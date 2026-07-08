@@ -1,0 +1,125 @@
+/* ===========================
+   WHOLESALE
+=========================== */
+
+.wholesale{
+
+    padding:140px 0;
+
+    background:var(--background);
+
+}
+
+.wholesale-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    align-items:center;
+
+    gap:80px;
+
+}
+
+.wholesale-content p{
+
+    color:#555;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    margin:30px 0;
+
+}
+
+.wholesale-list{
+
+    display:grid;
+
+    gap:18px;
+
+    margin-bottom:40px;
+
+}
+
+.wholesale-list li{
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+@media(max-width:992px){
+
+.wholesale-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.wholesale-content{
+
+    text-align:center;
+
+}
+
+.wholesale-list{
+
+    justify-items:center;
+
+}
+
+.wholesale-image{
+
+    order:-1;
+
+}
+
+.wholesale .btn{
+
+    padding:16px 34px;
+
+    font-size:16px;
+
+}
+
+}
+
+.wholesale .btn{
+
+    padding:18px 42px;
+
+    font-size:18px;
+
+}
+
+.wholesale-image{
+
+    overflow:hidden;
+
+    border-radius:28px;
+
+}
+
+.wholesale-image img{
+
+    width:100%;
+
+    display:block;
+
+    border-radius:28px;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.15);
+
+    transition:transform .45s ease;
+
+}
+
+.wholesale-image:hover img{
+
+    transform:scale(1.05);
+
+}

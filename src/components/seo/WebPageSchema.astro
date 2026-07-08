@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+}
+
+const {
+  title,
+  description,
+  canonical
+} = Astro.props;
+
+const webpage = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+
+  name: title,
+
+  description,
+
+  url: canonical,
+
+  isPartOf: {
+    "@type": "WebSite",
+    name: "Mato Cashew",
+    url: "https://matocashew.com"
+  },
+
+  inLanguage: "en"
+};
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(webpage)}
+/>

@@ -1,0 +1,164 @@
+---
+const currentPath = Astro.url.pathname;
+---
+<header class="header">
+
+  <div class="container header-wrapper">
+
+    <a
+        href="/"
+        class="logo"
+        aria-label="Mato Cashew Home"
+    >
+
+      <img src="/images/logo/logo.png" alt="Mato Cashew Logo" />
+
+    </a>
+
+    <nav aria-label="Main navigation">
+        
+    <button
+        type="button"
+        aria-controls="main-menu"
+        class="menu-toggle"
+        aria-label="Toggle Menu"
+        aria-expanded="false"
+    >
+        ☰
+    </button>
+
+        <ul id="main-menu" class="nav-menu">
+
+        <li>
+            <a
+            href="/"
+            class={currentPath === "/" ? "active" : ""}
+            >
+            Home
+            </a>
+        </li>
+
+        <li>
+            <a
+            href="/about"
+            class={currentPath === "/about" ? "active" : ""}
+            >
+            About
+            </a>
+        </li>
+
+        <li>
+            <a
+            href="/products"
+            class={currentPath === "/products" ? "active" : ""}
+            >
+            Products
+            </a>
+        </li>
+
+        <li>
+            <a
+            href="/gallery"
+            class={currentPath === "/gallery" ? "active" : ""}
+            >
+            Gallery
+            </a>
+        </li>
+
+        <li>
+            <a
+            href="/wholesale"
+            class={currentPath === "/wholesale" ? "active" : ""}
+            >
+            Wholesale
+            </a>
+        </li>
+
+        <li>
+            <a
+            href="/contact"
+            class={currentPath === "/contact" ? "active" : ""}
+            >
+            Contact
+            </a>
+        </li>
+
+        </ul>
+
+    </nav>
+
+  </div>
+
+</header>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const header = document.querySelector(".header");
+
+    if (header) {
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 40) {
+
+                header.classList.add("scrolled");
+
+            } else {
+
+                header.classList.remove("scrolled");
+
+            }
+
+        });
+
+    }
+
+    const menuToggle = document.querySelector(".menu-toggle");
+const navMenu = document.querySelector(".nav-menu");
+
+if (menuToggle && navMenu) {
+
+    menuToggle.addEventListener("click", () => {
+
+        navMenu.classList.toggle("open");
+
+        const expanded =
+            menuToggle.getAttribute("aria-expanded") === "true";
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            (!expanded).toString()
+        );
+
+        menuToggle.textContent = expanded ? "☰" : "✕";
+
+    });
+
+}
+const navLinks = document.querySelectorAll(".nav-menu a");
+navLinks.forEach((link) => {
+
+    link.addEventListener("click", () => {
+
+        if (navMenu) {
+
+            navMenu.classList.remove("open");
+
+        }
+
+        if (menuToggle) {
+
+            menuToggle.textContent = "☰";
+
+            menuToggle.setAttribute("aria-expanded", "false");
+
+        }
+
+    });
+
+});
+
+});
+
+</script>

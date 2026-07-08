@@ -1,0 +1,30 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Contact from "../components/Contact.astro";
+---
+
+<PageLayout
+  title="Contact | Mato Cashew"
+  description="Contact Mato Cashew for wholesale inquiries, partnerships, and premium Cambodian cashew products."
+  canonical="https://matocashew.com/contact"
+  breadcrumbs={[
+    {
+      name: "Home",
+      url: "https://matocashew.com"
+    },
+    {
+      name: "Contact",
+      url: "https://matocashew.com/contact"
+    }
+  ]}
+>
+
+  <PageHero
+    title="Contact Us"
+    description="We'd love to hear from you. Get in touch with our team today."
+  />
+
+  <Contact />
+
+</PageLayout>

@@ -1,0 +1,42 @@
+---
+import SectionTitle from "../SectionTitle.astro";
+import ProductCard from "../ProductCard.astro";
+---
+
+<section class="retail-products">
+
+    <div class="container">
+
+        <SectionTitle
+            tag="Retail Products"
+            title="Perfect for Everyday Enjoyment"
+        />
+
+        <div class="products-grid">
+
+            <ProductCard
+                image="/images/products/package-100g.png"
+                title="Premium Cashew 100g"
+                weight="100g"
+                badge="Snack Pack"
+            />
+
+            <ProductCard
+                image="/images/products/package-250g.png"
+                title="Premium Cashew 250g"
+                weight="250g"
+                badge="Family Pack"
+            />
+
+            <ProductCard
+                image="/images/products/package-500g.png"
+                title="Premium Cashew 500g"
+                weight="500g"
+                badge="Best Seller"
+            />
+
+        </div>
+
+    </div>
+
+</section>

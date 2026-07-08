@@ -1,0 +1,61 @@
+---
+interface Props {
+  image: string;
+  title: string;
+  description?: string;
+  weight: string;
+  badge: string;
+  rating?: string;
+}
+
+const {
+  image,
+  title,
+  description,
+  weight,
+  badge,
+  rating = "⭐ 5.0"
+} = Astro.props;
+---
+
+<article class="product-card">
+
+  <div class="product-badge">
+    {badge}
+  </div>
+
+  <div class="product-image">
+
+      <img
+          src={image}
+          alt={title}
+          loading="lazy"
+          decoding="async"
+      />
+
+  </div>
+
+  <div class="product-content">
+
+    <h3>{title}</h3>
+
+      {description && <p>{description}</p>}
+
+    <div class="product-meta">
+
+      <span>{rating}</span>
+
+      <span>{weight}</span>
+
+    </div>
+
+    <a
+      href="/contact#form"
+      class="btn btn-primary"
+    >
+      Learn More
+    </a>
+
+  </div>
+
+</article>

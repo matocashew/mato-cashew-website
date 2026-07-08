@@ -1,0 +1,185 @@
+---
+import OrganizationSchema from "../components/seo/OrganizationSchema.astro";
+import WebsiteSchema from "../components/seo/WebsiteSchema.astro";
+import WebPageSchema from "../components/seo/WebPageSchema.astro";
+import BreadcrumbSchema from "../components/seo/BreadcrumbSchema.astro";
+
+import "../styles/global.css";
+
+import "../styles/header.css";
+
+import "../styles/hero.css";
+
+import "../styles/section-title.css";
+
+import "../styles/about.css";
+
+import "../styles/products.css";
+
+import "../styles/gallery.css";
+
+import "../styles/footer.css";
+
+import "../styles/wholesale.css";
+
+import "../styles/contact.css";
+
+import "../styles/page.css";
+
+import "../styles/about-page.css";
+
+import "../styles/products-page.css";
+
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  breadcrumbs?: {
+    name: string;
+    url: string;
+  }[];
+}
+
+const siteUrl = "https://matocashew.com";
+
+const {
+  title = "Mato Cashew | Premium Cambodian Cashew",
+  description = "Premium Cambodian Cashew for Local & International Markets.",
+  canonical = siteUrl,
+  breadcrumbs = []
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <OrganizationSchema />
+
+  <WebsiteSchema />
+
+  <WebPageSchema
+    title={title}
+    description={description}
+    canonical={canonical}
+  />
+  {
+    breadcrumbs.length > 0 && (
+      <BreadcrumbSchema items={breadcrumbs} />
+    )
+  }
+
+  <meta charset="UTF-8" />
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1"
+/>
+
+<title>{title}</title>
+
+<meta
+  name="description"
+  content={description}
+/>
+
+<meta
+  name="robots"
+  content="index,follow"
+/>
+
+<meta
+  name="author"
+  content="Mato Cashew"
+/>
+
+<meta
+  name="keywords"
+  content="Cambodian Cashew, Premium Cashew, Cashew Kernels, Wholesale Cashew, Export Cashew"
+/>
+
+<link
+  rel="canonical"
+  href={canonical}
+/>
+
+<link
+  rel="icon"
+  href="/favicon.svg"
+/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<link rel="icon" sizes="32x32" href="/favicon-32x32.png" />
+
+<link rel="icon" sizes="16x16" href="/favicon-16x16.png" />
+
+<link rel="manifest" href="/site.webmanifest" />
+
+<meta
+  name="theme-color"
+  content="#0D5C3A"
+/>
+
+<!-- Open Graph -->
+
+<meta
+  property="og:type"
+  content="website"
+/>
+
+<meta
+  property="og:site_name"
+  content="Mato Cashew"
+/>
+
+<meta
+  property="og:title"
+  content={title}
+/>
+
+<meta
+  property="og:description"
+  content={description}
+/>
+
+<meta
+  property="og:url"
+  content={canonical}
+/>
+
+<meta
+  property="og:image"
+  content={`${siteUrl}/images/seo/og-image.jpg`}
+/>
+
+<!-- Twitter -->
+
+<meta
+  name="twitter:card"
+  content="summary_large_image"
+/>
+
+<meta
+  name="twitter:title"
+  content={title}
+/>
+
+<meta
+  name="twitter:description"
+  content={description}
+/>
+
+<meta
+  name="twitter:image"
+  content={`${siteUrl}/images/seo/og-image.jpg`}
+/>
+</head>
+
+<body>
+
+  <slot />
+  
+</body>
+
+</html>

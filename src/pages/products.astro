@@ -1,0 +1,42 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import ProductIntro from "../components/products/ProductIntro.astro";
+import RetailProducts from "../components/products/RetailProducts.astro";
+import WholesaleProducts from "../components/products/WholesaleProducts.astro";
+import PackagingOptions from "../components/products/PackagingOptions.astro";
+import ProductSpecifications from "../components/products/ProductSpecifications.astro";
+import ProductFAQ from "../components/products/ProductFAQ.astro";
+import ProductsCTA from "../components/products/ProductsCTA.astro";
+---
+
+<PageLayout
+  title="Products | Mato Cashew"
+  description="Premium Cambodian Cashew Products"
+  canonical="https://matocashew.com/products"
+  breadcrumbs={[
+    {
+      name: "Home",
+      url: "https://matocashew.com"
+    },
+    {
+      name: "Products",
+      url: "https://matocashew.com/products"
+    }
+  ]}
+>
+
+  <PageHero
+    title="Our Products"
+    description="Premium Cambodian Cashew Kernels for Retail & Wholesale Markets."
+  />
+
+  <ProductIntro />
+  <RetailProducts />
+  <WholesaleProducts />
+  <PackagingOptions />
+  <ProductSpecifications />
+  <ProductFAQ />
+  <ProductsCTA />
+
+</PageLayout>

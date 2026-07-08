@@ -1,0 +1,223 @@
+/* =========================
+   Google Fonts
+========================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Khmer:wght@100..900&display=swap');
+
+/* =========================
+   CSS Variables
+========================= */
+
+:root{
+
+  /* Brand Colors */
+  --primary:#0D5C3A;
+  --primary-light:#1C7A4B;
+  --secondary:#C89B3C;
+
+  --background:#F8F3EA;
+  --white:#ffffff;
+
+  --text:#1F2937;
+  --text-light:#6B7280;
+  
+  --shadow-sm:0 12px 30px rgba(0,0,0,.08);
+
+  --shadow-md:0 18px 45px rgba(0,0,0,.10);
+
+  --shadow-lg:0 25px 60px rgba(0,0,0,.15);
+
+  --radius:18px;
+
+  --container:1200px;
+
+  --font-en:'Poppins',sans-serif;
+  --font-kh:'Noto Sans Khmer',sans-serif;
+
+  --radius-sm:14px;
+
+  --radius-md:24px;
+
+  --radius-lg:28px;
+
+  --radius-xl:32px;
+
+}
+
+/* =========================
+   Reset
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:var(--font-en);
+
+    font-weight:400;
+
+    background:var(--background);
+
+    color:var(--text);
+
+    line-height:1.7;
+
+    overflow-x:hidden;
+
+}
+
+img{
+
+    display:block;
+
+    max-width:100%;
+
+    height:auto;
+
+}
+
+a{
+
+    color:inherit;
+
+    text-decoration:none;
+
+    transition:
+        color .3s ease,
+        opacity .3s ease;
+
+}
+
+ul{
+
+    list-style:none;
+
+}
+
+.container{
+
+    width:min(92%,var(--container));
+
+    margin:auto;
+
+}
+
+.btn{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:18px 42px;
+
+    border-radius:999px;
+
+    font-weight:700;
+
+    transition:
+        background-color .3s ease,
+        color .3s ease,
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+    cursor:pointer;
+
+}
+
+.btn-primary{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--primary-light);
+    transform:translateY(-3px);
+
+}
+
+.btn-outline{
+
+    border:2px solid var(--primary);
+
+    color:var(--primary);
+
+}
+
+.btn-outline:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+h1{
+
+    font-size:64px;
+
+    line-height:1.05;
+
+    font-weight:800;
+
+}
+
+h2{
+
+    font-size:42px;
+
+    font-weight:700;
+
+}
+
+h3{
+
+    font-size:28px;
+
+}
+
+@media (max-width:768px){
+
+    h1{
+
+        font-size:46px;
+
+    }
+
+    h2{
+
+        font-size:32px;
+
+    }
+
+}
+
+::selection{
+
+    background:var(--primary);
+
+    color:#fff;
+
+}
+
+:focus-visible{
+
+    outline:2px solid var(--secondary);
+
+    outline-offset:3px;
+
+}
+
+

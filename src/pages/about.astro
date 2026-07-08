@@ -1,0 +1,56 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import CompanyStory from "../components/about/CompanyStory.astro";
+import MissionVision from "../components/about/MissionVision.astro";
+import CoreValues from "../components/about/CoreValues.astro";
+import OurProcess from "../components/about/OurProcess.astro";
+import QualityStandards from "../components/about/QualityStandards.astro";
+import WhyChooseUs from "../components/about/WhyChooseUs.astro";
+import AboutCTA from "../components/about/AboutCTA.astro";
+---
+
+  <PageLayout
+
+    title="About Mato Cashew"
+
+    description="Learn about Mato Cashew."
+
+    canonical="https://matocashew.com/about"
+
+    breadcrumbs={[
+
+    {
+
+    name:"Home",
+
+    url:"https://matocashew.com"
+
+    },
+
+    {
+
+    name:"About",
+
+    url:"https://matocashew.com/about"
+
+    }
+
+    ]}
+
+  >
+
+  <PageHero
+    title="About Mato Cashew"
+    description="We connect Cambodian farmers with international markets."
+  />
+
+  <CompanyStory />
+  <MissionVision />
+  <CoreValues />
+  <OurProcess />
+  <QualityStandards />
+  <WhyChooseUs />
+  <AboutCTA />
+
+</PageLayout>

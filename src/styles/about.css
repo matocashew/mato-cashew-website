@@ -1,0 +1,96 @@
+/* ===========================
+   ABOUT
+=========================== */
+
+.about{
+
+    padding:120px 0;
+
+    background:#fff;
+
+}
+
+.about-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:70px;
+
+    align-items:center;
+
+}
+
+.about-image img{
+
+    width:100%;
+
+    border-radius:24px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.about p{
+
+    color:var(--text-light);
+
+    line-height:1.8;
+
+    margin-bottom:30px;
+
+
+}
+
+.about-list{
+
+    display:grid;
+
+    gap:16px;
+
+    margin-bottom:36px;
+
+}
+
+.about-list li{
+
+    font-weight:600;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:10px;
+
+}
+
+@media(max-width:992px){
+
+    .about-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .about-image{
+
+        order:-1;
+
+    }
+
+}
+
+.about-image img{
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+
+}
+
+.about-image img:hover{
+
+    transform:scale(1.02);
+
+}

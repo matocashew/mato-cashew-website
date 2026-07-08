@@ -1,0 +1,43 @@
+---
+import SectionTitle from "./SectionTitle.astro";
+import ProductCard from "./ProductCard.astro";
+---
+<section class="products">
+
+  <div class="container">
+
+    <SectionTitle
+      tag="Our Products"
+      title="Premium Cashew Collection"
+    />
+
+    <div class="products-grid">
+      <ProductCard
+        image="/images/products/package-100g.png"
+        title="Premium Cashew 100g"
+        description="Perfect snack size with premium Cambodian cashew kernels."
+        weight="100g"
+        badge="New"
+      />
+
+      <ProductCard
+        image="/images/products/package-250g.png"
+        title="Premium Cashew 250g"
+        description="Ideal for families and everyday healthy snacking."
+        weight="250g"
+        badge="Popular"
+      />
+
+      <ProductCard
+        image="/images/products/package-500g.png"
+        title="Premium Cashew 500g"
+        description="Export quality whole cashew kernels for local and international markets."
+        weight="500g"
+        badge="Best Seller"
+      />
+
+    </div>
+
+  </div>
+
+</section>

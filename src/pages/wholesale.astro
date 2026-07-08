@@ -1,0 +1,30 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Wholesale from "../components/Wholesale.astro";
+---
+
+<PageLayout
+  title="Wholesale | Mato Cashew"
+  description="Partner with Mato Cashew for premium Cambodian cashew wholesale and export."
+  canonical="https://matocashew.com/wholesale"
+  breadcrumbs={[
+    {
+      name: "Home",
+      url: "https://matocashew.com"
+    },
+    {
+      name: "Wholesale",
+      url: "https://matocashew.com/wholesale"
+    }
+  ]}
+>
+
+  <PageHero
+    title="Wholesale"
+    description="Reliable supply, export quality, and flexible packaging solutions for international buyers."
+  />
+
+  <Wholesale />
+
+</PageLayout>

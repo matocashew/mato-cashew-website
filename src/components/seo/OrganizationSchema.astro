@@ -1,0 +1,30 @@
+---
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+
+  name: "Mato Cashew",
+
+  url: "https://matocashew.com",
+
+  logo: "https://matocashew.com/images/logo/logo.png",
+
+  description:
+    "Premium Cambodian cashew kernels for local and international markets.",
+
+  email: "sales@matocashew.com",
+
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Kampong Thom",
+    addressCountry: "Cambodia"
+  },
+
+  sameAs: []
+};
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(organization)}
+/>

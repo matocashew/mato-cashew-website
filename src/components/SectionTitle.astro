@@ -1,0 +1,20 @@
+---
+interface Props {
+  tag: string;
+  title: string;
+}
+
+const { tag, title } = Astro.props;
+---
+
+<div class="section-title">
+
+    <span class="section-tag">
+        {tag}
+    </span>
+
+    <h2>
+        {title}
+    </h2>
+
+</div>
