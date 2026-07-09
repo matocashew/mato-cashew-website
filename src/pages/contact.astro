@@ -1,7 +1,8 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import PageHero from "../components/PageHero.astro";
-import Contact from "../components/Contact.astro";
+import ContactInfo from "../components/contact/ContactInfo.astro";
+import ContactForm from "../components/contact/ContactForm.astro";
 ---
 
 <PageLayout
@@ -25,6 +26,16 @@ import Contact from "../components/Contact.astro";
     description="We'd love to hear from you. Get in touch with our team today."
   />
 
-  <Contact />
+  <section class="contact-page">
+
+    <div class="container contact-grid">
+
+      <ContactInfo />
+
+      <ContactForm />
+
+    </div>
+
+  </section>
 
 </PageLayout>
