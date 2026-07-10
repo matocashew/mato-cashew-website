@@ -1,6 +1,33 @@
+<div
+    id="successMessage"
+    class="success-message"
+    hidden
+>
+
+    ✅ Thank you!
+
+    Your inquiry has been sent successfully.
+
+</div>
+
+<div
+  id="formError"
+  class="form-error"
+  hidden
+>
+
+  ❌ Sorry,
+
+  Something went wrong.
+
+  Please try again.
+
+</div>
+
 <form
   class="contact-form"
   id="contact-form"
+  novalidate
 >
 
   <div class="form-group">
@@ -13,8 +40,12 @@
       id="name"
       name="name"
       type="text"
+      autocomplete="name"
+      placeholder="John Smith"
       required
     />
+
+    <small class="error-message"></small>
 
   </div>
 
@@ -28,7 +59,11 @@
       id="company"
       name="company"
       type="text"
+      autocomplete="organization"
+      placeholder="ABC Trading Co., Ltd."
     />
+
+    <small class="error-message"></small>
 
   </div>
 
@@ -42,8 +77,11 @@
       id="country"
       name="country"
       type="text"
+      placeholder="Cambodia"
       required
     />
+
+    <small class="error-message"></small>
 
   </div>
 
@@ -57,8 +95,12 @@
       id="email"
       name="email"
       type="email"
+      autocomplete="email"
+      placeholder="john@example.com"
       required
     />
+
+    <small class="error-message"></small>
 
   </div>
 
@@ -72,7 +114,11 @@
       id="phone"
       name="phone"
       type="text"
+      autocomplete="tel"
+      placeholder="+855..."
     />
+
+    <small class="error-message"></small>
 
   </div>
 
@@ -89,34 +135,36 @@
     >
 
       <option value="">
-        Select an option
+          Select an option
       </option>
 
-      <option>
+      <option value="Wholesale Inquiry">
         Wholesale Inquiry
       </option>
 
-      <option>
+      <option value="Retail Inquiry">
         Retail Inquiry
       </option>
 
-      <option>
+      <option value="Distributor Request">
         Distributor Request
       </option>
 
-      <option>
+      <option value="Export Partnership">
         Export Partnership
       </option>
 
-      <option>
+      <option value="OEM / Private Label">
         OEM / Private Label
       </option>
 
-      <option>
+      <option value="General Inquiry">
         General Inquiry
       </option>
 
     </select>
+
+    <small class="error-message"></small>
 
   </div>
 
@@ -130,24 +178,28 @@
       id="volume"
       name="volume"
     >
-
-      <option>
+      <option value="">
+          Select volume
+      </option>
+      <option value="Less than 100 kg">
         Less than 100 kg
       </option>
 
-      <option>
+      <option value="100–500 kg">
         100–500 kg
       </option>
 
-      <option>
+      <option value="500 kg–1 ton">
         500 kg–1 ton
       </option>
 
-      <option>
+      <option value="More than 1 ton">
         More than 1 ton
       </option>
 
     </select>
+
+    <small class="error-message"></small>
 
   </div>
 
@@ -161,16 +213,37 @@
       id="message"
       name="message"
       rows="6"
+      placeholder="Please tell us about your inquiry..."
       required
     ></textarea>
 
+    <small class="error-message"></small>
+
   </div>
 
-  <button
-    type="submit"
-    class="btn btn-primary"
-  >
+<div
+  class="cf-turnstile"
+  data-sitekey="0x4AAAAAADzApl_-GPhwXu0j"
+></div>
+
+<button
+  id="submitBtn"
+  type="submit"
+  class="btn btn-primary"
+>
+
+  <span class="btn-text">
     Send Inquiry
-  </button>
+  </span>
+
+</button>
+
+<p class="privacy-note">
+
+We respect your privacy.
+
+Your information will only be used to respond to your inquiry.
+
+</p>
 
 </form>
