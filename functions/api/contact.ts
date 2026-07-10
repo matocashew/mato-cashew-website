@@ -1,13 +1,37 @@
 export const onRequestPost = async (context: any) => {
 
-  return Response.json({
+  try {
 
-    success: true,
+    const body = await context.request.json();
 
-    hasResendKey: !!context.env.RESEND_API_KEY,
+    return Response.json({
 
-    hasTurnstileKey: !!context.env.TURNSTILE_SECRET_KEY
+      success: true,
 
-  });
+      received: body
+
+    });
+
+  } catch {
+
+    return Response.json(
+
+      {
+
+        success: false,
+
+        message: "Invalid JSON"
+
+      },
+
+      {
+
+        status: 400
+
+      }
+
+    );
+
+  }
 
 };
