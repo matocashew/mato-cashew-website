@@ -1,6 +1,7 @@
 import { verifyTurnstile } from "./turnstile";
 import { validateForm } from "./validation";
 import type { ContactFormData } from "./types";
+import { sendEmails } from "./resend";
 
 export const onRequestPost = async (context: any) => {
 
@@ -43,11 +44,19 @@ export const onRequestPost = async (context: any) => {
 
     }
 
+    await sendEmails(
+
+    context.env.RESEND_API_KEY,
+
+    body
+
+    );
+
     return Response.json({
 
-      success: true,
+    success: true,
 
-      message: "Turnstile verified successfully."
+    message: "Your inquiry has been sent successfully."
 
     });
 
