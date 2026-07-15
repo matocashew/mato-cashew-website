@@ -19,6 +19,8 @@ if (!form) {
 
   form.addEventListener("submit", async (event) => {
 
+    alert("Submit event fired");
+    
     console.log("🚀 Submit button clicked");
 
     event.preventDefault();
