@@ -1,4 +1,4 @@
-console.log("Contact form script loaded");
+console.log("✅ Contact form script loaded");
 
 declare const turnstile: {
   getResponse(): string;
@@ -7,7 +7,11 @@ declare const turnstile: {
 
 const form = document.getElementById("contact-form") as HTMLFormElement | null;
 
-if (form) {
+if (!form) {
+  console.error("❌ Contact form not found");
+} else {
+
+  console.log("✅ Contact form found");
 
   const submitBtn = document.getElementById("submitBtn") as HTMLButtonElement;
   const successBox = document.getElementById("successMessage") as HTMLDivElement;
@@ -15,12 +19,14 @@ if (form) {
 
   form.addEventListener("submit", async (event) => {
 
+    console.log("🚀 Submit button clicked");
+
     event.preventDefault();
 
     successBox.hidden = true;
     errorBox.hidden = true;
 
-    // Clear previous validation
+    // Clear validation
     form.querySelectorAll(".error-message").forEach((el) => {
       (el as HTMLElement).textContent = "";
     });
@@ -35,7 +41,10 @@ if (form) {
 
     requiredFields.forEach((field) => {
 
-      const input = field as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+      const input =
+        field as HTMLInputElement |
+        HTMLTextAreaElement |
+        HTMLSelectElement;
 
       if (!input.value.trim()) {
 
@@ -43,7 +52,9 @@ if (form) {
 
         input.classList.add("input-error");
 
-        const error = input.parentElement?.querySelector(".error-message") as HTMLElement | null;
+        const error = input.parentElement?.querySelector(
+          ".error-message"
+        ) as HTMLElement | null;
 
         if (error) {
           error.textContent = "This field is required.";
@@ -53,17 +64,24 @@ if (form) {
 
     });
 
+    console.log("Validation:", valid);
+
     if (!valid) {
+      console.warn("❌ Validation failed");
       return;
     }
 
-    // Turnstile token
     const token = turnstile.getResponse();
+
+    console.log("Turnstile Token:", token);
 
     if (!token) {
 
+      console.warn("❌ Turnstile token missing");
+
       errorBox.hidden = false;
-      errorBox.textContent = "Please complete the security verification.";
+      errorBox.textContent =
+        "Please complete the security verification.";
 
       return;
 
@@ -94,30 +112,40 @@ if (form) {
 
     };
 
+    console.log("📦 Payload:");
+    console.log(payload);
+
     try {
+
+      console.log("➡️ Calling /api/contact");
 
       const response = await fetch("/api/contact", {
 
         method: "POST",
 
         headers: {
+
           "Content-Type": "application/json"
+
         },
 
         body: JSON.stringify(payload)
 
       });
 
-      const result = await response.json() as {
-        success: boolean;
-        message?: string;
-        errors?: string[];
-      };
+      console.log("⬅️ Response Status:", response.status);
+
+      const result = await response.json();
+
+      console.log("📨 API Result:");
+      console.log(result);
 
       submitBtn.disabled = false;
       submitBtn.textContent = "Send Inquiry";
 
       if (result.success) {
+
+        console.log("✅ Success");
 
         successBox.hidden = false;
 
@@ -127,23 +155,32 @@ if (form) {
 
       } else {
 
+        console.warn("❌ API returned failure");
+
         errorBox.hidden = false;
 
         errorBox.textContent =
-          result.message ||
-          (result.errors ? result.errors.join(", ") : "Submission failed.");
+          result.message ??
+          (result.errors
+            ? result.errors.join(", ")
+            : "Submission failed.");
 
       }
 
     } catch (error) {
 
+      console.error("🔥 Fetch Error:");
+
       console.error(error);
 
       submitBtn.disabled = false;
+
       submitBtn.textContent = "Send Inquiry";
 
       errorBox.hidden = false;
-      errorBox.textContent = "Network error. Please try again.";
+
+      errorBox.textContent =
+        "Network error. Please try again.";
 
     }
 
