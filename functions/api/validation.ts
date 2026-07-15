@@ -5,7 +5,7 @@ export function validateForm(data: ContactFormData): string[] {
   const errors: string[] = [];
 
   if (!data.name?.trim()) {
-    errors.push("Full name is required.");
+    errors.push("Full Name is required.");
   }
 
   if (!data.country?.trim()) {
@@ -13,18 +13,22 @@ export function validateForm(data: ContactFormData): string[] {
   }
 
   if (!data.email?.trim()) {
-    errors.push("Email is required.");
-  }
 
-  if (
-    data.email &&
-    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)
-  ) {
-    errors.push("Invalid email address.");
+    errors.push("Email Address is required.");
+
+  } else {
+
+    const emailRegex =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(data.email)) {
+      errors.push("Invalid email address.");
+    }
+
   }
 
   if (!data.inquiry?.trim()) {
-    errors.push("Inquiry type is required.");
+    errors.push("Inquiry Type is required.");
   }
 
   if (!data.message?.trim()) {
@@ -32,7 +36,7 @@ export function validateForm(data: ContactFormData): string[] {
   }
 
   if (!data.turnstileToken?.trim()) {
-    errors.push("Turnstile verification failed.");
+    errors.push("Security verification failed.");
   }
 
   return errors;

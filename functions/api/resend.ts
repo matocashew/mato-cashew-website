@@ -1,17 +1,34 @@
 import { Resend } from "resend";
+
 import type { ContactFormData } from "./types";
+
 import {
+
   buildAdminEmail,
+
   buildAutoReply
+
 } from "./templates";
 
 export async function sendEmails(
+
   apiKey: string,
+
   data: ContactFormData
+
 ) {
+
   const resend = new Resend(apiKey);
 
-  const [adminResult, autoReplyResult] = await Promise.all([
+  console.log("Sending emails...");
+
+  const [
+
+    adminResult,
+
+    autoReplyResult
+
+  ] = await Promise.all([
 
     resend.emails.send({
 
@@ -41,8 +58,16 @@ export async function sendEmails(
 
   ]);
 
+  console.log("Admin Email:", adminResult);
+
+  console.log("Auto Reply:", autoReplyResult);
+
   return {
+
     adminResult,
+
     autoReplyResult
+
   };
+
 }

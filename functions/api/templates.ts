@@ -23,59 +23,42 @@ export function buildAdminEmail(
 
   return `
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
 <meta charset="UTF-8">
-
 </head>
 
-<body
-style="
+<body style="
 font-family:Arial,sans-serif;
 background:#f5f5f5;
 padding:40px;
-"
->
+">
 
-<div
-style="
+<div style="
 max-width:700px;
 margin:auto;
 background:#ffffff;
 border-radius:12px;
 padding:40px;
-"
->
+">
 
-<h2
-style="
-color:#0D5C3A;
+<h2 style="
 margin-top:0;
-"
->
-
+color:#0D5C3A;
+">
 New Contact Form Submission
-
 </h2>
 
 <p>
-
 A new inquiry has been submitted from
-
 <strong>matocashew.com</strong>.
-
 </p>
 
-<table
-style="
+<table style="
 width:100%;
 border-collapse:collapse;
 margin-top:25px;
-"
->
+">
 
 <tr>
 <td><strong>Name</strong></td>
@@ -103,7 +86,7 @@ margin-top:25px;
 </tr>
 
 <tr>
-<td><strong>Inquiry Type</strong></td>
+<td><strong>Inquiry</strong></td>
 <td>${escapeHtml(data.inquiry)}</td>
 </tr>
 
@@ -119,20 +102,14 @@ margin-top:25px;
 
 </table>
 
-<hr
-style="
-margin:30px 0;
-"
->
+<hr style="margin:30px 0;">
 
 <h3>Message</h3>
 
-<p
-style="
+<p style="
 white-space:pre-line;
 line-height:1.8;
-"
->
+">
 
 ${escapeHtml(data.message)}
 
@@ -141,7 +118,6 @@ ${escapeHtml(data.message)}
 </div>
 
 </body>
-
 </html>
 `;
 
@@ -162,33 +138,25 @@ export function buildAutoReply(
 
 </head>
 
-<body
-style="
+<body style="
 font-family:Arial,sans-serif;
 background:#f5f5f5;
 padding:40px;
-"
->
+">
 
-<div
-style="
+<div style="
 max-width:700px;
 margin:auto;
 background:#ffffff;
 border-radius:12px;
 padding:40px;
-"
->
+">
 
-<h2
-style="
-color:#0D5C3A;
+<h2 style="
 margin-top:0;
-"
->
-
+color:#0D5C3A;
+">
 Thank You for Contacting Mato Cashew
-
 </h2>
 
 <p>
@@ -201,27 +169,25 @@ Dear <strong>${escapeHtml(data.name)}</strong>,
 
 Thank you for contacting Mato Cashew.
 
+</p>
+
+<p>
+
 We have successfully received your inquiry.
 
-</p>
-
-<p>
-
-Our team will carefully review your request and respond as soon as possible.
+Our sales team will review your request and reply as soon as possible.
 
 </p>
 
 <p>
 
-If your inquiry is urgent, you may also contact us via WhatsApp or email.
+If your inquiry is urgent,
+
+please contact us directly via WhatsApp or Email.
 
 </p>
 
-<hr
-style="
-margin:30px 0;
-"
->
+<hr style="margin:30px 0;">
 
 <p>
 

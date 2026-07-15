@@ -1,31 +1,25 @@
 import { verifyTurnstile } from "./turnstile";
 import { validateForm } from "./validation";
-import type { ContactFormData } from "./types";
 import { sendEmails } from "./resend";
+import type { ContactFormData } from "./types";
 
 export const onRequestPost = async (context: any) => {
-  try {
 
-    if (
-      !context.env.TURNSTILE_SECRET_KEY ||
-      !context.env.RESEND_API_KEY
-    ) {
-      return Response.json(
-        {
-          success: false,
-          message: "Server configuration error."
-        },
-        {
-          status: 500
-        }
-      );
-    }
+  console.log("========== CONTACT API ==========");
+
+  try {
 
     const body = await context.request.json() as ContactFormData;
 
+    console.log("Request Body:", body);
+
+    // Validate form
     const errors = validateForm(body);
 
     if (errors.length > 0) {
+
+      console.log("Validation failed:", errors);
+
       return Response.json(
         {
           success: false,
@@ -35,38 +29,56 @@ export const onRequestPost = async (context: any) => {
           status: 400
         }
       );
+
     }
 
-    const isValid = await verifyTurnstile(
+    console.log("Validation passed.");
+
+    // Verify Turnstile
+    const turnstileValid = await verifyTurnstile(
       body.turnstileToken,
       context.env.TURNSTILE_SECRET_KEY
     );
 
-    if (!isValid) {
+    console.log("Turnstile:", turnstileValid);
+
+    if (!turnstileValid) {
+
       return Response.json(
         {
           success: false,
-          message: "Turnstile verification failed."
+          message: "Security verification failed."
         },
         {
           status: 403
         }
       );
+
     }
+
+    console.log("Sending emails...");
 
     await sendEmails(
       context.env.RESEND_API_KEY,
       body
     );
 
-    return Response.json({
-      success: true,
-      message: "Your inquiry has been sent successfully."
-    });
+    console.log("Emails sent successfully.");
 
-  } catch (err) {
+    return Response.json(
+      {
+        success: true,
+        message: "Your inquiry has been sent successfully."
+      },
+      {
+        status: 200
+      }
+    );
 
-    console.error("Contact API Error:", err);
+  } catch (error) {
+
+    console.error("CONTACT API ERROR");
+    console.error(error);
 
     return Response.json(
       {
@@ -77,5 +89,7 @@ export const onRequestPost = async (context: any) => {
         status: 500
       }
     );
+
   }
+
 };
