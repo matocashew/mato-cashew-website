@@ -4,15 +4,28 @@ import type { ContactFormData } from "./types";
 import { sendEmails } from "./resend";
 
 export const onRequestPost = async (context: any) => {
-
   try {
+
+    if (
+      !context.env.TURNSTILE_SECRET_KEY ||
+      !context.env.RESEND_API_KEY
+    ) {
+      return Response.json(
+        {
+          success: false,
+          message: "Server configuration error."
+        },
+        {
+          status: 500
+        }
+      );
+    }
 
     const body = await context.request.json() as ContactFormData;
 
     const errors = validateForm(body);
 
     if (errors.length > 0) {
-
       return Response.json(
         {
           success: false,
@@ -22,7 +35,6 @@ export const onRequestPost = async (context: any) => {
           status: 400
         }
       );
-
     }
 
     const isValid = await verifyTurnstile(
@@ -31,7 +43,6 @@ export const onRequestPost = async (context: any) => {
     );
 
     if (!isValid) {
-
       return Response.json(
         {
           success: false,
@@ -41,28 +52,21 @@ export const onRequestPost = async (context: any) => {
           status: 403
         }
       );
-
     }
 
     await sendEmails(
-
-    context.env.RESEND_API_KEY,
-
-    body
-
+      context.env.RESEND_API_KEY,
+      body
     );
 
     return Response.json({
-
-    success: true,
-
-    message: "Your inquiry has been sent successfully."
-
+      success: true,
+      message: "Your inquiry has been sent successfully."
     });
 
   } catch (err) {
 
-    console.error(err);
+    console.error("Contact API Error:", err);
 
     return Response.json(
       {
@@ -73,7 +77,5 @@ export const onRequestPost = async (context: any) => {
         status: 500
       }
     );
-
   }
-
 };

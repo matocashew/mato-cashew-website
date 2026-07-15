@@ -1,53 +1,48 @@
 import { Resend } from "resend";
-
 import type { ContactFormData } from "./types";
-
 import {
-
   buildAdminEmail,
-
   buildAutoReply
-
 } from "./templates";
 
 export async function sendEmails(
-
   apiKey: string,
-
   data: ContactFormData
-
 ) {
-
   const resend = new Resend(apiKey);
 
-  // Email to Mato Cashew
+  const [adminResult, autoReplyResult] = await Promise.all([
 
-  await resend.emails.send({
+    resend.emails.send({
 
-    from: "Mato Cashew <noreply@updates.matocashew.com>",
+      from: "Mato Cashew <noreply@updates.matocashew.com>",
 
-    to: ["info@matocashew.com"],
+      to: ["info@matocashew.com"],
 
-    replyTo: data.email,
+      replyTo: data.email,
 
-    subject: `New ${data.inquiry} from ${data.name}`,
+      subject: `[Mato Cashew] ${data.inquiry} - ${data.name}`,
 
-    html: buildAdminEmail(data)
+      html: buildAdminEmail(data)
 
-  });
+    }),
 
-  // Auto Reply
+    resend.emails.send({
 
-  await resend.emails.send({
+      from: "Mato Cashew <noreply@updates.matocashew.com>",
 
-    from: "Mato Cashew <noreply@updates.matocashew.com>",
+      to: [data.email],
 
-    to: [data.email],
+      subject: "Thank you for contacting Mato Cashew",
 
-    subject: "Thank you for contacting Mato Cashew",
+      html: buildAutoReply(data)
 
-    html: buildAutoReply(data)
+    })
 
-  });
+  ]);
 
+  return {
+    adminResult,
+    autoReplyResult
+  };
 }

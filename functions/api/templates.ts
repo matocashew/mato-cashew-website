@@ -1,123 +1,251 @@
 import type { ContactFormData } from "./types";
 
 function escapeHtml(text: string): string {
+
   return text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}
-
-export function buildAdminEmail(data: ContactFormData): string {
-
-  return `
-  <!DOCTYPE html>
-  <html>
-  <body style="font-family:Arial,sans-serif;background:#f5f5f5;padding:30px;">
-
-    <div style="max-width:700px;margin:auto;background:#fff;padding:30px;border-radius:10px;">
-
-      <h2 style="color:#0D5C3A;">
-        New Contact Form Submission
-      </h2>
-
-      <table style="width:100%;border-collapse:collapse;">
-
-        <tr>
-          <td><strong>Name</strong></td>
-          <td>${escapeHtml(data.name)}</td>
-        </tr>
-
-        <tr>
-          <td><strong>Company</strong></td>
-          <td>${escapeHtml(data.company || "-")}</td>
-        </tr>
-
-        <tr>
-          <td><strong>Country</strong></td>
-          <td>${escapeHtml(data.country)}</td>
-        </tr>
-
-        <tr>
-          <td><strong>Email</strong></td>
-          <td>${escapeHtml(data.email)}</td>
-        </tr>
-
-        <tr>
-          <td><strong>Phone</strong></td>
-          <td>${escapeHtml(data.phone || "-")}</td>
-        </tr>
-
-        <tr>
-          <td><strong>Inquiry</strong></td>
-          <td>${escapeHtml(data.inquiry)}</td>
-        </tr>
-
-        <tr>
-          <td><strong>Estimated Volume</strong></td>
-          <td>${escapeHtml(data.volume || "-")}</td>
-        </tr>
-
-      </table>
-
-      <hr style="margin:25px 0;">
-
-      <h3>Message</h3>
-
-      <p style="white-space:pre-line;">
-        ${escapeHtml(data.message)}
-      </p>
-
-    </div>
-
-  </body>
-  </html>
-  `;
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 
 }
 
-export function buildAutoReply(data: ContactFormData): string {
+export function buildAdminEmail(
+  data: ContactFormData
+): string {
+
+  const submittedAt = new Date().toLocaleString("en-US", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "Asia/Phnom_Penh"
+  });
 
   return `
-  <!DOCTYPE html>
-  <html>
-  <body style="font-family:Arial,sans-serif;background:#f5f5f5;padding:30px;">
+<!DOCTYPE html>
 
-    <div style="max-width:700px;margin:auto;background:#fff;padding:30px;border-radius:10px;">
+<html>
 
-      <h2 style="color:#0D5C3A;">
-        Thank you for contacting Mato Cashew
-      </h2>
+<head>
 
-      <p>Dear ${escapeHtml(data.name)},</p>
+<meta charset="UTF-8">
 
-      <p>
+</head>
 
-        Thank you for contacting us.
+<body
+style="
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+padding:40px;
+"
+>
 
-        We have received your inquiry and our team will respond as soon as possible.
+<div
+style="
+max-width:700px;
+margin:auto;
+background:#ffffff;
+border-radius:12px;
+padding:40px;
+"
+>
 
-      </p>
+<h2
+style="
+color:#0D5C3A;
+margin-top:0;
+"
+>
 
-      <p>
+New Contact Form Submission
 
-        If your inquiry is urgent, you may also contact us via WhatsApp.
+</h2>
 
-      </p>
+<p>
 
-      <br>
+A new inquiry has been submitted from
 
-      <p>
+<strong>matocashew.com</strong>.
 
-        Best regards,
+</p>
 
-      </p>
+<table
+style="
+width:100%;
+border-collapse:collapse;
+margin-top:25px;
+"
+>
 
-      <strong>Mato Cashew</strong>
+<tr>
+<td><strong>Name</strong></td>
+<td>${escapeHtml(data.name)}</td>
+</tr>
 
-    </div>
+<tr>
+<td><strong>Company</strong></td>
+<td>${escapeHtml(data.company || "-")}</td>
+</tr>
 
-  </body>
-  </html>
-  `;
+<tr>
+<td><strong>Country</strong></td>
+<td>${escapeHtml(data.country)}</td>
+</tr>
+
+<tr>
+<td><strong>Email</strong></td>
+<td>${escapeHtml(data.email)}</td>
+</tr>
+
+<tr>
+<td><strong>Phone</strong></td>
+<td>${escapeHtml(data.phone || "-")}</td>
+</tr>
+
+<tr>
+<td><strong>Inquiry Type</strong></td>
+<td>${escapeHtml(data.inquiry)}</td>
+</tr>
+
+<tr>
+<td><strong>Estimated Volume</strong></td>
+<td>${escapeHtml(data.volume || "-")}</td>
+</tr>
+
+<tr>
+<td><strong>Submitted</strong></td>
+<td>${submittedAt}</td>
+</tr>
+
+</table>
+
+<hr
+style="
+margin:30px 0;
+"
+>
+
+<h3>Message</h3>
+
+<p
+style="
+white-space:pre-line;
+line-height:1.8;
+"
+>
+
+${escapeHtml(data.message)}
+
+</p>
+
+</div>
+
+</body>
+
+</html>
+`;
+
+}
+
+export function buildAutoReply(
+  data: ContactFormData
+): string {
+
+  return `
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+</head>
+
+<body
+style="
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+padding:40px;
+"
+>
+
+<div
+style="
+max-width:700px;
+margin:auto;
+background:#ffffff;
+border-radius:12px;
+padding:40px;
+"
+>
+
+<h2
+style="
+color:#0D5C3A;
+margin-top:0;
+"
+>
+
+Thank You for Contacting Mato Cashew
+
+</h2>
+
+<p>
+
+Dear <strong>${escapeHtml(data.name)}</strong>,
+
+</p>
+
+<p>
+
+Thank you for contacting Mato Cashew.
+
+We have successfully received your inquiry.
+
+</p>
+
+<p>
+
+Our team will carefully review your request and respond as soon as possible.
+
+</p>
+
+<p>
+
+If your inquiry is urgent, you may also contact us via WhatsApp or email.
+
+</p>
+
+<hr
+style="
+margin:30px 0;
+"
+>
+
+<p>
+
+Best regards,
+
+</p>
+
+<p>
+
+<strong>Mato Cashew</strong><br>
+
+Premium Cambodian Cashew Kernels<br>
+
+🌐 https://matocashew.com<br>
+
+📧 info@matocashew.com
+
+</p>
+
+</div>
+
+</body>
+
+</html>
+`;
 
 }
