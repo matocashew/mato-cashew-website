@@ -2,4 +2,4 @@ User-agent: *
 
 Allow: /
 
-Sitemap: https://matocashew.com/sitemap.xml
+Sitemap: https://matocashew.com/sitemap-index.xml
