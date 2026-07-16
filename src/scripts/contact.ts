@@ -233,3 +233,5 @@ if (!form) {
   console.log("Before addEventListener");
 
 }
+
+console.log("CONTACT SCRIPT LOADED");
