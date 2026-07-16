@@ -67,7 +67,7 @@
 }
 
 .hero-content {
-    opacity: 1;
+    animation: fadeUp .8s ease;
 }
 
 /* ===========================
@@ -91,7 +91,7 @@
    Animations
 =========================== */
 
-/*@keyframes fadeUp {
+@keyframes fadeUp {
 
     from {
         opacity: 0;
@@ -103,7 +103,7 @@
         transform: translateY(0);
     }
 
-}*/
+}
 
 @keyframes float {
 
