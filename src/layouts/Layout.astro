@@ -108,21 +108,45 @@ const {
   rel="canonical"
   href={canonical}
 />
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="/favicon-32x32.png"
+/>
 
 <link
   rel="icon"
-  href="/favicon.svg"
+  type="image/png"
+  sizes="16x16"
+  href="/favicon-16x16.png"
 />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-<link rel="icon" sizes="32x32" href="/favicon-32x32.png" />
+<link
+  rel="shortcut icon"
+  href="/favicon.ico"
+/>
 
-<link rel="icon" sizes="16x16" href="/favicon-16x16.png" />
+<link
+  rel="apple-touch-icon"
+  href="/apple-touch-icon.png"
+/>
 
 <link rel="manifest" href="/site.webmanifest" />
 
+<link rel="preconnect" href="https://www.googletagmanager.com" />
+
+<link rel="preconnect" href="https://www.google-analytics.com" />
+
 <meta
   name="theme-color"
+  media="(prefers-color-scheme: light)"
+  content="#0D5C3A"
+/>
+
+<meta
+  name="theme-color"
+  media="(prefers-color-scheme: dark)"
   content="#0D5C3A"
 />
 
@@ -156,6 +180,36 @@ const {
 <meta
   property="og:image"
   content={`${siteUrl}/images/seo/og-image.jpg`}
+/>
+
+<meta
+  property="og:image:width"
+  content="1200"
+/>
+
+<meta
+  property="og:image:height"
+  content="630"
+/>
+
+<meta
+  property="og:image:alt"
+  content="Mato Cashew Premium Cambodian Cashew"
+/>
+
+<meta
+  property="og:locale"
+  content="en_US"
+/>
+
+<meta
+  property="og:image:type"
+  content="image/jpeg"
+/>
+
+<meta
+  name="format-detection"
+  content="telephone=no"
 />
 
 <!-- Twitter -->
