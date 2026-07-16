@@ -1,5 +1,3 @@
-console.log("Contact form script loaded");
-
 declare const turnstile: {
   getResponse(): string;
   reset(): void;
@@ -13,13 +11,7 @@ interface ApiResponse {
 
 const form = document.getElementById("contact-form") as HTMLFormElement | null;
 
-if (!form) {
-
-  console.error("Contact form not found.");
-
-} else {
-
-  console.log("Contact form found.");
+if (form) {
 
   const submitBtn =
     document.getElementById("submitBtn") as HTMLButtonElement;
@@ -30,13 +22,9 @@ if (!form) {
   const errorBox =
     document.getElementById("formError") as HTMLDivElement;
 
-  console.log("Before addEventListener");
-
   form.addEventListener("submit", async (event) => {
 
     event.preventDefault();
-
-    console.log("========== CONTACT FORM ==========");
 
     successBox.hidden = true;
     errorBox.hidden = true;
@@ -77,7 +65,7 @@ if (!form) {
         input.classList.add("input-error");
 
         const error =
-          input.parentElement?.querySelector(".error-message") as HTMLElement;
+          input.parentElement?.querySelector(".error-message") as HTMLElement | null;
 
         if (error) {
 
@@ -91,19 +79,13 @@ if (!form) {
 
     if (!valid) {
 
-      console.warn("Validation failed.");
-
       return;
 
     }
 
-    console.log("Validation passed.");
-
     const token = turnstile.getResponse();
 
     if (!token) {
-
-      console.warn("Turnstile token missing.");
 
       errorBox.hidden = false;
 
@@ -113,8 +95,6 @@ if (!form) {
       return;
 
     }
-
-    console.log("Turnstile verified.");
 
     const payload = {
 
@@ -154,15 +134,11 @@ if (!form) {
 
     };
 
-    console.log("Payload", payload);
-
     submitBtn.disabled = true;
 
     submitBtn.textContent = "Sending...";
 
     try {
-
-      console.log("Calling /api/contact");
 
       const response = await fetch("/api/contact", {
 
@@ -178,20 +154,14 @@ if (!form) {
 
       });
 
-      console.log("HTTP Status:", response.status);
-
       const result =
         await response.json() as ApiResponse;
-
-      console.log("API Response:", result);
 
       submitBtn.disabled = false;
 
       submitBtn.textContent = "Send Inquiry";
 
       if (result.success) {
-
-        console.log("Submission successful.");
 
         successBox.hidden = false;
 
@@ -200,8 +170,6 @@ if (!form) {
         turnstile.reset();
 
       } else {
-
-        console.warn("Submission failed.");
 
         errorBox.hidden = false;
 
@@ -212,11 +180,7 @@ if (!form) {
 
       }
 
-    } catch (error) {
-
-      console.error("Fetch Error");
-
-      console.error(error);
+    } catch {
 
       submitBtn.disabled = false;
 
@@ -230,8 +194,5 @@ if (!form) {
     }
 
   });
-  console.log("Before addEventListener");
 
 }
-
-console.log("CONTACT SCRIPT LOADED");
