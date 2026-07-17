@@ -1,41 +1,92 @@
 ---
+import "../../styles/resources.css";
+
 import PageLayout from "../../layouts/PageLayout.astro";
 import PageHero from "../../components/PageHero.astro";
+import SectionTitle from "../../components/SectionTitle.astro";
+
+import ResourceCard from "../../components/resources/ResourceCard.astro";
 ---
 
 <PageLayout
     title="Resources | Mato Cashew"
-    description="Explore guides, insights, and resources about Cambodian cashews, wholesale, export, and private label services."
+    description="Expert guides and industry insights about Cambodian cashews."
     canonical="https://matocashew.com/resources"
-    breadcrumbs={[
-        {
-            name: "Home",
-            url: "https://matocashew.com"
-        },
-        {
-            name: "Resources",
-            url: "https://matocashew.com/resources"
-        }
-    ]}
 >
 
 <PageHero
     title="Resources"
-    description="Expert guides, industry insights, and educational resources about Cambodian cashews, export, OEM, and private label manufacturing."
+    description="Guides, buying advice, export insights, and educational resources from Mato Cashew."
 />
 
-<section class="section">
+<section class="resources">
 
-    <div class="container">
+<div class="container">
 
-        <h2>Coming Soon</h2>
+<SectionTitle
 
-        <p>
-            We are preparing professional resources and buying guides for importers,
-            distributors, wholesalers, and retail brands worldwide.
-        </p>
+tag="Featured"
 
-    </div>
+title="Latest Resources"
+
+/>
+
+<div class="resources-grid">
+
+<ResourceCard
+
+title="Why Cambodian Cashews Are Becoming the World's Premium Choice"
+
+description="Discover why Cambodian cashews are gaining worldwide recognition for their superior quality and flavor."
+
+href="#"
+
+image="/images/gallery/orchard.jpg"
+
+category="Industry Insights"
+
+publishDate="July 2026"
+
+readingTime="6 min read"
+/>
+
+<ResourceCard
+
+title="Cashew Grades Explained"
+
+description="Learn the difference between whole, split, broken, and scorched cashew kernels."
+
+href="#"
+
+image="/images/gallery/kernels.jpg"
+
+category="Buying Guide"
+
+publishDate="July 2026"
+
+readingTime="8 min read"
+/>
+
+<ResourceCard
+
+title="Private Label Cashew Manufacturing"
+
+description="Everything you need to know before launching your own cashew brand."
+
+href="#"
+
+image="/images/gallery/packaging.jpg"
+
+category="OEM"
+
+publishDate="July 2026"
+
+readingTime="7 min read"
+/>
+
+</div>
+
+</div>
 
 </section>
 
