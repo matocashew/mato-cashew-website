@@ -1,0 +1,312 @@
+/* ===========================
+   Article
+=========================== */
+
+.article-meta{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin:40px 0;
+
+    font-size:15px;
+
+    color:var(--text-light);
+
+}
+
+.article-category{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    background:#edf7f1;
+
+    color:var(--primary);
+
+    font-weight:700;
+
+}
+
+@media(max-width:768px){
+
+.article-meta{
+
+    font-size:14px;
+
+}
+
+}
+/* ===========================
+   Article CTA
+=========================== */
+
+.article-cta{
+
+    padding:100px 0;
+
+}
+
+.article-cta-card{
+
+    background:#fff;
+
+    border-radius:28px;
+
+    padding:60px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.article-cta-card h2{
+
+    margin-bottom:20px;
+
+}
+
+.article-cta-card p{
+
+    max-width:760px;
+
+    margin:0 auto 36px;
+
+    color:var(--text-light);
+
+    line-height:1.8;
+
+}
+
+.article-cta-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+@media(max-width:768px){
+
+.article-cta{
+
+    padding:70px 0;
+
+}
+
+.article-cta-card{
+
+    padding:36px 24px;
+
+}
+
+.article-cta-actions{
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+}
+/* ===========================
+   Markdown Content
+=========================== */
+
+.article-content{
+
+    max-width:900px;
+
+    margin:0 auto;
+
+    padding-bottom:80px;
+
+}
+
+.article-content h2{
+
+    margin-top:50px;
+
+    margin-bottom:20px;
+
+}
+
+.article-content h3{
+
+    margin-top:36px;
+
+    margin-bottom:16px;
+
+}
+
+.article-content p{
+
+    margin-bottom:24px;
+
+    line-height:1.9;
+
+    color:var(--text);
+
+}
+
+.article-content ul,
+.article-content ol{
+
+    margin:24px 0;
+
+    padding-left:24px;
+
+}
+
+.article-content li{
+
+    margin-bottom:12px;
+
+}
+
+.article-content img{
+
+    width:100%;
+
+    border-radius:20px;
+
+    margin:40px 0;
+
+}
+
+/* ===========================
+   Rich Article Typography
+=========================== */
+
+.article-content a{
+
+    color:var(--primary);
+
+    font-weight:600;
+
+    text-decoration:none;
+
+}
+
+.article-content a:hover{
+
+    text-decoration:underline;
+
+}
+
+.article-content strong{
+
+    font-weight:700;
+
+    color:var(--text);
+
+}
+
+.article-content blockquote{
+
+    margin:40px 0;
+
+    padding:24px 30px;
+
+    border-left:5px solid var(--primary);
+
+    background:#f8f8f8;
+
+    border-radius:12px;
+
+    font-style:italic;
+
+}
+
+.article-content hr{
+
+    margin:60px 0;
+
+    border:none;
+
+    border-top:1px solid #e5e5e5;
+
+}
+
+.article-content table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin:40px 0;
+
+}
+
+.article-content th{
+
+    background:#f3f6f4;
+
+    text-align:left;
+
+    padding:16px;
+
+    font-weight:700;
+
+}
+
+.article-content td{
+
+    padding:16px;
+
+    border-top:1px solid #ececec;
+
+}
+
+.article-content code{
+
+    padding:2px 6px;
+
+    background:#f5f5f5;
+
+    border-radius:6px;
+
+    font-size:.95em;
+
+}
+
+.article-content pre{
+
+    overflow:auto;
+
+    padding:24px;
+
+    margin:32px 0;
+
+    border-radius:16px;
+
+    background:#1e1e1e;
+
+}
+
+.article-content pre code{
+
+    background:none;
+
+    color:#fff;
+
+    padding:0;
+
+}

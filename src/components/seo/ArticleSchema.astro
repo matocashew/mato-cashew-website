@@ -1,0 +1,66 @@
+---
+interface Props {
+  headline: string;
+  description: string;
+  image: string;
+  datePublished: Date;
+  dateModified?: Date;
+  author?: string;
+  canonical: string;
+}
+
+const {
+  headline,
+  description,
+  image,
+  datePublished,
+  dateModified,
+  author = "Mato Cashew",
+  canonical
+} = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+
+  headline,
+
+  description,
+
+  image: [
+    image.startsWith("http")
+      ? image
+      : `https://matocashew.com${image}`
+  ],
+
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": canonical
+  },
+
+  author: {
+    "@type": "Organization",
+    name: author
+  },
+
+  publisher: {
+    "@type": "Organization",
+    name: "Mato Cashew",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://matocashew.com/images/logo/logo.png"
+    }
+  },
+
+  datePublished: datePublished.toISOString(),
+
+  dateModified: (
+    dateModified ?? datePublished
+  ).toISOString()
+};
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

@@ -1,0 +1,61 @@
+---
+interface Props {
+  publishDate: Date;
+  updatedDate?: Date;
+  author?: string;
+  category: string;
+}
+
+const {
+  publishDate,
+  updatedDate,
+  author = "Mato Cashew",
+  category
+} = Astro.props;
+
+const published = publishDate.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric"
+});
+
+const updated = updatedDate
+  ? updatedDate.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    })
+  : null;
+---
+
+<div class="article-meta">
+
+  <span class="article-category">
+    {category}
+  </span>
+
+  <span>•</span>
+
+  <span>
+    Published {published}
+  </span>
+
+  {
+    updated && (
+      <>
+        <span>•</span>
+
+        <span>
+          Updated {updated}
+        </span>
+      </>
+    )
+  }
+
+  <span>•</span>
+
+  <span>
+    By {author}
+  </span>
+
+</div>

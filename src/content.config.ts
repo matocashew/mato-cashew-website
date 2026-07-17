@@ -4,6 +4,7 @@ const resources = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
+
     description: z.string(),
 
     publishDate: z.date(),
@@ -17,7 +18,11 @@ const resources = defineCollection({
 
     tags: z.array(z.string()),
 
-    draft: z.boolean().default(false)
+    draft: z.boolean().default(false),
+
+    featured: z.boolean().default(false),
+
+    readingTime: z.number().optional()
   })
 });
 
