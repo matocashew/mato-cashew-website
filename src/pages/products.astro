@@ -13,6 +13,8 @@ import PackagingOptions from "../components/products/PackagingOptions.astro";
 import ProductSpecifications from "../components/products/ProductSpecifications.astro";
 import ProductFAQ from "../components/products/ProductFAQ.astro";
 import ProductsCTA from "../components/products/ProductsCTA.astro";
+
+import CollectionPageSchema from "../components/seo/CollectionPageSchema.astro";
 ---
 
 <PageLayout
@@ -31,17 +33,25 @@ import ProductsCTA from "../components/products/ProductsCTA.astro";
   ]}
 >
 
+  <CollectionPageSchema />
+
   <PageHero
     title="Our Products"
     description="Premium Cambodian Cashew Kernels for Retail & Wholesale Markets."
   />
 
   <ProductIntro />
+
   <RetailProducts />
+
   <WholesaleProducts />
+
   <PackagingOptions />
+
   <ProductSpecifications />
+
   <ProductFAQ />
+
   <ProductsCTA />
 
 </PageLayout>

@@ -1,25 +1,19 @@
 ---
 import OrganizationSchema from "../components/seo/OrganizationSchema.astro";
-
 import WebsiteSchema from "../components/seo/WebsiteSchema.astro";
-
 import WebPageSchema from "../components/seo/WebPageSchema.astro";
-
 import BreadcrumbSchema from "../components/seo/BreadcrumbSchema.astro";
 
 import "../styles/global.css";
-
 import "../styles/header.css";
-
 import "../styles/footer.css";
-
 import "../styles/section-title.css";
-
 
 interface Props {
   title?: string;
   description?: string;
   canonical?: string;
+  robots?: string;
   breadcrumbs?: {
     name: string;
     url: string;
@@ -32,6 +26,7 @@ const {
   title = "Mato Cashew | Premium Cambodian Cashew",
   description = "Premium Cambodian Cashew for Local & International Markets.",
   canonical = siteUrl,
+  robots = "index,follow",
   breadcrumbs = []
 } = Astro.props;
 ---
@@ -40,6 +35,7 @@ const {
 <html lang="en">
 
 <head>
+
   <OrganizationSchema />
 
   <WebsiteSchema />
@@ -49,6 +45,7 @@ const {
     description={description}
     canonical={canonical}
   />
+
   {
     breadcrumbs.length > 0 && (
       <BreadcrumbSchema items={breadcrumbs} />
@@ -57,215 +54,179 @@ const {
 
   <meta charset="UTF-8" />
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1"
-/>
-<!-- Google Fonts -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
 
-<link
-  rel="preconnect"
-  href="https://fonts.googleapis.com"
-/>
+  <!-- Google Fonts -->
 
-<link
-  rel="preconnect"
-  href="https://fonts.gstatic.com"
-  crossorigin
-/>
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
 
-<link
-  rel="preload"
-  as="style"
-  href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Khmer:wght@100..900&display=swap"
-/>
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
 
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Khmer:wght@100..900&display=swap"
-/>
-<title>{title}</title>
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Khmer:wght@100..900&display=swap"
+  />
 
-<meta
-  name="description"
-  content={description}
-/>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Khmer:wght@100..900&display=swap"
+  />
 
-<meta
-  name="robots"
-  content="index,follow"
-/>
+  <title>{title}</title>
 
-<meta
-  name="author"
-  content="Mato Cashew"
-/>
+  <meta
+    name="description"
+    content={description}
+  />
 
-<meta
-  name="keywords"
-  content="Cambodian Cashew, Premium Cashew, Cashew Kernels, Wholesale Cashew, Export Cashew"
-/>
+  <meta
+    name="robots"
+    content={robots}
+  />
 
-<link
-  rel="canonical"
-  href={canonical}
-/>
-<link
-  rel="icon"
-  type="image/png"
-  sizes="32x32"
-  href="/favicon-32x32.png"
-/>
+  <meta
+    name="author"
+    content="Mato Cashew"
+  />
 
-<link
-  rel="icon"
-  type="image/png"
-  sizes="16x16"
-  href="/favicon-16x16.png"
-/>
+  <meta
+    name="keywords"
+    content="Cambodian Cashew, Premium Cashew, Cashew Kernels, Wholesale Cashew, Export Cashew"
+  />
 
-<link
-  rel="shortcut icon"
-  href="/favicon.ico"
-/>
+  <link
+    rel="canonical"
+    href={canonical}
+  />
 
-<link
-  rel="apple-touch-icon"
-  href="/apple-touch-icon.png"
-/>
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/favicon-32x32.png"
+  />
 
-<link rel="manifest" href="/site.webmanifest" />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="/favicon-16x16.png"
+  />
 
-<link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link
+    rel="shortcut icon"
+    href="/favicon.ico"
+  />
 
-<link rel="preconnect" href="https://www.google-analytics.com" />
+  <link
+    rel="apple-touch-icon"
+    href="/apple-touch-icon.png"
+  />
 
-<meta
-  name="theme-color"
-  media="(prefers-color-scheme: light)"
-  content="#0D5C3A"
-/>
+  <link
+    rel="manifest"
+    href="/site.webmanifest"
+  />
 
-<meta
-  name="theme-color"
-  media="(prefers-color-scheme: dark)"
-  content="#0D5C3A"
-/>
+  <meta
+    name="theme-color"
+    content="#0D5C3A"
+  />
 
-<!-- Open Graph -->
+  <!-- Open Graph -->
 
-<meta
-  property="og:type"
-  content="website"
-/>
+  <meta property="og:type" content="website" />
 
-<meta
-  property="og:site_name"
-  content="Mato Cashew"
-/>
+  <meta property="og:site_name" content="Mato Cashew" />
 
-<meta
-  property="og:title"
-  content={title}
-/>
+  <meta property="og:title" content={title} />
 
-<meta
-  property="og:description"
-  content={description}
-/>
+  <meta property="og:description" content={description} />
 
-<meta
-  property="og:url"
-  content={canonical}
-/>
+  <meta property="og:url" content={canonical} />
 
-<meta
-  property="og:image"
-  content={`${siteUrl}/images/seo/og-image.jpg`}
-/>
+  <meta
+    property="og:image"
+    content={`${siteUrl}/images/seo/og-image.jpg`}
+  />
 
-<meta
-  property="og:image:width"
-  content="1200"
-/>
+  <meta property="og:image:width" content="1200" />
 
-<meta
-  property="og:image:height"
-  content="630"
-/>
+  <meta property="og:image:height" content="630" />
 
-<meta
-  property="og:image:alt"
-  content="Mato Cashew Premium Cambodian Cashew"
-/>
+  <meta
+    property="og:image:alt"
+    content="Mato Cashew Premium Cambodian Cashew"
+  />
 
-<meta
-  property="og:locale"
-  content="en_US"
-/>
+  <meta property="og:locale" content="en_US" />
 
-<meta
-  property="og:image:type"
-  content="image/jpeg"
-/>
+  <!-- Twitter -->
 
-<meta
-  name="format-detection"
-  content="telephone=no"
-/>
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  />
 
-<!-- Twitter -->
+  <meta
+    name="twitter:title"
+    content={title}
+  />
 
-<meta
-  name="twitter:card"
-  content="summary_large_image"
-/>
+  <meta
+    name="twitter:description"
+    content={description}
+  />
 
-<meta
-  name="twitter:title"
-  content={title}
-/>
+  <meta
+    name="twitter:image"
+    content={`${siteUrl}/images/seo/og-image.jpg`}
+  />
 
-<meta
-  name="twitter:description"
-  content={description}
-/>
+  <!-- Google Analytics -->
 
-<meta
-  name="twitter:image"
-  content={`${siteUrl}/images/seo/og-image.jpg`}
-/>
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-9CBMMS5DPF"
+  ></script>
 
-<!-- Google Analytics -->
-<script
-  async
-  src="https://www.googletagmanager.com/gtag/js?id=G-9CBMMS5DPF"
-></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
 
-<script is:inline>
-  window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
 
-  function gtag() {
-    dataLayer.push(arguments);
-  }
+    gtag("js", new Date());
 
-  gtag("js", new Date());
+    gtag("config", "G-9CBMMS5DPF");
+  </script>
 
-  gtag("config", "G-9CBMMS5DPF");
-</script>
+  <!-- Cloudflare Turnstile -->
 
-<script
-  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-  async
-  defer
-></script>
+  <script
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+    async
+    defer
+  ></script>
 
 </head>
 
 <body>
 
   <slot />
-  
+
 </body>
 
 </html>

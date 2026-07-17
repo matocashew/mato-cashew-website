@@ -3,8 +3,8 @@ import PageLayout from "../layouts/PageLayout.astro";
 ---
 
 <PageLayout
-  title="404 | Page Not Found"
-  description="The page you are looking for could not be found."
+  title="404 | Page Not Found | Mato Cashew"
+  description="The page you are looking for could not be found. Explore Mato Cashew's premium Cambodian cashew products or return to the homepage."
   canonical="https://matocashew.com/404"
 >
 
@@ -16,6 +16,10 @@ import PageLayout from "../layouts/PageLayout.astro";
       src="/images/logo/logo.png"
       alt="Mato Cashew Logo"
       class="error-logo"
+      width="220"
+      height="220"
+      loading="eager"
+      decoding="async"
     />
 
     <h1>404</h1>
@@ -24,15 +28,26 @@ import PageLayout from "../layouts/PageLayout.astro";
 
     <p>
       Sorry, the page you are looking for doesn't exist,
-      has been moved, or the URL is incorrect.
+      may have been moved, or the URL may be incorrect.
     </p>
 
-    <a
-      href="/"
-      class="btn btn-primary"
-    >
-      Back to Home
-    </a>
+    <div class="error-actions">
+
+      <a
+        href="/"
+        class="btn btn-primary"
+      >
+        Back to Home
+      </a>
+
+      <a
+        href="/products"
+        class="btn btn-outline"
+      >
+        Browse Products
+      </a>
+
+    </div>
 
   </div>
 

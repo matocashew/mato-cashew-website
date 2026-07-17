@@ -1,0 +1,29 @@
+---
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+
+  name: "Premium Cambodian Cashew Products",
+
+  description:
+    "Explore Mato Cashew's premium Cambodian cashew products for retail, wholesale, export, OEM, and private label markets.",
+
+  url: "https://matocashew.com/products",
+
+  isPartOf: {
+    "@type": "WebSite",
+    name: "Mato Cashew",
+    url: "https://matocashew.com"
+  },
+
+  about: {
+    "@type": "Thing",
+    name: "Premium Cambodian Cashew Kernels"
+  }
+};
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

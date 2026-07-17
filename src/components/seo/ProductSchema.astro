@@ -1,0 +1,56 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  image: string;
+  weight: string;
+}
+
+const {
+  name,
+  description,
+  image,
+  weight
+} = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+
+  name,
+
+  image: [
+    `https://matocashew.com${image}`
+  ],
+
+  description,
+
+  brand: {
+    "@type": "Brand",
+    name: "Mato Cashew"
+  },
+
+  manufacturer: {
+    "@type": "Organization",
+    name: "Mato Cashew"
+  },
+
+  category: "Cashew Kernels",
+
+  countryOfOrigin: {
+    "@type": "Country",
+    name: "Cambodia"
+  },
+
+  material: "Cashew Kernels",
+
+  size: weight,
+
+  url: "https://matocashew.com/products"
+};
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

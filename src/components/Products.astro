@@ -1,6 +1,7 @@
 ---
 import SectionTitle from "./SectionTitle.astro";
 import ProductCard from "./ProductCard.astro";
+import ProductSchema from "./seo/ProductSchema.astro";
 ---
 <section
   id="products"
@@ -13,7 +14,26 @@ import ProductCard from "./ProductCard.astro";
       tag="Our Products"
       title="Premium Cashew Collection"
     />
+    <ProductSchema
+      name="Premium Cashew 100g"
+      description="Perfect snack size with premium Cambodian cashew kernels."
+      image="/images/products/package-100g.png"
+      weight="100g"
+    />
 
+    <ProductSchema
+      name="Premium Cashew 250g"
+      description="Ideal for families and everyday healthy snacking."
+      image="/images/products/package-250g.png"
+      weight="250g"
+    />
+
+    <ProductSchema
+      name="Premium Cashew 500g"
+      description="Export quality whole cashew kernels for local and international markets."
+      image="/images/products/package-500g.png"
+      weight="500g"
+    />
     <div class="products-grid">
       <ProductCard
         image="/images/products/package-100g.png"

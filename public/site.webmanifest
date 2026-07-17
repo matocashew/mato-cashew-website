@@ -2,8 +2,12 @@
   "name": "Mato Cashew",
   "short_name": "Mato Cashew",
   "description": "Premium Cambodian Cashew Kernels",
+  "id": "/",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait",
+  "lang": "en",
   "background_color": "#F8F3EA",
   "theme_color": "#0D5C3A",
   "icons": [
