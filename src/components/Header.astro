@@ -58,6 +58,15 @@ const currentPath = Astro.url.pathname;
 
         <li>
             <a
+                href="/resources"
+                class={currentPath.startsWith("/resources") ? "active" : ""}
+            >
+                Resources
+            </a>
+        </li>
+
+        <li>
+            <a
             href="/gallery"
             class={currentPath === "/gallery" ? "active" : ""}
             >
