@@ -8,7 +8,7 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import PageHero from "../../components/PageHero.astro";
 
 import ProductDetails from "../../components/products/ProductDetails.astro";
-import ProductSpecifications from "../../components/products/ProductSpecifications.astro";
+import ProductSpecificationsList from "../../components/products/ProductSpecificationsList.astro";
 import ProductApplications from "../../components/products/ProductApplications.astro";
 import RelatedProducts from "../../components/products/RelatedProducts.astro";
 
@@ -78,7 +78,7 @@ const relatedProducts = (
 
 <ProductDetails product={product} />
 
-<ProductSpecifications
+<ProductSpecificationsList
   specifications={product.data.specifications}
 />
 

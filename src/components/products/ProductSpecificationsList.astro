@@ -1,0 +1,40 @@
+---
+import SectionTitle from "../SectionTitle.astro";
+
+interface Props {
+  specifications: string[];
+}
+
+const {
+  specifications = []
+} = Astro.props;
+---
+
+{
+  specifications.length > 0 && (
+
+    <section class="product-specifications">
+
+      <div class="container">
+
+        <SectionTitle
+          tag="Specifications"
+          title="Technical Specifications"
+        />
+
+        <ul class="specifications-list">
+
+          {
+            specifications.map((item) => (
+              <li>{item}</li>
+            ))
+          }
+
+        </ul>
+
+      </div>
+
+    </section>
+
+  )
+}

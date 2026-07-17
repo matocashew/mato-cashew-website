@@ -1,0 +1,65 @@
+/* ===========================
+   Product Specifications
+=========================== */
+
+.product-specifications{
+
+    padding:100px 0;
+
+    background:#faf8f2;
+
+}
+
+.product-specifications h2{
+
+    margin-bottom:40px;
+
+    text-align:center;
+
+}
+
+.specifications-list{
+
+    max-width:900px;
+
+    margin:0 auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:20px;
+
+}
+
+.specifications-list li{
+
+    background:#fff;
+
+    padding:20px 24px;
+
+    border-radius:16px;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.06);
+
+    list-style:none;
+
+    position:relative;
+
+    padding-left:48px;
+
+}
+
+.specifications-list li::before{
+
+    content:"✓";
+
+    position:absolute;
+
+    left:20px;
+
+    color:var(--primary);
+
+    font-weight:700;
+
+}
