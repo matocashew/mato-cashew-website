@@ -1,4 +1,68 @@
 /* ===========================
+   PAGE HERO
+=========================== */
+
+.page-hero {
+
+    padding: 180px 0 100px;
+
+    text-align: center;
+
+    background: linear-gradient(
+        180deg,
+        #f7f4ef 0%,
+        #ffffff 100%
+    );
+
+}
+
+.page-hero h1 {
+
+    font-size: 56px;
+
+    color: var(--primary);
+
+    margin-bottom: 20px;
+
+}
+
+.page-hero p {
+
+    max-width: 760px;
+
+    margin: 0 auto;
+
+    color: #666;
+
+    font-size: 20px;
+
+    line-height: 1.8;
+
+}
+
+@media (max-width:768px){
+
+    .page-hero{
+
+        padding:140px 0 70px;
+
+    }
+
+    .page-hero h1{
+
+        font-size:40px;
+
+    }
+
+    .page-hero p{
+
+        font-size:18px;
+
+    }
+
+}
+
+/* ===========================
    404 PAGE
 =========================== */
 
