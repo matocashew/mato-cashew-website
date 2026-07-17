@@ -20,8 +20,6 @@ tags:
 draft: false
 
 featured: true
-
-readingTime: 12
 ---
 
 # Why Cambodian Cashews Are Becoming the World's Premium Choice

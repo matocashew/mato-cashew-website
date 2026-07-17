@@ -4,13 +4,15 @@ interface Props {
   updatedDate?: Date;
   author?: string;
   category: string;
+  readingTime?: number;
 }
 
 const {
   publishDate,
   updatedDate,
   author = "Mato Cashew",
-  category
+  category,
+  readingTime
 } = Astro.props;
 
 const published = publishDate.toLocaleDateString("en-US", {
@@ -57,5 +59,17 @@ const updated = updatedDate
   <span>
     By {author}
   </span>
+
+  {
+    readingTime && (
+      <>
+        <span>•</span>
+
+        <span>
+          {readingTime} min read
+        </span>
+      </>
+    )
+  }
 
 </div>
