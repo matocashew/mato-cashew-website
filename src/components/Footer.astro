@@ -1,3 +1,8 @@
+---
+import { getLanguage } from "../i18n/getLanguage";
+
+const t = getLanguage("en");
+---
 <footer class="footer">
 
     <div class="container footer-grid">
@@ -17,27 +22,28 @@
             </a>
 
             <p>
-                Premium Cambodian cashew kernels for local and
-                international markets.
+            {t.footer.description}
             </p>
 
         </div>
 
         <div class="footer-links">
 
-            <h4>Quick Links</h4>
+            <h4>{t.footer.quickLinks}</h4>
 
                 <ul>
 
-                    <li><a href="/about">About</a></li>
+                    <li><a href="/about">{t.nav.about}</a></li>
 
-                    <li><a href="/products">Products</a></li>
+                    <li><a href="/products">{t.nav.products}</a></li>
 
-                    <li><a href="/gallery">Gallery</a></li>
+                    <li><a href="/resources">{t.nav.resources}</a></li>
 
-                    <li><a href="/wholesale">Wholesale</a></li>
+                    <li><a href="/gallery">{t.nav.gallery}</a></li>
 
-                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/wholesale">{t.nav.wholesale}</a></li>
+
+                    <li><a href="/contact">{t.nav.contact}</a></li>
 
                 </ul>
 
@@ -45,17 +51,17 @@
 
         <div class="footer-contact">
 
-            <h4>Contact</h4>
+            <h4>{t.footer.contact}</h4>
 
             <p>
-            Email:
+            {t.footer.email}:
             <a href="mailto:info@matocashew.com">
                 info@matocashew.com
             </a>
             </p>
 
             <p>
-            Phone:
+            {t.footer.phone}:
             <a href="tel:+85512646988">
                 +855 12 646 988
             </a>
@@ -69,7 +75,7 @@
 
         <p>
 
-            © 2026 Mato Cashew. All Rights Reserved.
+            {t.footer.copyright}
 
         </p>
 

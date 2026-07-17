@@ -179,3 +179,15 @@ navLinks.forEach((link) => {
 });
 
 </script>
+
+<script type="module">
+
+  import { initLanguageSwitcher }
+    from "../scripts/language-switcher.ts";
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initLanguageSwitcher
+  );
+
+</script>

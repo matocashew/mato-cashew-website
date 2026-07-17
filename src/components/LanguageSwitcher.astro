@@ -2,19 +2,60 @@
 
   <button
     type="button"
-    class="language-button active"
-    aria-current="true"
+    class="language-current"
+    aria-haspopup="true"
+    aria-expanded="false"
   >
-    EN
+
+    <img
+      src="/images/flags/us.svg"
+      alt=""
+      width="20"
+      height="15"
+    />
+
+    <span>English</span>
+
+    <span class="arrow">▼</span>
+
   </button>
 
-  <span>|</span>
+  <div class="language-dropdown">
 
-  <button
-    type="button"
-    class="language-button"
-  >
-    ខ្មែរ
-  </button>
+    <button
+      type="button"
+      class="language-option active"
+    >
+
+      <img
+        src="/images/flags/us.svg"
+        alt=""
+        width="24"
+        height="18"
+      />
+
+      <span>English</span>
+
+      <span class="check">✓</span>
+
+    </button>
+
+    <button
+      type="button"
+      class="language-option"
+    >
+
+      <img
+        src="/images/flags/kh.svg"
+        alt=""
+        width="24"
+        height="18"
+      />
+
+      <span>ខ្មែរ</span>
+
+    </button>
+
+  </div>
 
 </div>

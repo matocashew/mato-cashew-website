@@ -1,3 +1,8 @@
+---
+import { getLanguage } from "../i18n/getLanguage";
+
+const t = getLanguage("en");
+---
 <section class="hero">
 
   <div class="container hero-grid">
@@ -5,30 +10,23 @@
     <div class="hero-content">
 
       <span class="hero-tag">
-        PREMIUM CAMBODIAN CASHEW
+        {t.hero.tag}
       </span>
 
-      <h1>
-        Premium Cambodian
-        <br />
-        Cashew
-        <br />
-        Naturally Delicious
-      </h1>
+        <h1>{t.hero.title}</h1>
 
       <p>
-        Premium Cambodian cashew kernels carefully selected from trusted local farms.
-        Supplying retail, wholesale, export, OEM, and private label partners worldwide.
+        {t.hero.description}
       </p>
 
       <div class="hero-buttons">
 
         <a href="/products" class="btn btn-primary">
-          Explore Products
+          {t.common.viewProducts}
         </a>
 
         <a href="/contact" class="btn btn-outline">
-          Contact Us
+          {t.common.contactUs}
         </a>
 
       </div>
