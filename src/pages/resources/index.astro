@@ -17,6 +17,7 @@ const articles = (await getCollection(
     b.data.publishDate.getTime() -
     a.data.publishDate.getTime()
 );
+console.log("Articles:", articles);
 ---
 
 <PageLayout
