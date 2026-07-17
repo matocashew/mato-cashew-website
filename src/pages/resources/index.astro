@@ -69,7 +69,7 @@ console.log("Articles:", articles);
                 day: "numeric"
               }
             )}
-            readingTime="5 min read"
+            readingTime={`${article.data.readingTime ?? 5} min read`}
           />
 
         ))
