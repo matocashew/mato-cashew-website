@@ -1,0 +1,55 @@
+---
+interface Option {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  options?: Option[];
+  placeholder?: string;
+  required?: boolean;
+}
+
+const {
+  id,
+  name,
+  label,
+  options = [],
+  placeholder = "Select an option",
+  required = false,
+} = Astro.props;
+---
+
+<div class="form-group">
+
+  <label for={id}>
+    {label}
+    {required && <span class="required">*</span>}
+  </label>
+
+  <select
+    id={id}
+    name={name}
+    required={required}
+  >
+
+    <option value="">
+      {placeholder}
+    </option>
+
+    {
+      options.map((option) => (
+        <option value={option.value}>
+          {option.label}
+        </option>
+      ))
+    }
+
+  </select>
+
+  <small class="error-message"></small>
+
+</div>

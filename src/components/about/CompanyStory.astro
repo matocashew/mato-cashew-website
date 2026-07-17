@@ -1,3 +1,9 @@
+---
+import { getLanguage } from "../../i18n/getLanguage";
+
+const t = getLanguage("en");
+---
+
 <section class="company-story">
 
   <div class="container story-grid">
@@ -5,25 +11,19 @@
     <div class="story-content">
 
       <span class="section-tag">
-        Our Story
+        {t.about.story.tag}
       </span>
 
       <h2>
-        From Cambodian Farms to Global Markets
+        {t.about.story.title}
       </h2>
 
       <p>
-        Mato Cashew was founded with a simple vision:
-        to bring premium Cambodian cashew kernels to
-        customers around the world while creating
-        sustainable value for local farmers.
+        {t.about.story.paragraph1}
       </p>
 
       <p>
-        By working directly with growers and applying
-        strict quality standards throughout processing
-        and packaging, we deliver products that meet
-        international export requirements.
+        {t.about.story.paragraph2}
       </p>
 
     </div>
@@ -33,6 +33,8 @@
       <img
         src="/images/about/about-orchard.jpg"
         alt="Mato Cashew Orchard"
+        loading="lazy"
+        decoding="async"
       />
 
     </div>

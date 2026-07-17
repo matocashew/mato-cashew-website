@@ -1,0 +1,43 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  type?: HTMLAttributes<"input">["type"];
+  placeholder?: string;
+  autocomplete?: HTMLAttributes<"input">["autocomplete"];
+  required?: boolean;
+}
+
+const {
+  id,
+  name,
+  label,
+  type = "text",
+  placeholder = "",
+  autocomplete,
+  required = false,
+} = Astro.props;
+---
+
+<div class="form-group">
+
+  <label for={id}>
+    {label}
+    {required && <span class="required">*</span>}
+  </label>
+
+  <input
+    id={id}
+    name={name}
+    type={type}
+    placeholder={placeholder}
+    autocomplete={autocomplete}
+    required={required}
+  />
+
+  <small class="error-message"></small>
+
+</div>

@@ -1,72 +1,79 @@
 ---
+import { getLanguage } from "../../i18n/getLanguage";
 import SectionTitle from "../SectionTitle.astro";
+
+const t = getLanguage("en");
 ---
 
 <section class="why-choose">
 
-    <div class="container">
+  <div class="container">
 
-        <SectionTitle
-            tag="Why Choose Us"
-            title="Trusted Partner for Premium Cambodian Cashew"
-        />
+    <SectionTitle
+      tag={t.about.whyChooseUs.tag}
+      title={t.about.whyChooseUs.title}
+    />
 
-        <div class="choose-grid">
+    <div class="choose-grid">
 
-            <article class="choose-card">
+      <article class="choose-card">
 
-                <div class="choose-icon">🌱</div>
+        <div class="choose-icon">🌱</div>
 
-                <h3>Premium Origin</h3>
+        <h3>
+          {t.about.whyChooseUs.premiumOrigin.title}
+        </h3>
 
-                <p>
-                    Carefully sourced from Cambodia's fertile cashew-growing
-                    regions for superior taste and quality.
-                </p>
+        <p>
+          {t.about.whyChooseUs.premiumOrigin.description}
+        </p>
 
-            </article>
+      </article>
 
-            <article class="choose-card">
+      <article class="choose-card">
 
-                <div class="choose-icon">🏭</div>
+        <div class="choose-icon">🏭</div>
 
-                <h3>Modern Processing</h3>
+        <h3>
+          {t.about.whyChooseUs.modernProcessing.title}
+        </h3>
 
-                <p>
-                    Processed with strict quality control and food safety
-                    procedures from shelling to final grading.
-                </p>
+        <p>
+          {t.about.whyChooseUs.modernProcessing.description}
+        </p>
 
-            </article>
+      </article>
 
-            <article class="choose-card">
+      <article class="choose-card">
 
-                <div class="choose-icon">🌍</div>
+        <div class="choose-icon">🌍</div>
 
-                <h3>Export Ready</h3>
+        <h3>
+          {t.about.whyChooseUs.exportReady.title}
+        </h3>
 
-                <p>
-                    Professional documentation, reliable logistics, and
-                    packaging designed for international markets.
-                </p>
+        <p>
+          {t.about.whyChooseUs.exportReady.description}
+        </p>
 
-            </article>
+      </article>
 
-            <article class="choose-card">
+      <article class="choose-card">
 
-                <div class="choose-icon">🤝</div>
+        <div class="choose-icon">🤝</div>
 
-                <h3>Reliable Partnership</h3>
+        <h3>
+          {t.about.whyChooseUs.partnership.title}
+        </h3>
 
-                <p>
-                    Building long-term relationships through consistency,
-                    transparency, and responsive customer service.
-                </p>
+        <p>
+          {t.about.whyChooseUs.partnership.description}
+        </p>
 
-            </article>
-
-        </div>
+      </article>
 
     </div>
+
+  </div>
 
 </section>

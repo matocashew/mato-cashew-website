@@ -1,8 +1,72 @@
-<div id="successMessage" class="success-message" hidden>
+---
+import { getLanguage } from "../../i18n/getLanguage";
+
+import FormField from "./FormField.astro";
+import FormSelect from "./FormSelect.astro";
+import FormTextarea from "./FormTextarea.astro";
+
+const t = getLanguage("en");
+
+const inquiryOptions = [
+  {
+    value: "Wholesale Inquiry",
+    label: t.contact.options.wholesale,
+  },
+  {
+    value: "Retail Inquiry",
+    label: t.contact.options.retail,
+  },
+  {
+    value: "Distributor Request",
+    label: t.contact.options.distributor,
+  },
+  {
+    value: "Export Partnership",
+    label: t.contact.options.export,
+  },
+  {
+    value: "OEM / Private Label",
+    label: t.contact.options.oem,
+  },
+  {
+    value: "General Inquiry",
+    label: t.contact.options.general,
+  },
+];
+
+const volumeOptions = [
+  {
+    value: "Less than 100 kg",
+    label: t.contact.volumeOptions.less100,
+  },
+  {
+    value: "100–500 kg",
+    label: t.contact.volumeOptions.kg100500,
+  },
+  {
+    value: "500 kg–1 ton",
+    label: t.contact.volumeOptions.kg5001ton,
+  },
+  {
+    value: "More than 1 ton",
+    label: t.contact.volumeOptions.more1ton,
+  },
+];
+---
+
+<div
+  id="successMessage"
+  class="success-message"
+  hidden
+>
   ✅ Thank you! Your inquiry has been sent successfully.
 </div>
 
-<div id="formError" class="form-error" hidden>
+<div
+  id="formError"
+  class="form-error"
+  hidden
+>
   ❌ Sorry, something went wrong. Please try again.
 </div>
 
@@ -12,130 +76,75 @@
   novalidate
 >
 
-  <div class="form-group">
-    <label for="name">Full Name *</label>
+  <FormField
+    id="name"
+    name="name"
+    label={t.contact.name}
+    placeholder={t.contact.placeholders.name}
+    autocomplete="name"
+    required
+  />
 
-    <input
-      id="name"
-      name="name"
-      type="text"
-      autocomplete="name"
-      placeholder="John Smith"
-      required
-    />
+  <FormField
+    id="company"
+    name="company"
+    label={t.contact.company}
+    placeholder={t.contact.placeholders.company}
+    autocomplete="organization"
+  />
 
-    <small class="error-message"></small>
-  </div>
+  <FormField
+    id="country"
+    name="country"
+    label={t.contact.country}
+    placeholder={t.contact.placeholders.country}
+    required
+  />
 
-  <div class="form-group">
-    <label for="company">Company Name</label>
+  <FormField
+    id="email"
+    name="email"
+    type="email"
+    label={t.contact.email}
+    placeholder={t.contact.placeholders.email}
+    autocomplete="email"
+    required
+  />
 
-    <input
-      id="company"
-      name="company"
-      type="text"
-      autocomplete="organization"
-      placeholder="ABC Trading Co., Ltd."
-    />
+  <FormField
+    id="phone"
+    name="phone"
+    type="tel"
+    label={t.contact.phone}
+    placeholder={t.contact.placeholders.phone}
+    autocomplete="tel"
+  />
 
-    <small class="error-message"></small>
-  </div>
+  <FormSelect
+    id="inquiry"
+    name="inquiry"
+    label={t.contact.inquiry}
+    placeholder={t.common.selectOption}
+    required
+    options={inquiryOptions}
+  />
 
-  <div class="form-group">
-    <label for="country">Country *</label>
+  <FormSelect
+    id="volume"
+    name="volume"
+    label={t.contact.volume}
+    placeholder={t.common.selectVolume}
+    options={volumeOptions}
+  />
 
-    <input
-      id="country"
-      name="country"
-      type="text"
-      placeholder="Cambodia"
-      required
-    />
-
-    <small class="error-message"></small>
-  </div>
-
-  <div class="form-group">
-    <label for="email">Email Address *</label>
-
-    <input
-      id="email"
-      name="email"
-      type="email"
-      autocomplete="email"
-      placeholder="john@example.com"
-      required
-    />
-
-    <small class="error-message"></small>
-  </div>
-
-  <div class="form-group">
-    <label for="phone">Phone / WhatsApp</label>
-
-    <input
-      id="phone"
-      name="phone"
-      type="text"
-      autocomplete="tel"
-      placeholder="+855..."
-    />
-
-    <small class="error-message"></small>
-  </div>
-
-  <div class="form-group">
-    <label for="inquiry">Inquiry Type *</label>
-
-    <select
-      id="inquiry"
-      name="inquiry"
-      required
-    >
-      <option value="">Select an option</option>
-
-      <option value="Wholesale Inquiry">Wholesale Inquiry</option>
-      <option value="Retail Inquiry">Retail Inquiry</option>
-      <option value="Distributor Request">Distributor Request</option>
-      <option value="Export Partnership">Export Partnership</option>
-      <option value="OEM / Private Label">OEM / Private Label</option>
-      <option value="General Inquiry">General Inquiry</option>
-    </select>
-
-    <small class="error-message"></small>
-  </div>
-
-  <div class="form-group">
-    <label for="volume">Estimated Order Volume</label>
-
-    <select
-      id="volume"
-      name="volume"
-    >
-      <option value="">Select volume</option>
-
-      <option value="Less than 100 kg">Less than 100 kg</option>
-      <option value="100–500 kg">100–500 kg</option>
-      <option value="500 kg–1 ton">500 kg–1 ton</option>
-      <option value="More than 1 ton">More than 1 ton</option>
-    </select>
-
-    <small class="error-message"></small>
-  </div>
-
-  <div class="form-group">
-    <label for="message">Message *</label>
-
-    <textarea
-      id="message"
-      name="message"
-      rows="6"
-      placeholder="Please tell us about your inquiry..."
-      required
-    ></textarea>
-
-    <small class="error-message"></small>
-  </div>
+  <FormTextarea
+    id="message"
+    name="message"
+    label={t.contact.message}
+    placeholder={t.contact.placeholders.message}
+    rows={6}
+    required
+  />
 
   <div
     class="cf-turnstile"
@@ -148,13 +157,12 @@
     class="btn btn-primary"
   >
     <span class="btn-text">
-      Send Inquiry
+      {t.contact.send}
     </span>
   </button>
 
   <p class="privacy-note">
-    We respect your privacy.
-    Your information will only be used to respond to your inquiry.
+    {t.contact.privacy}
   </p>
 
 </form>

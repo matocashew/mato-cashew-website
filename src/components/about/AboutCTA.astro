@@ -1,43 +1,47 @@
+---
+import { getLanguage } from "../../i18n/getLanguage";
+
+const t = getLanguage("en");
+---
+
 <section class="about-cta">
 
-    <div class="container">
+  <div class="container">
 
-        <div class="about-cta-box">
+    <div class="about-cta-box">
 
-            <span class="cta-tag">
-                Let's Work Together
-            </span>
+      <span class="cta-tag">
+        {t.about.cta.tag}
+      </span>
 
-            <h2>
-                Ready to Source Premium Cambodian Cashew?
-            </h2>
+      <h2>
+        {t.about.cta.title}
+      </h2>
 
-            <p>
-                Whether you are an importer, distributor, supermarket,
-                or food manufacturer, Mato Cashew is ready to become
-                your trusted long-term partner.
-            </p>
+      <p>
+        {t.about.cta.description}
+      </p>
 
-            <div class="cta-buttons">
+      <div class="cta-buttons">
 
-                <a
-                    href="/contact"
-                    class="btn btn-primary"
-                >
-                    Contact Us
-                </a>
+        <a
+          href="/contact"
+          class="btn btn-primary"
+        >
+          {t.common.contactUs}
+        </a>
 
-                <a
-                    href="/wholesale"
-                    class="btn btn-outline"
-                >
-                    Wholesale Information
-                </a>
+        <a
+          href="/wholesale"
+          class="btn btn-outline"
+        >
+          {t.about.cta.wholesaleButton}
+        </a>
 
-            </div>
-
-        </div>
+      </div>
 
     </div>
+
+  </div>
 
 </section>

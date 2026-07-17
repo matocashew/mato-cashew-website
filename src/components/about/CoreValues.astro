@@ -1,13 +1,17 @@
 ---
+import { getLanguage } from "../../i18n/getLanguage";
 import SectionTitle from "../SectionTitle.astro";
+
+const t = getLanguage("en");
 ---
+
 <section class="core-values">
 
   <div class="container">
 
     <SectionTitle
-      tag="Our Values"
-      title="What We Stand For"
+      tag={t.about.values.tag}
+      title={t.about.values.title}
     />
 
     <div class="values-grid">
@@ -16,11 +20,12 @@ import SectionTitle from "../SectionTitle.astro";
 
         <div class="value-icon">🌱</div>
 
-        <h3>Sustainability</h3>
+        <h3>
+          {t.about.values.sustainability.title}
+        </h3>
 
         <p>
-          Supporting environmentally responsible farming
-          and long-term agricultural development.
+          {t.about.values.sustainability.description}
         </p>
 
       </article>
@@ -29,11 +34,12 @@ import SectionTitle from "../SectionTitle.astro";
 
         <div class="value-icon">🤝</div>
 
-        <h3>Integrity</h3>
+        <h3>
+          {t.about.values.integrity.title}
+        </h3>
 
         <p>
-          Building trust through transparency,
-          honesty, and reliable partnerships.
+          {t.about.values.integrity.description}
         </p>
 
       </article>
@@ -42,11 +48,12 @@ import SectionTitle from "../SectionTitle.astro";
 
         <div class="value-icon">🏆</div>
 
-        <h3>Quality</h3>
+        <h3>
+          {t.about.values.quality.title}
+        </h3>
 
         <p>
-          Delivering premium Cambodian cashew kernels
-          that consistently meet export standards.
+          {t.about.values.quality.description}
         </p>
 
       </article>

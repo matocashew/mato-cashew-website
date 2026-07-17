@@ -1,0 +1,38 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  placeholder?: string;
+  rows?: number;
+  required?: boolean;
+}
+
+const {
+  id,
+  name,
+  label,
+  placeholder = "",
+  rows = 6,
+  required = false,
+} = Astro.props;
+---
+
+<div class="form-group">
+
+  <label for={id}>
+    {label}
+    {required && <span class="required">*</span>}
+  </label>
+
+  <textarea
+    id={id}
+    name={name}
+    rows={rows}
+    placeholder={placeholder}
+    required={required}
+  ></textarea>
+
+  <small class="error-message"></small>
+
+</div>

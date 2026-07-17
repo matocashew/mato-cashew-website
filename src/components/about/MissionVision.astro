@@ -1,3 +1,9 @@
+---
+import { getLanguage } from "../../i18n/getLanguage";
+
+const t = getLanguage("en");
+---
+
 <section class="mission-vision">
 
   <div class="container">
@@ -8,12 +14,12 @@
 
         <div class="mv-icon">🎯</div>
 
-        <h3>Our Mission</h3>
+        <h3>
+          {t.about.mission.title}
+        </h3>
 
         <p>
-          To deliver premium Cambodian cashew kernels
-          that meet international quality standards while
-          creating sustainable opportunities for local farmers.
+          {t.about.mission.description}
         </p>
 
       </article>
@@ -22,12 +28,12 @@
 
         <div class="mv-icon">🌍</div>
 
-        <h3>Our Vision</h3>
+        <h3>
+          {t.about.vision.title}
+        </h3>
 
         <p>
-          To become one of Cambodia's leading cashew
-          exporters recognized for quality, reliability,
-          and long-term partnerships worldwide.
+          {t.about.vision.description}
         </p>
 
       </article>
