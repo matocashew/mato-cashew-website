@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import DynamicProductCard from "./DynamicProductCard.astro";
+
+interface Props {
+  products: CollectionEntry<"products">[];
+}
+
+const { products } = Astro.props;
+---
+
+{
+  products.length > 0 && (
+
+    <section class="products-grid-section">
+
+      <div class="products-grid">
+
+        {
+          products.map((product) => (
+
+            <DynamicProductCard
+              product={product}
+            />
+
+          ))
+        }
+
+      </div>
+
+    </section>
+
+  )
+}

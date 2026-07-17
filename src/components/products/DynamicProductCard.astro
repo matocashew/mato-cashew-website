@@ -1,0 +1,63 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  product: CollectionEntry<"products">;
+}
+
+const { product } = Astro.props;
+---
+
+<article class="product-card">
+
+  <a
+    href={`/products/${product.id}`}
+    class="product-image"
+  >
+
+    <img
+      src={product.data.image}
+      alt={product.data.title}
+      width="600"
+      height="600"
+      loading="lazy"
+    />
+
+  </a>
+
+  <div class="product-content">
+
+    <span class="product-category">
+      {product.data.category}
+    </span>
+
+    <h3>
+
+      <a href={`/products/${product.id}`}>
+        {product.data.title}
+      </a>
+
+    </h3>
+
+    <p>
+      {product.data.description}
+    </p>
+
+    <div class="product-footer">
+
+      <span class="product-weight">
+        {product.data.weight}
+      </span>
+
+      <a
+        href={`/products/${product.id}`}
+        class="product-link"
+      >
+        View Details →
+      </a>
+
+    </div>
+
+  </div>
+
+</article>

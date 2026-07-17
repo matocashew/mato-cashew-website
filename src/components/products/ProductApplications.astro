@@ -1,0 +1,44 @@
+---
+import SectionTitle from "../SectionTitle.astro";
+
+interface Props {
+  applications: string[];
+}
+
+const { applications = [] } = Astro.props;
+---
+
+{
+  applications.length > 0 && (
+
+    <section class="product-applications">
+
+      <div class="container">
+
+        <SectionTitle
+          tag="Applications"
+          title="Recommended Uses"
+        />
+
+        <div class="applications-grid">
+
+          {
+            applications.map((item) => (
+
+              <div class="application-card">
+
+                <h3>{item}</h3>
+
+              </div>
+
+            ))
+          }
+
+        </div>
+
+      </div>
+
+    </section>
+
+  )
+}

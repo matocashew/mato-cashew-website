@@ -179,3 +179,65 @@
     }
 
 }
+
+/* ===========================
+   Product Applications
+=========================== */
+
+.product-applications{
+
+    padding:100px 0;
+
+}
+
+.applications-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:24px;
+
+}
+
+.application-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 10px 24px rgba(0,0,0,.08);
+
+    transition:.3s ease;
+
+}
+
+.application-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.application-card h3{
+
+    color:var(--primary);
+
+    font-size:22px;
+
+}
+
+/* ===========================
+   Related Products
+=========================== */
+
+.related-products{
+
+    padding:100px 0;
+
+    background:#faf8f2;
+
+}

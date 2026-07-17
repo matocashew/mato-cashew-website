@@ -1,0 +1,45 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import SectionTitle from "../SectionTitle.astro";
+import DynamicProductCard from "./DynamicProductCard.astro";
+
+interface Props {
+  products: CollectionEntry<"products">[];
+}
+
+const { products = [] } = Astro.props;
+---
+
+{
+  products.length > 0 && (
+
+    <section class="related-products">
+
+      <div class="container">
+
+        <SectionTitle
+          tag="You May Also Like"
+          title="Related Products"
+        />
+
+        <div class="products-grid">
+
+          {
+            products.map((product) => (
+
+              <DynamicProductCard
+                product={product}
+              />
+
+            ))
+          }
+
+        </div>
+
+      </div>
+
+    </section>
+
+  )
+}
