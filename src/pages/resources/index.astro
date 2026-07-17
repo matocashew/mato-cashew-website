@@ -8,6 +8,7 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import PageHero from "../../components/PageHero.astro";
 import SectionTitle from "../../components/SectionTitle.astro";
 import ResourceCard from "../../components/resources/ResourceCard.astro";
+import ResourceGrid from "../../components/resources/ResourceGrid.astro";
 
 const articles = (await getCollection(
   "resources",
@@ -50,32 +51,9 @@ console.log("Articles:", articles);
       title="Latest Articles"
     />
 
-    <div class="resources-grid">
-
-      {
-        articles.map((article) => (
-
-          <ResourceCard
-            title={article.data.title}
-            description={article.data.description}
-            href={`/resources/${article.id}`}
-            image={article.data.image}
-            category={article.data.category}
-            publishDate={article.data.publishDate.toLocaleDateString(
-              "en-US",
-              {
-                year: "numeric",
-                month: "long",
-                day: "numeric"
-              }
-            )}
-            readingTime={`${article.data.readingTime ?? 5} min read`}
-          />
-
-        ))
-      }
-
-    </div>
+    <ResourceGrid
+      articles={articles}
+    />
 
   </div>
 

@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ResourceCard from "../resources/ResourceCard.astro";
+import ResourceGrid from "../resources/ResourceGrid.astro";
+
+interface Props {
+  articles: CollectionEntry<"resources">[];
+}
+
+const { articles } = Astro.props;
+---
+
+{
+  articles.length > 0 && (
+
+    <section class="related-articles">
+
+      <div class="container">
+
+        <h2>Related Articles</h2>
+
+        <ResourceGrid
+          articles={articles}
+        />
+
+      </div>
+
+    </section>
+
+  )
+}

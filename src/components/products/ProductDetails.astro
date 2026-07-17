@@ -1,0 +1,116 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  product: CollectionEntry<"products">;
+}
+
+const { product } = Astro.props;
+---
+
+<section class="product-details">
+
+  <div class="container">
+
+    <div class="product-details-grid">
+
+      <div class="product-image">
+
+        <img
+          src={product.data.image}
+          alt={product.data.title}
+          width="700"
+          height="700"
+          loading="eager"
+        />
+
+      </div>
+
+      <div class="product-info">
+
+        <span class="product-category">
+          {product.data.category}
+        </span>
+
+        <h2>{product.data.title}</h2>
+
+        <p class="product-description">
+          {product.data.description}
+        </p>
+
+        <div class="product-meta">
+
+          <div>
+
+            <strong>SKU</strong>
+
+            <span>{product.data.sku}</span>
+
+          </div>
+
+          <div>
+
+            <strong>Weight</strong>
+
+            <span>{product.data.weight}</span>
+
+          </div>
+
+          <div>
+
+            <strong>Packaging</strong>
+
+            <span>{product.data.packaging}</span>
+
+          </div>
+
+          {
+            product.data.minimumOrder && (
+
+              <div>
+
+                <strong>Minimum Order</strong>
+
+                <span>{product.data.minimumOrder}</span>
+
+              </div>
+
+            )
+          }
+
+        </div>
+
+        <div class="product-badges">
+
+          {
+            product.data.availableForWholesale && (
+              <span class="badge">
+                Wholesale Available
+              </span>
+            )
+          }
+
+          {
+            product.data.privateLabel && (
+              <span class="badge">
+                Private Label
+              </span>
+            )
+          }
+
+        </div>
+
+        <a
+          href="/contact"
+          class="btn btn-primary"
+        >
+          Request a Quote
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

@@ -31,6 +31,49 @@ const resources = defineCollection({
   })
 });
 
+const products = defineCollection({
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "./src/content/products"
+  }),
+
+  schema: z.object({
+    title: z.string(),
+
+    description: z.string(),
+
+    sku: z.string(),
+
+    category: z.string(),
+
+    weight: z.string(),
+
+    packaging: z.string(),
+
+    image: z.string(),
+
+    gallery: z.array(z.string()).default([]),
+
+    featured: z.boolean().default(false),
+
+    availableForWholesale: z.boolean().default(true),
+
+    privateLabel: z.boolean().default(false),
+
+    minimumOrder: z.string().optional(),
+
+    specifications: z.array(z.string()).default([]),
+
+    applications: z.array(z.string()).default([]),
+
+    publishDate: z.date(),
+
+    draft: z.boolean().default(false)
+  })
+});
+
 export const collections = {
-  resources
+  resources,
+  products
 };
+

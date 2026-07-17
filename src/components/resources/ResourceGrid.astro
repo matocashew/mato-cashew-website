@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ResourceCard from "./ResourceCard.astro";
+
+interface Props {
+  articles: CollectionEntry<"resources">[];
+}
+
+const { articles } = Astro.props;
+---
+
+<div class="resources-grid">
+
+  {
+    articles.map((article) => (
+
+      <ResourceCard
+        title={article.data.title}
+        description={article.data.description}
+        href={`/resources/${article.id}`}
+        image={article.data.image}
+        category={article.data.category}
+        publishDate={article.data.publishDate.toLocaleDateString(
+          "en-US",
+          {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+          }
+        )}
+        readingTime={`${article.data.readingTime ?? 5} min read`}
+      />
+
+    ))
+  }
+
+</div>

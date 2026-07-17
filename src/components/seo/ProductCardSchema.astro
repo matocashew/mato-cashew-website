@@ -1,0 +1,36 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  image: string;
+  weight: string;
+}
+
+const {
+  name,
+  description,
+  image,
+  weight
+} = Astro.props;
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Product",
+
+    name,
+
+    description,
+
+    image: [image],
+
+    weight,
+
+    brand: {
+      "@type": "Brand",
+      name: "Mato Cashew"
+    }
+  })}
+></script>

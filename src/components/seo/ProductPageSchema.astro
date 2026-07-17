@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  product: CollectionEntry<"products">;
+  canonical: string;
+}
+
+const { product, canonical } = Astro.props;
+console.log("ProductSchema props:", Astro.props);
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Product",
+
+    name: product.data.title,
+
+    description: product.data.description,
+
+    image: [product.data.image],
+
+    sku: product.data.sku,
+
+    category: product.data.category,
+
+    url: canonical,
+
+    brand: {
+      "@type": "Brand",
+      name: "Mato Cashew"
+    }
+  })}
+></script>

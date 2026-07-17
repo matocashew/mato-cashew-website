@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 
 import "../../styles/page.css";
 import "../../styles/article.css";
+import "../../styles/related-articles.css";
 
 import PageLayout from "../../layouts/PageLayout.astro";
 import PageHero from "../../components/PageHero.astro";
@@ -10,6 +11,7 @@ import PageHero from "../../components/PageHero.astro";
 import ArticleMeta from "../../components/articles/ArticleMeta.astro";
 import ArticleCTA from "../../components/articles/ArticleCTA.astro";
 import ArticleSchema from "../../components/seo/ArticleSchema.astro";
+import RelatedArticles from "../../components/articles/RelatedArticles.astro";
 
 export async function getStaticPaths() {
   const articles = await getCollection(
@@ -30,6 +32,15 @@ export async function getStaticPaths() {
 const { article } = Astro.props;
 
 const { Content } = await render(article);
+
+const relatedArticles = (
+  await getCollection(
+    "resources",
+    ({ data }) => !data.draft
+  )
+)
+.filter((item) => item.id !== article.id)
+.slice(0, 3);
 
 const canonical = `https://matocashew.com/resources/${article.id}`;
 ---
@@ -88,5 +99,9 @@ const canonical = `https://matocashew.com/resources/${article.id}`;
 </section>
 
 <ArticleCTA />
+
+<RelatedArticles
+  articles={relatedArticles}
+/>
 
 </PageLayout>

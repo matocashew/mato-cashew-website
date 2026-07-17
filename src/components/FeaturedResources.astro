@@ -1,0 +1,53 @@
+---
+import { getCollection } from "astro:content";
+
+import SectionTitle from "./SectionTitle.astro";
+import ResourceGrid from "./resources/ResourceGrid.astro";
+
+const featuredArticles = (
+  await getCollection(
+    "resources",
+    ({ data }) => !data.draft && data.featured
+  )
+)
+.sort(
+  (a, b) =>
+    b.data.publishDate.getTime() -
+    a.data.publishDate.getTime()
+)
+.slice(0, 3);
+---
+
+{
+  featuredArticles.length > 0 && (
+
+    <section class="featured-resources">
+
+      <div class="container">
+
+        <SectionTitle
+          tag="Resources"
+          title="Featured Resources"
+        />
+
+        <ResourceGrid
+          articles={featuredArticles}
+        />
+
+        <div class="featured-resources-action">
+
+          <a
+            href="/resources"
+            class="btn btn-primary"
+          >
+            View All Resources
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  )
+}
