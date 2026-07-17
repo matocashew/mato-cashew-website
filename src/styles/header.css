@@ -193,3 +193,28 @@
 .header.scrolled .logo img {
     width: 135px;
 }
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.language-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.language-button:hover {
+  color: var(--color-primary, #0D5C3A);
+}
+
+.language-button.active {
+  font-weight: 700;
+  color: var(--color-primary, #0D5C3A);
+}

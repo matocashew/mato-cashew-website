@@ -1,5 +1,11 @@
 ---
+import { getLanguage } from "../i18n/getLanguage";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+
 const currentPath = Astro.url.pathname;
+
+// បណ្ដោះអាសន្នប្រើ English ជាលំនាំដើម
+const t = getLanguage("en");
 ---
 <header class="header">
 
@@ -34,7 +40,7 @@ const currentPath = Astro.url.pathname;
             href="/"
             class={currentPath === "/" ? "active" : ""}
             >
-            Home
+            {t.nav.home}
             </a>
         </li>
 
@@ -43,7 +49,7 @@ const currentPath = Astro.url.pathname;
             href="/about"
             class={currentPath === "/about" ? "active" : ""}
             >
-            About
+            {t.nav.about}
             </a>
         </li>
 
@@ -52,7 +58,7 @@ const currentPath = Astro.url.pathname;
             href="/products"
             class={currentPath === "/products" ? "active" : ""}
             >
-            Products
+            {t.nav.products}
             </a>
         </li>
 
@@ -61,7 +67,7 @@ const currentPath = Astro.url.pathname;
                 href="/resources"
                 class={currentPath.startsWith("/resources") ? "active" : ""}
             >
-                Resources
+                {t.nav.resources}
             </a>
         </li>
 
@@ -70,7 +76,7 @@ const currentPath = Astro.url.pathname;
             href="/gallery"
             class={currentPath === "/gallery" ? "active" : ""}
             >
-            Gallery
+            {t.nav.gallery}
             </a>
         </li>
 
@@ -79,7 +85,7 @@ const currentPath = Astro.url.pathname;
             href="/wholesale"
             class={currentPath === "/wholesale" ? "active" : ""}
             >
-            Wholesale
+            {t.nav.wholesale}
             </a>
         </li>
 
@@ -88,13 +94,15 @@ const currentPath = Astro.url.pathname;
             href="/contact"
             class={currentPath === "/contact" ? "active" : ""}
             >
-            Contact
+            {t.nav.contact}
             </a>
         </li>
 
         </ul>
 
     </nav>
+
+    <LanguageSwitcher />
 
   </div>
 
