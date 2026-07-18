@@ -1,7 +1,9 @@
 ---
-import { getLanguage } from "../../i18n/getLanguage";
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
 
-const t = getLanguage("en");
+const t = getCurrentLanguage(
+  Astro.url.pathname
+);
 ---
 
 <section class="about-cta">

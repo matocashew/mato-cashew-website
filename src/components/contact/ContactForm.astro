@@ -1,11 +1,12 @@
 ---
-import { getLanguage } from "../../i18n/getLanguage";
-
 import FormField from "./FormField.astro";
 import FormSelect from "./FormSelect.astro";
 import FormTextarea from "./FormTextarea.astro";
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
 
-const t = getLanguage("en");
+const t = getCurrentLanguage(
+  Astro.url.pathname
+);
 
 const inquiryOptions = [
   {

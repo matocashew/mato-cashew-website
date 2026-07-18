@@ -1,5 +1,11 @@
-import { languages, type Language } from "./index";
+import { translations } from "./index";
+import {
+  defaultLanguage,
+  type Language,
+} from "./config";
 
-export function getLanguage(lang?: Language) {
-  return languages[lang ?? "en"];
+export function getLanguage(
+  language: Language = defaultLanguage
+) {
+  return translations[language];
 }

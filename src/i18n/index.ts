@@ -1,9 +1,10 @@
 import en from "./en";
 import km from "./km";
 
-export const languages = {
+export const translations = {
   en,
-  km
+  km,
 };
 
-export type Language = keyof typeof languages;
+export type Translation =
+  typeof en;

@@ -256,6 +256,61 @@ const en = {
       wholesaleButton: "Wholesale Information",
     },
   },
+  products: {
+  intro: {
+    tag: "Premium Cashew",
+
+    title: "Premium Cambodian Cashew Products",
+
+    description:
+      "Mato Cashew offers premium Cambodian cashew kernels for retail, wholesale, export, OEM, and private label partners. Every product is carefully selected to meet international quality standards.",
+  },
+
+  retail: {
+    tag: "Retail Products",
+
+    title: "Healthy Snacks for Everyday Enjoyment",
+  },
+
+  wholesale: {
+    tag: "Wholesale Products",
+
+    title: "Bulk Cashew Supply for Business",
+  },
+
+  packaging: {
+    tag: "Packaging Options",
+
+    title: "Flexible Packaging Solutions",
+
+    retail: "Retail Pouch",
+
+    vacuum: "Vacuum Bag",
+
+    carton: "Export Carton",
+  },
+
+  specifications: {
+    tag: "Specifications",
+
+    title: "Technical Specifications",
+  },
+
+  faq: {
+    tag: "FAQ",
+
+    title: "Frequently Asked Questions",
+  },
+
+  cta: {
+    title: "Looking for a Reliable Cashew Supplier?",
+
+    description:
+      "Contact Mato Cashew today for wholesale pricing, OEM, private label, or export opportunities.",
+
+    button: "Contact Us",
+  },
+},
 };
 
 export default en;
