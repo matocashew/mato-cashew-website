@@ -4,10 +4,14 @@ import type { CollectionEntry } from "astro:content";
 interface Props {
   product: CollectionEntry<"products">;
   canonical: string;
+  lang?: "en" | "km";
 }
 
-const { product, canonical } = Astro.props;
-console.log("ProductSchema props:", Astro.props);
+const {
+  product,
+  canonical,
+  lang = "en"
+} = Astro.props;
 ---
 
 <script
@@ -27,6 +31,8 @@ console.log("ProductSchema props:", Astro.props);
     category: product.data.category,
 
     url: canonical,
+
+    inLanguage: lang,
 
     brand: {
       "@type": "Brand",

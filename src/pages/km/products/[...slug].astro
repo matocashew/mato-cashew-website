@@ -1,18 +1,18 @@
 ---
 import { getCollection, render } from "astro:content";
 
-import "../../styles/page.css";
-import "../../styles/product-detail.css";
+import "../../../styles/page.css";
+import "../../../styles/product-detail.css";
 
-import PageLayout from "../../layouts/PageLayout.astro";
-import PageHero from "../../components/PageHero.astro";
+import PageLayout from "../../../layouts/PageLayout.astro";
+import PageHero from "../../../components/PageHero.astro";
 
-import ProductDetails from "../../components/products/ProductDetails.astro";
-import ProductSpecificationsList from "../../components/products/ProductSpecificationsList.astro";
-import ProductApplications from "../../components/products/ProductApplications.astro";
-import RelatedProducts from "../../components/products/RelatedProducts.astro";
+import ProductDetails from "../../../components/products/ProductDetails.astro";
+import ProductSpecificationsList from "../../../components/products/ProductSpecificationsList.astro";
+import ProductApplications from "../../../components/products/ProductApplications.astro";
+import RelatedProducts from "../../../components/products/RelatedProducts.astro";
 
-import ProductPageSchema from "../../components/seo/ProductPageSchema.astro";
+import ProductPageSchema from "../../../components/seo/ProductPageSchema.astro";
 
 export async function getStaticPaths() {
   const products = await getCollection(
@@ -34,7 +34,8 @@ const { product } = Astro.props;
 
 const { Content } = await render(product);
 
-const canonical = `https://matocashew.com/products/${product.id}`;
+const canonical =
+  `https://matocashew.com/km/products/${product.id}`;
 
 const relatedProducts = (
   await getCollection(
@@ -49,27 +50,28 @@ const relatedProducts = (
 <ProductPageSchema
   product={product}
   canonical={canonical}
-  lang="en"
+  lang="km"
 />
 
 <PageLayout
-  title={`${product.data.title} | Mato Cashew`}
-  description={product.data.description}
-  canonical={canonical}
-  breadcrumbs={[
+    lang="km"
+    title={`${product.data.title} | Mato Cashew`}
+    description={product.data.description}
+    canonical={canonical}
+    breadcrumbs={[
     {
-      name: "Home",
-      url: "https://matocashew.com"
+        name: "ទំព័រដើម",
+        url: "https://matocashew.com/km"
     },
     {
-      name: "Products",
-      url: "https://matocashew.com/products"
+        name: "ផលិតផល",
+        url: "https://matocashew.com/km/products"
     },
     {
-      name: product.data.title,
-      url: canonical
+        name: product.data.title,
+        url: canonical
     }
-  ]}
+    ]}
 >
 
 <PageHero
