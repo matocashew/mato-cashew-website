@@ -1,0 +1,29 @@
+---
+import "../../styles/page.css";
+import "../../styles/contact.css";
+import "../../styles/contact-form.css";
+
+import PageLayout from "../../layouts/PageLayout.astro";
+import ContactPage from "../../components/pages/ContactPage.astro";
+---
+
+<PageLayout
+  lang="km"
+  title="ទំនាក់ទំនង | Mato Cashew"
+  description="ទាក់ទង Mato Cashew សម្រាប់ការបញ្ជាទិញ សហការ និងព័ត៌មានអំពីគ្រាប់ស្វាយចន្ទីកម្ពុជា។"
+  canonical="https://matocashew.com/km/contact"
+  breadcrumbs={[
+    {
+      name: "ទំព័រដើម",
+      url: "https://matocashew.com/km"
+    },
+    {
+      name: "ទំនាក់ទំនង",
+      url: "https://matocashew.com/km/contact"
+    }
+  ]}
+>
+
+  <ContactPage />
+
+</PageLayout>

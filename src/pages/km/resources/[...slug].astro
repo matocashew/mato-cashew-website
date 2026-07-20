@@ -1,0 +1,114 @@
+---
+import { getCollection, render } from "astro:content";
+
+import "../../../styles/page.css";
+import "../../../styles/article.css";
+import "../../../styles/related-articles.css";
+
+import PageLayout from "../../../layouts/PageLayout.astro";
+import PageHero from "../../../components/PageHero.astro";
+
+import ArticleMeta from "../../../components/articles/ArticleMeta.astro";
+import ArticleCTA from "../../../components/articles/ArticleCTA.astro";
+import ArticleSchema from "../../../components/seo/ArticleSchema.astro";
+import RelatedArticles from "../../../components/articles/RelatedArticles.astro";
+import { getCurrentLanguage } from "../../../i18n/getCurrentLanguage";
+
+export async function getStaticPaths() {
+  const articles = await getCollection(
+    "resources",
+    ({ data }) => !data.draft
+  );
+
+  return articles.map((article) => ({
+    params: {
+      slug: article.id
+    },
+    props: {
+      article
+    }
+  }));
+}
+
+const { article } = Astro.props;
+
+const { Content } = await render(article);
+
+const relatedArticles = (
+  await getCollection(
+    "resources",
+    ({ data }) => !data.draft
+  )
+)
+.filter((item) => item.id !== article.id)
+.slice(0, 3);
+
+const canonical =
+  `https://matocashew.com/km/resources/${article.id}`;
+
+const t = getCurrentLanguage(
+  Astro.url.pathname
+);
+---
+
+<ArticleSchema
+  headline={article.data.title}
+  description={article.data.description}
+  image={article.data.image}
+  datePublished={article.data.publishDate}
+  dateModified={article.data.updatedDate}
+  author={article.data.author}
+  canonical={canonical}
+/>
+
+<PageLayout
+  lang="km"
+  title={`${article.data.title} | Mato Cashew`}
+  description={article.data.description}
+  canonical={canonical}
+  breadcrumbs={[
+    {
+    name: "ទំព័រដើម",
+    url: "https://matocashew.com/km"
+    },
+    {
+    name: t.resources.detail.breadcrumb,
+    url: "https://matocashew.com/km/resources"
+    },
+    {
+      name: article.data.title,
+      url: canonical
+    }
+  ]}
+>
+
+<PageHero
+  title={article.data.title}
+  description={article.data.description}
+/>
+
+<section class="container">
+
+<ArticleMeta
+  publishDate={article.data.publishDate}
+  updatedDate={article.data.updatedDate}
+  author={article.data.author}
+  category={article.data.category}
+  readingTime={article.data.readingTime}
+/>
+
+<article class="article-content">
+
+  <Content />
+
+</article>
+
+</section>
+
+<ArticleCTA />
+
+<RelatedArticles
+  articles={relatedArticles}
+/>
+
+</PageLayout>
