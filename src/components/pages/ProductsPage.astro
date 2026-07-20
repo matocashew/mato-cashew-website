@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import PageHero from "../PageHero.astro";
+
+import ProductIntro from "../products/ProductIntro.astro";
+import ProductGrid from "../products/ProductGrid.astro";
+import PackagingOptions from "../products/PackagingOptions.astro";
+import ProductSpecifications from "../products/ProductSpecifications.astro";
+import ProductFAQ from "../products/ProductFAQ.astro";
+import ProductsCTA from "../products/ProductsCTA.astro";
+
+interface Props {
+  products: CollectionEntry<"products">[];
+}
+
+const { products } = Astro.props;
+---
+
+<PageHero
+  title="Our Products"
+  description="Premium Cambodian Cashew Kernels for Retail & Wholesale Markets."
+/>
+
+<ProductIntro />
+
+<ProductGrid
+  products={products}
+/>
+
+<PackagingOptions />
+
+<ProductSpecifications />
+
+<ProductFAQ />
+
+<ProductsCTA />

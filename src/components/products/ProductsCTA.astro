@@ -1,55 +1,57 @@
+---
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(Astro.url.pathname);
+---
+
 <section class="products-cta">
 
-    <div class="container">
+  <div class="container">
 
-        <div class="products-cta-box">
+    <div class="products-cta-box">
 
-            <span class="cta-tag">
-                Wholesale Inquiry
-            </span>
+      <span class="cta-tag">
+        {t.products.cta.tag}
+      </span>
 
-            <h2>
-                Ready to Import Premium Cambodian Cashew?
-            </h2>
+      <h2>
+        {t.products.cta.title}
+      </h2>
 
-            <p>
-                Whether you are an importer, distributor,
-                supermarket, or food manufacturer,
-                Mato Cashew is ready to supply premium
-                Cambodian cashew kernels tailored to
-                your business needs.
-            </p>
+      <p>
+        {t.products.cta.description}
+      </p>
 
-            <div class="cta-features">
+      <div class="cta-features">
 
-                <span>✓ Export Ready</span>
+        {
+          t.products.cta.features.map((feature) => (
+            <span>✓ {feature}</span>
+          ))
+        }
 
-                <span>✓ OEM & Private Label</span>
+      </div>
 
-                <span>✓ Reliable Supply</span>
+      <div class="cta-buttons">
 
-            </div>
+        <a
+          href="/contact"
+          class="btn btn-primary"
+        >
+          {t.products.cta.primaryButton}
+        </a>
 
-            <div class="cta-buttons">
+        <a
+          href="/wholesale"
+          class="btn btn-outline"
+        >
+          {t.products.cta.secondaryButton}
+        </a>
 
-                <a
-                    href="/contact"
-                    class="btn btn-primary"
-                >
-                    Request Quote
-                </a>
-
-                <a
-                    href="/wholesale"
-                    class="btn btn-outline"
-                >
-                    Wholesale Information
-                </a>
-
-            </div>
-
-        </div>
+      </div>
 
     </div>
+
+  </div>
 
 </section>

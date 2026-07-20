@@ -1,45 +1,25 @@
 ---
-import SectionTitle from "../SectionTitle.astro";
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(Astro.url.pathname);
 ---
 
 <section class="product-intro">
 
-    <div class="container intro-grid">
+  <div class="container">
 
-        <div class="intro-content">
+    <span class="section-tag">
+      {t.products.intro.tag}
+    </span>
 
-            <SectionTitle
-                tag="Our Products"
-                title="Premium Cambodian Cashew Kernels"
-            />
+    <h2>
+      {t.products.intro.title}
+    </h2>
 
-            <p>
-                Mato Cashew offers carefully selected premium Cambodian
-                cashew kernels for both retail and wholesale markets.
-                Every kernel is processed under strict quality control
-                to ensure freshness, natural taste, and export quality.
-            </p>
+    <p>
+      {t.products.intro.description}
+    </p>
 
-            <ul class="intro-list">
-
-                <li>✔ Whole White Kernels</li>
-                <li>✔ Vacuum Packed</li>
-                <li>✔ Export Quality</li>
-                <li>✔ OEM & Private Label Available</li>
-
-            </ul>
-
-        </div>
-
-        <div class="intro-image">
-
-            <img
-                src="/images/products/premium-kernels.png"
-                alt="Premium Cambodian Cashew Kernels"
-            />
-
-        </div>
-
-    </div>
+  </div>
 
 </section>

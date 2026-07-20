@@ -1,75 +1,35 @@
 ---
 import SectionTitle from "../SectionTitle.astro";
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(Astro.url.pathname);
 ---
 
 <section class="product-faq">
 
-    <div class="container">
+  <div class="container">
 
-        <SectionTitle
-            tag="FAQ"
-            title="Frequently Asked Questions"
-        />
+    <SectionTitle
+      tag={t.products.faq.tag}
+      title={t.products.faq.title}
+    />
 
-        <div class="faq-list">
+    <div class="faq-list">
 
-            <details class="faq-item">
+      {
+        t.products.faq.items.map((item) => (
+          <details class="faq-item">
 
-                <summary>What grades of cashew kernels do you supply?</summary>
+            <summary>{item.question}</summary>
 
-                <p>
-                    We supply premium Cambodian cashew kernels including
-                    WW180, WW210, WW240, WW320, WW450, LP and SP grades.
-                </p>
+            <p>{item.answer}</p>
 
-            </details>
-
-            <details class="faq-item">
-
-                <summary>Do you offer OEM or private label services?</summary>
-
-                <p>
-                    Yes. We provide OEM and private label packaging
-                    tailored to your brand and market requirements.
-                </p>
-
-            </details>
-
-            <details class="faq-item">
-
-                <summary>What is your minimum order quantity (MOQ)?</summary>
-
-                <p>
-                    MOQ depends on the product type and packaging.
-                    Please contact our sales team for detailed quotations.
-                </p>
-
-            </details>
-
-            <details class="faq-item">
-
-                <summary>Which countries do you export to?</summary>
-
-                <p>
-                    We serve both domestic and international markets
-                    and welcome partnerships worldwide.
-                </p>
-
-            </details>
-
-            <details class="faq-item">
-
-                <summary>How can I request a quotation?</summary>
-
-                <p>
-                    Simply visit our Contact page or click the
-                    "Request Quote" button to get in touch with us.
-                </p>
-
-            </details>
-
-        </div>
+          </details>
+        ))
+      }
 
     </div>
+
+  </div>
 
 </section>

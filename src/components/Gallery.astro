@@ -1,5 +1,10 @@
 ---
 import SectionTitle from "./SectionTitle.astro";
+import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(
+  Astro.url.pathname
+);
 ---
 
 <section id="gallery" class="gallery">
@@ -7,8 +12,8 @@ import SectionTitle from "./SectionTitle.astro";
   <div class="container">
 
     <SectionTitle
-      tag="Gallery"
-      title="From Farm to Export"
+      tag={t.galleryHome.tag}
+      title={t.galleryHome.title}
     />
 
     <div class="gallery-grid">
@@ -16,7 +21,7 @@ import SectionTitle from "./SectionTitle.astro";
       <div class="gallery-item large">
         <img
           src="/images/gallery/orchard.jpg"
-          alt="Cambodian cashew orchard"
+          alt={t.galleryHome.images.orchard}
           width="600"
           height="400"
           loading="lazy"
@@ -27,7 +32,7 @@ import SectionTitle from "./SectionTitle.astro";
       <div class="gallery-item">
         <img
           src="/images/gallery/farmers.jpg"
-          alt="Cambodian cashew farmers harvesting cashew"
+          alt={t.galleryHome.images.farmers}
           width="600"
           height="400"
           loading="lazy"
@@ -38,7 +43,7 @@ import SectionTitle from "./SectionTitle.astro";
       <div class="gallery-item">
         <img
           src="/images/gallery/factory.jpg"
-          alt="Mato Cashew processing facility"
+          alt={t.galleryHome.images.factory}
           width="600"
           height="400"
           loading="lazy"
@@ -49,7 +54,7 @@ import SectionTitle from "./SectionTitle.astro";
       <div class="gallery-item">
         <img
           src="/images/gallery/kernels.jpg"
-          alt="Premium Cambodian cashew kernels"
+          alt={t.galleryHome.images.kernels}
           width="600"
           height="400"
           loading="lazy"
@@ -60,7 +65,7 @@ import SectionTitle from "./SectionTitle.astro";
       <div class="gallery-item">
         <img
           src="/images/gallery/packaging.jpg"
-          alt="Export-ready cashew packaging"
+          alt={t.galleryHome.images.packaging}
           width="600"
           height="400"
           loading="lazy"
@@ -71,7 +76,7 @@ import SectionTitle from "./SectionTitle.astro";
       <div class="gallery-item large">
         <img
           src="/images/gallery/export.jpg"
-          alt="Cambodian cashew export shipment"
+          alt={t.galleryHome.images.export}
           width="600"
           height="400"
           loading="lazy"

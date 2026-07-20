@@ -1,14 +1,13 @@
 ---
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+
 interface Props {
   title: string;
   description: string;
   href: string;
   image: string;
-
   category: string;
-
   publishDate: string;
-
   readingTime: string;
 }
 
@@ -19,60 +18,62 @@ const {
   image,
   category,
   publishDate,
-  readingTime
+  readingTime,
 } = Astro.props;
+
+const t = getCurrentLanguage(Astro.url.pathname);
 ---
 
 <article class="resource-card">
 
-    <a href={href} class="resource-image">
+  <a href={href} class="resource-image">
 
-        <img
-            src={image}
-            alt={title}
-            width="640"
-            height="360"
-            loading="lazy"
-            decoding="async"
-        />
+    <img
+      src={image}
+      alt={title}
+      width="640"
+      height="360"
+      loading="lazy"
+      decoding="async"
+    />
 
-    </a>
+  </a>
 
-    <div class="resource-content">
+  <div class="resource-content">
 
-        <span class="resource-category">
-            {category}
-        </span>
+    <span class="resource-category">
+      {category}
+    </span>
 
-        <h3>
+    <h3>
 
-            <a href={href}>
-                {title}
-            </a>
+      <a href={href}>
+        {title}
+      </a>
 
-        </h3>
+    </h3>
 
-        <p>
-            {description}
-        </p>
+    <p>
+      {description}
+    </p>
 
-        <div class="resource-meta">
+    <div class="resource-meta">
 
-            <span>{publishDate}</span>
+      <span>{publishDate}</span>
 
-            <span>•</span>
+      <span>•</span>
 
-            <span>{readingTime}</span>
-
-        </div>
-
-        <a
-            href={href}
-            class="resource-link"
-        >
-            Read Article →
-        </a>
+      <span>{readingTime}</span>
 
     </div>
+
+    <a
+      href={href}
+      class="resource-link"
+    >
+      {t.resources.card.readArticle}
+    </a>
+
+  </div>
 
 </article>

@@ -16,6 +16,9 @@ interface Props {
   description?: string;
   canonical?: string;
   robots?: string;
+
+  lang?: "en" | "km";
+
   breadcrumbs?: {
     name: string;
     url: string;
@@ -29,12 +32,15 @@ const {
   description = "Premium Cambodian Cashew for Local & International Markets.",
   canonical = siteUrl,
   robots = "index,follow",
-  breadcrumbs = []
+
+  lang = "en",
+
+  breadcrumbs = [],
 } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={lang}>
 
 <head>
 
@@ -172,7 +178,10 @@ const {
     content="Mato Cashew Premium Cambodian Cashew"
   />
 
-  <meta property="og:locale" content="en_US" />
+  <meta
+  property="og:locale"
+  content={lang === "km" ? "km_KH" : "en_US"}
+/>
 
   <!-- Twitter -->
 

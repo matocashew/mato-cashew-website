@@ -1,11 +1,13 @@
 ---
-import { getLanguage } from "../i18n/getLanguage";
+import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
+
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 
 const currentPath = Astro.url.pathname;
 
-// បណ្ដោះអាសន្នប្រើ English ជាលំនាំដើម
-const t = getLanguage("en");
+const t = getCurrentLanguage(
+  Astro.url.pathname
+);
 ---
 <header class="header">
 

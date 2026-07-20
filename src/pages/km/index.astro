@@ -1,0 +1,27 @@
+---
+import "../../styles/hero.css";
+import "../../styles/about.css";
+import "../../styles/products.css";
+import "../../styles/gallery.css";
+import "../../styles/wholesale.css";
+
+import Layout from "../../layouts/Layout.astro";
+import HomePage from "../../components/pages/HomePage.astro";
+---
+
+<Layout
+  lang="km"
+  title="ម៉ាតូ ខាស្យូ | គ្រាប់ស្វាយចន្ទីកម្ពុជាគុណភាពខ្ពស់"
+  description="ម៉ាតូ ខាស្យូ ផ្គត់ផ្គង់គ្រាប់ស្វាយចន្ទីកម្ពុជាគុណភាពខ្ពស់សម្រាប់ទីផ្សារក្នុងស្រុក និងអន្តរជាតិ។"
+  canonical="https://matocashew.com/km/"
+  breadcrumbs={[
+    {
+      name: "ទំព័រដើម",
+      url: "https://matocashew.com/km/"
+    }
+  ]}
+>
+
+  <HomePage />
+
+</Layout>

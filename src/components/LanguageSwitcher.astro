@@ -1,3 +1,18 @@
+---
+const isKhmer = Astro.url.pathname.startsWith("/km");
+
+const currentLanguage = isKhmer
+  ? {
+      code: "km",
+      label: "ខ្មែរ",
+      flag: "/images/flags/kh.svg",
+    }
+  : {
+      code: "en",
+      label: "English",
+      flag: "/images/flags/us.svg",
+    };
+---
 <div class="language-switcher">
 
   <button
@@ -8,13 +23,13 @@
   >
 
     <img
-      src="/images/flags/us.svg"
+      src={currentLanguage.flag}
       alt=""
       width="20"
       height="15"
     />
 
-    <span>English</span>
+    <span>{currentLanguage.label}</span>
 
     <span class="arrow">▼</span>
 
@@ -24,7 +39,12 @@
 
     <button
       type="button"
-      class="language-option active"
+      class={`language-option ${
+        currentLanguage.code === "en"
+          ? "active"
+          : ""
+      }`}
+      data-language="en"
     >
 
       <img
@@ -36,13 +56,22 @@
 
       <span>English</span>
 
-      <span class="check">✓</span>
+      {
+        currentLanguage.code === "en" && (
+          <span class="check">✓</span>
+        )
+      }
 
     </button>
 
     <button
       type="button"
-      class="language-option"
+      class={`language-option ${
+        currentLanguage.code === "km"
+          ? "active"
+          : ""
+      }`}
+      data-language="km"
     >
 
       <img
@@ -53,6 +82,12 @@
       />
 
       <span>ខ្មែរ</span>
+
+      {
+        currentLanguage.code === "km" && (
+          <span class="check">✓</span>
+        )
+      }
 
     </button>
 

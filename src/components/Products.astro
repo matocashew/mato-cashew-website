@@ -3,6 +3,11 @@ import { getCollection } from "astro:content";
 
 import SectionTitle from "./SectionTitle.astro";
 import ProductGrid from "./products/ProductGrid.astro";
+import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(
+  Astro.url.pathname
+);
 
 const featuredProducts = (
   await getCollection(
@@ -22,8 +27,8 @@ const featuredProducts = (
   <div class="container">
 
     <SectionTitle
-      tag="Our Products"
-      title="Premium Cashew Collection"
+      tag={t.productsHome.tag}
+      title={t.productsHome.title}
     />
 
     <ProductGrid

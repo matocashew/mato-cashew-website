@@ -3,6 +3,11 @@ import { getCollection } from "astro:content";
 
 import SectionTitle from "./SectionTitle.astro";
 import ResourceGrid from "./resources/ResourceGrid.astro";
+import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(
+  Astro.url.pathname
+);
 
 const featuredArticles = (
   await getCollection(
@@ -26,8 +31,8 @@ const featuredArticles = (
       <div class="container">
 
         <SectionTitle
-          tag="Resources"
-          title="Featured Resources"
+          tag={t.resources.featured.tag}
+          title={t.resources.featured.title}
         />
 
         <ResourceGrid
@@ -40,7 +45,7 @@ const featuredArticles = (
             href="/resources"
             class="btn btn-primary"
           >
-            View All Resources
+            {t.resources.featured.button}
           </a>
 
         </div>

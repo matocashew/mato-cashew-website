@@ -1,5 +1,8 @@
 ---
 import SectionTitle from "../SectionTitle.astro";
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(Astro.url.pathname);
 ---
 
 <section class="product-specifications">
@@ -7,8 +10,8 @@ import SectionTitle from "../SectionTitle.astro";
   <div class="container">
 
     <SectionTitle
-      tag="Specifications"
-      title="Technical Specifications"
+      tag={t.products.specifications.tag}
+      title={t.products.specifications.title}
     />
 
     <div class="spec-table-wrapper">
@@ -18,53 +21,48 @@ import SectionTitle from "../SectionTitle.astro";
         <tbody>
 
           <tr>
-            <th>Product</th>
-            <td>Premium Cambodian Cashew Kernels</td>
+            <th>{t.products.specifications.rows.product}</th>
+            <td>{t.products.specifications.rows.productValue}</td>
           </tr>
 
           <tr>
-            <th>Origin</th>
-            <td>Cambodia</td>
+            <th>{t.products.specifications.rows.origin}</th>
+            <td>{t.products.specifications.rows.originValue}</td>
           </tr>
 
           <tr>
-            <th>Kernel Grades</th>
-            <td>
-              WW180, WW210, WW240, WW320, WW450,
-              LP, SP
-            </td>
+            <th>{t.products.specifications.rows.grades}</th>
+            <td>{t.products.specifications.rows.gradesValue}</td>
           </tr>
 
           <tr>
-            <th>Moisture</th>
-            <td>Maximum 5%</td>
+            <th>{t.products.specifications.rows.moisture}</th>
+            <td>{t.products.specifications.rows.moistureValue}</td>
           </tr>
 
           <tr>
-            <th>Broken Ratio</th>
-            <td>According to Grade Standard</td>
+            <th>{t.products.specifications.rows.broken}</th>
+            <td>{t.products.specifications.rows.brokenValue}</td>
           </tr>
 
           <tr>
-            <th>Shelf Life</th>
-            <td>24 Months</td>
+            <th>{t.products.specifications.rows.shelfLife}</th>
+            <td>{t.products.specifications.rows.shelfLifeValue}</td>
           </tr>
 
           <tr>
-            <th>Storage</th>
-            <td>Store in a cool, dry place.</td>
+            <th>{t.products.specifications.rows.storage}</th>
+            <td>{t.products.specifications.rows.storageValue}</td>
           </tr>
 
           <tr>
-            <th>Packaging</th>
-            <td>
-              Retail Pouch / Vacuum Bag / Export Carton
-            </td>
+            <th>{t.products.specifications.rows.packaging}</th>
+            <td>{t.products.specifications.rows.packagingValue}</td>
           </tr>
 
           <tr>
-            <th>Certification</th>
-            <td>Available upon request</td>
+            <th>{t.products.specifications.rows.certification}</th>
+            <td>{t.products.specifications.rows.certificationValue}</td>
           </tr>
 
         </tbody>

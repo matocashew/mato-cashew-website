@@ -7,7 +7,11 @@ interface Props {
   title: string;
   description: string;
   canonical: string;
+
+  lang?: "en" | "km";
+
   robots?: string;
+
   breadcrumbs?: {
     name: string;
     url: string;
@@ -18,8 +22,12 @@ const {
   title,
   description,
   canonical,
+
+  lang = "en",
+
   robots = "index,follow",
-  breadcrumbs = []
+
+  breadcrumbs = [],
 } = Astro.props;
 ---
 
@@ -27,6 +35,9 @@ const {
   title={title}
   description={description}
   canonical={canonical}
+
+  lang={lang}
+
   robots={robots}
   breadcrumbs={breadcrumbs}
 >

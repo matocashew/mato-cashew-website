@@ -1,5 +1,10 @@
 ---
 import SectionTitle from "./SectionTitle.astro";
+import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(
+  Astro.url.pathname
+);
 ---
 
 <section id="wholesale" class="wholesale">
@@ -9,26 +14,23 @@ import SectionTitle from "./SectionTitle.astro";
         <div class="wholesale-content">
 
             <SectionTitle
-                tag="Wholesale"
-                title="Export Premium Cambodian Cashew Worldwide"
+                tag={t.wholesaleHome.tag}
+                title={t.wholesaleHome.title}
             />
 
-            <p>
-                Mato Cashew supplies premium Cambodian cashew kernels
-                to international importers, distributors, supermarkets,
-                and food manufacturers. We provide reliable quality,
-                competitive pricing, and export-ready packaging.
-            </p>
+                <p>
+                    {t.wholesaleHome.description}
+                </p>
 
             <ul class="wholesale-list">
 
-                <li>🌍 Worldwide Export</li>
+                <li>🌍 {t.wholesaleHome.features.export}</li>
 
-                <li>📦 Food Grade Packaging</li>
+                <li>📦 {t.wholesaleHome.features.packaging}</li>
 
-                <li>🏆 International Quality Standard</li>
+                <li>🏆 {t.wholesaleHome.features.quality}</li>
 
-                <li>🤝 OEM & Private Label Available</li>
+                <li>🤝 {t.wholesaleHome.features.privateLabel}</li>
 
             </ul>
 
@@ -36,7 +38,7 @@ import SectionTitle from "./SectionTitle.astro";
                 href="#contact"
                 class="btn btn-primary"
             >
-                Request Wholesale Quote
+                {t.wholesaleHome.cta}
             </a>
 
         </div>
@@ -45,7 +47,7 @@ import SectionTitle from "./SectionTitle.astro";
 
             <img
                 src="/images/wholesale/export.jpg"
-                alt="Wholesale Export"
+                alt={t.wholesaleHome.imageAlt}
             />
 
         </div>

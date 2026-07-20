@@ -4,15 +4,9 @@ import "../styles/products.css";
 import "../styles/products-page.css";
 
 import PageLayout from "../layouts/PageLayout.astro";
-import PageHero from "../components/PageHero.astro";
-import ProductIntro from "../components/products/ProductIntro.astro";
-import PackagingOptions from "../components/products/PackagingOptions.astro";
-import ProductSpecifications from "../components/products/ProductSpecifications.astro";
-import ProductFAQ from "../components/products/ProductFAQ.astro";
-import ProductsCTA from "../components/products/ProductsCTA.astro";
+import ProductsPage from "../components/pages/ProductsPage.astro";
 import CollectionPageSchema from "../components/seo/CollectionPageSchema.astro";
 import { getCollection } from "astro:content";
-import ProductGrid from "../components/products/ProductGrid.astro";
 
 const products = (
   await getCollection(
@@ -42,23 +36,8 @@ const products = (
 
   <CollectionPageSchema />
 
-  <PageHero
-    title="Our Products"
-    description="Premium Cambodian Cashew Kernels for Retail & Wholesale Markets."
-  />
-
-  <ProductIntro />
-
-  <ProductGrid
+  <ProductsPage
     products={products}
   />
-  
-  <PackagingOptions />
-
-  <ProductSpecifications />
-
-  <ProductFAQ />
-
-  <ProductsCTA />
 
 </PageLayout>

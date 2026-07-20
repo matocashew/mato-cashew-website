@@ -1,74 +1,73 @@
 ---
 import SectionTitle from "../SectionTitle.astro";
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(Astro.url.pathname);
 ---
 
 <section class="wholesale-products">
 
-    <div class="container">
+  <div class="container">
 
-        <SectionTitle
-            tag="Wholesale Products"
-            title="Bulk Packaging for International Buyers"
-        />
+    <SectionTitle
+      tag={t.products.wholesale.tag}
+      title={t.products.wholesale.title}
+    />
 
-        <div class="wholesale-products-grid">
+    <div class="wholesale-products-grid">
 
-            <article class="bulk-card">
+      <article class="bulk-card">
 
-                <h3>10kg Vacuum Pack</h3>
+        <h3>{t.products.wholesale.items.vacuum10kg.title}</h3>
 
-                <p>
-                    Premium whole white kernels packed in food-grade vacuum
-                    bags for maximum freshness.
-                </p>
+        <p>
+          {t.products.wholesale.items.vacuum10kg.description}
+        </p>
 
-                <ul>
+        <ul>
+          {
+            t.products.wholesale.items.vacuum10kg.features.map((feature) => (
+              <li>✓ {feature}</li>
+            ))
+          }
+        </ul>
 
-                    <li>✓ Export Ready</li>
-                    <li>✓ Food Grade Packaging</li>
-                    <li>✓ Vacuum Sealed</li>
-                    <li>✓ OEM Available</li>
+        <a
+          href="/contact"
+          class="btn btn-primary"
+        >
+          {t.common.requestQuote}
+        </a>
 
-                </ul>
+      </article>
 
-                <a
-                    href="/contact"
-                    class="btn btn-primary"
-                >
-                    Request Quote
-                </a>
+      <article class="bulk-card">
 
-            </article>
+        <h3>{t.products.wholesale.items.exportCarton.title}</h3>
 
-            <article class="bulk-card">
+        <p>
+          {t.products.wholesale.items.exportCarton.description}
+        </p>
 
-                <h3>22.68kg Export Carton (50 lbs)</h3>
+        <ul>
+          {
+            t.products.wholesale.items.exportCarton.features.map((feature) => (
+              <li>✓ {feature}</li>
+            ))
+          }
+        </ul>
 
-                <p>
-                    Designed for international distributors and food
-                    manufacturers requiring large-volume supply.
-                </p>
+        <a
+          href="/contact"
+          class="btn btn-primary"
+        >
+          {t.common.requestQuote}
+        </a>
 
-                <ul>
-
-                    <li>✓ Bulk Export</li>
-                    <li>✓ Private Label</li>
-                    <li>✓ International Shipping</li>
-                    <li>✓ Consistent Quality</li>
-
-                </ul>
-
-                <a
-                    href="/contact"
-                    class="btn btn-primary"
-                >
-                    Request Quote
-                </a>
-
-            </article>
-
-        </div>
+      </article>
 
     </div>
+
+  </div>
 
 </section>

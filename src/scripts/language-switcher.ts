@@ -1,3 +1,4 @@
+import { switchLanguage } from "../i18n/switchLanguage";
 export function initLanguageSwitcher() {
 
   const current =
@@ -8,6 +9,7 @@ export function initLanguageSwitcher() {
 
   if (!current || !dropdown) return;
 
+  // Toggle dropdown
   current.addEventListener("click", (event) => {
 
     event.stopPropagation();
@@ -24,6 +26,7 @@ export function initLanguageSwitcher() {
 
   });
 
+  // Close dropdown
   document.addEventListener("click", () => {
 
     dropdown.classList.remove("open");
@@ -32,6 +35,29 @@ export function initLanguageSwitcher() {
       "aria-expanded",
       "false"
     );
+
+  });
+
+  // Language switching
+  const languageButtons =
+    document.querySelectorAll(".language-option");
+
+  languageButtons.forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+      const language =
+        button.getAttribute("data-language");
+
+      if (!language) return;
+
+      const target = switchLanguage(
+        window.location.pathname,
+        language as "en" | "km"
+      );
+
+      window.location.href = target;
+    });
 
   });
 

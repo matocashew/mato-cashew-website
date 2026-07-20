@@ -1,59 +1,65 @@
 ---
 import SectionTitle from "../SectionTitle.astro";
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(Astro.url.pathname);
 ---
 
 <section class="packaging-options">
 
-    <div class="container">
+  <div class="container">
 
-        <SectionTitle
-            tag="Packaging"
-            title="Packaging Options"
-        />
+    <SectionTitle
+      tag={t.products.packaging.tag}
+      title={t.products.packaging.title}
+    />
 
-        <div class="packaging-grid">
+    <div class="packaging-grid">
 
-            <article class="package-card">
+      <article class="package-card">
 
-                <div class="package-icon">🛍️</div>
+        <div class="package-icon">🛍️</div>
 
-                <h3>Retail Packaging</h3>
+        <h3>
+          {t.products.packaging.items.retail.title}
+        </h3>
 
-                <p>
-                    Available in 100g, 250g and 500g premium stand-up pouches
-                    for supermarkets and retail stores.
-                </p>
+        <p>
+          {t.products.packaging.items.retail.description}
+        </p>
 
-            </article>
+      </article>
 
-            <article class="package-card">
+      <article class="package-card">
 
-                <div class="package-icon">📦</div>
+        <div class="package-icon">📦</div>
 
-                <h3>Bulk Packaging</h3>
+        <h3>
+          {t.products.packaging.items.bulk.title}
+        </h3>
 
-                <p>
-                    Food-grade vacuum bags packed in export cartons,
-                    suitable for distributors and manufacturers.
-                </p>
+        <p>
+          {t.products.packaging.items.bulk.description}
+        </p>
 
-            </article>
+      </article>
 
-            <article class="package-card">
+      <article class="package-card">
 
-                <div class="package-icon">🏷️</div>
+        <div class="package-icon">🏷️</div>
 
-                <h3>Private Label</h3>
+        <h3>
+          {t.products.packaging.items.privateLabel.title}
+        </h3>
 
-                <p>
-                    OEM and private label services with custom packaging
-                    and branding for international partners.
-                </p>
+        <p>
+          {t.products.packaging.items.privateLabel.description}
+        </p>
 
-            </article>
-
-        </div>
+      </article>
 
     </div>
+
+  </div>
 
 </section>

@@ -1,0 +1,45 @@
+---
+import "../../styles/page.css";
+import "../../styles/products.css";
+import "../../styles/products-page.css";
+
+import PageLayout from "../../layouts/PageLayout.astro";
+import ProductsPage from "../../components/pages/ProductsPage.astro";
+import CollectionPageSchema from "../../components/seo/CollectionPageSchema.astro";
+import { getCollection } from "astro:content";
+
+const products = (
+  await getCollection(
+    "products",
+    ({ data }) => !data.draft
+  )
+).sort(
+  (a, b) =>
+    Number(b.data.featured) - Number(a.data.featured)
+);
+---
+
+<PageLayout
+  lang="km"
+  title="ផលិតផល | Mato Cashew"
+  description="ផលិតផលគ្រាប់ស្វាយចន្ទីកម្ពុជាគុណភាពខ្ពស់"
+  canonical="https://matocashew.com/km/products"
+  breadcrumbs={[
+    {
+      name: "ទំព័រដើម",
+      url: "https://matocashew.com/km"
+    },
+    {
+      name: "ផលិតផល",
+      url: "https://matocashew.com/km/products"
+    }
+  ]}
+>
+
+  <CollectionPageSchema />
+
+  <ProductsPage
+    products={products}
+  />
+
+</PageLayout>
