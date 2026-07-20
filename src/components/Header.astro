@@ -5,16 +5,22 @@ import LanguageSwitcher from "./LanguageSwitcher.astro";
 
 const currentPath = Astro.url.pathname;
 
+const isKhmer = currentPath.startsWith("/km");
+
+const basePath = isKhmer ? "/km" : "";
+
 const t = getCurrentLanguage(
   Astro.url.pathname
 );
+
+const homePath = isKhmer ? "/km/" : "/";
 ---
 <header class="header">
 
   <div class="container header-wrapper">
 
     <a
-        href="/"
+        href={homePath}
         class="logo"
         aria-label="Mato Cashew Home"
     >
@@ -39,7 +45,7 @@ const t = getCurrentLanguage(
 
         <li>
             <a
-            href="/"
+            href={homePath}
             class={currentPath === "/" ? "active" : ""}
             >
             {t.nav.home}
@@ -48,8 +54,12 @@ const t = getCurrentLanguage(
 
         <li>
             <a
-            href="/about"
-            class={currentPath === "/about" ? "active" : ""}
+            href={`${basePath}/about`}
+            class={
+            currentPath === `${basePath}/about`
+                ? "active"
+                : ""
+            }
             >
             {t.nav.about}
             </a>
@@ -57,7 +67,7 @@ const t = getCurrentLanguage(
 
         <li>
             <a
-            href="/products"
+            href={`${basePath}/products`}
             class={currentPath === "/products" ? "active" : ""}
             >
             {t.nav.products}
@@ -66,7 +76,7 @@ const t = getCurrentLanguage(
 
         <li>
             <a
-                href="/resources"
+                href={`${basePath}/resources`}
                 class={currentPath.startsWith("/resources") ? "active" : ""}
             >
                 {t.nav.resources}
@@ -75,7 +85,7 @@ const t = getCurrentLanguage(
 
         <li>
             <a
-            href="/gallery"
+            href={`${basePath}/gallery`}
             class={currentPath === "/gallery" ? "active" : ""}
             >
             {t.nav.gallery}
@@ -84,7 +94,7 @@ const t = getCurrentLanguage(
 
         <li>
             <a
-            href="/wholesale"
+            href={`${basePath}/wholesale`}
             class={currentPath === "/wholesale" ? "active" : ""}
             >
             {t.nav.wholesale}
@@ -93,7 +103,7 @@ const t = getCurrentLanguage(
 
         <li>
             <a
-            href="/contact"
+            href={`${basePath}/contact`}
             class={currentPath === "/contact" ? "active" : ""}
             >
             {t.nav.contact}

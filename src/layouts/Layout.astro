@@ -37,6 +37,23 @@ const {
 
   breadcrumbs = [],
 } = Astro.props;
+const pathname = Astro.url.pathname;
+
+const englishPath =
+  pathname.startsWith("/km")
+    ? pathname.replace(/^\/km/, "") || "/"
+    : pathname;
+
+const khmerPath =
+  pathname.startsWith("/km")
+    ? pathname
+    : pathname === "/"
+      ? "/km"
+      : `/km${pathname}`;
+
+const englishUrl = `${siteUrl}${englishPath}`;
+
+const khmerUrl = `${siteUrl}${khmerPath}`;
 ---
 
 <!DOCTYPE html>
@@ -118,7 +135,23 @@ const {
     rel="canonical"
     href={canonical}
   />
+  <link
+    rel="alternate"
+    hreflang="en"
+    href={englishUrl}
+  />
 
+  <link
+    rel="alternate"
+    hreflang="km"
+    href={khmerUrl}
+  />
+
+  <link
+    rel="alternate"
+    hreflang="x-default"
+    href={englishUrl}
+  />
   <link
     rel="icon"
     type="image/png"

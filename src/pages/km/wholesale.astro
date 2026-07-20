@@ -1,0 +1,38 @@
+---
+import "../../styles/page.css";
+import "../../styles/wholesale.css";
+
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import Wholesale from "../../components/Wholesale.astro";
+
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(Astro.url.pathname);
+---
+
+<PageLayout
+  lang="km"
+  title={`${t.nav.wholesale} | Mato Cashew`}
+  description={t.wholesaleHome.description}
+  canonical="https://matocashew.com/km/wholesale"
+  breadcrumbs={[
+    {
+      name: "ទំព័រដើម",
+      url: "https://matocashew.com/km"
+    },
+    {
+      name: t.nav.wholesale,
+      url: "https://matocashew.com/km/wholesale"
+    }
+  ]}
+>
+
+  <PageHero
+    title={t.nav.wholesale}
+    description={t.wholesaleHome.description}
+  />
+
+  <Wholesale />
+
+</PageLayout>

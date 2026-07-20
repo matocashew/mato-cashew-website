@@ -1,0 +1,38 @@
+---
+import "../../styles/page.css";
+import "../../styles/gallery.css";
+
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import Gallery from "../../components/Gallery.astro";
+
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(Astro.url.pathname);
+---
+
+<PageLayout
+  lang="km"
+  title={`${t.nav.gallery} | Mato Cashew`}
+  description={t.galleryHome.title}
+  canonical="https://matocashew.com/km/gallery"
+  breadcrumbs={[
+    {
+      name: "ទំព័រដើម",
+      url: "https://matocashew.com/km"
+    },
+    {
+      name: t.nav.gallery,
+      url: "https://matocashew.com/km/gallery"
+    }
+  ]}
+>
+
+  <PageHero
+    title={t.nav.gallery}
+    description={t.galleryHome.title}
+  />
+
+  <Gallery />
+
+</PageLayout>
