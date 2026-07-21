@@ -66,6 +66,15 @@ const t = getCurrentLanguage(
   title={`${article.data.title} | Mato Cashew`}
   description={article.data.description}
   canonical={canonical}
+
+  ogType="article"
+
+  ogImage={
+    article.data.image.startsWith("http")
+      ? article.data.image
+      : `https://matocashew.com${article.data.image}`
+  }
+
   breadcrumbs={[
     {
     name: "ទំព័រដើម",

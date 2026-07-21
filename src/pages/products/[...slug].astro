@@ -56,6 +56,15 @@ const relatedProducts = (
   title={`${product.data.title} | Mato Cashew`}
   description={product.data.description}
   canonical={canonical}
+
+  ogType="product"
+
+  ogImage={
+    product.data.image.startsWith("http")
+      ? product.data.image
+      : `https://matocashew.com${product.data.image}`
+  }
+
   breadcrumbs={[
     {
       name: "Home",

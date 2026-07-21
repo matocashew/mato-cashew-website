@@ -20,6 +20,9 @@ interface Props {
 
   lang?: "en" | "km";
 
+  ogImage?: string;
+  ogType?: "website" | "article" | "product";
+
   breadcrumbs?: {
     name: string;
     url: string;
@@ -35,6 +38,9 @@ const {
   robots = "index,follow",
 
   lang = "en",
+
+  ogImage = `${siteUrl}/images/seo/og-image.jpg`,
+  ogType = "website",
 
   breadcrumbs = [],
 } = Astro.props;
@@ -193,7 +199,7 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
 
   <!-- Open Graph -->
 
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={ogType} />
 
   <meta property="og:site_name" content="Mato Cashew" />
 
@@ -205,7 +211,7 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
 
   <meta
     property="og:image"
-    content={`${siteUrl}/images/seo/og-image.jpg`}
+    content={ogImage}
   />
 
   <meta property="og:image:width" content="1200" />
@@ -241,7 +247,7 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
 
   <meta
     name="twitter:image"
-    content={`${siteUrl}/images/seo/og-image.jpg`}
+    content={ogImage}
   />
 
   <!-- Google Analytics -->

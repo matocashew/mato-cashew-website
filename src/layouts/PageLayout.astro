@@ -12,6 +12,9 @@ interface Props {
 
   robots?: string;
 
+  ogImage?: string;
+  ogType?: "website" | "article" | "product";
+
   breadcrumbs?: {
     name: string;
     url: string;
@@ -27,6 +30,9 @@ const {
 
   robots = "index,follow",
 
+  ogImage,
+  ogType,
+
   breadcrumbs = [],
 } = Astro.props;
 ---
@@ -39,6 +45,10 @@ const {
   lang={lang}
 
   robots={robots}
+
+  ogImage={ogImage}
+  ogType={ogType}
+
   breadcrumbs={breadcrumbs}
 >
 
