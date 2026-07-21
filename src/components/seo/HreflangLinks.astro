@@ -1,0 +1,31 @@
+---
+interface Props {
+  canonical: string;
+  lang?: "en" | "km";
+}
+
+const {
+  canonical,
+  lang = "en"
+} = Astro.props;
+
+const site = "https://matocashew.com";
+
+// បង្កើត URL ភាសាអង់គ្លេស
+const enUrl =
+  lang === "km"
+    ? canonical.replace(`${site}/km`, site)
+    : canonical;
+
+// បង្កើត URL ភាសាខ្មែរ
+const kmUrl =
+  lang === "km"
+    ? canonical
+    : canonical.replace(site, `${site}/km`);
+---
+
+<link rel="alternate" hreflang="en" href={enUrl} />
+
+<link rel="alternate" hreflang="km" href={kmUrl} />
+
+<link rel="alternate" hreflang="x-default" href={enUrl} />

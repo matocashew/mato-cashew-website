@@ -3,6 +3,7 @@ import OrganizationSchema from "../components/seo/OrganizationSchema.astro";
 import WebsiteSchema from "../components/seo/WebsiteSchema.astro";
 import WebPageSchema from "../components/seo/WebPageSchema.astro";
 import BreadcrumbSchema from "../components/seo/BreadcrumbSchema.astro";
+import HreflangLinks from "../components/seo/HreflangLinks.astro";
 
 import "../styles/global.css";
 import "../styles/header.css";
@@ -134,6 +135,10 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
   <link
     rel="canonical"
     href={canonical}
+  />
+  <HreflangLinks
+    canonical={canonical}
+    lang={lang}
   />
   <link
     rel="alternate"
