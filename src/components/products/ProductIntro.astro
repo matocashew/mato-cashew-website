@@ -20,6 +20,22 @@ const t = getCurrentLanguage(Astro.url.pathname);
       {t.products.intro.description}
     </p>
 
+    <div class="product-features">
+
+      <span class="feature-badge">
+        ✓ {t.products.intro.features.exportReady}
+      </span>
+
+      <span class="feature-badge">
+        ✓ {t.products.intro.features.oem}
+      </span>
+
+      <span class="feature-badge">
+        ✓ {t.products.intro.features.directFarmers}
+      </span>
+
+    </div>
+
   </div>
 
 </section>

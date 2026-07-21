@@ -259,3 +259,47 @@
     text-decoration:underline;
 
 }
+
+.product-features{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:14px;
+
+    margin-top:28px;
+
+}
+
+.feature-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    padding:10px 18px;
+
+    border:1px solid rgba(13,92,58,.12);
+
+    background:#F3FAF5;
+
+    color:var(--primary);
+
+    border-radius:999px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+@media (max-width:768px){
+
+    .product-features{
+
+        justify-content:center;
+
+    }
+
+}

@@ -4,11 +4,11 @@
 
 .page-hero {
 
-    padding: 180px 0 100px;
+    padding: 150px 0 70px;
 
-    text-align: center;
+    text-align:center;
 
-    background: linear-gradient(
+    background:linear-gradient(
         180deg,
         #f7f4ef 0%,
         #ffffff 100%
@@ -44,7 +44,7 @@
 
     .page-hero{
 
-        padding:140px 0 70px;
+        padding:120px 0 55px;
 
     }
 
@@ -67,19 +67,15 @@
 =========================== */
 
 .error-page{
-
-    min-height:70vh;
+    min-height: calc(100vh - 120px);
 
     display:flex;
 
+    justify-content:flex-start;
+
     align-items:center;
 
-    justify-content:center;
-
-    text-align:center;
-
-    padding:120px 0;
-
+    padding:160px 0 120px;
 }
 
 .error-logo{
@@ -90,6 +86,13 @@
 
     margin:0 auto 30px;
 
+}
+
+.error-icon{
+    font-size:72px;
+    font-weight:700;
+    color:var(--primary);
+    margin-bottom:20px;
 }
 
 .error-page h1{

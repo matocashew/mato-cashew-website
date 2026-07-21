@@ -315,6 +315,12 @@ const en = {
 
     description:
       "Mato Cashew offers premium Cambodian cashew kernels for retail, wholesale, export, OEM, and private label partners. Every product is carefully selected to meet international quality standards.",
+
+    features: {
+      exportReady: "Export Ready",
+      oem: "OEM & Private Label",
+      directFarmers: "Direct from Farmers",
+    },
   },
   retail: {
     tag: "Retail Products",
