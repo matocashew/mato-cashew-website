@@ -5,6 +5,8 @@ import WebPageSchema from "../components/seo/WebPageSchema.astro";
 import BreadcrumbSchema from "../components/seo/BreadcrumbSchema.astro";
 import HreflangLinks from "../components/seo/HreflangLinks.astro";
 
+import { SITE } from "../config/site";
+
 import "../styles/global.css";
 import "../styles/header.css";
 import "../styles/footer.css";
@@ -29,21 +31,25 @@ interface Props {
   }[];
 }
 
-const siteUrl = "https://matocashew.com";
+const siteUrl = SITE.website.url;
 
 const {
-  title = "Mato Cashew | Premium Cambodian Cashew",
-  description = "Premium Cambodian Cashew for Local & International Markets.",
+  title = `${SITE.brand.english} | ${SITE.website.title}`,
+  description = SITE.website.description,
+
   canonical = siteUrl,
+
   robots = "index,follow",
 
   lang = "en",
 
   ogImage = `${siteUrl}/images/seo/og-image.jpg`,
+
   ogType = "website",
 
   breadcrumbs = [],
 } = Astro.props;
+
 const pathname = Astro.url.pathname;
 
 const englishPath =
@@ -64,26 +70,10 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
 ---
 
 <!DOCTYPE html>
+
 <html lang={lang}>
 
 <head>
-
-  <OrganizationSchema />
-
-  <WebsiteSchema />
-
-  <WebPageSchema
-    title={title}
-    description={description}
-    canonical={canonical}
-    lang={lang}
-  />
-
-  {
-    breadcrumbs.length > 0 && (
-      <BreadcrumbSchema items={breadcrumbs} />
-    )
-  }
 
   <meta charset="UTF-8" />
 
@@ -92,7 +82,57 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
     content="width=device-width, initial-scale=1"
   />
 
-  <!-- Google Fonts -->
+  <title>{title}</title>
+
+  <meta
+    name="description"
+    content={description}
+  />
+
+  <meta
+    name="robots"
+    content={robots}
+  />
+
+  <meta
+    name="author"
+    content={SITE.brand.english}
+  />
+
+  <meta
+    name="keywords"
+    content="Cambodian Cashew, Premium Cashew, Cashew Kernels, Wholesale Cashew, Export Cashew"
+  />
+
+  <link
+    rel="canonical"
+    href={canonical}
+  />
+
+  <HreflangLinks
+    canonical={canonical}
+    lang={lang}
+  />
+
+  <link
+    rel="alternate"
+    hreflang="en"
+    href={englishUrl}
+  />
+
+  <link
+    rel="alternate"
+    hreflang="km"
+    href={khmerUrl}
+  />
+
+  <link
+    rel="alternate"
+    hreflang="x-default"
+    href={englishUrl}
+  />
+
+  <!-- Fonts -->
 
   <link
     rel="preconnect"
@@ -116,53 +156,8 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Khmer:wght@100..900&display=swap"
   />
 
-  <title>{title}</title>
+  <!-- Icons -->
 
-  <meta
-    name="description"
-    content={description}
-  />
-
-  <meta
-    name="robots"
-    content={robots}
-  />
-
-  <meta
-    name="author"
-    content="Mato Cashew"
-  />
-
-  <meta
-    name="keywords"
-    content="Cambodian Cashew, Premium Cashew, Cashew Kernels, Wholesale Cashew, Export Cashew"
-  />
-
-  <link
-    rel="canonical"
-    href={canonical}
-  />
-  <HreflangLinks
-    canonical={canonical}
-    lang={lang}
-  />
-  <link
-    rel="alternate"
-    hreflang="en"
-    href={englishUrl}
-  />
-
-  <link
-    rel="alternate"
-    hreflang="km"
-    href={khmerUrl}
-  />
-
-  <link
-    rel="alternate"
-    hreflang="x-default"
-    href={englishUrl}
-  />
   <link
     rel="icon"
     type="image/png"
@@ -199,34 +194,55 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
 
   <!-- Open Graph -->
 
-  <meta property="og:type" content={ogType} />
+  <meta
+    property="og:type"
+    content={ogType}
+  />
 
-  <meta property="og:site_name" content="Mato Cashew" />
+  <meta
+    property="og:site_name"
+    content={SITE.brand.english}
+  />
 
-  <meta property="og:title" content={title} />
+  <meta
+    property="og:title"
+    content={title}
+  />
 
-  <meta property="og:description" content={description} />
+  <meta
+    property="og:description"
+    content={description}
+  />
 
-  <meta property="og:url" content={canonical} />
+  <meta
+    property="og:url"
+    content={canonical}
+  />
 
   <meta
     property="og:image"
     content={ogImage}
   />
 
-  <meta property="og:image:width" content="1200" />
-
-  <meta property="og:image:height" content="630" />
-
   <meta
-    property="og:image:alt"
-    content="Mato Cashew Premium Cambodian Cashew"
+    property="og:image:width"
+    content="1200"
   />
 
   <meta
-  property="og:locale"
-  content={lang === "km" ? "km_KH" : "en_US"}
-/>
+    property="og:image:height"
+    content="630"
+  />
+
+  <meta
+    property="og:image:alt"
+    content={`${SITE.brand.english} - Premium Cambodian Cashew`}
+  />
+
+  <meta
+    property="og:locale"
+    content={lang === "km" ? "km_KH" : "en_US"}
+  />
 
   <!-- Twitter -->
 
@@ -250,11 +266,30 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
     content={ogImage}
   />
 
+  <!-- Structured Data -->
+
+  <OrganizationSchema />
+
+  <WebsiteSchema />
+
+  <WebPageSchema
+    title={title}
+    description={description}
+    canonical={canonical}
+    lang={lang}
+  />
+
+  {
+    breadcrumbs.length > 0 && (
+      <BreadcrumbSchema items={breadcrumbs} />
+    )
+  }
+
   <!-- Google Analytics -->
 
   <script
     async
-    src="https://www.googletagmanager.com/gtag/js?id=G-9CBMMS5DPF"
+    src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analytics.google}`}
   ></script>
 
   <script is:inline>
@@ -266,16 +301,8 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
 
     gtag("js", new Date());
 
-    gtag("config", "G-9CBMMS5DPF");
+    gtag("config", "{SITE.analytics.google}");
   </script>
-
-  <!-- Cloudflare Turnstile -->
-
-  <script
-    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-    async
-    defer
-  ></script>
 
 </head>
 

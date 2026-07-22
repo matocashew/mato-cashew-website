@@ -4,7 +4,7 @@
 
 .product-intro{
 
-    padding:120px 0;
+    padding:var(--section-space) 0;
 
 }
 
@@ -92,7 +92,7 @@
 
 .retail-products{
 
-    padding:120px 0;
+    padding:var(--section-space) 0;
 
     background:#fff;
 
@@ -103,7 +103,7 @@
 
 .wholesale-products{
 
-    padding:120px 0;
+    padding:var(--section-space) 0;
 
     background:#f8f8f6;
 
@@ -193,7 +193,7 @@
 
 .packaging-options{
 
-    padding:120px 0;
+    padding:var(--section-space) 0;
 
 }
 
@@ -273,7 +273,7 @@
 
 .product-specifications{
 
-    padding:120px 0;
+    padding:var(--section-space) 0;
 
     background:#f8f8f6;
 
@@ -383,7 +383,7 @@
 
 .product-faq{
 
-    padding:120px 0;
+    padding:var(--section-space) 0;
 
 }
 

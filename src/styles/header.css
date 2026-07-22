@@ -57,6 +57,8 @@
 
     padding: 6px 0;
 
+    font-size: 16px;
+
     font-weight: 600;
 
     transition:
@@ -210,6 +212,8 @@
 .language-switcher{
     position:relative;
     margin-left:1rem;
+    min-height: 42px;
+    padding: 10px 16px;
 }
 
 .language-current{

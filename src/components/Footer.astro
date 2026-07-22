@@ -1,86 +1,126 @@
 ---
 import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
+import { SITE } from "../config/site";
 
-const t = getCurrentLanguage(
-  Astro.url.pathname
-);
+const t = getCurrentLanguage(Astro.url.pathname);
+
+const isKhmer = Astro.url.pathname.startsWith("/km");
+
+const homeUrl = isKhmer ? "/km" : "/";
+const aboutUrl = isKhmer ? "/km/about" : "/about";
+const productsUrl = isKhmer ? "/km/products" : "/products";
+const resourcesUrl = isKhmer ? "/km/resources" : "/resources";
+const galleryUrl = isKhmer ? "/km/gallery" : "/gallery";
+const wholesaleUrl = isKhmer ? "/km/wholesale" : "/wholesale";
+const contactUrl = isKhmer ? "/km/contact" : "/contact";
 ---
+
 <footer class="footer">
 
-    <div class="container footer-grid">
+  <div class="container footer-grid">
 
-        <div class="footer-brand">
+    <!-- Brand -->
 
-            <a
-                href="/"
-                aria-label="Mato Cashew Home"
-            >
+    <div class="footer-brand">
 
-                <img
-                    src="/images/logo/logo-white.png"
-                    alt="Mato Cashew Logo"
-                />
+      <a
+        href={homeUrl}
+        aria-label={`${SITE.brand.english} Home`}
+      >
 
-            </a>
+        <img
+          src="/images/logo/logo-white.png"
+          alt={`${SITE.brand.english} Logo`}
+          width="180"
+          height="60"
+          loading="lazy"
+          decoding="async"
+        />
 
-            <p>
-            {t.footer.description}
-            </p>
+      </a>
 
-        </div>
-
-        <div class="footer-links">
-
-            <h4>{t.footer.quickLinks}</h4>
-
-                <ul>
-
-                    <li><a href="/about">{t.nav.about}</a></li>
-
-                    <li><a href="/products">{t.nav.products}</a></li>
-
-                    <li><a href="/resources">{t.nav.resources}</a></li>
-
-                    <li><a href="/gallery">{t.nav.gallery}</a></li>
-
-                    <li><a href="/wholesale">{t.nav.wholesale}</a></li>
-
-                    <li><a href="/contact">{t.nav.contact}</a></li>
-
-                </ul>
-
-        </div>
-
-        <div class="footer-contact">
-
-            <h4>{t.footer.contact}</h4>
-
-            <p>
-            {t.footer.email}:
-            <a href="mailto:info@matocashew.com">
-                info@matocashew.com
-            </a>
-            </p>
-
-            <p>
-            {t.footer.phone}:
-            <a href="tel:+85512646988">
-                +855 12 646 988
-            </a>
-            </p>
-
-        </div>
+      <p>
+        {t.footer.description}
+      </p>
 
     </div>
 
-    <div class="footer-bottom">
+    <!-- Quick Links -->
 
-        <p>
+    <div class="footer-links">
 
-            {t.footer.copyright}
+      <h4>{t.footer.quickLinks}</h4>
 
-        </p>
+      <ul>
+
+        <li><a href={aboutUrl}>{t.nav.about}</a></li>
+
+        <li><a href={productsUrl}>{t.nav.products}</a></li>
+
+        <li><a href={resourcesUrl}>{t.nav.resources}</a></li>
+
+        <li><a href={galleryUrl}>{t.nav.gallery}</a></li>
+
+        <li><a href={wholesaleUrl}>{t.nav.wholesale}</a></li>
+
+        <li><a href={contactUrl}>{t.nav.contact}</a></li>
+
+      </ul>
 
     </div>
+
+    <!-- Contact -->
+
+    <div class="footer-contact">
+
+      <h4>{t.footer.contact}</h4>
+
+      <p>
+
+        <strong>{t.footer.email}:</strong><br />
+
+        <a href={`mailto:${SITE.contact.email}`}>
+
+          {SITE.contact.email}
+
+        </a>
+
+      </p>
+
+      <p>
+
+        <strong>{t.footer.phone}:</strong><br />
+
+        <a href={`tel:${SITE.contact.phone.replace(/\s+/g, "")}`}>
+
+          {SITE.contact.phone}
+
+        </a>
+
+      </p>
+
+      <p>
+
+        <strong>{isKhmer ? "អាសយដ្ឋាន" : "Address"}:</strong><br />
+
+        {isKhmer
+          ? SITE.address.khmer
+          : SITE.address.full}
+
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+
+    <p>
+
+      {SITE.copyright}
+
+    </p>
+
+  </div>
 
 </footer>
