@@ -1,21 +1,15 @@
 ---
-import { getCollection } from "astro:content";
-
 import SectionTitle from "./SectionTitle.astro";
 import ProductGrid from "./products/ProductGrid.astro";
 import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
+import { getFeaturedProducts } from "../services/product.service";
 
 const t = getCurrentLanguage(
   Astro.url.pathname
 );
 
 const featuredProducts = (
-  await getCollection(
-    "products",
-    ({ data }) =>
-      !data.draft &&
-      data.featured
-  )
+  await getFeaturedProducts()
 ).slice(0, 3);
 ---
 

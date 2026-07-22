@@ -1,3 +1,9 @@
+import type { ProductTranslation } from "./ProductTranslation";
+import type { ProductImage } from "./ProductImage";
+import type { ProductPackaging } from "./ProductPackaging";
+import type { ProductSpecification } from "./ProductSpecification";
+import type { ProductSEO } from "./ProductSEO";
+
 export interface Product {
 
   id: number;
@@ -12,7 +18,7 @@ export interface Product {
 
   image: string;
 
-  gallery: string[];
+  gallery: ProductImage[];
 
   weight: string;
 
@@ -20,46 +26,16 @@ export interface Product {
 
   rating: string;
 
-  packaging: string[];
+  packaging: ProductPackaging[];
 
-  specifications: {
-    moisture: string;
-    broken: string;
-    shelfLife: string;
-    storage: string;
-    certification: string;
-  };
+  specifications: ProductSpecification[];
 
-  translations: {
+  translations: ProductTranslation[];
 
-    en: {
+  seo: ProductSEO;
 
-      name: string;
+  status: "draft" | "published" | "archived";
 
-      shortDescription: string;
-
-      description: string;
-
-      seoTitle: string;
-
-      seoDescription: string;
-
-    };
-
-    km: {
-
-      name: string;
-
-      shortDescription: string;
-
-      description: string;
-
-      seoTitle: string;
-
-      seoDescription: string;
-
-    };
-
-  };
+  tags: string[];
 
 }

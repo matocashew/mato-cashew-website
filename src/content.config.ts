@@ -13,6 +13,7 @@ const resources = defineCollection({
     description: z.string(),
 
     publishDate: z.date(),
+
     updatedDate: z.date().optional(),
 
     author: z.string().default("Mato Cashew"),
@@ -21,7 +22,7 @@ const resources = defineCollection({
 
     category: z.string(),
 
-    tags: z.array(z.string()),
+    tags: z.array(z.string()).default([]),
 
     draft: z.boolean().default(false),
 
@@ -38,13 +39,19 @@ const products = defineCollection({
   }),
 
   schema: z.object({
+
     title: z.string(),
+
+    slug: z.string(),
 
     description: z.string(),
 
     sku: z.string(),
 
-    category: z.string(),
+    category: z.enum([
+      "Retail",
+      "Wholesale"
+    ]),
 
     weight: z.string(),
 
@@ -68,7 +75,10 @@ const products = defineCollection({
 
     publishDate: z.date(),
 
+    updatedDate: z.date().optional(),
+
     draft: z.boolean().default(false)
+
   })
 });
 
@@ -76,4 +86,3 @@ export const collections = {
   resources,
   products
 };
-

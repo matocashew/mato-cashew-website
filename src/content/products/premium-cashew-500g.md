@@ -1,11 +1,13 @@
 ---
 title: "Premium Cambodian Cashew Kernels 500g"
 
+slug: "premium-cashew-500g"
+
 description: "Premium whole Cambodian cashew kernels in a convenient 500g retail package. Perfect for families, healthy snacks, and international buyers."
 
 sku: "MC-500"
 
-category: "Retail Products"
+category: "Retail"
 
 weight: "500g"
 
@@ -25,27 +27,19 @@ privateLabel: true
 minimumOrder: "500 Packs"
 
 specifications:
-  - "Premium Whole Cashew Kernels"
-  - "Export Quality"
-  - "Naturally Sweet Flavor"
-  - "Carefully Selected"
-  - "Food Grade Packaging"
+  - Premium Whole Cashew Kernels
+  - Export Quality
+  - Naturally Sweet Flavor
+  - Carefully Selected
+  - Food Grade Packaging
 
 applications:
-  - "Retail"
-  - "Supermarkets"
-  - "Healthy Snacks"
-  - "Gift Shops"
+  - Retail
+  - Supermarkets
+  - Healthy Snacks
+  - Gift Shops
 
 publishDate: 2026-07-17
 
 draft: false
 ---
-
-# Premium Cambodian Cashew Kernels 500g
-
-Our Premium Cambodian Cashew Kernels 500g package is designed for consumers who appreciate high-quality, healthy snacks made from carefully selected Cambodian cashews.
-
-Each pack contains export-quality whole kernels that are naturally sweet, rich in flavor, and packed under strict quality control.
-
-Suitable for retail stores, supermarkets, gift shops, and international distributors.
