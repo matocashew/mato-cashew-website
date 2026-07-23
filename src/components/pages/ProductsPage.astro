@@ -24,9 +24,17 @@ const { products } = Astro.props;
 
 <ProductIntro />
 
-<ProductGrid
-  products={products}
-/>
+<section class="products-page-grid">
+
+  <div class="container">
+
+    <ProductGrid
+      products={products}
+    />
+
+  </div>
+
+</section>
 
 <PackagingOptions />
 

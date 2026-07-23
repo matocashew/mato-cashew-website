@@ -7,29 +7,19 @@ interface Props {
   products: CollectionEntry<"products">[];
 }
 
-const { products } = Astro.props;
+const { products }: Props = Astro.props;
 ---
 
 {
   products.length > 0 && (
-
     <section class="products-grid-section">
-
       <div class="products-grid">
-
-        {
-          products.map((product) => (
-
-            <DynamicProductCard
-              product={product}
-            />
-
-          ))
-        }
-
+        {products.map((product) => (
+          <DynamicProductCard
+            product={product}
+          />
+        ))}
       </div>
-
     </section>
-
   )
 }

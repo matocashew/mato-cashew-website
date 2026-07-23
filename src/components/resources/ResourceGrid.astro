@@ -1,44 +1,36 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import ResourceCard from "./ResourceCard.astro";
-import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
 
 interface Props {
-  articles: CollectionEntry<"resources">[];
+  resources?: CollectionEntry<"resources">[];
 }
 
-const { articles } = Astro.props;
-
-const t = getCurrentLanguage(
-  Astro.url.pathname
-);
+const {
+  resources = []
+} = Astro.props;
 ---
 
-<div class="resources-grid">
+{
+  resources.length > 0 && (
 
-  {
-    articles.map((article) => (
+    <section class="resources-grid-section">
 
-      <ResourceCard
-        title={article.data.title}
-        description={article.data.description}
-        href={`/resources/${article.id}`}
-        image={article.data.image}
-        category={article.data.category}
-        publishDate={article.data.publishDate.toLocaleDateString(
-          Astro.url.pathname.startsWith("/km")
-            ? "km-KH"
-            : "en-US",
-          {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          }
-        )}
-        readingTime={`${article.data.readingTime ?? 5} ${t.common.minuteRead}`}
-      />
+      <div class="resources-grid">
 
-    ))
-  }
+        {
+          resources.map((resource) => (
 
-</div>
+            <ResourceCard
+              resource={resource}
+            />
+
+          ))
+        }
+
+      </div>
+
+    </section>
+
+  )
+}

@@ -1,6 +1,4 @@
 ---
-import { getCollection } from "astro:content";
-
 import "../../../styles/page.css";
 import "../../../styles/resources.css";
 
@@ -8,20 +6,15 @@ import PageLayout from "../../../layouts/PageLayout.astro";
 import PageHero from "../../../components/PageHero.astro";
 import SectionTitle from "../../../components/SectionTitle.astro";
 import ResourceGrid from "../../../components/resources/ResourceGrid.astro";
+
 import { getCurrentLanguage } from "../../../i18n/getCurrentLanguage";
+import { getResources } from "../../../services/resourceService";
 
-const t = getCurrentLanguage(Astro.url.pathname);
-
-const articles = (
-  await getCollection(
-    "resources",
-    ({ data }) => !data.draft
-  )
-).sort(
-  (a, b) =>
-    b.data.publishDate.getTime() -
-    a.data.publishDate.getTime()
+const t = getCurrentLanguage(
+  Astro.url.pathname
 );
+
+const resources = await getResources();
 ---
 
 <PageLayout
@@ -31,12 +24,12 @@ const articles = (
   canonical="https://matocashew.com/km/resources"
   breadcrumbs={[
     {
-    name: "ទំព័រដើម",
-    url: "https://matocashew.com/km"
+      name: "ទំព័រដើម",
+      url: "https://matocashew.com/km"
     },
     {
-    name: t.resources.listing.pageTitle,
-    url: "https://matocashew.com/km/resources"
+      name: t.resources.listing.pageTitle,
+      url: "https://matocashew.com/km/resources"
     }
   ]}
 >
@@ -56,7 +49,7 @@ const articles = (
       />
 
       <ResourceGrid
-        articles={articles}
+        resources={resources}
       />
 
     </div>

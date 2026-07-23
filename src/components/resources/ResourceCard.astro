@@ -1,79 +1,50 @@
 ---
-import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  title: string;
-  description: string;
-  href: string;
-  image: string;
-  category: string;
-  publishDate: string;
-  readingTime: string;
+  resource: CollectionEntry<"resources">;
 }
 
-const {
-  title,
-  description,
-  href,
-  image,
-  category,
-  publishDate,
-  readingTime,
-} = Astro.props;
-
-const t = getCurrentLanguage(Astro.url.pathname);
+const { resource } = Astro.props;
 ---
 
 <article class="resource-card">
 
-  <a href={href} class="resource-image">
+  <a
+    href={`/resources/${resource.data.slug}`}
+    class="resource-card__link"
+  >
 
     <img
-      src={image}
-      alt={title}
-      width="640"
-      height="360"
+      src={resource.data.image}
+      alt={resource.data.title}
       loading="lazy"
-      decoding="async"
     />
 
-  </a>
+    <div class="resource-card__content">
 
-  <div class="resource-content">
+      <span class="resource-card__category">
+        {resource.data.category}
+      </span>
 
-    <span class="resource-category">
-      {category}
-    </span>
+      <h3>
+        {resource.data.title}
+      </h3>
 
-    <h3>
-
-      <a href={href}>
-        {title}
-      </a>
-
-    </h3>
-
-    <p>
-      {description}
-    </p>
-
-    <div class="resource-meta">
-
-      <span>{publishDate}</span>
-
-      <span>•</span>
-
-      <span>{readingTime}</span>
+      <p>
+        {resource.data.description}
+      </p>
 
     </div>
 
-    <a
-      href={href}
-      class="resource-link"
-    >
-      {t.resources.card.readArticle}
-    </a>
+    <div class="resource-card__footer">
 
-  </div>
+      <small>
+        {resource.data.publishDate.toLocaleDateString("en-US")}
+      </small>
+
+    </div>
+
+  </a>
 
 </article>

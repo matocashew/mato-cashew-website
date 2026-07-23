@@ -1,27 +1,55 @@
 # Mato Cashew Website
 
-Official website for **Mato Cashew (ចន្ទីមាតុភូមិ)**, a Cambodian producer and supplier of premium cashew kernels for local and international markets.
+Official website of **Mato Cashew (ចន្ទីមាតុភូមិ)**, a premium Cambodian cashew producer and exporter supplying local and international markets.
 
-This project is built with **Astro** and is designed with a **CMS-ready architecture**, allowing future migration from static content to a dynamic content management system without major code restructuring.
+The project is built with **Astro** using a **Service-Oriented** and **CMS-Ready Architecture**, allowing future migration from static content to a headless CMS or backend API with minimal code changes.
+
+---
+
+# Business Information
+
+**Company**
+
+Mato Cashew (ចន្ទីមាតុភូមិ)
+
+**Industry**
+
+Premium Cambodian Cashew Processing & Export
+
+**Address**
+
+Village: Chanloung  
+Commune: Damril  
+District: Ou Reang Ov  
+Province: Tbong Khmum  
+Country: Cambodia
+
+**Website**
+
+https://matocashew.com
+
+**Languages**
+
+- 🇺🇸 English
+- 🇰🇭 Khmer
 
 ---
 
 # Project Overview
 
-Mato Cashew aims to provide a modern, fast, SEO-friendly, and multilingual website that showcases:
+The website is designed to promote Mato Cashew products and services while providing educational resources about Cambodian cashews.
 
-- Company information
-- Product catalog
-- Wholesale solutions
-- Export capability
-- Educational resources
-- Media gallery
-- Customer inquiries
+Current public modules include:
 
-The website currently supports:
+- Home
+- About
+- Products
+- Resources
+- Gallery
+- Wholesale
+- Contact
 
-- 🇺🇸 English
-- 🇰🇭 Khmer
+The architecture is designed to support future migration to a complete CMS and backend platform.
 
 ---
 
@@ -31,37 +59,42 @@ The website currently supports:
 
 - Responsive Design
 - SEO Optimized
-- Structured Data (Schema.org)
-- Open Graph & Twitter Cards
+- JSON-LD Structured Data
+- Open Graph
+- Twitter Cards
 - XML Sitemap
 - Robots.txt
 - Canonical URLs
 - Hreflang Support
 - Breadcrumb Schema
+- Product Schema
 
 ---
 
 ## Products
 
 - Product Listing
-- Product Detail Pages
+- Dynamic Product Pages
 - Product Specifications
-- Packaging Information
+- Product Applications
+- Related Products
+- Wholesale Information
 
 ---
 
 ## Resources
 
 - Educational Articles
-- SEO Friendly URLs
+- SEO-Friendly URLs
+- Content Collections
 
 ---
 
 ## Gallery
 
 - Production
-- Factory
 - Farmers
+- Factory
 - Packaging
 - Export
 
@@ -72,6 +105,7 @@ The website currently supports:
 - OEM
 - Private Label
 - Export Information
+- International Buyers
 
 ---
 
@@ -80,7 +114,7 @@ The website currently supports:
 - Contact Form
 - Cloudflare Turnstile
 - Email Integration
-- Google Analytics
+- Google Analytics 4
 
 ---
 
@@ -92,13 +126,18 @@ The website currently supports:
 - TypeScript
 - CSS
 
+## Content
+
+- Astro Content Collections
+
 ## SEO
 
 - JSON-LD
 - Sitemap
-- Open Graph
-- Hreflang
 - Canonical URLs
+- Open Graph
+- Twitter Cards
+- Hreflang
 
 ## Deployment
 
@@ -110,26 +149,50 @@ The website currently supports:
 
 ---
 
+# Current Project Status
+
+| Module | Status |
+|---------|--------|
+| Home | ✅ Complete |
+| About | ✅ Complete |
+| Products | ✅ Complete |
+| Resources | ✅ Complete |
+| Gallery | ✅ Complete |
+| Wholesale | ✅ Complete |
+| Contact | ✅ Complete |
+| SEO | ✅ Complete |
+| Documentation | ✅ Complete |
+| Service Layer | ✅ Complete |
+| CMS Ready | 🚧 In Progress |
+| Backend API | ⏳ Planned |
+| Admin Dashboard | ⏳ Planned |
+
+---
+
 # Project Structure
 
 ```
 src/
 
 components/
+config/
+content/
+data/
+i18n/
 layouts/
 pages/
-styles/
-scripts/
-
-config/
-data/
 services/
+styles/
 types/
 utils/
 
 public/
 
 docs/
+
+project-info/
+
+scripts/
 ```
 
 ---
@@ -155,14 +218,14 @@ Services
 
 ↓
 
-Data
+Content Collections
 
 ↓
 
 Configuration
 ```
 
-This architecture allows future migration to:
+Future architecture
 
 ```
 Pages
@@ -184,45 +247,46 @@ REST API
 Database
 ```
 
-without changing the UI components.
+No UI components should require modification during future backend migration.
 
 ---
 
 # Configuration
 
-Business information is centralized inside:
+Business information is centralized inside
 
 ```
 src/config/
 ```
 
-Current configuration includes:
+Configuration includes
 
-- Website Information
-- Brand Information
+- Company Information
 - Contact Information
 - Address
+- Website Settings
 - Analytics
 - Social Media
+- SEO Defaults
 
-This avoids hard-coded business data throughout the project.
+No business information should be hard-coded inside components.
 
 ---
 
 # Internationalization
 
-The website currently supports:
+Supported languages
 
 - English
 - Khmer
 
-Translations are managed inside:
+Translation files
 
 ```
 src/i18n/
 ```
 
-Business information remains inside:
+Business configuration remains inside
 
 ```
 src/config/
@@ -232,42 +296,187 @@ This separation keeps content maintainable.
 
 ---
 
-# Performance
+# Developer Toolkit
 
-Current optimization includes:
+Developer utilities are available through npm scripts.
 
-- Optimized Images
-- Lazy Loading
-- Responsive Images
-- CSS Optimization
-- SEO Optimization
+## Development
 
-Future improvements:
+```bash
+npm run dev
+```
 
-- AVIF Images
-- Image CDN
-- Edge Caching
+## Build
+
+```bash
+npm run build
+```
+
+## Preview
+
+```bash
+npm run preview
+```
+
+## Type Checking
+
+```bash
+npm run check
+```
+
+## Optimize Images
+
+```bash
+npm run optimize-images
+```
+
+## Generate Project Tree
+
+```bash
+npm run project:tree
+```
+
+## Generate Project Map
+
+```bash
+npm run project:map
+```
+
+## Complete Audit
+
+```bash
+npm run audit
+```
+
+## Content Audit
+
+```bash
+npm run audit:content
+```
+
+## SEO Audit
+
+```bash
+npm run audit:seo
+```
+
+## Image Audit
+
+```bash
+npm run audit:images
+```
+
+## Unused Files Audit
+
+```bash
+npm run audit:unused
+```
 
 ---
 
 # Documentation
 
-Project documentation is located in:
+All documentation is located inside
 
 ```
 docs/
 ```
 
-Documents include:
+| Document | Purpose |
+|----------|---------|
+| README.md | Project overview |
+| architecture.md | System architecture |
+| folder-structure.md | Folder organization |
+| coding-standards.md | Coding conventions |
+| api-design.md | API design |
+| deployment.md | Deployment guide |
+| product-model.md | Product model |
+| business-rules.md | Business rules |
+| cms-roadmap.md | CMS migration |
+| developer-toolkit.md | Developer tools |
+| decision-log.md | Architecture decisions |
+| CHANGELOG.md | Version history |
 
-- Architecture
-- Folder Structure
-- Product Model
-- CMS Roadmap
-- API Design
-- Coding Standards
-- Deployment Guide
-- Changelog
+---
+
+# Project Information
+
+Project reports are stored in
+
+```
+project-info/
+```
+
+Includes
+
+- Project Tree
+- Project Map
+- Sprint Status
+- Roadmap
+- Change Log
+- Project Rules
+- Architecture Version
+
+---
+
+# Development Workflow
+
+Daily
+
+```bash
+npm run dev
+```
+
+Before Commit
+
+```bash
+npm run check
+
+npm run build
+```
+
+Weekly
+
+```bash
+npm run audit
+
+npm run project:tree
+
+npm run project:map
+```
+
+Before Release
+
+```bash
+npm run check
+
+npm run build
+
+npm run audit
+
+npm run audit:content
+
+npm run audit:seo
+
+npm run audit:images
+```
+
+---
+
+# Coding Principles
+
+The project follows these principles.
+
+- Component-Based Architecture
+- Service-Oriented Design
+- Separation of Concerns
+- Configuration-Driven Development
+- CMS-Ready Structure
+- Reusable Components
+- SEO-First Development
+- Performance-First Development
+- Type Safety
+- Documentation First
 
 ---
 
@@ -277,17 +486,9 @@ Documents include:
 
 Public Website
 
-- Home
-- About
-- Products
-- Gallery
-- Resources
-- Wholesale
-- Contact
+Status
 
-Status:
-
-Completed
+✅ Completed
 
 ---
 
@@ -296,13 +497,13 @@ Completed
 CMS Ready Architecture
 
 - Configuration Layer
-- Data Layer
 - Service Layer
-- Product Model
+- Content Collections
+- Developer Toolkit
 
-Status:
+Status
 
-In Progress
+🚧 In Progress
 
 ---
 
@@ -313,7 +514,7 @@ Backend
 - Node.js
 - Express
 - PostgreSQL
-- Prisma
+- Prisma ORM
 - Authentication
 - REST API
 
@@ -323,7 +524,7 @@ Backend
 
 Admin Dashboard
 
-- Login
+- Authentication
 - Dashboard
 - Product Management
 - Gallery Management
@@ -335,60 +536,32 @@ Admin Dashboard
 
 ## Phase 5
 
-Future Expansion
+Business Expansion
 
 - Distributor Portal
 - Customer Portal
-- Mobile API
-- Inventory Integration
+- Inventory Management
 - ERP Integration
+- Mobile API
 
 ---
 
-# Development
+# Version
 
-Install dependencies
+Current Version
 
-```bash
-npm install
-```
+**1.0.0**
 
-Run development server
+Architecture
 
-```bash
-npm run dev
-```
-
-Build
-
-```bash
-npm run build
-```
-
-Preview
-
-```bash
-npm run preview
-```
-
----
-
-# Coding Principles
-
-This project follows several core principles.
-
-- Component-based architecture
-- Separation of concerns
-- Configuration-driven design
-- Service layer abstraction
-- Reusable UI components
-- SEO-first development
-- Performance-first development
+- Service Layer
+- Content Collections
+- CMS Ready
 
 ---
 
 # License
 
-Copyright © 2026 Mato Cashew.
+Copyright © 2026 Mato Cashew (ចន្ទីមាតុភូមិ).
 
 All Rights Reserved.

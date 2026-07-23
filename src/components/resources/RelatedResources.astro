@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import SectionTitle from "../SectionTitle.astro";
+import ResourceGrid from "./ResourceGrid.astro";
+
+interface Props {
+  resources: CollectionEntry<"resources">[];
+}
+
+const {
+  resources = []
+} = Astro.props;
+---
+
+{
+  resources.length > 0 && (
+
+    <section class="related-resources">
+
+      <div class="container">
+
+        <SectionTitle
+          tag="Keep Reading"
+          title="Related Resources"
+        />
+
+        <ResourceGrid
+          resources={resources}
+        />
+
+      </div>
+
+    </section>
+
+  )
+}

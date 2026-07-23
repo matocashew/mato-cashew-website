@@ -8,7 +8,10 @@ const resources = defineCollection({
   }),
 
   schema: z.object({
+
     title: z.string(),
+
+    slug: z.string(),
 
     description: z.string(),
 
@@ -29,6 +32,7 @@ const resources = defineCollection({
     featured: z.boolean().default(false),
 
     readingTime: z.number().optional()
+
   })
 });
 

@@ -1,6 +1,8 @@
 ---
 title: "Why Cambodian Cashews Are Becoming the World's Premium Choice"
 
+slug: "why-cambodian-cashews"
+
 description: "Discover why Cambodian cashews are gaining worldwide recognition for their premium quality, flavor, and export potential."
 
 publishDate: 2026-07-20

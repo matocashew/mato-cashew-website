@@ -1,5 +1,6 @@
 {
   "name": "mato-cashew-website",
+  "private": true,
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -10,9 +11,25 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "optimize-images": "node scripts/optimize-images.js"
+    "check": "astro check",
+    "optimize-images": "node scripts/optimize-images.js",
+    "project:tree": "node scripts/project-tree.js",
+    "project:map": "node scripts/project-map.js",
+    "audit": "node scripts/audit.js",
+    "audit:content": "node scripts/content-audit.js",
+    "audit:seo": "node scripts/seo-audit.js",
+    "audit:images": "node scripts/image-audit.js",
+    "audit:unused": "node scripts/unused-files.js",
+    "test:report": "node scripts/test-report.js",
+    "test:tree": "node scripts/tests/test-tree.js",
+    "test:content": "node scripts/tests/test-content.js",
+    "test:markdown":"node scripts/tests/test-markdown.js",
+    "test:content": "node scripts/tests/test-content.js",
+    "audit:content": "node scripts/content-audit.js",
+    "test:audit": "node scripts/tests/test-audit-result.js"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/cloudflare": "^14.1.2",
     "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/vite": "^4.3.2",
@@ -20,7 +37,8 @@
     "astro": "^7.0.6",
     "resend": "^6.17.2",
     "sharp": "^0.35.3",
-    "tailwindcss": "^4.3.2"
+    "tailwindcss": "^4.3.2",
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@squoosh/cli": "^0.7.1"

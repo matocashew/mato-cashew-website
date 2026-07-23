@@ -107,3 +107,10 @@ export async function hasProduct(
   return product !== undefined;
 
 }
+
+/**
+ * Get all product paths.
+ */
+export async function getProductPaths(): Promise<ProductEntry[]> {
+  return getProducts();
+}

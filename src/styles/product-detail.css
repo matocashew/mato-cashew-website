@@ -20,15 +20,19 @@
 
 }
 
-.product-image{
+.product-detail-image{
 
     background:#fff;
-
     border-radius:24px;
-
     padding:40px;
-
     box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+}
+
+.product-detail-image img{
+
+    width:100%;
+    display:block;
 
 }
 

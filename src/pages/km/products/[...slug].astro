@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 
 import "../../../styles/page.css";
 import "../../../styles/product-detail.css";
@@ -14,20 +14,27 @@ import RelatedProducts from "../../../components/products/RelatedProducts.astro"
 
 import ProductPageSchema from "../../../components/seo/ProductPageSchema.astro";
 
+import {
+  getProducts,
+  getRelatedProducts,
+} from "../../../services/product.service";
+
 export async function getStaticPaths() {
-  const products = await getCollection(
-    "products",
-    ({ data }) => !data.draft
-  );
+
+  const products = await getProducts();
 
   return products.map((product) => ({
+
     params: {
-      slug: product.id
+      slug: product.data.slug,
     },
+
     props: {
-      product
-    }
+      product,
+    },
+
   }));
+
 }
 
 const { product } = Astro.props;
@@ -35,16 +42,13 @@ const { product } = Astro.props;
 const { Content } = await render(product);
 
 const canonical =
-  `https://matocashew.com/km/products/${product.id}`;
+  `https://matocashew.com/km/products/${product.data.slug}`;
 
-const relatedProducts = (
-  await getCollection(
-    "products",
-    ({ data }) => !data.draft
-  )
-)
-.filter((item) => item.id !== product.id)
-.slice(0, 3);
+const relatedProducts =
+  await getRelatedProducts(
+    product.data.slug,
+    3
+  );
 ---
 
 <ProductPageSchema
@@ -54,62 +58,64 @@ const relatedProducts = (
 />
 
 <PageLayout
-    lang="km"
-    title={`${product.data.title} | Mato Cashew`}
-    description={product.data.description}
-    canonical={canonical}
+  lang="km"
+  title={`${product.data.title} | Mato Cashew`}
+  description={product.data.description}
+  canonical={canonical}
 
-    ogType="product"
+  ogType="product"
 
-    ogImage={
-      product.data.image.startsWith("http")
-        ? product.data.image
-        : `https://matocashew.com${product.data.image}`
-    }
+  ogImage={
+    product.data.image.startsWith("http")
+      ? product.data.image
+      : `https://matocashew.com${product.data.image}`
+  }
 
-    breadcrumbs={[
+  breadcrumbs={[
     {
-        name: "ទំព័រដើម",
-        url: "https://matocashew.com/km"
+      name: "ទំព័រដើម",
+      url: "https://matocashew.com/km"
     },
     {
-        name: "ផលិតផល",
-        url: "https://matocashew.com/km/products"
+      name: "ផលិតផល",
+      url: "https://matocashew.com/km/products"
     },
     {
-        name: product.data.title,
-        url: canonical
+      name: product.data.title,
+      url: canonical
     }
-    ]}
+  ]}
 >
 
-<PageHero
-  title={product.data.title}
-  description={product.data.description}
-/>
+  <PageHero
+    title={product.data.title}
+    description={product.data.description}
+  />
 
-<ProductDetails product={product} />
+  <ProductDetails
+    product={product}
+  />
 
-<ProductSpecificationsList
-  specifications={product.data.specifications}
-/>
+  <ProductSpecificationsList
+    specifications={product.data.specifications}
+  />
 
-<ProductApplications
-  applications={product.data.applications}
-/>
+  <ProductApplications
+    applications={product.data.applications}
+  />
 
-<section class="container">
+  <section class="container">
 
-  <article class="product-content">
+    <article class="product-content">
 
-    <Content />
+      <Content />
 
-  </article>
+    </article>
 
-</section>
+  </section>
 
-<RelatedProducts
-  products={relatedProducts}
-/>
+  <RelatedProducts
+    products={relatedProducts}
+  />
 
 </PageLayout>

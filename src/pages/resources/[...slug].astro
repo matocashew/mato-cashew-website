@@ -1,121 +1,82 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 
 import "../../styles/page.css";
-import "../../styles/article.css";
-import "../../styles/related-articles.css";
+import "../../styles/resources.css";
+import "../../styles/resource-detail.css";
 
 import PageLayout from "../../layouts/PageLayout.astro";
 import PageHero from "../../components/PageHero.astro";
+import ResourceMeta from "../../components/resources/ResourceMeta.astro";
+import ResourcePageSchema from "../../components/seo/ResourcePageSchema.astro";
 
-import ArticleMeta from "../../components/articles/ArticleMeta.astro";
-import ArticleCTA from "../../components/articles/ArticleCTA.astro";
-import ArticleSchema from "../../components/seo/ArticleSchema.astro";
-import RelatedArticles from "../../components/articles/RelatedArticles.astro";
-import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+import {
+  getResources,
+  getResourceBySlug
+} from "../../services/resourceService";
 
 export async function getStaticPaths() {
-  const articles = await getCollection(
-    "resources",
-    ({ data }) => !data.draft
-  );
 
-  return articles.map((article) => ({
+  const resources =
+    await getResources();
+
+  return resources.map((resource) => ({
+
     params: {
-      slug: article.id
+      slug: resource.data.slug
     },
+
     props: {
-      article
+      resource
     }
+
   }));
+
 }
 
-const { article } = Astro.props;
+const {
+  resource
+} = Astro.props;
 
-const { Content } = await render(article);
+const {
+  Content
+} = await render(resource);
 
-const relatedArticles = (
-  await getCollection(
-    "resources",
-    ({ data }) => !data.draft
-  )
-)
-.filter((item) => item.id !== article.id)
-.slice(0, 3);
-
-const canonical = `https://matocashew.com/resources/${article.id}`;
-
-const t = getCurrentLanguage(
-  Astro.url.pathname
-);
+const canonical =
+  `https://matocashew.com/resources/${resource.data.slug}`;
 ---
-
-<ArticleSchema
-  headline={article.data.title}
-  description={article.data.description}
-  image={article.data.image}
-  datePublished={article.data.publishDate}
-  dateModified={article.data.updatedDate}
-  author={article.data.author}
+<ResourcePageSchema
+  resource={resource}
   canonical={canonical}
+  lang="en"
 />
-
 <PageLayout
-  title={`${article.data.title} | Mato Cashew`}
-  description={article.data.description}
+  title={`${resource.data.title} | Mato Cashew`}
+  description={resource.data.description}
   canonical={canonical}
-
-  ogType="article"
-
-  ogImage={
-    article.data.image.startsWith("http")
-      ? article.data.image
-      : `https://matocashew.com${article.data.image}`
-  }
-
-  breadcrumbs={[
-    {
-      name: "Home",
-      url: "https://matocashew.com"
-    },
-    {
-      name: t.resources.detail.breadcrumb,
-      url: "https://matocashew.com/resources"
-    },
-    {
-      name: article.data.title,
-      url: canonical
-    }
-  ]}
 >
 
-<PageHero
-  title={article.data.title}
-  description={article.data.description}
-/>
+  <PageHero
+    title={resource.data.title}
+    description={resource.data.description}
+  />
 
-<section class="container">
+  <ResourceMeta
+    category={resource.data.category}
+    author={resource.data.author}
+    publishDate={resource.data.publishDate}
+    readingTime={resource.data.readingTime}
+    tags={resource.data.tags}
+  />
 
-<ArticleMeta
-  publishDate={article.data.publishDate}
-  updatedDate={article.data.updatedDate}
-  author={article.data.author}
-  category={article.data.category}
-  readingTime={article.data.readingTime}
-/>
+  <section class="container">
 
-<article class="article-content">
+    <article class="resource-content">
 
-  <Content />
+      <Content />
 
-</article>
+    </article>
 
-</section>
-
-<ArticleCTA />
-
-<RelatedArticles
-  articles={relatedArticles}
-/>
+  </section>
 
 </PageLayout>

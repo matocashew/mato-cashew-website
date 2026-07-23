@@ -1,0 +1,62 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  resource: CollectionEntry<"resources">;
+  canonical: string;
+  lang?: "en" | "km";
+}
+
+const {
+  resource,
+  canonical,
+  lang = "en"
+} = Astro.props;
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+
+    "@type": "Article",
+
+    headline: resource.data.title,
+
+    description: resource.data.description,
+
+    image: [
+      resource.data.image
+    ],
+
+    author: {
+      "@type": "Organization",
+      name: resource.data.author
+    },
+
+    datePublished:
+      resource.data.publishDate.toISOString(),
+
+    dateModified:
+      (
+        resource.data.updatedDate ??
+        resource.data.publishDate
+      ).toISOString(),
+
+    articleSection:
+      resource.data.category,
+
+    keywords:
+      resource.data.tags.join(", "),
+
+    inLanguage: lang,
+
+    mainEntityOfPage: canonical,
+
+    publisher: {
+      "@type": "Organization",
+
+      name: "Mato Cashew"
+    }
+  })}
+></script>
