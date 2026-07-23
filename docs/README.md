@@ -1,567 +1,174 @@
 # Mato Cashew Website
 
-Official website of **Mato Cashew (ចន្ទីមាតុភូមិ)**, a premium Cambodian cashew producer and exporter supplying local and international markets.
+> Premium Cambodian Cashews • Knowledge Hub • Wholesale & Export Platform
 
-The project is built with **Astro** using a **Service-Oriented** and **CMS-Ready Architecture**, allowing future migration from static content to a headless CMS or backend API with minimal code changes.
+## Overview
 
----
+Mato Cashew is a bilingual website built with Astro to promote premium Cambodian cashew products while serving as a trusted knowledge hub for consumers, importers, farmers, and researchers.
 
-# Business Information
+The platform combines:
 
-**Company**
-
-Mato Cashew (ចន្ទីមាតុភូមិ)
-
-**Industry**
-
-Premium Cambodian Cashew Processing & Export
-
-**Address**
-
-Village: Chanloung  
-Commune: Damril  
-District: Ou Reang Ov  
-Province: Tbong Khmum  
-Country: Cambodia
-
-**Website**
-
-https://matocashew.com
-
-**Languages**
-
-- 🇺🇸 English
-- 🇰🇭 Khmer
+- Premium Product Catalog
+- Cashew Knowledge Center
+- Wholesale & Export Information
+- Educational Resources
+- SEO-Optimized Content
 
 ---
 
-# Project Overview
+## Vision
 
-The website is designed to promote Mato Cashew products and services while providing educational resources about Cambodian cashews.
-
-Current public modules include:
-
-- Home
-- About
-- Products
-- Resources
-- Gallery
-- Wholesale
-- Contact
-
-The architecture is designed to support future migration to a complete CMS and backend platform.
+To become the most trusted digital platform for Cambodian cashews.
 
 ---
 
-# Features
+## Key Features
 
-## Public Website
+### Brand Website
 
-- Responsive Design
-- SEO Optimized
-- JSON-LD Structured Data
-- Open Graph
-- Twitter Cards
-- XML Sitemap
-- Robots.txt
-- Canonical URLs
-- Hreflang Support
-- Breadcrumb Schema
-- Product Schema
-
----
-
-## Products
-
-- Product Listing
-- Dynamic Product Pages
-- Product Specifications
-- Product Applications
-- Related Products
-- Wholesale Information
-
----
-
-## Resources
-
-- Educational Articles
-- SEO-Friendly URLs
-- Content Collections
-
----
-
-## Gallery
-
-- Production
-- Farmers
+- Company Information
 - Factory
-- Packaging
-- Export
+- Certifications
+- Sustainability
 
----
+### Product Catalog
 
-## Wholesale
+- Retail Products
+- Wholesale Products
+- Product Specifications
+- Product Details
+
+### Knowledge Hub
+
+- Cashew Knowledge
+- Health Benefits
+- Processing
+- Export Guide
+- Recipes
+- FAQ
+
+### Wholesale
 
 - OEM
 - Private Label
-- Export Information
-- International Buyers
+- MOQ
+- Export Services
 
 ---
 
-## Contact
-
-- Contact Form
-- Cloudflare Turnstile
-- Email Integration
-- Google Analytics 4
-
----
-
-# Technology Stack
-
-## Frontend
+## Technology Stack
 
 - Astro
 - TypeScript
+- Markdown Content Collections
 - CSS
-
-## Content
-
-- Astro Content Collections
-
-## SEO
-
-- JSON-LD
-- Sitemap
-- Canonical URLs
-- Open Graph
-- Twitter Cards
-- Hreflang
-
-## Deployment
-
-- Cloudflare Pages
-
-## Analytics
-
-- Google Analytics 4
+- GitHub
 
 ---
 
-# Current Project Status
+## Project Structure
 
-| Module | Status |
-|---------|--------|
-| Home | ✅ Complete |
-| About | ✅ Complete |
-| Products | ✅ Complete |
-| Resources | ✅ Complete |
-| Gallery | ✅ Complete |
-| Wholesale | ✅ Complete |
-| Contact | ✅ Complete |
-| SEO | ✅ Complete |
-| Documentation | ✅ Complete |
-| Service Layer | ✅ Complete |
-| CMS Ready | 🚧 In Progress |
-| Backend API | ⏳ Planned |
-| Admin Dashboard | ⏳ Planned |
-
----
-
-# Project Structure
-
-```
 src/
 
 components/
-config/
-content/
-data/
-i18n/
-layouts/
-pages/
-services/
-styles/
-types/
-utils/
 
-public/
+layouts/
+
+pages/
+
+services/
+
+content/
+
+styles/
+
+data/
 
 docs/
 
-project-info/
-
-scripts/
-```
-
 ---
 
-# Architecture
+## Documentation
 
-The project follows a layered architecture.
+See the `/docs` folder.
 
-```
-Pages
+01 Project Vision
 
-↓
+02 Information Architecture
 
-Layouts
+03 Navigation Specification
 
-↓
+04 Design System
 
-Components
+05 Content Strategy
 
-↓
+06 SEO Strategy
 
-Services
+07 Development Roadmap
 
-↓
-
-Content Collections
-
-↓
-
-Configuration
-```
-
-Future architecture
-
-```
-Pages
-
-↓
-
-Components
-
-↓
-
-Services
-
-↓
-
-REST API
-
-↓
-
-Database
-```
-
-No UI components should require modification during future backend migration.
+08 Coding Standards
 
 ---
-
-# Configuration
-
-Business information is centralized inside
-
-```
-src/config/
-```
-
-Configuration includes
-
-- Company Information
-- Contact Information
-- Address
-- Website Settings
-- Analytics
-- Social Media
-- SEO Defaults
-
-No business information should be hard-coded inside components.
-
----
-
-# Internationalization
-
-Supported languages
-
-- English
-- Khmer
-
-Translation files
-
-```
-src/i18n/
-```
-
-Business configuration remains inside
-
-```
-src/config/
-```
-
-This separation keeps content maintainable.
-
----
-
-# Developer Toolkit
-
-Developer utilities are available through npm scripts.
 
 ## Development
+
+Install
+
+```bash
+npm install
+```
+
+Run
 
 ```bash
 npm run dev
 ```
 
-## Build
+Build
 
 ```bash
 npm run build
 ```
 
-## Preview
+Preview
 
 ```bash
 npm run preview
 ```
 
-## Type Checking
+---
 
-```bash
-npm run check
-```
+## Development Workflow
 
-## Optimize Images
+Plan
 
-```bash
-npm run optimize-images
-```
+↓
 
-## Generate Project Tree
+Document
 
-```bash
-npm run project:tree
-```
+↓
 
-## Generate Project Map
+Design
 
-```bash
-npm run project:map
-```
+↓
 
-## Complete Audit
+Develop
 
-```bash
-npm run audit
-```
+↓
 
-## Content Audit
+Test
 
-```bash
-npm run audit:content
-```
+↓
 
-## SEO Audit
+Review
 
-```bash
-npm run audit:seo
-```
+↓
 
-## Image Audit
-
-```bash
-npm run audit:images
-```
-
-## Unused Files Audit
-
-```bash
-npm run audit:unused
-```
+Release
 
 ---
 
-# Documentation
+## License
 
-All documentation is located inside
-
-```
-docs/
-```
-
-| Document | Purpose |
-|----------|---------|
-| README.md | Project overview |
-| architecture.md | System architecture |
-| folder-structure.md | Folder organization |
-| coding-standards.md | Coding conventions |
-| api-design.md | API design |
-| deployment.md | Deployment guide |
-| product-model.md | Product model |
-| business-rules.md | Business rules |
-| cms-roadmap.md | CMS migration |
-| developer-toolkit.md | Developer tools |
-| decision-log.md | Architecture decisions |
-| CHANGELOG.md | Version history |
-
----
-
-# Project Information
-
-Project reports are stored in
-
-```
-project-info/
-```
-
-Includes
-
-- Project Tree
-- Project Map
-- Sprint Status
-- Roadmap
-- Change Log
-- Project Rules
-- Architecture Version
-
----
-
-# Development Workflow
-
-Daily
-
-```bash
-npm run dev
-```
-
-Before Commit
-
-```bash
-npm run check
-
-npm run build
-```
-
-Weekly
-
-```bash
-npm run audit
-
-npm run project:tree
-
-npm run project:map
-```
-
-Before Release
-
-```bash
-npm run check
-
-npm run build
-
-npm run audit
-
-npm run audit:content
-
-npm run audit:seo
-
-npm run audit:images
-```
-
----
-
-# Coding Principles
-
-The project follows these principles.
-
-- Component-Based Architecture
-- Service-Oriented Design
-- Separation of Concerns
-- Configuration-Driven Development
-- CMS-Ready Structure
-- Reusable Components
-- SEO-First Development
-- Performance-First Development
-- Type Safety
-- Documentation First
-
----
-
-# Future Roadmap
-
-## Phase 1
-
-Public Website
-
-Status
-
-✅ Completed
-
----
-
-## Phase 2
-
-CMS Ready Architecture
-
-- Configuration Layer
-- Service Layer
-- Content Collections
-- Developer Toolkit
-
-Status
-
-🚧 In Progress
-
----
-
-## Phase 3
-
-Backend
-
-- Node.js
-- Express
-- PostgreSQL
-- Prisma ORM
-- Authentication
-- REST API
-
----
-
-## Phase 4
-
-Admin Dashboard
-
-- Authentication
-- Dashboard
-- Product Management
-- Gallery Management
-- Resources Management
-- Contact Management
-- Website Settings
-
----
-
-## Phase 5
-
-Business Expansion
-
-- Distributor Portal
-- Customer Portal
-- Inventory Management
-- ERP Integration
-- Mobile API
-
----
-
-# Version
-
-Current Version
-
-**1.0.0**
-
-Architecture
-
-- Service Layer
-- Content Collections
-- CMS Ready
-
----
-
-# License
-
-Copyright © 2026 Mato Cashew (ចន្ទីមាតុភូមិ).
-
+Copyright © Mato Cashew.
 All Rights Reserved.
