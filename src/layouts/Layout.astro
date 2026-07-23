@@ -34,7 +34,7 @@ interface Props {
 const siteUrl = SITE.website.url;
 
 const {
-  title = `${SITE.brand.english} | ${SITE.website.title}`,
+  title = `${SITE.brand.english} | ${SITE.website.tagline}`,
   description = SITE.website.description,
 
   canonical = siteUrl,
@@ -289,10 +289,10 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
 
   <script
     async
-    src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analytics.google}`}
+    src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analytics.googleAnalytics}`}
   ></script>
 
-  <script is:inline>
+  <script define:vars={{ gaId: SITE.analytics.googleAnalytics }}>
     window.dataLayer = window.dataLayer || [];
 
     function gtag() {
@@ -301,7 +301,7 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
 
     gtag("js", new Date());
 
-    gtag("config", "{SITE.analytics.google}");
+    gtag("config", gaId);
   </script>
 
 </head>

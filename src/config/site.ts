@@ -1,4 +1,6 @@
-export const SITE = {
+import type { SiteConfig } from "./types";
+
+export const site: SiteConfig = {
   // ==========================
   // Brand
   // ==========================
@@ -14,11 +16,13 @@ export const SITE = {
   // ==========================
 
   website: {
-    title: "Premium Cambodian Cashew",
+    name: "Mato Cashew",
+    tagline: "Premium Cambodian Cashew",
     description:
       "Premium Cambodian cashew kernels for retail, wholesale, OEM, private label and export markets worldwide.",
     url: "https://matocashew.com",
     logo: "/images/logo/logo.png",
+    locale: "en",
   },
 
   // ==========================
@@ -50,6 +54,7 @@ export const SITE = {
 
   // ==========================
   // Social
+  // (Temporary - will move to src/data/social.ts)
   // ==========================
 
   social: {
@@ -57,19 +62,33 @@ export const SITE = {
     linkedin: "",
     youtube: "",
     telegram: "",
+    tiktok: "",
   },
 
   // ==========================
   // Analytics
+  // (Temporary - will move to src/config/analytics.ts)
   // ==========================
 
   analytics: {
-    google: "G-9CBMMS5DPF",
+    googleAnalytics: "G-9CBMMS5DPF",
+    googleTagManager: "",
+    microsoftClarity: "",
   },
 
   // ==========================
   // Copyright
+  // (Temporary - will move to src/data/footer.ts)
   // ==========================
 
   copyright: `© ${new Date().getFullYear()} Mato Cashew. All rights reserved.`,
 };
+
+// -----------------------------------------------------------------
+// Backward Compatibility
+// Remove this export after all imports have been migrated to `site`.
+// -----------------------------------------------------------------
+
+export const SITE = site;
+
+export default site;
