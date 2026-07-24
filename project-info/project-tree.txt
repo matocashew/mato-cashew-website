@@ -60,8 +60,10 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   ¦       WholesaleProducts.astro
 ¦   ¦       
 ¦   +---resources
+¦   ¦       RelatedResources.astro
 ¦   ¦       ResourceCard.astro
 ¦   ¦       ResourceGrid.astro
+¦   ¦       ResourceMeta.astro
 ¦   ¦       
 ¦   +---seo
 ¦           ArticleSchema.astro
@@ -71,12 +73,20 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦           OrganizationSchema.astro
 ¦           ProductCardSchema.astro
 ¦           ProductPageSchema.astro
+¦           ResourcePageSchema.astro
 ¦           WebPageSchema.astro
 ¦           WebsiteSchema.astro
 ¦           
 +---config
-¦       navigation.ts
+¦       analytics.ts
+¦       features.ts
+¦       index.ts
+¦       languages.ts
+¦       routes.ts
+¦       seo.ts
 ¦       site.ts
+¦       theme.ts
+¦       types.ts
 ¦       
 +---content
 ¦   +---products
@@ -88,7 +98,13 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦           why-cambodian-cashews.md
 ¦           
 +---data
+¦       certifications.ts
+¦       company.ts
+¦       footer.ts
+¦       index.ts
+¦       navigation.ts
 ¦       products.ts
+¦       social.ts
 ¦       
 +---i18n
 ¦       config.ts
@@ -146,7 +162,9 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦       language-switcher.ts
 ¦       
 +---services
+¦       navigationService.ts
 ¦       product.service.ts
+¦       resourceService.ts
 ¦       
 +---styles
 ¦       about-page.css
@@ -167,11 +185,13 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦       products.css
 ¦       related-articles.css
 ¦       related-products.css
+¦       resource-detail.css
 ¦       resources.css
 ¦       section-title.css
 ¦       wholesale.css
 ¦       
 +---types
+¦       navigation.ts
 ¦       Product.ts
 ¦       ProductImage.ts
 ¦       ProductPackaging.ts

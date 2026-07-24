@@ -1,0 +1,362 @@
+# ADR 0011: Shared Content Model
+
+Status: Accepted
+
+Date: 2026-07-25
+
+Decision Makers
+
+- Mato Cashew Platform Team
+
+---
+
+# Context
+
+The Mato Cashew Platform is designed as a Content-First Platform.
+
+The platform will contain multiple publishable content types including:
+
+- Knowledge
+- Articles
+- Recipes
+- Guides
+- FAQs
+- Downloads
+- Industry News
+- Research Papers
+- Future educational resources
+
+If every content type defines its own fields independently, the platform will quickly accumulate duplicated models, inconsistent metadata, and repeated business logic.
+
+Examples of duplicated fields include:
+
+- title
+- slug
+- description
+- author
+- tags
+- SEO
+- hero image
+- publish date
+
+Duplicating these fields across multiple models increases maintenance costs and makes future CMS integration more difficult.
+
+---
+
+# Decision
+
+The platform adopts a Shared Content Model.
+
+All publishable content types must inherit from a common base content model.
+
+Each specific content type should extend the shared model by adding only its own domain-specific fields.
+
+---
+
+# Base Content Model
+
+Every publishable content type should contain the following core properties.
+
+Identity
+
+- title
+- slug
+
+Content
+
+- description
+- excerpt
+- body
+
+Publishing
+
+- author
+- publishedAt
+- updatedAt
+- draft
+- featured
+
+Media
+
+- heroImage
+
+Classification
+
+- tags
+
+SEO
+
+- seo
+
+Localization
+
+- language
+
+---
+
+# Derived Content Types
+
+The following models extend the shared base model.
+
+Knowledge
+
+Additional fields
+
+- category
+- readingTime
+- relatedProducts
+
+---
+
+Article
+
+Additional fields
+
+- category
+- source
+- references
+
+---
+
+Recipe
+
+Additional fields
+
+- ingredients
+- preparationTime
+- cookingTime
+- servings
+- nutrition
+
+---
+
+Guide
+
+Additional fields
+
+- difficulty
+- estimatedTime
+- downloadableResources
+
+---
+
+FAQ
+
+Additional fields
+
+- question
+- answer
+- category
+
+---
+
+Download
+
+Additional fields
+
+- file
+- version
+- fileSize
+- format
+
+---
+
+# Architectural Principles
+
+## Reuse
+
+Common metadata must never be duplicated.
+
+---
+
+## Consistency
+
+All publishable content should follow the same publishing workflow.
+
+---
+
+## Extensibility
+
+New content types should extend the shared model rather than creating independent models.
+
+---
+
+## Separation of Concerns
+
+Content models define data.
+
+Services implement business logic.
+
+Components render content.
+
+Pages compose layouts.
+
+---
+
+# Benefits
+
+The shared model provides:
+
+- Consistent metadata
+- Shared publishing workflow
+- Easier SEO implementation
+- Better CMS integration
+- Reduced code duplication
+- Cleaner TypeScript interfaces
+- Reusable services
+- Simpler search indexing
+
+---
+
+# Example Hierarchy
+
+BaseContent
+
+├── Knowledge
+
+├── Article
+
+├── Recipe
+
+├── Guide
+
+├── FAQ
+
+└── Download
+
+Every child model inherits common fields and introduces only domain-specific properties.
+
+---
+
+# Search
+
+Because every content type shares the same base model, the search engine can index all content consistently.
+
+Search fields include:
+
+- title
+- description
+- excerpt
+- tags
+- author
+
+Additional fields may be indexed depending on the content type.
+
+---
+
+# SEO
+
+Every publishable content type must support:
+
+- SEO title
+- Meta description
+- Canonical URL
+- Open Graph
+- Twitter Card
+- Structured Data
+
+SEO metadata should follow a unified schema.
+
+---
+
+# CMS Compatibility
+
+The shared model enables future migration to:
+
+- Headless CMS
+- REST API
+- GraphQL
+- Database
+- External content sources
+
+without redesigning the application architecture.
+
+---
+
+# Future Expansion
+
+The shared model should support additional content types including:
+
+- Market Reports
+- Case Studies
+- White Papers
+- Research Papers
+- Video Lessons
+- Learning Modules
+- Interactive Tutorials
+
+without changing existing content models.
+
+---
+
+# Consequences
+
+Positive
+
+- Reduced duplication
+- Better maintainability
+- Cleaner architecture
+- Consistent publishing
+- Easier testing
+- Better scalability
+
+Trade-offs
+
+- Slightly more initial design effort
+- Requires developers to understand inheritance
+- Additional planning before implementation
+
+These trade-offs are acceptable because they support long-term maintainability.
+
+---
+
+# Implementation Guidelines
+
+Developers should:
+
+- Create one BaseContent interface.
+- Extend BaseContent for every publishable content type.
+- Keep shared metadata inside the base model.
+- Avoid redefining inherited properties.
+- Keep business logic inside services.
+
+---
+
+# Related ADRs
+
+- ADR 0001 — Platform Vision
+- ADR 0003 — Bilingual Content
+- ADR 0004 — Single Source of Truth
+- ADR 0006 — Service Layer
+- ADR 0010 — Content-First Platform
+
+---
+
+# Related Documents
+
+- 02 Platform Architecture
+- 03 Information Architecture
+- 09 Content Strategy
+- 11 API Design
+- 12 Product Model
+
+---
+
+# Review
+
+This ADR should be reviewed when:
+
+- A new publishable content type is introduced.
+- CMS integration is implemented.
+- The search architecture changes.
+- The publishing workflow changes.
+
+---
+
+# Status
+
+Accepted
+
+Version
+
+1.0

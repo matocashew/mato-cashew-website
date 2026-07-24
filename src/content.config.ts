@@ -1,6 +1,16 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
+import { knowledgeSchema } from "./content/schemas/knowledge";
+
+const knowledge = defineCollection({
+
+  type: "content",
+
+  schema: knowledgeSchema,
+
+});
+
 const resources = defineCollection({
   loader: glob({
     pattern: "**/*.{md,mdx}",
@@ -88,5 +98,6 @@ const products = defineCollection({
 
 export const collections = {
   resources,
-  products
+  products,
+  knowledge,
 };

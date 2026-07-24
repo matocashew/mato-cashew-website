@@ -1,25 +1,20 @@
 import { navigation } from "@data/navigation";
+import type { MenuItem } from "@models/navigation";
 
 export const navigationService = {
-
-  getMainMenu() {
-
-    return navigation;
-
+  getHeaderMenu(): MenuItem[] {
+    return navigation
+      .filter(item => item.visible !== false)
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   },
 
-  getFooterMenu() {
-
-    return navigation;
-
+  getFooterMenu(): MenuItem[] {
+    return this.getHeaderMenu();
   },
 
-  getKnowledgeMenu() {
-
-    return navigation.find(
-      item => item.id === "knowledge"
-    );
-
+  getMenuById(id: string): MenuItem | undefined {
+    return navigation.find(item => item.id === id);
   },
-
 };
+
+export default navigationService;

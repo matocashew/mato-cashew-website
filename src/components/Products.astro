@@ -2,7 +2,7 @@
 import SectionTitle from "./SectionTitle.astro";
 import ProductGrid from "./products/ProductGrid.astro";
 import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
-import { getFeaturedProducts } from "../services/product.service";
+import { getFeaturedProducts } from "../services/productService";
 
 const t = getCurrentLanguage(
   Astro.url.pathname
