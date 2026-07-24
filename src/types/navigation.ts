@@ -1,0 +1,17 @@
+export interface NavigationItem {
+  id: string;
+
+  label: string;
+
+  href: string;
+
+  description?: string;
+
+  icon?: string;
+
+  featured?: boolean;
+
+  external?: boolean;
+
+  children?: NavigationItem[];
+}

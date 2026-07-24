@@ -1,40 +1,53 @@
-export const navigation = [
+import type { NavigationItem } from "@models/navigation";
 
+export const navigation: NavigationItem[] = [
   {
+    id: "home",
     label: "Home",
-    href: "/"
+    href: "/",
   },
 
   {
+    id: "about",
     label: "About",
-    href: "/about"
+    href: "/about",
   },
 
   {
+    id: "products",
     label: "Products",
-    href: "/products"
+    href: "/products",
   },
 
   {
+    id: "knowledge",
+    label: "Knowledge",
+    href: "/knowledge",
+  },
+
+  {
+    id: "resources",
     label: "Resources",
-    href: "/resources"
+    href: "/resources",
   },
 
   {
+    id: "gallery",
     label: "Gallery",
-    href: "/gallery"
+    href: "/gallery",
   },
 
   {
+    id: "wholesale",
     label: "Wholesale",
-    href: "/wholesale"
+    href: "/wholesale",
   },
 
   {
+    id: "contact",
     label: "Contact",
-    href: "/contact"
-  }
-
+    href: "/contact",
+  },
 ];
 
 export default navigation;
