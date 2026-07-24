@@ -1,0 +1,20 @@
+---
+import Layout from "@layouts/Layout.astro";
+
+import KnowledgeGrid from "@components/knowledge/KnowledgeGrid.astro";
+
+import { knowledgeService } from "@services/knowledgeService";
+
+const articles = await knowledgeService.getAll();
+---
+
+<Layout
+  title="Knowledge"
+  description="Cashew knowledge and educational resources."
+>
+  <main class="container">
+    <h1>Knowledge</h1>
+
+    <KnowledgeGrid articles={articles} />
+  </main>
+</Layout>

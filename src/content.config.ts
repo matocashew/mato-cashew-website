@@ -4,11 +4,12 @@ import { glob } from "astro/loaders";
 import { knowledgeSchema } from "./content/schemas/knowledge";
 
 const knowledge = defineCollection({
-
-  type: "content",
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "./src/content/knowledge",
+  }),
 
   schema: knowledgeSchema,
-
 });
 
 const resources = defineCollection({
