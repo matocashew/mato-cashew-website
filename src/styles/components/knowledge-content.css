@@ -1,0 +1,100 @@
+.knowledge-body {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.knowledge-body h2 {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.knowledge-body h3 {
+  margin-top: 2rem;
+  margin-bottom: .75rem;
+
+  font-size: 1.5rem;
+}
+
+.knowledge-body p {
+  margin: 1rem 0;
+
+  line-height: 1.9;
+}
+
+.knowledge-body ul,
+.knowledge-body ol {
+  margin: 1.25rem 0;
+  padding-left: 2rem;
+}
+
+.knowledge-body li {
+  margin: .5rem 0;
+}
+
+.knowledge-body img {
+  width: 100%;
+
+  border-radius: 16px;
+
+  margin: 2rem 0;
+}
+
+.knowledge-body blockquote {
+  margin: 2rem 0;
+
+  padding: 1rem 1.5rem;
+
+  border-left: 5px solid #2E7D32;
+
+  background: #F6F8F4;
+}
+
+.knowledge-body hr {
+  margin: 3rem 0;
+}
+
+.knowledge-article {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.knowledge-layout {
+
+  display: grid;
+
+  grid-template-columns: 280px 1fr;
+
+  gap: 3rem;
+
+  align-items: start;
+
+  margin-top: 2rem;
+
+}
+
+.knowledge-layout aside {
+
+  position: sticky;
+
+  top: 2rem;
+
+}
+
+@media (max-width: 900px) {
+
+  .knowledge-layout {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .knowledge-layout aside {
+
+    position: static;
+
+  }
+
+}

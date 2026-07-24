@@ -37,7 +37,6 @@ seo:
     - cashew
     - cambodian cashew
 ---
-# What is Cashew?
 
 Cashew is a tropical evergreen tree scientifically known as *Anacardium occidentale*.
 

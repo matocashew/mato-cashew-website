@@ -1,0 +1,45 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+---
+
+{
+  headings.length > 0 && (
+
+    <aside class="knowledge-toc">
+
+      <h3>Contents</h3>
+
+      <ul>
+
+        {
+          headings.map((heading) => (
+
+            <li class={`toc-item depth-${heading.depth}`}>
+
+              <a href={`#${heading.slug}`}>
+
+                {heading.text}
+
+              </a>
+
+            </li>
+
+          ))
+        }
+
+      </ul>
+
+    </aside>
+
+  )
+}

@@ -1,0 +1,25 @@
+---
+interface Props {
+  author: string;
+  publishedAt: Date;
+  readingTime: number;
+}
+
+const {
+  author,
+  publishedAt,
+  readingTime,
+} = Astro.props;
+---
+
+<div class="knowledge-meta">
+  <span>👤 {author}</span>
+
+  <span>
+    📅 {publishedAt.toLocaleDateString()}
+  </span>
+
+  <span>
+    ⏱ {readingTime} min read
+  </span>
+</div>

@@ -1,0 +1,139 @@
+.knowledge-toc {
+
+  position: sticky;
+
+  top: 2rem;
+
+  width: 240px;
+
+  padding: 1.5rem;
+
+  border: 1px solid #E5E7EB;
+
+  border-radius: 16px;
+
+  background: #FFFFFF;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .05);
+
+}
+
+.knowledge-toc h3 {
+
+  margin: 0 0 1.25rem;
+
+  font-size: 1.6rem;
+
+  font-weight: 700;
+
+  color: #1F2937;
+
+}
+
+.knowledge-toc ul {
+
+  list-style: none;
+
+  margin: 0;
+
+  padding: 0;
+
+}
+
+.knowledge-toc li {
+
+  margin-bottom: .75rem;
+
+}
+
+.depth-2 {
+
+  margin-left: 0;
+
+}
+
+.depth-3 {
+
+  margin-left: 1rem;
+
+}
+
+.depth-4 {
+
+  margin-left: 2rem;
+
+}
+
+.toc-item {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: .5rem;
+
+}
+
+.toc-item::before {
+
+  content: "•";
+
+  color: #2E7D32;
+
+  font-size: .8rem;
+
+  margin-top: .45rem;
+
+  flex-shrink: 0;
+
+}
+
+.toc-item a {
+
+  display: block;
+
+  width: 100%;
+
+  padding: .25rem 0;
+
+  color: #374151;
+
+  text-decoration: none;
+
+  line-height: 1.6;
+
+  transition:
+    color .2s ease,
+    transform .2s ease;
+
+}
+
+.toc-item a:hover {
+
+  color: #2E7D32;
+
+  transform: translateX(4px);
+
+}
+
+.toc-item a:focus {
+
+  outline: none;
+
+  color: #2E7D32;
+
+}
+
+@media (max-width: 900px) {
+
+  .knowledge-toc {
+
+    position: static;
+
+    width: 100%;
+
+    margin-bottom: 2rem;
+
+  }
+
+}
