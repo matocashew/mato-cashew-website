@@ -1,0 +1,45 @@
+---
+import type { Knowledge } from "@models/Knowledge";
+
+interface Props {
+  article: Knowledge;
+}
+
+const { article } = Astro.props as Props;
+---
+
+<a
+  href={`/knowledge/${article.slug}`}
+  class="knowledge-article-card"
+>
+
+  <img
+    src={article.heroImage}
+    alt={article.title}
+  />
+
+  <div class="card-content">
+
+    <span class="category">
+      {article.category}
+    </span>
+
+    <h3>{article.title}</h3>
+
+    <p>{article.description}</p>
+
+    <div class="card-footer">
+
+      <span>
+        {article.readingTime} min read
+      </span>
+
+      <span class="read-more">
+        Read →
+      </span>
+
+    </div>
+
+  </div>
+
+</a>

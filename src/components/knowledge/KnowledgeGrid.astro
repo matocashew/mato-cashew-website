@@ -1,6 +1,8 @@
 ---
 import type { Knowledge } from "@models/Knowledge";
-import KnowledgeCard from "./KnowledgeCard.astro";
+
+import KnowledgeArticleCard from "./KnowledgeArticleCard.astro";
+
 import "@styles/components/knowledge-grid.css";
 
 interface Props {
@@ -11,13 +13,23 @@ const { articles } = Astro.props as Props;
 ---
 
 <section class="knowledge-grid">
+
   {
     articles.length === 0 ? (
+
       <p>No knowledge articles found.</p>
+
     ) : (
-      articles.map((article) => (
-        <KnowledgeCard article={article} />
+
+      articles.map(article => (
+
+        <KnowledgeArticleCard
+          article={article}
+        />
+
       ))
+
     )
   }
+
 </section>

@@ -1,0 +1,184 @@
+---
+interface Props {
+  previous?: {
+    title: string;
+    slug: string;
+  };
+
+  next?: {
+    title: string;
+    slug: string;
+  };
+}
+
+const { previous, next } = Astro.props;
+---
+
+<nav
+  class:list={[
+    "knowledge-navigation",
+    {
+      "single-card": !(previous && next)
+    }
+  ]}
+>
+
+  {
+    previous ? (
+      <a
+        href={`/knowledge/${previous.slug}`}
+        class="previous"
+      >
+        <span>← Previous</span>
+
+        <strong>{previous.title}</strong>
+      </a>
+    ) : (
+      <div></div>
+    )
+  }
+
+  {
+    next ? (
+      <a
+        href={`/knowledge/${next.slug}`}
+        class="next"
+      >
+        <span>Next →</span>
+
+        <strong>{next.title}</strong>
+      </a>
+    ) : (
+      <div></div>
+    )
+  }
+
+</nav>
+
+<style>
+
+.knowledge-navigation {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 1.5rem;
+
+  margin-top: 4rem;
+
+  padding-top: 2rem;
+
+  border-top: 1px solid #E5E7EB;
+
+}
+
+/* Single previous or next card */
+
+.knowledge-navigation.single-card {
+
+  grid-template-columns: 1fr;
+
+}
+
+.knowledge-navigation.single-card a {
+
+  max-width: 520px;
+
+}
+
+.knowledge-navigation.single-card .next {
+
+  justify-self: end;
+
+}
+
+.knowledge-navigation a {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: .35rem;
+
+  padding: 1rem;
+
+  border: 1px solid #E5E7EB;
+
+  border-radius: 12px;
+
+  background: #FFFFFF;
+
+  text-decoration: none;
+
+  color: inherit;
+
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease,
+    box-shadow .2s ease;
+
+}
+
+.knowledge-navigation a:hover {
+
+  background: #F9FAFB;
+
+  border-color: #2E7D32;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,.06);
+
+  transform: translateY(-2px);
+
+}
+
+.knowledge-navigation .next {
+
+  text-align: right;
+
+}
+
+.knowledge-navigation span {
+
+  font-size: .875rem;
+
+  color: #6B7280;
+
+}
+
+.knowledge-navigation strong {
+
+  color: #111827;
+
+  font-size: 1rem;
+
+  line-height: 1.5;
+
+}
+
+@media (max-width: 768px) {
+
+  .knowledge-navigation {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .knowledge-navigation.single-card a {
+
+    max-width: 100%;
+
+  }
+
+  .knowledge-navigation .next {
+
+    text-align: left;
+
+    justify-self: stretch;
+
+  }
+
+}
+
+</style>

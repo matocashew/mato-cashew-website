@@ -1,16 +1,19 @@
 ---
 import Layout from "@layouts/Layout.astro";
-
 import knowledgeService from "@services/knowledgeService";
 
 import KnowledgeHero from "@components/knowledge/KnowledgeHero.astro";
 import KnowledgeMeta from "@components/knowledge/KnowledgeMeta.astro";
 import KnowledgeTOC from "@components/knowledge/KnowledgeTOC.astro";
+import KnowledgeNavigation from "@components/knowledge/KnowledgeNavigation.astro";
+import RelatedArticles from "@components/knowledge/RelatedArticles.astro";
+import TagGroup from "@components/ui/TagGroup.astro";
 
 import { render } from "astro:content";
 
 import "@styles/components/knowledge-content.css";
 import "@styles/components/knowledge-toc.css";
+import "@styles/components/related-articles.css";
 
 export async function getStaticPaths() {
   const articles = await knowledgeService.getAll();
@@ -24,7 +27,6 @@ export async function getStaticPaths() {
         params: {
           slug: article.slug,
         },
-
         props: {
           entry,
         },
@@ -44,6 +46,35 @@ interface Props {
 const { entry } = Astro.props as Props;
 
 const { Content, headings } = await render(entry);
+
+const articles = await knowledgeService.getAll();
+
+const relatedArticles = articles
+  .filter(
+    (article) =>
+      article.slug !== entry.id &&
+      (
+        article.category === entry.data.category ||
+        article.tags.some((tag) =>
+          entry.data.tags.includes(tag)
+        )
+      )
+  )
+  .slice(0, 2);
+
+const currentIndex = articles.findIndex(
+  (article) => article.slug === entry.id
+);
+
+const previous =
+  currentIndex > 0
+    ? articles[currentIndex - 1]
+    : undefined;
+
+const next =
+  currentIndex < articles.length - 1
+    ? articles[currentIndex + 1]
+    : undefined;
 ---
 
 <Layout
@@ -66,6 +97,10 @@ const { Content, headings } = await render(entry);
       readingTime={entry.data.readingTime}
     />
 
+    <TagGroup
+      tags={entry.data.tags}
+    />
+
     <hr />
 
     <article class="knowledge-layout">
@@ -78,13 +113,22 @@ const { Content, headings } = await render(entry);
 
       </aside>
 
-      <div class="knowledge-content">
+        <div class="knowledge-content">
 
-        <Content />
+          <Content />
 
-      </div>
+        </div>
 
-    </article>
+        </article>
+
+    <KnowledgeNavigation
+      previous={previous}
+      next={next}
+    />
+
+    <RelatedArticles
+      articles={relatedArticles}
+    />
 
   </main>
 

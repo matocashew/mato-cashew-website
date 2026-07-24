@@ -1,4 +1,25 @@
 .knowledge-grid {
+
   display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+
   gap: 2rem;
+
+  margin-top: 2rem;
+
+  align-items: stretch;
+
+}
+
+@media (max-width: 768px) {
+
+  .knowledge-grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 1.5rem;
+
+  }
+
 }

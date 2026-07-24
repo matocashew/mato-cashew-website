@@ -1,0 +1,133 @@
+.knowledge-article-card {
+
+  display: flex;
+
+  flex-direction: column;
+
+  background: #fff;
+
+  border: 1px solid #e6e6e6;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  text-decoration: none;
+
+  color: inherit;
+
+  transition: all .25s ease;
+
+  box-shadow: 0 4px 16px rgba(0,0,0,.04);
+
+}
+
+.knowledge-article-card:hover {
+
+  transform: translateY(-6px);
+
+  box-shadow: 0 12px 32px rgba(0,0,0,.12);
+
+}
+
+.knowledge-article-card img {
+
+  width: 100%;
+
+  height: auto;
+
+  display: block;
+
+  object-fit: contain;
+
+  background: #f8f8f8;
+
+  border-bottom: 1px solid #eee;
+
+}
+
+.card-content {
+
+  padding: 1.75rem;
+
+  display: flex;
+
+  flex-direction: column;
+
+  flex: 1;
+
+  gap: .75rem;
+
+}
+
+.category {
+
+  display: inline-block;
+
+  font-size: .8rem;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  color: #2E7D32;
+
+  letter-spacing: .05em;
+
+  margin-bottom: .75rem;
+
+}
+
+.card-content h3 {
+
+  margin: 0;
+
+  font-size: 1.8rem;
+
+  line-height: 1.2;
+
+}
+
+.card-content p {
+
+  margin: 1rem 0;
+
+  color: #666;
+
+  line-height: 1.6;
+
+}
+
+.card-footer {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-top: 1.5rem;
+
+  font-size: .95rem;
+
+}
+
+.read-more {
+
+  color: #2E7D32;
+
+  font-weight: 700;
+
+}
+
+.knowledge-article-card:hover .read-more {
+
+  transform: translateX(4px);
+
+}
+
+.card-footer {
+
+  margin-top: auto;
+
+}

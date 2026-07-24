@@ -3,9 +3,25 @@ import Layout from "@layouts/Layout.astro";
 
 import KnowledgeGrid from "@components/knowledge/KnowledgeGrid.astro";
 
+import FeaturedKnowledgeCard from "@components/knowledge/FeaturedKnowledgeCard.astro";
+
+import "@styles/components/featured-knowledge-card.css";
+
 import { knowledgeService } from "@services/knowledgeService";
 
+import KnowledgeIndexHero from "@components/knowledge/KnowledgeIndexHero.astro";
+
+import "@styles/components/knowledge-index-hero.css";
+
+import "@styles/components/knowledge-article-card.css";
+
 const articles = await knowledgeService.getAll();
+
+const featuredArticle =
+  articles.find(article => article.featured);
+
+const latestArticles =
+  articles.filter(article => !article.featured);
 ---
 
 <Layout
@@ -13,8 +29,29 @@ const articles = await knowledgeService.getAll();
   description="Cashew knowledge and educational resources."
 >
   <main class="container">
-    <h1>Knowledge</h1>
+    <KnowledgeIndexHero />
+    <h2 class="section-title">
+      Featured Article
+    </h2>
 
-    <KnowledgeGrid articles={articles} />
+    {
+      featuredArticle && (
+
+        <FeaturedKnowledgeCard
+          title={featuredArticle.title}
+          description={featuredArticle.description}
+          image={featuredArticle.heroImage}
+          category={featuredArticle.category}
+          slug={featuredArticle.slug}
+        />
+
+      )
+    }
+
+    <h2>Latest Articles</h2>
+
+    <KnowledgeGrid
+      articles={latestArticles}
+    />
   </main>
 </Layout>

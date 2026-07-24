@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+  slug: string;
+}
+
+const {
+  title,
+  description,
+  image,
+  category,
+  slug
+} = Astro.props;
+---
+
+<a
+  href={`/knowledge/${slug}`}
+  class="featured-knowledge-card"
+>
+
+  <div class="featured-image">
+
+    <img
+      src={image}
+      alt={title}
+      loading="lazy"
+    />
+
+  </div>
+
+  <div class="featured-content">
+
+    <span class="category">
+      {category}
+    </span>
+
+    <h2>{title}</h2>
+
+    <p>{description}</p>
+
+    <span class="read-more">
+      Read Article →
+    </span>
+
+  </div>
+
+</a>

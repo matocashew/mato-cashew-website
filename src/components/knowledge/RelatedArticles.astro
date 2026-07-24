@@ -1,0 +1,32 @@
+---
+import type { Knowledge } from "@models/Knowledge";
+import KnowledgeArticleCard from "./KnowledgeArticleCard.astro";
+
+interface Props {
+  articles: Knowledge[];
+}
+
+const { articles } = Astro.props as Props;
+---
+
+{
+  articles.length > 0 && (
+    <section class="related-articles">
+
+      <h2>Related Articles</h2>
+
+      <div class="related-articles-grid">
+
+        {
+          articles.map((article) => (
+            <KnowledgeArticleCard
+              article={article}
+            />
+          ))
+        }
+
+      </div>
+
+    </section>
+  )
+}

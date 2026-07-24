@@ -1,0 +1,62 @@
+.related-articles {
+
+  margin-top: 5rem;
+
+}
+
+.related-articles h2 {
+
+  margin-bottom: 2rem;
+
+  font-size: 2rem;
+
+  font-weight: 800;
+
+}
+
+.related-articles-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(320px, 1fr)
+  );
+
+  gap: 2rem;
+
+  align-items: stretch;
+
+}
+
+/* Desktop */
+
+@media (min-width: 900px) {
+
+  .related-articles-grid {
+
+    grid-template-columns: repeat(2, 1fr);
+
+  }
+
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+  .related-articles {
+
+    margin-top: 4rem;
+
+  }
+
+  .related-articles-grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 1.5rem;
+
+  }
+
+}
