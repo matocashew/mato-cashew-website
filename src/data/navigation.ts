@@ -1,4 +1,4 @@
-export const NAVIGATION = [
+export const navigation = [
 
   {
     label: "Home",
@@ -36,3 +36,5 @@ export const NAVIGATION = [
   }
 
 ];
+
+export default navigation;
