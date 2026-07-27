@@ -1,0 +1,47 @@
+---
+interface Props {
+  topics: {
+    title: string;
+    href?: string;
+  }[];
+}
+
+const { topics } = Astro.props;
+---
+
+{
+  topics.length > 0 && (
+
+    <section class="related-topics">
+
+      <h2>Related Topics</h2>
+
+      <div class="topics-list">
+
+        {
+          topics.map(topic => (
+
+            topic.href
+              ? (
+                <a
+                  href={topic.href}
+                  class="topic-chip"
+                >
+                  {topic.title}
+                </a>
+              )
+              : (
+                <span class="topic-chip">
+                  {topic.title}
+                </span>
+              )
+
+          ))
+        }
+
+      </div>
+
+    </section>
+
+  )
+}

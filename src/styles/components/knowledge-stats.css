@@ -1,0 +1,53 @@
+.knowledge-stats {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 1rem;
+
+  margin: 2.5rem 0 3rem;
+
+}
+
+.stat {
+
+  background: var(--knowledge-surface);
+
+  border: 1px solid var(--knowledge-border);
+
+  border-radius: var(--knowledge-radius);
+
+  padding: 1.5rem;
+
+  text-align: center;
+
+  box-shadow: var(--knowledge-shadow);
+
+}
+
+.stat strong {
+
+  display: block;
+
+  font-size: 2rem;
+
+  color: var(--primary);
+
+}
+
+.stat span {
+
+  color: var(--text-light);
+
+}
+
+@media (max-width: 768px) {
+
+  .knowledge-stats {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}

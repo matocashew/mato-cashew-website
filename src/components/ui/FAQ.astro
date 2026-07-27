@@ -5,34 +5,22 @@ interface FAQItem {
 }
 
 interface Props {
-  items: FAQItem[];
+  questions: FAQItem[];
 }
 
-const { items } = Astro.props;
+const { questions } = Astro.props;
 ---
 
 <section class="faq">
-
   {
-    items.map((item) => (
-
+    questions.map((item) => (
       <details class="faq-item">
-
-        <summary>
-
-          {item.question}
-
-        </summary>
+        <summary>{item.question}</summary>
 
         <div class="faq-answer">
-
           <p>{item.answer}</p>
-
         </div>
-
       </details>
-
     ))
   }
-
 </section>

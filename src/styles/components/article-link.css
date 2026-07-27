@@ -1,0 +1,23 @@
+.article-link {
+
+  color: var(--primary);
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  border-bottom: 1px solid transparent;
+
+  transition:
+    color .2s ease,
+    border-color .2s ease;
+
+}
+
+.article-link:hover {
+
+  color: var(--primary-light);
+
+  border-color: currentColor;
+
+}

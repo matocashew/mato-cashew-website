@@ -1,0 +1,35 @@
+.external-link {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: .25rem;
+
+  color: var(--primary);
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  border-bottom: 1px solid transparent;
+
+  transition:
+    color .2s ease,
+    border-color .2s ease;
+
+}
+
+.external-link:hover {
+
+  color: var(--primary-light);
+
+  border-color: currentColor;
+
+}
+
+.external-link span {
+
+  font-size: .8rem;
+
+}

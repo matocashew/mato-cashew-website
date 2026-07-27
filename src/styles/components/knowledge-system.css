@@ -1,0 +1,28 @@
+/* ==========================================
+   Knowledge Design System
+========================================== */
+
+:root {
+
+  /* Knowledge Colors */
+
+  --knowledge-primary: var(--primary);
+  --knowledge-surface: #ffffff;
+  --knowledge-border: #E5E7EB;
+  --knowledge-muted: #6B7280;
+
+  /* Knowledge Radius */
+
+  --knowledge-radius: 16px;
+
+  /* Knowledge Shadow */
+
+  --knowledge-shadow:
+
+    0 8px 24px rgba(0,0,0,.06);
+
+  --knowledge-shadow-hover:
+
+    0 18px 42px rgba(0,0,0,.12);
+
+}

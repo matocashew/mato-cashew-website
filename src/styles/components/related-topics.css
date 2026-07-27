@@ -1,0 +1,53 @@
+.related-topics {
+
+  margin-top: 4rem;
+
+}
+
+.related-topics h2 {
+
+  margin-bottom: 1.25rem;
+
+}
+
+.topics-list {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: .75rem;
+
+}
+
+.topic-chip {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: .6rem 1rem;
+
+  border-radius: 999px;
+
+  background: #eef6ef;
+
+  color: var(--primary);
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    background .2s ease,
+    transform .2s ease;
+
+}
+
+.topic-chip:hover {
+
+  background: #dcefdc;
+
+  transform: translateY(-2px);
+
+}

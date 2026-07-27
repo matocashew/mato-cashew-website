@@ -128,11 +128,13 @@
 
   .knowledge-toc {
 
-    position: static;
+    position: sticky;
 
-    width: 100%;
+    top: 2rem;
 
-    margin-bottom: 2rem;
+    max-height: calc(100vh - 120px);
+
+    overflow-y: auto;
 
   }
 
@@ -229,5 +231,27 @@
     display: none;
 
   }
+
+}
+
+.knowledge-toc {
+
+  max-height: calc(100vh - 120px);
+
+  overflow-y: auto;
+
+}
+
+.knowledge-toc::-webkit-scrollbar {
+
+  width: 6px;
+
+}
+
+.knowledge-toc::-webkit-scrollbar-thumb {
+
+  background: #cfd8dc;
+
+  border-radius: 999px;
 
 }

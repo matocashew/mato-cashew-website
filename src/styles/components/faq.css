@@ -67,3 +67,17 @@
   line-height: 1.8;
 
 }
+
+.faq-item {
+
+  overflow: hidden;
+
+  transition: all .25s ease;
+
+}
+
+.faq-answer {
+
+  padding-top: .75rem;
+
+}

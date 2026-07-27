@@ -1,19 +1,18 @@
 ---
 import Layout from "@layouts/Layout.astro";
-
 import KnowledgeGrid from "@components/knowledge/KnowledgeGrid.astro";
-
 import FeaturedKnowledgeCard from "@components/knowledge/FeaturedKnowledgeCard.astro";
-
-import "@styles/components/featured-knowledge-card.css";
-
 import { knowledgeService } from "@services/knowledgeService";
-
 import KnowledgeIndexHero from "@components/knowledge/KnowledgeIndexHero.astro";
+import KnowledgeCategories from "@components/knowledge/KnowledgeCategories.astro";
+import KnowledgeStats from "@components/knowledge/KnowledgeStats.astro";
 
+import "@styles/components/knowledge-stats.css";
+import "@styles/components/featured-knowledge-card.css";
+import "@styles/components/knowledge-categories.css";
 import "@styles/components/knowledge-index-hero.css";
-
 import "@styles/components/knowledge-article-card.css";
+import "@styles/components/knowledge-system.css";
 
 const articles = await knowledgeService.getAll();
 
@@ -22,6 +21,24 @@ const featuredArticle =
 
 const latestArticles =
   articles.filter(article => !article.featured);
+
+const totalArticles = articles.length;
+
+const totalCategories =
+  new Set(
+    articles.map(article => article.category)
+  ).size;
+
+const totalTags =
+  new Set(
+    articles.flatMap(article => article.tags)
+  ).size;
+
+const categories = [
+  ...new Set(
+    articles.map(article => article.category)
+  )
+];
 ---
 
 <Layout
@@ -30,6 +47,15 @@ const latestArticles =
 >
   <main class="container">
     <KnowledgeIndexHero />
+    <KnowledgeStats
+      articles={totalArticles}
+      categories={totalCategories}
+      tags={totalTags}
+    />
+    <KnowledgeCategories
+      categories={categories}
+    />
+
     <h2 class="section-title">
       Featured Article
     </h2>
