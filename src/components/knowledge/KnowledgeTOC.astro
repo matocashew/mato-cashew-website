@@ -15,9 +15,16 @@ const { headings } = Astro.props;
 {
   headings.length > 0 && (
 
-    <aside class="knowledge-toc">
+    <details
+      class="knowledge-toc"
+      open
+    >
 
-      <h3>Contents</h3>
+      <summary>
+
+        <span>📑 Contents</span>
+
+      </summary>
 
       <ul>
 
@@ -26,7 +33,10 @@ const { headings } = Astro.props;
 
             <li class={`toc-item depth-${heading.depth}`}>
 
-              <a href={`#${heading.slug}`}>
+              <a
+                href={`#${heading.slug}`}
+                data-toc-link={heading.slug}
+              >
 
                 {heading.text}
 
@@ -39,7 +49,91 @@ const { headings } = Astro.props;
 
       </ul>
 
-    </aside>
+    </details>
 
   )
 }
+
+<script>
+document.addEventListener("astro:page-load", () => {
+
+  const links = document.querySelectorAll("[data-toc-link]");
+
+  // Smooth scroll
+  links.forEach((link) => {
+
+    link.addEventListener("click", (event) => {
+
+      event.preventDefault();
+
+      const id = link.getAttribute("data-toc-link");
+
+      if (!id) return;
+
+      const target = document.getElementById(id);
+
+      if (!target) return;
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+    });
+
+  });
+
+  // Active section highlight
+  const headings = [...links]
+    .map(link => {
+
+      const id = link.getAttribute("data-toc-link");
+
+      return id
+        ? document.getElementById(id)
+        : null;
+
+    })
+    .filter(
+      (heading): heading is HTMLElement =>
+        heading !== null
+    );
+
+  const observer = new IntersectionObserver(
+
+    (entries) => {
+
+      entries.forEach((entry) => {
+
+        if (!entry.isIntersecting) return;
+
+        const id = entry.target.id;
+
+        links.forEach(link => {
+
+          link.classList.toggle(
+            "active",
+            link.getAttribute("data-toc-link") === id
+          );
+
+        });
+
+      });
+
+    },
+
+    {
+      rootMargin: "-15% 0px -70% 0px",
+      threshold: 0,
+    }
+
+  );
+
+  headings.forEach((heading) => {
+
+    observer.observe(heading);
+
+  });
+
+});
+</script>

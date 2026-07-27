@@ -23,14 +23,13 @@
     "test:report": "node scripts/test-report.js",
     "test:tree": "node scripts/tests/test-tree.js",
     "test:content": "node scripts/tests/test-content.js",
-    "test:markdown":"node scripts/tests/test-markdown.js",
-    "test:content": "node scripts/tests/test-content.js",
-    "audit:content": "node scripts/content-audit.js",
+    "test:markdown": "node scripts/tests/test-markdown.js",
     "test:audit": "node scripts/tests/test-audit-result.js"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
     "@astrojs/cloudflare": "^14.1.2",
+    "@astrojs/mdx": "^7.0.3",
     "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/vite": "^4.3.2",
     "aos": "^2.3.4",

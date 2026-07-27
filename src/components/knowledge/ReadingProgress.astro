@@ -1,0 +1,96 @@
+<div
+  id="reading-progress"
+  class="reading-progress"
+></div>
+
+<script>
+
+  const progress =
+    document.getElementById("reading-progress");
+
+  const article =
+    document.getElementById("knowledge-content");
+
+  if (progress && article) {
+
+    const updateProgress = () => {
+
+      const articleTop =
+        article.offsetTop;
+
+      const articleHeight =
+        article.offsetHeight;
+
+      const viewport =
+        window.innerHeight;
+
+      const scroll =
+        window.scrollY;
+
+      const total =
+        Math.max(
+          articleHeight - viewport,
+          1
+        );
+
+      const current =
+        scroll - articleTop;
+
+      let percent =
+        (current / total) * 100;
+
+      percent =
+        Math.max(
+          0,
+          Math.min(100, percent)
+        );
+
+      progress.style.width =
+        `${percent}%`;
+
+    };
+
+    window.addEventListener(
+      "scroll",
+      updateProgress,
+      { passive: true }
+    );
+
+    window.addEventListener(
+      "resize",
+      updateProgress
+    );
+
+    updateProgress();
+
+  }
+
+</script>
+
+<style>
+
+.reading-progress {
+
+  position: fixed;
+
+  top: 0;
+
+  left: 0;
+
+  width: 0;
+
+  height: 4px;
+
+  background: linear-gradient(
+    90deg,
+    #2E7D32,
+    #66BB6A
+  );
+
+  z-index: 9999;
+
+  transition: width .08s linear;
+
+}
+
+</style>
