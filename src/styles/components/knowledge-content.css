@@ -79,7 +79,11 @@
 
   position: sticky;
 
-  top: 2rem;
+  top: 90px;
+
+  align-self: start;
+
+  height: fit-content;
 
 }
 

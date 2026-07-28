@@ -16,6 +16,10 @@
 
   box-shadow: 0 4px 16px rgba(0, 0, 0, .05);
 
+  max-height: calc(100vh - 120px);
+
+  overflow-y: auto;
+
 }
 
 .knowledge-toc h3 {
@@ -135,5 +139,19 @@
     margin-bottom: 2rem;
 
   }
+
+}
+
+.knowledge-toc::-webkit-scrollbar {
+
+  width: 6px;
+
+}
+
+.knowledge-toc::-webkit-scrollbar-thumb {
+
+  background: #cfd8dc;
+
+  border-radius: 999px;
 
 }
