@@ -1,0 +1,59 @@
+.comparison-table-wrapper {
+
+  overflow-x: auto;
+
+  margin: 2rem 0;
+
+  border: 1px solid var(--border);
+
+  border-radius: 12px;
+
+  background: var(--surface);
+
+}
+
+.comparison-table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  min-width: 700px;
+
+}
+
+.comparison-table th {
+
+  background: var(--primary);
+
+  color: white;
+
+  padding: 1rem;
+
+  text-align: left;
+
+  font-weight: 700;
+
+}
+
+.comparison-table td {
+
+  padding: 1rem;
+
+  border-top: 1px solid var(--border);
+
+  vertical-align: top;
+
+}
+
+.comparison-table tbody tr:nth-child(even) {
+
+  background: #FAFAFA;
+
+}
+
+.comparison-table tbody tr:hover {
+
+  background: #F2F8F3;
+
+}

@@ -90,11 +90,13 @@
 
 .card-content p {
 
-  margin: 1rem 0;
+  margin: .5rem 0 1rem;
 
   color: #666;
 
-  line-height: 1.6;
+  line-height: 1.7;
+
+  flex: 1;
 
 }
 
@@ -106,7 +108,13 @@
 
   align-items: center;
 
-  margin-top: 1.5rem;
+  width: 100%;
+
+  margin-top: auto;
+
+  padding-top: 1.5rem;
+
+  gap: 1rem;
 
   font-size: .95rem;
 
@@ -114,20 +122,22 @@
 
 .read-more {
 
+  display: inline-flex;
+
+  align-items: center;
+
   color: #2E7D32;
 
   font-weight: 700;
+
+  white-space: nowrap;
+
+  transition: transform .2s ease;
 
 }
 
 .knowledge-article-card:hover .read-more {
 
   transform: translateX(4px);
-
-}
-
-.card-footer {
-
-  margin-top: auto;
 
 }

@@ -1,0 +1,37 @@
+---
+interface Props {
+  articles: number;
+  categories: number;
+  tags: number;
+}
+
+const { articles, categories, tags } = Astro.props;
+---
+
+<section class="knowledge-stats">
+
+  <div class="stat">
+
+    <strong>{articles}</strong>
+
+    <span>Articles</span>
+
+  </div>
+
+  <div class="stat">
+
+    <strong>{categories}</strong>
+
+    <span>Categories</span>
+
+  </div>
+
+  <div class="stat">
+
+    <strong>{tags}</strong>
+
+    <span>Tags</span>
+
+  </div>
+
+</section>
