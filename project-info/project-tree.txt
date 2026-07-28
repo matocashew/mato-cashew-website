@@ -1,5 +1,5 @@
 Folder PATH listing for volume DATA
-Volume serial number is 44D9-7808
+Volume serial number is 000001C0 EED2:A12A
 D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   content.config.ts
 ¦   
@@ -38,6 +38,22 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   ¦       FormSelect.astro
 ¦   ¦       FormTextarea.astro
 ¦   ¦       
+¦   +---knowledge
+¦   ¦       FeaturedKnowledgeCard.astro
+¦   ¦       KnowledgeArticleCard.astro
+¦   ¦       KnowledgeCard.astro
+¦   ¦       KnowledgeCategories.astro
+¦   ¦       KnowledgeGrid.astro
+¦   ¦       KnowledgeHero.astro
+¦   ¦       KnowledgeIndexHero.astro
+¦   ¦       KnowledgeMeta.astro
+¦   ¦       KnowledgeNavigation.astro
+¦   ¦       KnowledgeStats.astro
+¦   ¦       KnowledgeTOC.astro
+¦   ¦       ReadingProgress.astro
+¦   ¦       RelatedArticles.astro
+¦   ¦       RelatedTopics.astro
+¦   ¦       
 ¦   +---pages
 ¦   ¦       AboutPage.astro
 ¦   ¦       ContactPage.astro
@@ -66,16 +82,31 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   ¦       ResourceMeta.astro
 ¦   ¦       
 ¦   +---seo
-¦           ArticleSchema.astro
-¦           BreadcrumbSchema.astro
-¦           CollectionPageSchema.astro
-¦           HreflangLinks.astro
-¦           OrganizationSchema.astro
-¦           ProductCardSchema.astro
-¦           ProductPageSchema.astro
-¦           ResourcePageSchema.astro
-¦           WebPageSchema.astro
-¦           WebsiteSchema.astro
+¦   ¦       ArticleSchema.astro
+¦   ¦       BreadcrumbSchema.astro
+¦   ¦       CollectionPageSchema.astro
+¦   ¦       HreflangLinks.astro
+¦   ¦       OrganizationSchema.astro
+¦   ¦       ProductCardSchema.astro
+¦   ¦       ProductPageSchema.astro
+¦   ¦       ResourcePageSchema.astro
+¦   ¦       WebPageSchema.astro
+¦   ¦       WebsiteSchema.astro
+¦   ¦       
+¦   +---ui
+¦           ArticleLink.astro
+¦           Badge.astro
+¦           Card.astro
+¦           ComparisonTable.astro
+¦           Container.astro
+¦           ExternalLink.astro
+¦           FAQ.astro
+¦           FaqItem.astro
+¦           Grid.astro
+¦           InfoBox.astro
+¦           SectionTitle.astro
+¦           Tag.astro
+¦           TagGroup.astro
 ¦           
 +---config
 ¦       analytics.ts
@@ -89,13 +120,28 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦       types.ts
 ¦       
 +---content
+¦   +---knowledge
+¦   ¦       cashew-grading-standards.md
+¦   ¦       cashew-processing-guide.md
+¦   ¦       cashew-tree.mdx
+¦   ¦       what-is-cashew.mdx
+¦   ¦       
 ¦   +---products
 ¦   ¦       premium-cashew-100g.md
 ¦   ¦       premium-cashew-250g.md
 ¦   ¦       premium-cashew-500g.md
 ¦   ¦       
 ¦   +---resources
-¦           why-cambodian-cashews.md
+¦   ¦       why-cambodian-cashews.md
+¦   ¦       
+¦   +---schemas
+¦           article.ts
+¦           baseContent.ts
+¦           download.ts
+¦           faq.ts
+¦           guide.ts
+¦           knowledge.ts
+¦           recipe.ts
 ¦           
 +---data
 ¦       certifications.ts
@@ -106,6 +152,7 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦       products.ts
 ¦       social.ts
 ¦       
++---design
 +---i18n
 ¦       config.ts
 ¦       en.ts
@@ -123,7 +170,6 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦       Layout.astro
 ¦       PageLayout.astro
 ¦       
-+---lib
 +---pages
 ¦   ¦   404.astro
 ¦   ¦   about.astro
@@ -148,6 +194,10 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   ¦           index.astro
 ¦   ¦           [...slug].astro
 ¦   ¦           
+¦   +---knowledge
+¦   ¦       index.astro
+¦   ¦       [slug].astro
+¦   ¦       
 ¦   +---products
 ¦   ¦       [...slug].astro
 ¦   ¦       
@@ -162,41 +212,67 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦       language-switcher.ts
 ¦       
 +---services
+¦       knowledgeService.ts
 ¦       navigationService.ts
-¦       product.service.ts
+¦       productService.ts
 ¦       resourceService.ts
 ¦       
 +---styles
-¦       about-page.css
-¦       about.css
-¦       article.css
-¦       contact-form.css
-¦       contact.css
-¦       featured-resources.css
-¦       footer.css
-¦       gallery.css
-¦       global.css
-¦       header.css
-¦       hero.css
-¦       page.css
-¦       product-detail.css
-¦       product-specifications.css
-¦       products-page.css
-¦       products.css
-¦       related-articles.css
-¦       related-products.css
-¦       resource-detail.css
-¦       resources.css
-¦       section-title.css
-¦       wholesale.css
-¦       
+¦   ¦   about-page.css
+¦   ¦   about.css
+¦   ¦   article.css
+¦   ¦   contact-form.css
+¦   ¦   contact.css
+¦   ¦   featured-resources.css
+¦   ¦   footer.css
+¦   ¦   gallery.css
+¦   ¦   global.css
+¦   ¦   header.css
+¦   ¦   hero.css
+¦   ¦   knowledge-hero.css
+¦   ¦   page.css
+¦   ¦   product-detail.css
+¦   ¦   product-specifications.css
+¦   ¦   products-page.css
+¦   ¦   products.css
+¦   ¦   related-articles.css
+¦   ¦   related-products.css
+¦   ¦   resource-detail.css
+¦   ¦   resources.css
+¦   ¦   section-title.css
+¦   ¦   wholesale.css
+¦   ¦   
+¦   +---components
+¦           article-link.css
+¦           comparison-table.css
+¦           external-link.css
+¦           faq.css
+¦           featured-knowledge-card.css
+¦           info-box.css
+¦           knowledge-article-card.css
+¦           knowledge-card.css
+¦           knowledge-categories.css
+¦           knowledge-content.css
+¦           knowledge-grid.css
+¦           knowledge-index-hero.css
+¦           knowledge-stats.css
+¦           knowledge-system.css
+¦           knowledge-toc.css
+¦           related-articles.css
+¦           related-topics.css
+¦           
 +---types
-¦       navigation.ts
-¦       Product.ts
-¦       ProductImage.ts
-¦       ProductPackaging.ts
-¦       ProductSEO.ts
-¦       ProductSpecification.ts
-¦       ProductTranslation.ts
-¦       
-+---utils
+        BaseContent.ts
+        Download.ts
+        FAQ.ts
+        Guide.ts
+        Knowledge.ts
+        navigation.ts
+        Product.ts
+        ProductImage.ts
+        ProductPackaging.ts
+        ProductSEO.ts
+        ProductSpecification.ts
+        ProductTranslation.ts
+        Recipe.ts
+        

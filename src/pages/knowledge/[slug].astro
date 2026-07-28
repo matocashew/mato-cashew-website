@@ -172,3 +172,19 @@ const next =
   </main>
 
 </Layout>
+
+</Layout>
+
+<script is:inline>
+document.addEventListener("DOMContentLoaded", () => {
+
+  console.log("Knowledge Page Loaded");
+
+  const links = Array.from(
+    document.querySelectorAll("[data-toc-link]")
+  );
+
+  console.log("TOC Links:", links.length);
+
+});
+</script>

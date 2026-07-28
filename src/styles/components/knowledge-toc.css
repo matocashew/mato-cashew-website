@@ -12,7 +12,11 @@
   position: sticky;
   top: 90px;
 
-  width: 240px;
+  align-self: start;
+
+  width: 100%;
+
+  max-width: 260px;
 
   padding: 1.5rem;
 
@@ -140,13 +144,17 @@
     transform .2s ease,
     font-weight .2s ease;
 
+  border-left: 3px solid transparent;
+
 }
 
 .toc-item a:hover {
 
   color: #2E7D32;
 
-  transform: translateX(4px);
+  background: rgba(46,125,50,.04);
+
+  border-radius: 6px;
 
 }
 
@@ -233,6 +241,22 @@
     margin-bottom: 2rem;
 
   }
+
+  .knowledge-toc a.active {
+
+  color: #2E7D32;
+
+  font-weight: 700;
+
+  border-left-color: #2E7D32;
+
+  padding-left: .75rem;
+
+  background: rgba(46,125,50,.06);
+
+  border-radius: 6px;
+
+}
 
   .knowledge-toc summary {
 

@@ -65,7 +65,7 @@
 
   display: grid;
 
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 260px minmax(0, 1fr);
 
   gap: 3rem;
 
@@ -77,13 +77,29 @@
 
 .knowledge-layout aside {
 
-  position: sticky;
-
-  top: 90px;
-
   align-self: start;
 
-  height: fit-content;
+  min-width: 0;
+
+}
+
+.knowledge-content {
+
+  min-width: 0;
+
+  max-width: 100%;
+
+}
+
+@media (max-width: 1024px) {
+
+  .knowledge-layout {
+
+    grid-template-columns: 220px minmax(0, 1fr);
+
+    gap: 2rem;
+
+  }
 
 }
 
@@ -92,12 +108,6 @@
   .knowledge-layout {
 
     grid-template-columns: 1fr;
-
-  }
-
-  .knowledge-layout aside {
-
-    position: static;
 
   }
 
