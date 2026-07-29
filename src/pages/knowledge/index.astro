@@ -90,79 +90,150 @@ const categories = [
 <script is:inline>
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("knowledge-search");
+  const categoryButtons = document.querySelectorAll(".category-chip");
   const clearButton = document.getElementById("knowledge-search-clear");
+  let selectedCategory = "all";
+  let selectedTag = "";
 
   if (!(input instanceof HTMLInputElement)) return;
 
   const cards = document.querySelectorAll(".knowledge-article-card");
+  const tagElements = document.querySelectorAll<HTMLElement>(".card-tag");
   const noResults = document.getElementById("knowledge-no-results");
+  const noResultsMessage = document.getElementById("knowledge-no-results-message");
+  const clearFiltersButton = document.getElementById("knowledge-clear-filters");
   const resultCounter = document.getElementById("knowledge-search-result-count");
   const featuredSection = document.getElementById("featured-article-section");
   const featuredCard = document.querySelector(".featured-knowledge-card");
 
-  input.addEventListener("input", () => {
-    const keyword = input.value.trim().toLowerCase();
-    if (clearButton instanceof HTMLButtonElement) {
-      clearButton.hidden = keyword === "";
-    }
+function updateResultCounter(
+  visibleCount,
+  totalArticles,
+  keyword
+) {
+  if (!(resultCounter instanceof HTMLElement)) return;
 
-    let visibleCount = 0;
+  if (visibleCount === 0) {
+    resultCounter.textContent = "No matching articles";
+  } else if (
+    keyword === "" &&
+    selectedCategory === "all"
+  ) {
+    resultCounter.textContent =
+      `Showing all ${totalArticles} articles`;
+  } else {
+    resultCounter.textContent =
+      `Showing ${visibleCount} of ${totalArticles} articles`;
+  }
+}
 
-    cards.forEach((card) => {
-      if (!(card instanceof HTMLElement)) return;
+function updateNoResults(visibleCount) {
+  if (!(noResults instanceof HTMLElement)) return;
 
-      const searchableText = [
-        card.dataset.title ?? "",
-        card.dataset.description ?? "",
-        card.dataset.category ?? "",
-        card.dataset.tags ?? "",
-      ].join(" ");
+  noResults.hidden = visibleCount !== 0;
+}
 
-      const matched = searchableText.includes(keyword);
+function updateNoResultsMessage(keyword) {
+  if (!(noResultsMessage instanceof HTMLElement)) return;
 
-      card.style.display = matched ? "" : "none";
+  if (keyword === "") {
+    noResultsMessage.textContent =
+      "Try another search term or choose a different category.";
+    return;
+  }
 
-      if (matched) {
-        visibleCount++;
-      }
-    });
+  if (selectedCategory === "all") {
+    noResultsMessage.textContent =
+      `No articles match "${keyword}". Try a different keyword.`;
+  } else {
+    noResultsMessage.textContent =
+      `No articles match "${keyword}" in the ${selectedCategory} category.`;
+  }
+}
 
-    if (noResults instanceof HTMLElement) {
-          noResults.hidden = visibleCount !== 0;
-        }
-        if (resultCounter instanceof HTMLElement) {
-      const totalArticles = cards.length;
+function updateFeaturedArticle(keyword) {
+  if (
+    !(featuredSection instanceof HTMLElement) ||
+    !(featuredCard instanceof HTMLElement)
+  ) {
+    return;
+  }
 
-      if (keyword === "") {
-        resultCounter.textContent =
-          `Showing all ${totalArticles} articles`;
-      } else if (visibleCount === 0) {
-        resultCounter.textContent =
-          "No matching articles";
-      } else {
-        resultCounter.textContent =
-          `Showing ${visibleCount} of ${totalArticles} articles`;
-      }
-    }
-    if (
-      featuredSection instanceof HTMLElement &&
-      featuredCard instanceof HTMLElement
-    ) {
-      if (keyword === "") {
-        featuredSection.hidden = false;
-      } else {
-        const featuredText = [
-          featuredCard.dataset.title ?? "",
-          featuredCard.dataset.description ?? "",
-          featuredCard.dataset.category ?? "",
-        ].join(" ");
+  const featuredText = [
+    featuredCard.dataset.title ?? "",
+    featuredCard.dataset.description ?? "",
+    featuredCard.dataset.category ?? "",
+  ].join(" ");
 
-        const featuredMatches = featuredText.includes(keyword);
+  const featuredMatchesKeyword =
+    keyword === "" || featuredText.includes(keyword);
 
-        featuredSection.hidden = !featuredMatches;
-      }
+  const featuredMatchesCategory =
+    selectedCategory === "all" ||
+    (featuredCard.dataset.category ?? "") === selectedCategory;
+
+  featuredSection.hidden =
+    !(featuredMatchesKeyword && featuredMatchesCategory);
+}
+
+function matchesFilters(card, keyword) {
+  if (!(card instanceof HTMLElement)) return false;
+
+  const searchableText = [
+    card.dataset.title ?? "",
+    card.dataset.description ?? "",
+    card.dataset.category ?? "",
+    card.dataset.tags ?? "",
+  ].join(" ");
+
+  const matchesKeyword =
+    keyword === "" || searchableText.includes(keyword);
+
+  const matchesCategory =
+    selectedCategory === "all" ||
+    (card.dataset.category ?? "") === selectedCategory;
+
+  return matchesKeyword && matchesCategory;
+}
+
+function filterArticles() {
+  const keyword = input.value.trim().toLowerCase();
+
+  if (clearButton instanceof HTMLButtonElement) {
+    clearButton.hidden = keyword === "";
+  }
+
+  let visibleCount = 0;
+
+  cards.forEach((card) => {
+    if (!(card instanceof HTMLElement)) return;
+
+    const matched = matchesFilters(card, keyword);
+
+    card.style.display = matched ? "" : "none";
+
+    if (matched) {
+      visibleCount++;
     }
   });
+
+updateNoResults(visibleCount);
+
+updateNoResultsMessage(keyword);
+
+updateResultCounter(
+  visibleCount,
+  cards.length,
+  keyword
+);
+
+updateFeaturedArticle(keyword);
+
+}
+input.addEventListener("input", () => {
+  filterArticles();
+});
+
   if (
     input instanceof HTMLInputElement &&
     clearButton instanceof HTMLButtonElement
@@ -170,6 +241,68 @@ document.addEventListener("DOMContentLoaded", () => {
     clearButton.addEventListener("click", () => {
       input.value = "";
       input.dispatchEvent(new Event("input"));
+      input.focus();
+    });
+  }
+  if (categoryButtons.length > 0) {
+    categoryButtons.forEach((button) => {
+      tagElements.forEach((tag) => {
+        tag.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          const clickedTag = tag.dataset.tag ?? "";
+
+          selectedTag =
+            selectedTag === clickedTag ? "" : clickedTag;
+
+          filterArticles();
+        });
+      });
+      if (!(button instanceof HTMLButtonElement)) return;
+
+      button.addEventListener("click", () => {
+        console.log("Category clicked:", button.dataset.category);
+
+        selectedCategory = button.dataset.category ?? "all";
+
+        categoryButtons.forEach((chip) => {
+          if (!(chip instanceof HTMLButtonElement)) return;
+
+          const isActive = chip === button;
+
+          chip.classList.toggle("active", isActive);
+          chip.setAttribute(
+            "aria-pressed",
+            isActive ? "true" : "false"
+          );
+        });
+
+        input.dispatchEvent(new Event("input"));
+      });
+    });
+  }
+  if (clearFiltersButton instanceof HTMLButtonElement) {
+    clearFiltersButton.addEventListener("click", () => {
+      input.value = "";
+
+      selectedCategory = "all";
+
+      categoryButtons.forEach((button) => {
+        if (!(button instanceof HTMLButtonElement)) return;
+
+        const isActive =
+          button.dataset.category === "all";
+
+        button.classList.toggle("active", isActive);
+        button.setAttribute(
+          "aria-pressed",
+          String(isActive)
+        );
+      });
+
+      filterArticles();
+
       input.focus();
     });
   }

@@ -141,3 +141,32 @@
   transform: translateX(4px);
 
 }
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.card-tag {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 0.25rem 0.6rem;
+
+  border-radius: 999px;
+
+  background: var(--color-surface-secondary, #f3f4f6);
+  color: var(--color-text-secondary, #4b5563);
+
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.card-tag:hover {
+  background: var(--color-primary, #166534);
+  color: #fff;
+}

@@ -32,6 +32,21 @@ const { article } = Astro.props as Props;
 
     <p>{article.description}</p>
 
+    {
+      article.tags.length > 0 && (
+        <div class="card-tags">
+          {article.tags.slice(0, 3).map((tag) => (
+            <span
+              class="card-tag"
+              data-tag={tag.toLowerCase()}
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )
+    }
+
     <div class="card-footer">
 
       <span>

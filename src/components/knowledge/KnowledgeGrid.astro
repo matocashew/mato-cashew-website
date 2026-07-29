@@ -31,12 +31,24 @@ const { articles } = Astro.props as Props;
 
     )
   }
-  <p
+  <div
     id="knowledge-no-results"
     class="knowledge-no-results"
     hidden
   >
-    No matching articles found.
-  </p>
+    <h3>No matching articles</h3>
+
+    <p id="knowledge-no-results-message">
+      Try another search term or choose a different category.
+    </p>
+
+    <button
+      id="knowledge-clear-filters"
+      class="knowledge-clear-filters"
+      type="button"
+    >
+      Clear search
+    </button>
+  </div>
 
 </section>

@@ -45,3 +45,28 @@
   line-height: 1.7;
 
 }
+.knowledge-no-results h3 {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+  color: #111827;
+}
+
+.knowledge-no-results p {
+  margin-bottom: 1.5rem;
+  color: #6b7280;
+}
+
+.knowledge-clear-filters {
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 9999px;
+  background: #166534;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.knowledge-clear-filters:hover {
+  background: #14532d;
+}
