@@ -1,0 +1,23 @@
+---
+import KnowledgeSearch from "./KnowledgeSearch.astro";
+
+interface Props {
+  totalArticles: number;
+}
+
+const { totalArticles } = Astro.props;
+---
+
+<div class="knowledge-toolbar">
+
+  <KnowledgeSearch />
+
+  <p
+    id="knowledge-search-result-count"
+    class="knowledge-search-result-count"
+    aria-live="polite"
+  >
+    Showing all {totalArticles} articles
+  </p>
+
+</div>

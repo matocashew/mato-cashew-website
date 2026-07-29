@@ -6,6 +6,7 @@ import { knowledgeService } from "@services/knowledgeService";
 import KnowledgeIndexHero from "@components/knowledge/KnowledgeIndexHero.astro";
 import KnowledgeCategories from "@components/knowledge/KnowledgeCategories.astro";
 import KnowledgeStats from "@components/knowledge/KnowledgeStats.astro";
+import KnowledgeToolbar from "@components/knowledge/KnowledgeToolbar.astro";
 
 import "@styles/components/knowledge-stats.css";
 import "@styles/components/featured-knowledge-card.css";
@@ -47,6 +48,7 @@ const categories = [
 >
   <main class="container">
     <KnowledgeIndexHero />
+    <KnowledgeToolbar totalArticles={latestArticles.length} />
     <KnowledgeStats
       articles={totalArticles}
       categories={totalCategories}
@@ -56,23 +58,27 @@ const categories = [
       categories={categories}
     />
 
-    <h2 class="section-title">
-      Featured Article
-    </h2>
+    <section id="featured-article-section">
 
-    {
-      featuredArticle && (
+      <h2 class="section-title">
+        Featured Article
+      </h2>
 
-        <FeaturedKnowledgeCard
-          title={featuredArticle.title}
-          description={featuredArticle.description}
-          image={featuredArticle.heroImage}
-          category={featuredArticle.category}
-          slug={featuredArticle.slug}
-        />
+      {
+        featuredArticle && (
 
-      )
-    }
+          <FeaturedKnowledgeCard
+            title={featuredArticle.title}
+            description={featuredArticle.description}
+            image={featuredArticle.heroImage}
+            category={featuredArticle.category}
+            slug={featuredArticle.slug}
+          />
+
+        )
+      }
+
+    </section>
 
     <h2>Latest Articles</h2>
 
@@ -81,3 +87,91 @@ const categories = [
     />
   </main>
 </Layout>
+<script is:inline>
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("knowledge-search");
+  const clearButton = document.getElementById("knowledge-search-clear");
+
+  if (!(input instanceof HTMLInputElement)) return;
+
+  const cards = document.querySelectorAll(".knowledge-article-card");
+  const noResults = document.getElementById("knowledge-no-results");
+  const resultCounter = document.getElementById("knowledge-search-result-count");
+  const featuredSection = document.getElementById("featured-article-section");
+  const featuredCard = document.querySelector(".featured-knowledge-card");
+
+  input.addEventListener("input", () => {
+    const keyword = input.value.trim().toLowerCase();
+    if (clearButton instanceof HTMLButtonElement) {
+      clearButton.hidden = keyword === "";
+    }
+
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      if (!(card instanceof HTMLElement)) return;
+
+      const searchableText = [
+        card.dataset.title ?? "",
+        card.dataset.description ?? "",
+        card.dataset.category ?? "",
+        card.dataset.tags ?? "",
+      ].join(" ");
+
+      const matched = searchableText.includes(keyword);
+
+      card.style.display = matched ? "" : "none";
+
+      if (matched) {
+        visibleCount++;
+      }
+    });
+
+    if (noResults instanceof HTMLElement) {
+          noResults.hidden = visibleCount !== 0;
+        }
+        if (resultCounter instanceof HTMLElement) {
+      const totalArticles = cards.length;
+
+      if (keyword === "") {
+        resultCounter.textContent =
+          `Showing all ${totalArticles} articles`;
+      } else if (visibleCount === 0) {
+        resultCounter.textContent =
+          "No matching articles";
+      } else {
+        resultCounter.textContent =
+          `Showing ${visibleCount} of ${totalArticles} articles`;
+      }
+    }
+    if (
+      featuredSection instanceof HTMLElement &&
+      featuredCard instanceof HTMLElement
+    ) {
+      if (keyword === "") {
+        featuredSection.hidden = false;
+      } else {
+        const featuredText = [
+          featuredCard.dataset.title ?? "",
+          featuredCard.dataset.description ?? "",
+          featuredCard.dataset.category ?? "",
+        ].join(" ");
+
+        const featuredMatches = featuredText.includes(keyword);
+
+        featuredSection.hidden = !featuredMatches;
+      }
+    }
+  });
+  if (
+    input instanceof HTMLInputElement &&
+    clearButton instanceof HTMLButtonElement
+  ) {
+    clearButton.addEventListener("click", () => {
+      input.value = "";
+      input.dispatchEvent(new Event("input"));
+      input.focus();
+    });
+  }
+});
+</script>

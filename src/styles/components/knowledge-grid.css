@@ -23,3 +23,25 @@
   }
 
 }
+
+.knowledge-no-results {
+
+  grid-column: 1 / -1;
+
+  padding: 3rem 2rem;
+
+  text-align: center;
+
+  border: 1px dashed #D1D5DB;
+
+  border-radius: 16px;
+
+  background: #FAFAFA;
+
+  color: #6B7280;
+
+  font-size: 1rem;
+
+  line-height: 1.7;
+
+}

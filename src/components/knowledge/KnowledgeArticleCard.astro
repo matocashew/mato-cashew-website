@@ -11,6 +11,10 @@ const { article } = Astro.props as Props;
 <a
   href={`/knowledge/${article.slug}`}
   class="knowledge-article-card"
+  data-title={article.title.toLowerCase()}
+  data-description={article.description.toLowerCase()}
+  data-category={article.category.toLowerCase()}
+  data-tags={article.tags.join(" ").toLowerCase()}
 >
 
   <img

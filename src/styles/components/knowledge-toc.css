@@ -1,306 +1,196 @@
 /* ==========================================================
    Knowledge Table of Contents
-   Mato Cashew Knowledge Center
 ========================================================== */
-
-/* ----------------------------------------
-   Container
------------------------------------------ */
 
 .knowledge-toc {
 
   position: sticky;
   top: 90px;
 
-  align-self: start;
-
   width: 100%;
-
   max-width: 260px;
 
-  padding: 1.5rem;
+  padding: 1.25rem;
 
   background: #FFFFFF;
 
   border: 1px solid #E5E7EB;
   border-radius: 16px;
 
-  box-shadow: 0 4px 16px rgba(0, 0, 0, .05);
+  box-shadow: 0 4px 16px rgba(0,0,0,.05);
 
   max-height: calc(100vh - 120px);
 
   overflow-y: auto;
 
-  scroll-behavior: smooth;
+}
+
+/* ---------- Summary ---------- */
+
+.knowledge-toc summary{
+
+  display:none;
 
 }
 
-/* ----------------------------------------
-   Heading
------------------------------------------ */
+/* ---------- List ---------- */
 
-.knowledge-toc h3 {
+.knowledge-toc ul{
 
-  margin: 0 0 1.25rem;
+  list-style:none;
 
-  font-size: 1.25rem;
+  margin:0;
 
-  font-weight: 700;
-
-  color: #1F2937;
+  padding:0;
 
 }
 
-/* ----------------------------------------
-   List
------------------------------------------ */
+.knowledge-toc li{
 
-.knowledge-toc ul {
-
-  list-style: none;
-
-  margin: 0;
-
-  padding: 0;
+  margin:.25rem 0;
 
 }
 
-.knowledge-toc li {
+/* ---------- Indent ---------- */
 
-  margin-bottom: .6rem;
+.depth-2{
 
-}
-
-/* ----------------------------------------
-   Nested Headings
------------------------------------------ */
-
-.depth-2 {
-
-  margin-left: 0;
+  margin-left:0;
 
 }
 
-.depth-3 {
+.depth-3{
 
-  margin-left: 1rem;
-
-}
-
-.depth-4 {
-
-  margin-left: 2rem;
+  margin-left:14px;
 
 }
 
-/* ----------------------------------------
-   TOC Item
------------------------------------------ */
+.depth-4{
 
-.toc-item {
-
-  display: flex;
-
-  align-items: flex-start;
-
-  gap: .5rem;
+  margin-left:28px;
 
 }
 
-.toc-item::before {
+/* ---------- Link ---------- */
 
-  content: "•";
+.toc-item a{
 
-  color: #2E7D32;
+  display:block;
 
-  font-size: .75rem;
+  padding:.55rem .75rem;
 
-  margin-top: .45rem;
+  border-left:3px solid transparent;
 
-  flex-shrink: 0;
+  border-radius:8px;
 
-}
+  color:#374151;
 
-/* ----------------------------------------
-   Links
------------------------------------------ */
+  text-decoration:none;
 
-.toc-item a {
-
-  display: block;
-
-  width: 100%;
-
-  padding: .2rem 0;
-
-  color: #374151;
-
-  text-decoration: none;
-
-  line-height: 1.6;
+  line-height:1.5;
 
   transition:
-    color .2s ease,
-    transform .2s ease,
-    font-weight .2s ease;
-
-  border-left: 3px solid transparent;
+    background .2s,
+    color .2s,
+    border-color .2s;
 
 }
 
-.toc-item a:hover {
+.toc-item a:hover{
 
-  color: #2E7D32;
+  background:#F3F4F6;
 
-  background: rgba(46,125,50,.04);
-
-  border-radius: 6px;
+  color:#2E7D32;
 
 }
 
-.toc-item a:focus {
+/* ---------- Active ---------- */
 
-  outline: none;
+.toc-item a.active{
 
-  color: #2E7D32;
+  background:#008000 !important;
 
-}
+  color:#ffffff !important;
 
-/* ----------------------------------------
-   Active Heading
------------------------------------------ */
+  font-weight:700;
 
-.toc-item a.active {
-
-  color: #2E7D32;
-
-  font-weight: 700;
+  border-left:6px solid red !important;
 
 }
 
-.toc-item a.active::before {
+/* ---------- Scrollbar ---------- */
 
-  content: "● ";
+.knowledge-toc::-webkit-scrollbar{
 
-  color: #2E7D32;
-
-}
-
-/* ----------------------------------------
-   Scrollbar
------------------------------------------ */
-
-.knowledge-toc::-webkit-scrollbar {
-
-  width: 6px;
+  width:6px;
 
 }
 
-.knowledge-toc::-webkit-scrollbar-track {
+.knowledge-toc::-webkit-scrollbar-thumb{
 
-  background: transparent;
+  background:#CBD5E1;
 
-}
-
-.knowledge-toc::-webkit-scrollbar-thumb {
-
-  background: #CBD5E1;
-
-  border-radius: 999px;
+  border-radius:999px;
 
 }
 
-.knowledge-toc::-webkit-scrollbar-thumb:hover {
+/* ---------- Mobile ---------- */
 
-  background: #94A3B8;
+@media (max-width:900px){
 
-}
+  .knowledge-toc{
 
-/* ----------------------------------------
-   Mobile
------------------------------------------ */
+    position:static;
 
-.knowledge-toc summary {
+    max-width:none;
 
-  display: none;
+    max-height:none;
 
-}
+    overflow:visible;
 
-@media (max-width: 900px) {
-
-  .knowledge-toc {
-
-    position: static;
-
-    width: 100%;
-
-    max-height: none;
-
-    overflow: visible;
-
-    margin-bottom: 2rem;
+    margin-bottom:2rem;
 
   }
 
-  .knowledge-toc a.active {
+  .knowledge-toc summary{
 
-  color: #2E7D32;
+    display:flex;
 
-  font-weight: 700;
+    justify-content:space-between;
 
-  border-left-color: #2E7D32;
+    align-items:center;
 
-  padding-left: .75rem;
+    cursor:pointer;
 
-  background: rgba(46,125,50,.06);
+    font-weight:700;
 
-  border-radius: 6px;
-
-}
-
-  .knowledge-toc summary {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    cursor: pointer;
-
-    font-weight: 700;
-
-    font-size: 1rem;
-
-    list-style: none;
-
-    margin-bottom: 1rem;
+    margin-bottom:1rem;
 
   }
 
-  .knowledge-toc summary::-webkit-details-marker {
+  .knowledge-toc summary::-webkit-details-marker{
 
-    display: none;
-
-  }
-
-  .knowledge-toc summary::after {
-
-    content: "▼";
-
-    transition: transform .25s ease;
+    display:none;
 
   }
 
-  .knowledge-toc[open] summary::after {
+  .knowledge-toc summary::after{
 
-    transform: rotate(180deg);
+    content:"▼";
+
+    transition:.25s;
 
   }
 
-  .knowledge-toc:not([open]) ul {
+  .knowledge-toc[open] summary::after{
 
-    display: none;
+    transform:rotate(180deg);
+
+  }
+
+  .knowledge-toc:not([open]) ul{
+
+    display:none;
 
   }
 
