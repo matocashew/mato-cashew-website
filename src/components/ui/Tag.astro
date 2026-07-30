@@ -1,14 +1,29 @@
 ---
 interface Props {
   label: string;
+  href?: string;
 }
 
-const { label } = Astro.props;
+const {
+  label,
+  href,
+} = Astro.props as Props;
 ---
 
-<span class="tag">
-  {label}
-</span>
+{
+  href ? (
+    <a
+      href={href}
+      class="tag"
+    >
+      {label}
+    </a>
+  ) : (
+    <span class="tag">
+      {label}
+    </span>
+  )
+}
 
 <style>
 .tag {
@@ -30,6 +45,8 @@ const { label } = Astro.props;
   font-weight: 500;
 
   line-height: 1;
+
+  text-decoration: none;
 
   transition:
     background .2s ease,

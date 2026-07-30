@@ -15,7 +15,12 @@ const { tags } = Astro.props;
 
       {
         tags.map(tag => (
-          <Tag label={tag} />
+
+          <Tag
+            label={tag}
+            href={`/knowledge?tag=${encodeURIComponent(tag.toLowerCase())}`}
+          />
+
         ))
       }
 

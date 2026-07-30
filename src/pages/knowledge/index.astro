@@ -136,6 +136,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let selectedCategory = "all";
   let selectedTag = "";
 
+  const urlParams = new URLSearchParams(window.location.search);
+
+  selectedTag =
+    (urlParams.get("tag") ?? "").toLowerCase();
+
   if (!(input instanceof HTMLInputElement)) return;
 
   const cards = document.querySelectorAll(".knowledge-article-card");
@@ -445,10 +450,15 @@ input.addEventListener("input", () => {
         );
       });
 
+      updateTagSelection();
       filterArticles();
 
       input.focus();
     });
   }
-});
+
+  updateTagSelection();
+  filterArticles();
+
+  });
 </script>
