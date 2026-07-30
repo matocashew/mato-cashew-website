@@ -138,6 +138,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const urlParams = new URLSearchParams(window.location.search);
 
+  selectedCategory =
+    (urlParams.get("category") ?? "all").toLowerCase();
+
   selectedTag =
     (urlParams.get("tag") ?? "").toLowerCase();
 
@@ -355,6 +358,26 @@ input.addEventListener("input", () => {
       });
     });
   }
+  function updateCategorySelection() {
+
+    categoryButtons.forEach((button) => {
+      if (!(button instanceof HTMLButtonElement)) return;
+
+      const buttonCategory =
+        button.dataset.category ?? "all";
+
+      const isActive =
+        buttonCategory === selectedCategory;
+
+      button.classList.toggle("active", isActive);
+
+      button.setAttribute(
+        "aria-pressed",
+        String(isActive)
+      );
+    });
+
+  }
   function updateTagSelection() {
 
     tagElements.forEach((tag) => {
@@ -457,7 +480,10 @@ input.addEventListener("input", () => {
     });
   }
 
+  updateCategorySelection();
+
   updateTagSelection();
+
   filterArticles();
 
   });
