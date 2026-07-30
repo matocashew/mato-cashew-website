@@ -40,6 +40,11 @@ const categories = [
     articles.map(article => article.category)
   )
 ];
+const tags = [
+  ...new Set(
+    articles.flatMap(article => article.tags)
+  )
+].sort();
 ---
 
 <Layout
@@ -57,6 +62,41 @@ const categories = [
     <KnowledgeCategories
       categories={categories}
     />
+
+    <section class="knowledge-tags-filter">
+
+      <h2>Browse by Tags</h2>
+
+      <div
+        id="knowledge-tag-filter"
+        class="tag-filter-chips"
+      >
+
+        <button
+          type="button"
+          class="tag-filter-chip active"
+          data-tag=""
+          aria-pressed="true"
+        >
+          All
+        </button>
+
+        {
+          tags.map((tag) => (
+            <button
+              type="button"
+              class="tag-filter-chip"
+              data-tag={tag.toLowerCase()}
+              aria-pressed="false"
+            >
+              #{tag}
+            </button>
+          ))
+        }
+
+      </div>
+
+    </section>
 
     <section id="featured-article-section">
 
@@ -92,13 +132,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("knowledge-search");
   const categoryButtons = document.querySelectorAll(".category-chip");
   const clearButton = document.getElementById("knowledge-search-clear");
+
   let selectedCategory = "all";
   let selectedTag = "";
 
   if (!(input instanceof HTMLInputElement)) return;
 
   const cards = document.querySelectorAll(".knowledge-article-card");
-  const tagElements = document.querySelectorAll<HTMLElement>(".card-tag");
+  const tagElements =
+  document.querySelectorAll(".card-tag");
+
+const globalTagButtons =
+  document.querySelectorAll(".tag-filter-chip");
   const noResults = document.getElementById("knowledge-no-results");
   const noResultsMessage = document.getElementById("knowledge-no-results-message");
   const clearFiltersButton = document.getElementById("knowledge-clear-filters");
@@ -113,12 +158,14 @@ function updateResultCounter(
 ) {
   if (!(resultCounter instanceof HTMLElement)) return;
 
+  const hasFilters =
+    keyword !== "" ||
+    selectedCategory !== "all" ||
+    selectedTag !== "";
+
   if (visibleCount === 0) {
     resultCounter.textContent = "No matching articles";
-  } else if (
-    keyword === "" &&
-    selectedCategory === "all"
-  ) {
+  } else if (!hasFilters) {
     resultCounter.textContent =
       `Showing all ${totalArticles} articles`;
   } else {
@@ -136,19 +183,32 @@ function updateNoResults(visibleCount) {
 function updateNoResultsMessage(keyword) {
   if (!(noResultsMessage instanceof HTMLElement)) return;
 
-  if (keyword === "") {
+  const hasKeyword = keyword !== "";
+  const hasCategory = selectedCategory !== "all";
+  const hasTag = selectedTag !== "";
+
+  if (!hasKeyword && !hasCategory && !hasTag) {
     noResultsMessage.textContent =
       "Try another search term or choose a different category.";
     return;
   }
 
-  if (selectedCategory === "all") {
-    noResultsMessage.textContent =
-      `No articles match "${keyword}". Try a different keyword.`;
-  } else {
-    noResultsMessage.textContent =
-      `No articles match "${keyword}" in the ${selectedCategory} category.`;
+  const filters = [];
+
+  if (hasKeyword) {
+    filters.push(`"${keyword}"`);
   }
+
+  if (hasCategory) {
+    filters.push(selectedCategory);
+  }
+
+  if (hasTag) {
+    filters.push(`#${selectedTag}`);
+  }
+
+  noResultsMessage.textContent =
+    `No articles match ${filters.join(", ")}. Try different filters.`;
 }
 
 function updateFeaturedArticle(keyword) {
@@ -163,6 +223,7 @@ function updateFeaturedArticle(keyword) {
     featuredCard.dataset.title ?? "",
     featuredCard.dataset.description ?? "",
     featuredCard.dataset.category ?? "",
+    featuredCard.dataset.tags ?? "",
   ].join(" ");
 
   const featuredMatchesKeyword =
@@ -172,8 +233,18 @@ function updateFeaturedArticle(keyword) {
     selectedCategory === "all" ||
     (featuredCard.dataset.category ?? "") === selectedCategory;
 
-  featuredSection.hidden =
-    !(featuredMatchesKeyword && featuredMatchesCategory);
+  const featuredTags =
+    (featuredCard.dataset.tags ?? "").split(" ");
+
+  const featuredMatchesTag =
+    selectedTag === "" ||
+    featuredTags.includes(selectedTag);
+
+  featuredSection.hidden = !(
+    featuredMatchesKeyword &&
+    featuredMatchesCategory &&
+    featuredMatchesTag
+  );
 }
 
 function matchesFilters(card, keyword) {
@@ -193,7 +264,17 @@ function matchesFilters(card, keyword) {
     selectedCategory === "all" ||
     (card.dataset.category ?? "") === selectedCategory;
 
-  return matchesKeyword && matchesCategory;
+  const cardTags = (card.dataset.tags ?? "").split(" ");
+
+  const matchesTag =
+    selectedTag === "" ||
+    cardTags.includes(selectedTag);
+
+  return (
+    matchesKeyword &&
+    matchesCategory &&
+    matchesTag
+  );
 }
 
 function filterArticles() {
@@ -240,30 +321,17 @@ input.addEventListener("input", () => {
   ) {
     clearButton.addEventListener("click", () => {
       input.value = "";
-      input.dispatchEvent(new Event("input"));
+
+      filterArticles();
+
       input.focus();
     });
   }
   if (categoryButtons.length > 0) {
     categoryButtons.forEach((button) => {
-      tagElements.forEach((tag) => {
-        tag.addEventListener("click", (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-
-          const clickedTag = tag.dataset.tag ?? "";
-
-          selectedTag =
-            selectedTag === clickedTag ? "" : clickedTag;
-
-          filterArticles();
-        });
-      });
       if (!(button instanceof HTMLButtonElement)) return;
 
       button.addEventListener("click", () => {
-        console.log("Category clicked:", button.dataset.category);
-
         selectedCategory = button.dataset.category ?? "all";
 
         categoryButtons.forEach((chip) => {
@@ -278,15 +346,91 @@ input.addEventListener("input", () => {
           );
         });
 
-        input.dispatchEvent(new Event("input"));
+        filterArticles();
       });
     });
   }
+  function updateTagSelection() {
+
+    tagElements.forEach((tag) => {
+      if (!(tag instanceof HTMLElement)) return;
+
+      const isActive =
+        (tag.dataset.tag ?? "") === selectedTag;
+
+      tag.classList.toggle("active", isActive);
+      tag.setAttribute(
+        "aria-pressed",
+        String(isActive)
+      );
+    });
+
+    globalTagButtons.forEach((button) => {
+      if (!(button instanceof HTMLButtonElement)) return;
+
+      const buttonTag =
+        button.dataset.tag ?? "";
+
+      const isActive =
+        buttonTag === selectedTag;
+
+      if (selectedTag === "" && buttonTag === "") {
+        button.classList.add("active");
+        button.setAttribute("aria-pressed", "true");
+        return;
+      }
+
+      button.classList.toggle("active", isActive);
+      button.setAttribute(
+        "aria-pressed",
+        String(isActive)
+      );
+    });
+
+  }
+
+  tagElements.forEach((tag) => {
+    if (!(tag instanceof HTMLElement)) return;
+
+    tag.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const clickedTag = tag.dataset.tag ?? "";
+
+      selectedTag =
+        selectedTag === clickedTag
+          ? ""
+          : clickedTag;
+
+      updateTagSelection();
+
+      filterArticles();
+    });
+  });
+  globalTagButtons.forEach((button) => {
+    if (!(button instanceof HTMLButtonElement)) return;
+
+    button.addEventListener("click", () => {
+      const clickedTag =
+        button.dataset.tag ?? "";
+
+      selectedTag =
+        selectedTag === clickedTag
+          ? ""
+          : clickedTag;
+
+      updateTagSelection();
+
+      filterArticles();
+    });
+  });
   if (clearFiltersButton instanceof HTMLButtonElement) {
     clearFiltersButton.addEventListener("click", () => {
       input.value = "";
 
       selectedCategory = "all";
+      selectedTag = "";
 
       categoryButtons.forEach((button) => {
         if (!(button instanceof HTMLButtonElement)) return;

@@ -61,3 +61,62 @@
   outline-offset:2px;
 
 }
+
+/* ==========================================
+   Knowledge Tag Filter
+========================================== */
+
+.knowledge-tags-filter {
+  margin-top: 2rem;
+}
+
+.knowledge-tags-filter h2 {
+  margin-bottom: 1rem;
+}
+
+.tag-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tag-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.45rem 0.85rem;
+
+  border: 1px solid #d9e3d4;
+  border-radius: 999px;
+
+  background: #ffffff;
+  color: #4b5563;
+
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.tag-filter-chip:hover {
+  background: #f3faf4;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+
+  transform: translateY(-1px);
+}
+
+.tag-filter-chip.active {
+  background: #e8f5e9;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+
+  font-weight: 600;
+}
