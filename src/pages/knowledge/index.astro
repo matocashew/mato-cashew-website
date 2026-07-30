@@ -180,7 +180,26 @@ function updateQueryParameter(key, value) {
 
   window.history.replaceState({}, "", newUrl);
 }
+function getResultCounterMessage(
+  visibleCount,
+  totalArticles,
+  keyword
+) {
+  const hasFilters =
+    keyword !== "" ||
+    selectedCategory !== "all" ||
+    selectedTag !== "";
 
+  if (visibleCount === 0) {
+    return "No matching articles";
+  }
+
+  if (!hasFilters) {
+    return `Showing all ${totalArticles} articles`;
+  }
+
+  return `Showing ${visibleCount} of ${totalArticles} articles`;
+}
 function updateResultCounter(
   visibleCount,
   totalArticles,
@@ -188,20 +207,12 @@ function updateResultCounter(
 ) {
   if (!(resultCounter instanceof HTMLElement)) return;
 
-  const hasFilters =
-    keyword !== "" ||
-    selectedCategory !== "all" ||
-    selectedTag !== "";
-
-  if (visibleCount === 0) {
-    resultCounter.textContent = "No matching articles";
-  } else if (!hasFilters) {
-    resultCounter.textContent =
-      `Showing all ${totalArticles} articles`;
-  } else {
-    resultCounter.textContent =
-      `Showing ${visibleCount} of ${totalArticles} articles`;
-  }
+  resultCounter.textContent =
+    getResultCounterMessage(
+      visibleCount,
+      totalArticles,
+      keyword
+    );
 }
 
 function updateNoResults(visibleCount) {
@@ -210,17 +221,13 @@ function updateNoResults(visibleCount) {
   noResults.hidden = visibleCount !== 0;
 }
 
-function updateNoResultsMessage(keyword) {
-  if (!(noResultsMessage instanceof HTMLElement)) return;
-
+function getNoResultsMessage(keyword) {
   const hasKeyword = keyword !== "";
   const hasCategory = selectedCategory !== "all";
   const hasTag = selectedTag !== "";
 
   if (!hasKeyword && !hasCategory && !hasTag) {
-    noResultsMessage.textContent =
-      "Try another search term or choose a different category.";
-    return;
+    return "Try another search term or choose a different category.";
   }
 
   const filters = [];
@@ -237,8 +244,14 @@ function updateNoResultsMessage(keyword) {
     filters.push(`#${selectedTag}`);
   }
 
-  noResultsMessage.textContent =
-    `No articles match ${filters.join(", ")}. Try different filters.`;
+  return `No articles match ${filters.join(", ")}. Try different filters.`;
+}
+
+function updateNoResultsMessage(keyword) {
+  if (!(noResultsMessage instanceof HTMLElement)) return;
+
+    noResultsMessage.textContent =
+      getNoResultsMessage(keyword);
 }
 
 function updateFeaturedArticle(keyword) {
@@ -468,6 +481,8 @@ input.addEventListener("input", () => {
           ? ""
           : clickedTag;
 
+      updateQueryParameter("tag", selectedTag);
+
       updateTagSelection();
 
       filterArticles();
@@ -484,6 +499,8 @@ input.addEventListener("input", () => {
         selectedTag === clickedTag
           ? ""
           : clickedTag;
+
+      updateQueryParameter("tag", selectedTag);
 
       updateTagSelection();
 
