@@ -138,6 +138,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const urlParams = new URLSearchParams(window.location.search);
 
+  let initialSearch =
+    (urlParams.get("search") ?? "").trim().toLowerCase();
+
   selectedCategory =
     (urlParams.get("category") ?? "all").toLowerCase();
 
@@ -145,6 +148,8 @@ document.addEventListener("DOMContentLoaded", () => {
     (urlParams.get("tag") ?? "").toLowerCase();
 
   if (!(input instanceof HTMLInputElement)) return;
+
+  input.value = initialSearch;
 
   const cards = document.querySelectorAll(".knowledge-article-card");
   const tagElements =
@@ -158,6 +163,23 @@ const globalTagButtons =
   const resultCounter = document.getElementById("knowledge-search-result-count");
   const featuredSection = document.getElementById("featured-article-section");
   const featuredCard = document.querySelector(".featured-knowledge-card");
+
+function updateQueryParameter(key, value) {
+  const params = new URLSearchParams(window.location.search);
+
+  if (value === "") {
+    params.delete(key);
+  } else {
+    params.set(key, value);
+  }
+
+  const newUrl =
+    `${window.location.pathname}${
+      params.toString() ? `?${params}` : ""
+    }`;
+
+  window.history.replaceState({}, "", newUrl);
+}
 
 function updateResultCounter(
   visibleCount,
@@ -263,7 +285,9 @@ function matchesFilters(card, keyword) {
     card.dataset.description ?? "",
     card.dataset.category ?? "",
     card.dataset.tags ?? "",
-  ].join(" ");
+  ]
+    .join(" ")
+    .toLowerCase();
 
   const matchesKeyword =
     keyword === "" || searchableText.includes(keyword);
@@ -320,7 +344,13 @@ updateFeaturedArticle(keyword);
 
 }
 input.addEventListener("input", () => {
+
+  const keyword = input.value.trim();
+
+  updateQueryParameter("search", keyword);
+
   filterArticles();
+
 });
 
   if (
@@ -341,6 +371,13 @@ input.addEventListener("input", () => {
 
       button.addEventListener("click", () => {
         selectedCategory = button.dataset.category ?? "all";
+
+        updateQueryParameter(
+          "category",
+          selectedCategory === "all"
+            ? ""
+            : selectedCategory
+        );
 
         categoryButtons.forEach((chip) => {
           if (!(chip instanceof HTMLButtonElement)) return;
