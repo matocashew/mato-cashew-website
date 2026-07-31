@@ -115,6 +115,69 @@ Sprint scope should not change unless:
 - [ ] Split Inline Script
 - [ ] JavaScript Modules
 
+### Sprint Acceptance Criteria
+
+#### 1. Separate Business Logic
+
+**Objective**
+
+Separate business logic from UI/DOM manipulation to improve maintainability and testability.
+
+**Definition of Done**
+
+- Business logic functions must not modify the DOM.
+- Business logic functions should only return data, strings, numbers, booleans, arrays, or objects.
+- UI functions are responsible for updating the DOM.
+- No user-visible behavior changes.
+- Build Success.
+
+---
+
+#### 2. Reduce DOM Coupling
+
+**Objective**
+
+Reduce dependencies between application logic and DOM elements.
+
+**Definition of Done**
+
+- Functions should avoid querying the DOM internally whenever possible.
+- DOM elements should be initialized once during page setup.
+- Functions should receive required elements or values as parameters.
+- Build Success.
+
+---
+
+#### 3. Split Inline Script
+
+**Objective**
+
+Improve readability and prepare for future modularization.
+
+**Definition of Done**
+
+- Group helper functions together.
+- Group UI functions together.
+- Group event listeners together.
+- Keep a single initialization section.
+- No behavior changes.
+- Build Success.
+
+---
+
+#### 4. JavaScript Modules
+
+**Objective**
+
+Move JavaScript logic into reusable modules.
+
+**Definition of Done**
+
+- Business logic is extracted from `index.astro`.
+- Each module has a single responsibility.
+- Imports remain simple and maintainable.
+- Build Success.
+- Manual testing passed.
 ---
 
 # Phase 7 — User Experience

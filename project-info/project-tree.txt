@@ -1,5 +1,5 @@
 Folder PATH listing for volume DATA
-Volume serial number is 000001C0 EED2:A12A
+Volume serial number is 44D9-7808
 D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   content.config.ts
 ¦   
@@ -48,12 +48,15 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   ¦       KnowledgeIndexHero.astro
 ¦   ¦       KnowledgeMeta.astro
 ¦   ¦       KnowledgeNavigation.astro
+¦   ¦       KnowledgeSearch.astro
 ¦   ¦       KnowledgeStats.astro
 ¦   ¦       KnowledgeTOC.astro
+¦   ¦       KnowledgeToolbar.astro
 ¦   ¦       ReadingProgress.astro
 ¦   ¦       RelatedArticles.astro
 ¦   ¦       RelatedTopics.astro
 ¦   ¦       
+¦   +---layout
 ¦   +---pages
 ¦   ¦       AboutPage.astro
 ¦   ¦       ContactPage.astro
@@ -152,7 +155,6 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦       products.ts
 ¦       social.ts
 ¦       
-+---design
 +---i18n
 ¦       config.ts
 ¦       en.ts
@@ -170,6 +172,7 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦       Layout.astro
 ¦       PageLayout.astro
 ¦       
++---lib
 +---pages
 ¦   ¦   404.astro
 ¦   ¦   about.astro
@@ -206,11 +209,16 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦           [...slug].astro
 ¦           
 +---scripts
-¦       aos.ts
-¦       contact.ts
-¦       header.ts
-¦       language-switcher.ts
-¦       
+¦   ¦   aos.ts
+¦   ¦   contact.ts
+¦   ¦   header.ts
+¦   ¦   knowledge.ts
+¦   ¦   language-switcher.ts
+¦   ¦   
+¦   +---knowledge
+¦           knowledge-utils.ts
+¦           url.ts
+¦           
 +---services
 ¦       knowledgeService.ts
 ¦       navigationService.ts
@@ -262,17 +270,18 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦           related-topics.css
 ¦           
 +---types
-        BaseContent.ts
-        Download.ts
-        FAQ.ts
-        Guide.ts
-        Knowledge.ts
-        navigation.ts
-        Product.ts
-        ProductImage.ts
-        ProductPackaging.ts
-        ProductSEO.ts
-        ProductSpecification.ts
-        ProductTranslation.ts
-        Recipe.ts
-        
+¦       BaseContent.ts
+¦       Download.ts
+¦       FAQ.ts
+¦       Guide.ts
+¦       Knowledge.ts
+¦       navigation.ts
+¦       Product.ts
+¦       ProductImage.ts
+¦       ProductPackaging.ts
+¦       ProductSEO.ts
+¦       ProductSpecification.ts
+¦       ProductTranslation.ts
+¦       Recipe.ts
+¦       
++---utils

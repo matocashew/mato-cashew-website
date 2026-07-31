@@ -3,14 +3,15 @@ D:\Projects\mato-cashew-website\src\config
 D:\Projects\mato-cashew-website\src\content
 D:\Projects\mato-cashew-website\src\content.config.ts
 D:\Projects\mato-cashew-website\src\data
-D:\Projects\mato-cashew-website\src\design
 D:\Projects\mato-cashew-website\src\i18n
 D:\Projects\mato-cashew-website\src\layouts
+D:\Projects\mato-cashew-website\src\lib
 D:\Projects\mato-cashew-website\src\pages
 D:\Projects\mato-cashew-website\src\scripts
 D:\Projects\mato-cashew-website\src\services
 D:\Projects\mato-cashew-website\src\styles
 D:\Projects\mato-cashew-website\src\types
+D:\Projects\mato-cashew-website\src\utils
 D:\Projects\mato-cashew-website\src\components\about
 D:\Projects\mato-cashew-website\src\components\About.astro
 D:\Projects\mato-cashew-website\src\components\articles
@@ -22,6 +23,7 @@ D:\Projects\mato-cashew-website\src\components\Header.astro
 D:\Projects\mato-cashew-website\src\components\Hero.astro
 D:\Projects\mato-cashew-website\src\components\knowledge
 D:\Projects\mato-cashew-website\src\components\LanguageSwitcher.astro
+D:\Projects\mato-cashew-website\src\components\layout
 D:\Projects\mato-cashew-website\src\components\PageHero.astro
 D:\Projects\mato-cashew-website\src\components\pages
 D:\Projects\mato-cashew-website\src\components\ProductCard.astro
@@ -56,8 +58,10 @@ D:\Projects\mato-cashew-website\src\components\knowledge\KnowledgeHero.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\KnowledgeIndexHero.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\KnowledgeMeta.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\KnowledgeNavigation.astro
+D:\Projects\mato-cashew-website\src\components\knowledge\KnowledgeSearch.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\KnowledgeStats.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\KnowledgeTOC.astro
+D:\Projects\mato-cashew-website\src\components\knowledge\KnowledgeToolbar.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\ReadingProgress.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\RelatedArticles.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\RelatedTopics.astro
@@ -183,7 +187,11 @@ D:\Projects\mato-cashew-website\src\pages\resources\[...slug].astro
 D:\Projects\mato-cashew-website\src\scripts\aos.ts
 D:\Projects\mato-cashew-website\src\scripts\contact.ts
 D:\Projects\mato-cashew-website\src\scripts\header.ts
+D:\Projects\mato-cashew-website\src\scripts\knowledge
+D:\Projects\mato-cashew-website\src\scripts\knowledge.ts
 D:\Projects\mato-cashew-website\src\scripts\language-switcher.ts
+D:\Projects\mato-cashew-website\src\scripts\knowledge\knowledge-utils.ts
+D:\Projects\mato-cashew-website\src\scripts\knowledge\url.ts
 D:\Projects\mato-cashew-website\src\services\knowledgeService.ts
 D:\Projects\mato-cashew-website\src\services\navigationService.ts
 D:\Projects\mato-cashew-website\src\services\productService.ts
