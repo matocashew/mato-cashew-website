@@ -1,4 +1,7 @@
 import { updateQueryParameter } from "./knowledge/url";
+import { getResultCounterMessage } from "./knowledge/knowledge-utils";
+import { getNoResultsMessage } from "./knowledge/knowledge-utils";
+import { matchesFilters } from "./knowledge/knowledge-utils";
 export default function initKnowledge() {
   const input = document.getElementById("knowledge-search");
   const categoryButtons = document.querySelectorAll(".category-chip");
@@ -41,26 +44,6 @@ const globalTagButtons =
     ".featured-knowledge-card"
     );
 
-function getResultCounterMessage(
-  visibleCount: number,
-  totalArticles: number,
-  keyword: string
-): string {
-  const hasFilters =
-    keyword !== "" ||
-    selectedCategory !== "all" ||
-    selectedTag !== "";
-
-  if (visibleCount === 0) {
-    return "No matching articles";
-  }
-
-  if (!hasFilters) {
-    return `Showing all ${totalArticles} articles`;
-  }
-
-  return `Showing ${visibleCount} of ${totalArticles} articles`;
-}
 function updateResultCounter(
   visibleCount: number,
   totalArticles: number,
@@ -72,7 +55,9 @@ function updateResultCounter(
     getResultCounterMessage(
       visibleCount,
       totalArticles,
-      keyword
+      keyword,
+      selectedCategory,
+      selectedTag
     );
 }
 
@@ -84,41 +69,17 @@ function updateNoResults(
   noResults.hidden = visibleCount !== 0;
 }
 
-function getNoResultsMessage(
-  keyword: string
-): string {
-  const hasKeyword = keyword !== "";
-  const hasCategory = selectedCategory !== "all";
-  const hasTag = selectedTag !== "";
-
-  if (!hasKeyword && !hasCategory && !hasTag) {
-    return "Try another search term or choose a different category.";
-  }
-
-  const filters = [];
-
-  if (hasKeyword) {
-    filters.push(`"${keyword}"`);
-  }
-
-  if (hasCategory) {
-    filters.push(selectedCategory);
-  }
-
-  if (hasTag) {
-    filters.push(`#${selectedTag}`);
-  }
-
-  return `No articles match ${filters.join(", ")}. Try different filters.`;
-}
-
 function updateNoResultsMessage(
   keyword: string
 ): void {
   if (!(noResultsMessage instanceof HTMLElement)) return;
 
     noResultsMessage.textContent =
-      getNoResultsMessage(keyword);
+      getNoResultsMessage(
+        keyword,
+        selectedCategory,
+        selectedTag
+      );
 }
 function shouldShowFeaturedArticle(
   keyword: string
@@ -163,41 +124,6 @@ function updateFeaturedArticle(
   featuredSection.hidden =
     !shouldShowFeaturedArticle(keyword);
 }
-
-function matchesFilters(
-  card: HTMLElement,
-  keyword: string
-): boolean {
-  if (!(card instanceof HTMLElement)) return false;
-
-  const searchableText = [
-    card.dataset.title ?? "",
-    card.dataset.description ?? "",
-    card.dataset.category ?? "",
-    card.dataset.tags ?? "",
-  ]
-    .join(" ")
-    .toLowerCase();
-
-  const matchesKeyword =
-    keyword === "" || searchableText.includes(keyword);
-
-  const matchesCategory =
-    selectedCategory === "all" ||
-    (card.dataset.category ?? "") === selectedCategory;
-
-  const cardTags = (card.dataset.tags ?? "").split(" ");
-
-  const matchesTag =
-    selectedTag === "" ||
-    cardTags.includes(selectedTag);
-
-  return (
-    matchesKeyword &&
-    matchesCategory &&
-    matchesTag
-  );
-}
 function filterArticles(): void {
   const searchInput = input as HTMLInputElement;
 
@@ -212,7 +138,12 @@ function filterArticles(): void {
   cards.forEach((card) => {
     if (!(card instanceof HTMLElement)) return;
 
-    const matched = matchesFilters(card, keyword);
+    const matched = matchesFilters(
+      card,
+      keyword,
+      selectedCategory,
+      selectedTag
+    );
 
     card.style.display = matched ? "" : "none";
 
