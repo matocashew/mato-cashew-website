@@ -1,7 +1,10 @@
 import { updateQueryParameter } from "./knowledge/url";
-import { getResultCounterMessage } from "./knowledge/knowledge-utils";
-import { getNoResultsMessage } from "./knowledge/knowledge-utils";
-import { matchesFilters } from "./knowledge/knowledge-utils";
+import {
+  getResultCounterMessage,
+  getNoResultsMessage,
+  matchesFilters,
+  shouldShowFeaturedArticle,
+} from "./knowledge/knowledge-utils";
 export default function initKnowledge() {
   const input = document.getElementById("knowledge-search");
   const categoryButtons = document.querySelectorAll(".category-chip");
@@ -81,36 +84,6 @@ function updateNoResultsMessage(
         selectedTag
       );
 }
-function shouldShowFeaturedArticle(
-  keyword: string
-): boolean {
-  const featuredText = [
-    featuredCard?.dataset.title ?? "",
-    featuredCard?.dataset.description ?? "",
-    featuredCard?.dataset.category ?? "",
-    featuredCard?.dataset.tags ?? "",
-  ].join(" ");
-
-  const matchesKeyword =
-    keyword === "" || featuredText.includes(keyword);
-
-  const matchesCategory =
-    selectedCategory === "all" ||
-    (featuredCard?.dataset.category ?? "") === selectedCategory;
-
-  const featuredTags =
-    (featuredCard?.dataset.tags ?? "").split(" ");
-
-  const matchesTag =
-    selectedTag === "" ||
-    featuredTags.includes(selectedTag);
-
-  return (
-    matchesKeyword &&
-    matchesCategory &&
-    matchesTag
-  );
-}
 function updateFeaturedArticle(
   keyword: string
 ): void {
@@ -120,9 +93,14 @@ function updateFeaturedArticle(
   ) {
     return;
   }
+  const shouldShow = shouldShowFeaturedArticle(
+    featuredCard,
+    keyword,
+    selectedCategory,
+    selectedTag
+  );
 
-  featuredSection.hidden =
-    !shouldShowFeaturedArticle(keyword);
+  featuredSection.hidden = !shouldShow;
 }
 function filterArticles(): void {
   const searchInput = input as HTMLInputElement;

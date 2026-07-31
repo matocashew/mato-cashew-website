@@ -90,4 +90,40 @@ export function getNoResultsMessage(
   return `No articles match ${filters.join(", ")}. Try different filters.`;
 }
 
-export function shouldShowFeaturedArticle() {}
+export function shouldShowFeaturedArticle(
+  featuredCard: HTMLElement | null,
+  keyword: string,
+  selectedCategory: string,
+  selectedTag: string
+): boolean {
+  if (!featuredCard) {
+    return false;
+  }
+
+  const featuredText = [
+    featuredCard.dataset.title ?? "",
+    featuredCard.dataset.description ?? "",
+    featuredCard.dataset.category ?? "",
+    featuredCard.dataset.tags ?? "",
+  ].join(" ");
+
+  const matchesKeyword =
+    keyword === "" || featuredText.includes(keyword);
+
+  const matchesCategory =
+    selectedCategory === "all" ||
+    (featuredCard.dataset.category ?? "") === selectedCategory;
+
+  const featuredTags =
+    (featuredCard.dataset.tags ?? "").split(" ");
+
+  const matchesTag =
+    selectedTag === "" ||
+    featuredTags.includes(selectedTag);
+
+  return (
+    matchesKeyword &&
+    matchesCategory &&
+    matchesTag
+  );
+}
