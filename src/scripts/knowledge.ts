@@ -1,3 +1,4 @@
+import { updateQueryParameter } from "./knowledge/url";
 export default function initKnowledge() {
   const input = document.getElementById("knowledge-search");
   const categoryButtons = document.querySelectorAll(".category-chip");
@@ -40,25 +41,6 @@ const globalTagButtons =
     ".featured-knowledge-card"
     );
 
-function updateQueryParameter(
-  key: string,
-  value: string
-): void {
-  const params = new URLSearchParams(window.location.search);
-
-  if (value === "") {
-    params.delete(key);
-  } else {
-    params.set(key, value);
-  }
-
-  const newUrl =
-    `${window.location.pathname}${
-      params.toString() ? `?${params}` : ""
-    }`;
-
-  window.history.replaceState({}, "", newUrl);
-}
 function getResultCounterMessage(
   visibleCount: number,
   totalArticles: number,
