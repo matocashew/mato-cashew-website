@@ -122,9 +122,9 @@ D:\Projects\mato-cashew-website\src\content\knowledge
 D:\Projects\mato-cashew-website\src\content\products
 D:\Projects\mato-cashew-website\src\content\resources
 D:\Projects\mato-cashew-website\src\content\schemas
-D:\Projects\mato-cashew-website\src\content\knowledge\cashew-grading-standards.md
-D:\Projects\mato-cashew-website\src\content\knowledge\cashew-processing-guide.md
+D:\Projects\mato-cashew-website\src\content\knowledge\cashew-grading-standards.mdx
 D:\Projects\mato-cashew-website\src\content\knowledge\cashew-tree.mdx
+D:\Projects\mato-cashew-website\src\content\knowledge\complete-guide-to-cashew-processing.mdx
 D:\Projects\mato-cashew-website\src\content\knowledge\what-is-cashew.mdx
 D:\Projects\mato-cashew-website\src\content\products\premium-cashew-100g.md
 D:\Projects\mato-cashew-website\src\content\products\premium-cashew-250g.md
@@ -191,6 +191,7 @@ D:\Projects\mato-cashew-website\src\scripts\knowledge
 D:\Projects\mato-cashew-website\src\scripts\knowledge.ts
 D:\Projects\mato-cashew-website\src\scripts\language-switcher.ts
 D:\Projects\mato-cashew-website\src\scripts\knowledge\knowledge-utils.ts
+D:\Projects\mato-cashew-website\src\scripts\knowledge\state.ts
 D:\Projects\mato-cashew-website\src\scripts\knowledge\url.ts
 D:\Projects\mato-cashew-website\src\services\knowledgeService.ts
 D:\Projects\mato-cashew-website\src\services\navigationService.ts
