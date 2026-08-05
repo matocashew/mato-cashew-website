@@ -1,0 +1,35 @@
+---
+interface Props {
+  title?: string;
+  items: string[];
+}
+
+const {
+  title = "Quick Facts",
+  items
+} = Astro.props;
+---
+
+<div class="quick-facts">
+
+  <ul class="quick-facts__list">
+
+    {
+      items.map((item) => (
+
+        <li class="quick-facts__item">
+
+          <span class="quick-facts__icon">✓</span>
+
+          <span class="quick-facts__text">
+            {item}
+          </span>
+
+        </li>
+
+      ))
+    }
+
+  </ul>
+
+</div>

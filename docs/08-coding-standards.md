@@ -214,6 +214,16 @@ A component should do one thing well.
 
 If a component exceeds approximately 250–300 lines, consider splitting it into smaller components.
 
+Reusable content components should always be preferred over repeated Markdown structures.
+
+Examples:
+
+- QuickFacts
+- InfoBox
+- ComparisonTable
+- FAQ
+- ArticleLink
+
 ---
 
 # File Naming

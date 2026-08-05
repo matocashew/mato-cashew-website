@@ -402,3 +402,44 @@ The Mato Cashew Knowledge Center should grow into one of the most trusted online
 Every article should strengthen the overall knowledge network by providing accurate information, consistent structure, and meaningful connections to related topics.
 
 Quality should always take priority over quantity.
+
+## Reusable Components
+
+To ensure consistency across the Knowledge Center, authors should use the available reusable components whenever appropriate.
+
+### QuickFacts
+
+Use the `QuickFacts` component to summarize the most important concepts immediately after the article introduction.
+
+Example:
+
+```mdx
+<QuickFacts
+  items={[
+    "Fact 1",
+    "Fact 2",
+    "Fact 3"
+  ]}
+/>
+```
+
+### InfoBox
+
+Use `InfoBox` for:
+
+- Definitions
+- Tips
+- Warnings
+- Success messages
+
+### ComparisonTable
+
+Use `ComparisonTable` instead of Markdown tables whenever structured comparisons are presented.
+
+### FAQ
+
+Use the reusable FAQ component for frequently asked questions.
+
+### ArticleLink
+
+Use `ArticleLink` to build the Continue Learning section.
