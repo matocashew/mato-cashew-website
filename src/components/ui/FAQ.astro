@@ -4,23 +4,27 @@ interface FAQItem {
   answer: string;
 }
 
-interface FAQItem {
-  question: string;
-  answer: string;
-}
-
 interface Props {
+  items?: FAQItem[];
   questions?: FAQItem[];
 }
 
-const { questions = [] } = Astro.props as Props;
+const {
+  items = [],
+  questions = [],
+} = Astro.props as Props;
+
+const faqItems = items.length > 0 ? items : questions;
 ---
 
-<section class="faq">
+<div class="faq-list">
   {
-    questions.map((item) => (
+    faqItems.map((item) => (
       <details class="faq-item">
-        <summary>{item.question}</summary>
+        <summary class="faq-question">
+          <span>{item.question}</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
 
         <div class="faq-answer">
           <p>{item.answer}</p>
@@ -28,4 +32,4 @@ const { questions = [] } = Astro.props as Props;
       </details>
     ))
   }
-</section>
+</div>
