@@ -52,6 +52,7 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   ¦       KnowledgeStats.astro
 ¦   ¦       KnowledgeTOC.astro
 ¦   ¦       KnowledgeToolbar.astro
+¦   ¦       QuickFacts.astro
 ¦   ¦       ReadingProgress.astro
 ¦   ¦       RelatedArticles.astro
 ¦   ¦       RelatedTopics.astro
@@ -124,9 +125,11 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦       
 +---content
 ¦   +---knowledge
-¦   ¦       cashew-grading-standards.md
-¦   ¦       cashew-processing-guide.md
+¦   ¦       cashew-food-safety.mdx
+¦   ¦       cashew-grading-standards.mdx
+¦   ¦       cashew-quality-standards.mdx
 ¦   ¦       cashew-tree.mdx
+¦   ¦       complete-guide-to-cashew-processing.mdx
 ¦   ¦       what-is-cashew.mdx
 ¦   ¦       
 ¦   +---products
@@ -217,6 +220,7 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   ¦   
 ¦   +---knowledge
 ¦           knowledge-utils.ts
+¦           state.ts
 ¦           url.ts
 ¦           
 +---services
@@ -266,6 +270,7 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦           knowledge-stats.css
 ¦           knowledge-system.css
 ¦           knowledge-toc.css
+¦           quick-facts.css
 ¦           related-articles.css
 ¦           related-topics.css
 ¦           

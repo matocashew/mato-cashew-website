@@ -62,6 +62,7 @@ D:\Projects\mato-cashew-website\src\components\knowledge\KnowledgeSearch.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\KnowledgeStats.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\KnowledgeTOC.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\KnowledgeToolbar.astro
+D:\Projects\mato-cashew-website\src\components\knowledge\QuickFacts.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\ReadingProgress.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\RelatedArticles.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\RelatedTopics.astro
@@ -122,7 +123,9 @@ D:\Projects\mato-cashew-website\src\content\knowledge
 D:\Projects\mato-cashew-website\src\content\products
 D:\Projects\mato-cashew-website\src\content\resources
 D:\Projects\mato-cashew-website\src\content\schemas
+D:\Projects\mato-cashew-website\src\content\knowledge\cashew-food-safety.mdx
 D:\Projects\mato-cashew-website\src\content\knowledge\cashew-grading-standards.mdx
+D:\Projects\mato-cashew-website\src\content\knowledge\cashew-quality-standards.mdx
 D:\Projects\mato-cashew-website\src\content\knowledge\cashew-tree.mdx
 D:\Projects\mato-cashew-website\src\content\knowledge\complete-guide-to-cashew-processing.mdx
 D:\Projects\mato-cashew-website\src\content\knowledge\what-is-cashew.mdx
@@ -236,6 +239,7 @@ D:\Projects\mato-cashew-website\src\styles\components\knowledge-index-hero.css
 D:\Projects\mato-cashew-website\src\styles\components\knowledge-stats.css
 D:\Projects\mato-cashew-website\src\styles\components\knowledge-system.css
 D:\Projects\mato-cashew-website\src\styles\components\knowledge-toc.css
+D:\Projects\mato-cashew-website\src\styles\components\quick-facts.css
 D:\Projects\mato-cashew-website\src\styles\components\related-articles.css
 D:\Projects\mato-cashew-website\src\styles\components\related-topics.css
 D:\Projects\mato-cashew-website\src\types\BaseContent.ts
