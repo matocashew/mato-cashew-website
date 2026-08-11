@@ -1,9 +1,23 @@
 ---
 import SectionTitle from "../SectionTitle.astro";
 import ProductCard from "../ProductCard.astro";
+
 import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+import { getProductsByCategory } from "../../services/productService";
 
 const t = getCurrentLanguage(Astro.url.pathname);
+
+const products = await getProductsByCategory("Retail");
+
+const isKhmer = Astro.url.pathname.startsWith("/km");
+
+const basePath = isKhmer
+  ? "/km/products"
+  : "/products";
+
+const viewLabel = isKhmer
+  ? "មើលព័ត៌មានលម្អិត"
+  : "View Details";
 ---
 
 <section class="retail-products">
@@ -17,26 +31,21 @@ const t = getCurrentLanguage(Astro.url.pathname);
 
     <div class="products-grid">
 
-      <ProductCard
-        image="/images/products/package-100g.png"
-        title={t.products.retail.items.pack100.title}
-        weight="100g"
-        badge={t.products.retail.items.pack100.badge}
-      />
+      {
+        products.map((product) => (
 
-      <ProductCard
-        image="/images/products/package-250g.png"
-        title={t.products.retail.items.pack250.title}
-        weight="250g"
-        badge={t.products.retail.items.pack250.badge}
-      />
+          <ProductCard
+            image={product.data.image}
+            title={product.data.title}
+            description={product.data.description}
+            weight={product.data.weight}
+            badge={product.data.category}
+            href={`${basePath}/${product.data.slug}`}
+            linkLabel={viewLabel}
+          />
 
-      <ProductCard
-        image="/images/products/package-500g.png"
-        title={t.products.retail.items.pack500.title}
-        weight="500g"
-        badge={t.products.retail.items.pack500.badge}
-      />
+        ))
+      }
 
     </div>
 

@@ -5,6 +5,8 @@ interface Props {
   description?: string;
   weight: string;
   badge: string;
+  href?: string;
+  linkLabel?: string;
   rating?: string;
 }
 
@@ -14,6 +16,8 @@ const {
   description,
   weight,
   badge,
+  href = "/contact#contact-form",
+  linkLabel = `Contact About ${title}`,
   rating = "⭐ 5.0"
 } = Astro.props;
 ---
@@ -54,11 +58,11 @@ const {
     </div>
 
     <a
-      href="/contact#contact-form"
+      href={href}
       class="btn btn-primary"
-      aria-label={`Contact Mato Cashew about ${title}`}
+      aria-label={`${linkLabel}: ${title}`}
     >
-      Contact About {title}
+      {linkLabel}
     </a>
 
   </div>
