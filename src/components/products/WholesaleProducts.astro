@@ -1,67 +1,46 @@
 ---
 import SectionTitle from "../SectionTitle.astro";
-import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
 
-const t = getCurrentLanguage(Astro.url.pathname);
+const isKhmer = Astro.url.pathname.startsWith("/km");
+
+const content = isKhmer
+  ? {
+      tag: "សម្រាប់អាជីវកម្ម",
+      title: "ការសាកសួរទិញដុំ",
+      description:
+        "ប្រសិនបើអ្នកកំពុងស្វែងរកផលិតផលគ្រាប់ស្វាយចន្ទីសម្រាប់អាជីវកម្ម សូមទាក់ទងមក Mato Cashew ដើម្បីពិភាក្សាអំពីផលិតផល បរិមាណ និងតម្រូវការវេចខ្ចប់របស់អ្នក។",
+      button: "ទាក់ទង Mato Cashew",
+    }
+  : {
+      tag: "For Business",
+      title: "Wholesale Inquiries",
+      description:
+        "Looking for Cambodian cashew products for your business? Contact Mato Cashew to discuss product, quantity, and packaging requirements based on your needs.",
+      button: "Contact Mato Cashew",
+    };
 ---
 
 <section class="wholesale-products">
-
   <div class="container">
 
     <SectionTitle
-      tag={t.products.wholesale.tag}
-      title={t.products.wholesale.title}
+      tag={content.tag}
+      title={content.title}
     />
 
     <div class="wholesale-products-grid">
 
       <article class="bulk-card">
 
-        <h3>{t.products.wholesale.items.vacuum10kg.title}</h3>
-
         <p>
-          {t.products.wholesale.items.vacuum10kg.description}
+          {content.description}
         </p>
 
-        <ul>
-          {
-            t.products.wholesale.items.vacuum10kg.features.map((feature) => (
-              <li>✓ {feature}</li>
-            ))
-          }
-        </ul>
-
         <a
-          href="/contact"
+          href={isKhmer ? "/km/contact" : "/contact"}
           class="btn btn-primary"
         >
-          {t.common.requestQuote}
-        </a>
-
-      </article>
-
-      <article class="bulk-card">
-
-        <h3>{t.products.wholesale.items.exportCarton.title}</h3>
-
-        <p>
-          {t.products.wholesale.items.exportCarton.description}
-        </p>
-
-        <ul>
-          {
-            t.products.wholesale.items.exportCarton.features.map((feature) => (
-              <li>✓ {feature}</li>
-            ))
-          }
-        </ul>
-
-        <a
-          href="/contact"
-          class="btn btn-primary"
-        >
-          {t.common.requestQuote}
+          {content.button}
         </a>
 
       </article>
@@ -69,5 +48,4 @@ const t = getCurrentLanguage(Astro.url.pathname);
     </div>
 
   </div>
-
 </section>

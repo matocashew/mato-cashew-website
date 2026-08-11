@@ -125,9 +125,15 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦       
 +---content
 ¦   +---knowledge
+¦   ¦       cashew-export-guide.mdx
 ¦   ¦       cashew-food-safety.mdx
 ¦   ¦       cashew-grading-standards.mdx
+¦   ¦       cashew-kernel-grades-uses.mdx
+¦   ¦       cashew-moisture-standards.mdx
+¦   ¦       cashew-packaging-guide.mdx
 ¦   ¦       cashew-quality-standards.mdx
+¦   ¦       cashew-shelf-life-guide.mdx
+¦   ¦       cashew-storage-guide.mdx
 ¦   ¦       cashew-tree.mdx
 ¦   ¦       complete-guide-to-cashew-processing.mdx
 ¦   ¦       what-is-cashew.mdx
