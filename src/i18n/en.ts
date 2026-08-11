@@ -283,43 +283,43 @@ const en = {
   packaging: {
     tag: "Packaging",
 
-    title: "Packaging Options",
+    title: "Packaging Information",
 
     items: {
       retail: {
         title: "Retail Packaging",
 
         description:
-          "Available in 100g, 250g and 500g premium stand-up pouches for supermarkets and retail stores.",
+          "Current retail products are available in 100g, 250g and 500g stand-up pouches.",
       },
 
       bulk: {
-        title: "Bulk Packaging",
+        title: "Business Requirements",
 
         description:
-          "Food-grade vacuum bags packed in export cartons, suitable for distributors and manufacturers.",
+          "For larger quantity requirements, contact Mato Cashew to discuss available product and packaging options.",
       },
 
       privateLabel: {
-        title: "Private Label",
+        title: "Packaging Inquiries",
 
         description:
-          "OEM and private label services with custom packaging and branding for international partners.",
+          "Have specific packaging requirements? Contact us to discuss your business needs and available options.",
       },
     },
   },
   intro: {
-    tag: "Premium Cashew",
+    tag: "Cambodian Cashew",
 
-    title: "Premium Cambodian Cashew Products",
+    title: "Cambodian Cashew Products",
 
     description:
-      "Mato Cashew offers premium Cambodian cashew kernels for retail, wholesale, export, OEM, and private label partners. Every product is carefully selected to meet international quality standards.",
+      "Explore Mato Cashew's current retail products and contact us to discuss product, quantity, or business requirements.",
 
     features: {
-      exportReady: "Export Ready",
-      oem: "OEM & Private Label",
-      directFarmers: "Direct from Farmers",
+      exportReady: "Cambodian Origin",
+      oem: "Retail Products",
+      directFarmers: "Business Inquiries Welcome",
     },
   },
   retail: {
@@ -383,37 +383,37 @@ const en = {
     },
   },
   specifications: {
-    tag: "Specifications",
+    tag: "Product Information",
 
-    title: "Technical Specifications",
+    title: "General Product Information",
 
     rows: {
       product: "Product",
-      productValue: "Premium Cambodian Cashew Kernels",
+      productValue: "Cambodian Cashew Kernels",
 
       origin: "Origin",
       originValue: "Cambodia",
 
       grades: "Kernel Grades",
-      gradesValue: "WW180, WW210, WW240, WW320, WW450, LP, SP",
+      gradesValue: "Please contact us for current product information",
 
       moisture: "Moisture",
-      moistureValue: "Maximum 5%",
+      moistureValue: "Please contact us for current product information",
 
-      broken: "Broken Ratio",
-      brokenValue: "According to Grade Standard",
+      broken: "Kernel Condition",
+      brokenValue: "Varies by product",
 
       shelfLife: "Shelf Life",
-      shelfLifeValue: "24 Months",
+      shelfLifeValue: "Refer to product packaging",
 
       storage: "Storage",
-      storageValue: "Store in a cool, dry place.",
+      storageValue: "Store according to the instructions on the product packaging.",
 
-      packaging: "Packaging",
-      packagingValue: "Retail Pouch / Vacuum Bag / Export Carton",
+      packaging: "Current Retail Packaging",
+      packagingValue: "100g / 250g / 500g Stand-up Pouches",
 
-      certification: "Certification",
-      certificationValue: "Available upon request",
+      certification: "Additional Information",
+      certificationValue: "Please contact Mato Cashew for specific requirements",
     },
   },
 
@@ -424,57 +424,57 @@ const en = {
 
     items: [
       {
-        question: "What grades of cashew kernels do you supply?",
+        question: "What retail products are currently available?",
 
         answer:
-          "We supply premium Cambodian cashew kernels including WW180, WW210, WW240, WW320, WW450, LP and SP grades.",
+          "Mato Cashew currently presents 100g, 250g and 500g retail cashew products. Please see the product pages for current details.",
       },
 
       {
-        question: "Do you offer OEM or private label services?",
+        question: "Can I contact Mato Cashew about larger quantities?",
 
         answer:
-          "Yes. We provide OEM and private label packaging tailored to your brand and market requirements.",
+          "Yes. Businesses can contact Mato Cashew to discuss product quantities, packaging requirements, and available options.",
       },
 
       {
-        question: "What is your minimum order quantity (MOQ)?",
+        question: "Do you provide specific kernel grades?",
 
         answer:
-          "MOQ depends on the product type and packaging. Please contact our sales team for detailed quotations.",
+          "Please contact Mato Cashew to discuss current product specifications and grade requirements.",
       },
 
       {
-        question: "Which countries do you export to?",
+        question: "Can I discuss custom packaging requirements?",
 
         answer:
-          "We serve both domestic and international markets and welcome partnerships worldwide.",
+          "Yes. You are welcome to contact us about your packaging requirements. Available options can be discussed based on your needs.",
       },
 
       {
-        question: "How can I request a quotation?",
+        question: "How can I request product or pricing information?",
 
         answer:
-          "Simply visit our Contact page or click the 'Request Quote' button to get in touch with us.",
+          "Visit our Contact page and send us your product, quantity, and packaging requirements.",
       },
     ],
   },
 
   cta: {
-    tag: "Wholesale Inquiry",
+    tag: "Business Inquiries",
 
-    title: "Ready to Import Premium Cambodian Cashew?",
+    title: "Interested in Cambodian Cashew Products?",
 
     description:
-      "Whether you are an importer, distributor, supermarket, or food manufacturer, Mato Cashew is ready to supply premium Cambodian cashew kernels tailored to your business needs.",
+      "Contact Mato Cashew to discuss the products, quantities, packaging, or business requirements you are looking for.",
 
     features: [
-      "Export Ready",
-      "OEM & Private Label",
-      "Reliable Supply",
+      "Product Inquiries",
+      "Quantity Discussions",
+      "Packaging Requirements",
     ],
 
-    primaryButton: "Request Quote",
+    primaryButton: "Contact Mato Cashew",
 
     secondaryButton: "Wholesale Information",
   },
