@@ -3,7 +3,7 @@ title: "Premium Cambodian Cashew 250g"
 
 slug: "premium-cashew-250g"
 
-description: "Premium roasted Cambodian cashew kernels in a family-size 250g package."
+description: "Premium roasted Cambodian cashew kernels in a family-size 250g stand-up pouch."
 
 sku: "MC-250"
 
@@ -28,10 +28,9 @@ minimumOrder: "300 Packs"
 
 specifications:
   - Premium Cambodian Cashew Kernels
-  - Family Size Package
-  - Naturally Sweet
-  - Crispy Whole Kernels
-  - Food Grade Packaging
+  - 250g Family-Size Pack
+  - Whole Kernels
+  - Stand-up Pouch
 
 applications:
   - Family Consumption

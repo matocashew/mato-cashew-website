@@ -3,7 +3,7 @@ title: "Premium Cambodian Cashew 100g"
 
 slug: "premium-cashew-100g"
 
-description: "Premium roasted Cambodian cashew kernels in a convenient 100g retail pack. Perfect for healthy everyday snacking."
+description: "Premium roasted Cambodian cashew kernels in a convenient 100g retail pack for everyday snacking."
 
 sku: "MC-100"
 
@@ -29,8 +29,8 @@ minimumOrder: "500 Packs"
 specifications:
   - Premium Cambodian Cashew Kernels
   - Ready-to-Eat
-  - Naturally Sweet Flavor
-  - Crispy Texture
+  - 100g Retail Pack
+  - Stand-up Pouch
   - Resealable Packaging
 
 applications:
