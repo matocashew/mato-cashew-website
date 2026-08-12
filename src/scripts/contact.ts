@@ -254,6 +254,21 @@ if (form) {
 
           turnstile.reset();
 
+          requestAnimationFrame(() => {
+
+            const headerOffset = 120;
+
+            const messagePosition =
+              successBox.getBoundingClientRect().top +
+              window.scrollY;
+
+            window.scrollTo({
+              top: messagePosition - headerOffset,
+              behavior: "smooth",
+            });
+
+          });
+
         } else {
 
           errorBox.hidden = false;
