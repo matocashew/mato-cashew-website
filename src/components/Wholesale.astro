@@ -1,57 +1,69 @@
 ---
 import SectionTitle from "./SectionTitle.astro";
+
 import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
+import { getLocalizedPath } from "../i18n/getLocalizedPath";
+
+import type { Language } from "../i18n/config";
 
 const t = getCurrentLanguage(
   Astro.url.pathname
 );
+
+const language: Language =
+  Astro.url.pathname.startsWith("/km")
+    ? "km"
+    : "en";
+
+const contactPath =
+  getLocalizedPath(language, "/contact");
 ---
 
 <section id="wholesale" class="wholesale">
 
-    <div class="container wholesale-grid">
+  <div class="container wholesale-grid">
 
-        <div class="wholesale-content">
+    <div class="wholesale-content">
 
-            <SectionTitle
-                tag={t.wholesaleHome.tag}
-                title={t.wholesaleHome.title}
-            />
+      <SectionTitle
+        tag={t.wholesaleHome.tag}
+        title={t.wholesaleHome.title}
+      />
 
-                <p>
-                    {t.wholesaleHome.description}
-                </p>
+      <p>
+        {t.wholesaleHome.description}
+      </p>
 
-            <ul class="wholesale-list">
+      <ul class="wholesale-list">
 
-                <li>🌍 {t.wholesaleHome.features.export}</li>
+        <li>🌍 {t.wholesaleHome.features.export}</li>
 
-                <li>📦 {t.wholesaleHome.features.packaging}</li>
+        <li>📦 {t.wholesaleHome.features.packaging}</li>
 
-                <li>🏆 {t.wholesaleHome.features.quality}</li>
+        <li>🏆 {t.wholesaleHome.features.quality}</li>
 
-                <li>🤝 {t.wholesaleHome.features.privateLabel}</li>
+        <li>🤝 {t.wholesaleHome.features.privateLabel}</li>
 
-            </ul>
+      </ul>
 
-            <a
-                href="#contact"
-                class="btn btn-primary"
-            >
-                {t.wholesaleHome.cta}
-            </a>
-
-        </div>
-
-        <div class="wholesale-image">
-
-            <img
-                src="/images/wholesale/export.jpg"
-                alt={t.wholesaleHome.imageAlt}
-            />
-
-        </div>
+      <a
+        href={contactPath}
+        class="btn btn-primary"
+      >
+        {t.wholesaleHome.cta}
+      </a>
 
     </div>
+
+    <div class="wholesale-image">
+
+      <img
+        src="/images/wholesale/export.jpg"
+        alt={t.wholesaleHome.imageAlt}
+      />
+
+    </div>
+
+  </div>
 
 </section>

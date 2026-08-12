@@ -1,18 +1,32 @@
 ---
 import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+import { getLocalizedPath } from "../../i18n/getLocalizedPath";
+
+import type { Language } from "../../i18n/config";
 
 const t = getCurrentLanguage(
   Astro.url.pathname
 );
+
+const language: Language =
+  Astro.url.pathname.startsWith("/km")
+    ? "km"
+    : "en";
+
+const contactPath =
+  getLocalizedPath(language, "/contact");
+
+const wholesalePath =
+  getLocalizedPath(language, "/wholesale");
 ---
 
 <section class="about-cta">
 
   <div class="container">
 
-    <div class="about-cta-box">
+    <div class="about-cta-content">
 
-      <span class="cta-tag">
+      <span class="about-cta-tag">
         {t.about.cta.tag}
       </span>
 
@@ -24,17 +38,17 @@ const t = getCurrentLanguage(
         {t.about.cta.description}
       </p>
 
-      <div class="cta-buttons">
+      <div class="about-cta-actions">
 
         <a
-          href="/contact"
+          href={contactPath}
           class="btn btn-primary"
         >
           {t.common.contactUs}
         </a>
 
         <a
-          href="/wholesale"
+          href={wholesalePath}
           class="btn btn-outline"
         >
           {t.about.cta.wholesaleButton}

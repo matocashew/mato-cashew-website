@@ -8,11 +8,17 @@ import OurProcess from "../about/OurProcess.astro";
 import QualityStandards from "../about/QualityStandards.astro";
 import WhyChooseUs from "../about/WhyChooseUs.astro";
 import AboutCTA from "../about/AboutCTA.astro";
+
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(
+  Astro.url.pathname
+);
 ---
 
 <PageHero
-  title="About Mato Cashew"
-  description="We connect Cambodian farmers with international markets."
+  title={t.about.pageHero.title}
+  description={t.about.pageHero.description}
 />
 
 <CompanyStory />

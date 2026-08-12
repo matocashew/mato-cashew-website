@@ -1,10 +1,22 @@
 ---
 import SectionTitle from "./SectionTitle.astro";
+
 import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
+import { getLocalizedPath } from "../i18n/getLocalizedPath";
+
+import type { Language } from "../i18n/config";
 
 const t = getCurrentLanguage(
   Astro.url.pathname
 );
+
+const language: Language =
+  Astro.url.pathname.startsWith("/km")
+    ? "km"
+    : "en";
+
+const productsPath =
+  getLocalizedPath(language, "/products");
 ---
 
 <section id="about" class="about">
@@ -48,7 +60,7 @@ const t = getCurrentLanguage(
       </ul>
 
       <a
-        href="/products"
+        href={productsPath}
         class="btn btn-primary"
       >
         {t.aboutHome.cta}

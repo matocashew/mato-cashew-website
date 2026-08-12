@@ -21,13 +21,12 @@ const en = {
   },
 
   hero: {
-    tag: "PREMIUM CAMBODIAN CASHEW",
+    tag: "Cambodian Cashew Products",
 
-    title:
-      "Premium Cambodian Cashew for Retail, Wholesale and Export Markets",
+    title: "Premium Cambodian Cashew for Everyday Enjoyment",
 
     description:
-      "Premium Cambodian cashew kernels carefully selected from trusted local farms. Supplying retail, wholesale, export, OEM, and private label partners worldwide.",
+      "Discover Mato Cashew's current range of Cambodian cashew products, prepared for convenient everyday enjoyment.",
   },
 
   footer: {
@@ -111,173 +110,180 @@ const en = {
     aboutHome: {
       tag: "About Mato Cashew",
 
-      title: "Premium Cambodian Cashew",
+      title: "Cambodian Cashew, Thoughtfully Presented",
 
       description:
-        "Mato Cashew partners directly with trusted Cambodian farmers to produce premium cashew kernels for domestic and international markets. Every batch is carefully selected, processed under strict quality standards, and packed to preserve freshness, flavor, and food safety. We proudly support sustainable agriculture while delivering reliable products for wholesale, export, OEM, and private label customers.",
-
-      imageAlt:
-        "Cambodian cashew orchard supplying premium Mato Cashew kernels",
-
-      cta: "Explore Products",
+        "Mato Cashew is building a Cambodian cashew brand focused on clear product information, convenient retail packaging, and responsive customer service.",
 
       features: {
-        quality: "Premium Quality",
-        farmers: "Direct from Farmers",
-        export: "Export Standard",
-        sustainability: "Sustainable Agriculture",
+        quality: "Carefully Presented Products",
+        farmers: "Cambodian Cashew",
+        export: "Business Inquiries Welcome",
+        sustainability: "Growing with Care",
       },
+
+      cta: "Explore Our Products",
+
+      imageAlt: "Cambodian cashew orchard",
     },
-    about: {
-    story: {
-      tag: "Our Story",
-      title: "From Cambodian Farms to Global Markets",
+about: {
+  story: {
+    tag: "Our Story",
 
-      paragraph1:
-        "Mato Cashew was founded with a simple vision: to bring premium Cambodian cashew kernels to customers around the world while creating sustainable value for local farmers.",
+    title: "Building a Cambodian Cashew Brand",
 
-      paragraph2:
-        "By working directly with growers and applying strict quality standards throughout processing and packaging, we deliver products that meet international export requirements.",
-    },
+    paragraph1:
+      "Mato Cashew was created with a focus on presenting Cambodian cashew products clearly, thoughtfully, and accessibly to customers and business partners.",
 
-    mission: {
-      title: "Our Mission",
+    paragraph2:
+      "As the business grows, we are working to build strong product knowledge, reliable customer service, and responsible relationships across the Cambodian cashew value chain.",
+  },
+
+  mission: {
+    title: "Our Mission",
+
+    description:
+      "To build a trusted Cambodian cashew brand by offering clear product information, thoughtful presentation, and responsive service to customers and business partners.",
+  },
+
+  vision: {
+    title: "Our Vision",
+
+    description:
+      "To grow Mato Cashew into a recognized Cambodian cashew brand known for quality, trust, and long-term business relationships.",
+  },
+
+  values: {
+    tag: "Our Values",
+
+    title: "What We Stand For",
+
+    sustainability: {
+      title: "Responsible Growth",
 
       description:
-        "To deliver premium Cambodian cashew kernels that meet international quality standards while creating sustainable opportunities for local farmers.",
+        "Growing the business thoughtfully while respecting the long-term value of Cambodia's agricultural sector.",
     },
 
-    vision: {
-      title: "Our Vision",
+    integrity: {
+      title: "Integrity",
 
       description:
-        "To become one of Cambodia's leading cashew exporters recognized for quality, reliability, and long-term partnerships worldwide.",
+        "Building trust through transparency, honesty, and clear communication.",
     },
 
-    values: {
-      tag: "Our Values",
-
-      title: "What We Stand For",
-
-      sustainability: {
-        title: "Sustainability",
-
-        description:
-          "Supporting environmentally responsible farming and long-term agricultural development.",
-      },
-
-      integrity: {
-        title: "Integrity",
-
-        description:
-          "Building trust through transparency, honesty, and reliable partnerships.",
-      },
-
-      quality: {
-        title: "Quality",
-
-        description:
-          "Delivering premium Cambodian cashew kernels that consistently meet export standards.",
-      },
-    },
-
-    process: {
-      tag: "Our Process",
-
-      title: "From Farm to Global Markets",
-
-      orchard: {
-        title: "Cashew Orchard",
-
-        description:
-          "Premium cashew apples are harvested from carefully managed orchards across Cambodia.",
-      },
-
-      processing: {
-        title: "Processing",
-
-        description:
-          "Nuts are steamed, shelled, dried, peeled, graded, and inspected under strict quality control.",
-      },
-      packaging: {
-        title: "Packaging",
-
-        description:
-          "Kernels are vacuum packed using export-grade food packaging to preserve freshness.",
-      },
-      export: {
-        title: "Worldwide Export",
-
-        description:
-          "Finished products are prepared for international buyers with reliable logistics and documentation.",
-      },
-    },
-
-    qualityStandards: {
-      tag: "Quality Standards",
-
-      title: "Certified for Global Markets",
+    quality: {
+      title: "Quality",
 
       description:
-        "Mato Cashew follows strict quality control procedures from raw material selection to final packaging. Every batch is carefully inspected to ensure premium quality, food safety, and export readiness.",
-
-      items: [
-        "Premium Cambodian Cashew Kernels",
-        "Food Safety & Hygiene Control",
-        "Export Quality Inspection",
-        "Vacuum & Food Grade Packaging",
-        "Consistent International Standards",
-      ],
-    },
-
-    whyChooseUs: {
-      tag: "Why Choose Us",
-
-      title: "Trusted Partner for Premium Cambodian Cashew",
-
-      premiumOrigin: {
-        title: "Premium Origin",
-
-        description:
-          "Carefully sourced from Cambodia's fertile cashew-growing regions for superior taste and quality.",
-      },
-
-      modernProcessing: {
-        title: "Modern Processing",
-
-        description:
-          "Processed with strict quality control and food safety procedures from shelling to final grading.",
-      },
-
-      exportReady: {
-        title: "Export Ready",
-
-        description:
-          "Professional documentation, reliable logistics, and packaging designed for international markets.",
-      },
-
-      partnership: {
-        title: "Reliable Partnership",
-
-        description:
-          "Building long-term relationships through consistency, transparency, and responsive customer service.",
-      },
-    },
-
-    cta: {
-      tag: "Let's Work Together",
-
-      title: "Ready to Source Premium Cambodian Cashew?",
-
-      description:
-        "Whether you are an importer, distributor, supermarket, or food manufacturer, Mato Cashew is ready to become your trusted long-term partner.",
-
-      wholesaleButton: "Wholesale Information",
+        "Focusing on careful product presentation, useful information, and continuous improvement.",
     },
   },
+
+  process: {
+    tag: "Our Approach",
+
+    title: "From Cashew to Customer",
+
+    orchard: {
+      title: "Cambodian Cashew",
+
+      description:
+        "Our products are built around Cambodian cashew and the country's growing cashew sector.",
+    },
+
+    processing: {
+      title: "Product Preparation",
+
+      description:
+        "Cashew kernels go through preparation and handling before they are ready for packaging and sale.",
+    },
+
+    packaging: {
+      title: "Retail Packaging",
+
+      description:
+        "Current Mato Cashew retail products are presented in convenient stand-up pouch formats.",
+    },
+
+    export: {
+      title: "Business Inquiries",
+
+      description:
+        "Businesses are welcome to contact Mato Cashew to discuss product quantities, packaging requirements, and available options.",
+    },
+  },
+
+  qualityStandards: {
+    tag: "Product Focus",
+
+    title: "Our Approach to Product Quality",
+
+    description:
+      "Mato Cashew is focused on presenting clear product information, careful packaging, and a consistent customer experience as the business develops.",
+
+    items: [
+      "Cambodian Cashew Products",
+      "Clear Product Information",
+      "Convenient Retail Packaging",
+      "Careful Product Presentation",
+      "Continuous Improvement",
+    ],
+  },
+
+  whyChooseUs: {
+    tag: "Why Mato Cashew",
+
+    title: "A Growing Cambodian Cashew Brand",
+
+    premiumOrigin: {
+      title: "Cambodian Origin",
+
+      description:
+        "Our brand is centered on Cambodian cashew and the value of Cambodia's cashew sector.",
+    },
+
+    modernProcessing: {
+      title: "Product Focus",
+
+      description:
+        "We focus on clear product presentation, practical packaging, and useful information for customers.",
+    },
+
+    exportReady: {
+      title: "Business Inquiries Welcome",
+
+      description:
+        "Contact Mato Cashew to discuss product, quantity, packaging, or other business requirements.",
+    },
+
+    partnership: {
+      title: "Responsive Service",
+
+      description:
+        "We aim to build long-term relationships through transparency, clear communication, and responsive customer service.",
+    },
+  },
+
+  cta: {
+    tag: "Let's Connect",
+
+    title: "Interested in Mato Cashew Products?",
+
+    description:
+      "Contact Mato Cashew to discuss our current products, quantities, packaging requirements, or other business inquiries.",
+
+    wholesaleButton: "Business Inquiries",
+  },
+  pageHero: {
+    title: "About Mato Cashew",
+    description:
+      "Discover the story, values, and approach behind our growing Cambodian cashew brand.",
+  },
+},
   productsHome: {
     tag: "Our Products",
-    title: "Premium Cashew Collection",
+    title: "Explore Mato Cashew Products",
   },
   products: {
   packaging: {
@@ -512,47 +518,35 @@ resources: {
 galleryHome: {
   tag: "Gallery",
 
-  title: "From Farm to Export",
+  title: "Explore Cambodian Cashew",
 
   images: {
-    orchard:
-      "Cambodian cashew orchard",
-
-    farmers:
-      "Cambodian cashew farmers harvesting cashew",
-
-    factory:
-      "Mato Cashew processing facility",
-
-    kernels:
-      "Premium Cambodian cashew kernels",
-
-    packaging:
-      "Export-ready cashew packaging",
-
-    export:
-      "Cambodian cashew export shipment",
+    orchard: "Cashew orchard",
+    farmers: "Cashew farming",
+    factory: "Cashew processing",
+    kernels: "Cashew kernels",
+    packaging: "Cashew product packaging",
+    export: "Packaged cashew products",
   },
 },
 wholesaleHome: {
-  tag: "Wholesale",
+  tag: "Business Inquiries",
 
-  title: "Export Premium Cambodian Cashew Worldwide",
+  title: "Looking for Cambodian Cashew Products?",
 
   description:
-    "Mato Cashew supplies premium Cambodian cashew kernels to international importers, distributors, supermarkets, and food manufacturers. We provide reliable quality, competitive pricing, and export-ready packaging.",
-
-  imageAlt:
-    "Wholesale export of premium Cambodian cashew kernels",
-
-  cta: "Request Wholesale Quote",
+    "Contact Mato Cashew to discuss product quantities, packaging requirements, and available options for your business.",
 
   features: {
-    export: "Worldwide Export",
-    packaging: "Food Grade Packaging",
-    quality: "International Quality Standard",
-    privateLabel: "OEM & Private Label Available",
+    export: "Product Inquiries",
+    packaging: "Packaging Requirements",
+    quality: "Product Information",
+    privateLabel: "Business Discussions",
   },
+
+  cta: "Contact Mato Cashew",
+
+  imageAlt: "Packaged Cambodian cashew products",
 },
 };
 
