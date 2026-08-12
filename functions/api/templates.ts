@@ -175,7 +175,7 @@ Thank you for contacting Mato Cashew.
 
 We have successfully received your inquiry.
 
-Our sales team will review your request and reply as soon as possible.
+We will review your inquiry and reply as soon as possible.
 
 </p>
 

@@ -3,71 +3,89 @@ import { Resend } from "resend";
 import type { ContactFormData } from "./types";
 
 import {
-
   buildAdminEmail,
-
   buildAutoReply
-
 } from "./templates";
 
 export async function sendEmails(
-
   apiKey: string,
-
   data: ContactFormData
-
 ) {
 
   const resend = new Resend(apiKey);
 
-  console.log("Sending emails...");
-
   const [
-
     adminResult,
-
     autoReplyResult
-
   ] = await Promise.all([
 
     resend.emails.send({
 
-      from: "Mato Cashew <noreply@updates.matocashew.com>",
+      from:
+        "Mato Cashew <noreply@updates.matocashew.com>",
 
-      to: ["info@matocashew.com"],
+      to: [
+        "info@matocashew.com"
+      ],
 
       replyTo: data.email,
 
-      subject: `[Mato Cashew] ${data.inquiry} - ${data.name}`,
+      subject:
+        `[Mato Cashew] ${data.inquiry} - ${data.name}`,
 
-      html: buildAdminEmail(data)
+      html:
+        buildAdminEmail(data),
 
     }),
 
     resend.emails.send({
 
-      from: "Mato Cashew <noreply@updates.matocashew.com>",
+      from:
+        "Mato Cashew <noreply@updates.matocashew.com>",
 
-      to: [data.email],
+      to: [
+        data.email
+      ],
 
-      subject: "Thank you for contacting Mato Cashew",
+      subject:
+        "Thank you for contacting Mato Cashew",
 
-      html: buildAutoReply(data)
+      html:
+        buildAutoReply(data),
 
-    })
+    }),
 
   ]);
 
-  console.log("Admin Email:", adminResult);
+  if (adminResult.error) {
 
-  console.log("Auto Reply:", autoReplyResult);
+    console.error(
+      "Admin email failed:",
+      adminResult.error
+    );
+
+    throw new Error(
+      "Failed to send admin notification."
+    );
+  }
+
+  if (autoReplyResult.error) {
+
+    console.error(
+      "Auto reply failed:",
+      autoReplyResult.error
+    );
+
+    throw new Error(
+      "Failed to send customer auto reply."
+    );
+  }
 
   return {
+    adminEmailId:
+      adminResult.data?.id,
 
-    adminResult,
-
-    autoReplyResult
-
+    autoReplyEmailId:
+      autoReplyResult.data?.id,
   };
-
 }
