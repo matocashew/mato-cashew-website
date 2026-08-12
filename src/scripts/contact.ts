@@ -9,190 +9,277 @@ interface ApiResponse {
   errors?: string[];
 }
 
-const form = document.getElementById("contact-form") as HTMLFormElement | null;
+const form =
+  document.getElementById(
+    "contact-form"
+  ) as HTMLFormElement | null;
 
 if (form) {
 
   const submitBtn =
-    document.getElementById("submitBtn") as HTMLButtonElement;
+    document.getElementById(
+      "submitBtn"
+    ) as HTMLButtonElement;
 
   const successBox =
-    document.getElementById("successMessage") as HTMLDivElement;
+    document.getElementById(
+      "successMessage"
+    ) as HTMLDivElement;
 
   const errorBox =
-    document.getElementById("formError") as HTMLDivElement;
+    document.getElementById(
+      "formError"
+    ) as HTMLDivElement;
 
-  form.addEventListener("submit", async (event) => {
+  const requiredMessage =
+    form.dataset.requiredMessage ??
+    "This field is required.";
 
-    event.preventDefault();
+  const securityMessage =
+    form.dataset.securityMessage ??
+    "Please complete the security verification.";
 
-    successBox.hidden = true;
-    errorBox.hidden = true;
+  const sendingLabel =
+    form.dataset.sendingLabel ??
+    "Sending...";
 
-    errorBox.textContent = "";
+  const sendLabel =
+    form.dataset.sendLabel ??
+    "Send Inquiry";
 
-    form
-      .querySelectorAll(".error-message")
-      .forEach((el) => {
+  const submissionFailed =
+    form.dataset.submissionFailed ??
+    "Submission failed.";
 
-        (el as HTMLElement).textContent = "";
+  const connectionError =
+    form.dataset.connectionError ??
+    "Unable to connect to the server.";
 
-      });
+  form.addEventListener(
+    "submit",
+    async (event) => {
 
-    form
-      .querySelectorAll("input, textarea, select")
-      .forEach((el) => {
+      event.preventDefault();
 
-        el.classList.remove("input-error");
+      successBox.hidden = true;
+      errorBox.hidden = true;
 
-      });
+      errorBox.textContent = "";
 
-    let valid = true;
+      form
+        .querySelectorAll(".error-message")
+        .forEach((el) => {
 
-    const requiredFields = form.querySelectorAll("[required]");
+          (el as HTMLElement).textContent = "";
 
-    requiredFields.forEach((field) => {
+        });
 
-      const input =
-        field as HTMLInputElement |
-        HTMLTextAreaElement |
-        HTMLSelectElement;
+      form
+        .querySelectorAll(
+          "input, textarea, select"
+        )
+        .forEach((el) => {
 
-      if (!input.value.trim()) {
+          el.classList.remove(
+            "input-error"
+          );
 
-        valid = false;
+        });
 
-        input.classList.add("input-error");
+      let valid = true;
 
-        const error =
-          input.parentElement?.querySelector(".error-message") as HTMLElement | null;
+      const requiredFields =
+        form.querySelectorAll(
+          "[required]"
+        );
 
-        if (error) {
+      requiredFields.forEach(
+        (field) => {
 
-          error.textContent = "This field is required.";
+          const input =
+            field as
+              | HTMLInputElement
+              | HTMLTextAreaElement
+              | HTMLSelectElement;
+
+          if (!input.value.trim()) {
+
+            valid = false;
+
+            input.classList.add(
+              "input-error"
+            );
+
+            const error =
+              input.parentElement
+                ?.querySelector(
+                  ".error-message"
+                ) as HTMLElement | null;
+
+            if (error) {
+              error.textContent =
+                requiredMessage;
+            }
+
+          }
 
         }
+      );
 
+      if (!valid) {
+        return;
       }
 
-    });
+      if (
+        typeof turnstile === "undefined"
+      ) {
 
-    if (!valid) {
+        errorBox.hidden = false;
+        errorBox.textContent =
+          securityMessage;
 
-      return;
+        return;
+      }
 
-    }
+      const token =
+        turnstile.getResponse();
 
-    const token = turnstile.getResponse();
-
-    if (!token) {
-
-      errorBox.hidden = false;
-
-      errorBox.textContent =
-        "Please complete the security verification.";
-
-      return;
-
-    }
-
-    const payload = {
-
-      name:
-        (document.getElementById("name") as HTMLInputElement)
-          .value.trim(),
-
-      company:
-        (document.getElementById("company") as HTMLInputElement)
-          .value.trim(),
-
-      country:
-        (document.getElementById("country") as HTMLInputElement)
-          .value.trim(),
-
-      email:
-        (document.getElementById("email") as HTMLInputElement)
-          .value.trim(),
-
-      phone:
-        (document.getElementById("phone") as HTMLInputElement)
-          .value.trim(),
-
-      inquiry:
-        (document.getElementById("inquiry") as HTMLSelectElement)
-          .value,
-
-      volume:
-        (document.getElementById("volume") as HTMLSelectElement)
-          .value,
-
-      message:
-        (document.getElementById("message") as HTMLTextAreaElement)
-          .value.trim(),
-
-      turnstileToken: token
-
-    };
-
-    submitBtn.disabled = true;
-
-    submitBtn.textContent = "Sending...";
-
-    try {
-
-      const response = await fetch("/api/contact", {
-
-        method: "POST",
-
-        headers: {
-
-          "Content-Type": "application/json"
-
-        },
-
-        body: JSON.stringify(payload)
-
-      });
-
-      const result =
-        await response.json() as ApiResponse;
-
-      submitBtn.disabled = false;
-
-      submitBtn.textContent = "Send Inquiry";
-
-      if (result.success) {
-
-        successBox.hidden = false;
-
-        form.reset();
-
-        turnstile.reset();
-
-      } else {
+      if (!token) {
 
         errorBox.hidden = false;
 
         errorBox.textContent =
-          result.message ??
-          result.errors?.join(", ") ??
-          "Submission failed.";
+          securityMessage;
+
+        return;
+      }
+
+      const payload = {
+
+        name:
+          (
+            document.getElementById(
+              "name"
+            ) as HTMLInputElement
+          ).value.trim(),
+
+        company:
+          (
+            document.getElementById(
+              "company"
+            ) as HTMLInputElement
+          ).value.trim(),
+
+        country:
+          (
+            document.getElementById(
+              "country"
+            ) as HTMLInputElement
+          ).value.trim(),
+
+        email:
+          (
+            document.getElementById(
+              "email"
+            ) as HTMLInputElement
+          ).value.trim(),
+
+        phone:
+          (
+            document.getElementById(
+              "phone"
+            ) as HTMLInputElement
+          ).value.trim(),
+
+        inquiry:
+          (
+            document.getElementById(
+              "inquiry"
+            ) as HTMLSelectElement
+          ).value,
+
+        volume:
+          (
+            document.getElementById(
+              "volume"
+            ) as HTMLSelectElement
+          ).value,
+
+        message:
+          (
+            document.getElementById(
+              "message"
+            ) as HTMLTextAreaElement
+          ).value.trim(),
+
+        turnstileToken: token,
+
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent =
+        sendingLabel;
+
+      try {
+
+        const response =
+          await fetch(
+            "/api/contact",
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json",
+              },
+
+              body:
+                JSON.stringify(
+                  payload
+                ),
+            }
+          );
+
+        const result = await response.json() as ApiResponse;
+
+        submitBtn.disabled = false;
+        submitBtn.textContent =
+          sendLabel;
+
+        if (result.success) {
+
+          successBox.hidden = false;
+
+          form.reset();
+
+          turnstile.reset();
+
+        } else {
+
+          errorBox.hidden = false;
+
+          errorBox.textContent =
+            result.message ??
+            result.errors?.join(", ") ??
+            submissionFailed;
+
+        }
+
+      } catch {
+
+        submitBtn.disabled = false;
+
+        submitBtn.textContent =
+          sendLabel;
+
+        errorBox.hidden = false;
+
+        errorBox.textContent =
+          connectionError;
 
       }
 
-    } catch {
-
-      submitBtn.disabled = false;
-
-      submitBtn.textContent = "Send Inquiry";
-
-      errorBox.hidden = false;
-
-      errorBox.textContent =
-        "Unable to connect to the server.";
-
     }
-
-  });
+  );
 
 }

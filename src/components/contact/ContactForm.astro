@@ -2,6 +2,7 @@
 import FormField from "./FormField.astro";
 import FormSelect from "./FormSelect.astro";
 import FormTextarea from "./FormTextarea.astro";
+
 import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
 
 const t = getCurrentLanguage(
@@ -18,15 +19,15 @@ const inquiryOptions = [
     label: t.contact.options.retail,
   },
   {
-    value: "Distributor Request",
+    value: "Distribution Inquiry",
     label: t.contact.options.distributor,
   },
   {
-    value: "Export Partnership",
+    value: "Business Partnership",
     label: t.contact.options.export,
   },
   {
-    value: "OEM / Private Label",
+    value: "Packaging / Private Label Inquiry",
     label: t.contact.options.oem,
   },
   {
@@ -60,7 +61,7 @@ const volumeOptions = [
   class="success-message"
   hidden
 >
-  ✅ Thank you! Your inquiry has been sent successfully.
+  ✅ {t.contact.messages.success}
 </div>
 
 <div
@@ -68,13 +69,19 @@ const volumeOptions = [
   class="form-error"
   hidden
 >
-  ❌ Sorry, something went wrong. Please try again.
+  ❌ {t.contact.messages.error}
 </div>
 
 <form
   id="contact-form"
   class="contact-form"
   novalidate
+  data-required-message={t.contact.messages.required}
+  data-security-message={t.contact.messages.security}
+  data-sending-label={t.contact.messages.sending}
+  data-send-label={t.contact.send}
+  data-submission-failed={t.contact.messages.submissionFailed}
+  data-connection-error={t.contact.messages.connectionError}
 >
 
   <FormField

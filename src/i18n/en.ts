@@ -48,22 +48,33 @@ const en = {
   contact: {
     title: "Contact Us",
 
+    hero: {
+      title: "Contact Us",
+      description:
+        "Get in touch with Mato Cashew to discuss our products, quantities, packaging requirements, or other business inquiries.",
+    },
+
+    info: {
+      tag: "Contact Information",
+      title: "Let's Connect",
+
+      description:
+        "Contact us for product information, retail or wholesale inquiries, distribution discussions, packaging requirements, or general questions.",
+
+      email: "Email",
+      phone: "Phone",
+      location: "Location",
+      locationValue: "Cambodia",
+    },
+
     name: "Full Name",
-
     company: "Company Name",
-
     country: "Country",
-
     email: "Email Address",
-
     phone: "Phone / WhatsApp",
-
     inquiry: "Inquiry Type",
-
     volume: "Estimated Order Volume",
-
     message: "Message",
-
     send: "Send Inquiry",
 
     privacy:
@@ -71,40 +82,50 @@ const en = {
 
     placeholders: {
       name: "John Smith",
-
       company: "ABC Trading Co., Ltd.",
-
       country: "Cambodia",
-
       email: "john@example.com",
-
       phone: "+855...",
-
       message: "Please tell us about your inquiry...",
     },
 
     options: {
       wholesale: "Wholesale Inquiry",
-
       retail: "Retail Inquiry",
-
-      distributor: "Distributor Request",
-
-      export: "Export Partnership",
-
-      oem: "OEM / Private Label",
-
+      distributor: "Distribution Inquiry",
+      export: "Business Partnership",
+      oem: "Packaging / Private Label Inquiry",
       general: "General Inquiry",
     },
 
     volumeOptions: {
       less100: "Less than 100 kg",
-
       kg100500: "100–500 kg",
-
       kg5001ton: "500 kg–1 ton",
-
       more1ton: "More than 1 ton",
+    },
+
+    messages: {
+      success:
+        "Thank you! Your inquiry has been sent successfully.",
+
+      error:
+        "Sorry, something went wrong. Please try again.",
+
+      required:
+        "This field is required.",
+
+      security:
+        "Please complete the security verification.",
+
+      sending:
+        "Sending...",
+
+      submissionFailed:
+        "Submission failed. Please try again.",
+
+      connectionError:
+        "Unable to connect to the server. Please try again.",
     },
   },
     aboutHome: {

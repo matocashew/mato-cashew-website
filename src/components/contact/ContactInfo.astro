@@ -1,24 +1,32 @@
+---
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(
+  Astro.url.pathname
+);
+---
+
 <section class="contact-info-card">
 
   <span class="section-tag">
-    Contact Information
+    {t.contact.info.tag}
   </span>
 
   <h2>
-    Let's Grow Together
+    {t.contact.info.title}
   </h2>
 
   <p>
-    Whether you are looking for premium Cambodian cashew kernels,
-    wholesale pricing, export opportunities, or OEM services,
-    our team is ready to assist you.
+    {t.contact.info.description}
   </p>
 
   <div class="contact-list">
 
     <div class="contact-item">
 
-      <h4>📧 Email</h4>
+      <h4>
+        📧 {t.contact.info.email}
+      </h4>
 
       <p>
         <a href="mailto:info@matocashew.com">
@@ -30,20 +38,26 @@
 
     <div class="contact-item">
 
-      <h4>📞 Phone</h4>
+      <h4>
+        📞 {t.contact.info.phone}
+      </h4>
 
       <p>
-        +855 12 646 988
+        <a href="tel:+85512646988">
+          +855 12 646 988
+        </a>
       </p>
 
     </div>
 
     <div class="contact-item">
 
-      <h4>📍 Location</h4>
+      <h4>
+        📍 {t.contact.info.location}
+      </h4>
 
       <p>
-        Cambodia
+        {t.contact.info.locationValue}
       </p>
 
     </div>

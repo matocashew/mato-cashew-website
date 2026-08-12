@@ -2,11 +2,17 @@
 import PageHero from "../PageHero.astro";
 import ContactInfo from "../contact/ContactInfo.astro";
 import ContactForm from "../contact/ContactForm.astro";
+
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+
+const t = getCurrentLanguage(
+  Astro.url.pathname
+);
 ---
 
 <PageHero
-  title="Contact Us"
-  description="We'd love to hear from you. Get in touch with our team today."
+  title={t.contact.hero.title}
+  description={t.contact.hero.description}
 />
 
 <section class="contact-page">
@@ -15,8 +21,17 @@ import ContactForm from "../contact/ContactForm.astro";
 
     <ContactInfo />
 
-    <ContactForm />
+    <div class="contact-form-column">
+      <ContactForm />
+    </div>
 
   </div>
 
 </section>
+
+<script
+  is:inline
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></script>
