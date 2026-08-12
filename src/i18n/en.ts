@@ -64,7 +64,8 @@ const en = {
       email: "Email",
       phone: "Phone",
       location: "Location",
-      locationValue: "Cambodia",
+      locationValue:
+        "Chanlong Village, Damril Commune, Ou Reang Ov District, Tboung Khmum Province, Cambodia",
     },
 
     name: "Full Name",
