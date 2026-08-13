@@ -1,51 +1,67 @@
 export async function verifyTurnstile(
-
   token: string,
-
   secretKey: string
-
 ): Promise<boolean> {
+
+  if (!token || !secretKey) {
+    console.error(
+      "Turnstile verification configuration is missing."
+    );
+
+    return false;
+  }
 
   try {
 
     const formData = new FormData();
 
-    formData.append("secret", secretKey);
-
-    formData.append("response", token);
-
-    const response = await fetch(
-
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-
-      {
-
-        method: "POST",
-
-        body: formData
-
-      }
-
+    formData.append(
+      "secret",
+      secretKey
     );
 
-    const result = await response.json() as {
+    formData.append(
+      "response",
+      token
+    );
 
-      success: boolean;
+    const response = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
 
-      "error-codes"?: string[];
+    if (!response.ok) {
+      console.error(
+        "Turnstile verification request failed."
+      );
 
-    };
+      return false;
+    }
 
-    console.log("Turnstile Result:", result);
+    const result =
+      await response.json() as {
+        success: boolean;
+        "error-codes"?: string[];
+      };
+
+    if (!result.success) {
+      console.warn(
+        "Turnstile verification rejected."
+      );
+    }
 
     return result.success;
 
   } catch (error) {
 
-    console.error("Turnstile Error:", error);
+    console.error(
+      "Turnstile verification error:",
+      error
+    );
 
     return false;
-
   }
-
 }

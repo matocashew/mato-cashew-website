@@ -19,6 +19,35 @@ export const onRequestPost =
 
     try {
 
+      const turnstileSecret =
+        context.env
+          ?.TURNSTILE_SECRET_KEY;
+
+      const resendApiKey =
+        context.env
+          ?.RESEND_API_KEY;
+
+      if (
+        !turnstileSecret ||
+        !resendApiKey
+      ) {
+
+        console.error(
+          "Contact API environment configuration is missing."
+        );
+
+        return Response.json(
+          {
+            success: false,
+            message:
+              "Service configuration error."
+          },
+          {
+            status: 500
+          }
+        );
+      }
+
       const body =
         await context.request.json() as ContactFormData;
 
@@ -45,8 +74,7 @@ export const onRequestPost =
       const turnstileValid =
         await verifyTurnstile(
           body.turnstileToken,
-          context.env
-            .TURNSTILE_SECRET_KEY
+          turnstileSecret
         );
 
       if (!turnstileValid) {
@@ -68,7 +96,7 @@ export const onRequestPost =
       }
 
       await sendEmails(
-        context.env.RESEND_API_KEY,
+        resendApiKey,
         body
       );
 
