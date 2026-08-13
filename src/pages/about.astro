@@ -4,20 +4,22 @@ import "../styles/about-page.css";
 
 import PageLayout from "../layouts/PageLayout.astro";
 import AboutPage from "../components/pages/AboutPage.astro";
+
+import { SITE } from "../config/site";
 ---
 
 <PageLayout
-  title="About Mato Cashew"
-  description="Learn about Mato Cashew."
-  canonical="https://matocashew.com/about"
+  title={`About | ${SITE.brand.english}`}
+  description="Learn about Mato Cashew, our commitment to quality, responsible sourcing, and our journey in bringing Cambodian cashew products to customers and business partners."
+  canonical="https://matocashew.com/about/"
   breadcrumbs={[
     {
       name: "Home",
-      url: "https://matocashew.com"
+      url: "https://matocashew.com/"
     },
     {
       name: "About",
-      url: "https://matocashew.com/about"
+      url: "https://matocashew.com/about/"
     }
   ]}
 >

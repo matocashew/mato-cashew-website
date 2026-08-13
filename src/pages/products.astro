@@ -6,6 +6,7 @@ import "../styles/products-page.css";
 import PageLayout from "../layouts/PageLayout.astro";
 import ProductsPage from "../components/pages/ProductsPage.astro";
 import CollectionPageSchema from "../components/seo/CollectionPageSchema.astro";
+
 import { getCollection } from "astro:content";
 
 const products = (
@@ -18,18 +19,19 @@ const products = (
     Number(b.data.featured) - Number(a.data.featured)
 );
 ---
+
 <PageLayout
   title="Products | Mato Cashew"
   description="Premium Cambodian Cashew Products"
-  canonical="https://matocashew.com/products"
+  canonical="https://matocashew.com/products/"
   breadcrumbs={[
     {
       name: "Home",
-      url: "https://matocashew.com"
+      url: "https://matocashew.com/"
     },
     {
       name: "Products",
-      url: "https://matocashew.com/products"
+      url: "https://matocashew.com/products/"
     }
   ]}
 >

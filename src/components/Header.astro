@@ -1,116 +1,137 @@
 ---
 import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
-
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 
 const currentPath = Astro.url.pathname;
 
 const isKhmer = currentPath.startsWith("/km");
 
-const basePath = isKhmer ? "/km" : "";
-
-const t = getCurrentLanguage(
-  Astro.url.pathname
-);
+const t = getCurrentLanguage(currentPath);
 
 const homePath = isKhmer ? "/km/" : "/";
+const aboutPath = isKhmer ? "/km/about" : "/about";
+const productsPath = isKhmer ? "/km/products" : "/products";
+const resourcesPath = isKhmer ? "/km/resources" : "/resources";
+const galleryPath = isKhmer ? "/km/gallery" : "/gallery";
+const wholesalePath = isKhmer ? "/km/wholesale" : "/wholesale";
+const contactPath = isKhmer ? "/km/contact" : "/contact";
+
+const brandName = isKhmer
+  ? "ចន្ទីមាតុភូមិ"
+  : "Mato Cashew";
 ---
+
 <header class="header">
 
   <div class="container header-wrapper">
 
     <a
-        href={homePath}
-        class="logo"
-        aria-label="Mato Cashew Home"
+      href={homePath}
+      class="logo"
+      aria-label={`${brandName} Home`}
     >
 
-      <img src="/images/logo/logo.png" alt="Mato Cashew Logo" />
+      <img
+        src="/images/logo/logo.png"
+        alt={`${brandName} Logo`}
+      />
 
     </a>
 
-    <nav aria-label="Main navigation">
-        
-    <button
+    <nav aria-label={isKhmer ? "ម៉ឺនុយមេ" : "Main navigation"}>
+
+      <button
         type="button"
         aria-controls="main-menu"
         class="menu-toggle"
-        aria-label="Toggle Menu"
+        aria-label={isKhmer ? "បើក ឬបិទម៉ឺនុយ" : "Toggle Menu"}
         aria-expanded="false"
-    >
+      >
         ☰
-    </button>
+      </button>
 
-        <ul id="main-menu" class="nav-menu">
+      <ul id="main-menu" class="nav-menu">
 
         <li>
-            <a
+          <a
             href={homePath}
-            class={currentPath === "/" ? "active" : ""}
-            >
-            {t.nav.home}
-            </a>
-        </li>
-
-        <li>
-            <a
-            href={`${basePath}/about`}
             class={
-            currentPath === `${basePath}/about`
+              currentPath === "/" ||
+              currentPath === "/km" ||
+              currentPath === "/km/"
                 ? "active"
                 : ""
             }
-            >
+          >
+            {t.nav.home}
+          </a>
+        </li>
+
+        <li>
+          <a
+            href={aboutPath}
+            class={currentPath === aboutPath ? "active" : ""}
+          >
             {t.nav.about}
-            </a>
+          </a>
         </li>
 
         <li>
-            <a
-            href={`${basePath}/products`}
-            class={currentPath === "/products" ? "active" : ""}
-            >
+          <a
+            href={productsPath}
+            class={
+              currentPath === productsPath ||
+              currentPath.startsWith(`${productsPath}/`)
+                ? "active"
+                : ""
+            }
+          >
             {t.nav.products}
-            </a>
+          </a>
         </li>
 
         <li>
-            <a
-                href={`${basePath}/resources`}
-                class={currentPath.startsWith("/resources") ? "active" : ""}
-            >
-                {t.nav.resources}
-            </a>
+          <a
+            href={resourcesPath}
+            class={
+              currentPath === resourcesPath ||
+              currentPath.startsWith(`${resourcesPath}/`)
+                ? "active"
+                : ""
+            }
+          >
+            {t.nav.resources}
+          </a>
         </li>
 
         <li>
-            <a
-            href={`${basePath}/gallery`}
-            class={currentPath === "/gallery" ? "active" : ""}
-            >
+          <a
+            href={galleryPath}
+            class={currentPath === galleryPath ? "active" : ""}
+          >
             {t.nav.gallery}
-            </a>
+          </a>
         </li>
 
         <li>
-            <a
-            href={`${basePath}/wholesale`}
-            class={currentPath === "/wholesale" ? "active" : ""}
-            >
+          <a
+            href={wholesalePath}
+            class={currentPath === wholesalePath ? "active" : ""}
+          >
             {t.nav.wholesale}
-            </a>
+          </a>
         </li>
 
         <li>
-            <a
-            href={`${basePath}/contact`}
-            class={currentPath === "/contact" ? "active" : ""}
-            >
+          <a
+            href={contactPath}
+            class={currentPath === contactPath ? "active" : ""}
+          >
             {t.nav.contact}
-            </a>
+          </a>
         </li>
 
-        </ul>
+      </ul>
 
     </nav>
 
@@ -123,77 +144,68 @@ const homePath = isKhmer ? "/km/" : "/";
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-    const header = document.querySelector(".header");
+  const header = document.querySelector(".header");
 
-    if (header) {
+  if (header) {
 
-        window.addEventListener("scroll", () => {
+    window.addEventListener("scroll", () => {
 
-            if (window.scrollY > 40) {
+      if (window.scrollY > 40) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
 
-                header.classList.add("scrolled");
+    });
 
-            } else {
+  }
 
-                header.classList.remove("scrolled");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navMenu = document.querySelector(".nav-menu");
 
-            }
-
-        });
-
-    }
-
-    const menuToggle = document.querySelector(".menu-toggle");
-const navMenu = document.querySelector(".nav-menu");
-
-if (menuToggle && navMenu) {
+  if (menuToggle && navMenu) {
 
     menuToggle.addEventListener("click", () => {
 
-        navMenu.classList.toggle("open");
+      navMenu.classList.toggle("open");
 
-        const expanded =
-            menuToggle.getAttribute("aria-expanded") === "true";
+      const expanded =
+        menuToggle.getAttribute("aria-expanded") === "true";
 
-        menuToggle.setAttribute(
-            "aria-expanded",
-            (!expanded).toString()
-        );
+      menuToggle.setAttribute(
+        "aria-expanded",
+        (!expanded).toString()
+      );
 
-        menuToggle.textContent = expanded ? "☰" : "✕";
+      menuToggle.textContent = expanded ? "☰" : "✕";
 
     });
 
-}
-const navLinks = document.querySelectorAll(".nav-menu a");
-navLinks.forEach((link) => {
+  }
+
+  const navLinks = document.querySelectorAll(".nav-menu a");
+
+  navLinks.forEach((link) => {
 
     link.addEventListener("click", () => {
 
-        if (navMenu) {
+      if (navMenu) {
+        navMenu.classList.remove("open");
+      }
 
-            navMenu.classList.remove("open");
-
-        }
-
-        if (menuToggle) {
-
-            menuToggle.textContent = "☰";
-
-            menuToggle.setAttribute("aria-expanded", "false");
-
-        }
+      if (menuToggle) {
+        menuToggle.textContent = "☰";
+        menuToggle.setAttribute("aria-expanded", "false");
+      }
 
     });
 
-});
+  });
 
 });
-
 </script>
 
 <script type="module">
-
   import { initLanguageSwitcher }
     from "../scripts/language-switcher.ts";
 
@@ -201,5 +213,4 @@ navLinks.forEach((link) => {
     "DOMContentLoaded",
     initLanguageSwitcher
   );
-
 </script>

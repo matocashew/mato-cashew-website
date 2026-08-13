@@ -42,7 +42,7 @@ const { product } = Astro.props;
 const { Content } = await render(product);
 
 const canonical =
-  `https://matocashew.com/km/products/${product.data.slug}`;
+  `https://matocashew.com/km/products/${product.data.slug}/`;
 
 const relatedProducts =
   await getRelatedProducts(
@@ -59,7 +59,7 @@ const relatedProducts =
 
 <PageLayout
   lang="km"
-  title={`${product.data.title} | Mato Cashew`}
+  title={`${product.data.title} | ចន្ទីមាតុភូមិ`}
   description={product.data.description}
   canonical={canonical}
 
@@ -74,11 +74,11 @@ const relatedProducts =
   breadcrumbs={[
     {
       name: "ទំព័រដើម",
-      url: "https://matocashew.com/km"
+      url: "https://matocashew.com/km/"
     },
     {
       name: "ផលិតផល",
-      url: "https://matocashew.com/km/products"
+      url: "https://matocashew.com/km/products/"
     },
     {
       name: product.data.title,

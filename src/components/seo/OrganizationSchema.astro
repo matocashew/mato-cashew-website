@@ -1,44 +1,55 @@
 ---
+import { site } from "../../config/site";
+
 const organization = {
   "@context": "https://schema.org",
   "@type": "Organization",
 
-  name: "Mato Cashew",
+  name: site.brand.english,
 
-  url: "https://matocashew.com",
+  alternateName: site.brand.khmer,
 
-  logo: "https://matocashew.com/images/logo/logo.png",
+  url: site.website.url,
 
-  image: "https://matocashew.com/images/logo/logo.png",
+  logo: `${site.website.url}${site.website.logo}`,
 
-  description:
-    "Premium Cambodian cashew kernels for local and international markets.",
+  image: `${site.website.url}${site.website.logo}`,
 
-  email: "info@matocashew.com",
+  description: site.website.description,
+
+  email: site.contact.email,
+
+  telephone: site.contact.phone,
 
   address: {
     "@type": "PostalAddress",
 
-    streetAddress: "Chanloang Village, Damril Commune",
+    streetAddress:
+      `${site.address.village}, ${site.address.commune}`,
 
-    addressLocality: "Ou Reang Ov District",
+    addressLocality:
+      site.address.district,
 
-    addressRegion: "Tboung Khmum Province",
+    addressRegion:
+      site.address.province,
 
-    addressCountry: "KH"
+    addressCountry: "KH",
   },
 
   contactPoint: {
     "@type": "ContactPoint",
 
-    contactType: "Sales",
+    contactType: "customer service",
 
-    email: "info@matocashew.com",
+    email: site.contact.email,
+
+    telephone: site.contact.phone,
 
     availableLanguage: [
-      "English"
-    ]
-  }
+      "English",
+      "Khmer",
+    ],
+  },
 };
 ---
 

@@ -26,7 +26,7 @@ const { previous, next } = Astro.props;
   {
     previous ? (
       <a
-        href={`/knowledge/${previous.slug}`}
+        href={`/knowledge/${previous.slug}/`}
         class="previous"
       >
         <span>← Previous</span>
@@ -41,7 +41,7 @@ const { previous, next } = Astro.props;
   {
     next ? (
       <a
-        href={`/knowledge/${next.slug}`}
+        href={`/knowledge/${next.slug}/`}
         class="next"
       >
         <span>Next →</span>

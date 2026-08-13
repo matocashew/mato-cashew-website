@@ -7,47 +7,61 @@ import "../styles/page.css";
 <PageLayout
   title="404 | Page Not Found | Mato Cashew"
   description="The page you are looking for could not be found."
-  canonical="https://matocashew.com/404"
+  canonical="https://matocashew.com/404/"
   robots="noindex,follow"
+  lang="en"
+  hasKhmerAlternate={false}
 >
 
-<section class="error-page">
+  <section class="error-page">
 
-  <div
-    class="container"
-    style="
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-    "
-  >
+    <div
+      class="container"
+      style="
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+      "
+    >
 
-    <div class="error-icon">🥜</div>
+      <div class="error-icon">
+        🥜
+      </div>
 
-    <h1>404</h1>
+      <h1>
+        404
+      </h1>
 
-    <h2>Page Not Found</h2>
+      <h2>
+        Page Not Found
+      </h2>
 
-    <p>
-      Sorry, the page you are looking for doesn't exist.
-    </p>
+      <p>
+        Sorry, the page you are looking for doesn't exist.
+      </p>
 
-    <div class="error-actions">
+      <div class="error-actions">
 
-      <a href="/" class="btn btn-primary">
-        Back to Home
-      </a>
+        <a
+          href="/"
+          class="btn btn-primary"
+        >
+          Back to Home
+        </a>
 
-      <a href="/products" class="btn btn-outline">
-        Browse Products
-      </a>
+        <a
+          href="/products/"
+          class="btn btn-outline"
+        >
+          Browse Products
+        </a>
+
+      </div>
 
     </div>
 
-  </div>
-
-</section>
+  </section>
 
 </PageLayout>

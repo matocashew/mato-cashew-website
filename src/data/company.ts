@@ -1,32 +1,33 @@
+import { site } from "../config/site";
+
 export const company = {
-  name: "Mato Cashew",
+  name: site.brand.english,
 
-  khmerName: "ចន្ទីមាតុភូមិ",
+  khmerName: site.brand.khmer,
 
-  legalName: "Mato Cashew",
+  legalName: site.brand.english,
 
   founded: 2024,
 
   industry: "Cashew Processing",
 
-  slogan: "Premium Cambodian Cashew",
+  slogan: site.website.tagline,
 
-  description:
-    "Premium Cambodian cashew kernels for retail, wholesale, OEM, private label and export markets worldwide.",
+  description: site.website.description,
 
   headquarters: {
-    village: "Chanloung Village",
-    commune: "Damril Commune",
-    district: "Ou Reang Ov District",
-    province: "Tbong Khmum Province",
-    country: "Cambodia",
+    village: site.address.village,
+    commune: site.address.commune,
+    district: site.address.district,
+    province: site.address.province,
+    country: site.address.country,
   },
 
-  email: "info@matocashew.com",
+  email: site.contact.email,
 
-  phone: "+855 12 646 988",
+  phone: site.contact.phone,
 
-  website: "https://matocashew.com",
+  website: site.website.url,
 } as const;
 
 export default company;

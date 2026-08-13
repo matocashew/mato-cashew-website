@@ -43,17 +43,34 @@ const {
 } = await render(resource);
 
 const canonical =
-  `https://matocashew.com/resources/${resource.data.slug}`;
+  `https://matocashew.com/resources/${resource.data.slug}/`;
 ---
+
 <ResourcePageSchema
   resource={resource}
   canonical={canonical}
   lang="en"
 />
+
 <PageLayout
   title={`${resource.data.title} | Mato Cashew`}
   description={resource.data.description}
   canonical={canonical}
+  ogType="article"
+  breadcrumbs={[
+    {
+      name: "Home",
+      url: "https://matocashew.com/"
+    },
+    {
+      name: "Resources",
+      url: "https://matocashew.com/resources/"
+    },
+    {
+      name: resource.data.title,
+      url: canonical
+    }
+  ]}
 >
 
   <PageHero

@@ -29,6 +29,8 @@ interface Props {
     name: string;
     url: string;
   }[];
+
+  hasKhmerAlternate?: boolean;
 }
 
 const siteUrl = SITE.website.url;
@@ -48,6 +50,8 @@ const {
   ogType = "website",
 
   breadcrumbs = [],
+
+  hasKhmerAlternate = true,
 } = Astro.props;
 
 const localizedBrand =
@@ -113,6 +117,7 @@ const localizedKeywords =
   <HreflangLinks
     canonical={canonical}
     lang={lang}
+    hasKhmerAlternate={hasKhmerAlternate}
   />
 
   <!-- Fonts -->

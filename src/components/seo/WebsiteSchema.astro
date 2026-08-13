@@ -1,16 +1,22 @@
 ---
+import { site } from "../../config/site";
+
 const website = {
   "@context": "https://schema.org",
   "@type": "WebSite",
 
-  name: "Mato Cashew",
+  name: site.brand.english,
 
-  url: "https://matocashew.com",
+  alternateName: site.brand.khmer,
 
-  description:
-    "Premium Cambodian cashew kernels for local and international markets.",
+  url: site.website.url,
 
-  inLanguage: "en"
+  description: site.website.description,
+
+  inLanguage: [
+    "en",
+    "km",
+  ],
 };
 ---
 

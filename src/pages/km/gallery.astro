@@ -7,23 +7,24 @@ import PageHero from "../../components/PageHero.astro";
 import Gallery from "../../components/Gallery.astro";
 
 import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+import { SITE } from "../../config/site";
 
 const t = getCurrentLanguage(Astro.url.pathname);
 ---
 
 <PageLayout
   lang="km"
-  title={`${t.nav.gallery} | Mato Cashew`}
+  title={`${t.nav.gallery} | ${SITE.brand.khmer}`}
   description={t.galleryHome.title}
-  canonical="https://matocashew.com/km/gallery"
+  canonical="https://matocashew.com/km/gallery/"
   breadcrumbs={[
     {
       name: "ទំព័រដើម",
-      url: "https://matocashew.com/km"
+      url: "https://matocashew.com/km/"
     },
     {
       name: t.nav.gallery,
-      url: "https://matocashew.com/km/gallery"
+      url: "https://matocashew.com/km/gallery/"
     }
   ]}
 >

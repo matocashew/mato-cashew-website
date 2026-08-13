@@ -19,7 +19,7 @@ export const site: SiteConfig = {
     name: "Mato Cashew",
     tagline: "Premium Cambodian Cashew",
     description:
-      "Premium Cambodian cashew kernels for retail, wholesale, OEM, private label and export markets worldwide.",
+      "Premium Cambodian cashew kernels for retail, wholesale, distribution, and business customers.",
     url: "https://matocashew.com",
     logo: "/images/logo/logo.png",
     locale: "en",
@@ -39,14 +39,14 @@ export const site: SiteConfig = {
   // ==========================
 
   address: {
-    village: "Chanloung Village",
+    village: "Chanlaong Village",
     commune: "Damril Commune",
     district: "Ou Reang Ov District",
-    province: "Tbong Khmum Province",
+    province: "Tboung Khmum Province",
     country: "Cambodia",
 
     full:
-      "Chanloung Village, Damril Commune, Ou Reang Ov District, Tbong Khmum Province, Cambodia",
+      "Chanlaong Village, Damril Commune, Ou Reang Ov District, Tboung Khmum Province, Cambodia",
 
     khmer:
       "ភូមិចន្លោង ឃុំដំរិល ស្រុកអូររាំងឪ ខេត្តត្បូងឃ្មុំ ប្រទេសកម្ពុជា",

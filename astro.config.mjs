@@ -7,6 +7,8 @@ export default defineConfig({
 
   site: "https://matocashew.com",
 
+  trailingSlash: "always",
+
   integrations: [
 
     mdx(),

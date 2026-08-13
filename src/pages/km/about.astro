@@ -4,21 +4,23 @@ import "../../styles/about-page.css";
 
 import PageLayout from "../../layouts/PageLayout.astro";
 import AboutPage from "../../components/pages/AboutPage.astro";
+
+import { SITE } from "../../config/site";
 ---
 
 <PageLayout
   lang="km"
-  title="អំពី Mato Cashew"
-  description="ស្វែងយល់អំពី Mato Cashew។"
-  canonical="https://matocashew.com/km/about"
+  title={`អំពីយើង | ${SITE.brand.khmer}`}
+  description="ស្វែងយល់អំពី ចន្ទីមាតុភូមិ ការយកចិត្តទុកដាក់លើគុណភាព ប្រភពផលិតផល និងដំណើររបស់យើងក្នុងការផ្គត់ផ្គង់ផលិតផលគ្រាប់ស្វាយចន្ទីកម្ពុជា។"
+  canonical="https://matocashew.com/km/about/"
   breadcrumbs={[
     {
       name: "ទំព័រដើម",
-      url: "https://matocashew.com/km"
+      url: "https://matocashew.com/km/"
     },
     {
       name: "អំពីយើង",
-      url: "https://matocashew.com/km/about"
+      url: "https://matocashew.com/km/about/"
     }
   ]}
 >

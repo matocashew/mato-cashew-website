@@ -1,6 +1,7 @@
 ---
 import "../styles/page.css";
 import "../styles/gallery.css";
+
 import PageLayout from "../layouts/PageLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import Gallery from "../components/Gallery.astro";
@@ -8,23 +9,23 @@ import Gallery from "../components/Gallery.astro";
 
 <PageLayout
   title="Gallery | Mato Cashew"
-  description="Explore our cashew orchards, processing factory, packaging, and export journey."
-  canonical="https://matocashew.com/gallery"
+  description="Explore Mato Cashew through Cambodian cashew orchards, processing, packaging, products, and our journey."
+  canonical="https://matocashew.com/gallery/"
   breadcrumbs={[
     {
       name: "Home",
-      url: "https://matocashew.com"
+      url: "https://matocashew.com/"
     },
     {
       name: "Gallery",
-      url: "https://matocashew.com/gallery"
+      url: "https://matocashew.com/gallery/"
     }
   ]}
 >
 
   <PageHero
     title="Gallery"
-    description="Explore every step of Mato Cashew's journey, from Cambodian orchards to export-ready products."
+    description="Explore Mato Cashew's journey from Cambodian cashew orchards through processing, packaging, and finished products."
   />
 
   <Gallery />

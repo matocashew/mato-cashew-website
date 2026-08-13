@@ -1,4 +1,6 @@
 ---
+import { SITE } from "../../config/site";
+
 interface Props {
   title: string;
   description: string;
@@ -25,11 +27,12 @@ const webpage = {
 
   isPartOf: {
     "@type": "WebSite",
-    name: "Mato Cashew",
-    url: "https://matocashew.com"
+    name: SITE.brand.english,
+    alternateName: SITE.brand.khmer,
+    url: SITE.website.url,
   },
 
-  inLanguage: lang
+  inLanguage: lang,
 };
 ---
 
