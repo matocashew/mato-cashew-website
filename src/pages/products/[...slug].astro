@@ -13,8 +13,6 @@ import ProductSpecificationsList from "../../components/products/ProductSpecific
 import ProductApplications from "../../components/products/ProductApplications.astro";
 import RelatedProducts from "../../components/products/RelatedProducts.astro";
 
-import ProductPageSchema from "../../components/seo/ProductPageSchema.astro";
-
 import {
   getProducts,
   getRelatedProducts,
@@ -51,12 +49,6 @@ const relatedProducts =
     3
   );
 ---
-
-<ProductPageSchema
-  product={product}
-  canonical={canonical}
-  lang="en"
-/>
 
 <PageLayout
   title={`${product.data.title} | Mato Cashew`}

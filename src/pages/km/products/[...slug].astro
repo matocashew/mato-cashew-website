@@ -12,8 +12,6 @@ import ProductSpecificationsList from "../../../components/products/ProductSpeci
 import ProductApplications from "../../../components/products/ProductApplications.astro";
 import RelatedProducts from "../../../components/products/RelatedProducts.astro";
 
-import ProductPageSchema from "../../../components/seo/ProductPageSchema.astro";
-
 import {
   getProducts,
   getRelatedProducts,
@@ -50,12 +48,6 @@ const relatedProducts =
     3
   );
 ---
-
-<ProductPageSchema
-  product={product}
-  canonical={canonical}
-  lang="km"
-/>
 
 <PageLayout
   lang="km"
