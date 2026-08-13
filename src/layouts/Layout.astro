@@ -50,23 +50,20 @@ const {
   breadcrumbs = [],
 } = Astro.props;
 
-const pathname = Astro.url.pathname;
+const localizedBrand =
+  lang === "km"
+    ? SITE.brand.khmer
+    : SITE.brand.english;
 
-const englishPath =
-  pathname.startsWith("/km")
-    ? pathname.replace(/^\/km/, "") || "/"
-    : pathname;
+const localizedOgImageAlt =
+  lang === "km"
+    ? `${SITE.brand.khmer} - ផលិតផលគ្រាប់ស្វាយចន្ទីកម្ពុជា`
+    : `${SITE.brand.english} - Cambodian Cashew Products`;
 
-const khmerPath =
-  pathname.startsWith("/km")
-    ? pathname
-    : pathname === "/"
-      ? "/km"
-      : `/km${pathname}`;
-
-const englishUrl = `${siteUrl}${englishPath}`;
-
-const khmerUrl = `${siteUrl}${khmerPath}`;
+const localizedKeywords =
+  lang === "km"
+    ? "គ្រាប់ស្វាយចន្ទីកម្ពុជា, ផលិតផលគ្រាប់ស្វាយចន្ទី, លក់រាយគ្រាប់ស្វាយចន្ទី, លក់ដុំគ្រាប់ស្វាយចន្ទី, ចន្ទីមាតុភូមិ, Mato Cashew"
+    : "Cambodian Cashew, Cashew Kernels, Cashew Products, Retail Cashew, Wholesale Cashew, Mato Cashew";
 ---
 
 <!DOCTYPE html>
@@ -96,40 +93,26 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
 
   <meta
     name="author"
-    content={SITE.brand.english}
+    content={localizedBrand}
   />
 
   <meta
     name="keywords"
-    content="Cambodian Cashew, Premium Cashew, Cashew Kernels, Wholesale Cashew, Export Cashew"
+    content={localizedKeywords}
   />
+
+  <!-- Canonical -->
 
   <link
     rel="canonical"
     href={canonical}
   />
 
+  <!-- Hreflang -->
+
   <HreflangLinks
     canonical={canonical}
     lang={lang}
-  />
-
-  <link
-    rel="alternate"
-    hreflang="en"
-    href={englishUrl}
-  />
-
-  <link
-    rel="alternate"
-    hreflang="km"
-    href={khmerUrl}
-  />
-
-  <link
-    rel="alternate"
-    hreflang="x-default"
-    href={englishUrl}
   />
 
   <!-- Fonts -->
@@ -201,7 +184,7 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
 
   <meta
     property="og:site_name"
-    content={SITE.brand.english}
+    content={localizedBrand}
   />
 
   <meta
@@ -236,12 +219,16 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
 
   <meta
     property="og:image:alt"
-    content={`${SITE.brand.english} - Premium Cambodian Cashew`}
+    content={localizedOgImageAlt}
   />
 
   <meta
     property="og:locale"
-    content={lang === "km" ? "km_KH" : "en_US"}
+    content={
+      lang === "km"
+        ? "km_KH"
+        : "en_US"
+    }
   />
 
   <!-- Twitter -->
@@ -281,7 +268,9 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
 
   {
     breadcrumbs.length > 0 && (
-      <BreadcrumbSchema items={breadcrumbs} />
+      <BreadcrumbSchema
+        items={breadcrumbs}
+      />
     )
   }
 
@@ -292,16 +281,27 @@ const khmerUrl = `${siteUrl}${khmerPath}`;
     src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analytics.googleAnalytics}`}
   ></script>
 
-  <script define:vars={{ gaId: SITE.analytics.googleAnalytics }}>
-    window.dataLayer = window.dataLayer || [];
+  <script
+    define:vars={{
+      gaId: SITE.analytics.googleAnalytics
+    }}
+  >
+    window.dataLayer =
+      window.dataLayer || [];
 
     function gtag() {
       dataLayer.push(arguments);
     }
 
-    gtag("js", new Date());
+    gtag(
+      "js",
+      new Date()
+    );
 
-    gtag("config", gaId);
+    gtag(
+      "config",
+      gaId
+    );
   </script>
 
 </head>
