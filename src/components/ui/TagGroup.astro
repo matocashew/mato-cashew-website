@@ -1,6 +1,4 @@
 ---
-import Tag from "./Tag.astro";
-
 interface Props {
   tags: string[];
 }
@@ -10,37 +8,30 @@ const { tags } = Astro.props;
 
 {
   tags.length > 0 && (
-
-    <div class="tag-group">
-
-      {
-        tags.map(tag => (
-
-          <Tag
-            label={tag}
-            href={`/knowledge?tag=${encodeURIComponent(tag.toLowerCase())}`}
-          />
-
-        ))
-      }
-
+    <div class="tag-group" aria-label="Article tags">
+      {tags.map((tag) => (
+        <span class="tag">{tag}</span>
+      ))}
     </div>
-
   )
 }
 
 <style>
+  .tag-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 2rem 0;
+  }
 
-.tag-group {
-
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: .75rem;
-
-  margin: 2rem 0;
-
-}
-
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    background: var(--color-surface, #f5f5f5);
+    color: inherit;
+    font-size: 0.875rem;
+    line-height: 1.2;
+  }
 </style>
