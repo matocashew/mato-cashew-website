@@ -123,9 +123,15 @@ D:\Projects\mato-cashew-website\src\content\knowledge
 D:\Projects\mato-cashew-website\src\content\products
 D:\Projects\mato-cashew-website\src\content\resources
 D:\Projects\mato-cashew-website\src\content\schemas
+D:\Projects\mato-cashew-website\src\content\knowledge\cashew-export-guide.mdx
 D:\Projects\mato-cashew-website\src\content\knowledge\cashew-food-safety.mdx
 D:\Projects\mato-cashew-website\src\content\knowledge\cashew-grading-standards.mdx
+D:\Projects\mato-cashew-website\src\content\knowledge\cashew-kernel-grades-uses.mdx
+D:\Projects\mato-cashew-website\src\content\knowledge\cashew-moisture-standards.mdx
+D:\Projects\mato-cashew-website\src\content\knowledge\cashew-packaging-guide.mdx
 D:\Projects\mato-cashew-website\src\content\knowledge\cashew-quality-standards.mdx
+D:\Projects\mato-cashew-website\src\content\knowledge\cashew-shelf-life-guide.mdx
+D:\Projects\mato-cashew-website\src\content\knowledge\cashew-storage-guide.mdx
 D:\Projects\mato-cashew-website\src\content\knowledge\cashew-tree.mdx
 D:\Projects\mato-cashew-website\src\content\knowledge\complete-guide-to-cashew-processing.mdx
 D:\Projects\mato-cashew-website\src\content\knowledge\what-is-cashew.mdx
