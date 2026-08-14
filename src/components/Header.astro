@@ -9,16 +9,14 @@ const isKhmer = currentPath.startsWith("/km");
 const t = getCurrentLanguage(currentPath);
 
 const homePath = isKhmer ? "/km/" : "/";
-const aboutPath = isKhmer ? "/km/about" : "/about";
-const productsPath = isKhmer ? "/km/products" : "/products";
-const resourcesPath = isKhmer ? "/km/resources" : "/resources";
-const galleryPath = isKhmer ? "/km/gallery" : "/gallery";
-const wholesalePath = isKhmer ? "/km/wholesale" : "/wholesale";
-const contactPath = isKhmer ? "/km/contact" : "/contact";
+const aboutPath = isKhmer ? "/km/about/" : "/about/";
+const productsPath = isKhmer ? "/km/products/" : "/products/";
+const resourcesPath = isKhmer ? "/km/resources/" : "/resources/";
+const galleryPath = isKhmer ? "/km/gallery/" : "/gallery/";
+const wholesalePath = isKhmer ? "/km/wholesale/" : "/wholesale/";
+const contactPath = isKhmer ? "/km/contact/" : "/contact/";
 
-const brandName = isKhmer
-  ? "ចន្ទីមាតុភូមិ"
-  : "Mato Cashew";
+const brandName = "ចន្ទីមាតុភូមិ — Mato Cashew";
 ---
 
 <header class="header">
@@ -26,17 +24,31 @@ const brandName = isKhmer
   <div class="container header-wrapper">
 
     <a
-      href={homePath}
-      class="logo"
-      aria-label={`${brandName} Home`}
-    >
+    href={homePath}
+    class="logo brand-lockup"
+    aria-label={`${brandName} Home`}
+  >
+    <img
+      class="brand-symbol"
+      src="/images/logo/logo.png"
+      alt=""
+      aria-hidden="true"
+    />
 
-      <img
-        src="/images/logo/logo.png"
-        alt={`${brandName} Logo`}
-      />
+    <span class="brand-signature" aria-hidden="true">
 
-    </a>
+      <span class="brand-khmer">
+        ចន្ទីមាតុភូមិ
+      </span>
+
+      <span class="brand-divider"></span>
+
+      <span class="brand-english">
+        MATO CASHEW
+      </span>
+
+    </span>
+  </a>
 
     <nav aria-label={isKhmer ? "ម៉ឺនុយមេ" : "Main navigation"}>
 
@@ -142,75 +154,118 @@ const brandName = isKhmer
 </header>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+  /**
+   * Global scroll handler.
+   *
+   * Astro bundled scripts execute once, so this listener
+   * does not need a custom window flag.
+   */
+  const updateHeaderScrollState = () => {
+    const header =
+      document.querySelector<HTMLElement>(".header");
 
-  const header = document.querySelector(".header");
+    if (!header) return;
 
-  if (header) {
+    header.classList.toggle(
+      "scrolled",
+      window.scrollY > 40
+    );
+  };
 
-    window.addEventListener("scroll", () => {
+  window.addEventListener(
+    "scroll",
+    updateHeaderScrollState,
+    { passive: true }
+  );
 
-      if (window.scrollY > 40) {
-        header.classList.add("scrolled");
-      } else {
-        header.classList.remove("scrolled");
-      }
 
-    });
-
-  }
-
-  const menuToggle = document.querySelector(".menu-toggle");
-  const navMenu = document.querySelector(".nav-menu");
-
-  if (menuToggle && navMenu) {
-
-    menuToggle.addEventListener("click", () => {
-
-      navMenu.classList.toggle("open");
-
-      const expanded =
-        menuToggle.getAttribute("aria-expanded") === "true";
-
-      menuToggle.setAttribute(
-        "aria-expanded",
-        (!expanded).toString()
+  /**
+   * Initialize DOM-specific header interactions.
+   *
+   * astro:page-load runs on the first page
+   * and after every ClientRouter navigation.
+   */
+  function initHeader() {
+    const menuToggle =
+      document.querySelector<HTMLButtonElement>(
+        ".menu-toggle"
       );
 
-      menuToggle.textContent = expanded ? "☰" : "✕";
+    const navMenu =
+      document.querySelector<HTMLElement>(
+        ".nav-menu"
+      );
 
+    /*
+     * Apply correct header state immediately.
+     */
+    updateHeaderScrollState();
+
+
+    /*
+     * Mobile menu
+     */
+    if (menuToggle && navMenu) {
+      menuToggle.addEventListener(
+        "click",
+        () => {
+          const isOpen =
+            navMenu.classList.toggle("open");
+
+          menuToggle.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+          );
+
+          menuToggle.textContent =
+            isOpen ? "✕" : "☰";
+        }
+      );
+    }
+
+
+    /*
+     * Close mobile menu after clicking
+     * any navigation link.
+     */
+    const navLinks =
+      document.querySelectorAll<HTMLAnchorElement>(
+        ".nav-menu a"
+      );
+
+    navLinks.forEach((link) => {
+      link.addEventListener(
+        "click",
+        () => {
+          navMenu?.classList.remove("open");
+
+          if (menuToggle) {
+            menuToggle.textContent = "☰";
+
+            menuToggle.setAttribute(
+              "aria-expanded",
+              "false"
+            );
+          }
+        }
+      );
     });
-
   }
 
-  const navLinks = document.querySelectorAll(".nav-menu a");
 
-  navLinks.forEach((link) => {
-
-    link.addEventListener("click", () => {
-
-      if (navMenu) {
-        navMenu.classList.remove("open");
-      }
-
-      if (menuToggle) {
-        menuToggle.textContent = "☰";
-        menuToggle.setAttribute("aria-expanded", "false");
-      }
-
-    });
-
-  });
-
-});
+  document.addEventListener(
+    "astro:page-load",
+    initHeader
+  );
 </script>
 
-<script type="module">
+
+<script>
   import { initLanguageSwitcher }
     from "../scripts/language-switcher.ts";
 
   document.addEventListener(
-    "DOMContentLoaded",
+    "astro:page-load",
     initLanguageSwitcher
   );
 </script>

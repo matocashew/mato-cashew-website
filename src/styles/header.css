@@ -1,11 +1,22 @@
+/* =========================================================
+   MATO CASHEW — HEADER
+   ========================================================= */
+
+
+/* =========================================================
+   Header Base
+   ========================================================= */
+
 .header {
     position: fixed;
     top: 0;
     left: 0;
+
     width: 100%;
+
     z-index: 1000;
 
-    background: rgba(255, 255, 255, .92);
+    background: rgba(255, 255, 255, .94);
 
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
@@ -13,58 +24,166 @@
     border-bottom: 1px solid transparent;
 
     transition:
-        background .35s ease,
-        box-shadow .35s ease,
-        border-color .35s ease;
+        background var(--duration-normal) var(--ease-default),
+        box-shadow var(--duration-normal) var(--ease-default),
+        border-color var(--duration-normal) var(--ease-default);
 }
+
 
 .header-wrapper {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
-    min-height: 108px;
-
-    transition: min-height .3s ease;
-}
-
-.logo img {
-    width: 150px;
+    min-height: 96px;
 
     transition:
-        width .35s ease,
-        transform .3s ease;
+        min-height var(--duration-normal) var(--ease-default);
 }
 
-.logo img:hover {
-    transform: scale(1.05);
+
+/* =========================================================
+   Mato Cashew Brand Lockup
+   ========================================================= */
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 14px;
+
+    flex-shrink: 0;
+
+    text-decoration: none;
 }
 
-/* =========================
+
+/* Brand Symbol */
+
+.brand-symbol {
+    display: block;
+
+    width: auto;
+    height: 72px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+
+    transition:
+        height var(--duration-normal) var(--ease-default),
+        transform var(--duration-normal) var(--ease-default);
+}
+
+
+.logo:hover .brand-symbol {
+    transform: translateY(-1px) scale(1.02);
+}
+
+
+/* =========================================================
+   Brand Signature
+   ========================================================= */
+
+.brand-signature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: max-content;
+
+    line-height: 1;
+}
+
+
+/* Khmer Brand */
+
+.brand-khmer {
+    display: block;
+
+    font-family: var(--font-kh);
+
+    font-size: 28px;
+    font-weight: 700;
+
+    line-height: 1.25;
+
+    color: var(--primary);
+
+    white-space: nowrap;
+}
+
+
+/* Gold Divider
+   Width automatically follows Khmer text
+*/
+
+.brand-divider {
+    display: block;
+
+    width: 100%;
+    height: 2px;
+
+    margin: 3px 0 5px;
+
+    background: var(--secondary);
+
+    border-radius: var(--radius-full);
+
+    opacity: .95;
+}
+
+
+/* English Brand */
+
+.brand-english {
+    display: block;
+
+    font-family: "Playfair Display", Georgia, serif;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    line-height: 1;
+
+    letter-spacing: .18em;
+
+    color: var(--primary);
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
    Navigation
-========================= */
+   ========================================================= */
 
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 42px;
+
+    gap: 32px;
 }
+
 
 .nav-menu a {
     position: relative;
 
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
 
-    padding: 6px 0;
+    padding: 8px 0;
 
-    font-size: 16px;
-
+    font-size: 15px;
     font-weight: 600;
 
+    line-height: 1.2;
+
     transition:
-        color .3s ease,
-        transform .3s ease;
+        color var(--duration-normal) var(--ease-default),
+        transform var(--duration-normal) var(--ease-default);
 }
+
 
 .nav-menu a:hover {
     color: var(--primary);
@@ -72,9 +191,13 @@
     transform: translateY(-2px);
 }
 
+
 .nav-menu a.active {
     color: var(--primary);
 }
+
+
+/* Navigation underline */
 
 .nav-menu a::after {
     content: "";
@@ -82,48 +205,382 @@
     position: absolute;
 
     left: 50%;
-    bottom: -2px;
-
-    transform: translateX(-50%);
+    bottom: 0;
 
     width: 0;
     height: 2px;
 
-    background: var(--primary);
+    background: var(--secondary);
 
-    border-radius: 999px;
+    border-radius: var(--radius-full);
 
-    transition: width .3s ease;
+    transform: translateX(-50%);
+
+    transition:
+        width var(--duration-normal) var(--ease-default);
 }
+
 
 .nav-menu a:hover::after,
 .nav-menu a.active::after {
-    width: 70%;
+    width: 60%;
 }
 
-/* =========================
+
+/* =========================================================
    Mobile Menu Button
-========================= */
+   ========================================================= */
 
 .menu-toggle {
     display: none;
 
-    background: none;
+    padding: 4px;
+
+    background: transparent;
 
     border: none;
 
-    font-size: 32px;
+    font-family: inherit;
+    font-size: 30px;
+
+    line-height: 1;
 
     color: var(--primary);
 
     cursor: pointer;
 }
 
-/* =========================
-   Mobile
-========================= */
 
-@media (max-width:768px) {
+/* =========================================================
+   Language Switcher
+   ========================================================= */
+
+.language-switcher {
+    position: relative;
+
+    margin-left: var(--space-4);
+
+    padding: 0;
+
+    min-height: auto;
+
+    flex-shrink: 0;
+}
+
+
+.language-current {
+    display: flex;
+    align-items: center;
+
+    gap: var(--space-2);
+
+    min-width: 142px;
+    min-height: 44px;
+
+    padding: 9px 12px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-sm);
+
+    color: var(--text);
+
+    font: inherit;
+
+    cursor: pointer;
+
+    transition:
+        border-color var(--duration-fast) var(--ease-default),
+        box-shadow var(--duration-fast) var(--ease-default),
+        background var(--duration-fast) var(--ease-default);
+}
+
+
+.language-current:hover {
+    border-color: var(--primary);
+
+    box-shadow: 0 5px 16px rgba(13, 92, 58, .10);
+}
+
+
+.language-current img {
+    width: 24px;
+    height: 18px;
+
+    object-fit: cover;
+
+    border-radius: 2px;
+
+    flex-shrink: 0;
+}
+
+
+.language-current span:first-of-type {
+    flex: 1;
+
+    text-align: left;
+
+    font-weight: 600;
+}
+
+
+.arrow {
+    font-size: .8rem;
+
+    transition:
+        transform var(--duration-fast) var(--ease-default);
+}
+
+
+.language-current[aria-expanded="true"] .arrow {
+    transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   Language Dropdown
+   ========================================================= */
+
+.language-dropdown {
+    position: absolute;
+
+    top: calc(100% + 8px);
+    right: 0;
+
+    width: 180px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-md);
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow-md);
+
+    display: none;
+
+    z-index: 1001;
+
+    transform-origin: top right;
+}
+
+
+.language-dropdown.open {
+    display: block;
+
+    animation: dropdown .18s ease;
+}
+
+
+.language-option {
+    position: relative;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: .9rem;
+
+    padding: .85rem 1rem;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--text);
+
+    cursor: pointer;
+
+    font: inherit;
+
+    transition:
+        background var(--duration-fast) var(--ease-default),
+        color var(--duration-fast) var(--ease-default);
+}
+
+
+.language-option img {
+    width: 24px;
+    height: 18px;
+
+    object-fit: cover;
+
+    border-radius: 2px;
+}
+
+
+.language-option:hover {
+    background: rgba(13, 92, 58, .05);
+}
+
+
+.language-option.active {
+    background: rgba(13, 92, 58, .08);
+
+    color: var(--primary);
+
+    font-weight: 700;
+}
+
+
+.check {
+    margin-left: auto;
+
+    color: var(--primary);
+
+    font-size: .95rem;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   Scrolled Header
+   ========================================================= */
+
+.header.scrolled {
+    background: rgba(255, 255, 255, .97);
+
+    border-bottom-color: var(--border);
+
+    box-shadow: var(--shadow-sm);
+}
+
+
+.header.scrolled .header-wrapper {
+    min-height: 82px;
+}
+
+
+/* Scrolled Brand */
+
+.header.scrolled .brand-symbol {
+    height: 60px;
+}
+
+
+.header.scrolled .brand-khmer {
+    font-size: 24px;
+}
+
+
+.header.scrolled .brand-divider {
+    height: 2px;
+
+    margin: 3px 0 4px;
+}
+
+
+.header.scrolled .brand-english {
+    font-size: 13px;
+
+    letter-spacing: .16em;
+}
+
+
+/* =========================================================
+   Dropdown Animation
+   ========================================================= */
+
+@keyframes dropdown {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(.96)
+            translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   Tablet / Mobile
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .header-wrapper {
+        min-height: 78px;
+    }
+
+
+    /* -----------------------------------------
+       Mobile Brand
+       ----------------------------------------- */
+
+    .logo {
+        gap: 10px;
+    }
+
+
+    .brand-symbol {
+        height: 58px;
+    }
+
+
+    .brand-khmer {
+        font-size: 20px;
+    }
+
+
+    .brand-divider {
+        height: 2px;
+
+        margin: 2px 0 4px;
+    }
+
+
+    .brand-english {
+        font-size: 11px;
+
+        letter-spacing: .14em;
+    }
+
+
+    /* -----------------------------------------
+       Scrolled Mobile Brand
+       ----------------------------------------- */
+
+    .header.scrolled .header-wrapper {
+        min-height: 72px;
+    }
+
+
+    .header.scrolled .brand-symbol {
+        height: 52px;
+    }
+
+
+    .header.scrolled .brand-khmer {
+        font-size: 18px;
+    }
+
+
+    .header.scrolled .brand-english {
+        font-size: 10px;
+
+        letter-spacing: .12em;
+    }
+
+
+    /* -----------------------------------------
+       Mobile Navigation
+       ----------------------------------------- */
 
     .menu-toggle {
         display: block;
@@ -132,6 +589,7 @@
 
         z-index: 1002;
     }
+
 
     .nav-menu {
         position: absolute;
@@ -145,13 +603,13 @@
         flex-direction: column;
         align-items: center;
 
-        gap: 24px;
+        gap: var(--space-6);
 
-        padding: 30px 0;
+        padding: var(--space-7) 0;
 
-        background: #fff;
+        background: var(--surface);
 
-        box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
+        box-shadow: var(--shadow-md);
 
         opacity: 0;
         visibility: hidden;
@@ -159,10 +617,11 @@
         transform: translateY(-15px);
 
         transition:
-            opacity .3s ease,
-            transform .3s ease,
-            visibility .3s ease;
+            opacity var(--duration-normal) var(--ease-default),
+            transform var(--duration-normal) var(--ease-default),
+            visibility var(--duration-normal) var(--ease-default);
     }
+
 
     .nav-menu.open {
         opacity: 1;
@@ -171,242 +630,138 @@
         transform: translateY(0);
     }
 
+
     .nav-menu a {
+        font-size: 17px;
+    }
+
+
+    /* -----------------------------------------
+       Mobile Language
+       ----------------------------------------- */
+
+    .language-switcher {
+        margin-left: auto;
+    }
+
+
+    .language-current {
+        min-width: auto;
+
+        padding: .6rem .75rem;
+    }
+
+
+    .language-dropdown {
+        width: 170px;
+    }
+
+}
+
+
+/* =========================================================
+   Small Mobile
+   ========================================================= */
+
+@media (max-width: 576px) {
+
+    .logo {
+        gap: 8px;
+    }
+
+
+    .brand-symbol {
+        height: 52px;
+    }
+
+
+    .brand-khmer {
         font-size: 18px;
     }
-        .language-current{
 
-        min-width:auto;
 
-        padding:.6rem .75rem;
+    .brand-english {
+        font-size: 10px;
 
+        letter-spacing: .12em;
     }
 
-    .language-dropdown{
 
-        width:170px;
-
-    }
-}
-
-/* =========================
-   Scrolled Header
-========================= */
-
-.header.scrolled {
-    background: rgba(255, 255, 255, .96);
-
-    border-bottom: 1px solid rgba(0, 0, 0, .05);
-
-    box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
-}
-
-.header.scrolled .header-wrapper {
-    min-height: 90px;
-}
-
-.header.scrolled .logo img {
-    width: 135px;
-}
-
-.language-switcher{
-    position:relative;
-    margin-left:1rem;
-    min-height: 42px;
-    padding: 10px 16px;
-}
-
-.language-current{
-
-    display:flex;
-    align-items:center;
-    gap:.6rem;
-
-    min-width:155px;
-
-    padding:.7rem .9rem;
-
-    background:#fff;
-
-    border:1px solid #d9d9d9;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-.language-current:hover{
-
-    border-color:#0D5C3A;
-
-    box-shadow:0 6px 18px rgba(13,92,58,.12);
-
-}
-
-.language-current img{
-
-    width:24px;
-
-    height:18px;
-
-    object-fit:cover;
-
-    border-radius:2px;
-
-}
-
-.language-current span:first-of-type{
-
-    flex:1;
-
-    text-align:left;
-
-    font-weight:600;
-
-}
-
-.arrow{
-
-    font-size:.8rem;
-
-    transition:.25s;
-
-}
-
-.language-current[aria-expanded="true"] .arrow{
-
-    transform:rotate(180deg);
-
-}
-
-.language-dropdown{
-
-    position:absolute;
-
-    top:calc(100% + 8px);
-
-    right:0;
-
-    width:190px;
-
-    background:#fff;
-
-    border:1px solid #e8e8e8;
-
-    border-radius:14px;
-
-    overflow:hidden;
-
-    box-shadow:
-    0 12px 35px rgba(0,0,0,.08);
-
-    display:none;
-
-    z-index:999;
-
-    transform-origin:top right;
-
-}
-
-.language-dropdown.open{
-
-    display:block;
-
-    animation:dropdown .18s ease;
-
-}
-
-.language-option{
-
-    width:100%;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:.9rem;
-
-    padding:.85rem 1rem;
-
-    border:none;
-
-    background:none;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-    font:inherit;
-
-}
-
-.language-option img{
-
-    width:24px;
-
-    height:18px;
-
-    border-radius:2px;
-
-}
-
-.language-option:hover{
-
-    background:#f4f8f6;
-
-}
-
-.language-option.active{
-
-    background:#eef8f2;
-
-    color:#0D5C3A;
-
-    font-weight:700;
-
-}
-
-@keyframes dropdown{
-
-    from{
-
-        opacity:0;
-
-        transform:
-        scale(.96)
-        translateY(-6px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-        scale(1)
-        translateY(0);
-
+    .language-current {
+        padding: 8px 10px;
     }
 
 }
 
-.language-option{
 
-    position:relative;
+/* =========================================================
+   Very Small Mobile
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .header-wrapper {
+        min-height: 72px;
+    }
+
+
+    .brand-symbol {
+        height: 46px;
+    }
+
+
+    .brand-khmer {
+        font-size: 16px;
+    }
+
+
+    .brand-divider {
+        margin: 2px 0 3px;
+    }
+
+
+    .brand-english {
+        font-size: 9px;
+
+        letter-spacing: .10em;
+    }
+
+
+    .language-current {
+        min-height: 40px;
+
+        padding: 7px 9px;
+    }
+
+
+    .language-current img {
+        width: 21px;
+        height: 16px;
+    }
 
 }
 
-.check{
 
-    margin-left:auto;
+/* =========================================================
+   Reduced Motion
+   ========================================================= */
 
-    color:#0D5C3A;
+@media (prefers-reduced-motion: reduce) {
 
-    font-size:.95rem;
+    .header,
+    .header-wrapper,
+    .brand-symbol,
+    .nav-menu,
+    .nav-menu a,
+    .nav-menu a::after,
+    .language-current,
+    .arrow {
+        transition: none;
+    }
 
-    font-weight:700;
+
+    .language-dropdown.open {
+        animation: none;
+    }
 
 }
