@@ -3,19 +3,32 @@ import { glob } from "astro/loaders";
 
 import { knowledgeSchema } from "./content/schemas/knowledge";
 
+
+/* =========================================================
+   KNOWLEDGE
+   ========================================================= */
+
 const knowledge = defineCollection({
+
   loader: glob({
     pattern: "**/*.{md,mdx}",
     base: "./src/content/knowledge",
   }),
 
   schema: knowledgeSchema,
+
 });
 
+
+/* =========================================================
+   RESOURCES
+   ========================================================= */
+
 const resources = defineCollection({
+
   loader: glob({
     pattern: "**/*.{md,mdx}",
-    base: "./src/content/resources"
+    base: "./src/content/resources",
   }),
 
   schema: z.object({
@@ -30,75 +43,193 @@ const resources = defineCollection({
 
     updatedDate: z.date().optional(),
 
-    author: z.string().default("Mato Cashew"),
+    author: z
+      .string()
+      .default("Mato Cashew"),
 
     image: z.string(),
 
     category: z.string(),
 
-    tags: z.array(z.string()).default([]),
+    tags: z
+      .array(z.string())
+      .default([]),
 
-    draft: z.boolean().default(false),
+    draft: z
+      .boolean()
+      .default(false),
 
-    featured: z.boolean().default(false),
+    featured: z
+      .boolean()
+      .default(false),
 
-    readingTime: z.number().optional()
+    readingTime: z
+      .number()
+      .optional(),
 
-  })
+  }),
+
 });
 
+
+/* =========================================================
+   PRODUCTS
+   ========================================================= */
+
 const products = defineCollection({
+
   loader: glob({
     pattern: "**/*.{md,mdx}",
-    base: "./src/content/products"
+    base: "./src/content/products",
   }),
 
   schema: z.object({
 
+    /* -----------------------------------------------------
+       Identity
+       ----------------------------------------------------- */
+
     title: z.string(),
+
+    titleKm: z
+      .string()
+      .optional(),
 
     slug: z.string(),
 
+    sku: z.string(),
+
+
+    /* -----------------------------------------------------
+       Description
+       ----------------------------------------------------- */
+
     description: z.string(),
 
-    sku: z.string(),
+    descriptionKm: z
+      .string()
+      .optional(),
+
+
+    /* -----------------------------------------------------
+       Category
+       ----------------------------------------------------- */
 
     category: z.enum([
       "Retail",
-      "Wholesale"
+      "Wholesale",
     ]),
+
+    categoryKm: z
+      .string()
+      .optional(),
+
+
+    /* -----------------------------------------------------
+       Product Size
+       ----------------------------------------------------- */
 
     weight: z.string(),
 
+
+    /* -----------------------------------------------------
+       Packaging
+       ----------------------------------------------------- */
+
     packaging: z.string(),
+
+    packagingKm: z
+      .string()
+      .optional(),
+
+
+    /* -----------------------------------------------------
+       Images
+       ----------------------------------------------------- */
 
     image: z.string(),
 
-    gallery: z.array(z.string()).default([]),
+    gallery: z
+      .array(z.string())
+      .default([]),
 
-    featured: z.boolean().default(false),
 
-    availableForWholesale: z.boolean().default(true),
+    /* -----------------------------------------------------
+       Commercial Settings
+       ----------------------------------------------------- */
 
-    privateLabel: z.boolean().default(false),
+    featured: z
+      .boolean()
+      .default(false),
 
-    minimumOrder: z.string().optional(),
+    availableForWholesale: z
+      .boolean()
+      .default(true),
 
-    specifications: z.array(z.string()).default([]),
+    privateLabel: z
+      .boolean()
+      .default(false),
 
-    applications: z.array(z.string()).default([]),
+    minimumOrder: z
+      .string()
+      .optional(),
+
+
+    /* -----------------------------------------------------
+       Specifications
+       ----------------------------------------------------- */
+
+    specifications: z
+      .array(z.string())
+      .default([]),
+
+    specificationsKm: z
+      .array(z.string())
+      .optional(),
+
+
+    /* -----------------------------------------------------
+       Applications
+       ----------------------------------------------------- */
+
+    applications: z
+      .array(z.string())
+      .default([]),
+
+    applicationsKm: z
+      .array(z.string())
+      .optional(),
+
+
+    /* -----------------------------------------------------
+       Publishing
+       ----------------------------------------------------- */
 
     publishDate: z.date(),
 
-    updatedDate: z.date().optional(),
+    updatedDate: z
+      .date()
+      .optional(),
 
-    draft: z.boolean().default(false)
+    draft: z
+      .boolean()
+      .default(false),
 
-  })
+  }),
+
 });
 
+
+/* =========================================================
+   COLLECTION EXPORTS
+   ========================================================= */
+
 export const collections = {
+
   resources,
+
   products,
+
   knowledge,
+
 };

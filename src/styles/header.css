@@ -765,3 +765,212 @@
     }
 
 }
+
+/* =========================================================
+   PHASE 1 — HEADER FINAL RESPONSIVE POLISH
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Tablet / Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+    .header-wrapper {
+        min-height: 74px;
+        gap: 8px;
+    }
+
+    /* Brand lockup */
+
+    .logo {
+        gap: 8px;
+        min-width: 0;
+    }
+
+    .brand-symbol {
+        height: 52px;
+    }
+
+    .brand-signature {
+        flex-shrink: 0;
+    }
+
+    .brand-khmer {
+        font-size: 19px;
+        line-height: 1.18;
+    }
+
+    .brand-divider {
+        height: 2px;
+        margin: 2px 0 3px;
+    }
+
+    .brand-english {
+        font-size: 10px;
+        line-height: 1;
+        letter-spacing: .13em;
+    }
+
+
+    /* Mobile menu button */
+
+    .menu-toggle {
+        padding: 2px;
+        font-size: 27px;
+        flex-shrink: 0;
+    }
+
+
+    /* Language selector */
+
+    .language-switcher {
+        margin-left: auto;
+    }
+
+    .language-current {
+        min-width: 112px;
+        min-height: 40px;
+
+        padding: 7px 9px;
+
+        gap: 7px;
+
+        border-radius: 10px;
+    }
+
+    .language-current img {
+        width: 22px;
+        height: 16px;
+    }
+
+    .language-current span:first-of-type {
+        font-size: 14px;
+    }
+
+
+    /* Scrolled state */
+
+    .header.scrolled .header-wrapper {
+        min-height: 68px;
+    }
+
+    .header.scrolled .brand-symbol {
+        height: 47px;
+    }
+
+    .header.scrolled .brand-khmer {
+        font-size: 17px;
+    }
+
+    .header.scrolled .brand-english {
+        font-size: 9px;
+        letter-spacing: .11em;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Standard Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 576px) {
+
+    .header-wrapper {
+        min-height: 72px;
+    }
+
+    .logo {
+        gap: 7px;
+    }
+
+    .brand-symbol {
+        height: 50px;
+    }
+
+    .brand-khmer {
+        font-size: 18px;
+    }
+
+    .brand-english {
+        font-size: 9.5px;
+        letter-spacing: .11em;
+    }
+
+    .language-current {
+        min-width: 105px;
+        min-height: 40px;
+
+        padding: 7px 9px;
+    }
+
+    .language-current span:first-of-type {
+        font-size: 13px;
+    }
+
+    .menu-toggle {
+        font-size: 26px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   Small Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 420px) {
+
+    .header-wrapper {
+        min-height: 68px;
+        gap: 5px;
+    }
+
+    .logo {
+        gap: 5px;
+    }
+
+    .brand-symbol {
+        height: 44px;
+    }
+
+    .brand-khmer {
+        font-size: 16px;
+    }
+
+    .brand-divider {
+        height: 1.5px;
+        margin: 1px 0 2px;
+    }
+
+    .brand-english {
+        font-size: 8px;
+        letter-spacing: .09em;
+    }
+
+    .menu-toggle {
+        font-size: 24px;
+    }
+
+    .language-current {
+        min-width: auto;
+        min-height: 38px;
+
+        padding: 6px 8px;
+
+        gap: 5px;
+    }
+
+    .language-current img {
+        width: 20px;
+        height: 15px;
+    }
+
+    .language-current span:first-of-type {
+        font-size: 12px;
+    }
+
+    .arrow {
+        font-size: .7rem;
+    }
+}

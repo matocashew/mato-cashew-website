@@ -3,6 +3,7 @@ import { render } from "astro:content";
 
 import "../../../styles/page.css";
 import "../../../styles/product-detail.css";
+import "../../../styles/related-products.css";
 
 import PageLayout from "../../../layouts/PageLayout.astro";
 import PageHero from "../../../components/PageHero.astro";
@@ -16,6 +17,11 @@ import {
   getProducts,
   getRelatedProducts,
 } from "../../../services/productService";
+
+
+/* =========================================================
+   STATIC PATHS
+   ========================================================= */
 
 export async function getStaticPaths() {
 
@@ -35,12 +41,52 @@ export async function getStaticPaths() {
 
 }
 
+
+/* =========================================================
+   PRODUCT
+   ========================================================= */
+
 const { product } = Astro.props;
 
 const { Content } = await render(product);
 
+
+/* =========================================================
+   KHMER DATA
+   Khmer → fallback to English
+   ========================================================= */
+
+const productTitle =
+  product.data.titleKm ??
+  product.data.title;
+
+
+const productDescription =
+  product.data.descriptionKm ??
+  product.data.description;
+
+
+const productSpecifications =
+  product.data.specificationsKm ??
+  product.data.specifications;
+
+
+const productApplications =
+  product.data.applicationsKm ??
+  product.data.applications;
+
+
+/* =========================================================
+   SEO
+   ========================================================= */
+
 const canonical =
   `https://matocashew.com/km/products/${product.data.slug}/`;
+
+
+/* =========================================================
+   RELATED PRODUCTS
+   ========================================================= */
 
 const relatedProducts =
   await getRelatedProducts(
@@ -51,8 +97,11 @@ const relatedProducts =
 
 <PageLayout
   lang="km"
-  title={`${product.data.title} | ចន្ទីមាតុភូមិ`}
-  description={product.data.description}
+
+  title={`${productTitle} | ចន្ទីមាតុភូមិ`}
+
+  description={productDescription}
+
   canonical={canonical}
 
   ogType="product"
@@ -73,28 +122,52 @@ const relatedProducts =
       url: "https://matocashew.com/km/products/"
     },
     {
-      name: product.data.title,
+      name: productTitle,
       url: canonical
     }
   ]}
 >
 
+  <!-- =====================================================
+       HERO
+       ===================================================== -->
+
   <PageHero
-    title={product.data.title}
-    description={product.data.description}
+    title={productTitle}
+    description={productDescription}
   />
+
+
+  <!-- =====================================================
+       PRODUCT DETAILS
+       ===================================================== -->
 
   <ProductDetails
     product={product}
   />
 
+
+  <!-- =====================================================
+       SPECIFICATIONS
+       ===================================================== -->
+
   <ProductSpecificationsList
-    specifications={product.data.specifications}
+    specifications={productSpecifications}
   />
 
+
+  <!-- =====================================================
+       APPLICATIONS
+       ===================================================== -->
+
   <ProductApplications
-    applications={product.data.applications}
+    applications={productApplications}
   />
+
+
+  <!-- =====================================================
+       PRODUCT BODY CONTENT
+       ===================================================== -->
 
   <section class="container">
 
@@ -106,8 +179,14 @@ const relatedProducts =
 
   </section>
 
+
+  <!-- =====================================================
+       RELATED PRODUCTS
+       ===================================================== -->
+
   <RelatedProducts
     products={relatedProducts}
+    lang="km"
   />
 
 </PageLayout>

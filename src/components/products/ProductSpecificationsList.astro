@@ -8,6 +8,17 @@ interface Props {
 const {
   specifications = []
 } = Astro.props;
+
+const isKhmer =
+  Astro.url.pathname.startsWith("/km/");
+
+const tag = isKhmer
+  ? "ព័ត៌មានផលិតផល"
+  : "Product Details";
+
+const title = isKhmer
+  ? "ចំណុចសំខាន់ៗនៃផលិតផល"
+  : "Product Highlights";
 ---
 
 {
@@ -18,15 +29,28 @@ const {
       <div class="container">
 
         <SectionTitle
-          tag="Product Details"
-          title="Product Highlights"
+          tag={tag}
+          title={title}
         />
 
         <ul class="specifications-list">
 
           {
             specifications.map((item) => (
-              <li>{item}</li>
+
+              <li>
+                <span
+                  class="specification-check"
+                  aria-hidden="true"
+                >
+                  ✓
+                </span>
+
+                <span>
+                  {item}
+                </span>
+              </li>
+
             ))
           }
 

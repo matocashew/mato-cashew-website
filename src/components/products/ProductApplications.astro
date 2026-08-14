@@ -5,7 +5,20 @@ interface Props {
   applications: string[];
 }
 
-const { applications = [] } = Astro.props;
+const {
+  applications = []
+} = Astro.props;
+
+const isKhmer =
+  Astro.url.pathname.startsWith("/km/");
+
+const tag = isKhmer
+  ? "ការប្រើប្រាស់"
+  : "Applications";
+
+const title = isKhmer
+  ? "ការប្រើប្រាស់ដែលបានណែនាំ"
+  : "Recommended Uses";
 ---
 
 {
@@ -16,8 +29,8 @@ const { applications = [] } = Astro.props;
       <div class="container">
 
         <SectionTitle
-          tag="Applications"
-          title="Recommended Uses"
+          tag={tag}
+          title={title}
         />
 
         <div class="applications-grid">
@@ -27,7 +40,16 @@ const { applications = [] } = Astro.props;
 
               <div class="application-card">
 
-                <h3>{item}</h3>
+                <span
+                  class="application-icon"
+                  aria-hidden="true"
+                >
+                  ✓
+                </span>
+
+                <h3>
+                  {item}
+                </h3>
 
               </div>
 

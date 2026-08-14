@@ -1,21 +1,388 @@
-/* ===========================
-   Related Products
-=========================== */
+/* =========================================================
+   RELATED PRODUCTS
+   Mato Cashew Premium Product Cards
+   ========================================================= */
 
 .related-products {
+    padding: 88px 0 100px;
 
-    padding: 100px 0;
+    background: #fffdf8;
+}
+
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.related-products-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 24px;
+
+    margin-top: 38px;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.related-product-card {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border:
+        1px solid
+        rgba(15, 105, 67, 0.09);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(30, 52, 39, 0.06);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+.related-product-card:hover {
+    transform: translateY(-5px);
+
+    border-color:
+        rgba(15, 105, 67, 0.18);
+
+    box-shadow:
+        0 18px 38px
+        rgba(30, 52, 39, 0.10);
+}
+
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.related-product-image {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 310px;
+
+    padding: 24px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #faf7ef 100%
+        );
+
+    text-decoration: none;
+}
+
+
+.related-product-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: 270px;
+
+    object-fit: contain;
+
+    transition:
+        transform 0.35s ease;
+}
+
+
+.related-product-card:hover
+.related-product-image img {
+    transform: scale(1.035);
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.related-product-content {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 22px 22px 24px;
+}
+
+
+/* =========================================================
+   BADGES
+   ========================================================= */
+
+.related-product-badges {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+}
+
+
+.related-product-category,
+.related-product-weight {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 28px;
+
+    padding: 5px 11px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+
+.related-product-category {
+    background: #eaf6ef;
+
+    color: var(--primary);
+}
+
+
+.related-product-weight {
+    background: #f5f1e7;
+
+    color: #6d6048;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.related-product-title {
+    margin: 0 0 10px;
+
+    font-size: 18px;
+    line-height: 1.35;
+}
+
+
+.related-product-title a {
+    color: var(--text);
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease;
+}
+
+
+.related-product-title a:hover {
+    color: var(--primary);
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.related-product-description {
+    display: -webkit-box;
+
+    overflow: hidden;
+
+    margin: 0 0 20px;
+
+    color: var(--text-light);
+
+    font-size: 13px;
+    line-height: 1.65;
+
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.related-product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 14px;
+
+    margin-top: auto;
+
+    padding-top: 16px;
+
+    border-top:
+        1px solid
+        rgba(15, 105, 67, 0.08);
+}
+
+
+.related-product-packaging {
+    min-width: 0;
+
+    overflow: hidden;
+
+    color: var(--text-light);
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.related-product-link {
+    flex-shrink: 0;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    color: var(--primary);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        gap 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.related-product-link:hover {
+    gap: 10px;
+}
+
+
+/* =========================================================
+   KHMER
+   ========================================================= */
+
+html[lang="km"]
+.related-product-title {
+    line-height: 1.65;
+}
+
+
+html[lang="km"]
+.related-product-description {
+    line-height: 1.8;
+}
+
+
+html[lang="km"]
+.related-product-link {
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 980px) {
+
+    .related-products-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
 
 }
 
-.related-products .products-grid {
 
-    margin-top: 48px;
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+    .related-products {
+        padding: 60px 0 70px;
+    }
+
+
+    .related-products-grid {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+        margin-top: 28px;
+    }
+
+
+    .related-product-image {
+        height: 290px;
+    }
+
+
+    .related-product-image img {
+        max-width: 250px;
+    }
+
+
+    .related-product-content {
+        padding: 18px 18px 20px;
+    }
 
 }
 
-.related-products .section-title {
 
-    margin-bottom: 0;
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .related-product-image {
+        height: 260px;
+
+        padding: 18px;
+    }
+
+
+    .related-product-image img {
+        max-width: 225px;
+    }
+
+
+    .related-product-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
 
 }

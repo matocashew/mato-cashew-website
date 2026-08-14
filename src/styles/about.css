@@ -1,78 +1,339 @@
-/* ===========================
-   About
-=========================== */
+/* =========================================================
+   MATO CASHEW — HOMEPAGE ABOUT
+   ========================================================= */
+
+
+/* =========================================================
+   Section
+   ========================================================= */
 
 .about {
-    padding: 120px 0;
-    background: #fff;
+    padding: 104px 0;
+
+    background: var(--surface);
 }
+
+
+/* =========================================================
+   Layout
+   ========================================================= */
 
 .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns:
+        minmax(0, 1.05fr)
+        minmax(0, .95fr);
+
     align-items: center;
-    gap: 70px;
+
+    gap: clamp(56px, 6vw, 88px);
 }
 
-/* ===========================
-   About Image
-=========================== */
+
+/* =========================================================
+   Image
+   ========================================================= */
+
+.about-image {
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: var(--radius-xl);
+}
+
+
+.about-image::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    border-radius: inherit;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, .16);
+}
+
 
 .about-image img {
+    display: block;
+
     width: 100%;
 
-    border-radius: 24px;
+    aspect-ratio: 7 / 5;
+
+    object-fit: cover;
+
+    border-radius: inherit;
 
     box-shadow: var(--shadow-md);
 
     transition:
-        transform .35s ease,
-        box-shadow .35s ease;
+        transform var(--duration-normal) var(--ease-default);
 }
 
-.about-image img:hover {
-    transform: scale(1.02);
+
+.about-image:hover img {
+    transform: scale(1.025);
 }
 
-/* ===========================
-   About Content
-=========================== */
+
+/* =========================================================
+   Content
+   ========================================================= */
+
+.about-content {
+    max-width: 560px;
+}
+
+
+.about-content .section-title {
+    margin-bottom: 24px;
+}
+
 
 .about p {
-    margin-bottom: 30px;
+    max-width: 540px;
+
+    margin-bottom: 28px;
 
     color: var(--text-light);
 
+    font-size: 17px;
     line-height: 1.8;
 }
 
+
+/* =========================================================
+   Feature List
+   ========================================================= */
+
 .about-list {
     display: grid;
-    gap: 16px;
 
-    margin-bottom: 36px;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 14px 22px;
+
+    margin-bottom: 34px;
 }
+
 
 .about-list li {
     display: flex;
     align-items: flex-start;
+
     gap: 10px;
 
+    color: var(--text);
+
+    font-size: 15px;
     font-weight: 600;
+
+    line-height: 1.5;
 }
 
-/* ===========================
-   Responsive
-=========================== */
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.about-content > .btn {
+    min-width: 168px;
+}
+
+
+/* =========================================================
+   Khmer Typography
+   ========================================================= */
+
+html[lang="km"] .about p {
+    line-height: 1.9;
+}
+
+
+html[lang="km"] .about-list li {
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   Tablet
+   ========================================================= */
 
 @media (max-width: 992px) {
 
+    .about {
+        padding: 88px 0;
+    }
+
+
     .about-grid {
         grid-template-columns: 1fr;
+
+        gap: 46px;
     }
+
 
     .about-image {
         order: -1;
+
+        width: min(100%, 720px);
+
+        margin-inline: auto;
+    }
+
+
+    .about-content {
+        max-width: 700px;
+
+        margin-inline: auto;
+
+        text-align: center;
+    }
+
+
+    .about p {
+        max-width: 650px;
+
+        margin-inline: auto;
+
+        margin-bottom: 28px;
+    }
+
+
+    .about-list {
+        width: min(100%, 620px);
+
+        margin-inline: auto;
+
+        margin-bottom: 32px;
+
+        text-align: left;
+    }
+
+}
+
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .about {
+        padding: 72px 0;
+    }
+
+
+    .about-grid {
+        gap: 34px;
+    }
+
+
+    .about-image {
+        border-radius: var(--radius-lg);
+    }
+
+
+    .about-content .section-title {
+        margin-bottom: 18px;
+    }
+
+
+    .about p {
+        margin-bottom: 24px;
+
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+
+    .about-list {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+        width: min(100%, 420px);
+
+        margin-bottom: 28px;
+    }
+
+
+    .about-list li {
+        font-size: 15px;
+    }
+
+
+    .about-content > .btn {
+        min-width: 190px;
+    }
+
+
+    html[lang="km"] .about p {
+        line-height: 1.85;
+    }
+
+
+    html[lang="km"] .about-list li {
+        line-height: 1.75;
+    }
+
+}
+
+
+/* =========================================================
+   Small Mobile
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .about {
+        padding: 60px 0;
+    }
+
+
+    .about-grid {
+        gap: 30px;
+    }
+
+
+    .about p {
+        font-size: 15px;
+    }
+
+
+    .about-list {
+        margin-bottom: 26px;
+    }
+
+
+    .about-content > .btn {
+        width: min(100%, 260px);
+    }
+
+}
+
+
+/* =========================================================
+   Reduced Motion
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .about-image img {
+        transition: none;
+    }
+
+
+    .about-image:hover img {
+        transform: none;
     }
 
 }

@@ -2,12 +2,9 @@
 import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
 import { SITE } from "../config/site";
 
-const t = getCurrentLanguage(
-  Astro.url.pathname
-);
+const t = getCurrentLanguage(Astro.url.pathname);
 
-const isKhmer =
-  Astro.url.pathname.startsWith("/km");
+const isKhmer = Astro.url.pathname.startsWith("/km");
 
 const brandName = isKhmer
   ? SITE.brand.khmer
@@ -17,68 +14,143 @@ const homeUrl =
   isKhmer ? "/km/" : "/";
 
 const aboutUrl =
-  isKhmer ? "/km/about" : "/about";
+  isKhmer ? "/km/about/" : "/about/";
 
 const productsUrl =
-  isKhmer ? "/km/products" : "/products";
+  isKhmer ? "/km/products/" : "/products/";
 
 const resourcesUrl =
-  isKhmer ? "/km/resources" : "/resources";
+  isKhmer ? "/km/resources/" : "/resources/";
 
 const galleryUrl =
-  isKhmer ? "/km/gallery" : "/gallery";
+  isKhmer ? "/km/gallery/" : "/gallery/";
 
 const wholesaleUrl =
-  isKhmer ? "/km/wholesale" : "/wholesale";
+  isKhmer ? "/km/wholesale/" : "/wholesale/";
 
 const contactUrl =
-  isKhmer ? "/km/contact" : "/contact";
+  isKhmer ? "/km/contact/" : "/contact/";
 
-const currentYear =
-  new Date().getFullYear();
+const currentYear = new Date().getFullYear();
 
-const copyright =
-  isKhmer
-    ? `© ${currentYear} ${SITE.brand.khmer}។ រក្សាសិទ្ធិគ្រប់យ៉ាង។`
-    : `© ${currentYear} ${SITE.brand.english}. All rights reserved.`;
+const copyright = isKhmer
+  ? `© ${currentYear} ${SITE.brand.khmer}។ រក្សាសិទ្ធិគ្រប់យ៉ាង។`
+  : `© ${currentYear} ${SITE.brand.english}. All rights reserved.`;
 ---
 
 <footer class="footer">
 
   <div class="container footer-grid">
 
-    <!-- Brand -->
+    <!-- =====================================================
+         BRAND
+         ===================================================== -->
 
     <div class="footer-brand">
 
       <a
+        class="footer-logo"
         href={homeUrl}
         aria-label={`${brandName} Home`}
       >
-
         <img
-          src="/images/logo/logo-white.png"
-          alt={`${brandName} Logo`}
-          width="180"
-          height="60"
+          src="/images/logo/footer-logo.png"
+          alt="ចន្ទីមាតុភូមិ — Mato Cashew"
+          width="190"
+          height="100"
           loading="lazy"
           decoding="async"
         />
-
       </a>
 
-      <p>
+      <p class="footer-description">
         {t.footer.description}
       </p>
 
     </div>
 
-    <!-- Quick Links -->
 
-    <div class="footer-links">
+    <!-- =====================================================
+         PRODUCTS
+         ===================================================== -->
+
+    <nav
+      class="footer-column"
+      aria-label={isKhmer ? "ផលិតផល" : "Products"}
+    >
 
       <h4>
-        {t.footer.quickLinks}
+        {isKhmer ? "ផលិតផល" : "Products"}
+      </h4>
+
+      <ul>
+
+        <li>
+          <a href={productsUrl}>
+            {isKhmer ? "ផលិតផលទាំងអស់" : "All Products"}
+          </a>
+        </li>
+
+        <li>
+          <a href={productsUrl}>
+            {isKhmer ? "គ្រាប់ស្វាយចន្ទី" : "Cashew Products"}
+          </a>
+        </li>
+
+        <li>
+          <a href={wholesaleUrl}>
+            {isKhmer ? "លក់ដុំ" : "Wholesale"}
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+
+    <!-- =====================================================
+         RESOURCES
+         ===================================================== -->
+
+    <nav
+      class="footer-column"
+      aria-label={isKhmer ? "ធនធាន" : "Resources"}
+    >
+
+      <h4>
+        {isKhmer ? "ធនធាន" : "Resources"}
+      </h4>
+
+      <ul>
+
+        <li>
+          <a href={resourcesUrl}>
+            {isKhmer ? "ធនធាន" : "Resources"}
+          </a>
+        </li>
+
+        <li>
+          <a href={galleryUrl}>
+            {isKhmer ? "វិចិត្រសាល" : "Gallery"}
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+
+    <!-- =====================================================
+         COMPANY
+         ===================================================== -->
+
+    <nav
+      class="footer-column"
+      aria-label={isKhmer ? "អំពីក្រុមហ៊ុន" : "Company"}
+    >
+
+      <h4>
+        {isKhmer ? "អំពីក្រុមហ៊ុន" : "Company"}
       </h4>
 
       <ul>
@@ -90,30 +162,6 @@ const copyright =
         </li>
 
         <li>
-          <a href={productsUrl}>
-            {t.nav.products}
-          </a>
-        </li>
-
-        <li>
-          <a href={resourcesUrl}>
-            {t.nav.resources}
-          </a>
-        </li>
-
-        <li>
-          <a href={galleryUrl}>
-            {t.nav.gallery}
-          </a>
-        </li>
-
-        <li>
-          <a href={wholesaleUrl}>
-            {t.nav.wholesale}
-          </a>
-        </li>
-
-        <li>
           <a href={contactUrl}>
             {t.nav.contact}
           </a>
@@ -121,73 +169,77 @@ const copyright =
 
       </ul>
 
+    </nav>
+
+  </div>
+
+
+  <!-- =======================================================
+       CONTACT STRIP
+       ======================================================= -->
+
+  <div class="container footer-contact-strip">
+
+    <div class="footer-contact-item">
+
+      <span class="footer-contact-label">
+        {t.footer.email}
+      </span>
+
+      <a href={`mailto:${SITE.contact.email}`}>
+        {SITE.contact.email}
+      </a>
+
     </div>
 
-    <!-- Contact -->
 
-    <div class="footer-contact">
+    <div class="footer-contact-item">
 
-      <h4>
-        {t.footer.contact}
-      </h4>
+      <span class="footer-contact-label">
+        {t.footer.phone}
+      </span>
 
-      <p>
+      <a
+        href={`tel:${SITE.contact.phone.replace(/\s+/g, "")}`}
+      >
+        {SITE.contact.phone}
+      </a>
 
-        <strong>
-          {t.footer.email}:
-        </strong>
+    </div>
 
-        <br />
 
-        <a
-          href={`mailto:${SITE.contact.email}`}
-        >
-          {SITE.contact.email}
-        </a>
+    <div class="footer-contact-item">
 
-      </p>
+      <span class="footer-contact-label">
+        {isKhmer ? "អាសយដ្ឋាន" : "Address"}
+      </span>
 
-      <p>
-
-        <strong>
-          {t.footer.phone}:
-        </strong>
-
-        <br />
-
-        <a
-          href={`tel:${SITE.contact.phone.replace(/\s+/g, "")}`}
-        >
-          {SITE.contact.phone}
-        </a>
-
-      </p>
-
-      <p>
-
-        <strong>
-          {isKhmer ? "អាសយដ្ឋាន" : "Address"}:
-        </strong>
-
-        <br />
-
+      <span>
         {
           isKhmer
             ? SITE.address.khmer
             : SITE.address.full
         }
-
-      </p>
+      </span>
 
     </div>
 
   </div>
 
+
+  <!-- =======================================================
+       BOTTOM
+       ======================================================= -->
+
   <div class="footer-bottom">
 
-    <p>
-      {copyright}
-    </p>
+    <div class="container footer-bottom-inner">
+
+      <p>
+        {copyright}
+      </p>
+
+    </div>
 
   </div>
 

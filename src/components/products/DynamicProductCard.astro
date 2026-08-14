@@ -7,43 +7,105 @@ interface Props {
 
 const { product } = Astro.props;
 
-const productUrl = `/products/${product.data.slug}`;
+
+/* =========================================================
+   LANGUAGE
+   ========================================================= */
+
+const isKhmer =
+  Astro.url.pathname.startsWith("/km/");
+
+
+/* =========================================================
+   PRODUCT URL
+   trailingSlash: "always"
+   ========================================================= */
+
+const productUrl = isKhmer
+  ? `/km/products/${product.data.slug}/`
+  : `/products/${product.data.slug}/`;
+
+
+/* =========================================================
+   LOCALIZED PRODUCT DATA
+   Khmer → fallback to English
+   ========================================================= */
+
+const productTitle =
+  isKhmer
+    ? product.data.titleKm ?? product.data.title
+    : product.data.title;
+
+
+const productDescription =
+  isKhmer
+    ? product.data.descriptionKm ?? product.data.description
+    : product.data.description;
+
+
+const categoryLabel =
+  isKhmer
+    ? product.data.categoryKm ??
+      (
+        product.data.category === "Retail"
+          ? "លក់រាយ"
+          : product.data.category === "Wholesale"
+            ? "លក់ដុំ"
+            : product.data.category
+      )
+    : product.data.category;
+
+
+/* =========================================================
+   UI LABELS
+   ========================================================= */
+
+const viewDetailsLabel =
+  isKhmer
+    ? "មើលព័ត៌មានលម្អិត"
+    : "View Details";
 ---
 
 <article class="product-card">
 
+  <!-- Product Image -->
+
   <a
     href={productUrl}
     class="product-image"
+    aria-label={productTitle}
   >
-
     <img
       src={product.data.image}
-      alt={product.data.title}
+      alt={productTitle}
       width="600"
       height="600"
       loading="lazy"
+      decoding="async"
     />
-
   </a>
+
+
+  <!-- Product Content -->
 
   <div class="product-content">
 
     <span class="product-category">
-      {product.data.category}
+      {categoryLabel}
     </span>
 
+
     <h3>
-
       <a href={productUrl}>
-        {product.data.title}
+        {productTitle}
       </a>
-
     </h3>
 
+
     <p>
-      {product.data.description}
+      {productDescription}
     </p>
+
 
     <div class="product-footer">
 
@@ -51,11 +113,13 @@ const productUrl = `/products/${product.data.slug}`;
         {product.data.weight}
       </span>
 
+
       <a
         href={productUrl}
         class="product-link"
+        aria-label={`${viewDetailsLabel}: ${productTitle}`}
       >
-        View Details
+        {viewDetailsLabel}
       </a>
 
     </div>

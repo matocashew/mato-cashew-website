@@ -1,63 +1,127 @@
+import { navigate } from "astro:transitions/client";
 import { switchLanguage } from "../i18n/switchLanguage";
+
+
 export function initLanguageSwitcher() {
 
   const current =
-    document.querySelector(".language-current");
+    document.querySelector<HTMLButtonElement>(
+      ".language-current"
+    );
 
   const dropdown =
-    document.querySelector(".language-dropdown");
+    document.querySelector<HTMLElement>(
+      ".language-dropdown"
+    );
 
   if (!current || !dropdown) return;
 
-  // Toggle dropdown
-  current.addEventListener("click", (event) => {
 
-    event.stopPropagation();
+  /* =========================
+     Toggle dropdown
+  ========================= */
 
-    dropdown.classList.toggle("open");
+  current.addEventListener(
+    "click",
+    (event) => {
 
-    const expanded =
-      current.getAttribute("aria-expanded") === "true";
+      event.stopPropagation();
 
-    current.setAttribute(
-      "aria-expanded",
-      (!expanded).toString()
-    );
+      const isOpen =
+        dropdown.classList.toggle("open");
 
-  });
+      current.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
 
-  // Close dropdown
-  document.addEventListener("click", () => {
+    }
+  );
 
-    dropdown.classList.remove("open");
 
-    current.setAttribute(
-      "aria-expanded",
-      "false"
-    );
+  /* =========================
+     Close dropdown
+  ========================= */
 
-  });
+  document.addEventListener(
+    "click",
+    () => {
 
-  // Language switching
+      dropdown.classList.remove("open");
+
+      current.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+    }
+  );
+
+
+  /* =========================
+     Language switching
+  ========================= */
+
   const languageButtons =
-    document.querySelectorAll(".language-option");
+    document.querySelectorAll<HTMLButtonElement>(
+      ".language-option"
+    );
+
 
   languageButtons.forEach((button) => {
 
-    button.addEventListener("click", () => {
+    button.addEventListener(
+      "click",
+      async (event) => {
 
-      const language =
-        button.getAttribute("data-language");
+        event.stopPropagation();
 
-      if (!language) return;
+        const language =
+          button.dataset.language as
+            | "en"
+            | "km"
+            | undefined;
 
-      const target = switchLanguage(
-        window.location.pathname,
-        language as "en" | "km"
-      );
+        if (!language) return;
 
-      window.location.href = target;
-    });
+
+        const target =
+          switchLanguage(
+            window.location.pathname,
+            language
+          );
+
+
+        /* Close dropdown before navigation */
+
+        dropdown.classList.remove("open");
+
+        current.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+
+        /* Avoid unnecessary navigation */
+
+        if (
+          target ===
+          window.location.pathname
+        ) {
+          return;
+        }
+
+
+        /*
+         * Astro ClientRouter navigation.
+         *
+         * No full page reload.
+         */
+
+        await navigate(target);
+
+      }
+    );
 
   });
 

@@ -2,13 +2,101 @@
 import type { CollectionEntry } from "astro:content";
 
 import SectionTitle from "../SectionTitle.astro";
-import DynamicProductCard from "./DynamicProductCard.astro";
 
 interface Props {
   products: CollectionEntry<"products">[];
+  lang?: "en" | "km";
 }
 
-const { products = [] }: Props = Astro.props;
+const {
+  products = [],
+  lang = "en",
+}: Props = Astro.props;
+
+const isKhmer = lang === "km";
+
+
+/* =========================================================
+   SECTION LABELS
+   ========================================================= */
+
+const tag = isKhmer
+  ? "ផលិតផលផ្សេងទៀត"
+  : "You May Also Like";
+
+const title = isKhmer
+  ? "ផលិតផលដែលពាក់ព័ន្ធ"
+  : "Related Products";
+
+const viewDetailsLabel = isKhmer
+  ? "មើលព័ត៌មានលម្អិត"
+  : "View Details";
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function getProductUrl(
+  product: CollectionEntry<"products">
+) {
+  return isKhmer
+    ? `/km/products/${product.data.slug}/`
+    : `/products/${product.data.slug}/`;
+}
+
+
+function getProductTitle(
+  product: CollectionEntry<"products">
+) {
+  return isKhmer
+    ? product.data.titleKm ??
+        product.data.title
+    : product.data.title;
+}
+
+
+function getProductDescription(
+  product: CollectionEntry<"products">
+) {
+  return isKhmer
+    ? product.data.descriptionKm ??
+        product.data.description
+    : product.data.description;
+}
+
+
+function getCategory(
+  product: CollectionEntry<"products">
+) {
+  if (!isKhmer) {
+    return product.data.category;
+  }
+
+  if (product.data.categoryKm) {
+    return product.data.categoryKm;
+  }
+
+  if (product.data.category === "Retail") {
+    return "លក់រាយ";
+  }
+
+  if (product.data.category === "Wholesale") {
+    return "លក់ដុំ";
+  }
+
+  return product.data.category;
+}
+
+
+function getPackaging(
+  product: CollectionEntry<"products">
+) {
+  return isKhmer
+    ? product.data.packagingKm ??
+        product.data.packaging
+    : product.data.packaging;
+}
 ---
 
 {
@@ -19,20 +107,118 @@ const { products = [] }: Props = Astro.props;
       <div class="container">
 
         <SectionTitle
-          tag="You May Also Like"
-          title="Related Products"
+          tag={tag}
+          title={title}
         />
 
-        <div class="products-grid">
+
+        <div class="related-products-grid">
 
           {
-            products.map((product) => (
+            products.map((product) => {
 
-              <DynamicProductCard
-                product={product}
-              />
+              const productUrl =
+                getProductUrl(product);
 
-            ))
+              const productTitle =
+                getProductTitle(product);
+
+              const productDescription =
+                getProductDescription(product);
+
+              const category =
+                getCategory(product);
+
+              const packaging =
+                getPackaging(product);
+
+              return (
+
+                <article class="related-product-card">
+
+                  <!-- =====================================
+                       IMAGE
+                       ===================================== -->
+
+                  <a
+                    href={productUrl}
+                    class="related-product-image"
+                    aria-label={productTitle}
+                  >
+
+                    <img
+                      src={product.data.image}
+                      alt={productTitle}
+                      width="520"
+                      height="520"
+                      loading="lazy"
+                      decoding="async"
+                    />
+
+                  </a>
+
+
+                  <!-- =====================================
+                       CONTENT
+                       ===================================== -->
+
+                  <div class="related-product-content">
+
+                    <div class="related-product-badges">
+
+                      <span class="related-product-category">
+                        {category}
+                      </span>
+
+                      <span class="related-product-weight">
+                        {product.data.weight}
+                      </span>
+
+                    </div>
+
+
+                    <h3 class="related-product-title">
+
+                      <a href={productUrl}>
+                        {productTitle}
+                      </a>
+
+                    </h3>
+
+
+                    <p class="related-product-description">
+                      {productDescription}
+                    </p>
+
+
+                    <div class="related-product-footer">
+
+                      <span class="related-product-packaging">
+                        {packaging}
+                      </span>
+
+
+                      <a
+                        href={productUrl}
+                        class="related-product-link"
+                        aria-label={`${viewDetailsLabel}: ${productTitle}`}
+                      >
+                        {viewDetailsLabel}
+
+                        <span aria-hidden="true">
+                          →
+                        </span>
+                      </a>
+
+                    </div>
+
+                  </div>
+
+                </article>
+
+              );
+
+            })
           }
 
         </div>
