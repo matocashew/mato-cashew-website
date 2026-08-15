@@ -1,0 +1,139 @@
+---
+import "../../styles/home-wholesale-cta.css";
+
+interface Props {
+  content: {
+    tag: string;
+    title: string;
+    description: string;
+
+    features: {
+      export: string;
+      packaging: string;
+      quality: string;
+      privateLabel: string;
+    };
+
+    cta: string;
+    imageAlt: string;
+  };
+}
+
+const { content } = Astro.props;
+---
+
+<section class="home-business">
+  <div class="home-business__inner">
+
+    <div class="home-business__content">
+
+      <p class="home-business__tag">
+        {content.tag}
+      </p>
+
+      <h2 class="home-business__title">
+        {content.title}
+      </h2>
+
+      <p class="home-business__description">
+        {content.description}
+      </p>
+
+      <ul class="home-business__features">
+        <li>
+          <span class="feature-icon" aria-hidden="true">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M4 7.5 12 3l8 4.5-8 4.5-8-4.5Z" />
+                    <path d="M4 7.5V16l8 5 8-5V7.5" />
+                    <path d="M12 12v9" />
+                </svg>
+            </span>
+
+            {content.features.export}
+        </li>
+
+        <li>
+          <span class="feature-icon" aria-hidden="true">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M5 8h14v12H5z" />
+                    <path d="M8 8V5h8v3" />
+                    <path d="M9 12h6" />
+                    <path d="M9 16h4" />
+                </svg>
+            </span>
+
+            {content.features.packaging}
+        </li>
+
+        <li>
+          <span class="feature-icon" aria-hidden="true">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M6 3h8l4 4v14H6z" />
+                    <path d="M14 3v5h4" />
+                    <path d="M9 12h6" />
+                    <path d="M9 16h6" />
+                </svg>
+            </span>
+
+            {content.features.quality}
+        </li>
+
+        <li>
+          <span class="feature-icon" aria-hidden="true">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M4 5h16v11H9l-5 4V5Z" />
+                    <path d="M8 9h8" />
+                    <path d="M8 12h5" />
+                </svg>
+            </span>
+
+            {content.features.privateLabel}
+        </li>
+      </ul>
+
+      <a href="/contact/" class="home-business__cta">
+        {content.cta}
+        <span aria-hidden="true">→</span>
+      </a>
+
+    </div>
+
+    <div class="home-business__image">
+      <img
+        src="/images/home/business-inquiry.png"
+        alt={content.imageAlt}
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+  </div>
+</section>

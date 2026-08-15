@@ -35,9 +35,11 @@
     align-items: center;
     justify-content: space-between;
 
-    min-height: 96px;
+    height: 88px;
+    min-height: 88px;
 
     transition:
+        height var(--duration-normal) var(--ease-default),
         min-height var(--duration-normal) var(--ease-default);
 }
 
@@ -453,7 +455,8 @@
 
 
 .header.scrolled .header-wrapper {
-    min-height: 82px;
+    height: 76px;
+    min-height: 76px;
 }
 
 

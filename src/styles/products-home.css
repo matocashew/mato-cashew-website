@@ -1,0 +1,537 @@
+/* =========================================================
+   HOME PRODUCT SHOWCASE
+   ========================================================= */
+
+.products-showcase {
+    padding: 86px 0;
+
+    background: #f8f4ea;
+}
+
+
+.products-showcase-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(240px, 0.8fr)
+        minmax(0, 2.2fr);
+
+    align-items: center;
+
+    gap: 54px;
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.products-showcase-intro {
+    max-width: 330px;
+}
+
+
+.products-showcase-tag {
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    color: #086a45;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+
+.products-showcase-intro h2 {
+    margin: 0;
+
+    color: #17241f;
+
+    font-size: clamp(36px, 3.2vw, 54px);
+    font-weight: 500;
+
+    line-height: 1.05;
+
+    letter-spacing: -0.025em;
+}
+
+
+.products-showcase-intro p {
+    max-width: 300px;
+
+    margin: 20px 0 26px;
+
+    color: #5e6863;
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+.products-showcase-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    min-height: 48px;
+
+    padding: 0 22px;
+
+    border-radius: 9px;
+}
+
+
+.products-showcase-cta span {
+    transition: transform 0.2s ease;
+}
+
+
+.products-showcase-cta:hover span {
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   PRODUCT SIDE
+   ========================================================= */
+
+.products-showcase-products {
+    position: relative;
+
+    min-width: 0;
+}
+
+
+/*
+ * ProductGrid is reused elsewhere.
+ * Scope all overrides under .products-showcase only.
+ */
+
+.products-showcase .products-grid-section {
+    margin: 0;
+    padding: 0;
+}
+
+
+.products-showcase .products-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   PRODUCT CARD
+   ========================================================= */
+
+.products-showcase .product-card {
+    height: 100%;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff;
+
+    border:
+        1px solid
+        rgba(31, 63, 47, 0.10);
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 10px 28px
+        rgba(28, 55, 40, 0.06);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.products-showcase .product-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 18px 38px
+        rgba(28, 55, 40, 0.10);
+}
+
+
+/* IMAGE */
+
+.products-showcase .product-image {
+    min-height: 245px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 22px 18px 8px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdfa 0%,
+            #faf7ef 100%
+        );
+}
+
+
+.products-showcase .product-image img {
+    width: auto;
+    height: 215px;
+
+    max-width: 100%;
+
+    object-fit: contain;
+
+    transition: transform 0.3s ease;
+}
+
+
+.products-showcase .product-card:hover
+.product-image img {
+    transform: scale(1.035);
+}
+
+
+/* CONTENT */
+
+.products-showcase .product-content {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 18px 18px 17px;
+}
+
+
+.products-showcase .product-category {
+    align-self: flex-start;
+
+    margin-bottom: 9px;
+
+    padding: 5px 9px;
+
+    border-radius: 999px;
+
+    background: #eaf5ee;
+
+    color: #087047;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+.products-showcase .product-content h3 {
+    margin: 0 0 9px;
+
+    font-size: 17px;
+    line-height: 1.25;
+}
+
+
+.products-showcase .product-content h3 a {
+    color: #16251f;
+    text-decoration: none;
+}
+
+
+.products-showcase .product-content p {
+    margin: 0;
+
+    color: #68716d;
+
+    font-size: 12px;
+    line-height: 1.55;
+
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+
+.products-showcase .product-footer {
+    margin-top: auto;
+
+    padding-top: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    border-top:
+        1px solid
+        rgba(30, 62, 47, 0.08);
+}
+
+
+.products-showcase .product-weight {
+    color: #68716d;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+.products-showcase .product-link {
+    color: #087047;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   RIGHT ARROW
+   ========================================================= */
+
+.products-showcase-arrow {
+    position: absolute;
+
+    top: 50%;
+    right: -56px;
+
+    transform: translateY(-50%);
+
+    width: 44px;
+    height: 44px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #086a45;
+
+    color: #ffffff;
+
+    font-size: 20px;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 10px 24px
+        rgba(8, 106, 69, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.products-showcase-arrow:hover {
+    transform:
+        translateY(-50%)
+        translateX(3px);
+
+    background: #075d3d;
+}
+
+
+/* =========================================================
+   KHMER TYPOGRAPHY
+   ========================================================= */
+
+html[lang="km"]
+.products-showcase-intro h2 {
+    font-size:
+        clamp(32px, 2.8vw, 46px);
+
+    line-height: 1.45;
+
+    letter-spacing: 0;
+}
+
+
+html[lang="km"]
+.products-showcase-intro p {
+    line-height: 1.85;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .products-showcase-grid {
+        grid-template-columns: 1fr;
+
+        gap: 34px;
+    }
+
+    .products-showcase-intro {
+        max-width: 620px;
+    }
+
+    .products-showcase-intro p {
+        max-width: 540px;
+    }
+
+    .products-showcase-arrow {
+        display: none;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .products-showcase {
+        padding: 58px 0;
+    }
+
+
+    .products-showcase-grid {
+        gap: 26px;
+    }
+
+
+    .products-showcase-intro {
+        max-width: none;
+    }
+
+
+    .products-showcase-intro h2 {
+        max-width: 330px;
+
+        font-size: 32px;
+        line-height: 1.08;
+    }
+
+
+    html[lang="km"]
+    .products-showcase-intro h2 {
+        font-size: 28px;
+        line-height: 1.5;
+    }
+
+
+    .products-showcase-intro p {
+        margin:
+            14px 0 20px;
+
+        font-size: 14px;
+    }
+
+
+    /*
+     * Vertical cards first.
+     * Stable and easy to test.
+     */
+
+    .products-showcase .products-grid {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+
+    .products-showcase .product-card {
+        border-radius: 14px;
+    }
+
+
+    .products-showcase .product-image {
+        min-height: 220px;
+
+        padding:
+            18px
+            16px
+            6px;
+    }
+
+
+    .products-showcase .product-image img {
+        height: 200px;
+    }
+
+
+    .products-showcase .product-content {
+        padding: 16px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .products-showcase {
+        padding:
+            48px 0;
+    }
+
+
+    .products-showcase-intro h2 {
+        font-size: 29px;
+    }
+
+
+    html[lang="km"]
+    .products-showcase-intro h2 {
+        font-size: 26px;
+    }
+
+
+    .products-showcase .product-image {
+        min-height: 195px;
+    }
+
+
+    .products-showcase .product-image img {
+        height: 178px;
+    }
+
+}
+
+/* =========================================================
+   KHMER — PRODUCTS SHOWCASE TAG
+   ========================================================= */
+
+html[lang="km"] .products-showcase-tag {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    line-height: 1.5 !important;
+
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+
+    color: #086a45;
+}
+
+@media (max-width: 768px) {
+    html[lang="km"] .products-showcase-tag {
+        font-size: 12px !important;
+        line-height: 1.5 !important;
+    }
+}

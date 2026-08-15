@@ -1,0 +1,648 @@
+/* =========================================================
+   HOME — PROCESS
+   FROM ORCHARD TO YOU
+   ========================================================= */
+
+.home-process {
+    padding: 72px 0 78px;
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.home-process-heading {
+    margin-bottom: 42px;
+}
+
+
+.home-process-tag {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    color: #086a45;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+
+.home-process-heading h2 {
+    margin: 0;
+
+    color: #17251f;
+
+    font-size: clamp(34px, 3vw, 48px);
+    font-weight: 500;
+
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+}
+
+
+/* =========================================================
+   PROCESS FLOW
+   ========================================================= */
+
+.home-process-flow {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, minmax(0, 1fr));
+
+    align-items: start;
+
+    gap: 0;
+
+    padding: 26px 24px;
+
+    border:
+        1px solid
+        rgba(18, 85, 58, 0.10);
+
+    border-radius: 18px;
+
+    background: #fbfaf6;
+
+    box-shadow:
+        0 12px 30px
+        rgba(25, 52, 39, 0.05);
+}
+
+
+/* =========================================================
+   STEP
+   ========================================================= */
+
+.home-process-step {
+    position: relative;
+
+    min-width: 0;
+
+    padding: 0 18px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.home-process-icon {
+    width: 52px;
+    height: 52px;
+
+    margin: 0 auto 14px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #edf5ef;
+
+    color: #086a45;
+
+    font-size: 20px;
+
+    border:
+        1px solid
+        rgba(8, 106, 69, 0.10);
+}
+
+
+/* =========================================================
+   NUMBER
+   ========================================================= */
+
+.home-process-number {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #b38a2d;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.home-process-step h3 {
+    min-height: 42px;
+
+    margin: 0;
+
+    color: #1b2d26;
+
+    font-size: 14px;
+    font-weight: 750;
+
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.home-process-step p {
+    max-width: 150px;
+
+    margin:
+        8px auto
+        0;
+
+    color: #69736e;
+
+    font-size: 11px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   CONNECTING ARROW
+   ========================================================= */
+
+.home-process-arrow {
+    position: absolute;
+
+    top: 18px;
+    right: -10px;
+
+    z-index: 2;
+
+    color: #087047;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   KHMER
+   ========================================================= */
+
+html[lang="km"] .home-process-tag {
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+
+html[lang="km"] .home-process-heading h2 {
+    font-size:
+        clamp(30px, 2.7vw, 42px);
+
+    line-height: 1.45;
+
+    letter-spacing: 0;
+}
+
+
+html[lang="km"] .home-process-step h3 {
+    min-height: 54px;
+
+    font-size: 13px;
+
+    line-height: 1.65;
+}
+
+
+html[lang="km"] .home-process-step p {
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .home-process-flow {
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 30px 0;
+
+        padding:
+            28px 20px;
+    }
+
+
+    .home-process-step {
+        padding:
+            0 22px;
+    }
+
+
+    /*
+     Hide arrows after each row.
+    */
+
+    .home-process-step:nth-child(3)
+    .home-process-arrow,
+    .home-process-step:nth-child(6)
+    .home-process-arrow {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .home-process {
+        padding:
+            54px 0;
+    }
+
+
+    .home-process-heading {
+        margin-bottom: 28px;
+    }
+
+
+    .home-process-heading h2 {
+        font-size: 30px;
+    }
+
+
+    html[lang="km"] .home-process-heading h2 {
+        font-size: 27px;
+    }
+
+
+    .home-process-flow {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+
+        padding: 10px;
+
+        background: transparent;
+
+        border: 0;
+
+        box-shadow: none;
+    }
+
+
+    .home-process-step {
+        min-height: 190px;
+
+        padding: 20px 12px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        border:
+            1px solid
+            rgba(18, 85, 58, 0.09);
+
+        border-radius: 14px;
+
+        background: #fbfaf6;
+
+        box-shadow:
+            0 8px 22px
+            rgba(25, 52, 39, 0.05);
+    }
+
+
+    .home-process-icon {
+        width: 44px;
+        height: 44px;
+
+        margin-bottom: 11px;
+
+        font-size: 17px;
+    }
+
+
+    .home-process-number {
+        margin-bottom: 5px;
+    }
+
+
+    .home-process-step h3 {
+        min-height: 0;
+
+        font-size: 13px;
+    }
+
+
+    html[lang="km"] .home-process-step h3 {
+        min-height: 0;
+
+        font-size: 12px;
+    }
+
+
+    .home-process-step p {
+        margin-top: 7px;
+
+        font-size: 10px;
+    }
+
+
+    /*
+     Arrows are not useful in 2-column mobile cards.
+    */
+
+    .home-process-arrow {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .home-process-flow {
+        gap: 8px;
+    }
+
+
+    .home-process-step {
+        min-height: 180px;
+
+        padding:
+            18px 10px;
+    }
+
+
+    .home-process-icon {
+        width: 40px;
+        height: 40px;
+
+        font-size: 15px;
+    }
+
+
+    .home-process-step h3 {
+        font-size: 12px;
+    }
+
+
+    html[lang="km"] .home-process-step h3 {
+        font-size: 11.5px;
+    }
+
+
+    .home-process-step p {
+        font-size: 9.5px;
+    }
+}
+/* =========================================================
+   HOME PROCESS — TYPOGRAPHY FINE TUNING
+   ========================================================= */
+
+/* Section tag */
+.home-process-tag {
+    font-size: 13px;
+}
+
+/* Main section title */
+.home-process-heading h2 {
+    font-size: clamp(38px, 3.2vw, 52px);
+}
+
+/* Step number */
+.home-process-number {
+    font-size: 11px;
+}
+
+/* Step title */
+.home-process-step h3 {
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+/* Step description */
+.home-process-step p {
+    max-width: 170px;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   KHMER
+   ========================================================= */
+
+html[lang="km"] .home-process-tag {
+    font-size: 15px;
+}
+
+html[lang="km"] .home-process-heading h2 {
+    font-size: clamp(34px, 3vw, 46px);
+    line-height: 1.45;
+}
+
+html[lang="km"] .home-process-step h3 {
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+html[lang="km"] .home-process-step p {
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .home-process-step h3 {
+        font-size: 15px;
+    }
+
+    .home-process-step p {
+        font-size: 12px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .home-process-heading h2 {
+        font-size: 32px;
+    }
+
+    html[lang="km"] .home-process-heading h2 {
+        font-size: 29px;
+    }
+
+    .home-process-step h3 {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .home-process-step p {
+        font-size: 11px;
+        line-height: 1.55;
+    }
+
+    html[lang="km"] .home-process-step h3 {
+        font-size: 13.5px;
+        line-height: 1.65;
+    }
+
+    html[lang="km"] .home-process-step p {
+        font-size: 11px;
+        line-height: 1.75;
+    }
+}
+/* =========================================================
+   HOME PROCESS — DESCRIPTION TEXT BIGGER
+   ========================================================= */
+
+.home-process-step p {
+    max-width: 180px;
+
+    font-size: 14px;
+    line-height: 1.7;
+
+    color: #5f6c66;
+}
+
+
+/* Khmer */
+html[lang="km"] .home-process-step p {
+    max-width: 185px;
+
+    font-size: 14px;
+    line-height: 1.9;
+
+    color: #5f6c66;
+}
+/* =========================================================
+   HOME PROCESS — MOBILE EQUAL CARD HEIGHT
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .home-process-flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: stretch;
+    }
+
+    .home-process-step {
+        height: 100%;
+        min-height: 235px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        padding: 20px 12px;
+    }
+
+    .home-process-icon {
+        flex-shrink: 0;
+    }
+
+    .home-process-number {
+        flex-shrink: 0;
+    }
+
+    .home-process-step h3 {
+        min-height: 54px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+    }
+
+    .home-process-step p {
+        min-height: 72px;
+
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+
+        margin-top: 8px;
+
+        text-align: center;
+    }
+}
+@media (max-width: 768px) {
+
+    html[lang="km"] .home-process-step {
+        min-height: 245px;
+    }
+
+    html[lang="km"] .home-process-step h3 {
+        min-height: 62px;
+    }
+
+    html[lang="km"] .home-process-step p {
+        min-height: 82px;
+    }
+}
+/* =========================================================
+   HOME PROCESS — SVG ICON POLISH
+   ========================================================= */
+
+.home-process-icon {
+    color: #08734b;
+}
+
+.home-process-icon svg {
+    width: 24px;
+    height: 24px;
+
+    display: block;
+
+    flex: 0 0 auto;
+}
+
+@media (max-width: 768px) {
+
+    .home-process-icon svg {
+        width: 21px;
+        height: 21px;
+    }
+
+}

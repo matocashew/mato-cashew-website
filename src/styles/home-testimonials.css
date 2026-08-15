@@ -1,0 +1,637 @@
+/* =========================================================
+   HOME TESTIMONIALS
+   ROADMAP FINAL LAYOUT
+   ========================================================= */
+
+.home-testimonials {
+    padding: 78px 0;
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.home-testimonials-heading {
+    margin-bottom: 30px;
+}
+
+.home-testimonials-tag {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    color: #08734b;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.home-testimonials-heading h2 {
+    margin: 0;
+
+    color: #17251f;
+
+    font-size: clamp(34px, 3vw, 46px);
+    font-weight: 500;
+
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+   3 TESTIMONIALS + FARMER IMAGE
+   ========================================================= */
+
+.home-testimonials-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.65fr)
+        minmax(280px, 0.85fr);
+
+    align-items: stretch;
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   TESTIMONIAL CARDS
+   ========================================================= */
+
+.home-testimonials-cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.testimonial-card {
+    min-width: 0;
+    min-height: 235px;
+
+    padding: 24px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff;
+
+    border:
+        1px solid
+        rgba(16, 84, 57, 0.10);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 28px
+        rgba(27, 63, 46, 0.07);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 16px 36px
+        rgba(27, 63, 46, 0.10);
+}
+
+
+/* =========================================================
+   STARS
+   ========================================================= */
+
+.testimonial-stars {
+    margin-bottom: 15px;
+
+    color: #d79a22;
+
+    font-size: 17px;
+    line-height: 1;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   REVIEW TEXT
+   ========================================================= */
+
+.testimonial-quote {
+    flex: 1;
+
+    margin: 0 0 20px;
+
+    color: #536159;
+
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   CUSTOMER
+   ========================================================= */
+
+.testimonial-customer {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding-top: 15px;
+
+    border-top:
+        1px solid
+        rgba(16, 84, 57, 0.08);
+}
+
+.testimonial-avatar {
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #edf6f1;
+
+    color: #08734b;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.testimonial-customer-info {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-customer strong {
+    color: #173329;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+.testimonial-customer span {
+    margin-top: 2px;
+
+    color: #7a857f;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   FARMER IMAGE
+   ========================================================= */
+
+.home-testimonials-visual {
+    position: relative;
+
+    min-height: 235px;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    background: #edf2ed;
+
+    box-shadow:
+        0 10px 28px
+        rgba(27, 63, 46, 0.08);
+}
+
+.home-testimonials-visual img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition:
+        transform 0.5s ease;
+}
+
+.home-testimonials-layout:hover
+.home-testimonials-visual img {
+    transform: scale(1.025);
+}
+
+
+/* subtle visual blend */
+
+.testimonial-visual-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.12) 0%,
+            rgba(255,255,255,0) 35%
+        );
+}
+
+
+/* =========================================================
+   PLACEHOLDER NOTE
+   ========================================================= */
+
+.testimonial-placeholder-note {
+    margin: 13px 0 0;
+
+    color: #949c97;
+
+    font-size: 10px;
+    line-height: 1.5;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   KHMER
+   ========================================================= */
+
+html[lang="km"] .home-testimonials-tag {
+    font-size: 14px;
+
+    letter-spacing: 0;
+    text-transform: none;
+
+    line-height: 1.6;
+}
+
+html[lang="km"] .home-testimonials-heading h2 {
+    font-size:
+        clamp(30px, 2.7vw, 42px);
+
+    line-height: 1.5;
+
+    letter-spacing: 0;
+}
+
+html[lang="km"] .testimonial-quote {
+    font-size: 14px;
+
+    line-height: 1.95;
+}
+
+html[lang="km"] .testimonial-customer strong {
+    font-size: 13px;
+
+    line-height: 1.65;
+}
+
+html[lang="km"] .testimonial-customer span {
+    font-size: 11px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .home-testimonials-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .home-testimonials-visual {
+        min-height: 360px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+    .home-testimonials {
+        padding: 54px 0;
+    }
+
+
+    /* Heading */
+
+    .home-testimonials-heading {
+        margin-bottom: 22px;
+    }
+
+    .home-testimonials-heading h2 {
+        font-size: 27px;
+
+        line-height: 1.2;
+    }
+
+    html[lang="km"]
+    .home-testimonials-heading h2 {
+        font-size: 25px;
+
+        line-height: 1.55;
+    }
+
+
+    /* Layout */
+
+    .home-testimonials-layout {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 14px;
+    }
+
+
+    /* Reviews */
+
+    .home-testimonials-cards {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .testimonial-card {
+        min-height: auto;
+
+        padding: 20px 18px;
+
+        border-radius: 14px;
+    }
+
+    .testimonial-quote {
+        margin-bottom: 17px;
+
+        font-size: 14px;
+        line-height: 1.75;
+    }
+
+    html[lang="km"] .testimonial-quote {
+        font-size: 14px;
+
+        line-height: 1.9;
+    }
+
+
+    /* Farmer image comes after cards */
+
+    .home-testimonials-visual {
+        width: 100%;
+
+        min-height: 250px;
+
+        border-radius: 14px;
+    }
+
+    .home-testimonials-visual img {
+        object-position: center;
+    }
+
+
+    /* Note */
+
+    .testimonial-placeholder-note {
+        margin-top: 10px;
+
+        text-align: left;
+    }
+
+}
+
+/* =========================================================
+   HOME TESTIMONIALS
+   FINAL DESKTOP TUNING — MATCH ROADMAP SAMPLE
+   ========================================================= */
+
+@media (min-width: 1051px) {
+
+    /* -----------------------------------------
+       SECTION
+       ----------------------------------------- */
+
+    .home-testimonials {
+        padding: 58px 0 62px;
+    }
+
+
+    /* -----------------------------------------
+       HEADING
+       Make it compact like the sample
+       ----------------------------------------- */
+
+    .home-testimonials-heading {
+        margin-bottom: 20px;
+    }
+
+    .home-testimonials-tag {
+        margin-bottom: 6px;
+
+        font-size: 10px;
+        letter-spacing: 0.13em;
+    }
+
+    .home-testimonials-heading h2 {
+        font-size: 30px;
+        line-height: 1.12;
+
+        font-weight: 500;
+    }
+
+
+    /* -----------------------------------------
+       MAIN ROW
+       Cards + Farmer Image
+       ----------------------------------------- */
+
+    .home-testimonials-layout {
+        display: grid;
+
+        /*
+         Left = 3 testimonial cards
+         Right = farmer visual
+        */
+        grid-template-columns:
+            minmax(0, 1.72fr)
+            minmax(320px, 0.88fr);
+
+        align-items: stretch;
+
+        /* Important:
+           reduce large empty area between
+           card 3 and image
+        */
+        gap: 10px;
+    }
+
+
+    /* -----------------------------------------
+       THREE CARDS
+       ----------------------------------------- */
+
+    .home-testimonials-cards {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+
+    .testimonial-card {
+        min-height: 190px;
+
+        padding: 18px 16px;
+
+        border-radius: 12px;
+
+        box-shadow:
+            0 8px 22px
+            rgba(27, 63, 46, 0.06);
+    }
+
+
+    /* -----------------------------------------
+       STARS
+       ----------------------------------------- */
+
+    .testimonial-stars {
+        margin-bottom: 11px;
+
+        font-size: 14px;
+        letter-spacing: 1.5px;
+    }
+
+
+    /* -----------------------------------------
+       REVIEW
+       ----------------------------------------- */
+
+    .testimonial-quote {
+        margin-bottom: 14px;
+
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+
+    /* -----------------------------------------
+       CUSTOMER
+       ----------------------------------------- */
+
+    .testimonial-customer {
+        gap: 8px;
+
+        padding-top: 11px;
+    }
+
+    .testimonial-avatar {
+        width: 32px;
+        height: 32px;
+
+        flex-basis: 32px;
+
+        font-size: 11px;
+    }
+
+    .testimonial-customer strong {
+        font-size: 11px;
+    }
+
+    .testimonial-customer span {
+        font-size: 9px;
+    }
+
+
+    /* -----------------------------------------
+       FARMER IMAGE
+       Same height as testimonial cards
+       ----------------------------------------- */
+
+    .home-testimonials-visual {
+        width: 100%;
+
+        min-height: 190px;
+        height: 100%;
+
+        border-radius: 12px;
+    }
+
+    .home-testimonials-visual img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        /*
+         Keep farmer on right
+         and cashew fruit visible on left
+        */
+        object-position: 56% center;
+    }
+
+
+    /* -----------------------------------------
+       PLACEHOLDER NOTE
+       ----------------------------------------- */
+
+    .testimonial-placeholder-note {
+        margin-top: 8px;
+
+        font-size: 8px;
+
+        text-align: right;
+    }
+
+}
+.home-testimonials-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 54% center;
+}
+
+@media (max-width: 640px) {
+    .home-testimonials-visual {
+        min-height: 230px;
+    }
+
+    .home-testimonials-visual img {
+        object-position: 57% center;
+    }
+}

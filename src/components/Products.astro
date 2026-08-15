@@ -1,12 +1,31 @@
 ---
-import SectionTitle from "./SectionTitle.astro";
 import ProductGrid from "./products/ProductGrid.astro";
+
 import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
+import { getLocalizedPath } from "../i18n/getLocalizedPath";
+
+import type { Language } from "../i18n/config";
+
 import { getFeaturedProducts } from "../services/productService";
+
+/* Home product showcase styles */
+import "../styles/products-home.css";
+
 
 const t = getCurrentLanguage(
   Astro.url.pathname
 );
+
+const language: Language =
+  Astro.url.pathname.startsWith("/km")
+    ? "km"
+    : "en";
+
+const productsPath =
+  getLocalizedPath(
+    language,
+    "/products/"
+  );
 
 const featuredProducts = (
   await getFeaturedProducts()
@@ -15,19 +34,66 @@ const featuredProducts = (
 
 <section
   id="products"
-  class="products"
+  class="products products-showcase"
 >
 
   <div class="container">
 
-    <SectionTitle
-      tag={t.productsHome.tag}
-      title={t.productsHome.title}
-    />
+    <div class="products-showcase-grid">
 
-    <ProductGrid
-      products={featuredProducts}
-    />
+      <!-- =========================================
+           INTRO
+           ========================================= -->
+
+      <div class="products-showcase-intro">
+
+        <span class="products-showcase-tag">
+          {t.productsHome.tag}
+        </span>
+
+        <h2>
+          {t.productsHome.title}
+        </h2>
+
+        <p>
+          {t.productsHome.description}
+        </p>
+
+        <a
+          href={productsPath}
+          class="btn btn-primary products-showcase-cta"
+        >
+          {t.productsHome.viewAll}
+
+          <span aria-hidden="true">
+            →
+          </span>
+        </a>
+
+      </div>
+
+
+      <!-- =========================================
+           PRODUCTS
+           ========================================= -->
+
+      <div class="products-showcase-products">
+
+        <ProductGrid
+          products={featuredProducts}
+        />
+
+        <a
+          href={productsPath}
+          class="products-showcase-arrow"
+          aria-label={t.productsHome.viewAll}
+        >
+          →
+        </a>
+
+      </div>
+
+    </div>
 
   </div>
 

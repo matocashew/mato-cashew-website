@@ -21,46 +21,70 @@ const contactPath =
 
 <section id="wholesale" class="wholesale">
 
-  <div class="container wholesale-grid">
+  <div class="container">
 
-    <div class="wholesale-content">
+    <div class="wholesale-card">
 
-      <SectionTitle
-        tag={t.wholesaleHome.tag}
-        title={t.wholesaleHome.title}
-      />
+      <div class="wholesale-content">
 
-      <p>
-        {t.wholesaleHome.description}
-      </p>
+        <SectionTitle
+          tag={t.wholesaleHome.tag}
+          title={t.wholesaleHome.title}
+        />
 
-      <ul class="wholesale-list">
+        <p class="wholesale-description">
+          {t.wholesaleHome.description}
+        </p>
 
-        <li>🌍 {t.wholesaleHome.features.export}</li>
+        <ul class="wholesale-list">
 
-        <li>📦 {t.wholesaleHome.features.packaging}</li>
+          <li>
+            <span class="wholesale-icon">🌍</span>
+            <span>{t.wholesaleHome.features.export}</span>
+          </li>
 
-        <li>🏆 {t.wholesaleHome.features.quality}</li>
+          <li>
+            <span class="wholesale-icon">📦</span>
+            <span>{t.wholesaleHome.features.packaging}</span>
+          </li>
 
-        <li>🤝 {t.wholesaleHome.features.privateLabel}</li>
+          <li>
+            <span class="wholesale-icon">🏆</span>
+            <span>{t.wholesaleHome.features.quality}</span>
+          </li>
 
-      </ul>
+          <li>
+            <span class="wholesale-icon">🤝</span>
+            <span>{t.wholesaleHome.features.privateLabel}</span>
+          </li>
 
-      <a
-        href={contactPath}
-        class="btn btn-primary"
-      >
-        {t.wholesaleHome.cta}
-      </a>
+        </ul>
 
-    </div>
+        <a
+          href={contactPath}
+          class="btn btn-primary wholesale-cta"
+        >
+          {t.wholesaleHome.cta}
+          <span aria-hidden="true">→</span>
+        </a>
 
-    <div class="wholesale-image">
+      </div>
 
-      <img
-        src="/images/wholesale/export.jpg"
-        alt={t.wholesaleHome.imageAlt}
-      />
+      <div class="wholesale-image">
+
+        <img
+          src="/images/wholesale/export.jpg"
+          alt={t.wholesaleHome.imageAlt}
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div class="wholesale-image-badge">
+          <span>Premium</span>
+          <strong>Cambodian Cashew</strong>
+        </div>
+
+      </div>
 
     </div>
 

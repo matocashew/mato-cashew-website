@@ -1,0 +1,109 @@
+---
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+import "../../styles/home-why-choose.css";
+
+const t = getCurrentLanguage(
+  Astro.url.pathname
+);
+
+const content = t.homeWhyChoose;
+---
+
+<section class="home-why-choose">
+
+  <div class="container">
+
+    <div class="home-why-choose-card">
+
+      <!-- ==============================
+           CONTENT
+           ============================== -->
+
+      <div class="home-why-choose-content">
+
+        <span class="home-why-choose-tag">
+          {content.tag}
+        </span>
+
+        <h2>
+          {content.title}
+        </h2>
+
+        <p class="home-why-choose-description">
+          {content.description}
+        </p>
+
+
+        <ul class="home-why-choose-benefits">
+
+          {
+            content.benefits.map((item) => (
+
+              <li>
+
+                <span
+                  class="home-why-choose-check"
+                  aria-hidden="true"
+                >
+                  ✓
+                </span>
+
+                <span>
+                  {item}
+                </span>
+
+              </li>
+
+            ))
+          }
+
+        </ul>
+
+      </div>
+
+
+      <!-- ==============================
+           VISUAL
+           ============================== -->
+
+      <div class="home-why-choose-visual">
+
+        <div class="home-why-choose-image">
+
+            <img
+                src="/images/home/why-choose-cashew.png"
+                alt={content.imageAlt}
+                loading="lazy"
+                decoding="async"
+            />
+
+        </div>
+
+
+        <div class="home-quality-badge">
+
+          <div class="home-quality-icon">
+            🌿
+          </div>
+
+          <strong>
+            {content.qualityBadge}
+          </strong>
+
+          <span class="home-quality-title">
+            {content.qualityTitle}
+          </span>
+
+          <span class="home-quality-text">
+            {content.qualityText}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

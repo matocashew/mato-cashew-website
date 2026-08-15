@@ -3,6 +3,11 @@ import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
 import { getLocalizedPath } from "../i18n/getLocalizedPath";
 import type { Language } from "../i18n/config";
 
+
+/* =========================================================
+   LANGUAGE
+   ========================================================= */
+
 const t = getCurrentLanguage(
   Astro.url.pathname
 );
@@ -12,16 +17,106 @@ const language: Language =
     ? "km"
     : "en";
 
-const productsPath =
-  getLocalizedPath(language, "/products");
 
-const contactPath =
-  getLocalizedPath(language, "/contact");
+/* =========================================================
+   LOCALIZED PATHS
+   ========================================================= */
+
+const productsPath =
+  getLocalizedPath(language, "/products/");
+
+const aboutPath =
+  getLocalizedPath(language, "/about/");
+
+
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+const primaryCta =
+  t.hero.primaryCta ??
+  t.common.viewProducts;
+
+const secondaryCta =
+  t.hero.secondaryCta ??
+  t.common.learnMore;
+
+const trustItems = [
+  {
+    key: "origin",
+    label:
+      t.hero.trust?.origin ??
+      (language === "km"
+        ? "ផលិតផលកម្ពុជា"
+        : "100% Cambodian"),
+  },
+
+  {
+    key: "quality",
+    label:
+      t.hero.trust?.quality ??
+      (language === "km"
+        ? "គុណភាពខ្ពស់"
+        : "Premium Quality"),
+  },
+
+  {
+    key: "care",
+    label:
+      t.hero.trust?.care ??
+      (language === "km"
+        ? "រៀបចំដោយយកចិត្តទុកដាក់"
+        : "Thoughtfully Presented"),
+  },
+];
+
+const productSlides = [
+  {
+    slug: "premium-cashew-250g-pouch",
+    image: "/images/products/package-250g.png",
+    titleEn: "Premium Cambodian Cashew 250g Pouch",
+    titleKm: "គ្រាប់ស្វាយចន្ទីកម្ពុជា 250ក្រាម ថង់វិចខ្ចប់",
+  },
+  {
+    slug: "premium-cashew-500g-pouch",
+    image: "/images/products/package-500g.png",
+    titleEn: "Premium Cambodian Cashew 500g Pouch",
+    titleKm: "គ្រាប់ស្វាយចន្ទីកម្ពុជា 500ក្រាម ថង់វិចខ្ចប់",
+  },
+  {
+    slug: "premium-cashew-1000g-pouch",
+    image: "/images/products/package-1000g.png",
+    titleEn: "Premium Cambodian Cashew 1000g Pouch",
+    titleKm: "គ្រាប់ស្វាយចន្ទីកម្ពុជា 1000ក្រាម ថង់វិចខ្ចប់",
+  },
+  {
+    slug: "premium-cashew-250g-can",
+    image: "/images/products/can-250g.png",
+    titleEn: "Premium Cambodian Cashew 250g Can",
+    titleKm: "គ្រាប់ស្វាយចន្ទីកម្ពុជា 250ក្រាម កំប៉ុង",
+  },
+  {
+    slug: "premium-cashew-500g-can",
+    image: "/images/products/can-500g.png",
+    titleEn: "Premium Cambodian Cashew 500g Can",
+    titleKm: "គ្រាប់ស្វាយចន្ទីកម្ពុជា 500ក្រាម កំប៉ុង",
+  },
+  {
+    slug: "premium-cashew-1000g-can",
+    image: "/images/products/can-1000g.png",
+    titleEn: "Premium Cambodian Cashew 1000g Can",
+    titleKm: "គ្រាប់ស្វាយចន្ទីកម្ពុជា 1000ក្រាម កំប៉ុង",
+  },
+];
 ---
 
 <section class="hero">
 
   <div class="container hero-grid">
+
+    <!-- =====================================================
+         HERO CONTENT
+         ===================================================== -->
 
     <div class="hero-content">
 
@@ -29,55 +124,660 @@ const contactPath =
         {t.hero.tag}
       </span>
 
-      <h1>{t.hero.title}</h1>
 
-      <p>
+      <h1 class="hero-title">
+        {
+          language === "en" ? (
+            <>
+              <span class="hero-title-line">Naturally Premium.</span>
+              <span class="hero-title-line">Uniquely Cambodian.</span>
+            </>
+          ) : (
+            t.hero.title
+          )
+        }
+      </h1>
+
+
+      <p class="hero-description">
         {t.hero.description}
       </p>
+
+
+      <!-- CTA -->
 
       <div class="hero-buttons">
 
         <a
           href={productsPath}
-          class="btn btn-primary"
+          class="btn btn-primary hero-primary-btn"
         >
-          {t.common.viewProducts}
+          <span>{primaryCta}</span>
+
+          <span
+            class="hero-btn-arrow"
+            aria-hidden="true"
+          >
+            →
+          </span>
         </a>
 
+
         <a
-          href={contactPath}
-          class="btn btn-outline"
+          href={aboutPath}
+          class="btn btn-outline hero-secondary-btn"
         >
-          {t.common.contactUs}
+          {secondaryCta}
         </a>
+
+      </div>
+
+
+      <!-- ===================================================
+           TRUST POINTS
+           =================================================== -->
+
+      <div class="hero-trust">
+
+        {
+          trustItems.map((item) => (
+
+            <div class="hero-trust-item">
+
+              <span
+                class="hero-trust-icon"
+                aria-hidden="true"
+              >
+
+                {
+                  item.key === "origin" && (
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M12 21C12 21 4.5 17.4 4.5 10.2C4.5 6.7 7.1 4 10.5 4C12.3 4 13.7 4.8 14.7 6.1C15.7 5.4 16.9 5 18.2 5C19.1 5 20 5.2 20.7 5.6C20.3 13.9 14.9 18.8 12 21Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+
+                      <path
+                        d="M8.5 14.5C11.4 12.6 14.1 10.3 17 7.5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                  )
+                }
+
+
+                {
+                  item.key === "quality" && (
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M12 3L14.6 8.3L20.5 9.2L16.3 13.3L17.3 19.1L12 16.3L6.7 19.1L7.7 13.3L3.5 9.2L9.4 8.3L12 3Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  )
+                }
+
+
+                {
+                  item.key === "care" && (
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M4 12.3C7.2 12.3 9.7 13.4 12 16C14.3 13.4 16.8 12.3 20 12.3"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                      />
+
+                      <path
+                        d="M12 16V21"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                      />
+
+                      <path
+                        d="M12 13C10 9.5 10.6 6.7 12 4C14.2 6.1 15.3 9.1 12 13Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  )
+                }
+
+              </span>
+
+
+              <span class="hero-trust-label">
+                {item.label}
+              </span>
+
+            </div>
+
+          ))
+        }
 
       </div>
 
     </div>
 
+
+    <!-- =====================================================
+        PRODUCT SLIDER
+        ===================================================== -->
+
     <div class="hero-image">
 
-      <picture>
+      <div
+        class="hero-product-slider"
+        data-hero-product-slider
+        aria-roledescription="carousel"
+        aria-label={
+          language === "km"
+            ? "ផលិតផលចន្ទីមាតុភូមិ"
+            : "Mato Cashew products"
+        }
+      >
 
-        <source
-          srcset="/images/products/package.webp"
-          type="image/webp"
-        />
+        <div class="hero-slider-stage">
 
-        <img
-          src="/images/products/package.png"
-          alt="Premium Cambodian cashew kernels by Mato Cashew"
-          width="600"
-          height="700"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
+          {
+            productSlides.map((slide, index) => {
 
-      </picture>
+              const productHref =
+                language === "km"
+                  ? `/km/products/${slide.slug}/`
+                  : `/products/${slide.slug}/`;
+
+              const alt =
+                language === "km"
+                  ? slide.titleKm
+                  : slide.titleEn;
+
+              return (
+
+                <a
+                  href={productHref}
+                  class:list={[
+                    "hero-product-slide",
+                    index === 0 && "is-active",
+                  ]}
+                  data-hero-slide
+                  aria-hidden={index === 0 ? "false" : "true"}
+                  tabindex={index === 0 ? "0" : "-1"}
+                >
+
+                  <img
+                    src={slide.image}
+                    alt={alt}
+                    width="600"
+                    height="700"
+                    loading={index === 0 ? "eager" : "lazy"}
+                    fetchpriority={index === 0 ? "high" : "auto"}
+                    decoding="async"
+                  />
+
+                </a>
+
+              );
+
+            })
+          }
+
+        </div>
+
+
+        <!-- Controls -->
+
+        <div class="hero-slider-controls">
+
+          <button
+            type="button"
+            class="hero-slider-arrow hero-slider-prev"
+            data-hero-prev
+            aria-label={
+              language === "km"
+                ? "ផលិតផលមុន"
+                : "Previous product"
+            }
+          >
+            ‹
+          </button>
+
+
+          <div
+            class="hero-slider-dots"
+            role="tablist"
+            aria-label={
+              language === "km"
+                ? "ជ្រើសរើសផលិតផល"
+                : "Choose product"
+            }
+          >
+
+            {
+              productSlides.map((slide, index) => (
+
+                <button
+                  type="button"
+                  class:list={[
+                    "hero-slider-dot",
+                    index === 0 && "is-active",
+                  ]}
+                  data-hero-dot={index}
+                  aria-label={
+                    language === "km"
+                      ? slide.titleKm
+                      : slide.titleEn
+                  }
+                  aria-selected={index === 0 ? "true" : "false"}
+                />
+
+              ))
+            }
+
+          </div>
+
+
+          <button
+            type="button"
+            class="hero-slider-arrow hero-slider-next"
+            data-hero-next
+            aria-label={
+              language === "km"
+                ? "ផលិតផលបន្ទាប់"
+                : "Next product"
+            }
+          >
+            ›
+          </button>
+
+        </div>
+
+      </div>
 
     </div>
 
   </div>
 
 </section>
+
+<script>
+  type HeroSliderState = {
+    controller: AbortController;
+    timer: number | null;
+  };
+
+  const heroSliderStates =
+    new WeakMap<HTMLElement, HeroSliderState>();
+
+
+  function initHeroSliders(): void {
+
+    const sliders =
+      document.querySelectorAll<HTMLElement>(
+        "[data-hero-product-slider]"
+      );
+
+
+    sliders.forEach((slider) => {
+
+      /* =========================================
+         CLEAN OLD INSTANCE
+         ========================================= */
+
+      const oldState =
+        heroSliderStates.get(slider);
+
+      if (oldState) {
+
+        oldState.controller.abort();
+
+        if (oldState.timer !== null) {
+          window.clearInterval(
+            oldState.timer
+          );
+        }
+
+        heroSliderStates.delete(slider);
+
+      }
+
+
+      /* =========================================
+         NEW INSTANCE
+         ========================================= */
+
+      const controller =
+        new AbortController();
+
+      const state: HeroSliderState = {
+        controller,
+        timer: null,
+      };
+
+      heroSliderStates.set(
+        slider,
+        state
+      );
+
+
+      const slides = Array.from(
+        slider.querySelectorAll<HTMLElement>(
+          "[data-hero-slide]"
+        )
+      );
+
+      const dots = Array.from(
+        slider.querySelectorAll<HTMLButtonElement>(
+          "[data-hero-dot]"
+        )
+      );
+
+      const prev =
+        slider.querySelector<HTMLButtonElement>(
+          "[data-hero-prev]"
+        );
+
+      const next =
+        slider.querySelector<HTMLButtonElement>(
+          "[data-hero-next]"
+        );
+
+
+      if (slides.length === 0) {
+        return;
+      }
+
+
+      let current = 0;
+
+
+      const reduceMotion =
+        window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+
+      /* =========================================
+         SHOW SLIDE
+         ========================================= */
+
+      const showSlide = (
+        newIndex: number
+      ): void => {
+
+        current =
+          (newIndex + slides.length) %
+          slides.length;
+
+
+        slides.forEach(
+          (slide, index) => {
+
+            const active =
+              index === current;
+
+            slide.classList.toggle(
+              "is-active",
+              active
+            );
+
+            slide.setAttribute(
+              "aria-hidden",
+              active
+                ? "false"
+                : "true"
+            );
+
+            slide.setAttribute(
+              "tabindex",
+              active
+                ? "0"
+                : "-1"
+            );
+
+          }
+        );
+
+
+        dots.forEach(
+          (dot, index) => {
+
+            const active =
+              index === current;
+
+            dot.classList.toggle(
+              "is-active",
+              active
+            );
+
+            dot.setAttribute(
+              "aria-selected",
+              active
+                ? "true"
+                : "false"
+            );
+
+          }
+        );
+
+      };
+
+
+      /* =========================================
+         AUTOPLAY
+         ========================================= */
+
+      const stopAutoPlay = (): void => {
+
+        if (state.timer !== null) {
+
+          window.clearInterval(
+            state.timer
+          );
+
+          state.timer = null;
+
+        }
+
+      };
+
+
+      const getRandomSlideIndex = (): number => {
+  if (slides.length <= 1) {
+    return 0;
+  }
+
+  let nextIndex = current;
+
+  while (nextIndex === current) {
+    nextIndex = Math.floor(
+      Math.random() * slides.length
+    );
+  }
+
+  return nextIndex;
+        };
+
+
+        const startAutoPlay = (): void => {
+          stopAutoPlay();
+
+          if (reduceMotion) {
+            return;
+          }
+
+          state.timer =
+            window.setInterval(
+              () => {
+                const randomIndex =
+                  getRandomSlideIndex();
+
+                showSlide(randomIndex);
+              },
+              4500
+            );
+        };
+
+
+      /* =========================================
+         PREVIOUS / NEXT
+         ========================================= */
+
+      prev?.addEventListener(
+        "click",
+        () => {
+
+          showSlide(
+            current - 1
+          );
+
+          startAutoPlay();
+
+        },
+        {
+          signal:
+            controller.signal,
+        }
+      );
+
+
+      next?.addEventListener(
+        "click",
+        () => {
+
+          showSlide(
+            current + 1
+          );
+
+          startAutoPlay();
+
+        },
+        {
+          signal:
+            controller.signal,
+        }
+      );
+
+
+      /* =========================================
+         DOT CONTROLS
+         ========================================= */
+
+      dots.forEach(
+        (dot, index) => {
+
+          dot.addEventListener(
+            "click",
+            () => {
+
+              showSlide(index);
+
+              startAutoPlay();
+
+            },
+            {
+              signal:
+                controller.signal,
+            }
+          );
+
+        }
+      );
+
+
+      /* =========================================
+         PAGE VISIBILITY
+         ========================================= */
+
+      document.addEventListener(
+        "visibilitychange",
+        () => {
+
+          if (document.hidden) {
+
+            stopAutoPlay();
+
+          } else {
+
+            startAutoPlay();
+
+          }
+
+        },
+        {
+          signal:
+            controller.signal,
+        }
+      );
+
+
+      /* =========================================
+         INITIAL STATE
+         ========================================= */
+
+      showSlide(0);
+
+
+      /*
+       * Important:
+       * Let Astro finish navigation / focus
+       * restoration before starting autoplay.
+       */
+
+      window.setTimeout(
+        () => {
+
+          if (
+            document.contains(slider)
+          ) {
+            startAutoPlay();
+          }
+
+        },
+        150
+      );
+
+    });
+
+  }
+
+
+  /* =============================================
+     ASTRO INITIAL LOAD + EVERY NAVIGATION
+     ============================================= */
+
+  document.addEventListener(
+    "astro:page-load",
+    initHeroSliders
+  );
+
+
+  /* Fallback when loaded without ClientRouter */
+
+  if (
+    document.readyState === "interactive" ||
+    document.readyState === "complete"
+  ) {
+
+    initHeroSliders();
+
+  }
+</script>

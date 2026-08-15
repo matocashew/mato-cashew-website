@@ -1,125 +1,260 @@
-/* ===========================
+/* =========================================================
    WHOLESALE
-=========================== */
+   ========================================================= */
 
-.wholesale{
+.wholesale {
+    padding: 96px 0;
+    background: var(--background);
+}
 
-    padding:140px 0;
 
-    background:var(--background);
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+.wholesale-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+
+    align-items: center;
+    gap: 70px;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.wholesale-content {
+    max-width: 560px;
+}
+
+.wholesale-content p {
+    margin: 24px 0 28px;
+
+    color: #56635d;
+
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   FEATURES
+   ========================================================= */
+
+.wholesale-list {
+    margin: 0 0 32px;
+    padding: 0;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 14px 20px;
+
+    list-style: none;
+}
+
+.wholesale-list li {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    color: #243d32;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.wholesale .btn {
+    padding: 15px 28px;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.wholesale-image {
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 18px 45px rgba(30, 62, 46, 0.12);
+}
+
+.wholesale-image img {
+    width: 100%;
+    height: auto;
+
+    display: block;
+
+    border-radius: inherit;
+
+    transition: transform 0.5s ease;
+}
+
+.wholesale-image:hover img {
+    transform: scale(1.025);
+}
+
+
+/* =========================================================
+   KHMER
+   ========================================================= */
+
+html[lang="km"] .wholesale-content p {
+    font-size: 16px;
+    line-height: 2;
+}
+
+html[lang="km"] .wholesale-list li {
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+html[lang="km"] .wholesale .btn {
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 992px) {
+
+    .wholesale {
+        padding: 72px 0;
+    }
+
+    .wholesale-grid {
+        grid-template-columns: 1fr;
+
+        gap: 42px;
+    }
+
+    .wholesale-content {
+        max-width: 680px;
+
+        margin: 0 auto;
+
+        text-align: center;
+    }
+
+    .wholesale-list {
+        max-width: 560px;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        text-align: left;
+    }
+
+    .wholesale .btn {
+        padding: 14px 28px;
+    }
+
+    .wholesale-image {
+        width: 100%;
+        max-width: 720px;
+
+        margin: 0 auto;
+
+        order: -1;
+    }
 
 }
 
-.wholesale-grid{
 
-    display:grid;
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
-    grid-template-columns:1fr 1fr;
+@media (max-width: 640px) {
 
-    align-items:center;
+    .wholesale {
+        padding: 54px 0;
+    }
 
-    gap:80px;
+    .wholesale-grid {
+        gap: 30px;
+    }
 
-}
+    .wholesale-content {
+        text-align: left;
+    }
 
-.wholesale-content p{
+    .wholesale-content p {
+        margin: 18px 0 22px;
 
-    color:#555;
+        font-size: 14px;
+        line-height: 1.8;
+    }
 
-    font-size:18px;
+    html[lang="km"] .wholesale-content p {
+        font-size: 14px;
+        line-height: 1.9;
+    }
 
-    line-height:1.8;
 
-    margin:30px 0;
+    /* Features */
 
-}
+    .wholesale-list {
+        grid-template-columns: 1fr;
 
-.wholesale-list{
+        gap: 12px;
 
-    display:grid;
+        margin-bottom: 25px;
+    }
 
-    gap:18px;
+    .wholesale-list li {
+        font-size: 14px;
+    }
 
-    margin-bottom:40px;
+    html[lang="km"] .wholesale-list li {
+        font-size: 14px;
+        line-height: 1.8;
+    }
 
-}
 
-.wholesale-list li{
+    /* Button */
 
-    font-size:18px;
+    .wholesale .btn {
+        padding: 13px 24px;
 
-    font-weight:600;
+        font-size: 13px;
+    }
 
-}
+    html[lang="km"] .wholesale .btn {
+        font-size: 14px;
+    }
 
-@media(max-width:992px){
 
-.wholesale-grid{
+    /* Image */
 
-    grid-template-columns:1fr;
+    .wholesale-image {
+        border-radius: 18px;
 
-}
+        box-shadow:
+            0 12px 30px rgba(30, 62, 46, 0.10);
+    }
 
-.wholesale-content{
-
-    text-align:center;
-
-}
-
-.wholesale-list{
-
-    justify-items:center;
-
-}
-
-.wholesale-image{
-
-    order:-1;
-
-}
-
-.wholesale .btn{
-
-    padding:16px 34px;
-
-    font-size:16px;
-
-}
-
-}
-
-.wholesale .btn{
-
-    padding:18px 42px;
-
-    font-size:18px;
-
-}
-
-.wholesale-image{
-
-    overflow:hidden;
-
-    border-radius:28px;
-
-}
-
-.wholesale-image img{
-
-    width:100%;
-
-    display:block;
-
-    border-radius:28px;
-
-    box-shadow:0 25px 60px rgba(0,0,0,.15);
-
-    transition:transform .45s ease;
-
-}
-
-.wholesale-image:hover img{
-
-    transform:scale(1.05);
+    .wholesale-image img {
+        border-radius: inherit;
+    }
 
 }

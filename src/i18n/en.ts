@@ -21,12 +21,21 @@ const en = {
   },
 
   hero: {
-    tag: "Cambodian Cashew Products",
+    tag: "Premium Cambodian Cashew",
 
-    title: "Premium Cambodian Cashew for Everyday Enjoyment",
+    title: "Naturally Premium. Uniquely Cambodian.",
 
     description:
-      "Discover Mato Cashew's current range of Cambodian cashew products, prepared for convenient everyday enjoyment.",
+      "Discover carefully presented Cambodian cashews, created for everyday enjoyment and proudly rooted in Cambodia.",
+
+    primaryCta: "Shop Products",
+    secondaryCta: "Learn Our Story",
+
+    trust: {
+      origin: "100% Cambodian",
+      quality: "Premium Quality",
+      care: "Thoughtfully Presented",
+    },
   },
 
   footer: {
@@ -303,10 +312,124 @@ about: {
       "Discover the story, values, and approach behind our growing Cambodian cashew brand.",
   },
 },
-  productsHome: {
-    tag: "Our Products",
-    title: "Explore Mato Cashew Products",
+  homeWhyChoose: {
+    tag: "Why Choose Mato Cashew",
+
+    title: "Quality You Can See, Trust You Can Taste",
+
+    description:
+      "We are committed to presenting premium Cambodian cashews with careful selection, thoughtful packaging, and attention to every detail.",
+
+    benefits: [
+      "Carefully Selected Premium Cashews",
+      "No Unnecessary Additives",
+      "Naturally Rich Taste",
+      "Presented with Care & Responsibility",
+    ],
+
+    qualityBadge: "100%",
+    qualityTitle: "Premium Quality",
+    qualityText: "Carefully Presented",
+
+    imageAlt: "Premium Cambodian cashew kernels",
   },
+  productsHome: {
+  tag: "Our Products",
+  title: "Premium Cashew For Every Occasion",
+  description:
+    "Discover our range of premium cashew kernels in multiple sizes and packaging options to suit your needs.",
+  viewAll: "View All Products",
+},
+
+  processHome: {
+    tag: "Our Process",
+    title: "From Orchard to You",
+
+    steps: [
+      {
+        title: "Sustainable Farming",
+        description: "Carefully grown in Cambodian orchards",
+      },
+      {
+        title: "Careful Harvesting",
+        description: "Selected with attention at harvest",
+      },
+      {
+        title: "Advanced Processing",
+        description: "Processed for quality and consistency",
+      },
+      {
+        title: "Quality Inspection",
+        description: "Checked before packaging",
+      },
+      {
+        title: "Hygienic Packaging",
+        description: "Packed to help preserve freshness",
+      },
+      {
+        title: "Delivered to You",
+        description: "Prepared for local and international markets",
+      },
+    ],
+  },
+
+  statsHome: {
+    items: [
+      {
+        value: "500+",
+        title: "Local Farmers",
+        description: "Empowered",
+      },
+      {
+        value: "100%",
+        title: "Cambodian",
+        description: "Origin",
+      },
+      {
+        value: "20+",
+        title: "Years of",
+        description: "Experience",
+      },
+      {
+        value: "30+",
+        title: "Countries",
+        description: "Served",
+      },
+    ],
+  },
+
+  testimonialsHome: {
+    tag: "What Our Customers Say",
+    title: "Loved by Customers Worldwide",
+
+    items: [
+      {
+        rating: 5,
+        quote:
+          "Premium quality, fresh taste, and beautifully presented packaging.",
+        name: "Customer A",
+        location: "International Customer",
+      },
+      {
+        rating: 5,
+        quote:
+          "A thoughtful premium cashew product suitable for gifting and everyday enjoyment.",
+        name: "Customer B",
+        location: "International Customer",
+      },
+      {
+        rating: 5,
+        quote:
+          "Clean presentation, attractive packaging, and a naturally rich cashew taste.",
+        name: "Customer C",
+        location: "Cambodia",
+      },
+    ],
+
+    placeholderNote:
+      "Sample testimonials shown for design preview only.",
+  },
+
   products: {
   packaging: {
     tag: "Packaging",

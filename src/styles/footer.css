@@ -536,3 +536,214 @@ html[lang="km"] .footer-contact-item > span:last-child {
     }
 
 }
+/* =========================================================
+   MATO CASHEW — FOOTER FINAL TYPOGRAPHY
+   ========================================================= */
+
+/* Brand description */
+.footer-description {
+    max-width: 360px;
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+/* Column headings */
+.footer-column h4 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Navigation links */
+.footer-column a {
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+/* Contact labels */
+.footer-contact-label {
+    font-size: 12px;
+}
+
+/* Contact values */
+.footer-contact-item a,
+.footer-contact-item > span:last-child {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Copyright */
+.footer-bottom p {
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   KHMER
+   ========================================================= */
+
+html[lang="km"] .footer-description {
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+html[lang="km"] .footer-column h4 {
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+html[lang="km"] .footer-column a {
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+html[lang="km"] .footer-contact-label {
+    font-size: 14px;
+}
+
+html[lang="km"] .footer-contact-item a,
+html[lang="km"] .footer-contact-item > span:last-child {
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .footer-description {
+        font-size: 15px;
+        line-height: 1.75;
+    }
+
+    .footer-column h4 {
+        font-size: 15px;
+    }
+
+    .footer-column a {
+        font-size: 14px;
+    }
+
+    .footer-contact-label {
+        font-size: 12px;
+    }
+
+    .footer-contact-item a,
+    .footer-contact-item > span:last-child {
+        font-size: 14px;
+    }
+
+    .footer-bottom p {
+        font-size: 12px;
+    }
+
+    html[lang="km"] .footer-description {
+        font-size: 15px;
+        line-height: 1.9;
+    }
+
+    html[lang="km"] .footer-column h4 {
+        font-size: 16px;
+    }
+
+    html[lang="km"] .footer-column a {
+        font-size: 14px;
+        line-height: 1.85;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .footer-description {
+        font-size: 14px;
+    }
+
+    .footer-column h4 {
+        font-size: 14px;
+    }
+
+    .footer-column a {
+        font-size: 13.5px;
+    }
+
+    html[lang="km"] .footer-column h4 {
+        font-size: 15px;
+    }
+
+    html[lang="km"] .footer-column a {
+        font-size: 14px;
+    }
+}
+/* =========================================================
+   FOOTER — FINAL MOBILE POLISH
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .footer {
+    padding-top: 40px;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 22px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-column {
+    text-align: left;
+  }
+
+  .footer-column h4::after {
+    margin-inline: 0;
+  }
+
+  .footer-contact-strip {
+    margin-top: 30px;
+    gap: 18px;
+  }
+}
+
+
+/* Keep two columns even on very small phones */
+@media (max-width: 360px) {
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 18px;
+    text-align: left;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+
+  .footer-column {
+    text-align: left;
+  }
+
+  .footer-column h4::after {
+    margin-inline: 0;
+  }
+}
+@media (max-width: 480px) {
+  .footer-logo {
+    margin-bottom: 10px;
+  }
+
+  .footer-description {
+    margin-inline: auto;
+    max-width: 290px;
+  }
+}

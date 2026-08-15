@@ -1,0 +1,115 @@
+---
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+import "../../styles/home-testimonials.css";
+
+const t = getCurrentLanguage(Astro.url.pathname);
+const content = t.testimonialsHome;
+
+/*
+ * IMPORTANT:
+ * Copy the actual farmer-image src from Gallery.astro
+ * and put it here.
+ */
+const testimonialImage =
+  "/images/home/testimonials-farmer.png";
+---
+
+<section class="home-testimonials">
+
+  <div class="container">
+
+    <div class="home-testimonials-heading">
+
+      <span class="home-testimonials-tag">
+        {content.tag}
+      </span>
+
+      <h2>
+        {content.title}
+      </h2>
+
+    </div>
+
+
+    <div class="home-testimonials-layout">
+
+      <!-- ==============================
+           TESTIMONIAL CARDS
+           ============================== -->
+
+      <div class="home-testimonials-cards">
+
+        {
+          content.items.map((item) => (
+
+            <article class="testimonial-card">
+
+              <div
+                class="testimonial-stars"
+                aria-label={`${item.rating} out of 5 stars`}
+              >
+                {"★".repeat(item.rating)}
+              </div>
+
+              <p class="testimonial-quote">
+                “{item.quote}”
+              </p>
+
+              <div class="testimonial-customer">
+
+                <div
+                  class="testimonial-avatar"
+                  aria-hidden="true"
+                >
+                  {item.name.charAt(0)}
+                </div>
+
+                <div class="testimonial-customer-info">
+
+                  <strong>
+                    {item.name}
+                  </strong>
+
+                  <span>
+                    {item.location}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </article>
+
+          ))
+        }
+
+      </div>
+
+
+      <!-- ==============================
+           FARMER VISUAL
+           ============================== -->
+
+      <div class="home-testimonials-visual">
+
+        <img
+          src={testimonialImage}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div class="testimonial-visual-overlay"></div>
+
+      </div>
+
+    </div>
+
+
+    <p class="testimonial-placeholder-note">
+      {content.placeholderNote}
+    </p>
+
+  </div>
+
+</section>
