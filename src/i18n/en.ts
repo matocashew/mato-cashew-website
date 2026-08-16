@@ -307,9 +307,16 @@ about: {
     wholesaleButton: "Business Inquiries",
   },
   pageHero: {
-    title: "About Mato Cashew",
+    tag: "About Mato Cashew",
+
+    title: "Rooted in Cambodia. Committed to Quality.",
+
     description:
-      "Discover the story, values, and approach behind our growing Cambodian cashew brand.",
+      "From our farms to your table, we bring you premium Cambodian cashews with care, integrity, and sustainability.",
+
+    primaryCta: "Explore Our Journey",
+
+    secondaryCta: "View Our Products",
   },
 },
   homeWhyChoose: {

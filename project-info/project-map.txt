@@ -20,6 +20,7 @@ D:\Projects\mato-cashew-website\src\components\Footer.astro
 D:\Projects\mato-cashew-website\src\components\Gallery.astro
 D:\Projects\mato-cashew-website\src\components\Header.astro
 D:\Projects\mato-cashew-website\src\components\Hero.astro
+D:\Projects\mato-cashew-website\src\components\home
 D:\Projects\mato-cashew-website\src\components\knowledge
 D:\Projects\mato-cashew-website\src\components\LanguageSwitcher.astro
 D:\Projects\mato-cashew-website\src\components\PageHero.astro
@@ -30,9 +31,11 @@ D:\Projects\mato-cashew-website\src\components\Products.astro
 D:\Projects\mato-cashew-website\src\components\resources
 D:\Projects\mato-cashew-website\src\components\SectionTitle.astro
 D:\Projects\mato-cashew-website\src\components\seo
+D:\Projects\mato-cashew-website\src\components\TrustBar.astro
 D:\Projects\mato-cashew-website\src\components\ui
 D:\Projects\mato-cashew-website\src\components\Wholesale.astro
 D:\Projects\mato-cashew-website\src\components\about\AboutCTA.astro
+D:\Projects\mato-cashew-website\src\components\about\AboutHero.astro
 D:\Projects\mato-cashew-website\src\components\about\CompanyStory.astro
 D:\Projects\mato-cashew-website\src\components\about\CoreValues.astro
 D:\Projects\mato-cashew-website\src\components\about\MissionVision.astro
@@ -47,6 +50,11 @@ D:\Projects\mato-cashew-website\src\components\contact\ContactInfo.astro
 D:\Projects\mato-cashew-website\src\components\contact\FormField.astro
 D:\Projects\mato-cashew-website\src\components\contact\FormSelect.astro
 D:\Projects\mato-cashew-website\src\components\contact\FormTextarea.astro
+D:\Projects\mato-cashew-website\src\components\home\HomeProcess.astro
+D:\Projects\mato-cashew-website\src\components\home\HomeStats.astro
+D:\Projects\mato-cashew-website\src\components\home\HomeTestimonials.astro
+D:\Projects\mato-cashew-website\src\components\home\HomeWholesaleCTA.astro
+D:\Projects\mato-cashew-website\src\components\home\HomeWhyChooseUs.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\FeaturedKnowledgeCard.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\KnowledgeArticleCard.astro
 D:\Projects\mato-cashew-website\src\components\knowledge\KnowledgeCard.astro
@@ -206,6 +214,7 @@ D:\Projects\mato-cashew-website\src\services\knowledgeService.ts
 D:\Projects\mato-cashew-website\src\services\navigationService.ts
 D:\Projects\mato-cashew-website\src\services\productService.ts
 D:\Projects\mato-cashew-website\src\services\resourceService.ts
+D:\Projects\mato-cashew-website\src\styles\about-hero.css
 D:\Projects\mato-cashew-website\src\styles\about-page.css
 D:\Projects\mato-cashew-website\src\styles\about.css
 D:\Projects\mato-cashew-website\src\styles\article.css
@@ -218,10 +227,16 @@ D:\Projects\mato-cashew-website\src\styles\gallery.css
 D:\Projects\mato-cashew-website\src\styles\global.css
 D:\Projects\mato-cashew-website\src\styles\header.css
 D:\Projects\mato-cashew-website\src\styles\hero.css
+D:\Projects\mato-cashew-website\src\styles\home-process.css
+D:\Projects\mato-cashew-website\src\styles\home-stats.css
+D:\Projects\mato-cashew-website\src\styles\home-testimonials.css
+D:\Projects\mato-cashew-website\src\styles\home-wholesale-cta.css
+D:\Projects\mato-cashew-website\src\styles\home-why-choose.css
 D:\Projects\mato-cashew-website\src\styles\knowledge-hero.css
 D:\Projects\mato-cashew-website\src\styles\page.css
 D:\Projects\mato-cashew-website\src\styles\product-detail.css
 D:\Projects\mato-cashew-website\src\styles\product-specifications.css
+D:\Projects\mato-cashew-website\src\styles\products-home.css
 D:\Projects\mato-cashew-website\src\styles\products-page.css
 D:\Projects\mato-cashew-website\src\styles\products.css
 D:\Projects\mato-cashew-website\src\styles\related-articles.css

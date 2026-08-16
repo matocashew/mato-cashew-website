@@ -1,0 +1,109 @@
+---
+import { getLocalizedPath } from "../../i18n/getLocalizedPath";
+import type { Language } from "../../i18n/config";
+import "../../styles/about-hero.css";
+
+interface Props {
+  tag: string;
+  title: string;
+  description: string;
+  primaryCta: string;
+  secondaryCta: string;
+}
+
+const {
+  tag,
+  title,
+  description,
+  primaryCta,
+  secondaryCta,
+} = Astro.props;
+
+const language: Language =
+  Astro.url.pathname.startsWith("/km")
+    ? "km"
+    : "en";
+
+const productsPath =
+  getLocalizedPath(language, "/products/");
+---
+
+<section class="about-hero">
+
+  <!-- Responsive hero image -->
+  <picture class="about-hero__media" aria-hidden="true">
+
+    <source
+      media="(max-width: 768px)"
+      srcset="/images/about/about-hero-mobile.png"
+    />
+
+    <img
+      src="/images/about/about-hero-desktop.png"
+      alt=""
+      loading="eager"
+      decoding="async"
+    />
+
+  </picture>
+
+
+  <!-- Premium cream gradient -->
+  <div class="about-hero__shade"></div>
+
+
+  <!-- Content -->
+  <div class="container about-hero__container">
+
+    <div class="about-hero__content">
+
+      <span class="about-hero__tag">
+        {tag}
+      </span>
+
+      <h1 class="about-hero__title">
+        {
+          language === "en" ? (
+            <>
+              <span class="about-hero__title-line">
+                Rooted in Cambodia.
+              </span>
+
+              <span class="about-hero__title-line">
+                Committed to Quality.
+              </span>
+            </>
+          ) : (
+            title
+          )
+        }
+      </h1>
+
+      <p class="about-hero__description">
+        {description}
+      </p>
+
+      <div class="about-hero__actions">
+
+        <a
+          href="#our-story"
+          class="btn btn-primary about-hero__primary"
+        >
+          <span>{primaryCta}</span>
+          <span aria-hidden="true">→</span>
+        </a>
+
+        <a
+          href={productsPath}
+          class="btn btn-outline about-hero__secondary"
+        >
+          {secondaryCta}
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

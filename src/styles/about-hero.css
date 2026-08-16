@@ -1,0 +1,892 @@
+/* =========================================================
+   MATO CASHEW — ABOUT HERO
+   Desktop-first premium layout
+   ========================================================= */
+
+.about-hero {
+    position: relative;
+
+    min-height: 728px;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    /*
+       Pull Hero upward behind the fixed Header
+    */
+    margin-top: -88px;
+
+    /*
+       Restore the space needed by Hero content
+    */
+    padding-top: 88px;
+}
+.about-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+.about-hero__media img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  /* move image upward without changing size */
+  object-position: 62% 80%;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+/* =========================================================
+   OVERLAY
+   ========================================================= */
+
+.about-hero__shade {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    rgba(250, 246, 235, 1) 0%,
+    rgba(250, 246, 235, 0.98) 18%,
+    rgba(250, 246, 235, 0.90) 29%,
+    rgba(250, 246, 235, 0.68) 39%,
+    rgba(250, 246, 235, 0.38) 49%,
+    rgba(250, 246, 235, 0.14) 59%,
+    rgba(250, 246, 235, 0) 70%
+  );
+}
+
+
+/* =========================================================
+   CONTAINER
+   Uses the website global .container
+   ========================================================= */
+
+.about-hero__container {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1200px;
+
+  margin-inline: auto;
+  padding-inline: 24px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.about-hero__content {
+  width: min(650px, 100%);
+
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+
+/* =========================================================
+   EYEBROW / TAG
+   ========================================================= */
+
+.about-hero__tag {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 10px;
+  margin-bottom: 17px;
+
+  color: #08734b;
+
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.2;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.about-hero__tag::before {
+  content: "";
+
+  display: block;
+
+  width: 22px;
+  height: 2px;
+
+  flex: 0 0 22px;
+
+  background: #08734b;
+  border-radius: 999px;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.about-hero__title {
+  max-width: 650px;
+
+  margin: 0;
+
+  color: #14271e;
+
+  font-size: clamp(42px, 3.8vw, 54px);
+  font-weight: 750;
+
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+.about-hero__title-line {
+  display: block;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.about-hero__description {
+  max-width: 485px;
+
+  margin: 20px 0 26px;
+
+  color: #4f5d56;
+
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.about-hero__actions {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.about-hero__primary,
+.about-hero__secondary {
+  min-height: 44px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: nowrap;
+}
+
+.about-hero__primary {
+  gap: 9px;
+}
+
+
+/* =========================================================
+   KHMER DESKTOP
+   ========================================================= */
+
+html[lang="km"] .about-hero__content {
+  width: min(575px, 100%);
+}
+
+html[lang="km"] .about-hero__tag {
+  margin-bottom: 14px;
+
+  font-size: 13px;
+  line-height: 1.6;
+
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[lang="km"] .about-hero__title {
+  max-width: 575px;
+
+  font-size: clamp(34px, 3.2vw, 46px);
+  font-weight: 700;
+
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+html[lang="km"] .about-hero__description {
+  max-width: 540px;
+
+  margin-top: 16px;
+  margin-bottom: 24px;
+
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .about-hero {
+    min-height: 470px;
+
+    background-position: 58% center;
+  }
+
+  .about-hero__shade {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(250, 246, 235, 1) 0%,
+        rgba(250, 246, 235, 0.97) 37%,
+        rgba(250, 246, 235, 0.72) 56%,
+        rgba(250, 246, 235, 0.18) 78%,
+        rgba(250, 246, 235, 0) 100%
+      );
+  }
+
+  .about-hero__content {
+    width: min(480px, 72%);
+
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .about-hero__title {
+    font-size: clamp(38px, 5vw, 48px);
+  }
+
+  html[lang="km"] .about-hero__content {
+    width: min(520px, 75%);
+  }
+
+  html[lang="km"] .about-hero__title {
+    font-size: clamp(31px, 4vw, 40px);
+  }
+}
+
+/* =========================================================
+   ABOUT HERO — MOBILE PREMIUM FINAL
+   Desktop styles remain untouched
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .about-hero {
+        position: relative;
+
+        /* Keep your approved mobile hero height */
+        min-height: 640px;
+
+        display: flex;
+        align-items: flex-start;
+
+        overflow: hidden;
+
+        /*
+        Pull hero behind fixed mobile header
+        */
+        margin-top: -74px;
+
+        /*
+        Restore content space so text is not hidden
+        */
+        padding-top: 74px;
+    }
+
+    .about-hero__media img {
+        display: block;
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        /*
+        Tune only this value if you want the image
+        slightly higher/lower on mobile.
+        */
+        object-position: center 30%;
+    }
+
+    /* Mobile cream overlay */
+
+    .about-hero__shade {
+        position: absolute;
+        inset: 0;
+
+        z-index: 1;
+
+        pointer-events: none;
+
+        background: linear-gradient(
+        180deg,
+        rgba(250, 247, 238, 0.80) 0%,
+        rgba(250, 247, 238, 0.88) 18%,
+        rgba(250, 247, 238, 0.72) 38%,
+        rgba(250, 247, 238, 0.35) 58%,
+        rgba(250, 247, 238, 0.08) 76%,
+        rgba(250, 247, 238, 0) 100%
+        );
+    }
+
+
+  /* Content above image + overlay */
+
+   .about-hero__container {
+        position: relative;
+
+        z-index: 2;
+
+        width: 100%;
+
+        padding-inline: 20px;
+    }
+
+  .about-hero__content {
+        width: 100%;
+        max-width: 370px;
+
+        /*
+        Header = 74px
+        + extra breathing room
+        */
+        padding-top: 44px;
+        padding-bottom: 0;
+    }
+
+  .about-hero__title {
+    max-width: 345px;
+
+    font-size: 23px;
+    line-height: 1.08;
+  }
+
+  .about-hero__title-line {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .about-hero__description {
+    max-width: 335px;
+
+    margin: 14px 0 19px;
+
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .about-hero__actions {
+    width: 100%;
+    max-width: 315px;
+
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 8px;
+  }
+
+  .about-hero__primary,
+  .about-hero__secondary {
+    width: 100%;
+    min-height: 42px;
+  }
+
+
+  /* Khmer */
+
+  html[lang="km"] .about-hero__content {
+    width: 100%;
+    max-width: 370px;
+
+    padding-top: 84px;
+    padding-bottom: 0;
+  }
+
+  html[lang="km"] .about-hero__title {
+    max-width: 345px;
+
+    font-size: 24px;
+    line-height: 1.5;
+
+    white-space: normal;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE — 390px AND BELOW
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+  .about-hero {
+    height: 590px;
+    min-height: 590px;
+
+    background-position: 67% center;
+  }
+
+  .about-hero__container {
+    padding-inline: 16px;
+  }
+
+  .about-hero__content {
+    max-width: 345px;
+
+    padding-top: 84px;
+    padding-bottom: 0;
+}
+
+    .about-hero__title {
+    width: 100%;
+    max-width: 345px;
+
+    font-size: 23px;
+    line-height: 1.08;
+    }
+
+    .about-hero__title-line {
+    display: block;
+    white-space: nowrap;
+    }
+
+  .about-hero__description {
+    max-width: 310px;
+
+    font-size: 12.5px;
+    line-height: 1.7;
+  }
+
+  .about-hero__actions {
+    max-width: 300px;
+  }
+
+
+  /* Khmer */
+
+  html[lang="km"] .about-hero__content {
+    max-width: 330px;
+
+    padding-top: 84px;
+    padding-bottom: 0;
+  }
+
+  html[lang="km"] .about-hero__title {
+    max-width: 320px;
+
+    font-size: 23px;
+    line-height: 1.5;
+  }
+
+  html[lang="km"] .about-hero__description {
+    max-width: 315px;
+
+    font-size: 12.5px;
+    line-height: 1.8;
+  }
+}
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .about-hero {
+    margin-top: -68px;
+    padding-top: 68px;
+  }
+
+  .about-hero__container {
+    padding-inline: 16px;
+  }
+
+  .about-hero__content {
+    padding-top: 32px;
+  }
+
+  .about-hero__media img {
+    object-position: center 28%;
+  }
+
+}
+/* =========================================================
+   ABOUT HERO — MOBILE UNDER GLASS HEADER
+   Background goes behind header,
+   content stays in the correct position.
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .about-hero {
+    --mobile-header-height: 74px;
+
+    position: relative;
+
+    min-height: 640px;
+
+    display: flex;
+    align-items: flex-start;
+
+    /*
+      Move Hero behind the fixed Header
+    */
+    margin-top: calc(-1 * var(--mobile-header-height));
+
+    /*
+      Push Hero CONTENT back down by exactly
+      the same amount.
+    */
+    padding-top: var(--mobile-header-height);
+
+    /*
+      IMPORTANT:
+      remove previous transform solution
+    */
+    transform: none;
+
+    /*
+      remove previous negative margin-bottom
+    */
+    margin-bottom: 0;
+
+    overflow: hidden;
+  }
+
+
+  /* =======================================================
+     HERO IMAGE
+     ======================================================= */
+
+  .about-hero__media {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 0;
+
+    overflow: hidden;
+  }
+
+  .about-hero__media img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    /* Keep current image composition */
+    object-position: center 25%;
+
+    user-select: none;
+    pointer-events: none;
+  }
+
+
+  /* =======================================================
+     OVERLAY
+     ======================================================= */
+
+  .about-hero__shade {
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    background: linear-gradient(
+      180deg,
+      rgba(250, 247, 238, 0.55) 0%,
+      rgba(250, 247, 238, 0.72) 18%,
+      rgba(250, 247, 238, 0.86) 38%,
+      rgba(250, 247, 238, 0.60) 55%,
+      rgba(250, 247, 238, 0.24) 72%,
+      rgba(250, 247, 238, 0) 100%
+    );
+  }
+
+
+  /* =======================================================
+     CONTENT
+     ======================================================= */
+
+  .about-hero__container {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    padding-inline: 20px;
+  }
+
+  .about-hero__content {
+    width: 100%;
+    max-width: 370px;
+
+    /*
+      Only normal visual spacing now.
+      Do NOT use 100px+ anymore.
+    */
+    padding-top: 34px;
+    padding-bottom: 0;
+  }
+
+  html[lang="km"] .about-hero__content {
+    padding-top: 44px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .about-hero {
+    --mobile-header-height: 68px;
+
+    margin-top: -68px;
+    padding-top: 68px;
+
+    transform: none;
+    margin-bottom: 0;
+  }
+
+  .about-hero__container {
+    padding-inline: 16px;
+  }
+
+  .about-hero__content,
+  html[lang="km"] .about-hero__content {
+    padding-top: 40px;
+  }
+
+  .about-hero__media img {
+    object-position: center 23%;
+  }
+}
+
+/* =========================================================
+   ABOUT HERO — MOBILE FINAL HEADER OVERLAY
+   Move IMAGE behind header, NOT the hero content
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .about-hero {
+    --mobile-header-height: 74px;
+
+    position: relative;
+
+    /* Mato Cashew mobile hero standard */
+    min-height: 640px;
+
+    display: flex;
+    align-items: flex-start;
+
+    /* IMPORTANT — do not move the whole hero anymore */
+    margin-top: 0;
+    padding-top: 0;
+    transform: none;
+    margin-bottom: 0;
+
+    /*
+      Allow image to extend upward behind the fixed header
+    */
+    overflow: visible;
+  }
+
+
+  /* =======================================================
+     IMAGE ONLY goes behind Header
+     ======================================================= */
+
+  .about-hero__media {
+    position: absolute;
+
+    /*
+      Extend image upward by Header height
+    */
+    top: calc(-1 * var(--mobile-header-height));
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+
+    /*
+      Hero 640px + Header 74px
+    */
+    height: calc(100% + var(--mobile-header-height));
+
+    z-index: 0;
+
+    overflow: hidden;
+  }
+
+  .about-hero__media img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    /*
+      Keep current mobile composition.
+      Tune only this value later if needed.
+    */
+    object-position: center 25%;
+
+    user-select: none;
+    pointer-events: none;
+  }
+
+
+  /* =======================================================
+     OVERLAY also extends behind Header
+     ======================================================= */
+
+  .about-hero__shade {
+    position: absolute;
+
+    top: calc(-1 * var(--mobile-header-height));
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: calc(100% + var(--mobile-header-height));
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    background: linear-gradient(
+      180deg,
+      rgba(250, 247, 238, 0.48) 0%,
+      rgba(250, 247, 238, 0.62) 14%,
+      rgba(250, 247, 238, 0.84) 34%,
+      rgba(250, 247, 238, 0.70) 52%,
+      rgba(250, 247, 238, 0.32) 72%,
+      rgba(250, 247, 238, 0.05) 90%,
+      rgba(250, 247, 238, 0) 100%
+    );
+  }
+
+
+  /* =======================================================
+     CONTENT stays in normal position
+     ======================================================= */
+
+  .about-hero__container {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    padding-inline: 20px;
+  }
+
+  .about-hero__content {
+    width: 100%;
+    max-width: 370px;
+
+    /*
+      Normal spacing below Header.
+      Hero itself is no longer shifted upward.
+    */
+    padding-top: 44px;
+    padding-bottom: 0;
+  }
+
+  html[lang="km"] .about-hero__content {
+    padding-top: 44px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   Header final height = 68px
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .about-hero {
+    --mobile-header-height: 68px;
+
+    margin-top: 0;
+    padding-top: 0;
+    transform: none;
+    margin-bottom: 0;
+  }
+
+  .about-hero__container {
+    padding-inline: 16px;
+  }
+
+  .about-hero__content,
+  html[lang="km"] .about-hero__content {
+    padding-top: 40px;
+  }
+
+  .about-hero__media img {
+    object-position: center 23%;
+  }
+}
+/* =========================================================
+   ABOUT HERO — MOBILE CONTENT POSITION FINAL TUNING
+   Move text down without changing image/header
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .about-hero__content {
+    padding-top: 78px;
+  }
+
+  html[lang="km"] .about-hero__content {
+    padding-top: 78px;
+  }
+}
+
+@media (max-width: 420px) {
+
+  .about-hero__content,
+  html[lang="km"] .about-hero__content {
+    padding-top: 72px;
+  }
+}

@@ -1,6 +1,6 @@
 ---
-import PageHero from "../PageHero.astro";
-
+import AboutHero from "../about/AboutHero.astro";
+import TrustBar from "../TrustBar.astro";
 import CompanyStory from "../about/CompanyStory.astro";
 import MissionVision from "../about/MissionVision.astro";
 import CoreValues from "../about/CoreValues.astro";
@@ -16,10 +16,15 @@ const t = getCurrentLanguage(
 );
 ---
 
-<PageHero
+<AboutHero
+  tag={t.about.pageHero.tag}
   title={t.about.pageHero.title}
   description={t.about.pageHero.description}
+  primaryCta={t.about.pageHero.primaryCta}
+  secondaryCta={t.about.pageHero.secondaryCta}
 />
+
+<TrustBar />
 
 <CompanyStory />
 

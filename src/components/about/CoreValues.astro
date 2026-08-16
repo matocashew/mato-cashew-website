@@ -1,5 +1,4 @@
 ---
-import SectionTitle from "../SectionTitle.astro";
 import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
 
 const t = getCurrentLanguage(
@@ -11,54 +10,230 @@ const t = getCurrentLanguage(
 
   <div class="container">
 
-    <SectionTitle
-      tag={t.about.values.tag}
-      title={t.about.values.title}
-    />
+    <!-- =========================
+         SECTION HEADING
+    ========================== -->
+    <div class="values-heading">
 
+      <span class="section-tag">
+        {t.about.values.tag}
+      </span>
+
+      <h2>
+        {t.about.values.title}
+      </h2>
+
+    </div>
+
+
+    <!-- =========================
+         VALUES GRID
+    ========================== -->
     <div class="values-grid">
 
+
+      <!-- =========================
+           01 — RESPONSIBLE GROWTH
+      ========================== -->
       <article class="value-card">
 
-        <div class="value-icon">🌱</div>
+        <div class="value-card-top">
 
-        <h3>
-          {t.about.values.sustainability.title}
-        </h3>
+          <div class="value-icon" aria-hidden="true">
 
-        <p>
-          {t.about.values.sustainability.description}
-        </p>
+            <svg
+              viewBox="0 0 48 48"
+              fill="none"
+            >
+              <path
+                d="M24 39V22"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+              />
+
+              <path
+                d="M24 27C19 27 15 24 14 18C20 17 24 20 24 27Z"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linejoin="round"
+              />
+
+              <path
+                d="M24 21C25 14 30 10 37 10C37 17 32 22 24 22"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linejoin="round"
+              />
+
+              <path
+                d="M16 39H32"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+              />
+            </svg>
+
+          </div>
+
+
+          <span class="value-number">
+            01
+          </span>
+
+        </div>
+
+
+        <div class="value-content">
+
+          <h3>
+            {t.about.values.sustainability.title}
+          </h3>
+
+          <p>
+            {t.about.values.sustainability.description}
+          </p>
+
+        </div>
+
+
+        <div
+          class="value-card-line"
+          aria-hidden="true"
+        ></div>
 
       </article>
 
+
+
+      <!-- =========================
+           02 — INTEGRITY
+      ========================== -->
       <article class="value-card">
 
-        <div class="value-icon">🤝</div>
+        <div class="value-card-top">
 
-        <h3>
-          {t.about.values.integrity.title}
-        </h3>
+          <div class="value-icon" aria-hidden="true">
 
-        <p>
-          {t.about.values.integrity.description}
-        </p>
+            <svg
+              viewBox="0 0 48 48"
+              fill="none"
+            >
+              <path
+                d="M16 23L22 29L34 16"
+                stroke="currentColor"
+                stroke-width="2.3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+
+              <path
+                d="M24 6L39 12V22C39 32 33 39 24 43C15 39 9 32 9 22V12L24 6Z"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linejoin="round"
+              />
+            </svg>
+
+          </div>
+
+
+          <span class="value-number">
+            02
+          </span>
+
+        </div>
+
+
+        <div class="value-content">
+
+          <h3>
+            {t.about.values.integrity.title}
+          </h3>
+
+          <p>
+            {t.about.values.integrity.description}
+          </p>
+
+        </div>
+
+
+        <div
+          class="value-card-line"
+          aria-hidden="true"
+        ></div>
 
       </article>
 
+
+
+      <!-- =========================
+           03 — QUALITY
+      ========================== -->
       <article class="value-card">
 
-        <div class="value-icon">🏆</div>
+        <div class="value-card-top">
 
-        <h3>
-          {t.about.values.quality.title}
-        </h3>
+          <div class="value-icon" aria-hidden="true">
 
-        <p>
-          {t.about.values.quality.description}
-        </p>
+            <svg
+              viewBox="0 0 48 48"
+              fill="none"
+            >
+              <circle
+                cx="24"
+                cy="20"
+                r="11"
+                stroke="currentColor"
+                stroke-width="2.2"
+              />
+
+              <path
+                d="M19 31L16 42L24 37L32 42L29 31"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+
+              <path
+                d="M24 14L26 18L31 19L27.5 22.5L28.5 27L24 24.5L19.5 27L20.5 22.5L17 19L22 18L24 14Z"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linejoin="round"
+              />
+            </svg>
+
+          </div>
+
+
+          <span class="value-number">
+            03
+          </span>
+
+        </div>
+
+
+        <div class="value-content">
+
+          <h3>
+            {t.about.values.quality.title}
+          </h3>
+
+          <p>
+            {t.about.values.quality.description}
+          </p>
+
+        </div>
+
+
+        <div
+          class="value-card-line"
+          aria-hidden="true"
+        ></div>
 
       </article>
+
 
     </div>
 

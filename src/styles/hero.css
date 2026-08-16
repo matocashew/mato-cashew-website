@@ -1946,3 +1946,40 @@ html[lang="km"] .hero-description,
     }
 
 }
+
+/* =========================================================
+   HOME HERO — MOBILE BEHIND GLASS HEADER
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .hero {
+    --mobile-header-height: 74px;
+
+    position: relative;
+
+    /*
+      Pull Home Hero upward behind the fixed glass Header
+    */
+    margin-top: calc(-1 * var(--mobile-header-height));
+
+    /*
+      Push only the Hero content back down
+      so text/buttons are not hidden under Header
+    */
+    padding-top: var(--mobile-header-height);
+
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 420px) {
+
+  .hero {
+    --mobile-header-height: 68px;
+
+    margin-top: -68px;
+    padding-top: 68px;
+  }
+}
+

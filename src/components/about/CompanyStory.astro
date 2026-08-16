@@ -6,10 +6,13 @@ const t = getCurrentLanguage(
 );
 ---
 
-<section class="company-story">
+<section id="our-story" class="company-story">
 
   <div class="container story-grid">
 
+    <!-- =========================
+         STORY CONTENT
+    ========================== -->
     <div class="story-content">
 
       <span class="section-tag">
@@ -30,17 +33,407 @@ const t = getCurrentLanguage(
 
     </div>
 
-    <div class="story-image">
 
+    <!-- =========================
+         STORY VISUAL
+    ========================== -->
+  <div class="story-visual" data-story-gallery>
+
+    <!-- MAIN IMAGE -->
+    <button
+      type="button"
+      class="story-main-image"
+      data-story-open
+      aria-label="View larger image"
+    >
       <img
-        src="/images/about/about-orchard.jpg"
-        alt="Mato Cashew Orchard"
+        src="/images/about/about-farmer.png"
+        alt="Cambodian cashew farmer"
         loading="lazy"
         decoding="async"
+        data-story-main
       />
+
+      <span class="story-zoom-icon" aria-hidden="true">
+        ↗
+      </span>
+    </button>
+
+
+    <!-- THUMBNAILS -->
+    <div class="story-gallery">
+
+      <button
+        type="button"
+        class="story-gallery-item"
+        data-story-thumb
+        data-image="/images/about/about-orchard.png"
+        data-alt="Cambodian cashew orchard"
+        aria-label="View Cambodian cashew orchard"
+      >
+        <img
+          src="/images/about/about-orchard.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+
+
+      <button
+        type="button"
+        class="story-gallery-item"
+        data-story-thumb
+        data-image="/images/about/about-cashew-kernels.png"
+        data-alt="Premium Cambodian cashew kernels"
+        aria-label="View premium Cambodian cashew kernels"
+      >
+        <img
+          src="/images/about/about-cashew-kernels.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+
+
+      <button
+        type="button"
+        class="story-gallery-item"
+        data-story-thumb
+        data-image="/images/about/about-processing.png"
+        data-alt="Mato Cashew processing facility"
+        aria-label="View Mato Cashew processing facility"
+      >
+        <img
+          src="/images/about/about-processing.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
 
     </div>
 
+
+    <!-- LIGHTBOX -->
+    <div
+      class="story-lightbox"
+      data-story-lightbox
+      aria-hidden="true"
+    >
+      <button
+        type="button"
+        class="story-lightbox-close"
+        data-story-close
+        aria-label="Close image"
+      >
+        ×
+      </button>
+
+      <div class="story-lightbox-content">
+        <img
+          src=""
+          alt=""
+          data-story-lightbox-image
+        />
+      </div>
+    </div>
+
+  </div>
+  <div
+    class="story-lightbox"
+    data-story-lightbox
+    aria-hidden="true"
+  >
+    <button
+      type="button"
+      class="story-lightbox-close"
+      data-story-close
+      aria-label="Close image"
+    >
+      ×
+    </button>
+
+    <div class="story-lightbox-content">
+      <img
+        src=""
+        alt=""
+        data-story-lightbox-image
+      />
+    </div>
+  </div>
   </div>
 
 </section>
+
+<script>
+  function initStoryGallery() {
+    document.querySelectorAll("[data-story-gallery]").forEach((gallery) => {
+
+      /*
+       * Prevent duplicate initialization
+       */
+      if (gallery.getAttribute("data-gallery-ready") === "true") {
+        return;
+      }
+
+      gallery.setAttribute("data-gallery-ready", "true");
+
+
+      /* =========================================
+         ELEMENTS
+      ========================================= */
+
+      const mainImage = gallery.querySelector("[data-story-main]");
+
+      const thumbnails =
+        gallery.querySelectorAll("[data-story-thumb]");
+
+      const openButton =
+        gallery.querySelector("[data-story-open]");
+
+      const lightbox =
+        gallery.querySelector("[data-story-lightbox]");
+
+      const lightboxImage =
+        gallery.querySelector("[data-story-lightbox-image]");
+
+      const closeButton =
+        gallery.querySelector("[data-story-close]");
+
+
+      if (!(mainImage instanceof HTMLImageElement)) {
+        return;
+      }
+
+
+      /* =========================================
+         IMAGE SWAP
+      ========================================= */
+
+      thumbnails.forEach((thumbnail) => {
+
+        thumbnail.addEventListener("click", () => {
+
+          const thumbImage =
+            thumbnail.querySelector("img");
+
+          if (!(thumbImage instanceof HTMLImageElement)) {
+            return;
+          }
+
+
+          /* Current MAIN */
+
+          const currentMainSrc =
+            mainImage.getAttribute("src") || "";
+
+          const currentMainAlt =
+            mainImage.getAttribute("alt") || "";
+
+
+          /* Clicked thumbnail */
+
+          const clickedSrc =
+            thumbnail.getAttribute("data-image") ||
+            thumbImage.getAttribute("src") ||
+            "";
+
+          const clickedAlt =
+            thumbnail.getAttribute("data-alt") ||
+            "";
+
+          if (!clickedSrc || !currentMainSrc) {
+            return;
+          }
+
+
+          /* Transition */
+
+          mainImage.classList.add("is-changing");
+          thumbImage.classList.add("is-changing");
+
+
+          window.setTimeout(() => {
+
+            /* Thumbnail → Main */
+
+            mainImage.src = clickedSrc;
+            mainImage.alt = clickedAlt;
+
+
+            /* Old Main → Thumbnail */
+
+            thumbImage.src = currentMainSrc;
+            thumbImage.alt = "";
+
+
+            /*
+             * IMPORTANT
+             * Update thumbnail data
+             */
+
+            thumbnail.setAttribute(
+              "data-image",
+              currentMainSrc
+            );
+
+            thumbnail.setAttribute(
+              "data-alt",
+              currentMainAlt
+            );
+
+
+            /* Finish transition */
+
+            mainImage.classList.remove("is-changing");
+            thumbImage.classList.remove("is-changing");
+
+          }, 140);
+
+
+          /* Active thumbnail */
+
+          thumbnails.forEach((item) => {
+            item.classList.remove("is-active");
+          });
+
+          thumbnail.classList.add("is-active");
+
+        });
+
+      });
+
+
+      /* =========================================
+        LIGHTBOX
+      ========================================= */
+
+      const openLightbox = () => {
+        if (
+          !(lightbox instanceof HTMLElement) ||
+          !(lightboxImage instanceof HTMLImageElement)
+        ) {
+          return;
+        }
+
+        /* Always show CURRENT main image */
+        lightboxImage.src = mainImage.currentSrc || mainImage.src;
+        lightboxImage.alt = mainImage.alt || "";
+
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+
+        document.body.classList.add("story-lightbox-open");
+      };
+
+
+      const closeLightbox = () => {
+        if (!(lightbox instanceof HTMLElement)) {
+          return;
+        }
+
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+
+        document.body.classList.remove("story-lightbox-open");
+      };
+
+
+      /* =========================================
+        OPEN LIGHTBOX
+      ========================================= */
+
+      /*
+      * IMPORTANT:
+      * Listen directly on the MAIN IMAGE.
+      */
+      mainImage.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        openLightbox();
+      });
+
+
+      /*
+      * Keep wrapper/button support too
+      */
+      if (openButton && openButton !== mainImage) {
+        openButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          openLightbox();
+        });
+      }
+
+
+      /* =========================================
+        CLOSE BUTTON
+      ========================================= */
+
+      closeButton?.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        closeLightbox();
+      });
+
+
+      /* =========================================
+        CLICK BACKDROP TO CLOSE
+      ========================================= */
+
+      lightbox?.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+
+      /* ESC */
+
+      document.addEventListener(
+        "keydown",
+        (event) => {
+
+          if (
+            event.key === "Escape" &&
+            lightbox?.classList.contains("is-open")
+          ) {
+            closeLightbox();
+          }
+
+        }
+      );
+
+    });
+  }
+
+
+  /* =========================================
+     NORMAL PAGE LOAD
+  ========================================= */
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initStoryGallery
+  );
+
+
+  /* =========================================
+     ASTRO CLIENT-SIDE NAVIGATION
+  ========================================= */
+
+  document.addEventListener(
+    "astro:page-load",
+    initStoryGallery
+  );
+
+
+  /*
+   * Run immediately as fallback
+   */
+
+  initStoryGallery();
+</script>

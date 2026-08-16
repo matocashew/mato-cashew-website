@@ -12,31 +12,98 @@ const t = getCurrentLanguage(
 
     <div class="mv-grid">
 
-      <article class="mv-card">
+      <!-- =========================
+           OUR MISSION
+      ========================== -->
+      <article class="mv-card mv-card--mission">
 
-        <div class="mv-icon">🎯</div>
+        <div class="mv-card__decor" aria-hidden="true"></div>
 
-        <h3>
-          {t.about.mission.title}
-        </h3>
+        <div class="mv-icon" aria-hidden="true">
 
-        <p>
-          {t.about.mission.description}
-        </p>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="8"></circle>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle cx="12" cy="12" r="1"></circle>
+          </svg>
+
+        </div>
+
+        <div class="mv-content">
+
+          <span class="mv-label">
+            01
+          </span>
+
+          <h3>
+            {t.about.mission.title}
+          </h3>
+
+          <p>
+            {t.about.mission.description}
+          </p>
+
+        </div>
 
       </article>
 
-      <article class="mv-card">
 
-        <div class="mv-icon">🌍</div>
+      <!-- =========================
+           OUR VISION
+      ========================== -->
+      <article class="mv-card mv-card--vision">
 
-        <h3>
-          {t.about.vision.title}
-        </h3>
+        <div class="mv-card__decor" aria-hidden="true"></div>
 
-        <p>
-          {t.about.vision.description}
-        </p>
+        <div class="mv-icon" aria-hidden="true">
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="9"></circle>
+
+            <path
+              d="M3 12h18"
+            ></path>
+
+            <path
+              d="M12 3a15 15 0 0 1 0 18"
+            ></path>
+
+            <path
+              d="M12 3a15 15 0 0 0 0 18"
+            ></path>
+          </svg>
+
+        </div>
+
+        <div class="mv-content">
+
+          <span class="mv-label">
+            02
+          </span>
+
+          <h3>
+            {t.about.vision.title}
+          </h3>
+
+          <p>
+            {t.about.vision.description}
+          </p>
+
+        </div>
 
       </article>
 
