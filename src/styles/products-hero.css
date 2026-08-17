@@ -1,0 +1,454 @@
+/* =========================================================
+   PRODUCTS HERO
+   ========================================================= */
+
+.products-hero {
+  position: relative;
+
+  width: 100%;
+
+  /* Same height as About Hero */
+  height: 727px;
+  min-height: 727px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  background: #f6f1e6;
+}
+
+
+/* =========================================================
+   HERO IMAGE WRAPPER
+   ========================================================= */
+
+.products-hero__media {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   HERO IMAGE
+   ========================================================= */
+
+.products-hero__image {
+  position: absolute;
+
+  width: 108%;
+  max-width: none;
+
+  /* Give extra height so moving upward won't expose empty space */
+  height: 110%;
+
+  left: -4%;
+
+  /* Move the actual image upward */
+  top: -10%;
+
+  display: block;
+
+  object-fit: cover;
+
+  /* Keep image composition stable */
+  object-position: 56% center;
+
+  transform: none;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   HERO OVERLAY
+   ========================================================= */
+
+.products-hero__overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(248, 244, 234, 0.99) 0%,
+      rgba(248, 244, 234, 0.95) 27%,
+      rgba(248, 244, 234, 0.78) 41%,
+      rgba(248, 244, 234, 0.42) 55%,
+      rgba(248, 244, 234, 0.10) 70%,
+      rgba(248, 244, 234, 0) 82%
+    );
+}
+
+
+/* =========================================================
+   HERO CONTENT CONTAINER
+   ========================================================= */
+
+.products-hero__container {
+  position: relative;
+
+  z-index: 2;
+
+  height: 727px;
+  min-height: 727px;
+
+  display: flex;
+  align-items: center;
+}
+
+
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+.products-hero__content {
+  width: min(560px, 100%);
+  padding: 80px 0;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .products-hero {
+    min-height: 620px;
+  }
+
+  .products-hero__container {
+    min-height: 620px;
+  }
+
+  .products-hero__image {
+    width: 110%;
+    left: -5%;
+
+    object-position: 58% 45%;
+  }
+
+}
+
+
+/* =========================================================
+   PRODUCTS HERO — MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .products-hero {
+    position: relative;
+
+    width: 100%;
+    height: auto;
+    min-height: 760px;
+
+    /* Header already occupies its own space */
+    padding-top: 0;
+
+    overflow: hidden;
+  }
+
+
+  /* =======================================================
+     BACKGROUND IMAGE
+     ======================================================= */
+
+  .products-hero__image {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    /*
+     Adjust ONLY this value if you want to move
+     the mobile image vertically.
+    */
+    object-position: 58% 62%;
+
+    transform: none;
+
+    z-index: 0;
+  }
+
+
+  /* =======================================================
+     OVERLAY
+     ======================================================= */
+
+  .products-hero__overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(249, 246, 238, 0.98) 0%,
+        rgba(249, 246, 238, 0.97) 18%,
+        rgba(249, 246, 238, 0.94) 34%,
+        rgba(249, 246, 238, 0.82) 48%,
+        rgba(249, 246, 238, 0.48) 62%,
+        rgba(249, 246, 238, 0.12) 76%,
+        rgba(249, 246, 238, 0) 88%
+      );
+  }
+
+
+  /* =======================================================
+     CONTAINER
+     ======================================================= */
+
+  .products-hero__container {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(100% - 30px, 1200px);
+
+    height: auto;
+    min-height: 760px;
+
+    margin-inline: auto;
+
+    display: flex;
+    align-items: flex-start;
+  }
+
+
+  /* =======================================================
+     CONTENT
+     ======================================================= */
+
+  .products-hero__content {
+    width: 100%;
+    max-width: 520px;
+
+    /*
+     Main fix:
+     Previously content had too much top spacing.
+    */
+    padding:
+      80px
+      0
+      330px;
+
+    margin: 0;
+  }
+
+
+  /* =======================================================
+     EYEBROW / TAG
+     ======================================================= */
+
+  .products-hero__tag {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 0 0 10px;
+
+    color: #087346;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.03em;
+  }
+
+
+  .products-hero__tag::before {
+    content: "";
+
+    flex: 0 0 24px;
+
+    width: 24px;
+    height: 2px;
+
+    border-radius: 999px;
+
+    background: #087346;
+  }
+
+
+  /* =======================================================
+     TITLE
+     ======================================================= */
+
+  .products-hero__title {
+    max-width: 100%;
+
+    margin: 0;
+
+    color: #10213b;
+
+    font-size: clamp(32px, 9vw, 42px);
+
+    font-weight: 800;
+
+    line-height: 1.08;
+
+    letter-spacing: -0.035em;
+  }
+
+
+  /* =======================================================
+     DESCRIPTION
+     ======================================================= */
+
+  .products-hero__description {
+    max-width: 470px;
+
+    margin:
+      16px
+      0
+      0;
+
+    color: #59616e;
+
+    font-size: 15px;
+
+    line-height: 1.65;
+  }
+
+
+  /* =======================================================
+     PREMIUM CTA AREA
+     ======================================================= */
+
+  .products-hero__actions {
+    width: 100%;
+
+    margin-top: 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 11px;
+  }
+
+
+  /* =======================================================
+     BUTTON BASE
+     ======================================================= */
+
+  .products-hero__button {
+    width: 100%;
+
+    min-height: 52px;
+
+    padding:
+      0
+      20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 14px;
+
+    border-radius: 999px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    line-height: 1;
+
+    text-decoration: none;
+
+    transition:
+      transform 180ms ease,
+      background-color 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+
+  /* =======================================================
+     PRIMARY BUTTON
+     ======================================================= */
+
+  .products-hero__button--primary {
+    color: #ffffff;
+
+    background: #087346;
+
+    border: 1px solid #087346;
+
+    box-shadow:
+      0 8px 22px
+      rgba(8, 115, 70, 0.18);
+  }
+
+
+  .products-hero__button--primary:hover {
+    background: #065f3a;
+
+    border-color: #065f3a;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+      0 10px 26px
+      rgba(8, 115, 70, 0.22);
+  }
+
+
+  /* =======================================================
+     SECONDARY BUTTON
+     ======================================================= */
+
+  .products-hero__button--secondary {
+    color: #087346;
+
+    background:
+      rgba(255, 255, 255, 0.35);
+
+    border:
+      1px solid
+      rgba(8, 115, 70, 0.65);
+
+    backdrop-filter: blur(5px);
+
+    -webkit-backdrop-filter: blur(5px);
+  }
+
+
+  .products-hero__button--secondary:hover {
+    color: #ffffff;
+
+    background: #087346;
+
+    border-color: #087346;
+
+    transform: translateY(-1px);
+  }
+
+}

@@ -1,8 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
-import PageHero from "../PageHero.astro";
-
+import ProductsHero from "../products/ProductsHero.astro";
 import ProductIntro from "../products/ProductIntro.astro";
 import ProductGrid from "../products/ProductGrid.astro";
 import PackagingOptions from "../products/PackagingOptions.astro";
@@ -17,15 +16,14 @@ interface Props {
 const { products } = Astro.props;
 ---
 
-<PageHero
-  title="Our Products"
-  description="Premium Cambodian Cashew Kernels for Retail & Wholesale Markets."
-/>
+<ProductsHero />
 
 <ProductIntro />
 
-<section class="products-page-grid">
-
+<section
+  id="products"
+  class="products-page-grid"
+>
   <div class="container">
 
     <ProductGrid
@@ -33,7 +31,6 @@ const { products } = Astro.props;
     />
 
   </div>
-
 </section>
 
 <PackagingOptions />

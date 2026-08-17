@@ -6,7 +6,6 @@ import "../../styles/product-detail.css";
 import "../../styles/related-products.css";
 
 import PageLayout from "../../layouts/PageLayout.astro";
-import PageHero from "../../components/PageHero.astro";
 
 import ProductDetails from "../../components/products/ProductDetails.astro";
 import ProductSpecificationsList from "../../components/products/ProductSpecificationsList.astro";
@@ -75,11 +74,6 @@ const relatedProducts =
     }
   ]}
 >
-
-  <PageHero
-    title={product.data.title}
-    description={product.data.description}
-  />
 
   <ProductDetails
     product={product}

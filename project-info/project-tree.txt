@@ -15,10 +15,12 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   ¦   ProductCard.astro
 ¦   ¦   Products.astro
 ¦   ¦   SectionTitle.astro
+¦   ¦   TrustBar.astro
 ¦   ¦   Wholesale.astro
 ¦   ¦   
 ¦   +---about
 ¦   ¦       AboutCTA.astro
+¦   ¦       AboutHero.astro
 ¦   ¦       CompanyStory.astro
 ¦   ¦       CoreValues.astro
 ¦   ¦       MissionVision.astro
@@ -37,6 +39,13 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   ¦       FormField.astro
 ¦   ¦       FormSelect.astro
 ¦   ¦       FormTextarea.astro
+¦   ¦       
+¦   +---home
+¦   ¦       HomeProcess.astro
+¦   ¦       HomeStats.astro
+¦   ¦       HomeTestimonials.astro
+¦   ¦       HomeWholesaleCTA.astro
+¦   ¦       HomeWhyChooseUs.astro
 ¦   ¦       
 ¦   +---knowledge
 ¦   ¦       FeaturedKnowledgeCard.astro
@@ -109,7 +118,6 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦           Grid.astro
 ¦           InfoBox.astro
 ¦           SectionTitle.astro
-¦           Tag.astro
 ¦           TagGroup.astro
 ¦           
 +---config
@@ -139,9 +147,12 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   ¦       what-is-cashew.mdx
 ¦   ¦       
 ¦   +---products
-¦   ¦       premium-cashew-100g.md
-¦   ¦       premium-cashew-250g.md
-¦   ¦       premium-cashew-500g.md
+¦   ¦       premium-cashew-1000g-can.md
+¦   ¦       premium-cashew-1000g-pouch.md
+¦   ¦       premium-cashew-250g-can.md
+¦   ¦       premium-cashew-250g-pouch.md
+¦   ¦       premium-cashew-500g-can.md
+¦   ¦       premium-cashew-500g-pouch.md
 ¦   ¦       
 ¦   +---resources
 ¦   ¦       why-cambodian-cashews.md
@@ -236,6 +247,7 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦       resourceService.ts
 ¦       
 +---styles
+¦   ¦   about-hero.css
 ¦   ¦   about-page.css
 ¦   ¦   about.css
 ¦   ¦   article.css
@@ -247,10 +259,16 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   ¦   global.css
 ¦   ¦   header.css
 ¦   ¦   hero.css
+¦   ¦   home-process.css
+¦   ¦   home-stats.css
+¦   ¦   home-testimonials.css
+¦   ¦   home-wholesale-cta.css
+¦   ¦   home-why-choose.css
 ¦   ¦   knowledge-hero.css
 ¦   ¦   page.css
 ¦   ¦   product-detail.css
 ¦   ¦   product-specifications.css
+¦   ¦   products-home.css
 ¦   ¦   products-page.css
 ¦   ¦   products.css
 ¦   ¦   related-articles.css

@@ -1,0 +1,115 @@
+---
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+import { getLocalizedPath } from "../../i18n/getLocalizedPath";
+import type { Language } from "../../i18n/config";
+
+import "../../styles/products-hero.css";
+
+const t = getCurrentLanguage(
+  Astro.url.pathname
+);
+
+const language: Language =
+  Astro.url.pathname.startsWith("/km")
+    ? "km"
+    : "en";
+
+const contactPath =
+  getLocalizedPath(
+    language,
+    "/contact/"
+  );
+---
+
+<section class="products-hero">
+
+  <!-- =====================================================
+       RESPONSIVE HERO IMAGE
+       ===================================================== -->
+  <picture
+    class="products-hero__media"
+    aria-hidden="true"
+  >
+    <source
+      media="(max-width: 768px)"
+      srcset="/images/products/products-hero-mobile.png"
+    />
+
+    <img
+      src="/images/products/products-hero-desktop.png"
+      alt=""
+      class="products-hero__image"
+      width="1920"
+      height="1080"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </picture>
+
+
+  <!-- =====================================================
+       PREMIUM CREAM OVERLAY
+       ===================================================== -->
+  <div
+    class="products-hero__overlay"
+    aria-hidden="true"
+  ></div>
+
+
+  <!-- =====================================================
+       CONTENT
+       ===================================================== -->
+  <div class="container products-hero__container">
+
+    <div class="products-hero__content">
+
+      <span class="products-hero__tag">
+        {t.products.pageHero.tag}
+      </span>
+
+      <h1 class="products-hero__title">
+        {t.products.pageHero.title}
+      </h1>
+
+      <p class="products-hero__description">
+        {t.products.pageHero.description}
+      </p>
+
+
+      <div class="products-hero__actions">
+
+        <a
+          href="#products"
+          class="
+            products-hero__button
+            products-hero__button--primary
+          "
+        >
+          <span>
+            {t.products.pageHero.primaryCta}
+          </span>
+
+          <span aria-hidden="true">
+            →
+          </span>
+        </a>
+
+
+        <a
+          href={contactPath}
+          class="
+            products-hero__button
+            products-hero__button--secondary
+          "
+        >
+          {t.products.pageHero.secondaryCta}
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

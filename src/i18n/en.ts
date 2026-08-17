@@ -438,6 +438,18 @@ about: {
   },
 
   products: {
+    pageHero: {
+      tag: "Premium Cambodian Cashew",
+
+      title: "Our Products",
+
+      description:
+        "Discover Mato Cashew's premium Cambodian cashew products, thoughtfully presented for retail customers and business partners.",
+
+      primaryCta: "Explore Products",
+
+      secondaryCta: "Business Inquiries",
+    },
   packaging: {
     tag: "Packaging",
 

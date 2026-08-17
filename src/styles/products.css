@@ -36,7 +36,7 @@
 
 
 /* =========================================================
-   Product Card
+   Premium Product Card V2
    ========================================================= */
 
 .product-card {
@@ -48,83 +48,179 @@
     min-width: 0;
     height: 100%;
 
-    padding: 26px;
+    padding: 22px;
 
     overflow: hidden;
 
-    background: #fff;
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #ffffff 72%,
+            #fbfcf9 100%
+        );
 
-    border: 1px solid rgba(13, 92, 58, .07);
-
+    border: 1px solid rgba(13, 92, 58, 0.08);
     border-radius: 22px;
 
     box-shadow:
-        0 10px 30px rgba(0, 0, 0, .055);
+        0 4px 12px rgba(18, 45, 32, 0.025),
+        0 14px 34px rgba(18, 45, 32, 0.055);
 
     transition:
-        transform var(--duration-normal) var(--ease-default),
-        box-shadow var(--duration-normal) var(--ease-default),
-        border-color var(--duration-normal) var(--ease-default);
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+/* subtle premium top highlight */
+
+.product-card::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 22px;
+    right: 22px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(192, 146, 48, 0.38),
+            transparent
+        );
+
+    opacity: 0;
+
+    transition: opacity 0.3s ease;
 }
 
 
 .product-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
 
-    border-color: rgba(13, 92, 58, .12);
+    border-color: rgba(13, 92, 58, 0.14);
 
     box-shadow:
-        0 18px 42px rgba(0, 0, 0, .09);
+        0 8px 18px rgba(18, 45, 32, 0.04),
+        0 22px 48px rgba(18, 45, 32, 0.10);
+}
+
+
+.product-card:hover::before {
+    opacity: 1;
 }
 
 
 .product-card:focus-within {
-    border-color: rgba(13, 92, 58, .18);
+    border-color: rgba(13, 92, 58, 0.20);
 
-    box-shadow: var(--shadow-lg);
+    box-shadow:
+        0 8px 18px rgba(18, 45, 32, 0.04),
+        0 22px 48px rgba(18, 45, 32, 0.10);
 }
 
 
 /* =========================================================
-   Product Image
+   Premium Product Image
    ========================================================= */
 
 .product-image {
-    display: flex;
+    position: relative;
 
+    display: flex;
     align-items: center;
     justify-content: center;
 
     width: 100%;
     min-height: 270px;
 
-    padding: 8px 0 18px;
+    padding: 8px 10px 12px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(246, 241, 224, 0.72) 0%,
+            rgba(250, 248, 240, 0.38) 45%,
+            rgba(255, 255, 255, 0) 72%
+        );
+
+    border-radius: 17px;
 
     text-decoration: none;
 }
 
 
+/* soft glow behind product */
+
+.product-image::before {
+    content: "";
+
+    position: absolute;
+
+    width: 190px;
+    height: 190px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(212, 176, 91, 0.12) 0%,
+            rgba(212, 176, 91, 0.045) 48%,
+            transparent 72%
+        );
+
+    pointer-events: none;
+}
+
+
 .product-image img,
 .product-card > img {
+    position: relative;
+    z-index: 1;
+
     display: block;
 
     width: auto;
-    max-width: min(220px, 82%);
+    max-width: min(235px, 86%);
 
-    height: 250px;
+    height: 265px;
 
     margin-inline: auto;
 
     object-fit: contain;
 
+    filter:
+        drop-shadow(
+            0 12px 13px rgba(31, 46, 35, 0.08)
+        );
+
     transition:
-        transform var(--duration-normal) var(--ease-default);
+        transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1),
+        filter 0.38s ease;
 }
 
 
 .product-card:hover .product-image img,
 .product-card:hover > img {
-    transform: scale(1.035);
+    transform: translateY(-3px) scale(1.035);
+
+    filter:
+        drop-shadow(
+            0 16px 17px rgba(31, 46, 35, 0.12)
+        );
 }
 
 
@@ -139,12 +235,12 @@
 
     min-width: 0;
 
-    padding-top: 10px;
+    padding: 12px 3px 2px;
 }
 
 
 /* =========================================================
-   Category
+   Premium Category Badge
    ========================================================= */
 
 .product-category {
@@ -153,20 +249,24 @@
     display: inline-flex;
     align-items: center;
 
-    margin-bottom: 14px;
+    margin-bottom: 13px;
 
-    padding: 6px 13px;
+    padding: 5px 11px;
 
-    background: #edf7f1;
+    color: #0d6a46;
 
-    color: var(--primary);
+    background: #eef7f2;
+
+    border: 1px solid rgba(13, 92, 58, 0.07);
 
     border-radius: 999px;
 
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
 
     line-height: 1.3;
+
+    letter-spacing: 0.015em;
 }
 
 
@@ -175,14 +275,16 @@
    ========================================================= */
 
 .product-card h3 {
-    margin: 0 0 12px;
+    margin: 0 0 10px;
 
     color: var(--text);
 
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
 
     line-height: 1.35;
+
+    letter-spacing: -0.015em;
 }
 
 
@@ -192,7 +294,7 @@
     text-decoration: none;
 
     transition:
-        color var(--duration-fast) var(--ease-default);
+        color 0.2s ease;
 }
 
 
@@ -202,24 +304,33 @@
 
 
 /* =========================================================
-   Description
+   Product Description
    ========================================================= */
 
 .product-card p {
+    display: -webkit-box;
+
     flex: 1;
 
-    margin: 0 0 22px;
+    margin: 0 0 18px;
+
+    overflow: hidden;
 
     color: var(--text-light);
 
     font-size: 14px;
 
     line-height: 1.7;
+
+    -webkit-box-orient: vertical;
+
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
 }
 
 
 /* =========================================================
-   Dynamic Product Footer
+   Premium Product Footer
    ========================================================= */
 
 .product-footer {
@@ -232,17 +343,22 @@
 
     margin-top: auto;
 
-    padding-top: 18px;
+    padding-top: 15px;
 
-    border-top: 1px solid rgba(13, 92, 58, .08);
+    border-top: 1px solid rgba(13, 92, 58, 0.08);
 }
 
 
 .product-weight {
+    display: inline-flex;
+    align-items: center;
+
     color: var(--primary);
 
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
+
+    line-height: 1.4;
 
     white-space: nowrap;
 }
@@ -252,9 +368,11 @@
     display: inline-flex;
     align-items: center;
 
+    gap: 5px;
+
     color: var(--primary);
 
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
 
     line-height: 1.4;
@@ -262,20 +380,33 @@
     text-decoration: none;
 
     transition:
-        color var(--duration-fast) var(--ease-default),
-        transform var(--duration-fast) var(--ease-default);
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.product-link::after {
+    content: "→";
+
+    display: inline-block;
+
+    transition:
+        transform 0.2s ease;
 }
 
 
 .product-link:hover {
     color: var(--primary-dark);
+}
 
-    transform: translateX(3px);
+
+.product-link:hover::after {
+    transform: translateX(4px);
 }
 
 
 /* =========================================================
-   Legacy ProductCard Badge
+   Legacy Product Badge
    ========================================================= */
 
 .product-badge {
@@ -284,9 +415,9 @@
     top: 18px;
     right: 18px;
 
-    z-index: 2;
+    z-index: 3;
 
-    padding: 6px 14px;
+    padding: 6px 13px;
 
     color: #fff;
 
@@ -299,13 +430,16 @@
 
     border-radius: 999px;
 
-    font-size: 12px;
+    box-shadow:
+        0 5px 14px rgba(13, 92, 58, 0.15);
+
+    font-size: 11px;
     font-weight: 700;
 }
 
 
 /* =========================================================
-   Legacy ProductCard Meta
+   Legacy Product Meta
    ========================================================= */
 
 .product-meta {
@@ -317,7 +451,7 @@
     gap: 16px;
 
     margin-top: auto;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 
     color: var(--text);
 
@@ -327,7 +461,7 @@
 
 
 /* =========================================================
-   Legacy ProductCard Button
+   Legacy Product Button
    ========================================================= */
 
 .product-card .btn {
@@ -335,9 +469,8 @@
 
     justify-content: center;
 
-    padding: 14px 20px;
+    padding: 13px 20px;
 }
-
 
 /* =========================================================
    Product Features
@@ -384,6 +517,9 @@ html[lang="km"] .product-card h3 {
 
 html[lang="km"] .product-card p {
     line-height: 1.85;
+
+    line-clamp: 4;
+    -webkit-line-clamp: 4;
 }
 
 
@@ -465,57 +601,77 @@ html[lang="km"] .product-weight {
 
         margin-inline: auto;
 
-        padding: 22px;
+        padding: 18px;
 
         border-radius: 18px;
     }
 
 
     .product-image {
-        min-height: 220px;
+        min-height: 205px;
 
-        padding: 4px 0 14px;
+        padding: 4px 6px 10px;
+
+        border-radius: 15px;
     }
-
+    .product-image::before {
+        width: 160px;
+        height: 160px;
+    }
 
     .product-image img,
     .product-card > img {
         height: 205px;
 
-        max-width: 185px;
+        max-width: 190px;
     }
 
 
     .product-content {
-        padding-top: 8px;
+        padding: 9px 2px 1px;
     }
 
 
     .product-category {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
 
-        padding: 5px 12px;
+        padding: 5px 10px;
 
-        font-size: 12px;
+        font-size: 11px;
     }
 
 
     .product-card h3 {
-        margin-bottom: 10px;
+        margin-bottom: 9px;
 
-        font-size: 20px;
+        font-size: 19px;
     }
 
 
     .product-card p {
-        margin-bottom: 18px;
+        display: -webkit-box;
+
+        flex: 1;
+
+        margin: 0 0 18px;
+
+        overflow: hidden;
+
+        color: var(--text-light);
 
         font-size: 14px;
+
+        line-height: 1.7;
+
+        -webkit-box-orient: vertical;
+
+        line-clamp: 3;
+        -webkit-line-clamp: 3;
     }
 
 
     .product-footer {
-        padding-top: 16px;
+        padding-top: 14px;
     }
 
 }
