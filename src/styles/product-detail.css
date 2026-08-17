@@ -886,6 +886,16 @@
     line-height: 1.5;
 }
 
+/* =========================================================
+   PRODUCT HIGHLIGHTS — REMOVE GLOBAL LIST CHECK
+   ========================================================= */
+
+.specifications-list li::before,
+.specifications-list li::after {
+    content: none !important;
+    display: none !important;
+}
+
 
 .specification-check {
     flex: 0 0 24px;
@@ -905,6 +915,13 @@
 
     font-size: 12px;
     font-weight: 800;
+}
+
+.specification-check svg {
+    display: block;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
 }
 
 
