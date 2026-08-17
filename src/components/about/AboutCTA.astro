@@ -1,7 +1,6 @@
 ---
 import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
 import { getLocalizedPath } from "../../i18n/getLocalizedPath";
-
 import type { Language } from "../../i18n/config";
 
 const t = getCurrentLanguage(
@@ -14,45 +13,67 @@ const language: Language =
     : "en";
 
 const contactPath =
-  getLocalizedPath(language, "/contact");
+  getLocalizedPath(language, "/contact/");
 
 const wholesalePath =
-  getLocalizedPath(language, "/wholesale");
+  getLocalizedPath(language, "/wholesale/");
 ---
 
 <section class="about-cta">
 
   <div class="container">
 
-    <div class="about-cta-content">
+    <div class="about-cta-grid">
 
-      <span class="about-cta-tag">
-        {t.about.cta.tag}
-      </span>
+      <!-- =========================
+           LEFT — CONTENT
+      ========================== -->
+      <div class="about-cta-content">
 
-      <h2>
-        {t.about.cta.title}
-      </h2>
+        <span class="about-cta-tag">
+          {t.about.cta.tag}
+        </span>
 
-      <p>
-        {t.about.cta.description}
-      </p>
+        <h2>
+          {t.about.cta.title}
+        </h2>
 
-      <div class="about-cta-actions">
+        <p>
+          {t.about.cta.description}
+        </p>
 
-        <a
-          href={contactPath}
-          class="btn btn-primary"
-        >
-          {t.common.contactUs}
-        </a>
+        <div class="about-cta-actions">
 
-        <a
-          href={wholesalePath}
-          class="btn btn-outline"
-        >
-          {t.about.cta.wholesaleButton}
-        </a>
+          <a
+            href={contactPath}
+            class="btn btn-primary"
+          >
+            {t.common.contactUs}
+          </a>
+
+          <a
+            href={wholesalePath}
+            class="btn btn-outline"
+          >
+            {t.about.cta.wholesaleButton}
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           RIGHT — PRODUCT IMAGE
+      ========================== -->
+      <div class="about-cta-visual">
+
+        <img
+          src="/images/about/about-cta-product.png"
+          alt="Mato Cashew premium Cambodian cashew products"
+          loading="lazy"
+          decoding="async"
+        />
 
       </div>
 

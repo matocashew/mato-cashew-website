@@ -1983,3 +1983,37 @@ html[lang="km"] .hero-description,
   }
 }
 
+/* =========================================================
+   HOME HERO — FINAL MOBILE CONTENT POSITION FIX
+   Keep background behind glass header
+   Move actual content safely below header
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .hero .hero-grid {
+    padding-top: 82px !important;
+  }
+
+}
+
+
+/* Small mobile */
+@media (max-width: 480px) {
+
+  .hero .hero-grid {
+    padding-top: 78px !important;
+  }
+
+}
+
+
+/* Very small mobile */
+@media (max-width: 390px) {
+
+  .hero .hero-grid {
+    padding-top: 74px !important;
+  }
+
+}
+

@@ -2,80 +2,140 @@
 import SectionTitle from "../SectionTitle.astro";
 import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
 
-const t = getCurrentLanguage(
-  Astro.url.pathname
-);
+const t = getCurrentLanguage(Astro.url.pathname);
+
+const steps = [
+  {
+    number: "01",
+    title: t.about.process.orchard.title,
+    description: t.about.process.orchard.description,
+    icon: "orchard",
+  },
+  {
+    number: "02",
+    title: t.about.process.processing.title,
+    description: t.about.process.processing.description,
+    icon: "processing",
+  },
+  {
+    number: "03",
+    title: t.about.process.packaging.title,
+    description: t.about.process.packaging.description,
+    icon: "packaging",
+  },
+  {
+    number: "04",
+    title: t.about.process.export.title,
+    description: t.about.process.export.description,
+    icon: "export",
+  },
+];
 ---
 
 <section class="our-process">
-
   <div class="container">
 
-    <SectionTitle
-      tag={t.about.process.tag}
-      title={t.about.process.title}
-    />
+    <div class="process-heading">
+      <SectionTitle
+        tag={t.about.process.tag}
+        title={t.about.process.title}
+      />
+    </div>
 
-    <div class="process-grid">
+    <div class="process-timeline">
 
-      <article class="process-card">
+      {
+        steps.map((step) => (
+          <article class="process-card">
 
-        <div class="process-number">01</div>
+            <div class="process-top">
 
-        <h3>
-          {t.about.process.orchard.title}
-        </h3>
+              <span class="process-number">
+                {step.number}
+              </span>
 
-        <p>
-          {t.about.process.orchard.description}
-        </p>
+              <div class="process-icon">
 
-      </article>
+                {step.icon === "orchard" && (
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 22V12" />
+                    <path d="M12 13C8 13 5 10 5 6c4 0 7 2 7 7Z" />
+                    <path d="M12 10c0-4 3-7 7-7 0 4-3 7-7 7Z" />
+                    <path d="M7 22h10" />
+                  </svg>
+                )}
 
-      <article class="process-card">
+                {step.icon === "processing" && (
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21h-4v-.1A1.7 1.7 0 0 0 8.6 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3v-4h.1A1.7 1.7 0 0 0 4.6 8.6a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3h4v.1A1.7 1.7 0 0 0 15.4 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 9c.15.36.36.68.6 1 .28.3.67.48 1.1.5h.1v4h-.1a1.7 1.7 0 0 0-1.7.5Z" />
+                  </svg>
+                )}
 
-        <div class="process-number">02</div>
+                {step.icon === "packaging" && (
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m4 7 8-4 8 4-8 4-8-4Z" />
+                    <path d="M4 7v10l8 4 8-4V7" />
+                    <path d="M12 11v10" />
+                    <path d="m8 5 8 4" />
+                  </svg>
+                )}
 
-        <h3>
-          {t.about.process.processing.title}
-        </h3>
+                {step.icon === "export" && (
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M3 6h11v10H3Z" />
+                    <path d="M14 10h4l3 3v3h-7Z" />
+                    <circle cx="7" cy="18" r="2" />
+                    <circle cx="18" cy="18" r="2" />
+                    <path d="M14 13h7" />
+                  </svg>
+                )}
 
-        <p>
-          {t.about.process.processing.description}
-        </p>
+              </div>
 
-      </article>
+            </div>
 
-      <article class="process-card">
+            <h3>{step.title}</h3>
 
-        <div class="process-number">03</div>
+            <p>{step.description}</p>
 
-        <h3>
-          {t.about.process.packaging.title}
-        </h3>
-
-        <p>
-          {t.about.process.packaging.description}
-        </p>
-
-      </article>
-
-      <article class="process-card">
-
-        <div class="process-number">04</div>
-
-        <h3>
-          {t.about.process.export.title}
-        </h3>
-
-        <p>
-          {t.about.process.export.description}
-        </p>
-
-      </article>
+          </article>
+        ))
+      }
 
     </div>
 
   </div>
-
 </section>

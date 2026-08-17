@@ -11,6 +11,9 @@ const t = getCurrentLanguage(
 
   <div class="container quality-grid">
 
+    <!-- =========================================
+         QUALITY CONTENT
+    ========================================== -->
     <div class="quality-content">
 
       <SectionTitle
@@ -18,15 +21,43 @@ const t = getCurrentLanguage(
         title={t.about.qualityStandards.title}
       />
 
-      <p>
+      <div class="quality-accent" aria-hidden="true"></div>
+
+      <p class="quality-description">
         {t.about.qualityStandards.description}
       </p>
 
+
+      <!-- =========================================
+           QUALITY CHECKLIST
+      ========================================== -->
       <ul class="quality-list">
 
         {
           t.about.qualityStandards.items.map((item) => (
-            <li>✅ {item}</li>
+            <li>
+
+              <span
+                class="quality-check"
+                aria-hidden="true"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12.5l4 4L19 7" />
+                </svg>
+              </span>
+
+              <span class="quality-list-text">
+                {item}
+              </span>
+
+            </li>
           ))
         }
 
@@ -34,14 +65,45 @@ const t = getCurrentLanguage(
 
     </div>
 
-    <div class="quality-image">
 
-      <img
-        src="/images/about/quality.jpg"
-        alt="Quality Standards"
-        loading="lazy"
-        decoding="async"
-      />
+    <!-- =========================================
+         QUALITY VISUAL
+    ========================================== -->
+    <div class="quality-visual">
+
+      <div class="quality-image">
+
+        <img
+          src="/images/about/quality-standards.png"
+          alt="Mato Cashew quality standards and premium Cambodian cashew processing"
+          loading="lazy"
+          decoding="async"
+        />
+
+      </div>
+
+
+      <!-- Premium floating badge -->
+      <div
+        class="quality-badge"
+        aria-hidden="true"
+      >
+
+        <div class="quality-badge-icon">
+          ✓
+        </div>
+
+        <div>
+          <strong>
+            Quality First
+          </strong>
+
+          <span>
+            Premium Quality
+          </span>
+        </div>
+
+      </div>
 
     </div>
 
