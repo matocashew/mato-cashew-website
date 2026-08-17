@@ -187,86 +187,360 @@
 
 }
 
-/* ===========================
-   PACKAGING OPTIONS
-=========================== */
+/* =========================================================
+   PACKAGING OPTIONS — PREMIUM V2
+   ========================================================= */
 
-.packaging-options{
+.packaging-options {
+    position: relative;
 
-    padding:var(--section-space) 0;
+    padding: var(--section-space) 0;
 
+    background: #f8f4ea;
 }
 
-.packaging-grid{
 
-    display:grid;
+/* =========================================================
+   GRID
+   ========================================================= */
 
-    grid-template-columns:repeat(3,1fr);
+.packaging-grid {
+    display: grid;
 
-    gap:32px;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
 
-    margin-top:60px;
+    gap: 24px;
 
+    margin-top: 48px;
 }
 
-.package-card{
 
-    background:#fff;
+/* =========================================================
+   CARD
+   ========================================================= */
 
-    padding:40px;
+.package-card {
+    position: relative;
 
-    text-align:center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    border-radius:24px;
+    min-width: 0;
+    min-height: 250px;
 
-    box-shadow:0 18px 45px rgba(0,0,0,.08);
+    padding:
+        34px
+        28px
+        30px;
 
-    transition:.35s ease;
+    text-align: center;
 
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #fffefb 100%
+        );
+
+    border:
+        1px solid rgba(20, 93, 60, 0.08);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 12px 30px rgba(32, 45, 38, 0.06);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
 }
 
-.package-card:hover{
 
-    transform:translateY(-8px);
+/* Premium top accent */
 
-    box-shadow:0 25px 60px rgba(0,0,0,.12);
+.package-card::before {
+    content: "";
 
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    width: 54px;
+    height: 3px;
+
+    transform: translateX(-50%);
+
+    background: var(--primary);
+
+    border-radius:
+        0
+        0
+        4px
+        4px;
+
+    opacity: 0.85;
 }
 
-.package-icon{
 
-    font-size:54px;
+/* =========================================================
+   HOVER
+   ========================================================= */
 
-    margin-bottom:20px;
+@media (hover: hover) {
 
-}
+    .package-card:hover {
+        transform: translateY(-5px);
 
-.package-card h3{
+        border-color:
+            rgba(20, 93, 60, 0.16);
 
-    color:var(--primary);
-
-    margin-bottom:16px;
-
-}
-
-.package-card p{
-
-    color:#555;
-
-    line-height:1.8;
-
-}
-
-@media(max-width:992px){
-
-    .packaging-grid{
-
-        grid-template-columns:1fr;
-
+        box-shadow:
+            0 20px 42px
+            rgba(32, 45, 38, 0.10);
     }
 
 }
 
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.package-icon {
+    display: grid;
+    place-items: center;
+
+    width: 58px;
+    height: 58px;
+
+    margin-bottom: 20px;
+
+    font-size: 29px;
+    line-height: 1;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f3faf6,
+            #e9f5ee
+        );
+
+    border:
+        1px solid rgba(20, 93, 60, 0.08);
+
+    border-radius: 17px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.package-card h3 {
+    margin:
+        0
+        0
+        11px;
+
+    color: var(--primary);
+
+    font-size: 18px;
+    font-weight: 750;
+
+    line-height: 1.35;
+}
+
+
+.package-card p {
+    max-width: 290px;
+
+    margin: 0;
+
+    color: #667085;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   KHMER
+   ========================================================= */
+
+html[lang="km"] .package-card h3 {
+    line-height: 1.65;
+}
+
+
+html[lang="km"] .package-card p {
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 992px) {
+
+    .packaging-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 18px;
+
+        margin-top: 42px;
+    }
+
+
+    .package-card {
+        min-height: 230px;
+
+        padding:
+            28px
+            20px
+            26px;
+    }
+
+
+    .package-card h3 {
+        font-size: 16px;
+    }
+
+
+    .package-card p {
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 680px) {
+
+    .packaging-options {
+        padding:
+            48px
+            0;
+    }
+
+
+    .packaging-grid {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+        margin-top: 28px;
+    }
+
+
+    .package-card {
+        display: grid;
+
+        grid-template-columns:
+            48px
+            minmax(0, 1fr);
+
+        grid-template-areas:
+            "icon title"
+            "icon description";
+
+        align-items: center;
+
+        column-gap: 14px;
+        row-gap: 3px;
+
+        min-height: 0;
+
+        padding:
+            18px
+            17px;
+
+        text-align: left;
+
+        border-radius: 16px;
+    }
+
+
+    .package-card::before {
+        top: 50%;
+        left: 0;
+
+        width: 3px;
+        height: 34px;
+
+        transform:
+            translateY(-50%);
+
+        border-radius:
+            0
+            4px
+            4px
+            0;
+    }
+
+
+    .package-icon {
+        grid-area: icon;
+
+        width: 48px;
+        height: 48px;
+
+        margin: 0;
+
+        font-size: 24px;
+
+        border-radius: 14px;
+    }
+
+
+    .package-card h3 {
+        grid-area: title;
+
+        margin: 0;
+
+        font-size: 14px;
+
+        line-height: 1.4;
+    }
+
+
+    .package-card p {
+        grid-area: description;
+
+        max-width: none;
+
+        font-size: 11px;
+
+        line-height: 1.55;
+    }
+
+
+    html[lang="km"] .package-card h3 {
+        font-size: 13px;
+
+        line-height: 1.65;
+    }
+
+
+    html[lang="km"] .package-card p {
+        font-size: 10px;
+
+        line-height: 1.7;
+    }
+
+}
 /* ===========================
    PRODUCT SPECIFICATIONS
 =========================== */
