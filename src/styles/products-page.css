@@ -827,90 +827,423 @@ html[lang="km"] .spec-table td {
     }
 
 }
-/* ===========================
-   PRODUCT FAQ
-=========================== */
+/* =========================================================
+   PRODUCT FAQ — PREMIUM V2
+   ========================================================= */
 
-.product-faq{
+.product-faq {
+    position: relative;
 
-    padding:var(--section-space) 0;
+    padding: var(--section-space) 0;
+
+    background: var(--cream);
+}
+
+
+/* =========================================================
+   FAQ LIST
+   ========================================================= */
+
+.faq-list {
+    width: min(100%, 860px);
+
+    margin:
+        48px
+        auto
+        0;
+
+    display: grid;
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   FAQ ITEM
+   ========================================================= */
+
+.faq-item {
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border:
+        1px solid rgba(20, 93, 60, 0.08);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px 24px
+        rgba(32, 45, 38, 0.055);
+
+    transition:
+        border-color 0.22s ease,
+        box-shadow 0.22s ease,
+        transform 0.22s ease,
+        background-color 0.22s ease;
+}
+
+
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+
+.faq-item summary {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    min-height: 58px;
+
+    padding:
+        16px
+        54px
+        16px
+        20px;
+
+    cursor: pointer;
+
+    list-style: none;
+
+    color: var(--navy);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1.5;
+
+    transition:
+        color 0.2s ease;
+}
+
+
+/* remove default browser marker */
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+
+.faq-item summary::marker {
+    display: none;
+    content: "";
+}
+
+
+/* =========================================================
+   PREMIUM + ICON
+   ========================================================= */
+
+.faq-item summary::after {
+    content: "+";
+
+    position: absolute;
+
+    top: 50%;
+    right: 18px;
+
+    width: 28px;
+    height: 28px;
+
+    display: grid;
+
+    place-items: center;
+
+    transform:
+        translateY(-50%);
+
+    border-radius: 50%;
+
+    color: var(--green);
+
+    background:
+        rgba(20, 93, 60, 0.07);
+
+    font-size: 18px;
+    font-weight: 500;
+
+    line-height: 1;
+
+    transition:
+        transform 0.22s ease,
+        color 0.22s ease,
+        background-color 0.22s ease;
+}
+
+
+/* =========================================================
+   OPEN STATE
+   ========================================================= */
+
+.faq-item[open] {
+    border-color:
+        rgba(20, 93, 60, 0.16);
+
+    box-shadow:
+        0 12px 30px
+        rgba(32, 45, 38, 0.075);
+
+    background: #fff;
+}
+
+
+.faq-item[open] summary {
+    color: var(--green);
+}
+
+
+.faq-item[open] summary::after {
+    content: "−";
+
+    color: #fff;
+
+    background: var(--green);
+
+    transform:
+        translateY(-50%);
+}
+
+
+/* =========================================================
+   ANSWER
+   ========================================================= */
+
+.faq-item p {
+    position: relative;
+
+    margin: 0;
+
+    padding:
+        0
+        54px
+        20px
+        20px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.75;
+}
+
+
+/* subtle divider when opened */
+
+.faq-item[open] p::before {
+    content: "";
+
+    display: block;
+
+    width: 42px;
+    height: 2px;
+
+    margin:
+        0
+        0
+        14px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(20, 93, 60, 0.28);
+}
+
+
+/* =========================================================
+   DESKTOP HOVER
+   ========================================================= */
+
+@media (hover: hover) {
+
+    .faq-item:not([open]):hover {
+        transform:
+            translateY(-2px);
+
+        border-color:
+            rgba(20, 93, 60, 0.15);
+
+        box-shadow:
+            0 12px 28px
+            rgba(32, 45, 38, 0.075);
+    }
+
+
+    .faq-item:not([open]):hover summary {
+        color: var(--green);
+    }
+
+
+    .faq-item:not([open]):hover summary::after {
+        background:
+            rgba(20, 93, 60, 0.12);
+    }
 
 }
 
-.faq-list{
 
-    max-width:900px;
+/* =========================================================
+   KEYBOARD ACCESSIBILITY
+   ========================================================= */
 
-    margin:60px auto 0;
+.faq-item summary:focus-visible {
+    outline:
+        2px solid
+        rgba(20, 93, 60, 0.55);
 
-    display:grid;
+    outline-offset: -3px;
 
-    gap:20px;
+    border-radius: 12px;
+}
+
+
+/* =========================================================
+   KHMER
+   ========================================================= */
+
+html[lang="km"] .faq-item summary {
+    font-weight: 600;
+
+    line-height: 1.8;
+}
+
+
+html[lang="km"] .faq-item p {
+    line-height: 1.9;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .faq-list {
+        margin-top: 36px;
+
+        gap: 10px;
+    }
+
+
+    .faq-item summary {
+        min-height: 56px;
+
+        padding:
+            15px
+            52px
+            15px
+            18px;
+
+        font-size: 13px;
+    }
+
+
+    .faq-item p {
+        padding:
+            0
+            52px
+            18px
+            18px;
+
+        font-size: 12px;
+    }
 
 }
 
-.faq-item{
 
-    background:#fff;
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
-    border-radius:18px;
+@media (max-width: 560px) {
 
-    box-shadow:0 15px 35px rgba(0,0,0,.08);
+    .product-faq {
+        padding:
+            48px
+            0;
+    }
 
-    overflow:hidden;
+
+    .faq-list {
+        margin-top: 28px;
+
+        gap: 9px;
+    }
+
+
+    .faq-item {
+        border-radius: 13px;
+
+        box-shadow:
+            0 7px 20px
+            rgba(32, 45, 38, 0.05);
+    }
+
+
+    .faq-item summary {
+        min-height: 52px;
+
+        padding:
+            13px
+            48px
+            13px
+            15px;
+
+        font-size: 11px;
+
+        line-height: 1.55;
+    }
+
+
+    .faq-item summary::after {
+        right: 13px;
+
+        width: 25px;
+        height: 25px;
+
+        font-size: 16px;
+    }
+
+
+    .faq-item p {
+        padding:
+            0
+            48px
+            16px
+            15px;
+
+        font-size: 10.5px;
+
+        line-height: 1.7;
+    }
+
+
+    .faq-item[open] p::before {
+        width: 34px;
+
+        margin-bottom: 11px;
+    }
+
+
+    html[lang="km"] .faq-item summary {
+        font-size: 10px;
+
+        line-height: 1.8;
+    }
+
+
+    html[lang="km"] .faq-item p {
+        font-size: 9.5px;
+
+        line-height: 1.9;
+    }
 
 }
-
-.faq-item summary{
-
-    cursor:pointer;
-
-    padding:22px 28px;
-
-    font-weight:600;
-
-    list-style:none;
-
-    position:relative;
-
-}
-
-.faq-item summary::-webkit-details-marker{
-
-    display:none;
-
-}
-
-.faq-item summary::after{
-
-    content:"+";
-
-    position:absolute;
-
-    right:28px;
-
-    font-size:24px;
-
-    color:var(--primary);
-
-}
-
-.faq-item[open] summary::after{
-
-    content:"−";
-
-}
-
-.faq-item p{
-
-    padding:0 28px 24px;
-
-    color:#555;
-
-    line-height:1.8;
-
-}
-
 /* ===========================
    PRODUCTS CTA
 =========================== */
