@@ -119,6 +119,96 @@
   padding: 80px 0;
 }
 
+/* =========================================================
+   PRODUCTS HERO — DESKTOP ACTIONS
+   ========================================================= */
+
+.products-hero__actions {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 26px;
+}
+
+.products-hero__button {
+  min-height: 48px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 0 24px;
+
+  border-radius: 999px;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+
+  white-space: nowrap;
+
+  text-decoration: none;
+
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+/* Primary */
+
+.products-hero__button--primary {
+  min-width: 170px;
+
+  color: #ffffff;
+
+  background: #087346;
+
+  border: 1px solid #087346;
+
+  box-shadow:
+    0 8px 22px
+    rgba(8, 115, 70, 0.16);
+}
+
+.products-hero__button--primary:hover {
+  color: #ffffff;
+
+  background: #065f3a;
+
+  border-color: #065f3a;
+
+  transform: translateY(-1px);
+}
+
+
+/* Secondary */
+
+.products-hero__button--secondary {
+  min-width: 165px;
+
+  color: #087346;
+
+  background: rgba(255, 255, 255, 0.45);
+
+  border: 1px solid #087346;
+}
+
+.products-hero__button--secondary:hover {
+  color: #ffffff;
+
+  background: #087346;
+
+  border-color: #087346;
+
+  transform: translateY(-1px);
+}
 
 /* =========================================================
    TABLET
@@ -146,6 +236,7 @@
 
 /* =========================================================
    PRODUCTS HERO — MOBILE
+   Match Home Hero mobile composition
    ========================================================= */
 
 @media (max-width: 768px) {
@@ -157,10 +248,11 @@
     height: auto;
     min-height: 760px;
 
-    /* Header already occupies its own space */
     padding-top: 0;
 
     overflow: hidden;
+
+    background: #f6f1e6;
   }
 
 
@@ -168,9 +260,18 @@
      BACKGROUND IMAGE
      ======================================================= */
 
+  .products-hero__media {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+  }
+
   .products-hero__image {
     position: absolute;
-
     inset: 0;
 
     width: 100%;
@@ -178,10 +279,7 @@
 
     object-fit: cover;
 
-    /*
-     Adjust ONLY this value if you want to move
-     the mobile image vertically.
-    */
+    /* Product image / hero composition */
     object-position: 58% 62%;
 
     transform: none;
@@ -191,12 +289,11 @@
 
 
   /* =======================================================
-     OVERLAY
+     MOBILE OVERLAY
      ======================================================= */
 
   .products-hero__overlay {
     position: absolute;
-
     inset: 0;
 
     z-index: 1;
@@ -208,10 +305,10 @@
         180deg,
         rgba(249, 246, 238, 0.98) 0%,
         rgba(249, 246, 238, 0.97) 18%,
-        rgba(249, 246, 238, 0.94) 34%,
-        rgba(249, 246, 238, 0.82) 48%,
-        rgba(249, 246, 238, 0.48) 62%,
-        rgba(249, 246, 238, 0.12) 76%,
+        rgba(249, 246, 238, 0.93) 34%,
+        rgba(249, 246, 238, 0.78) 49%,
+        rgba(249, 246, 238, 0.42) 63%,
+        rgba(249, 246, 238, 0.10) 77%,
         rgba(249, 246, 238, 0) 88%
       );
   }
@@ -226,7 +323,7 @@
 
     z-index: 2;
 
-    width: min(100% - 30px, 1200px);
+    width: min(100% - 40px, 1200px);
 
     height: auto;
     min-height: 760px;
@@ -235,6 +332,7 @@
 
     display: flex;
     align-items: flex-start;
+    justify-content: center;
   }
 
 
@@ -247,29 +345,29 @@
     max-width: 520px;
 
     /*
-     Main fix:
-     Previously content had too much top spacing.
+      Same visual position concept as Home Hero:
+      centered content with controlled top spacing.
     */
-    padding:
-      80px
-      0
-      330px;
+    padding: 82px 0 330px;
 
-    margin: 0;
+    margin: 0 auto;
+
+    text-align: center;
   }
 
 
   /* =======================================================
-     EYEBROW / TAG
+     TAG
      ======================================================= */
 
   .products-hero__tag {
     display: flex;
     align-items: center;
+    justify-content: center;
 
     gap: 10px;
 
-    margin: 0 0 10px;
+    margin: 0 0 12px;
 
     color: #087346;
 
@@ -278,9 +376,9 @@
 
     line-height: 1.4;
 
-    letter-spacing: 0.03em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
-
 
   .products-hero__tag::before {
     content: "";
@@ -301,9 +399,10 @@
      ======================================================= */
 
   .products-hero__title {
+    width: 100%;
     max-width: 100%;
 
-    margin: 0;
+    margin: 0 auto;
 
     color: #10213b;
 
@@ -314,6 +413,8 @@
     line-height: 1.08;
 
     letter-spacing: -0.035em;
+
+    text-align: center;
   }
 
 
@@ -322,72 +423,61 @@
      ======================================================= */
 
   .products-hero__description {
-    max-width: 470px;
+    width: 100%;
+    max-width: 350px;
 
-    margin:
-      16px
-      0
-      0;
+    margin: 18px auto 0;
 
     color: #59616e;
 
     font-size: 15px;
 
-    line-height: 1.65;
+    line-height: 1.55;
+
+    text-align: center;
   }
 
 
   /* =======================================================
-     PREMIUM CTA AREA
+     CTA BUTTONS
      ======================================================= */
 
   .products-hero__actions {
     width: 100%;
+    max-width: 330px;
 
-    margin-top: 24px;
+    margin: 24px auto 0;
 
     display: flex;
     flex-direction: column;
-
     align-items: stretch;
 
-    gap: 11px;
+    gap: 10px;
   }
 
-
-  /* =======================================================
-     BUTTON BASE
-     ======================================================= */
 
   .products-hero__button {
     width: 100%;
 
-    min-height: 52px;
+    min-height: 44px;
 
-    padding:
-      0
-      20px;
+    padding: 0 18px;
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
-    gap: 14px;
+    gap: 10px;
 
     border-radius: 999px;
 
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
 
-    line-height: 1;
+    line-height: 1.2;
 
+    text-align: center;
     text-decoration: none;
-
-    transition:
-      transform 180ms ease,
-      background-color 180ms ease,
-      border-color 180ms ease,
-      box-shadow 180ms ease;
   }
 
 
@@ -407,17 +497,14 @@
       rgba(8, 115, 70, 0.18);
   }
 
-
   .products-hero__button--primary:hover {
+    color: #ffffff;
+
     background: #065f3a;
 
     border-color: #065f3a;
 
     transform: translateY(-1px);
-
-    box-shadow:
-      0 10px 26px
-      rgba(8, 115, 70, 0.22);
   }
 
 
@@ -428,18 +515,13 @@
   .products-hero__button--secondary {
     color: #087346;
 
-    background:
-      rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.35);
 
-    border:
-      1px solid
-      rgba(8, 115, 70, 0.65);
+    border: 2px solid #087346;
 
     backdrop-filter: blur(5px);
-
     -webkit-backdrop-filter: blur(5px);
   }
-
 
   .products-hero__button--secondary:hover {
     color: #ffffff;
@@ -450,5 +532,9 @@
 
     transform: translateY(-1px);
   }
+}
 
+html[lang="km"] .products-hero__button {
+  font-size: 11px;
+  line-height: 1.6;
 }

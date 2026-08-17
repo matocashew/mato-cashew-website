@@ -890,3 +890,215 @@ html[lang="km"] .about-hero__description {
     padding-top: 72px;
   }
 }
+/* =========================================================
+   ABOUT HERO — MOBILE ONLY
+   Match Home Hero content composition
+   Desktop stays unchanged
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .about-hero__container {
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+
+        padding-inline: 20px;
+    }
+
+    .about-hero__content,
+    html[lang="km"] .about-hero__content {
+        width: 100%;
+        max-width: 360px;
+
+        padding-top: 28px;
+        padding-bottom: 0;
+
+        text-align: center;
+    }
+
+
+    /* Eyebrow */
+
+    .about-hero__tag {
+        display: inline-flex;
+
+        justify-content: center;
+        align-items: center;
+
+        margin: 0 auto 14px;
+
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+    .about-hero__tag::before {
+        width: 20px;
+        flex-basis: 20px;
+    }
+
+
+    /* Title */
+
+    .about-hero__title {
+        width: 100%;
+        max-width: 340px;
+
+        margin: 0 auto 16px;
+
+        text-align: center;
+
+        font-size: 30px;
+        line-height: 1.08;
+    }
+
+    .about-hero__title-line {
+        display: block;
+        white-space: normal;
+    }
+
+
+    /* Description */
+
+    .about-hero__description {
+        width: 100%;
+        max-width: 340px;
+
+        margin: 0 auto 24px;
+
+        text-align: center;
+
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+
+    /* Buttons — same visual style as Home mobile */
+
+    .about-hero__actions {
+        width: 100%;
+        max-width: 330px;
+
+        display: flex;
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 10px;
+
+        margin: 0 auto;
+    }
+
+    .about-hero__primary,
+    .about-hero__secondary {
+        width: 100%;
+        min-height: 48px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0 20px;
+
+        border-radius: 999px;
+
+        font-size: 12px;
+        font-weight: 700;
+
+        text-align: center;
+    }
+
+
+    /* Khmer mobile */
+
+    html[lang="km"] .about-hero__tag {
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+    html[lang="km"] .about-hero__title {
+        max-width: 340px;
+
+        font-size: 27px;
+        line-height: 1.5;
+    }
+
+    html[lang="km"] .about-hero__description {
+        max-width: 340px;
+
+        font-size: 12.5px;
+        line-height: 1.85;
+    }
+
+    html[lang="km"] .about-hero__primary,
+    html[lang="km"] .about-hero__secondary {
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .about-hero__container {
+        padding-inline: 16px;
+    }
+
+    .about-hero__content,
+    html[lang="km"] .about-hero__content {
+        max-width: 345px;
+
+        padding-top: 24px;
+    }
+
+    .about-hero__title {
+        max-width: 330px;
+
+        font-size: 28px;
+    }
+
+    .about-hero__description {
+        max-width: 325px;
+
+        font-size: 12.5px;
+    }
+
+    .about-hero__actions {
+        max-width: 320px;
+    }
+
+    html[lang="km"] .about-hero__title {
+        max-width: 330px;
+
+        font-size: 25px;
+    }
+
+}
+/* =========================================================
+   ABOUT HERO — MOBILE CONTENT POSITION
+   Move content slightly lower
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .about-hero__content,
+    html[lang="km"] .about-hero__content {
+        padding-top: 70px;
+    }
+
+}
+
+@media (max-width: 420px) {
+
+    .about-hero__content,
+    html[lang="km"] .about-hero__content {
+        padding-top: 70px;
+    }
+
+}

@@ -21,21 +21,21 @@ const en = {
   },
 
   hero: {
-    tag: "Premium Cambodian Cashew",
+      tag: "Premium Cambodian Cashew",
 
-    title: "Naturally Premium. Uniquely Cambodian.",
+      title: "Naturally Premium. Uniquely Cambodian.",
 
-    description:
-      "Discover carefully presented Cambodian cashews, created for everyday enjoyment and proudly rooted in Cambodia.",
+      description:
+          "Discover premium Cambodian cashew kernels, carefully selected for quality, freshness, and naturally delicious taste.",
 
-    primaryCta: "Shop Products",
-    secondaryCta: "Learn Our Story",
+      primaryCta: "Explore Our Products",
+      secondaryCta: "Learn Our Story",
 
-    trust: {
-      origin: "100% Cambodian",
-      quality: "Premium Quality",
-      care: "Thoughtfully Presented",
-    },
+      trust: {
+          origin: "Cambodian Origin",
+          quality: "Premium Quality",
+          care: "Retail Ready",
+      },
   },
 
   footer: {
@@ -138,25 +138,25 @@ const en = {
         "Unable to connect to the server. Please try again.",
     },
   },
-    aboutHome: {
+  aboutHome: {
       tag: "About Mato Cashew",
 
-      title: "Cambodian Cashew, Thoughtfully Presented",
+      title: "Rooted in Cambodia. Committed to Quality.",
 
       description:
-        "Mato Cashew is building a Cambodian cashew brand focused on clear product information, convenient retail packaging, and responsive customer service.",
+          "From Cambodia’s cashew-growing communities to carefully prepared products, Mato Cashew is built around quality, responsible growth, and pride in Cambodian origin.",
 
       features: {
-        quality: "Carefully Presented Products",
-        farmers: "Cambodian Cashew",
-        export: "Business Inquiries Welcome",
-        sustainability: "Growing with Care",
+          quality: "Quality Focus",
+          farmers: "Cambodian Roots",
+          export: "Business Ready",
+          sustainability: "Responsible Growth",
       },
 
-      cta: "Explore Our Products",
+      cta: "Explore Our Story",
 
       imageAlt: "Cambodian cashew orchard",
-    },
+  },
 about: {
   story: {
     tag: "Our Story",
