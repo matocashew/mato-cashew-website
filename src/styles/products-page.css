@@ -541,116 +541,292 @@ html[lang="km"] .package-card p {
     }
 
 }
-/* ===========================
-   PRODUCT SPECIFICATIONS
-=========================== */
+/* =========================================================
+   PRODUCT SPECIFICATIONS — PREMIUM V2
+   ========================================================= */
 
-.product-specifications{
+.product-specifications {
+    position: relative;
 
-    padding:var(--section-space) 0;
+    padding: var(--section-space) 0;
 
-    background:#f8f8f6;
-
+    background: #fff;
 }
 
-.spec-table-wrapper{
 
-    margin-top:60px;
+/* =========================================================
+   TABLE WRAPPER
+   ========================================================= */
 
-    overflow-x:auto;
+.spec-table-wrapper {
+    max-width: 1000px;
 
+    margin:
+        48px
+        auto
+        0;
+
+    overflow: hidden;
+
+    background: #fff;
+
+    border:
+        1px solid rgba(20, 93, 60, 0.08);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 14px 34px
+        rgba(32, 45, 38, 0.07);
 }
 
-.spec-table{
 
-    width:100%;
+/* =========================================================
+   TABLE
+   ========================================================= */
 
-    border-collapse:collapse;
+.spec-table {
+    width: 100%;
 
-    background:#fff;
+    border-collapse: collapse;
+    border-spacing: 0;
 
-    border-radius:20px;
+    table-layout: fixed;
 
-    overflow:hidden;
-
-    box-shadow:0 18px 45px rgba(0,0,0,.08);
-
-    table-layout:fixed;
-
+    background: transparent;
 }
 
-.spec-table th{
 
-    width:30%;
+/* =========================================================
+   ROW
+   ========================================================= */
 
-    background:var(--primary);
-
-    color:#fff;
-
-    text-align:left;
-
-    padding:20px 24px;
-
-    font-weight:600;
-
+.spec-table tr {
+    border-bottom:
+        1px solid rgba(20, 93, 60, 0.08);
 }
 
-.spec-table td{
 
-    padding:20px 24px;
-
-    color:#555;
-
+.spec-table tr:last-child {
+    border-bottom: 0;
 }
 
-.spec-table tr:nth-child(even){
 
-    background:#fafafa;
+/* subtle alternating rows */
 
+.spec-table tr:nth-child(even) {
+    background:
+        rgba(248, 250, 248, 0.72);
 }
 
-.spec-table tr{
 
-    border-bottom:1px solid #eee;
+/* =========================================================
+   LABEL
+   ========================================================= */
 
+.spec-table th {
+    width: 31%;
+
+    padding:
+        17px
+        22px;
+
+    text-align: left;
+    vertical-align: middle;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0b6543,
+            #0d704a
+        );
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    line-height: 1.45;
 }
 
-@media(max-width:768px){
 
-    .spec-table-wrapper{
+/* =========================================================
+   VALUE
+   ========================================================= */
 
-        overflow-x:auto;
+.spec-table td {
+    padding:
+        17px
+        24px;
 
-        -webkit-overflow-scrolling:touch;
+    vertical-align: middle;
 
+    color: #4f5d55;
+
+    font-size: 13px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   HOVER — DESKTOP ONLY
+   ========================================================= */
+
+@media (hover: hover) {
+
+    .spec-table tr {
+        transition:
+            background-color 0.2s ease;
     }
 
-    .responsive-table{
 
-        min-width:560px;
-
-    }
-
-    .spec-table th{
-
-        width:38%;
-
-        font-size:14px;
-
-        padding:16px;
-
-    }
-
-    .spec-table td{
-
-        font-size:14px;
-
-        padding:16px;
-
+    .spec-table tr:hover td {
+        background:
+            rgba(239, 248, 243, 0.72);
     }
 
 }
 
+
+/* =========================================================
+   KHMER
+   ========================================================= */
+
+html[lang="km"] .spec-table th {
+    line-height: 1.7;
+}
+
+
+html[lang="km"] .spec-table td {
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .spec-table-wrapper {
+        margin-top: 36px;
+
+        border-radius: 17px;
+    }
+
+
+    .responsive-table {
+        min-width: 0;
+    }
+
+
+    .spec-table th {
+        width: 36%;
+
+        padding:
+            15px
+            16px;
+
+        font-size: 12px;
+    }
+
+
+    .spec-table td {
+        padding:
+            15px
+            17px;
+
+        font-size: 12px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+    .product-specifications {
+        padding:
+            48px
+            0;
+    }
+
+
+    .spec-table-wrapper {
+        margin-top: 28px;
+
+        overflow: hidden;
+
+        border-radius: 15px;
+
+        box-shadow:
+            0 10px 26px
+            rgba(32, 45, 38, 0.06);
+    }
+
+
+    .spec-table {
+        table-layout: fixed;
+    }
+
+
+    .responsive-table {
+        min-width: 0;
+    }
+
+
+    .spec-table th {
+        width: 38%;
+
+        padding:
+            13px
+            11px;
+
+        font-size: 10px;
+
+        line-height: 1.45;
+
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+
+    .spec-table td {
+        padding:
+            13px
+            12px;
+
+        font-size: 10px;
+
+        line-height: 1.55;
+
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+
+    html[lang="km"] .spec-table th {
+        font-size: 9px;
+
+        line-height: 1.7;
+    }
+
+
+    html[lang="km"] .spec-table td {
+        font-size: 9px;
+
+        line-height: 1.75;
+    }
+
+}
 /* ===========================
    PRODUCT FAQ
 =========================== */
