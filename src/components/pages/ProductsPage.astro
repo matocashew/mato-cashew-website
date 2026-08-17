@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 
 import ProductsHero from "../products/ProductsHero.astro";
 import ProductIntro from "../products/ProductIntro.astro";
+import ProductStats from "../products/ProductStats.astro";
 import ProductGrid from "../products/ProductGrid.astro";
 import PackagingOptions from "../products/PackagingOptions.astro";
 import ProductSpecifications from "../products/ProductSpecifications.astro";
@@ -19,6 +20,8 @@ const { products } = Astro.props;
 <ProductsHero />
 
 <ProductIntro />
+
+<ProductStats />
 
 <section
   id="products"

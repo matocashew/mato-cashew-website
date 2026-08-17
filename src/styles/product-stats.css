@@ -1,0 +1,279 @@
+/* =========================================================
+   PRODUCT STATS
+   ========================================================= */
+
+.product-stats {
+    position: relative;
+    z-index: 2;
+
+    padding: 0 0 54px;
+
+    background: #f8f4ea;
+}
+
+
+.product-stats-bar {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    overflow: hidden;
+
+    background:
+        rgba(255, 255, 255, 0.88);
+
+    border:
+        1px solid rgba(20, 93, 60, 0.08);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 14px 34px
+        rgba(30, 52, 39, 0.07);
+}
+
+
+/* =========================================================
+   ITEM
+   ========================================================= */
+
+.product-stat-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    min-width: 0;
+
+    gap: 13px;
+
+    padding:
+        20px
+        22px;
+}
+
+
+.product-stat-item:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    top: 22%;
+    right: 0;
+
+    width: 1px;
+    height: 56%;
+
+    background:
+        rgba(20, 93, 60, 0.12);
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.product-stat-icon {
+    display: grid;
+    place-items: center;
+
+    flex: 0 0 42px;
+
+    width: 42px;
+    height: 42px;
+
+    color: #0b6b45;
+
+    background: #edf8f2;
+
+    border:
+        1px solid rgba(11, 107, 69, 0.08);
+
+    border-radius: 13px;
+}
+
+
+.product-stat-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.product-stat-content {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.product-stat-content strong {
+    color: #142238;
+
+    font-size: 14px;
+    font-weight: 750;
+
+    line-height: 1.35;
+}
+
+
+.product-stat-content span {
+    color: #667085;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .product-stats {
+        padding-bottom: 42px;
+    }
+
+
+    .product-stats-bar {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .product-stat-item {
+        padding:
+            18px
+            20px;
+    }
+
+
+    .product-stat-item::after {
+        display: none;
+    }
+
+
+    .product-stat-item:nth-child(1),
+    .product-stat-item:nth-child(2) {
+        border-bottom:
+            1px solid rgba(20, 93, 60, 0.08);
+    }
+
+
+    .product-stat-item:nth-child(odd) {
+        border-right:
+            1px solid rgba(20, 93, 60, 0.08);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+    .product-stats {
+        padding:
+            6px
+            0
+            40px;
+    }
+
+
+    .product-stats-bar {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        border-radius: 15px;
+    }
+
+
+    .product-stat-item {
+        align-items: flex-start;
+
+        gap: 9px;
+
+        padding:
+            14px
+            11px;
+    }
+
+
+    .product-stat-icon {
+        flex-basis: 32px;
+
+        width: 32px;
+        height: 32px;
+
+        border-radius: 10px;
+    }
+
+
+    .product-stat-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+
+
+    .product-stat-content {
+        gap: 2px;
+    }
+
+
+    .product-stat-content strong {
+        font-size: 11px;
+
+        line-height: 1.4;
+    }
+
+
+    .product-stat-content span {
+        font-size: 9px;
+
+        line-height: 1.5;
+    }
+
+}
+
+
+/* =========================================================
+   KHMER
+   ========================================================= */
+
+html[lang="km"] .product-stat-content strong {
+    line-height: 1.65;
+}
+
+
+html[lang="km"] .product-stat-content span {
+    line-height: 1.7;
+}
+
+
+@media (max-width: 560px) {
+
+    html[lang="km"] .product-stat-content strong {
+        font-size: 10px;
+
+        line-height: 1.65;
+    }
+
+
+    html[lang="km"] .product-stat-content span {
+        font-size: 9px;
+
+        line-height: 1.65;
+    }
+
+}

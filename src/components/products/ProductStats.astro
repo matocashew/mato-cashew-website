@@ -1,0 +1,99 @@
+---
+import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+import "../../styles/product-stats.css";
+
+const t = getCurrentLanguage(Astro.url.pathname);
+const content = t.statsProducts;
+---
+
+<section class="product-stats" aria-label={content.ariaLabel}>
+  <div class="container">
+    <div class="product-stats-bar">
+
+      {
+        content.items.map((item, index) => (
+          <div class="product-stat-item">
+
+            <div class="product-stat-icon" aria-hidden="true">
+
+              {/* 01 — Cambodian Origin */}
+              {index === 0 && (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 21c4.5-4 7-7.5 7-11a7 7 0 1 0-14 0c0 3.5 2.5 7 7 11Z" />
+                  <path d="M12 14V9" />
+                  <path d="M12 11.5c-2.2 0-3.7-1.4-3.7-3.5 2.2 0 3.7 1.4 3.7 3.5Z" />
+                  <path d="M12 9.5c0-2.1 1.5-3.5 3.7-3.5 0 2.1-1.5 3.7-3.5 3.7Z" />
+                </svg>
+              )}
+
+              {/* 02 — Premium Quality */}
+              {index === 1 && (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="9" r="5" />
+                  <path d="m9 13-1 8 4-2 4 2-1-8" />
+                  <path d="m12 6 .9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2-1.45-1.4 2-.3L12 6Z" />
+                </svg>
+              )}
+
+              {/* 03 — Retail Ready */}
+              {index === 2 && (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M6 8h12l1 13H5L6 8Z" />
+                  <path d="M9 10V7a3 3 0 0 1 6 0v3" />
+                  <path d="M9 14h6" />
+                  <path d="M12 11v6" />
+                </svg>
+              )}
+
+              {/* 04 — Business Ready */}
+              {index === 3 && (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="7" width="18" height="13" rx="2" />
+                  <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                  <path d="M3 12h18" />
+                  <path d="M10 12v2h4v-2" />
+                </svg>
+              )}
+
+            </div>
+
+            <div class="product-stat-content">
+              <strong>{item.title}</strong>
+              <span>{item.description}</span>
+            </div>
+
+          </div>
+        ))
+      }
+
+    </div>
+  </div>
+</section>

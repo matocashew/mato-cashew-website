@@ -404,6 +404,28 @@ about: {
       },
     ],
   },
+  statsProducts: {
+    ariaLabel: "Product confidence",
+
+    items: [
+        {
+            title: "Cambodian Origin",
+            description: "Locally sourced cashew products",
+        },
+        {
+            title: "Premium Quality",
+            description: "Carefully selected cashew kernels",
+        },
+        {
+            title: "Retail Ready",
+            description: "Convenient retail pack sizes",
+        },
+        {
+            title: "Business Ready",
+            description: "Retail & wholesale inquiries welcome",
+        },
+    ],
+},
 
   testimonialsHome: {
     tag: "What Our Customers Say",
