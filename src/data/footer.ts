@@ -16,6 +16,11 @@ export const footer = {
     },
 
     {
+      label: "Knowledge",
+      href: "/knowledge",
+    },
+
+    {
       label: "Resources",
       href: "/resources",
     },

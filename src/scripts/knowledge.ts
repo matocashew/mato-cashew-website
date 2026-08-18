@@ -37,10 +37,19 @@ document.querySelectorAll<HTMLElement>(
 
 const globalTagButtons =
   document.querySelectorAll(".tag-filter-chip");
+const tagFilterContainer =
+  document.getElementById("knowledge-tag-filter");
+
+const tagsToggleButton =
+  document.getElementById("knowledge-tags-toggle");
   const noResults = document.getElementById("knowledge-no-results");
   const noResultsMessage = document.getElementById("knowledge-no-results-message");
   const clearFiltersButton = document.getElementById("knowledge-clear-filters");
   const resultCounter = document.getElementById("knowledge-search-result-count");
+  const loadMoreButton = document.getElementById("knowledge-load-more");
+
+    const ARTICLES_PER_PAGE = 6;
+    let visibleLimit = ARTICLES_PER_PAGE;
   const featuredSection = document.getElementById("featured-article-section");
   const featuredCard =
     document.querySelector<HTMLElement>(
@@ -102,16 +111,19 @@ function updateFeaturedArticle(
 
   featuredSection.hidden = !shouldShow;
 }
-function filterArticles(): void {
+function filterArticles(resetLimit = false): void {
   const searchInput = input as HTMLInputElement;
-
   const keyword = searchInput.value.trim().toLowerCase();
+
+  if (resetLimit) {
+    visibleLimit = ARTICLES_PER_PAGE;
+  }
 
   if (clearButton instanceof HTMLButtonElement) {
     clearButton.hidden = keyword === "";
   }
 
-  let visibleCount = 0;
+  const matchedCards: HTMLElement[] = [];
 
   cards.forEach((card) => {
     if (!(card instanceof HTMLElement)) return;
@@ -123,24 +135,44 @@ function filterArticles(): void {
       selectedTag
     );
 
-    card.style.display = matched ? "" : "none";
-
     if (matched) {
-      visibleCount++;
+      matchedCards.push(card);
+    }
+
+    card.style.display = "none";
+  });
+
+  matchedCards.forEach((card, index) => {
+    if (index < visibleLimit) {
+      card.style.display = "";
     }
   });
 
-  updateNoResults(visibleCount);
+  const totalMatched = matchedCards.length;
+  const displayedCount = Math.min(visibleLimit, totalMatched);
 
+  updateNoResults(totalMatched);
   updateNoResultsMessage(keyword);
 
   updateResultCounter(
-    visibleCount,
-    cards.length,
+    displayedCount,
+    totalMatched,
     keyword
   );
 
   updateFeaturedArticle(keyword);
+
+  if (loadMoreButton instanceof HTMLButtonElement) {
+    loadMoreButton.hidden =
+      totalMatched === 0 ||
+      displayedCount >= totalMatched;
+  }
+}
+if (loadMoreButton instanceof HTMLButtonElement) {
+  loadMoreButton.addEventListener("click", () => {
+    visibleLimit += ARTICLES_PER_PAGE;
+    filterArticles();
+  });
 }
 input.addEventListener("input", () => {
 
@@ -148,7 +180,7 @@ input.addEventListener("input", () => {
 
   updateQueryParameter("search", keyword);
 
-  filterArticles();
+  filterArticles(true);
 
 });
 
@@ -159,7 +191,9 @@ input.addEventListener("input", () => {
     clearButton.addEventListener("click", () => {
       input.value = "";
 
-      filterArticles();
+      updateQueryParameter("search", "");
+
+      filterArticles(true);
 
       input.focus();
     });
@@ -190,7 +224,7 @@ input.addEventListener("input", () => {
           );
         });
 
-        filterArticles();
+        filterArticles(true);
       });
     });
   }
@@ -220,13 +254,10 @@ input.addEventListener("input", () => {
       if (!(tag instanceof HTMLElement)) return;
 
       const isActive =
+        selectedTag !== "" &&
         (tag.dataset.tag ?? "") === selectedTag;
 
       tag.classList.toggle("active", isActive);
-      tag.setAttribute(
-        "aria-pressed",
-        String(isActive)
-      );
     });
 
     globalTagButtons.forEach((button) => {
@@ -252,28 +283,6 @@ input.addEventListener("input", () => {
     });
 
   }
-
-  tagElements.forEach((tag) => {
-    if (!(tag instanceof HTMLElement)) return;
-
-    tag.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      const clickedTag = tag.dataset.tag ?? "";
-
-      selectedTag =
-        selectedTag === clickedTag
-          ? ""
-          : clickedTag;
-
-      updateQueryParameter("tag", selectedTag);
-
-      updateTagSelection();
-
-      filterArticles();
-    });
-  });
   globalTagButtons.forEach((button) => {
     if (!(button instanceof HTMLButtonElement)) return;
 
@@ -290,7 +299,7 @@ input.addEventListener("input", () => {
 
       updateTagSelection();
 
-      filterArticles();
+      filterArticles(true);
     });
   });
   if (clearFiltersButton instanceof HTMLButtonElement) {
@@ -300,23 +309,34 @@ input.addEventListener("input", () => {
       selectedCategory = "all";
       selectedTag = "";
 
-      categoryButtons.forEach((button) => {
-        if (!(button instanceof HTMLButtonElement)) return;
+      updateQueryParameter("search", "");
+      updateQueryParameter("category", "");
+      updateQueryParameter("tag", "");
 
-        const isActive =
-          button.dataset.category === "all";
-
-        button.classList.toggle("active", isActive);
-        button.setAttribute(
-          "aria-pressed",
-          String(isActive)
-        );
-      });
-
+      updateCategorySelection("all");
       updateTagSelection();
-      filterArticles();
+
+      filterArticles(true);
 
       input.focus();
+    });
+  }
+
+  if (
+    tagFilterContainer instanceof HTMLElement &&
+    tagsToggleButton instanceof HTMLButtonElement
+  ) {
+    tagsToggleButton.addEventListener("click", () => {
+      const isExpanded =
+        tagFilterContainer.classList.toggle("is-expanded");
+
+      tagsToggleButton.textContent =
+        isExpanded ? "Show Less" : "Show More Tags";
+
+      tagsToggleButton.setAttribute(
+        "aria-expanded",
+        String(isExpanded)
+      );
     });
   }
 

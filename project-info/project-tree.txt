@@ -82,8 +82,10 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   ¦       ProductGrid.astro
 ¦   ¦       ProductIntro.astro
 ¦   ¦       ProductsCTA.astro
+¦   ¦       ProductsHero.astro
 ¦   ¦       ProductSpecifications.astro
 ¦   ¦       ProductSpecificationsList.astro
+¦   ¦       ProductStats.astro
 ¦   ¦       RelatedProducts.astro
 ¦   ¦       RetailProducts.astro
 ¦   ¦       WholesaleProducts.astro
@@ -268,6 +270,8 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   ¦   page.css
 ¦   ¦   product-detail.css
 ¦   ¦   product-specifications.css
+¦   ¦   product-stats.css
+¦   ¦   products-hero.css
 ¦   ¦   products-home.css
 ¦   ¦   products-page.css
 ¦   ¦   products.css

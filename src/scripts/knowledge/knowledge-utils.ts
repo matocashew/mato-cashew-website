@@ -53,7 +53,7 @@ export function getResultCounterMessage(
     return "No matching articles";
   }
 
-  if (!hasFilters) {
+  if (!hasFilters && visibleCount >= totalArticles) {
     return `Showing all ${totalArticles} articles`;
   }
 

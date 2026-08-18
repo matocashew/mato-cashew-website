@@ -26,3 +26,54 @@
     0 18px 42px rgba(0,0,0,.12);
 
 }
+/* =========================================================
+   KNOWLEDGE INDEX PAGE
+   Fixed header offset
+   ========================================================= */
+
+.knowledge-index-page {
+  padding-top: 88px;
+}
+
+/* Tablet / Mobile header */
+@media (max-width: 768px) {
+  .knowledge-index-page {
+    padding-top: 72px;
+  }
+}
+
+/* =========================================================
+   KNOWLEDGE LOAD MORE / FOOTER SPACING
+   ========================================================= */
+
+/* Space between Knowledge articles and footer */
+.knowledge-latest-section {
+  padding-bottom: 3.5rem;
+}
+
+@media (max-width: 640px) {
+  .knowledge-latest-section {
+    padding-bottom: 2.5rem;
+  }
+}
+
+/* =========================================================
+   KNOWLEDGE ARTICLE
+   FIXED HEADER OFFSET
+   ========================================================= */
+
+.knowledge-article-page {
+  padding-top: 112px;
+}
+
+@media (max-width: 900px) {
+  .knowledge-article-page {
+    padding-top: 92px;
+  }
+}
+
+@media (max-width: 640px) {
+  .knowledge-article-page {
+    padding-top: 84px;
+  }
+}

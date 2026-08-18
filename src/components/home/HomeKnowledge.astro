@@ -1,0 +1,59 @@
+---
+import SectionTitle from "../SectionTitle.astro";
+import KnowledgeArticleCard from "../knowledge/KnowledgeArticleCard.astro";
+
+import { knowledgeService } from "../../services/knowledgeService";
+
+const articles = (await knowledgeService.getAll())
+  .sort(
+    (a, b) =>
+      b.publishedAt.getTime() -
+      a.publishedAt.getTime()
+  )
+  .slice(0, 3);
+---
+
+{
+  articles.length > 0 && (
+    <section
+      class="home-knowledge"
+      aria-labelledby="home-knowledge-title"
+    >
+      <div class="container">
+
+        <div class="home-knowledge-header">
+          <SectionTitle
+            tag="Cashew Knowledge"
+            title="Learn More About Cambodian Cashew"
+          />
+
+          <p class="home-knowledge-description">
+            Explore practical knowledge about Cambodian cashew,
+            from grading and processing to quality, storage,
+            and the cashew value chain.
+          </p>
+        </div>
+
+        <div class="home-knowledge-grid">
+          {
+            articles.map((article) => (
+              <KnowledgeArticleCard
+                article={article}
+              />
+            ))
+          }
+        </div>
+
+        <div class="home-knowledge-action">
+          <a
+            href="/knowledge/"
+            class="btn btn-primary"
+          >
+            Explore Knowledge Center
+          </a>
+        </div>
+
+      </div>
+    </section>
+  )
+}

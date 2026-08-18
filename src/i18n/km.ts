@@ -3,6 +3,7 @@ const km = {
     home: "ទំព័រដើម",
     about: "អំពីយើង",
     products: "ផលិតផល",
+    knowledge: "មជ្ឈមណ្ឌលចំណេះដឹង",
     resources: "ចំណេះដឹង",
     gallery: "វិចិត្រសាល",
     wholesale: "លក់ដុំ",

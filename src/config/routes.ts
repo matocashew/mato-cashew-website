@@ -1,10 +1,11 @@
 export const routes = {
-
   home: "/",
 
   about: "/about",
 
   products: "/products",
+
+  knowledge: "/knowledge",
 
   resources: "/resources",
 
@@ -13,7 +14,6 @@ export const routes = {
   wholesale: "/wholesale",
 
   contact: "/contact",
-
 } as const;
 
 export default routes;

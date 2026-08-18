@@ -3,6 +3,7 @@ const en = {
     home: "Home",
     about: "About",
     products: "Products",
+    knowledge: "Knowledge",
     resources: "Resources",
     gallery: "Gallery",
     wholesale: "Wholesale",

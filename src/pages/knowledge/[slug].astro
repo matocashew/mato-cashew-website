@@ -1,5 +1,5 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import PageLayout from "@layouts/PageLayout.astro";
 import knowledgeService from "@services/knowledgeService";
 
 import KnowledgeHero from "@components/knowledge/KnowledgeHero.astro";
@@ -9,6 +9,7 @@ import KnowledgeNavigation from "@components/knowledge/KnowledgeNavigation.astro
 import ReadingProgress from "@components/knowledge/ReadingProgress.astro";
 import RelatedArticles from "@components/knowledge/RelatedArticles.astro";
 import TagGroup from "@components/ui/TagGroup.astro";
+import ArticleSchema from "@components/seo/ArticleSchema.astro";
 
 import { render } from "astro:content";
 
@@ -24,6 +25,11 @@ import "@styles/components/related-topics.css";
 import "@styles/components/knowledge-system.css";
 import "@styles/components/quick-facts.css";
 
+
+/* =========================================================
+   STATIC PATHS
+   ========================================================= */
+
 export async function getStaticPaths() {
   const articles = await knowledgeService.getAll();
 
@@ -36,6 +42,7 @@ export async function getStaticPaths() {
         params: {
           slug: article.slug,
         },
+
         props: {
           entry,
         },
@@ -46,6 +53,11 @@ export async function getStaticPaths() {
   return paths;
 }
 
+
+/* =========================================================
+   PROPS
+   ========================================================= */
+
 interface Props {
   entry: Awaited<
     ReturnType<typeof knowledgeService.getEntryBySlug>
@@ -54,41 +66,73 @@ interface Props {
 
 const { entry } = Astro.props as Props;
 
-const { Content, headings } = await render(entry);
 
-const articles = await knowledgeService.getAll();
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+const { Content, headings } =
+  await render(entry);
+
+const articles =
+  await knowledgeService.getAll();
+
+
+/* =========================================================
+   SEO
+   ========================================================= */
 
 const canonical =
   `https://matocashew.com/knowledge/${entry.id}/`;
 
+
+/* =========================================================
+   RELATED ARTICLES
+   ========================================================= */
+
 const relatedArticles = (() => {
 
-  const related = articles.filter(article =>
-    article.slug !== entry.id &&
-    (
-      article.category === entry.data.category ||
-      article.tags.some(tag =>
-        entry.data.tags.includes(tag)
+  const related = articles.filter(
+    (article) =>
+      article.slug !== entry.id &&
+      (
+        article.category === entry.data.category ||
+        article.tags.some((tag) =>
+          entry.data.tags.includes(tag)
+        )
       )
-    )
   );
 
   if (related.length >= 2) {
     return related.slice(0, 2);
   }
 
-  const fallback = articles.filter(article =>
-    article.slug !== entry.id &&
-    !related.some(item => item.slug === article.slug)
+  const fallback = articles.filter(
+    (article) =>
+      article.slug !== entry.id &&
+      !related.some(
+        (item) =>
+          item.slug === article.slug
+      )
   );
 
-  return [...related, ...fallback].slice(0, 2);
+  return [
+    ...related,
+    ...fallback,
+  ].slice(0, 2);
 
 })();
 
-const currentIndex = articles.findIndex(
-  (article) => article.slug === entry.id
-);
+
+/* =========================================================
+   PREVIOUS / NEXT
+   ========================================================= */
+
+const currentIndex =
+  articles.findIndex(
+    (article) =>
+      article.slug === entry.id
+  );
 
 const previous =
   currentIndex > 0
@@ -101,7 +145,7 @@ const next =
     : undefined;
 ---
 
-<Layout
+<PageLayout
   title={`${entry.data.title} | Mato Cashew`}
   description={entry.data.description}
   canonical={canonical}
@@ -124,9 +168,34 @@ const next =
   ]}
 >
 
+  <!-- =====================================================
+       ARTICLE STRUCTURED DATA
+       ===================================================== -->
+
+  <ArticleSchema
+    headline={entry.data.title}
+    description={entry.data.description}
+    image={entry.data.heroImage}
+    datePublished={entry.data.publishedAt}
+    author={entry.data.author}
+    canonical={canonical}
+  />
+
+
+  <!-- =====================================================
+       READING PROGRESS
+       ===================================================== -->
+
   <ReadingProgress />
 
-  <main class="container">
+
+  <!-- =====================================================
+       ARTICLE PAGE
+       ===================================================== -->
+
+  <div class="container knowledge-article-page">
+
+    <!-- ARTICLE HERO -->
 
     <KnowledgeHero
       category={entry.data.category}
@@ -135,17 +204,28 @@ const next =
       heroImage={entry.data.heroImage}
     />
 
+
+    <!-- ARTICLE META -->
+
     <KnowledgeMeta
       author={entry.data.author}
       publishedAt={entry.data.publishedAt}
       readingTime={entry.data.readingTime}
     />
 
+
+    <!-- TAGS -->
+
     <TagGroup
       tags={entry.data.tags}
     />
 
     <hr />
+
+
+    <!-- ===================================================
+         ARTICLE CONTENT + TABLE OF CONTENTS
+         =================================================== -->
 
     <article class="knowledge-layout">
 
@@ -157,41 +237,38 @@ const next =
 
       </aside>
 
-        <div
-          id="knowledge-content"
-          class="knowledge-content"
-          data-knowledge-content
-        >
 
-          <Content />
+      <div
+        id="knowledge-content"
+        class="knowledge-content"
+        data-knowledge-content
+      >
 
-        </div>
+        <Content />
 
-        </article>
+      </div>
+
+    </article>
+
+
+    <!-- ===================================================
+         PREVIOUS / NEXT
+         =================================================== -->
 
     <KnowledgeNavigation
       previous={previous}
       next={next}
     />
 
+
+    <!-- ===================================================
+         RELATED ARTICLES
+         =================================================== -->
+
     <RelatedArticles
       articles={relatedArticles}
     />
 
-  </main>
+  </div>
 
-</Layout>
-
-<script is:inline>
-document.addEventListener("DOMContentLoaded", () => {
-
-  console.log("Knowledge Page Loaded");
-
-  const links = Array.from(
-    document.querySelectorAll("[data-toc-link]")
-  );
-
-  console.log("TOC Links:", links.length);
-
-});
-</script>
+</PageLayout>

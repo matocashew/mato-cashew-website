@@ -54,63 +54,198 @@ const { headings } = Astro.props;
   )
 }
 
-<script is:inline>
+<script>
+  let tocScrollHandler: (() => void) | null = null;
 
-document.addEventListener("DOMContentLoaded", () => {
+  function initKnowledgeTOC() {
+    /*
+     * Remove previous scroll listener before
+     * initializing again after ClientRouter navigation.
+     */
+    if (tocScrollHandler) {
+      window.removeEventListener(
+        "scroll",
+        tocScrollHandler
+      );
 
-  const links = [...document.querySelectorAll("[data-toc-link]")];
+      tocScrollHandler = null;
+    }
 
-  if (!links.length) return;
+    /*
+     * Find all TOC links.
+     */
+    const links =
+      Array.from(
+        document.querySelectorAll<HTMLAnchorElement>(
+          "[data-toc-link]"
+        )
+      );
 
-  const sections = links
-    .map(link => {
+    if (!links.length) return;
 
-      const id = link.getAttribute("data-toc-link");
+    /*
+     * Match every TOC link with its article heading.
+     */
+    const sections =
+      links
+        .map((link) => {
+          const id =
+            link.getAttribute(
+              "data-toc-link"
+            );
 
-      return id ? document.getElementById(id) : null;
+          return id
+            ? document.getElementById(id)
+            : null;
+        })
+        .filter(
+          (
+            section
+          ): section is HTMLElement =>
+            section !== null
+        );
 
-    })
-    .filter(Boolean);
+    if (!sections.length) return;
 
-  function updateTOC() {
+    /*
+     * Update active TOC item while scrolling.
+     */
+    const updateTOC = () => {
+      let currentId = "";
 
-    let currentId = "";
+      /*
+       * Account for the fixed site header.
+       */
+      const scrollPosition =
+        window.scrollY + 140;
 
-    const scrollY = window.scrollY + 120;
+      sections.forEach((section) => {
+        if (
+          section.offsetTop <=
+          scrollPosition
+        ) {
+          currentId = section.id;
+        }
+      });
 
-    sections.forEach((section) => {
-
-      if (!section) return;
-
-      if (section.offsetTop <= scrollY) {
-
-        currentId = section.id;
-
+      /*
+       * Before reaching the first heading,
+       * keep the first TOC item active.
+       */
+      if (
+        !currentId &&
+        sections.length > 0
+      ) {
+        currentId =
+          sections[0].id;
       }
 
-    });
+      /*
+       * Apply active state.
+       */
+      links.forEach((link) => {
+        const isActive =
+          link.getAttribute(
+            "data-toc-link"
+          ) === currentId;
 
-    links.forEach((link) => {
+        link.classList.toggle(
+          "active",
+          isActive
+        );
 
-      const active =
-        link.getAttribute("data-toc-link") === currentId;
+        if (isActive) {
+          link.setAttribute(
+            "aria-current",
+            "true"
+          );
+        } else {
+          link.removeAttribute(
+            "aria-current"
+          );
+        }
+      });
 
-      link.classList.toggle("active", active);
+      /*
+       * Find currently active TOC link.
+       */
+      const activeLink =
+        links.find(
+          (link) =>
+            link.getAttribute(
+              "data-toc-link"
+            ) === currentId
+        );
 
-    });
+      if (!activeLink) return;
 
+      /*
+       * Keep the active TOC item visible
+       * inside the scrollable TOC panel.
+       */
+      const toc =
+        activeLink.closest<HTMLElement>(
+          ".knowledge-toc"
+        );
+
+      if (!toc) return;
+
+      const tocRect =
+        toc.getBoundingClientRect();
+
+      const activeRect =
+        activeLink.getBoundingClientRect();
+
+      const topBuffer = 16;
+      const bottomBuffer = 16;
+
+      const isAbove =
+        activeRect.top <
+        tocRect.top + topBuffer;
+
+      const isBelow =
+        activeRect.bottom >
+        tocRect.bottom - bottomBuffer;
+
+      /*
+       * Scroll only when the active item
+       * is outside the visible TOC area.
+       */
+      if (isAbove || isBelow) {
+        activeLink.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "nearest",
+        });
+      }
+    };
+
+    /*
+     * Store handler so it can be removed
+     * before the next ClientRouter init.
+     */
+    tocScrollHandler = updateTOC;
+
+    window.addEventListener(
+      "scroll",
+      tocScrollHandler,
+      {
+        passive: true,
+      }
+    );
+
+    /*
+     * Initialize immediately.
+     */
+    updateTOC();
   }
 
-  window.addEventListener(
-    "scroll",
-    updateTOC,
-    {
-      passive: true,
-    }
+  /*
+   * Works on the first page load
+   * and after every Astro ClientRouter navigation.
+   */
+  document.addEventListener(
+    "astro:page-load",
+    initKnowledgeTOC
   );
-
-  updateTOC();
-
-});
-
 </script>

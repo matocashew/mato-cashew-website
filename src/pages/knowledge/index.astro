@@ -1,5 +1,5 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import PageLayout from "@layouts/PageLayout.astro";
 import KnowledgeGrid from "@components/knowledge/KnowledgeGrid.astro";
 import FeaturedKnowledgeCard from "@components/knowledge/FeaturedKnowledgeCard.astro";
 import { knowledgeService } from "@services/knowledgeService";
@@ -47,7 +47,7 @@ const tags = [
 ].sort();
 ---
 
-<Layout
+<PageLayout
   title="Knowledge | Mato Cashew"
   description="Explore practical knowledge about Cambodian cashews, including processing, grading, quality, food safety, packaging, storage, and export preparation."
   canonical="https://matocashew.com/knowledge/"
@@ -64,7 +64,7 @@ const tags = [
     }
   ]}
 >
-  <main class="container">
+  <div class="container knowledge-index-page">
     <KnowledgeIndexHero />
     <KnowledgeToolbar totalArticles={latestArticles.length} />
     <KnowledgeStats
@@ -72,19 +72,15 @@ const tags = [
       categories={totalCategories}
       tags={totalTags}
     />
-    <KnowledgeCategories
-      categories={categories}
-    />
+    <KnowledgeCategories categories={categories} />
 
     <section class="knowledge-tags-filter">
-
       <h2>Browse by Tags</h2>
 
       <div
         id="knowledge-tag-filter"
         class="tag-filter-chips"
       >
-
         <button
           type="button"
           class="tag-filter-chip active"
@@ -95,10 +91,13 @@ const tags = [
         </button>
 
         {
-          tags.map((tag) => (
+          tags.map((tag, index) => (
             <button
               type="button"
-              class="tag-filter-chip"
+              class:list={[
+                "tag-filter-chip",
+                index >= 8 && "tag-filter-chip--extra"
+              ]}
               data-tag={tag.toLowerCase()}
               aria-pressed="false"
             >
@@ -106,45 +105,57 @@ const tags = [
             </button>
           ))
         }
-
       </div>
 
+      <button
+        id="knowledge-tags-toggle"
+        class="knowledge-tags-toggle"
+        type="button"
+        aria-expanded="false"
+      >
+        Show More Tags
+      </button>
     </section>
 
     <section id="featured-article-section">
-
       <h2 class="section-title">
         Featured Article
       </h2>
 
       {
         featuredArticle && (
-
           <FeaturedKnowledgeCard
             title={featuredArticle.title}
             description={featuredArticle.description}
             image={featuredArticle.heroImage}
             category={featuredArticle.category}
+            tags={featuredArticle.tags}
             slug={featuredArticle.slug}
           />
-
         )
       }
-
     </section>
 
-    <h2>Latest Articles</h2>
+    <section class="knowledge-latest-section">
+      <h2 class="section-title">
+        Latest Articles
+      </h2>
 
-    <KnowledgeGrid
-      articles={latestArticles}
-    />
-  </main>
-  <script type="module">
+      <KnowledgeGrid
+        articles={latestArticles}
+      />
+    </section>
+
+    <!-- tags / featured / latest sections ដដែល -->
+  </div>
+
+  <script>
   import initKnowledge from "../../scripts/knowledge";
 
   document.addEventListener(
-    "DOMContentLoaded",
+    "astro:page-load",
     initKnowledge
   );
 </script>
-</Layout>
+
+</PageLayout>

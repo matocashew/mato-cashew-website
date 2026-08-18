@@ -1,72 +1,219 @@
-.knowledge-grid {
+/* =========================================================
+   KNOWLEDGE GRID
+   Mato Cashew Knowledge Center
+   ========================================================= */
 
+.knowledge-grid {
   display: grid;
 
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
-  gap: 2rem;
+  column-gap: 1.5rem;
+  row-gap: 1.75rem;
 
-  margin-top: 2rem;
+  width: 100%;
+  margin-top: 1.75rem;
 
   align-items: stretch;
-
 }
 
-@media (max-width: 768px) {
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
 
   .knowledge-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
-    grid-template-columns: 1fr;
-
-    gap: 1.5rem;
-
+    column-gap: 1.25rem;
+    row-gap: 1.5rem;
   }
-
 }
 
-.knowledge-no-results {
 
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 680px) {
+
+  .knowledge-grid {
+    grid-template-columns: 1fr;
+
+    gap: 1.25rem;
+
+    margin-top: 1.4rem;
+  }
+}
+
+
+/* =========================================================
+   NO RESULTS STATE
+   ========================================================= */
+
+.knowledge-no-results {
   grid-column: 1 / -1;
 
-  padding: 3rem 2rem;
+  padding: 3.5rem 2rem;
 
   text-align: center;
 
-  border: 1px dashed #D1D5DB;
+  border: 1px dashed rgba(16, 97, 62, 0.22);
+  border-radius: 18px;
 
-  border-radius: 16px;
+  background: #fbfaf6;
 
-  background: #FAFAFA;
+  color: #667085;
 
-  color: #6B7280;
-
-  font-size: 1rem;
-
-  line-height: 1.7;
-
+  font-size: 0.95rem;
+  line-height: 1.65;
 }
+
 .knowledge-no-results h3 {
-  margin-bottom: 0.75rem;
-  font-size: 1.25rem;
-  color: #111827;
+  margin: 0 0 0.75rem;
+
+  color: #172033;
+
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.25;
 }
 
 .knowledge-no-results p {
-  margin-bottom: 1.5rem;
-  color: #6b7280;
+  margin: 0 0 1.5rem;
+
+  color: #667085;
 }
 
+
+/* =========================================================
+   CLEAR FILTER BUTTON
+   ========================================================= */
+
 .knowledge-clear-filters {
-  padding: 0.75rem 1.25rem;
-  border: none;
-  border-radius: 9999px;
-  background: #166534;
-  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 44px;
+
+  padding: 0.7rem 1.3rem;
+
+  border: 1px solid #10613e;
+  border-radius: 999px;
+
+  background: #10613e;
+  color: #ffffff;
+
   cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s ease;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .knowledge-clear-filters:hover {
-  background: #14532d;
+  background: #084f31;
+  border-color: #084f31;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MOBILE NO RESULTS
+   ========================================================= */
+
+@media (max-width: 680px) {
+
+  .knowledge-no-results {
+    padding: 2.5rem 1.25rem;
+
+    border-radius: 16px;
+  }
+
+  .knowledge-no-results h3 {
+    font-size: 1.15rem;
+  }
+
+  .knowledge-clear-filters {
+    width: 100%;
+  }
+}
+
+.knowledge-load-more-wrap {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.knowledge-load-more {
+  min-width: 220px;
+  min-height: 48px;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid #0b6b43;
+  border-radius: 999px;
+  background: #0b6b43;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.knowledge-load-more:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.knowledge-load-more[hidden] {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .knowledge-load-more-wrap {
+    margin-top: 0.25rem;
+  }
+
+  .knowledge-load-more {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* =========================================================
+   LATEST ARTICLES SECTION
+   ========================================================= */
+
+.knowledge-latest-section {
+  margin-top: 3.5rem;
+}
+
+.knowledge-latest-section .section-title {
+  margin: 0 0 1.5rem;
+}
+
+.knowledge-latest-section .knowledge-grid {
+  margin-top: 0;
+}
+
+@media (max-width: 680px) {
+  .knowledge-latest-section {
+    margin-top: 2.5rem;
+  }
+
+  .knowledge-latest-section .section-title {
+    margin-bottom: 1.25rem;
+  }
 }

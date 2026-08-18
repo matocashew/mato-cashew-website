@@ -11,6 +11,7 @@ const t = getCurrentLanguage(currentPath);
 const homePath = isKhmer ? "/km/" : "/";
 const aboutPath = isKhmer ? "/km/about/" : "/about/";
 const productsPath = isKhmer ? "/km/products/" : "/products/";
+const knowledgePath = "/knowledge/";
 const resourcesPath = isKhmer ? "/km/resources/" : "/resources/";
 const galleryPath = isKhmer ? "/km/gallery/" : "/gallery/";
 const wholesalePath = isKhmer ? "/km/wholesale/" : "/wholesale/";
@@ -99,6 +100,21 @@ const brandName = "ចន្ទីមាតុភូមិ — Mato Cashew";
             }
           >
             {t.nav.products}
+          </a>
+        </li>
+
+        <li>
+          <a
+            href={knowledgePath}
+            class={
+              currentPath === "/knowledge" ||
+              currentPath === "/knowledge/" ||
+              currentPath.startsWith("/knowledge/")
+                ? "active"
+                : ""
+            }
+          >
+            {t.nav.knowledge}
           </a>
         </li>
 

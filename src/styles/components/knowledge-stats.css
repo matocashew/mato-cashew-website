@@ -43,11 +43,41 @@
 }
 
 @media (max-width: 768px) {
-
   .knowledge-stats {
-
-    grid-template-columns: 1fr;
-
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin: 1.5rem 0 2rem;
   }
 
+  .stat {
+    padding: 1rem 0.4rem;
+  }
+
+  .stat strong {
+    font-size: 1.5rem;
+  }
+
+  .stat span {
+    font-size: 0.75rem;
+  }
+}
+/* ==========================================
+   Desktop — Reduce Hero → Stats spacing
+   ========================================== */
+
+@media (min-width: 769px) {
+  .knowledge-stats {
+    margin-top: 3.5rem;
+    margin-bottom: 0;
+  }
+}
+/* =========================================================
+   MOBILE — COMPACT STATS SPACING
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .knowledge-stats {
+    margin-top: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
 }

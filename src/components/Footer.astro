@@ -19,6 +19,8 @@ const aboutUrl =
 const productsUrl =
   isKhmer ? "/km/products/" : "/products/";
 
+const knowledgeUrl = "/knowledge/";
+
 const resourcesUrl =
   isKhmer ? "/km/resources/" : "/resources/";
 
@@ -122,6 +124,12 @@ const copyright = isKhmer
       </h4>
 
       <ul>
+
+        <li>
+          <a href={knowledgeUrl}>
+            {t.nav.knowledge}
+          </a>
+        </li>
 
         <li>
           <a href={resourcesUrl}>

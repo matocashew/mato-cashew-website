@@ -28,7 +28,7 @@
 
   font-weight: 600;
 
-  cursor: default;
+  cursor: pointer;
 
   transition:
     background .2s ease,
@@ -119,4 +119,83 @@
   color: var(--color-primary);
 
   font-weight: 600;
+}
+
+/* =========================================================
+   MOBILE TAGS COLLAPSE
+   ========================================================= */
+
+.knowledge-tags-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .knowledge-categories {
+    margin: 0 0 2rem;
+  }
+
+  .category-list {
+    gap: 0.55rem;
+  }
+
+  .category-chip {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.78rem;
+  }
+
+  .knowledge-tags-filter {
+    margin-top: 1.75rem;
+  }
+
+  .knowledge-tags-filter h2 {
+    margin-bottom: 0.75rem;
+  }
+
+  .tag-filter-chips {
+    gap: 0.5rem;
+  }
+
+
+  /* Existing Mobile Tags Collapse */
+
+  .tag-filter-chip--extra {
+    display: none;
+  }
+
+  .tag-filter-chips.is-expanded .tag-filter-chip--extra {
+    display: inline-flex;
+  }
+
+  .knowledge-tags-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 0.9rem;
+
+    min-height: 38px;
+    padding: 0.55rem 1rem;
+
+    border: 1px solid #10613e;
+    border-radius: 999px;
+
+    background: transparent;
+    color: #10613e;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    cursor: pointer;
+  }
+}
+/* =========================================================
+   DESKTOP — COMPACT CATEGORY SECTION SPACING
+   ========================================================= */
+
+@media (min-width: 769px) {
+  .knowledge-categories {
+    margin-top: -1.25rem;
+    margin-bottom: 2.5rem;
+  }
 }

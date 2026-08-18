@@ -86,8 +86,10 @@ D:\Projects\mato-cashew-website\src\components\products\ProductFAQ.astro
 D:\Projects\mato-cashew-website\src\components\products\ProductGrid.astro
 D:\Projects\mato-cashew-website\src\components\products\ProductIntro.astro
 D:\Projects\mato-cashew-website\src\components\products\ProductsCTA.astro
+D:\Projects\mato-cashew-website\src\components\products\ProductsHero.astro
 D:\Projects\mato-cashew-website\src\components\products\ProductSpecifications.astro
 D:\Projects\mato-cashew-website\src\components\products\ProductSpecificationsList.astro
+D:\Projects\mato-cashew-website\src\components\products\ProductStats.astro
 D:\Projects\mato-cashew-website\src\components\products\RelatedProducts.astro
 D:\Projects\mato-cashew-website\src\components\products\RetailProducts.astro
 D:\Projects\mato-cashew-website\src\components\products\WholesaleProducts.astro
@@ -238,6 +240,8 @@ D:\Projects\mato-cashew-website\src\styles\knowledge-hero.css
 D:\Projects\mato-cashew-website\src\styles\page.css
 D:\Projects\mato-cashew-website\src\styles\product-detail.css
 D:\Projects\mato-cashew-website\src\styles\product-specifications.css
+D:\Projects\mato-cashew-website\src\styles\product-stats.css
+D:\Projects\mato-cashew-website\src\styles\products-hero.css
 D:\Projects\mato-cashew-website\src\styles\products-home.css
 D:\Projects\mato-cashew-website\src\styles\products-page.css
 D:\Projects\mato-cashew-website\src\styles\products.css

@@ -4,6 +4,7 @@ interface Props {
   description: string;
   image: string;
   category: string;
+  tags: string[];
   slug: string;
 }
 
@@ -12,6 +13,7 @@ const {
   description,
   image,
   category,
+  tags,
   slug
 } = Astro.props;
 ---
@@ -22,6 +24,7 @@ const {
   data-title={title.toLowerCase()}
   data-description={description.toLowerCase()}
   data-category={category.toLowerCase()}
+  data-tags={tags.join(" ").toLowerCase()}
 >
 
   <div class="featured-image">
