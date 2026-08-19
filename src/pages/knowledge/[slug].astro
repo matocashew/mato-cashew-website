@@ -112,7 +112,7 @@ const englishLanguagePath =
 
 const khmerLanguagePath =
   khmerTranslation
-    ? `/km/knowledge/${currentSlug}/`
+    ? `/km/knowledge/${khmerTranslation.slug}/`
     : "/km/knowledge/";
 
 
@@ -189,7 +189,7 @@ const next =
   canonical={canonical}
   lang="en"
   ogType="article"
-  hasKhmerAlternate={false}
+  hasKhmerAlternate={Boolean(khmerTranslation)}
   breadcrumbs={[
     {
       name: "Home",
