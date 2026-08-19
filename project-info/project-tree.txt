@@ -41,6 +41,7 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦   ¦       FormTextarea.astro
 ¦   ¦       
 ¦   +---home
+¦   ¦       HomeKnowledge.astro
 ¦   ¦       HomeProcess.astro
 ¦   ¦       HomeStats.astro
 ¦   ¦       HomeTestimonials.astro
@@ -174,7 +175,6 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦       footer.ts
 ¦       index.ts
 ¦       navigation.ts
-¦       products.ts
 ¦       social.ts
 ¦       
 +---i18n
@@ -288,6 +288,7 @@ D:\PROJECTS\MATO-CASHEW-WEBSITE\SRC
 ¦           external-link.css
 ¦           faq.css
 ¦           featured-knowledge-card.css
+¦           home-knowledge.css
 ¦           info-box.css
 ¦           knowledge-article-card.css
 ¦           knowledge-card.css
