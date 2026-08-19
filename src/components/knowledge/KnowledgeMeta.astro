@@ -1,25 +1,64 @@
 ---
+import type { Language } from "../../i18n/config";
+
+import {
+  formatKnowledgeText,
+  getKnowledgeTranslations,
+} from "../../i18n/knowledge";
+
 interface Props {
   author: string;
   publishedAt: Date;
   readingTime: number;
+  lang?: Language;
 }
 
 const {
   author,
   publishedAt,
   readingTime,
+  lang = "en",
 } = Astro.props;
+
+const t =
+  getKnowledgeTranslations(lang);
+
+const locale =
+  lang === "km"
+    ? "km-KH"
+    : "en-US";
+
+const formattedDate =
+  publishedAt.toLocaleDateString(
+    locale,
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+  );
 ---
 
-<div class="knowledge-meta">
-  <span>👤 {author}</span>
-
+<div
+  class="knowledge-meta"
+  lang={lang}
+>
   <span>
-    📅 {publishedAt.toLocaleDateString()}
+    {t.author}: {author}
   </span>
 
   <span>
-    ⏱ {readingTime} min read
+    {t.published}: {formattedDate}
+  </span>
+
+  <span>
+    {
+      formatKnowledgeText(
+        t.minuteRead,
+        {
+          count: readingTime,
+        }
+      )
+    }
   </span>
 </div>

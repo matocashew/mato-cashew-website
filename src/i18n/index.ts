@@ -8,3 +8,6 @@ export const translations = {
 
 export type Translation =
   typeof en;
+
+/* Knowledge Center V2 */
+export * from "./knowledge";

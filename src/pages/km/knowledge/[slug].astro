@@ -27,32 +27,50 @@ import "@styles/components/quick-facts.css";
 
 
 /* =========================================================
+   LANGUAGE
+   ========================================================= */
+
+const lang = "km";
+
+
+/* =========================================================
    STATIC PATHS
    ========================================================= */
 
 export async function getStaticPaths() {
+
   const articles =
-    await knowledgeService.getAll("en");
+    await knowledgeService.getAll("km");
 
-  const paths = await Promise.all(
-    articles.map(async (article) => {
-      const entry =
-        await knowledgeService.getEntryBySlug(
-        article.slug,
-        "en"
-      );
+  const paths =
+    await Promise.all(
 
-      return {
-        params: {
-          slug: article.slug,
-        },
+      articles.map(
+        async (article) => {
 
-        props: {
-          entry,
-        },
-      };
-    })
-  );
+          const entry =
+            await knowledgeService
+              .getEntryBySlug(
+                article.slug,
+                "km"
+              );
+
+          return {
+
+            params: {
+              slug: article.slug,
+            },
+
+            props: {
+              entry,
+            },
+
+          };
+
+        }
+      )
+
+    );
 
   return paths;
 }
@@ -64,22 +82,20 @@ export async function getStaticPaths() {
 
 interface Props {
   entry: Awaited<
-    ReturnType<typeof knowledgeService.getEntryBySlug>
+    ReturnType<
+      typeof knowledgeService.getEntryBySlug
+    >
   >;
 }
 
-const { entry } = Astro.props as Props;
+const {
+  entry,
+} = Astro.props as Props;
 
 
 /* =========================================================
-   CONTENT
+   CURRENT ARTICLE SLUG
    ========================================================= */
-
-const { Content, headings } =
-  await render(entry);
-
-const articles =
-  await knowledgeService.getAll("en");
 
 /* =========================================================
    CURRENT ARTICLE
@@ -90,7 +106,7 @@ const currentSlug =
 
 if (!currentSlug) {
   throw new Error(
-    "Missing English Knowledge article slug."
+    "Missing Khmer Knowledge article slug."
   );
 }
 
@@ -98,22 +114,37 @@ const translationKey =
   entry.data.translationKey;
 
 /* =========================================================
+   CONTENT
+   ========================================================= */
+
+const { Content, headings } =
+  await render(entry);
+
+
+/* =========================================================
    LANGUAGE PAIR ROUTES
    ========================================================= */
 
-const khmerTranslation =
+const englishTranslation =
   await knowledgeService.getTranslation(
     translationKey,
-    "km"
+    "en"
   );
 
 const englishLanguagePath =
-  `/knowledge/${currentSlug}/`;
+  englishTranslation
+    ? `/knowledge/${currentSlug}/`
+    : "/knowledge/";
 
 const khmerLanguagePath =
-  khmerTranslation
-    ? `/km/knowledge/${currentSlug}/`
-    : "/km/knowledge/";
+  `/km/knowledge/${currentSlug}/`;
+
+/* =========================================================
+   KHMER ARTICLES ONLY
+   ========================================================= */
+
+const articles =
+  await knowledgeService.getAll("km");
 
 
 /* =========================================================
@@ -121,7 +152,7 @@ const khmerLanguagePath =
    ========================================================= */
 
 const canonical =
-  `https://matocashew.com/knowledge/${currentSlug}/`;
+  `https://matocashew.com/km/knowledge/${currentSlug}/`;
 
 
 /* =========================================================
@@ -130,29 +161,34 @@ const canonical =
 
 const relatedArticles = (() => {
 
-  const related = articles.filter(
-    (article) =>
-      article.slug !== currentSlug &&
-      (
-        article.category === entry.data.category ||
-        article.tags.some((tag) =>
-          entry.data.tags.includes(tag)
+  const related =
+    articles.filter(
+      (article) =>
+        article.slug !== currentSlug &&
+        (
+          article.category ===
+            entry.data.category ||
+
+          article.tags.some(
+            (tag) =>
+              entry.data.tags.includes(tag)
+          )
         )
-      )
-  );
+    );
 
   if (related.length >= 2) {
     return related.slice(0, 2);
   }
 
-  const fallback = articles.filter(
-    (article) =>
-      article.slug !== currentSlug &&
-      !related.some(
-        (item) =>
-          item.slug === article.slug
-      )
-  );
+  const fallback =
+    articles.filter(
+      (article) =>
+        article.slug !== currentSlug &&
+        !related.some(
+          (item) =>
+            item.slug === article.slug
+        )
+    );
 
   return [
     ...related,
@@ -178,6 +214,7 @@ const previous =
     : undefined;
 
 const next =
+  currentIndex >= 0 &&
   currentIndex < articles.length - 1
     ? articles[currentIndex + 1]
     : undefined;
@@ -187,17 +224,17 @@ const next =
   title={`${entry.data.title} | Mato Cashew`}
   description={entry.data.description}
   canonical={canonical}
-  lang="en"
+  lang={lang}
   ogType="article"
-  hasKhmerAlternate={false}
+  hasKhmerAlternate={true}
   breadcrumbs={[
     {
-      name: "Home",
-      url: "https://matocashew.com/"
+      name: "ទំព័រដើម",
+      url: "https://matocashew.com/km/"
     },
     {
-      name: "Knowledge Center",
-      url: "https://matocashew.com/knowledge/"
+      name: "មជ្ឈមណ្ឌលចំណេះដឹង",
+      url: "https://matocashew.com/km/knowledge/"
     },
     {
       name: entry.data.title,
@@ -227,9 +264,9 @@ const next =
     id="language-route-context"
     data-language-en={englishLanguagePath}
     data-language-km={khmerLanguagePath}
-  hidden
-  ></div>
-
+    hidden
+    ></div>
+    
   <ReadingProgress />
 
 
@@ -237,9 +274,14 @@ const next =
        ARTICLE PAGE
        ===================================================== -->
 
-  <div class="container knowledge-article-page">
+  <div
+    class="container knowledge-article-page"
+    lang={lang}
+  >
 
-    <!-- ARTICLE HERO -->
+    <!-- ===================================================
+         ARTICLE HERO
+         =================================================== -->
 
     <KnowledgeHero
       category={entry.data.category}
@@ -249,28 +291,32 @@ const next =
     />
 
 
-    <!-- ARTICLE META -->
+    <!-- ===================================================
+         ARTICLE META
+         =================================================== -->
 
     <KnowledgeMeta
-      author={entry.data.author}
-      publishedAt={entry.data.publishedAt}
-      readingTime={entry.data.readingTime}
-      lang="en"
+        author={entry.data.author}
+        publishedAt={entry.data.publishedAt}
+        readingTime={entry.data.readingTime}
+        lang={lang}
     />
 
 
-    <!-- TAGS -->
+    <!-- ===================================================
+         TAGS
+         =================================================== -->
 
     <TagGroup
       tags={entry.data.tags}
-      lang="en"
+      lang={lang}
     />
 
     <hr />
 
 
     <!-- ===================================================
-         ARTICLE CONTENT + TABLE OF CONTENTS
+         ARTICLE CONTENT + TOC
          =================================================== -->
 
     <article class="knowledge-layout">
@@ -278,8 +324,8 @@ const next =
       <aside>
 
         <KnowledgeTOC
-          headings={headings}
-          lang="en"
+            headings={headings}
+            lang={lang}
         />
 
       </aside>
@@ -303,9 +349,9 @@ const next =
          =================================================== -->
 
     <KnowledgeNavigation
-      previous={previous}
-      next={next}
-      lang="en"
+        previous={previous}
+        next={next}
+        lang={lang}
     />
 
 
@@ -315,7 +361,7 @@ const next =
 
     <RelatedArticles
       articles={relatedArticles}
-      lang="en"
+      lang={lang}
     />
 
   </div>

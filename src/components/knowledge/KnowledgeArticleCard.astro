@@ -1,15 +1,34 @@
 ---
 import type { Knowledge } from "@models/Knowledge";
+import type { Language } from "../../i18n/config";
+
+import {
+  formatKnowledgeText,
+  getKnowledgeCategoryLabel,
+  getKnowledgeTranslations,
+} from "../../i18n/knowledge";
 
 interface Props {
   article: Knowledge;
+  lang?: Language;
 }
 
-const { article } = Astro.props as Props;
+const {
+  article,
+  lang = "en",
+} = Astro.props as Props;
+
+const t =
+  getKnowledgeTranslations(lang);
+
+const articlePath =
+  lang === "km"
+    ? `/km/knowledge/${article.slug}/`
+    : `/knowledge/${article.slug}/`;
 ---
 
 <a
-  href={`/knowledge/${article.slug}/`}
+  href={articlePath}
   class="knowledge-article-card"
   data-title={article.title.toLowerCase()}
   data-description={article.description.toLowerCase()}
@@ -25,7 +44,12 @@ const { article } = Astro.props as Props;
   <div class="card-content">
 
     <span class="category">
-      {article.category}
+      {
+        getKnowledgeCategoryLabel(
+          article.category,
+          lang
+        )
+      }
     </span>
 
     <h3>{article.title}</h3>
@@ -35,14 +59,18 @@ const { article } = Astro.props as Props;
     {
       article.tags.length > 0 && (
         <div class="card-tags">
-          {article.tags.slice(0, 3).map((tag) => (
-            <span
-              class="card-tag"
-              data-tag={tag.toLowerCase()}
-            >
-              #{tag}
-            </span>
-          ))}
+          {
+            article.tags.slice(0, 3).map(
+              (tag) => (
+                <span
+                  class="card-tag"
+                  data-tag={tag.toLowerCase()}
+                >
+                  #{tag}
+                </span>
+              )
+            )
+          }
         </div>
       )
     }
@@ -50,11 +78,18 @@ const { article } = Astro.props as Props;
     <div class="card-footer">
 
       <span>
-        {article.readingTime} min read
+        {
+          formatKnowledgeText(
+            t.minuteRead,
+            {
+              count: article.readingTime,
+            }
+          )
+        }
       </span>
 
       <span class="read-more">
-        Read →
+        {t.readMore} &rarr;
       </span>
 
     </div>

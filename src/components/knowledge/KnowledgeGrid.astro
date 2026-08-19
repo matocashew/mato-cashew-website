@@ -1,5 +1,10 @@
 ---
 import type { Knowledge } from "@models/Knowledge";
+import type { Language } from "../../i18n/config";
+
+import {
+  getKnowledgeTranslations,
+} from "../../i18n/knowledge";
 
 import KnowledgeArticleCard from "./KnowledgeArticleCard.astro";
 
@@ -7,9 +12,16 @@ import "@styles/components/knowledge-grid.css";
 
 interface Props {
   articles: Knowledge[];
+  lang?: Language;
 }
 
-const { articles } = Astro.props as Props;
+const {
+  articles,
+  lang = "en",
+} = Astro.props as Props;
+
+const t =
+  getKnowledgeTranslations(lang);
 ---
 
 <section class="knowledge-grid">
@@ -17,7 +29,9 @@ const { articles } = Astro.props as Props;
   {
     articles.length === 0 ? (
 
-      <p>No knowledge articles found.</p>
+      <p>
+        {t.noResultsTitle}
+      </p>
 
     ) : (
 
@@ -25,21 +39,25 @@ const { articles } = Astro.props as Props;
 
         <KnowledgeArticleCard
           article={article}
+          lang={lang}
         />
 
       ))
 
     )
   }
+
   <div
     id="knowledge-no-results"
     class="knowledge-no-results"
     hidden
   >
-    <h3>No matching articles</h3>
+    <h3>
+      {t.noResultsTitle}
+    </h3>
 
     <p id="knowledge-no-results-message">
-      Try another search term or choose a different category.
+      {t.noResultsDescription}
     </p>
 
     <button
@@ -47,19 +65,21 @@ const { articles } = Astro.props as Props;
       class="knowledge-clear-filters"
       type="button"
     >
-      Clear search
+      {t.clearFilters}
     </button>
   </div>
 
   <div class="knowledge-load-more-wrap">
+
     <button
       id="knowledge-load-more"
       class="knowledge-load-more"
       type="button"
       hidden
     >
-      Load More Articles
+      {t.loadMoreArticles}
     </button>
+
   </div>
 
 </section>

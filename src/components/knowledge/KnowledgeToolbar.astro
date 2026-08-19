@@ -1,23 +1,44 @@
 ---
+import type { Language } from "../../i18n/config";
+
+import {
+  formatKnowledgeText,
+  getKnowledgeTranslations,
+} from "../../i18n/knowledge";
+
 import KnowledgeSearch from "./KnowledgeSearch.astro";
 
 interface Props {
   totalArticles: number;
+  lang?: Language;
 }
 
-const { totalArticles } = Astro.props;
+const {
+  totalArticles,
+  lang = "en",
+} = Astro.props;
+
+const t =
+  getKnowledgeTranslations(lang);
 ---
 
 <div class="knowledge-toolbar">
 
-  <KnowledgeSearch />
+  <KnowledgeSearch lang={lang} />
 
   <p
     id="knowledge-search-result-count"
     class="knowledge-search-result-count"
     aria-live="polite"
   >
-    Showing all {totalArticles} articles
+    {
+      formatKnowledgeText(
+        t.showingAll,
+        {
+          count: totalArticles,
+        }
+      )
+    }
   </p>
 
 </div>

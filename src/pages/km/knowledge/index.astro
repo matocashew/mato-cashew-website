@@ -1,0 +1,300 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+
+import KnowledgeGrid from "@components/knowledge/KnowledgeGrid.astro";
+import FeaturedKnowledgeCard from "@components/knowledge/FeaturedKnowledgeCard.astro";
+import KnowledgeIndexHero from "@components/knowledge/KnowledgeIndexHero.astro";
+import KnowledgeCategories from "@components/knowledge/KnowledgeCategories.astro";
+import KnowledgeStats from "@components/knowledge/KnowledgeStats.astro";
+import KnowledgeToolbar from "@components/knowledge/KnowledgeToolbar.astro";
+import { knowledgeService } from "@services/knowledgeService";
+
+import {
+  getKnowledgeTranslations,
+} from "../../../i18n/knowledge";
+
+import "@styles/components/knowledge-stats.css";
+import "@styles/components/featured-knowledge-card.css";
+import "@styles/components/knowledge-categories.css";
+import "@styles/components/knowledge-index-hero.css";
+import "@styles/components/knowledge-article-card.css";
+import "@styles/components/knowledge-system.css";
+
+
+/* =========================================================
+   LANGUAGE
+   ========================================================= */
+
+const lang = "km";
+
+const t =
+  getKnowledgeTranslations(lang);
+
+
+/* =========================================================
+   KNOWLEDGE DATA
+   ========================================================= */
+
+const articles =
+  await knowledgeService.getAll(lang);
+
+const featuredArticle =
+  articles.find(
+    article => article.featured
+  );
+
+const latestArticles =
+  articles.filter(
+    article => !article.featured
+  );
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+const totalArticles =
+  articles.length;
+
+const totalCategories =
+  new Set(
+    articles.map(
+      article => article.category
+    )
+  ).size;
+
+const totalTags =
+  new Set(
+    articles.flatMap(
+      article => article.tags
+    )
+  ).size;
+
+
+/* =========================================================
+   CATEGORIES
+   ========================================================= */
+
+const categories = [
+  ...new Set(
+    articles.map(
+      article => article.category
+    )
+  )
+];
+
+
+/* =========================================================
+   TAGS
+   ========================================================= */
+
+const tags = [
+  ...new Set(
+    articles.flatMap(
+      article => article.tags
+    )
+  )
+].sort();
+---
+
+<PageLayout
+  title="មជ្ឈមណ្ឌលចំណេះដឹងអំពីស្វាយចន្ទី | ចន្ទីមាតុភូមិ"
+  description="ស្វែងយល់ពីចំណេះដឹងជាក់ស្តែងអំពីស្វាយចន្ទីកម្ពុជា ការដាំដុះ ការកែច្នៃ គុណភាព ការចាត់ថ្នាក់ ការវេចខ្ចប់ ការរក្សាទុក និងការនាំចេញ។"
+  canonical="https://matocashew.com/km/knowledge/"
+  lang="km"
+  hasKhmerAlternate={true}
+  breadcrumbs={[
+    {
+      name: "ទំព័រដើម",
+      url: "/km/"
+    },
+    {
+      name: "មជ្ឈមណ្ឌលចំណេះដឹង",
+      url: "/km/knowledge/"
+    }
+  ]}
+>
+
+  <div
+    class="container knowledge-index-page"
+    lang={lang}
+  >
+
+    <!-- ===================================================
+         HERO
+         =================================================== -->
+
+    <KnowledgeIndexHero
+      lang={lang}
+    />
+
+
+    <!-- ===================================================
+         SEARCH / RESULT COUNT
+         =================================================== -->
+
+    <KnowledgeToolbar
+        totalArticles={totalArticles}
+        lang={lang}
+    />
+
+
+    <!-- ===================================================
+         STATS
+         =================================================== -->
+
+    <KnowledgeStats
+      articles={totalArticles}
+      categories={totalCategories}
+      tags={totalTags}
+      lang={lang}
+    />
+
+
+    <!-- ===================================================
+         CATEGORIES
+         =================================================== -->
+
+    <KnowledgeCategories
+      categories={categories}
+      lang={lang}
+    />
+
+
+    <!-- ===================================================
+         TAGS
+         =================================================== -->
+
+    {
+      tags.length > 0 && (
+
+        <section class="knowledge-tags-filter">
+
+          <h2>
+            {t.browseByTags}
+          </h2>
+
+          <div
+            id="knowledge-tag-filter"
+            class="tag-filter-chips"
+          >
+
+            <button
+              type="button"
+              class="tag-filter-chip active"
+              data-tag=""
+              aria-pressed="true"
+            >
+              {t.all}
+            </button>
+
+            {
+              tags.map(
+                (tag, index) => (
+
+                  <button
+                    type="button"
+                    class:list={[
+                      "tag-filter-chip",
+                      index >= 8 &&
+                        "tag-filter-chip--extra"
+                    ]}
+                    data-tag={tag.toLowerCase()}
+                    aria-pressed="false"
+                  >
+                    #{tag}
+                  </button>
+
+                )
+              )
+            }
+
+          </div>
+
+          {
+            tags.length > 8 && (
+
+              <button
+                id="knowledge-tags-toggle"
+                class="knowledge-tags-toggle"
+                type="button"
+                aria-expanded="false"
+              >
+                {t.showMoreTags}
+              </button>
+
+            )
+          }
+
+        </section>
+
+      )
+    }
+
+
+    <!-- ===================================================
+         FEATURED ARTICLE
+         =================================================== -->
+
+    {
+      featuredArticle && (
+
+        <section
+          id="featured-article-section"
+        >
+
+          <h2 class="section-title">
+            {t.featuredArticle}
+          </h2>
+
+          <FeaturedKnowledgeCard
+            title={featuredArticle.title}
+            description={featuredArticle.description}
+            image={featuredArticle.heroImage}
+            category={featuredArticle.category}
+            tags={featuredArticle.tags}
+            slug={featuredArticle.slug}
+            lang={lang}
+          />
+
+        </section>
+
+      )
+    }
+
+
+    <!-- ===================================================
+         LATEST ARTICLES
+         =================================================== -->
+
+    <section class="knowledge-latest-section">
+
+      <h2 class="section-title">
+        {t.latestArticles}
+      </h2>
+
+      <KnowledgeGrid
+        articles={latestArticles}
+        lang={lang}
+      />
+
+    </section>
+
+  </div>
+
+
+  <!-- =====================================================
+       KNOWLEDGE FILTER / SEARCH SCRIPT
+       ===================================================== -->
+
+  <script>
+    import initKnowledge
+      from "../../../scripts/knowledge";
+
+    document.addEventListener(
+      "astro:page-load",
+      initKnowledge
+    );
+  </script>
+
+</PageLayout>

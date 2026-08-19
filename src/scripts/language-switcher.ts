@@ -1,5 +1,8 @@
-import { navigate } from "astro:transitions/client";
-import { switchLanguage } from "../i18n/switchLanguage";
+import { navigate }
+  from "astro:transitions/client";
+
+import { switchLanguage }
+  from "../i18n/switchLanguage";
 
 
 export function initLanguageSwitcher() {
@@ -14,12 +17,14 @@ export function initLanguageSwitcher() {
       ".language-dropdown"
     );
 
-  if (!current || !dropdown) return;
+  if (!current || !dropdown) {
+    return;
+  }
 
 
-  /* =========================
-     Toggle dropdown
-  ========================= */
+  /* =======================================================
+     TOGGLE DROPDOWN
+     ======================================================= */
 
   current.addEventListener(
     "click",
@@ -28,7 +33,9 @@ export function initLanguageSwitcher() {
       event.stopPropagation();
 
       const isOpen =
-        dropdown.classList.toggle("open");
+        dropdown.classList.toggle(
+          "open"
+        );
 
       current.setAttribute(
         "aria-expanded",
@@ -39,15 +46,17 @@ export function initLanguageSwitcher() {
   );
 
 
-  /* =========================
-     Close dropdown
-  ========================= */
+  /* =======================================================
+     CLOSE DROPDOWN
+     ======================================================= */
 
   document.addEventListener(
     "click",
     () => {
 
-      dropdown.classList.remove("open");
+      dropdown.classList.remove(
+        "open"
+      );
 
       current.setAttribute(
         "aria-expanded",
@@ -58,9 +67,37 @@ export function initLanguageSwitcher() {
   );
 
 
-  /* =========================
-     Language switching
-  ========================= */
+  /* =======================================================
+     LANGUAGE ROUTE OVERRIDE
+     ======================================================= */
+
+  function getExplicitLanguageTarget(
+    language: "en" | "km"
+  ): string | undefined {
+
+    const context =
+      document.getElementById(
+        "language-route-context"
+      );
+
+    if (
+      !(context instanceof HTMLElement)
+    ) {
+      return undefined;
+    }
+
+    const target =
+      language === "km"
+        ? context.dataset.languageKm
+        : context.dataset.languageEn;
+
+    return target || undefined;
+  }
+
+
+  /* =======================================================
+     LANGUAGE SWITCHING
+     ======================================================= */
 
   const languageButtons =
     document.querySelectorAll<HTMLButtonElement>(
@@ -68,61 +105,91 @@ export function initLanguageSwitcher() {
     );
 
 
-  languageButtons.forEach((button) => {
+  languageButtons.forEach(
+    (button) => {
 
-    button.addEventListener(
-      "click",
-      async (event) => {
+      button.addEventListener(
+        "click",
+        async (event) => {
 
-        event.stopPropagation();
+          event.stopPropagation();
 
-        const language =
-          button.dataset.language as
-            | "en"
-            | "km"
-            | undefined;
+          const language =
+            button.dataset.language as
+              | "en"
+              | "km"
+              | undefined;
 
-        if (!language) return;
+          if (!language) {
+            return;
+          }
 
 
-        const target =
-          switchLanguage(
-            window.location.pathname,
-            language
+          /*
+           * Article Detail pages can provide
+           * an explicit paired translation route.
+           *
+           * Other pages use the normal
+           * switchLanguage() behavior.
+           */
+
+          const explicitTarget =
+            getExplicitLanguageTarget(
+              language
+            );
+
+          const safeExplicitTarget =
+            explicitTarget &&
+            !explicitTarget.includes(
+              "/undefined/"
+            )
+              ? explicitTarget
+              : undefined;
+
+          const target =
+            safeExplicitTarget ??
+            switchLanguage(
+              window.location.pathname,
+              language
+            );
+
+
+          /* -----------------------------------------------
+             Close dropdown
+             ----------------------------------------------- */
+
+          dropdown.classList.remove(
+            "open"
+          );
+
+          current.setAttribute(
+            "aria-expanded",
+            "false"
           );
 
 
-        /* Close dropdown before navigation */
+          /* -----------------------------------------------
+             Avoid unnecessary navigation
+             ----------------------------------------------- */
 
-        dropdown.classList.remove("open");
+          if (
+            target ===
+            window.location.pathname
+          ) {
+            return;
+          }
 
-        current.setAttribute(
-          "aria-expanded",
-          "false"
-        );
 
+          /* -----------------------------------------------
+             Astro ClientRouter navigation
+             ----------------------------------------------- */
 
-        /* Avoid unnecessary navigation */
+          await navigate(target);
 
-        if (
-          target ===
-          window.location.pathname
-        ) {
-          return;
         }
+      );
 
-
-        /*
-         * Astro ClientRouter navigation.
-         *
-         * No full page reload.
-         */
-
-        await navigate(target);
-
-      }
-    );
-
-  });
+    }
+  );
 
 }

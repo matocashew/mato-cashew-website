@@ -1,11 +1,26 @@
 ---
+import type { Language } from "../../i18n/config";
+
+import {
+  getKnowledgeTranslations,
+} from "../../i18n/knowledge";
+
 interface Props {
   articles: number;
   categories: number;
   tags: number;
+  lang?: Language;
 }
 
-const { articles, categories, tags } = Astro.props;
+const {
+  articles,
+  categories,
+  tags,
+  lang = "en",
+} = Astro.props;
+
+const t =
+  getKnowledgeTranslations(lang);
 ---
 
 <section class="knowledge-stats">
@@ -14,7 +29,9 @@ const { articles, categories, tags } = Astro.props;
 
     <strong>{articles}</strong>
 
-    <span>Articles</span>
+    <span>
+      {t.stats.articles}
+    </span>
 
   </div>
 
@@ -22,7 +39,9 @@ const { articles, categories, tags } = Astro.props;
 
     <strong>{categories}</strong>
 
-    <span>Categories</span>
+    <span>
+      {t.stats.categories}
+    </span>
 
   </div>
 
@@ -30,7 +49,9 @@ const { articles, categories, tags } = Astro.props;
 
     <strong>{tags}</strong>
 
-    <span>Tags</span>
+    <span>
+      {t.stats.tags}
+    </span>
 
   </div>
 

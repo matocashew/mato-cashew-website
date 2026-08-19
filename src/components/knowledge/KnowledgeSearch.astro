@@ -1,5 +1,20 @@
 ---
+import type { Language } from "../../i18n/config";
 
+import {
+  getKnowledgeTranslations,
+} from "../../i18n/knowledge";
+
+interface Props {
+  lang?: Language;
+}
+
+const {
+  lang = "en",
+} = Astro.props;
+
+const t =
+  getKnowledgeTranslations(lang);
 ---
 
 <div class="knowledge-search">
@@ -7,8 +22,8 @@
   <input
     id="knowledge-search"
     type="search"
-    aria-label="Search knowledge articles"
-    placeholder="Search knowledge articles..."
+    aria-label={t.searchPlaceholder}
+    placeholder={t.searchPlaceholder}
     autocomplete="off"
   />
 
@@ -16,7 +31,7 @@
     id="knowledge-search-clear"
     class="knowledge-search-clear"
     type="button"
-    aria-label="Clear search"
+    aria-label={t.clearFilters}
     hidden
   >
     ×

@@ -1,33 +1,67 @@
 ---
+import type { Language } from "../../i18n/config";
 
+import {
+  getKnowledgeTranslations,
+} from "../../i18n/knowledge";
+
+interface Props {
+  lang?: Language;
+}
+
+const {
+  lang = "en",
+} = Astro.props;
+
+const t =
+  getKnowledgeTranslations(lang);
 ---
 
-<section class="knowledge-index-hero">
+<section
+  class="knowledge-index-hero"
+  lang={lang}
+>
   <div class="knowledge-index-hero__inner">
 
     <p class="eyebrow">
-      MATO CASHEW KNOWLEDGE
+      {t.eyebrow}
     </p>
 
     <h1>
-      Cambodian Cashew
-      <span>Knowledge Center</span>
+      {t.titlePrimary}
+
+      <span>
+        {t.titleSecondary}
+      </span>
     </h1>
 
     <p class="description">
-      Explore practical knowledge about Cambodian cashews —
-      from cultivation and processing to quality, grading,
-      packaging, storage, and export preparation.
+      {t.description}
     </p>
 
     <div
       class="knowledge-index-hero__topics"
-      aria-label="Knowledge topics"
+      aria-label={
+        lang === "km"
+          ? "ប្រធានបទចំណេះដឹង"
+          : "Knowledge topics"
+      }
     >
-      <span>Cashew Knowledge</span>
-      <span>Product Quality</span>
-      <span>Processing</span>
-      <span>Business &amp; Export</span>
+      <span>
+        {t.topics.knowledge}
+      </span>
+
+      <span>
+        {t.topics.quality}
+      </span>
+
+      <span>
+        {t.topics.processing}
+      </span>
+
+      <span>
+        {t.topics.business}
+      </span>
     </div>
 
   </div>

@@ -1,4 +1,10 @@
 ---
+import type { Language } from "../../i18n/config";
+
+import {
+  getKnowledgeTranslations,
+} from "../../i18n/knowledge";
+
 interface Heading {
   depth: number;
   slug: string;
@@ -7,9 +13,16 @@ interface Heading {
 
 interface Props {
   headings: Heading[];
+  lang?: Language;
 }
 
-const { headings } = Astro.props;
+const {
+  headings,
+  lang = "en",
+} = Astro.props;
+
+const t =
+  getKnowledgeTranslations(lang);
 ---
 
 {
@@ -18,12 +31,13 @@ const { headings } = Astro.props;
     <details
       class="knowledge-toc"
       open
+      lang={lang}
     >
 
       <summary>
-
-        <span>📑 Contents</span>
-
+        <span>
+          {t.contents}
+        </span>
       </summary>
 
       <ul>
@@ -31,15 +45,15 @@ const { headings } = Astro.props;
         {
           headings.map((heading) => (
 
-            <li class={`toc-item depth-${heading.depth}`}>
+            <li
+              class={`toc-item depth-${heading.depth}`}
+            >
 
               <a
                 href={`#${heading.slug}`}
                 data-toc-link={heading.slug}
               >
-
                 {heading.text}
-
               </a>
 
             </li>
@@ -59,8 +73,8 @@ const { headings } = Astro.props;
 
   function initKnowledgeTOC() {
     /*
-     * Remove previous scroll listener before
-     * initializing again after ClientRouter navigation.
+     * Remove old listener before re-initializing
+     * after Astro ClientRouter navigation.
      */
     if (tocScrollHandler) {
       window.removeEventListener(
@@ -71,9 +85,11 @@ const { headings } = Astro.props;
       tocScrollHandler = null;
     }
 
-    /*
-     * Find all TOC links.
-     */
+    const toc =
+      document.querySelector<HTMLElement>(
+        ".knowledge-toc"
+      );
+
     const links =
       Array.from(
         document.querySelectorAll<HTMLAnchorElement>(
@@ -81,11 +97,8 @@ const { headings } = Astro.props;
         )
       );
 
-    if (!links.length) return;
+    if (!toc || !links.length) return;
 
-    /*
-     * Match every TOC link with its article heading.
-     */
     const sections =
       links
         .map((link) => {
@@ -107,15 +120,55 @@ const { headings } = Astro.props;
 
     if (!sections.length) return;
 
-    /*
-     * Update active TOC item while scrolling.
-     */
+    const keepActiveLinkVisible = (
+      activeLink: HTMLAnchorElement
+    ) => {
+      /*
+       * Scroll ONLY the TOC container.
+       * Do NOT use scrollIntoView().
+       */
+
+      const tocRect =
+        toc.getBoundingClientRect();
+
+      const linkRect =
+        activeLink.getBoundingClientRect();
+
+      const topBuffer = 20;
+      const bottomBuffer = 20;
+
+      const isAbove =
+        linkRect.top <
+        tocRect.top + topBuffer;
+
+      const isBelow =
+        linkRect.bottom >
+        tocRect.bottom - bottomBuffer;
+
+      if (!isAbove && !isBelow) {
+        return;
+      }
+
+      const linkTopInsideToc =
+        activeLink.offsetTop;
+
+      const targetScrollTop =
+        Math.max(
+          0,
+          linkTopInsideToc -
+          toc.clientHeight / 2 +
+          activeLink.offsetHeight / 2
+        );
+
+      toc.scrollTo({
+        top: targetScrollTop,
+        behavior: "smooth",
+      });
+    };
+
     const updateTOC = () => {
       let currentId = "";
 
-      /*
-       * Account for the fixed site header.
-       */
       const scrollPosition =
         window.scrollY + 140;
 
@@ -128,10 +181,6 @@ const { headings } = Astro.props;
         }
       });
 
-      /*
-       * Before reaching the first heading,
-       * keep the first TOC item active.
-       */
       if (
         !currentId &&
         sections.length > 0
@@ -140,9 +189,9 @@ const { headings } = Astro.props;
           sections[0].id;
       }
 
-      /*
-       * Apply active state.
-       */
+      let activeLink:
+        HTMLAnchorElement | null = null;
+
       links.forEach((link) => {
         const isActive =
           link.getAttribute(
@@ -159,6 +208,8 @@ const { headings } = Astro.props;
             "aria-current",
             "true"
           );
+
+          activeLink = link;
         } else {
           link.removeAttribute(
             "aria-current"
@@ -166,64 +217,13 @@ const { headings } = Astro.props;
         }
       });
 
-      /*
-       * Find currently active TOC link.
-       */
-      const activeLink =
-        links.find(
-          (link) =>
-            link.getAttribute(
-              "data-toc-link"
-            ) === currentId
+      if (activeLink) {
+        keepActiveLinkVisible(
+          activeLink
         );
-
-      if (!activeLink) return;
-
-      /*
-       * Keep the active TOC item visible
-       * inside the scrollable TOC panel.
-       */
-      const toc =
-        activeLink.closest<HTMLElement>(
-          ".knowledge-toc"
-        );
-
-      if (!toc) return;
-
-      const tocRect =
-        toc.getBoundingClientRect();
-
-      const activeRect =
-        activeLink.getBoundingClientRect();
-
-      const topBuffer = 16;
-      const bottomBuffer = 16;
-
-      const isAbove =
-        activeRect.top <
-        tocRect.top + topBuffer;
-
-      const isBelow =
-        activeRect.bottom >
-        tocRect.bottom - bottomBuffer;
-
-      /*
-       * Scroll only when the active item
-       * is outside the visible TOC area.
-       */
-      if (isAbove || isBelow) {
-        activeLink.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-          inline: "nearest",
-        });
       }
     };
 
-    /*
-     * Store handler so it can be removed
-     * before the next ClientRouter init.
-     */
     tocScrollHandler = updateTOC;
 
     window.addEventListener(
@@ -234,16 +234,9 @@ const { headings } = Astro.props;
       }
     );
 
-    /*
-     * Initialize immediately.
-     */
     updateTOC();
   }
 
-  /*
-   * Works on the first page load
-   * and after every Astro ClientRouter navigation.
-   */
   document.addEventListener(
     "astro:page-load",
     initKnowledgeTOC

@@ -6,25 +6,30 @@ export function switchLanguage(
   pathname: string,
   language: Language
 ) {
-  const current = getLanguageFromPath(pathname);
+  const current =
+    getLanguageFromPath(pathname);
 
   let cleanPath = pathname;
 
   if (current === "km") {
-    cleanPath = pathname.replace(/^\/km/, "") || "/";
+    cleanPath =
+      pathname.replace(/^\/km/, "") || "/";
   }
 
-  // Knowledge Center is currently English-only.
-  // Keep users on the English Knowledge route
-  // until Khmer Knowledge routes are available.
-  if (
-    cleanPath === "/knowledge" ||
-    cleanPath === "/knowledge/" ||
-    cleanPath.startsWith("/knowledge/")
-  ) {
-    return cleanPath;
-  }
-
+  /*
+   * Knowledge Center V2 is bilingual.
+   *
+   * Generic routes such as:
+   *
+   * /knowledge/
+   * /km/knowledge/
+   *
+   * can now use the normal localization system.
+   *
+   * Article-specific translation availability
+   * is handled by language-route-context
+   * on the article detail page.
+   */
   return getLocalizedPath(
     language,
     cleanPath

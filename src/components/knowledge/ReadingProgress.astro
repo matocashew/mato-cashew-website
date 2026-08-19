@@ -1,96 +1,246 @@
 <div
   id="reading-progress"
   class="reading-progress"
+  aria-hidden="true"
 ></div>
 
 <script>
+  /*
+   * =========================================================
+   * READING PROGRESS
+   *
+   * Astro ClientRouter safe implementation.
+   *
+   * The page DOM can be replaced without a full browser reload.
+   * Therefore progress/article elements must be queried again
+   * after every astro:page-load.
+   * =========================================================
+   */
 
-  const progress =
-    document.getElementById("reading-progress");
+  let readingProgressScrollHandler:
+    (() => void) | null = null;
 
-  const article =
-    document.getElementById("knowledge-content");
+  let readingProgressResizeHandler:
+    (() => void) | null = null;
 
-  if (progress && article) {
+
+  function cleanupReadingProgress() {
+
+    if (readingProgressScrollHandler) {
+
+      window.removeEventListener(
+        "scroll",
+        readingProgressScrollHandler
+      );
+
+      readingProgressScrollHandler = null;
+
+    }
+
+
+    if (readingProgressResizeHandler) {
+
+      window.removeEventListener(
+        "resize",
+        readingProgressResizeHandler
+      );
+
+      readingProgressResizeHandler = null;
+
+    }
+
+  }
+
+
+  function initReadingProgress() {
+
+    /*
+     * Remove listeners connected to the
+     * previous Astro page DOM.
+     */
+
+    cleanupReadingProgress();
+
+
+    /*
+     * Query the CURRENT page DOM.
+     */
+
+    const progress =
+      document.getElementById(
+        "reading-progress"
+      );
+
+    const article =
+      document.getElementById(
+        "knowledge-content"
+      );
+
+
+    /*
+     * This also safely handles navigation
+     * from an article to a non-article page.
+     */
+
+    if (
+      !(progress instanceof HTMLElement) ||
+      !(article instanceof HTMLElement)
+    ) {
+      return;
+    }
+
 
     const updateProgress = () => {
 
+      /*
+       * Use the document-relative article
+       * position instead of relying only on
+       * offsetTop.
+       *
+       * This remains correct when the article
+       * is inside nested layout containers.
+       */
+
+      const articleRect =
+        article.getBoundingClientRect();
+
       const articleTop =
-        article.offsetTop;
+        articleRect.top +
+        window.scrollY;
 
       const articleHeight =
         article.offsetHeight;
 
-      const viewport =
+      const viewportHeight =
         window.innerHeight;
 
-      const scroll =
+      const scrollY =
         window.scrollY;
 
-      const total =
+
+      /*
+       * Scroll distance available while
+       * reading the article.
+       */
+
+      const totalScrollable =
         Math.max(
-          articleHeight - viewport,
+          articleHeight -
+          viewportHeight,
           1
         );
 
+
       const current =
-        scroll - articleTop;
+        scrollY -
+        articleTop;
+
 
       let percent =
-        (current / total) * 100;
+        (current / totalScrollable) *
+        100;
+
+
+      /*
+       * Clamp between 0 and 100.
+       */
 
       percent =
         Math.max(
           0,
-          Math.min(100, percent)
+          Math.min(
+            100,
+            percent
+          )
         );
+
 
       progress.style.width =
         `${percent}%`;
 
     };
 
+
+    /*
+     * Store handler references so they can
+     * be removed before re-initialization.
+     */
+
+    readingProgressScrollHandler =
+      updateProgress;
+
+    readingProgressResizeHandler =
+      updateProgress;
+
+
     window.addEventListener(
       "scroll",
-      updateProgress,
-      { passive: true }
+      readingProgressScrollHandler,
+      {
+        passive: true
+      }
     );
+
 
     window.addEventListener(
       "resize",
-      updateProgress
+      readingProgressResizeHandler
     );
+
+
+    /*
+     * Calculate immediately.
+     *
+     * Important when:
+     * - navigating with ClientRouter
+     * - browser restores scroll position
+     * - switching article language
+     */
 
     updateProgress();
 
   }
 
+
+  /*
+   * Astro ClientRouter lifecycle.
+   *
+   * Runs on the first page and after every
+   * client-side navigation.
+   */
+
+  document.addEventListener(
+    "astro:page-load",
+    initReadingProgress
+  );
 </script>
 
+
 <style>
+  .reading-progress {
 
-.reading-progress {
+    position: fixed;
 
-  position: fixed;
+    top: 0;
 
-  top: 0;
+    left: 0;
 
-  left: 0;
+    width: 0;
 
-  width: 0;
+    height: 4px;
 
-  height: 4px;
+    background: linear-gradient(
+      90deg,
+      #2E7D32,
+      #66BB6A
+    );
 
-  background: linear-gradient(
-    90deg,
-    #2E7D32,
-    #66BB6A
-  );
+    z-index: 9999;
 
-  z-index: 9999;
+    transition:
+      width 0.08s linear;
 
-  transition: width .08s linear;
+    pointer-events: none;
 
-}
-
+  }
 </style>

@@ -1,9 +1,23 @@
 ---
+import type { Language } from "../../i18n/config";
+
+import {
+  getKnowledgeCategoryLabel,
+  getKnowledgeTranslations,
+} from "../../i18n/knowledge";
+
 interface Props {
   categories: string[];
+  lang?: Language;
 }
 
-const { categories } = Astro.props;
+const {
+  categories,
+  lang = "en",
+} = Astro.props;
+
+const t =
+  getKnowledgeTranslations(lang);
 ---
 
 {
@@ -12,36 +26,41 @@ const { categories } = Astro.props;
     <section class="knowledge-categories">
 
       <h2 class="section-title">
-        Browse by Category
+        {t.browseByCategory}
       </h2>
 
-        <div class="category-list">
+      <div class="category-list">
 
-          <button
-            type="button"
-            class="category-chip active"
-            data-category="all"
-            aria-pressed="true"
-          >
-            All
-          </button>
+        <button
+          type="button"
+          class="category-chip active"
+          data-category="all"
+          aria-pressed="true"
+        >
+          {t.all}
+        </button>
 
-          {
-            categories.map(category => (
+        {
+          categories.map(category => (
 
-              <button
-                type="button"
-                class="category-chip"
-                data-category={category.toLowerCase()}
-                aria-pressed="false"
-              >
-                {category}
-              </button>
+            <button
+              type="button"
+              class="category-chip"
+              data-category={category.toLowerCase()}
+              aria-pressed="false"
+            >
+              {
+                getKnowledgeCategoryLabel(
+                  category,
+                  lang
+                )
+              }
+            </button>
 
-            ))
-          }
+          ))
+        }
 
-        </div>
+      </div>
 
     </section>
 

@@ -1,4 +1,11 @@
 ---
+import type { Language } from "../../i18n/config";
+
+import {
+  getKnowledgeCategoryLabel,
+  getKnowledgeTranslations,
+} from "../../i18n/knowledge";
+
 interface Props {
   title: string;
   description: string;
@@ -6,6 +13,7 @@ interface Props {
   category: string;
   tags: string[];
   slug: string;
+  lang?: Language;
 }
 
 const {
@@ -14,12 +22,21 @@ const {
   image,
   category,
   tags,
-  slug
+  slug,
+  lang = "en",
 } = Astro.props;
+
+const t =
+  getKnowledgeTranslations(lang);
+
+const articlePath =
+  lang === "km"
+    ? `/km/knowledge/${slug}/`
+    : `/knowledge/${slug}/`;
 ---
 
 <a
-  href={`/knowledge/${slug}/`}
+  href={articlePath}
   class="featured-knowledge-card"
   data-title={title.toLowerCase()}
   data-description={description.toLowerCase()}
@@ -40,7 +57,12 @@ const {
   <div class="featured-content">
 
     <span class="category">
-      {category}
+      {
+        getKnowledgeCategoryLabel(
+          category,
+          lang
+        )
+      }
     </span>
 
     <h2>{title}</h2>
@@ -48,7 +70,7 @@ const {
     <p>{description}</p>
 
     <span class="read-more">
-      Read Article →
+      {t.readArticle} →
     </span>
 
   </div>

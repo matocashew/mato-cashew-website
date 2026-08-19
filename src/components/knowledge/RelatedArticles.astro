@@ -1,32 +1,55 @@
 ---
 import type { Knowledge } from "@models/Knowledge";
+import type { Language } from "../../i18n/config";
+
+import {
+  getKnowledgeTranslations,
+} from "../../i18n/knowledge";
+
 import KnowledgeArticleCard from "./KnowledgeArticleCard.astro";
 
 interface Props {
   articles: Knowledge[];
+  lang?: Language;
 }
 
-const { articles } = Astro.props as Props;
+const {
+  articles,
+  lang = "en",
+} = Astro.props as Props;
+
+const t =
+  getKnowledgeTranslations(lang);
 ---
 
 {
   articles.length > 0 && (
-    <section class="related-articles">
 
-      <h2>Related Articles</h2>
+    <section
+      class="related-articles"
+      lang={lang}
+    >
+
+      <h2>
+        {t.relatedArticles}
+      </h2>
 
       <div class="related-articles-grid">
 
         {
           articles.map((article) => (
+
             <KnowledgeArticleCard
               article={article}
+              lang={lang}
             />
+
           ))
         }
 
       </div>
 
     </section>
+
   )
 }

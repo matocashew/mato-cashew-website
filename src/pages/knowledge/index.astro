@@ -1,4 +1,7 @@
 ---
+import {
+  getKnowledgeTranslations,
+} from "../../i18n/knowledge";
 import PageLayout from "@layouts/PageLayout.astro";
 import KnowledgeGrid from "@components/knowledge/KnowledgeGrid.astro";
 import FeaturedKnowledgeCard from "@components/knowledge/FeaturedKnowledgeCard.astro";
@@ -15,7 +18,13 @@ import "@styles/components/knowledge-index-hero.css";
 import "@styles/components/knowledge-article-card.css";
 import "@styles/components/knowledge-system.css";
 
-const articles = await knowledgeService.getAll();
+const lang = "en";
+
+const t =
+  getKnowledgeTranslations(lang);
+
+const articles =
+  await knowledgeService.getAll(lang);
 
 const featuredArticle =
   articles.find(article => article.featured);
@@ -65,17 +74,29 @@ const tags = [
   ]}
 >
   <div class="container knowledge-index-page">
-    <KnowledgeIndexHero />
-    <KnowledgeToolbar totalArticles={latestArticles.length} />
+    <KnowledgeIndexHero lang={lang} />
+
+    <KnowledgeToolbar
+      totalArticles={totalArticles}
+      lang={lang}
+    />
+
     <KnowledgeStats
       articles={totalArticles}
       categories={totalCategories}
       tags={totalTags}
+      lang={lang}
     />
-    <KnowledgeCategories categories={categories} />
+
+    <KnowledgeCategories
+      categories={categories}
+      lang={lang}
+    />
 
     <section class="knowledge-tags-filter">
-      <h2>Browse by Tags</h2>
+      <h2>
+        {t.browseByTags}
+      </h2>
 
       <div
         id="knowledge-tag-filter"
@@ -87,7 +108,7 @@ const tags = [
           data-tag=""
           aria-pressed="true"
         >
-          All
+          {t.all}
         </button>
 
         {
@@ -113,13 +134,13 @@ const tags = [
         type="button"
         aria-expanded="false"
       >
-        Show More Tags
+        {t.showMoreTags}
       </button>
     </section>
 
     <section id="featured-article-section">
       <h2 class="section-title">
-        Featured Article
+        {t.featuredArticle}
       </h2>
 
       {
@@ -131,6 +152,7 @@ const tags = [
             category={featuredArticle.category}
             tags={featuredArticle.tags}
             slug={featuredArticle.slug}
+            lang={lang}
           />
         )
       }
@@ -138,11 +160,12 @@ const tags = [
 
     <section class="knowledge-latest-section">
       <h2 class="section-title">
-        Latest Articles
+        {t.latestArticles}
       </h2>
 
       <KnowledgeGrid
         articles={latestArticles}
+        lang={lang}
       />
     </section>
 
