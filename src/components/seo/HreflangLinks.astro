@@ -5,32 +5,42 @@ interface Props {
   canonical: string;
   lang?: "en" | "km";
   hasKhmerAlternate?: boolean;
+  englishAlternateUrl?: string;
+  khmerAlternateUrl?: string;
 }
 
 const {
   canonical,
   lang = "en",
   hasKhmerAlternate = true,
+  englishAlternateUrl,
+  khmerAlternateUrl,
 } = Astro.props;
 
 const siteUrl =
   SITE.website.url.replace(/\/$/, "");
 
 const enUrl =
-  lang === "km"
-    ? canonical.replace(
-        `${siteUrl}/km`,
-        siteUrl
-      )
-    : canonical;
+  englishAlternateUrl ??
+  (
+    lang === "km"
+      ? canonical.replace(
+          `${siteUrl}/km`,
+          siteUrl
+        )
+      : canonical
+  );
 
 const kmUrl =
-  lang === "km"
-    ? canonical
-    : canonical.replace(
-        siteUrl,
-        `${siteUrl}/km`
-      );
+  khmerAlternateUrl ??
+  (
+    lang === "km"
+      ? canonical
+      : canonical.replace(
+          siteUrl,
+          `${siteUrl}/km`
+        )
+  );
 ---
 
 <link

@@ -154,6 +154,14 @@ const articles =
 const canonical =
   `https://matocashew.com/km/knowledge/${currentSlug}/`;
 
+const englishAlternateUrl =
+  englishTranslation
+    ? `https://matocashew.com/knowledge/${englishTranslation.slug}/`
+    : undefined;
+
+const khmerAlternateUrl =
+  canonical;
+
 
 /* =========================================================
    RELATED ARTICLES
@@ -227,6 +235,8 @@ const next =
   lang={lang}
   ogType="article"
   hasKhmerAlternate={true}
+  englishAlternateUrl={englishAlternateUrl}
+  khmerAlternateUrl={khmerAlternateUrl}
   breadcrumbs={[
     {
       name: "ទំព័រដើម",

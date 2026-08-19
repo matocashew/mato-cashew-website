@@ -21,6 +21,8 @@ interface Props {
   }[];
 
   hasKhmerAlternate?: boolean;
+  englishAlternateUrl?: string;
+  khmerAlternateUrl?: string;
 }
 
 const {
@@ -38,6 +40,8 @@ const {
   breadcrumbs = [],
 
   hasKhmerAlternate = true,
+  englishAlternateUrl,
+  khmerAlternateUrl,
 } = Astro.props;
 ---
 
@@ -56,6 +60,8 @@ const {
   breadcrumbs={breadcrumbs}
 
   hasKhmerAlternate={hasKhmerAlternate}
+  englishAlternateUrl={englishAlternateUrl}
+  khmerAlternateUrl={khmerAlternateUrl}
 >
 
   <Header />

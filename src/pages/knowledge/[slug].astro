@@ -123,6 +123,14 @@ const khmerLanguagePath =
 const canonical =
   `https://matocashew.com/knowledge/${currentSlug}/`;
 
+const englishAlternateUrl =
+  canonical;
+
+const khmerAlternateUrl =
+  khmerTranslation
+    ? `https://matocashew.com/km/knowledge/${khmerTranslation.slug}/`
+    : undefined;
+
 
 /* =========================================================
    RELATED ARTICLES
@@ -190,6 +198,8 @@ const next =
   lang="en"
   ogType="article"
   hasKhmerAlternate={Boolean(khmerTranslation)}
+  englishAlternateUrl={englishAlternateUrl}
+  khmerAlternateUrl={khmerAlternateUrl}
   breadcrumbs={[
     {
       name: "Home",

@@ -33,6 +33,8 @@ interface Props {
   }[];
 
   hasKhmerAlternate?: boolean;
+  englishAlternateUrl?: string;
+  khmerAlternateUrl?: string;
 }
 
 const siteUrl = SITE.website.url;
@@ -54,6 +56,8 @@ const {
   breadcrumbs = [],
 
   hasKhmerAlternate = true,
+  englishAlternateUrl,
+  khmerAlternateUrl,
 } = Astro.props;
 
 const localizedBrand =
@@ -120,6 +124,8 @@ const localizedKeywords =
     canonical={canonical}
     lang={lang}
     hasKhmerAlternate={hasKhmerAlternate}
+    englishAlternateUrl={englishAlternateUrl}
+    khmerAlternateUrl={khmerAlternateUrl}
   />
 
   <!-- Fonts -->
