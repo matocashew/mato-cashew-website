@@ -61,7 +61,7 @@ const tags = [
   description="Explore practical knowledge about Cambodian cashews, including processing, grading, quality, food safety, packaging, storage, and export preparation."
   canonical="https://matocashew.com/knowledge/"
   lang="en"
-  hasKhmerAlternate={false}
+  hasKhmerAlternate={true}
   breadcrumbs={[
     {
       name: "Home",
@@ -73,7 +73,10 @@ const tags = [
     }
   ]}
 >
-  <div class="container knowledge-index-page">
+  <div
+    class="container knowledge-index-page"
+    lang={lang}
+  >
     <KnowledgeIndexHero lang={lang} />
 
     <KnowledgeToolbar
@@ -93,7 +96,11 @@ const tags = [
       lang={lang}
     />
 
+{
+  tags.length > 0 && (
+
     <section class="knowledge-tags-filter">
+
       <h2>
         {t.browseByTags}
       </h2>
@@ -102,6 +109,7 @@ const tags = [
         id="knowledge-tag-filter"
         class="tag-filter-chips"
       >
+
         <button
           type="button"
           class="tag-filter-chip active"
@@ -112,31 +120,47 @@ const tags = [
         </button>
 
         {
-          tags.map((tag, index) => (
-            <button
-              type="button"
-              class:list={[
-                "tag-filter-chip",
-                index >= 8 && "tag-filter-chip--extra"
-              ]}
-              data-tag={tag.toLowerCase()}
-              aria-pressed="false"
-            >
-              #{tag}
-            </button>
-          ))
+          tags.map(
+            (tag, index) => (
+
+              <button
+                type="button"
+                class:list={[
+                  "tag-filter-chip",
+                  index >= 8 &&
+                    "tag-filter-chip--extra"
+                ]}
+                data-tag={tag.toLowerCase()}
+                aria-pressed="false"
+              >
+                #{tag}
+              </button>
+
+            )
+          )
         }
+
       </div>
 
-      <button
-        id="knowledge-tags-toggle"
-        class="knowledge-tags-toggle"
-        type="button"
-        aria-expanded="false"
-      >
-        {t.showMoreTags}
-      </button>
+      {
+        tags.length > 8 && (
+
+          <button
+            id="knowledge-tags-toggle"
+            class="knowledge-tags-toggle"
+            type="button"
+            aria-expanded="false"
+          >
+            {t.showMoreTags}
+          </button>
+
+        )
+      }
+
     </section>
+
+  )
+}
 
     <section id="featured-article-section">
       <h2 class="section-title">
