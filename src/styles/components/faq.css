@@ -54,7 +54,7 @@
 
 .faq-item[open] summary::after {
 
-  content: "−";
+  content: "-";
 
 }
 
@@ -80,4 +80,52 @@
 
   padding-top: .75rem;
 
+}
+
+/* =========================================================
+   FAQ COMPONENT ICON
+   FAQ.astro renders its own .faq-icon.
+   Keep ::after only for legacy FaqItem.astro.
+   ========================================================= */
+
+.faq-item .faq-question::after {
+  content: none;
+  display: none;
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.faq-question > span:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.faq-question .faq-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  width: 1.5rem;
+  height: 1.5rem;
+
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+
+  transition:
+    transform 180ms ease,
+    color 180ms ease;
+}
+
+.faq-item[open]
+.faq-question
+.faq-icon {
+  transform: rotate(45deg);
 }

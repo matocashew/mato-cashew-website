@@ -225,3 +225,155 @@ html {
   }
 
 }
+
+/* MATO KNOWLEDGE PREMIUM ARTICLE V1 */
+
+.knowledge-layout {
+  gap: clamp(2rem, 4vw, 4rem);
+  margin-top: 2.75rem;
+}
+
+.knowledge-content {
+  color: #25332a;
+}
+
+.knowledge-content > :first-child {
+  margin-top: 0;
+}
+
+.knowledge-content h2 {
+  position: relative;
+  margin-top: 4.25rem;
+  margin-bottom: 1.25rem;
+  padding-top: 0.25rem;
+  color: #123c27;
+  font-size: clamp(1.65rem, 2.2vw, 2.15rem);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.knowledge-content h2::before {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  margin-bottom: 0.9rem;
+  border-radius: 999px;
+  background: var(--knowledge-primary, #176b42);
+}
+
+.knowledge-content h3 {
+  margin-top: 2.6rem;
+  margin-bottom: 0.9rem;
+  color: #194d32;
+  font-size: clamp(1.25rem, 1.7vw, 1.5rem);
+  line-height: 1.45;
+}
+
+.knowledge-content p {
+  margin: 1.15rem 0;
+  color: #3d4b42;
+  font-size: 1.04rem;
+  line-height: 1.95;
+}
+
+.knowledge-content li {
+  margin: 0.65rem 0;
+  color: #3d4b42;
+  line-height: 1.85;
+}
+
+.knowledge-content strong {
+  color: #203b2c;
+  font-weight: 700;
+}
+
+.knowledge-content img {
+  margin: 2.5rem 0;
+  border: 1px solid rgba(18, 60, 39, 0.08);
+  border-radius: 20px;
+  box-shadow:
+    0 18px 45px rgba(20, 54, 36, 0.08);
+}
+
+.knowledge-content blockquote {
+  position: relative;
+  margin: 2.4rem 0;
+  padding: 1.35rem 1.5rem 1.35rem 1.75rem;
+  border: 1px solid rgba(24, 107, 66, 0.12);
+  border-left: 4px solid
+    var(--knowledge-primary, #176b42);
+  border-radius: 0 14px 14px 0;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(238, 247, 241, 0.95),
+      rgba(250, 252, 249, 0.95)
+    );
+  color: #294536;
+}
+
+.knowledge-content hr {
+  width: 100%;
+  height: 1px;
+  margin: 4rem 0;
+  border: 0;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(23, 107, 66, 0.22),
+      transparent
+    );
+}
+
+html[lang="km"] .knowledge-content p,
+html[lang="km"] .knowledge-content li {
+  line-height: 2;
+}
+
+html[lang="km"] .knowledge-content h2 {
+  line-height: 1.55;
+}
+
+html[lang="km"] .knowledge-content h3 {
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .knowledge-layout {
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .knowledge-content h2 {
+    margin-top: 3.4rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .knowledge-content h2 {
+    margin-top: 3rem;
+    font-size: 1.55rem;
+  }
+
+  .knowledge-content h3 {
+    margin-top: 2.2rem;
+    font-size: 1.25rem;
+  }
+
+  .knowledge-content p {
+    font-size: 1rem;
+    line-height: 1.85;
+  }
+
+  html[lang="km"] .knowledge-content p,
+  html[lang="km"] .knowledge-content li {
+    line-height: 1.95;
+  }
+
+  .knowledge-content img {
+    margin: 2rem 0;
+    border-radius: 14px;
+  }
+}

@@ -195,3 +195,312 @@
   }
 
 }
+
+/* MATO KNOWLEDGE PREMIUM TOC V1 */
+
+.knowledge-toc {
+  padding: 1.35rem;
+  border:
+    1px solid rgba(20, 72, 46, 0.10);
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fbfcfa 100%
+    );
+  box-shadow:
+    0 12px 34px rgba(22, 54, 37, 0.07);
+}
+
+.toc-item a {
+  position: relative;
+  padding: 0.62rem 0.8rem;
+  border-left: 0;
+  border-radius: 9px;
+  color: #536158;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.toc-item a:hover {
+  background: #f2f7f3;
+  color: #176b42;
+}
+
+.toc-item a.active {
+  padding-left: 0.95rem;
+  border-left: 0 !important;
+  background:
+    linear-gradient(
+      135deg,
+      #176b42,
+      #0e5734
+    ) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow:
+    0 7px 18px rgba(23, 107, 66, 0.18);
+}
+
+.toc-item a.active::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0.45rem;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: #d8b75c;
+  transform: translateY(-50%);
+}
+
+html[lang="km"] .toc-item a {
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .knowledge-toc {
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.15rem;
+    border-radius: 14px;
+    box-shadow:
+      0 8px 24px rgba(22, 54, 37, 0.06);
+  }
+
+  .knowledge-toc summary {
+    margin-bottom: 0;
+    color: #174b31;
+  }
+
+  .knowledge-toc[open] summary {
+    margin-bottom: 1rem;
+  }
+}
+/* =========================================================
+   PREMIUM TOC SCROLL EXPERIENCE
+   ========================================================= */
+
+/*
+ * Keep scrolling, but remove the heavy native scrollbar.
+ */
+.knowledge-toc {
+  position: sticky;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  overflow-y: auto;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fbfcfa 100%
+    );
+
+  border:
+    1px solid rgba(20, 72, 46, 0.10);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 12px 32px
+    rgba(20, 54, 36, 0.07);
+}
+
+
+/* Chrome / Edge / Safari */
+
+.knowledge-toc::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+
+/* =========================================================
+   TOC LIST
+   ========================================================= */
+
+.knowledge-toc ul {
+  position: relative;
+
+  padding:
+    0.45rem
+    0.55rem
+    0.75rem;
+
+  margin: 0;
+}
+
+
+/* =========================================================
+   TOC LINKS
+   ========================================================= */
+
+.knowledge-toc
+.toc-item a {
+  display: block;
+
+  position: relative;
+
+  margin: 0.12rem 0;
+
+  padding:
+    0.62rem
+    0.85rem;
+
+  border-radius: 10px;
+
+  border: 0;
+
+  color: #526158;
+
+  background: transparent;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  line-height: 1.55;
+
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+
+/* Hover */
+
+.knowledge-toc
+.toc-item a:hover {
+  color:
+    var(--knowledge-primary, #176b42);
+
+  background:
+    rgba(23, 107, 66, 0.055);
+
+  transform:
+    translateX(2px);
+}
+
+
+/* =========================================================
+   ACTIVE SECTION
+   ========================================================= */
+
+.knowledge-toc
+.toc-item a.active {
+  padding:
+    0.7rem
+    0.95rem;
+
+  color: #ffffff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #176b42,
+      #0d5734
+    ) !important;
+
+  border: 0 !important;
+
+  border-radius: 11px;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 8px 18px
+    rgba(23, 107, 66, 0.18);
+
+  transform: none;
+}
+
+
+/*
+ * Small gold indicator instead of a heavy border.
+ */
+.knowledge-toc
+.toc-item a.active::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0.45rem;
+  top: 50%;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: #e3c46d;
+
+  transform:
+    translateY(-50%);
+}
+
+
+/* =========================================================
+   KHMER
+   ========================================================= */
+
+html[lang="km"]
+.knowledge-toc
+.toc-item a {
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   PREMIUM SCROLL FADES
+   ========================================================= */
+
+/*
+ * The fade subtly communicates that more TOC content
+ * continues beyond the visible area.
+ */
+
+.knowledge-toc {
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0,
+      #000 18px,
+      #000 calc(100% - 18px),
+      transparent 100%
+    );
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0,
+      #000 18px,
+      #000 calc(100% - 18px),
+      transparent 100%
+    );
+}
+
+
+/* =========================================================
+   TABLET / MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .knowledge-toc {
+    position: relative;
+
+    max-height: none;
+
+    mask-image: none;
+    -webkit-mask-image: none;
+
+    border-radius: 14px;
+  }
+
+}

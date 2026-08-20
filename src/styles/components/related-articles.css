@@ -60,3 +60,1063 @@
   }
 
 }
+
+/* =========================================================
+   MATO KNOWLEDGE PREMIUM RELATED V2
+   ========================================================= */
+
+.related-articles {
+  position: relative;
+
+  margin-top: 4.75rem;
+  margin-bottom: 0;
+
+  padding:
+    clamp(1.5rem, 3.5vw, 3rem);
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(20, 72, 46, 0.085);
+
+  border-radius: 26px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fbfcf8 0%,
+      #f4f8f3 48%,
+      #f8f5eb 100%
+    );
+
+  box-shadow:
+    0 18px 50px rgba(20, 54, 36, 0.055);
+}
+
+.related-articles::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -90px;
+
+  width: 270px;
+  height: 270px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(205, 166, 65, 0.12),
+      transparent 68%
+    );
+
+  pointer-events: none;
+}
+
+.related-articles::after {
+  content: "";
+  position: absolute;
+  left: -100px;
+  bottom: -150px;
+
+  width: 280px;
+  height: 280px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(23, 107, 66, 0.065),
+      transparent 68%
+    );
+
+  pointer-events: none;
+}
+
+.related-articles h2 {
+  position: relative;
+  z-index: 1;
+
+  margin: 0 0 1.8rem;
+  padding-bottom: 1rem;
+
+  color: #123c27;
+
+  font-size:
+    clamp(1.45rem, 2.2vw, 1.9rem);
+
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.related-articles h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 46px;
+  height: 3px;
+
+  border-radius: 999px;
+
+  background:
+    var(--knowledge-primary, #176b42);
+}
+
+.related-articles-grid {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+/*
+ * Keep existing KnowledgeArticleCard architecture,
+ * but give cards a quieter editorial treatment
+ * inside Related Articles.
+ */
+
+.related-articles
+.knowledge-article-card {
+  height: 100%;
+
+  border:
+    1px solid rgba(20, 72, 46, 0.085);
+
+  background: rgba(255,255,255,0.94);
+
+  box-shadow:
+    0 8px 24px rgba(20, 54, 36, 0.055);
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.related-articles
+.knowledge-article-card:hover {
+  transform: translateY(-4px);
+
+  border-color:
+    rgba(23, 107, 66, 0.18);
+
+  box-shadow:
+    0 16px 38px rgba(20, 54, 36, 0.10);
+}
+
+html[lang="km"]
+.related-articles h2 {
+  line-height: 1.65;
+}
+
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  .related-articles {
+    margin-top: 3.5rem;
+
+    padding:
+      1.75rem 1.2rem;
+
+    border-radius: 20px;
+  }
+
+  .related-articles h2 {
+    margin-bottom: 1.4rem;
+  }
+
+  .related-articles-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .related-articles {
+    padding:
+      1.5rem 0.9rem;
+  }
+
+}
+
+/* =========================================================
+   PREMIUM RELATED ARTICLE META PANEL
+   ========================================================= */
+
+.related-articles
+.knowledge-article-card
+.card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Push metadata area toward the bottom of equal-height cards */
+.related-articles
+.knowledge-article-card
+.card-tags {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 0.35rem 0.45rem;
+
+  margin-top: auto;
+  margin-bottom: 0;
+
+  padding:
+    1rem 4.5rem
+    0.55rem 4.3rem;
+
+  min-height: 58px;
+
+  border:
+    1px solid rgba(19, 78, 47, 0.09);
+
+  border-bottom: 0;
+
+  border-radius:
+    16px 16px 0 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fbfcf7 0%,
+      #f7f8ef 100%
+    );
+}
+
+
+/* ---------------------------------------------------------
+   Tag icon
+   --------------------------------------------------------- */
+
+.related-articles
+.knowledge-article-card
+.card-tags::before {
+  content: "#";
+
+  position: absolute;
+
+  left: 1rem;
+  top: 50%;
+
+  display: grid;
+  place-items: center;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  transform:
+    translateY(-50%);
+
+  background:
+    linear-gradient(
+      145deg,
+      #f7edd0,
+      #f2dfaa
+    );
+
+  color:
+    #155b37;
+
+  font-size: 1rem;
+  font-weight: 800;
+
+  box-shadow:
+    0 5px 14px
+    rgba(113, 91, 31, 0.10);
+}
+
+
+/* ---------------------------------------------------------
+   Tags become clean editorial text
+   --------------------------------------------------------- */
+
+.related-articles
+.knowledge-article-card
+.card-tag {
+  display: inline;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius: 0;
+
+  background: transparent;
+
+  color: #425148;
+
+  font-size: 0.82rem;
+  font-weight: 650;
+
+  line-height: 1.55;
+
+  box-shadow: none;
+
+  transition: color 160ms ease;
+}
+
+.related-articles
+.knowledge-article-card
+.card-tag:hover {
+  background: transparent;
+  color:
+    var(--knowledge-primary, #176b42);
+  transform: none;
+}
+
+
+/* ---------------------------------------------------------
+   Footer / reading time
+   --------------------------------------------------------- */
+
+.related-articles
+.knowledge-article-card
+.card-footer {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-top: 0;
+
+  padding:
+    0.55rem 1rem
+    1rem 4.3rem;
+
+  min-height: 58px;
+
+  border:
+    1px solid rgba(19, 78, 47, 0.09);
+
+  border-top: 0;
+
+  border-radius:
+    0 0 16px 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fbfcf7 0%,
+      #f7f8ef 100%
+    );
+
+  color: #31503e;
+
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+
+/* ---------------------------------------------------------
+   Premium round arrow button
+   --------------------------------------------------------- */
+
+.related-articles
+.knowledge-article-card
+.card-footer
+.read-more {
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  width: 42px;
+  height: 42px;
+
+  padding: 0;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #176b42,
+      #0e5533
+    );
+
+  color: transparent;
+
+  font-size: 0;
+
+  box-shadow:
+    0 7px 18px
+    rgba(23, 107, 66, 0.20);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.related-articles
+.knowledge-article-card
+.card-footer
+.read-more::before {
+  content: "›";
+
+  color: #ffffff;
+
+  font-size: 1.65rem;
+  font-weight: 400;
+
+  line-height: 1;
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* ---------------------------------------------------------
+   Hover interaction
+   --------------------------------------------------------- */
+
+.related-articles
+.knowledge-article-card:hover
+.card-footer
+.read-more {
+  transform:
+    translateX(3px);
+
+  box-shadow:
+    0 9px 22px
+    rgba(23, 107, 66, 0.27);
+}
+
+
+/* ---------------------------------------------------------
+   Khmer typography
+   --------------------------------------------------------- */
+
+html[lang="km"]
+.related-articles
+.knowledge-article-card
+.card-tag {
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+html[lang="km"]
+.related-articles
+.knowledge-article-card
+.card-footer {
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+
+/* ---------------------------------------------------------
+   Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 640px) {
+
+  .related-articles
+  .knowledge-article-card
+  .card-tags {
+    padding:
+      0.9rem 3.8rem
+      0.5rem 3.7rem;
+  }
+
+  .related-articles
+  .knowledge-article-card
+  .card-tags::before {
+    left: 0.85rem;
+
+    width: 34px;
+    height: 34px;
+  }
+
+  .related-articles
+  .knowledge-article-card
+  .card-footer {
+    padding:
+      0.5rem 0.85rem
+      0.9rem 3.7rem;
+  }
+
+  .related-articles
+  .knowledge-article-card
+  .card-footer
+  .read-more {
+    width: 38px;
+    height: 38px;
+  }
+
+}
+/* =========================================================
+   PREMIUM RELATED META PANEL - LAYOUT FIX
+   ========================================================= */
+
+/*
+ * Do not force card-content to 100% height.
+ * The article card already manages its own height.
+ */
+.related-articles
+.knowledge-article-card
+.card-content {
+  display: flex;
+  flex-direction: column;
+
+  height: auto;
+  min-height: 0;
+}
+
+
+/*
+ * Keep metadata in normal document flow.
+ * margin-top:auto was pushing the block outside
+ * the visible card content area.
+ */
+.related-articles
+.knowledge-article-card
+.card-tags {
+  flex: 0 0 auto;
+
+  margin-top: 1rem;
+  margin-bottom: 0;
+
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/*
+ * Ensure footer remains visible and participates
+ * in the normal card layout.
+ */
+.related-articles
+.knowledge-article-card
+.card-footer {
+  position: relative;
+
+  flex: 0 0 auto;
+
+  margin-top: 0;
+
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/*
+ * Allow the card to grow naturally with
+ * category, title, description, tags and footer.
+ */
+.related-articles
+.knowledge-article-card {
+  height: auto;
+  min-height: 100%;
+
+  overflow: visible;
+}
+
+
+/*
+ * Keep the two Related Article cards equal height
+ * through the grid item, not by forcing card-content.
+ */
+.related-articles-grid {
+  align-items: stretch;
+}
+
+.related-articles-grid
+> .knowledge-article-card {
+  align-self: stretch;
+}
+
+
+/* Mobile safeguard */
+
+@media (max-width: 768px) {
+
+  .related-articles
+  .knowledge-article-card {
+    min-height: 0;
+  }
+
+}
+/* =========================================================
+   PREMIUM RELATED META PANEL - FINAL POLISH
+   ========================================================= */
+
+.related-articles
+.knowledge-article-card
+.card-tags {
+  min-height: auto;
+
+  padding:
+    0.9rem 4.2rem
+    0.75rem 4.15rem;
+
+  gap: 0.3rem 0.55rem;
+
+  border-radius:
+    16px 16px 0 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fbfcf7 0%,
+      #f8f8f1 100%
+    );
+}
+
+
+/* Smaller, more refined tag icon */
+
+.related-articles
+.knowledge-article-card
+.card-tags::before {
+  left: 1rem;
+
+  width: 36px;
+  height: 36px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f8edcb,
+      #f3dda0
+    );
+
+  color: #125f39;
+
+  font-size: 0.95rem;
+
+  box-shadow:
+    0 4px 12px
+    rgba(111, 91, 34, 0.09);
+}
+
+
+/* Tags */
+
+.related-articles
+.knowledge-article-card
+.card-tag {
+  color: #31483a;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+
+  line-height: 1.55;
+}
+
+
+/* ---------------------------------------------------------
+   Footer
+   --------------------------------------------------------- */
+
+.related-articles
+.knowledge-article-card
+.card-footer {
+  min-height: auto;
+
+  padding:
+    0.75rem 1rem
+    0.9rem 4.15rem;
+
+  border-top:
+    1px solid rgba(20, 72, 46, 0.065);
+
+  color: #31503e;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fbfcf7 0%,
+      #f8f8f1 100%
+    );
+
+  font-size: 0.82rem;
+}
+
+
+/* Reading-time text */
+
+.related-articles
+.knowledge-article-card
+.card-footer > span:first-child {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 38px;
+
+  color: #31503e;
+
+  font-weight: 700;
+}
+
+
+/* ---------------------------------------------------------
+   Arrow button
+   --------------------------------------------------------- */
+
+.related-articles
+.knowledge-article-card
+.card-footer
+.read-more {
+  width: 40px;
+  height: 40px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #167044,
+      #0d5734
+    );
+
+  box-shadow:
+    0 6px 16px
+    rgba(17, 98, 57, 0.20);
+}
+
+.related-articles
+.knowledge-article-card
+.card-footer
+.read-more::before {
+  font-size: 1.55rem;
+}
+
+
+/* ---------------------------------------------------------
+   Better spacing between description and meta panel
+   --------------------------------------------------------- */
+
+.related-articles
+.knowledge-article-card
+.card-content > p {
+  margin-bottom: 0.5rem;
+}
+
+.related-articles
+.knowledge-article-card
+.card-tags {
+  margin-top: 0.75rem;
+}
+
+
+/* ---------------------------------------------------------
+   Khmer
+   --------------------------------------------------------- */
+
+html[lang="km"]
+.related-articles
+.knowledge-article-card
+.card-tag {
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+
+html[lang="km"]
+.related-articles
+.knowledge-article-card
+.card-footer {
+  font-size: 0.86rem;
+}
+
+
+/* ---------------------------------------------------------
+   Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 640px) {
+
+  .related-articles
+  .knowledge-article-card
+  .card-tags {
+    padding:
+      0.8rem 3.7rem
+      0.65rem 3.6rem;
+  }
+
+  .related-articles
+  .knowledge-article-card
+  .card-tags::before {
+    left: 0.8rem;
+
+    width: 34px;
+    height: 34px;
+  }
+
+  .related-articles
+  .knowledge-article-card
+  .card-footer {
+    padding:
+      0.65rem 0.8rem
+      0.8rem 3.6rem;
+  }
+
+  .related-articles
+  .knowledge-article-card
+  .card-footer
+  .read-more {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+/* =========================================================
+   RELATED ARTICLE CARDS - EQUAL HEIGHT FINAL FIX
+   ========================================================= */
+
+/*
+ * The grid stretches both cards to the same row height.
+ */
+.related-articles-grid {
+  align-items: stretch;
+}
+
+
+/*
+ * Make the complete article card a vertical flex container.
+ * height: 100% is safe here because the GRID ITEM itself
+ * should fill the available row height.
+ */
+.related-articles
+.knowledge-article-card {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+
+/*
+ * Image remains at the top and must not shrink.
+ */
+.related-articles
+.knowledge-article-card > img {
+  flex: 0 0 auto;
+}
+
+
+/*
+ * Card content fills all remaining height below the image.
+ *
+ * IMPORTANT:
+ * Do NOT use height: 100% here.
+ * flex: 1 is what prevents the previous overflow problem.
+ */
+.related-articles
+.knowledge-article-card
+.card-content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+
+  height: auto;
+  min-height: 0;
+}
+
+
+/*
+ * Description stays in normal flow.
+ */
+.related-articles
+.knowledge-article-card
+.card-content > p {
+  flex: 0 0 auto;
+}
+
+
+/*
+ * Push the premium metadata panel to the bottom,
+ * regardless of description length.
+ */
+.related-articles
+.knowledge-article-card
+.card-tags {
+  flex: 0 0 auto;
+
+  margin-top: auto;
+  margin-bottom: 0;
+
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/*
+ * Footer remains directly attached to the tags panel.
+ */
+.related-articles
+.knowledge-article-card
+.card-footer {
+  flex: 0 0 auto;
+
+  margin-top: 0;
+
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  /*
+   * Related cards stack vertically on mobile.
+   * They no longer need equal heights.
+   */
+  .related-articles
+  .knowledge-article-card {
+    height: auto;
+  }
+
+  .related-articles
+  .knowledge-article-card
+  .card-tags {
+    margin-top: 0.75rem;
+  }
+}
+
+/* =========================================================
+   RELATED ARTICLE CONTENT SPACING - FINAL POLISH
+   ========================================================= */
+
+/*
+ * Give the text area more breathing room without
+ * affecting the premium metadata panel below.
+ */
+.related-articles
+.knowledge-article-card
+.card-content {
+  padding:
+    0;
+}
+
+
+/*
+ * Category
+ */
+.related-articles
+.knowledge-article-card
+.card-content > .category {
+  display: inline-block;
+
+  margin:
+    1rem 1.25rem
+    0.45rem;
+
+  line-height: 1.5;
+}
+
+
+/*
+ * Title
+ */
+.related-articles
+.knowledge-article-card
+.card-content > h3 {
+  margin:
+    0 1.25rem
+    0.55rem;
+
+  line-height: 1.45;
+}
+
+
+/*
+ * Description
+ */
+.related-articles
+.knowledge-article-card
+.card-content > p {
+  margin:
+    0 1.25rem
+    1.15rem;
+
+  line-height: 1.75;
+}
+
+
+/*
+ * Keep premium metadata panel full width.
+ * It should not inherit the text margins above.
+ */
+.related-articles
+.knowledge-article-card
+.card-tags,
+.related-articles
+.knowledge-article-card
+.card-footer {
+  width: 100%;
+}
+
+
+/* Khmer typography */
+
+html[lang="km"]
+.related-articles
+.knowledge-article-card
+.card-content > h3 {
+  line-height: 1.6;
+}
+
+html[lang="km"]
+.related-articles
+.knowledge-article-card
+.card-content > p {
+  line-height: 1.9;
+}
+
+
+/* Tablet / Mobile */
+
+@media (max-width: 768px) {
+
+  .related-articles
+  .knowledge-article-card
+  .card-content > .category {
+    margin:
+      0.9rem 1rem
+      0.4rem;
+  }
+
+  .related-articles
+  .knowledge-article-card
+  .card-content > h3 {
+    margin:
+      0 1rem
+      0.5rem;
+  }
+
+  .related-articles
+  .knowledge-article-card
+  .card-content > p {
+    margin:
+      0 1rem
+      1rem;
+  }
+}
