@@ -4,7 +4,8 @@ import type { Language } from "../../i18n/config";
 
 import {
   formatKnowledgeText,
-  getKnowledgeCategoryLabel,
+  getKnowledgeDisplayCategoryLabel,
+  getKnowledgeTagLabel,
   getKnowledgeTranslations,
 } from "../../i18n/knowledge";
 
@@ -45,10 +46,10 @@ const articlePath =
 
     <span class="category">
       {
-        getKnowledgeCategoryLabel(
-          article.category,
-          lang
-        )
+        getKnowledgeDisplayCategoryLabel(
+        article.category,
+        lang
+      )
       }
     </span>
 
@@ -66,7 +67,7 @@ const articlePath =
                   class="card-tag"
                   data-tag={tag.toLowerCase()}
                 >
-                  #{tag}
+                  #{getKnowledgeTagLabel(tag, lang)}
                 </span>
               )
             )

@@ -1,5 +1,8 @@
 ---
 import type { Language } from "../../i18n/config";
+import {
+  getKnowledgeTagLabel,
+} from "../../i18n/knowledge";
 
 interface Props {
   tags: string[];
@@ -30,7 +33,7 @@ const ariaLabel =
         tags.map((tag) => (
 
           <span class="tag">
-            {tag}
+            {getKnowledgeTagLabel(tag, lang)}
           </span>
 
         ))

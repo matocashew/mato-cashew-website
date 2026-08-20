@@ -10,6 +10,7 @@ import KnowledgeToolbar from "@components/knowledge/KnowledgeToolbar.astro";
 import { knowledgeService } from "@services/knowledgeService";
 
 import {
+  getKnowledgeTagLabel,
   getKnowledgeTranslations,
 } from "../../../i18n/knowledge";
 
@@ -202,7 +203,7 @@ const tags = [
                     data-tag={tag.toLowerCase()}
                     aria-pressed="false"
                   >
-                    #{tag}
+                    #{getKnowledgeTagLabel(tag, lang)}
                   </button>
 
                 )

@@ -451,7 +451,205 @@ export function getKnowledgeCategoryLabel(
     key
   ][language];
 }
+/* =========================================================
+   KNOWLEDGE DISPLAY TAXONOMY
+   ========================================================= */
 
+const knowledgeCategoryDisplayLabels:
+  Record<string, Record<Language, string>> = {
+
+  "Quality": {
+    en: "Quality",
+    km: "គុណភាព",
+  },
+
+  "Food Safety": {
+    en: "Food Safety",
+    km: "សុវត្ថិភាពម្ហូបអាហារ",
+  },
+
+  "About Cashew": {
+    en: "About Cashew",
+    km: "អំពីស្វាយចន្ទី",
+  },
+
+  "Processing": {
+    en: "Processing",
+    km: "ការកែច្នៃ",
+  },
+
+};
+
+const knowledgeTagDisplayLabels:
+  Record<string, Record<Language, string>> = {
+
+  "agriculture": {
+    en: "agriculture",
+    km: "កសិកម្ម",
+  },
+
+  "botany": {
+    en: "botany",
+    km: "រុក្ខសាស្ត្រ",
+  },
+
+  "cambodia": {
+    en: "cambodia",
+    km: "កម្ពុជា",
+  },
+
+  "cashew": {
+    en: "cashew",
+    km: "ស្វាយចន្ទី",
+  },
+
+  "food safety": {
+    en: "food safety",
+    km: "សុវត្ថិភាពម្ហូបអាហារ",
+  },
+
+  "hygiene": {
+    en: "hygiene",
+    km: "អនាម័យ",
+  },
+
+  "tree": {
+    en: "tree",
+    km: "ដើមស្វាយចន្ទី",
+  },
+
+  "buyer-guide": {
+    en: "buyer-guide",
+    km: "មគ្គុទ្ទេសក៍អ្នកទិញ",
+  },
+
+  "cashew-kernels": {
+    en: "cashew-kernels",
+    km: "គ្រាប់ស្វាយចន្ទី",
+  },
+
+  "commercial": {
+    en: "commercial",
+    km: "ពាណិជ្ជកម្ម",
+  },
+
+  "export": {
+    en: "export",
+    km: "ការនាំចេញ",
+  },
+
+  "food-safety": {
+    en: "food-safety",
+    km: "សុវត្ថិភាពម្ហូបអាហារ",
+  },
+
+  "grading": {
+    en: "grading",
+    km: "ការចាត់ថ្នាក់",
+  },
+
+  "kernels": {
+    en: "kernels",
+    km: "គ្រាប់ស្វាយចន្ទី",
+  },
+
+  "moisture": {
+    en: "moisture",
+    km: "សំណើម",
+  },
+
+  "packaging": {
+    en: "packaging",
+    km: "ការវេចខ្ចប់",
+  },
+
+  "processing": {
+    en: "processing",
+    km: "ការកែច្នៃ",
+  },
+
+  "quality": {
+    en: "quality",
+    km: "គុណភាព",
+  },
+
+  "shelf-life": {
+    en: "shelf-life",
+    km: "អាយុកាលរក្សាទុក",
+  },
+
+  "size": {
+    en: "size",
+    km: "ទំហំ",
+  },
+
+  "standards": {
+    en: "standards",
+    km: "ស្តង់ដារ",
+  },
+
+  "storage": {
+    en: "storage",
+    km: "ការរក្សាទុក",
+  },
+
+  "traceability": {
+    en: "traceability",
+    km: "ការតាមដានប្រភព",
+  },
+
+  "trade": {
+    en: "trade",
+    km: "ពាណិជ្ជកម្ម",
+  },
+
+};
+
+export function getKnowledgeDisplayCategoryLabel(
+  category: string,
+  language: Language
+): string {
+
+  const direct =
+    knowledgeCategoryDisplayLabels[category];
+
+  if (direct) {
+    return direct[language];
+  }
+
+  return getKnowledgeCategoryLabel(
+    category,
+    language
+  );
+}
+
+export function getKnowledgeTagLabel(
+  tag: string,
+  language: Language
+): string {
+
+  const technicalTags =
+    new Set([
+      "GMP",
+      "HACCP",
+      "AFI",
+      "AOAC",
+      "MAP",
+    ]);
+
+  if (technicalTags.has(tag)) {
+    return tag;
+  }
+
+  const localized =
+    knowledgeTagDisplayLabels[
+      tag.toLowerCase()
+    ];
+
+  return localized
+    ? localized[language]
+    : tag;
+}
 
 /* =========================================================
    STRING INTERPOLATION

@@ -2,7 +2,7 @@
 import type { Language } from "../../i18n/config";
 
 import {
-  getKnowledgeCategoryLabel,
+  getKnowledgeDisplayCategoryLabel,
   getKnowledgeTranslations,
 } from "../../i18n/knowledge";
 
@@ -50,10 +50,10 @@ const t =
               aria-pressed="false"
             >
               {
-                getKnowledgeCategoryLabel(
-                  category,
-                  lang
-                )
+                getKnowledgeDisplayCategoryLabel(
+                category,
+                lang
+              )
               }
             </button>
 
