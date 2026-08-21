@@ -2298,8 +2298,8 @@
 
     width:
       min(
-        720px,
-        calc(100vw - 48px)
+        680px,
+        calc(100vw - 64px)
       );
 
     transform:
@@ -2842,15 +2842,20 @@ text-decoration: none !important;
 @media (min-width: 769px) {
 
   .hero-content,
-  .hero-trust {
+  .hero-trust,
+  .home-stat-content {
     -webkit-mask-image: none;
     mask-image: none;
   }
 
   body.mega-menu-occlusion-active
   .hero-content,
+
   body.mega-menu-occlusion-active
-  .hero-trust {
+  .hero-trust,
+
+  body.mega-menu-occlusion-active
+  .home-stat-content {
 
     /*
      * Layer 1:
@@ -2996,21 +3001,21 @@ text-decoration: none !important;
     background:
       linear-gradient(
         145deg,
-        rgba(255, 255, 255, 0.58) 0%,
-        rgba(250, 253, 251, 0.46) 100%
+        rgba(255, 255, 255, 0.78) 0%,
+        rgba(250, 253, 251, 0.66) 100%
       ) !important;
 
     border:
       1px solid
-      rgba(255, 255, 255, 0.72) !important;
+      rgba(255, 255, 255, 0.82) !important;
 
     -webkit-backdrop-filter:
-      blur(8px)
-      saturate(110%);
+      blur(14px)
+      saturate(112%);
 
     backdrop-filter:
-      blur(8px)
-      saturate(110%);
+      blur(14px)
+      saturate(112%);
 
     box-shadow:
       inset 0 1px 0
@@ -3185,4 +3190,366 @@ text-decoration: none !important;
     color:
       rgba(255, 255, 255, 0.95) !important;
   }
+}
+
+/* =========================================================
+   B7.6D2 ? HOME STATS FOUR-REGION OCCLUSION
+
+   Desktop-only deterministic mask for Home Stats text.
+
+   Keep:
+   - Stats bar
+   - Stats card surface
+   - Hero mask architecture
+
+   Hide:
+   - Only .home-stat-content where the Mega Menu overlaps.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  body.mega-menu-occlusion-active
+  .home-stat-content {
+
+    -webkit-mask-image:
+      linear-gradient(#000 0 0),
+      linear-gradient(#000 0 0),
+      linear-gradient(#000 0 0),
+      linear-gradient(#000 0 0);
+
+    mask-image:
+      linear-gradient(#000 0 0),
+      linear-gradient(#000 0 0),
+      linear-gradient(#000 0 0),
+      linear-gradient(#000 0 0);
+
+
+    /*
+     * Region 1 ? left of Mega Menu
+     * Region 2 ? right of Mega Menu
+     * Region 3 ? above Mega Menu
+     * Region 4 ? below Mega Menu
+     */
+
+    -webkit-mask-size:
+      var(--menu-hole-left)
+        100%,
+
+      calc(
+        100% -
+        var(--menu-hole-right)
+      )
+        100%,
+
+      calc(
+        var(--menu-hole-right) -
+        var(--menu-hole-left)
+      )
+        var(--menu-hole-top),
+
+      calc(
+        var(--menu-hole-right) -
+        var(--menu-hole-left)
+      )
+        calc(
+          100% -
+          var(--menu-hole-bottom)
+        );
+
+    mask-size:
+      var(--menu-hole-left)
+        100%,
+
+      calc(
+        100% -
+        var(--menu-hole-right)
+      )
+        100%,
+
+      calc(
+        var(--menu-hole-right) -
+        var(--menu-hole-left)
+      )
+        var(--menu-hole-top),
+
+      calc(
+        var(--menu-hole-right) -
+        var(--menu-hole-left)
+      )
+        calc(
+          100% -
+          var(--menu-hole-bottom)
+        );
+
+
+    -webkit-mask-position:
+      0 0,
+
+      var(--menu-hole-right)
+        0,
+
+      var(--menu-hole-left)
+        0,
+
+      var(--menu-hole-left)
+        var(--menu-hole-bottom);
+
+    mask-position:
+      0 0,
+
+      var(--menu-hole-right)
+        0,
+
+      var(--menu-hole-left)
+        0,
+
+      var(--menu-hole-left)
+        var(--menu-hole-bottom);
+
+
+    -webkit-mask-repeat:
+      no-repeat;
+
+    mask-repeat:
+      no-repeat;
+
+
+    /*
+     * Override the earlier subtractive
+     * Hero-style mask composition.
+     */
+
+    -webkit-mask-composite:
+      source-over;
+
+    mask-composite:
+      add;
+  }
+
+}
+
+
+/* =========================================================
+   B7.6F ? DIRECT HOME STATS INTERSECTION OCCLUSION
+
+   Hero keeps the existing precise rectangular mask.
+
+   Home Stats uses deterministic JS intersection instead:
+   overlapping text blocks disappear completely while the
+   Stats bar, icons and surrounding items remain visible.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * Disable the earlier experimental mask
+   * implementation for Home Stats only.
+   */
+
+  body.mega-menu-occlusion-active
+  .home-stat-content {
+    -webkit-mask-image:
+      none !important;
+
+    mask-image:
+      none !important;
+
+    -webkit-mask-composite:
+      initial !important;
+
+    mask-composite:
+      initial !important;
+  }
+
+
+  /*
+   * Hide only text blocks whose rectangles
+   * actually intersect the open Mega Menu.
+   */
+
+  .home-stat-content.mega-menu-stat-occluded {
+    opacity:
+      0 !important;
+
+    visibility:
+      hidden !important;
+
+    pointer-events:
+      none !important;
+
+    transition:
+      none !important;
+  }
+
+}
+
+
+/* =========================================================
+   B7.6G ? DETERMINISTIC CENTER STATS OCCLUSION
+
+   The desktop Mega Menu occupies the center of the Home
+   Stats bar. Therefore the second and third Stats text
+   blocks are hidden while a Mega Menu is active.
+
+   Preserved:
+   - Home Stats glass bar
+   - Home Stats icons
+   - outer Stats text
+   - Hero local occlusion
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * Neutralize experimental Home Stats masks.
+   * Hero masking remains untouched.
+   */
+
+  body.mega-menu-occlusion-active
+  .home-stat-content {
+    -webkit-mask:
+      none !important;
+
+    mask:
+      none !important;
+
+    -webkit-mask-image:
+      none !important;
+
+    mask-image:
+      none !important;
+  }
+
+
+  /*
+   * Mega Menu covers the two center Stats.
+   */
+
+  body.mega-menu-occlusion-active
+  .home-stat-item:nth-child(2)
+  .home-stat-content,
+
+  body.mega-menu-occlusion-active
+  .home-stat-item:nth-child(3)
+  .home-stat-content {
+    opacity:
+      0 !important;
+
+    visibility:
+      hidden !important;
+
+    pointer-events:
+      none !important;
+  }
+
+
+  /*
+   * Explicitly preserve outer Stats.
+   */
+
+  body.mega-menu-occlusion-active
+  .home-stat-item:nth-child(1)
+  .home-stat-content,
+
+  body.mega-menu-occlusion-active
+  .home-stat-item:nth-child(4)
+  .home-stat-content {
+    opacity:
+      1 !important;
+
+    visibility:
+      visible !important;
+  }
+
+}
+
+
+/* =========================================================
+   B7.6H ? ACTUAL MEGA MENU STATE STATS OCCLUSION
+
+   Root-cause fix:
+   Home Stats follows the real CSS menu-open state instead
+   of depending on the JS body lifecycle class.
+
+   Hero geometric occlusion remains unchanged.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * Pointer-open Mega Menu.
+   */
+
+  body:has(
+    .has-submenu:hover > .mega-menu
+  )
+  .home-stat-item:nth-child(2)
+  .home-stat-content,
+
+  body:has(
+    .has-submenu:hover > .mega-menu
+  )
+  .home-stat-item:nth-child(3)
+  .home-stat-content,
+
+  /*
+   * Keyboard / focus-open Mega Menu.
+   */
+
+  body:has(
+    .has-submenu:focus-within > .mega-menu
+  )
+  .home-stat-item:nth-child(2)
+  .home-stat-content,
+
+  body:has(
+    .has-submenu:focus-within > .mega-menu
+  )
+  .home-stat-item:nth-child(3)
+  .home-stat-content {
+    opacity:
+      0 !important;
+
+    visibility:
+      hidden !important;
+
+    pointer-events:
+      none !important;
+  }
+
+
+  /*
+   * Keep the outer Stats content visible.
+   */
+
+  body:has(
+    .has-submenu:hover > .mega-menu
+  )
+  .home-stat-item:nth-child(1)
+  .home-stat-content,
+
+  body:has(
+    .has-submenu:hover > .mega-menu
+  )
+  .home-stat-item:nth-child(4)
+  .home-stat-content,
+
+  body:has(
+    .has-submenu:focus-within > .mega-menu
+  )
+  .home-stat-item:nth-child(1)
+  .home-stat-content,
+
+  body:has(
+    .has-submenu:focus-within > .mega-menu
+  )
+  .home-stat-item:nth-child(4)
+  .home-stat-content {
+    opacity:
+      1 !important;
+
+    visibility:
+      visible !important;
+  }
+
 }

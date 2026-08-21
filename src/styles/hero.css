@@ -2017,3 +2017,148 @@ html[lang="km"] .hero-description,
 
 }
 
+
+
+/* =========================================================
+   B7.5C V2 ? HOME SCENIC CANVAS
+   Visual continuation only.
+   Layout order and Hero geometry remain unchanged.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .home-scenic-canvas {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(249, 245, 234, 0.08) 0%,
+        rgba(249, 245, 234, 0.24) 38%,
+        rgba(249, 246, 238, 0.64) 72%,
+        #ffffff 100%
+      );
+  }
+  /*
+   * Desktop background ownership:
+   * Scenic Canvas renders the Hero image.
+   * Hero itself remains the content/geometry layer.
+   */
+  .home-scenic-canvas > .hero {
+    background:
+      transparent !important;
+  }
+
+
+
+  .home-scenic-canvas::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: -2;
+
+    pointer-events: none;
+
+    background:
+      url("/images/hero/hero-bg-premium-desktop.png")
+      center top / 100% auto
+      no-repeat;
+
+    opacity: 0.90;
+  }
+
+
+  .home-scenic-canvas::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: -1;
+
+    pointer-events: none;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(249, 246, 238, 0.10) 28%,
+        rgba(249, 246, 238, 0.42) 56%,
+        rgba(249, 246, 238, 0.76) 78%,
+        #ffffff 100%
+      );
+  }
+
+
+  .home-scenic-canvas
+  > .home-why-choose,
+
+  .home-scenic-canvas
+  > .home-process,
+
+  .home-scenic-canvas
+  > .home-stats {
+    background:
+      transparent !important;
+  }
+
+
+  .home-scenic-canvas
+  > .home-stats {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.18) 0%,
+        rgba(255, 255, 255, 0.72) 72%,
+        #ffffff 100%
+      ) !important;
+  }
+
+}
+
+
+/* Mobile keeps existing section backgrounds. */
+
+@media (max-width: 768px) {
+
+  .home-scenic-canvas {
+    background:
+      transparent;
+  }
+
+  .home-scenic-canvas::before,
+  .home-scenic-canvas::after {
+    content:
+      none;
+  }
+
+}
+
+
+/* =========================================================
+   B7.5E ? CONTINUOUS SCENIC OVERLAY
+
+   The global Hero overlay ends at the fixed Hero boundary
+   and creates a visible horizontal seam.
+
+   Desktop Scenic Canvas already owns the continuous overlay,
+   so disable only the Hero-local pseudo overlay here.
+   Mobile keeps the original Hero overlay.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .home-scenic-canvas
+  > .hero::before {
+    content:
+      none !important;
+
+    display:
+      none !important;
+  }
+
+}
