@@ -626,10 +626,6 @@ const brandName =
         element.style.removeProperty(
           "--menu-hole-bottom"
         );
-
-        element.classList.remove(
-          "mega-menu-local-occluded"
-        );
       }
 
     };
@@ -724,27 +720,6 @@ const brandName =
           clampedBottom <=
             clampedTop
         ) {
-
-          element.style.removeProperty(
-            "--menu-hole-left"
-          );
-
-          element.style.removeProperty(
-            "--menu-hole-right"
-          );
-
-          element.style.removeProperty(
-            "--menu-hole-top"
-          );
-
-          element.style.removeProperty(
-            "--menu-hole-bottom"
-          );
-
-          element.classList.remove(
-            "mega-menu-local-occluded"
-          );
-
           continue;
         }
 
@@ -767,10 +742,6 @@ const brandName =
         element.style.setProperty(
           "--menu-hole-bottom",
           `${clampedBottom}px`
-        );
-
-        element.classList.add(
-          "mega-menu-local-occluded"
         );
       }
 

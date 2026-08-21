@@ -2848,11 +2848,14 @@ text-decoration: none !important;
     mask-image: none;
   }
 
-  .hero-content.mega-menu-local-occluded,
+  body.mega-menu-occlusion-active
+  .hero-content,
 
-  .hero-trust.mega-menu-local-occluded,
+  body.mega-menu-occlusion-active
+  .hero-trust,
 
-  .home-stat-content.mega-menu-local-occluded {
+  body.mega-menu-occlusion-active
+  .home-stat-content {
 
     /*
      * Layer 1:
@@ -3550,14 +3553,3 @@ text-decoration: none !important;
   }
 
 }
-
-/* =========================================================
-   B7.7B ? PER-ELEMENT MEGA MENU OCCLUSION
-
-   Occlusion is now activated only on foreground elements
-   whose viewport rectangle actually overlaps the visible
-   Mega Menu panel.
-
-   This prevents About or other right-side panels from
-   hiding unrelated Hero content.
-   ========================================================= */

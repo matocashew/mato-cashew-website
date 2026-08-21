@@ -405,14 +405,7 @@ const brandName =
       }
     );
     /* =========================================
-       B7.6L2 ? DESKTOP SUBMENU OCCLUSION STATE SYNC
-
-       CSS can keep a submenu visible through:
-       - :hover
-       - :focus-within
-       - .submenu-open
-
-       Occlusion must follow the same states.
+       DESKTOP SUBMENU HOVER OCCLUSION
        ========================================= */
 
     const submenuItems =
@@ -420,125 +413,41 @@ const brandName =
         ".has-submenu"
       );
 
-
-    const submenuShouldRemainOpen = (
-      navItem: HTMLElement
-    ): boolean => {
-
-      return (
-        navItem.matches(":hover") ||
-        navItem.matches(":focus-within") ||
-        navItem.classList.contains(
-          "submenu-open"
-        )
-      );
-    };
-
-
-    const applySubmenuOcclusion = (
-      navItem: HTMLElement
-    ) => {
-
-      if (
-        window.innerWidth <= 768
-      ) {
-        return;
-      }
-
-      const panel =
-        navItem.querySelector<HTMLElement>(
-          ":scope > .submenu-panel"
-        );
-
-      if (!panel) return;
-
-      requestAnimationFrame(() => {
-
-        if (
-          submenuShouldRemainOpen(
-            navItem
-          )
-        ) {
-          applyMegaMenuOcclusion(
-            panel
-          );
-        }
-      });
-    };
-
-
-    const releaseSubmenuOcclusion = (
-      navItem: HTMLElement
-    ) => {
-
-      if (
-        window.innerWidth <= 768
-      ) {
-        return;
-      }
-
-      /*
-       * Wait until browser hover/focus state
-       * has settled before deciding whether
-       * the visible submenu has actually closed.
-       */
-      requestAnimationFrame(() => {
-
-        if (
-          submenuShouldRemainOpen(
-            navItem
-          )
-        ) {
-          applySubmenuOcclusion(
-            navItem
-          );
-
-          return;
-        }
-
-        clearMegaMenuOcclusion();
-      });
-    };
-
-
     submenuItems.forEach((navItem) => {
-
       navItem.addEventListener(
         "mouseenter",
         () => {
-          applySubmenuOcclusion(
-            navItem
-          );
+          if (
+            window.innerWidth <= 768
+          ) {
+            return;
+          }
+
+          const panel =
+            navItem.querySelector<HTMLElement>(
+              ":scope > .submenu-panel"
+            );
+
+          if (!panel) return;
+
+          requestAnimationFrame(() => {
+            applyMegaMenuOcclusion(
+              panel
+            );
+          });
         }
       );
-
 
       navItem.addEventListener(
         "mouseleave",
         () => {
-          releaseSubmenuOcclusion(
-            navItem
-          );
-        }
-      );
+          if (
+            window.innerWidth <= 768
+          ) {
+            return;
+          }
 
-
-      navItem.addEventListener(
-        "focusin",
-        () => {
-          applySubmenuOcclusion(
-            navItem
-          );
-        }
-      );
-
-
-      navItem.addEventListener(
-        "focusout",
-        () => {
-          releaseSubmenuOcclusion(
-            navItem
-          );
+          clearMegaMenuOcclusion();
         }
       );
     });
@@ -587,17 +496,6 @@ const brandName =
         ".hero-trust"
       );
 
-    /*
-     * Home Stats foreground uses the same
-     * local Mega Menu occlusion rectangle.
-     */
-    const homeStatContent =
-      Array.from(
-        document.querySelectorAll<HTMLElement>(
-          ".home-stat-content"
-        )
-      );
-
 
     const clearMegaMenuOcclusion = () => {
 
@@ -607,7 +505,7 @@ const brandName =
 
       for (
         const element
-        of [heroForeground, heroTrust, ...homeStatContent]
+        of [heroForeground, heroTrust]
       ) {
         if (!element) continue;
 
@@ -626,12 +524,7 @@ const brandName =
         element.style.removeProperty(
           "--menu-hole-bottom"
         );
-
-        element.classList.remove(
-          "mega-menu-local-occluded"
-        );
       }
-
     };
 
 
@@ -644,7 +537,7 @@ const brandName =
 
       for (
         const element
-        of [heroForeground, heroTrust, ...homeStatContent]
+        of [heroForeground, heroTrust]
       ) {
 
         if (!element) continue;
@@ -724,27 +617,6 @@ const brandName =
           clampedBottom <=
             clampedTop
         ) {
-
-          element.style.removeProperty(
-            "--menu-hole-left"
-          );
-
-          element.style.removeProperty(
-            "--menu-hole-right"
-          );
-
-          element.style.removeProperty(
-            "--menu-hole-top"
-          );
-
-          element.style.removeProperty(
-            "--menu-hole-bottom"
-          );
-
-          element.classList.remove(
-            "mega-menu-local-occluded"
-          );
-
           continue;
         }
 
@@ -768,14 +640,9 @@ const brandName =
           "--menu-hole-bottom",
           `${clampedBottom}px`
         );
-
-        element.classList.add(
-          "mega-menu-local-occluded"
-        );
       }
 
-
-document.body.classList.add(
+      document.body.classList.add(
         "mega-menu-occlusion-active"
       );
     };
