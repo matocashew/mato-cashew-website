@@ -21,7 +21,37 @@ const t = getCurrentLanguage(Astro.url.pathname);
 <main>
 
   <div class="home-scenic-canvas">
-<Hero />
+
+    <!-- B7.14B ? NEW HERO VISUAL STACK -->
+    <div
+      class="hero-v2-layer hero-v2-layer--base"
+      aria-hidden="true"
+    ></div>
+
+    <div
+      class="hero-v2-layer hero-v2-layer--branch"
+      aria-hidden="true"
+    ></div>
+
+
+    <!-- B7.11E ? Natural Wind foreground layers -->
+
+    <div
+      class="hero-wind-layer hero-wind-layer--leaves"
+      aria-hidden="true"
+    ></div>
+
+    <div
+      class="hero-wind-layer hero-wind-layer--flowers"
+      aria-hidden="true"
+    ></div>
+
+    <div
+      class="hero-wind-layer hero-wind-layer--fruits"
+      aria-hidden="true"
+    ></div>
+
+    <Hero />
 
   <TrustBar />
 

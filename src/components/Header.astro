@@ -591,11 +591,42 @@ const brandName =
      * Home Stats foreground uses the same
      * local Mega Menu occlusion rectangle.
      */
-    const homeStatContent =
+    const getHomeStatContent = () =>
       Array.from(
         document.querySelectorAll<HTMLElement>(
           ".home-stat-content"
         )
+      );
+
+    /*
+     * Trust Bar foreground participates in the
+     * same per-element Mega Menu occlusion system.
+     */
+    const getTrustItemContent = () =>
+      Array.from(
+        document.querySelectorAll<HTMLElement>(
+          ".trust-item__content"
+        )
+      );
+
+    /*
+     * Trust Bar icons participate in the
+     * same per-element Mega Menu geometry.
+     */
+    const getTrustItemIcons = () =>
+      Array.from(
+        document.querySelectorAll<HTMLElement>(
+          ".trust-item__icon"
+        )
+      );
+
+    /*
+     * Dedicated Trust Bar surface participates
+     * in the same Mega Menu geometry.
+     */
+    const getTrustBarSurface = () =>
+      document.querySelector<HTMLElement>(
+        ".trust-bar__surface"
       );
 
 
@@ -607,7 +638,7 @@ const brandName =
 
       for (
         const element
-        of [heroForeground, heroTrust, ...homeStatContent]
+        of [heroForeground, heroTrust, ...getHomeStatContent(), ...getTrustItemContent(), ...getTrustItemIcons(), getTrustBarSurface()]
       ) {
         if (!element) continue;
 
@@ -644,7 +675,7 @@ const brandName =
 
       for (
         const element
-        of [heroForeground, heroTrust, ...homeStatContent]
+        of [heroForeground, heroTrust, ...getHomeStatContent(), ...getTrustItemContent(), ...getTrustItemIcons(), getTrustBarSurface()]
       ) {
 
         if (!element) continue;

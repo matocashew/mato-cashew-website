@@ -70,6 +70,10 @@ const iconPaths: Record<string, string> = {
 
 <section class="trust-bar" aria-label="Mato Cashew quality benefits">
   <div class="trust-bar__inner">
+    <div
+      class="trust-bar__surface"
+      aria-hidden="true"
+    ></div>
     {
       items.map((item) => (
         <div class="trust-item">
@@ -112,6 +116,7 @@ const iconPaths: Record<string, string> = {
   }
 
   .trust-bar__inner {
+    position: relative;
     width: min(1400px, 100%);
     min-height: 108px;
 
@@ -121,7 +126,7 @@ const iconPaths: Record<string, string> = {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 
-    background: rgba(255, 253, 248, 0.97);
+    background: transparent;
 
     border: 1px solid rgba(12, 98, 67, 0.08);
     border-radius: 18px;
@@ -130,6 +135,31 @@ const iconPaths: Record<string, string> = {
       0 12px 35px rgba(27, 55, 40, 0.08);
 
     backdrop-filter: blur(10px);
+  }
+
+
+  /*
+   * Dedicated Trust Bar visual surface.
+   * This layer can be locally occluded by
+   * the desktop Mega Menu without masking
+   * the Trust Bar children as one parent.
+   */
+  .trust-bar__surface {
+    position: absolute;
+    inset: 0;
+
+    border-radius: inherit;
+
+    background:
+      rgba(255, 253, 248, 0.97);
+
+    pointer-events: none;
+
+    z-index: 0;
+  }
+
+  .trust-item {
+    z-index: 1;
   }
 
   .trust-item {

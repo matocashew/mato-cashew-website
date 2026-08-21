@@ -2162,3 +2162,616 @@ html[lang="km"] .hero-description,
   }
 
 }
+
+/* =========================================================
+   B7.13D ? CROPPED PRODUCTION WIND INTEGRATION
+
+   Full-canvas wind layers replaced by tightly cropped
+   transparent production assets.
+
+   Benefits:
+   - smaller composited surfaces
+   - better natural pivot points
+   - less alpha shimmer
+   - less perceived blur
+   - lower GPU repaint area
+   ========================================================= */
+
+/* =========================================================
+   B7.12D-E ? TRANSPARENT WIND ASSET INTEGRATION
+
+   Dedicated alpha PNG assets now own the animated pixels.
+
+   Full Hero image removed from animated shared layer.
+   Polygon clip-paths removed.
+   Stationary Scenic Canvas remains unchanged.
+   Existing wind keyframes remain unchanged.
+   ========================================================= */
+
+
+/* =========================================================
+   B7.11F ? NATURAL WIND VISUAL ENGINE
+
+   Desktop only.
+   Base scenic image remains stationary.
+
+   Transparent foreground layers provide:
+   - leaf sway
+   - blossom flutter
+   - fruit sway
+
+   Motion timing remains based on B7.11G tuning.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+      .hero-wind-layer {
+    position: absolute;
+
+    pointer-events: none;
+
+    background-repeat:
+      no-repeat;
+
+    background-position:
+      center;
+
+    background-size:
+      100% 100%;
+
+    will-change:
+      transform;
+
+    backface-visibility:
+      hidden;
+
+    transform-style:
+      preserve-3d;
+
+    image-rendering:
+      auto;
+
+    z-index:
+      -1;
+  }
+
+
+  /* -------------------------------------------------------
+     LEAVES
+
+     Broad right-side foliage.
+     Fastest and lightest movement.
+     ------------------------------------------------------- */
+
+      .hero-wind-layer--leaves {
+    left:
+      67.4058%;
+
+    top:
+      0;
+
+    width:
+      32.5942%;
+
+    aspect-ratio:
+      633 / 567;
+
+    background-image:
+      url("/images/hero/wind/production/hero-wind-leaves-crop.png");
+
+    transform-origin:
+      88% 18%;
+
+    animation:
+      mato-wind-leaves
+      6.8s
+      ease-in-out
+      infinite;
+  }
+
+
+  /* -------------------------------------------------------
+     FLOWERS
+
+     Upper-right blossom cluster.
+     Smaller independent flutter.
+     ------------------------------------------------------- */
+
+      .hero-wind-layer--flowers {
+    left:
+      77.4460%;
+
+    top:
+      0;
+
+    width:
+      22.5540%;
+
+    aspect-ratio:
+      438 / 306;
+
+    background-image:
+      url("/images/hero/wind/production/hero-wind-flowers-crop.png");
+
+    transform-origin:
+      82% 24%;
+
+    animation:
+      mato-wind-flowers
+      5.2s
+      ease-in-out
+      infinite;
+
+    animation-delay:
+      -1.7s;
+  }
+
+
+  /* -------------------------------------------------------
+     FRUITS
+
+     Main cashew fruit cluster.
+     Heavier object = slower, smaller swing.
+     ------------------------------------------------------- */
+
+      .hero-wind-layer--fruits {
+    left:
+      75.2317%;
+
+    top:
+      3.0896vw;
+
+    width:
+      24.7683%;
+
+    aspect-ratio:
+      481 / 430;
+
+    background-image:
+      url("/images/hero/wind/production/hero-wind-fruits-crop.png");
+
+    transform-origin:
+      78% 18%;
+
+    animation:
+      mato-wind-fruits
+      8.8s
+      ease-in-out
+      infinite;
+
+    animation-delay:
+      -3.2s;
+  }
+
+
+  /* -------------------------------------------------------
+     NATURAL LEAF SWAY
+     ------------------------------------------------------- */
+
+  @keyframes mato-wind-leaves {
+
+    0%,
+    100% {
+      transform:
+        translate3d(0, 0, 0)
+        rotate(0deg);
+    }
+
+    20% {
+      transform:
+        translate3d(3px, -0.4px, 0)
+        rotate(0.14deg);
+    }
+
+    45% {
+      transform:
+        translate3d(-2px, 0.5px, 0)
+        rotate(-0.09deg);
+    }
+
+    72% {
+      transform:
+        translate3d(4px, 0.2px, 0)
+        rotate(0.18deg);
+    }
+  }
+
+
+  /* -------------------------------------------------------
+     BLOSSOM FLUTTER
+     ------------------------------------------------------- */
+
+  @keyframes mato-wind-flowers {
+
+    0%,
+    100% {
+      transform:
+        translate3d(0, 0, 0)
+        rotate(0deg);
+    }
+
+    25% {
+      transform:
+        translate3d(2px, -0.5px, 0)
+        rotate(0.12deg);
+    }
+
+    52% {
+      transform:
+        translate3d(-1.4px, 0.4px, 0)
+        rotate(-0.08deg);
+    }
+
+    78% {
+      transform:
+        translate3d(2.6px, -0.2px, 0)
+        rotate(0.14deg);
+    }
+  }
+
+
+  /* -------------------------------------------------------
+     FRUIT SWAY
+     ------------------------------------------------------- */
+
+  @keyframes mato-wind-fruits {
+
+    0%,
+    100% {
+      transform:
+        translate3d(0, 0, 0)
+        rotate(0deg);
+    }
+
+    30% {
+      transform:
+        translate3d(1.6px, 0.3px, 0)
+        rotate(0.07deg);
+    }
+
+    60% {
+      transform:
+        translate3d(-1px, 0.5px, 0)
+        rotate(-0.05deg);
+    }
+
+    82% {
+      transform:
+        translate3d(1.8px, 0.2px, 0)
+        rotate(0.08deg);
+    }
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY ? REDUCED MOTION
+
+   Keep decorative layers aligned with the source image,
+   but completely disable movement when requested.
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hero-wind-layer {
+    animation:
+      none !important;
+
+    transform:
+      none !important;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+
+   B7.11F is desktop-only for now.
+   Mobile retains its existing Hero rendering.
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .hero-wind-layer {
+    display:
+      none;
+  }
+
+}
+
+/* =========================================================
+   B7.14B ? NEW HERO STATIC ALIGNMENT
+   Preview only. No animation yet.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .home-scenic-canvas {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero-v2-layer {
+    position: absolute;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+
+  /* -----------------------------------------
+     LAYER 1 ? BASE
+     Reference canvas: 1942 ? 809
+     ----------------------------------------- */
+
+  .hero-v2-layer--base {
+    inset: 0;
+
+    background-image:
+      url("/images/hero/wind-v2/hero-base-v2.png");
+
+    background-position:
+      center top;
+
+    background-size:
+      100% auto;
+  }
+
+  /* -----------------------------------------
+     LAYER 2 ? FOLIAGE
+     Native: 1727 ? 911
+
+     Keep native aspect ratio.
+     Start with right/top anchoring.
+     Fine positioning happens after preview.
+     ----------------------------------------- */
+
+  .hero-v2-layer--foliage {
+    top: 0;
+    right: 0;
+
+    width: 88.93vw;
+    max-width: 1727px;
+
+    aspect-ratio:
+      1727 / 911;
+
+    background-image:
+      url("/images/hero/wind-v2/hero-foliage-v2.png");
+
+    background-position:
+      right top;
+
+    background-size:
+      contain;
+  }
+
+  /* -----------------------------------------
+     LAYER 3 ? FRUITS
+     Native: 1536 ? 1024
+
+     Right/top anchored for visual matching.
+     ----------------------------------------- */
+
+  .hero-v2-layer--fruits {
+    top: 0;
+    right: 0;
+
+    width: 79.09vw;
+    max-width: 1536px;
+
+    aspect-ratio:
+      1536 / 1024;
+
+    background-image:
+      url("/images/hero/wind-v2/hero-fruits-v2.png");
+
+    background-position:
+      right top;
+
+    background-size:
+      contain;
+  }
+
+  /*
+   * Disable old wind system during B7.14B preview.
+   * Nothing deleted yet.
+   */
+  .hero-wind-layer {
+    display:
+      none !important;
+  }
+
+  /*
+   * New base owns the scenic image during preview.
+   */
+  .home-scenic-canvas::before {
+    background:
+      none !important;
+  }
+}
+
+
+/* Mobile remains unchanged for now. */
+@media (max-width: 768px) {
+
+  .hero-v2-layer {
+    display:
+      none !important;
+  }
+}
+
+/* =========================================================
+   B7.14C ? UNIFIED BOTANICAL BRANCH
+   Replaces detached foliage + fruit preview layers.
+   Static alignment only. Animation comes in B7.14D.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .hero-v2-layer--foliage,
+  .hero-v2-layer--fruits {
+    display:
+      none !important;
+  }
+
+  .hero-v2-layer--branch {
+    position:
+      absolute;
+
+    top:
+      0;
+
+    right:
+      0;
+
+    width:
+      min(100%, 1727px);
+
+    aspect-ratio:
+      1727 / 911;
+
+    pointer-events:
+      none;
+
+    background-image:
+      url("/images/hero/wind-v2/hero-branch-v2.png");
+
+    background-repeat:
+      no-repeat;
+
+    background-position:
+      right top;
+
+    background-size:
+      contain;
+
+    z-index:
+      -1;
+
+    transform:
+      none;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .hero-v2-layer--branch {
+    display:
+      none !important;
+  }
+}
+
+/* =========================================================
+   B7.14C3 ? HERO LAYER STACKING REPAIR
+
+   Base:
+     scenic background
+
+   Branch:
+     transparent botanical foreground
+
+   Hero / TrustBar:
+     remain above visual layers
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .home-scenic-canvas {
+    position:
+      relative;
+
+    isolation:
+      isolate;
+  }
+
+  .hero-v2-layer {
+    pointer-events:
+      none;
+  }
+
+  .hero-v2-layer--base {
+    z-index:
+      0;
+  }
+
+  .hero-v2-layer--branch {
+    z-index:
+      1;
+  }
+
+  /*
+   * Existing scenic children must remain
+   * above the decorative visual stack.
+   */
+  .home-scenic-canvas > :not(.hero-v2-layer) {
+    position:
+      relative;
+
+    z-index:
+      2;
+  }
+}
+
+/* =========================================================
+   B7.14C5 ? PRODUCT SLIDE VISIBILITY REPAIR
+
+   Guarantee that only the active Hero product is visible.
+
+   This intentionally overrides older opacity /
+   visibility transitions that can leave outgoing
+   product slides visually overlapping.
+
+   No positioning changes.
+   No branch changes.
+   No image changes.
+   ========================================================= */
+
+.hero-product-slide {
+  opacity:
+    0 !important;
+
+  visibility:
+    hidden !important;
+
+  pointer-events:
+    none !important;
+
+  transition:
+    none !important;
+}
+
+.hero-product-slide.is-active {
+  opacity:
+    1 !important;
+
+  visibility:
+    visible !important;
+
+  pointer-events:
+    auto !important;
+}
+
+
+/*
+ * Product image itself must remain fully opaque.
+ * Prevent inherited / legacy visual fading.
+ */
+.hero-product-slide.is-active img {
+  opacity:
+    1 !important;
+}
+
+
+/*
+ * Accessibility state remains deterministic.
+ */
+@media (prefers-reduced-motion: reduce) {
+
+  .hero-product-slide {
+    transition:
+      none !important;
+  }
+
+}
