@@ -1,26 +1,62 @@
----
-import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
-import LanguageSwitcher from "./LanguageSwitcher.astro";
+﻿---
+import { getCurrentLanguage }
+  from "../i18n/getCurrentLanguage";
 
-const currentPath = Astro.url.pathname;
+import LanguageSwitcher
+  from "./LanguageSwitcher.astro";
 
-const isKhmer = currentPath.startsWith("/km");
+import { navigationService }
+  from "@services/navigationService";
 
-const t = getCurrentLanguage(currentPath);
+import type { NavigationLanguage }
+  from "@models/navigation";
 
-const homePath = isKhmer ? "/km/" : "/";
-const aboutPath = isKhmer ? "/km/about/" : "/about/";
-const productsPath = isKhmer ? "/km/products/" : "/products/";
-const knowledgePath =
+
+const currentPath =
+  Astro.url.pathname;
+
+const isKhmer =
+  currentPath === "/km" ||
+  currentPath.startsWith("/km/");
+
+const language: NavigationLanguage =
   isKhmer
-    ? "/km/knowledge/"
-    : "/knowledge/";
-const resourcesPath = isKhmer ? "/km/resources/" : "/resources/";
-const galleryPath = isKhmer ? "/km/gallery/" : "/gallery/";
-const wholesalePath = isKhmer ? "/km/wholesale/" : "/wholesale/";
-const contactPath = isKhmer ? "/km/contact/" : "/contact/";
+    ? "km"
+    : "en";
 
-const brandName = "ចន្ទីមាតុភូមិ — Mato Cashew";
+const t =
+  getCurrentLanguage(currentPath);
+
+
+/*
+ * Navigation V2
+ *
+ * Resolve the complete navigation tree
+ * before rendering the Header.
+ */
+const menuItems =
+  navigationService.getLocalizedMenu(
+    language,
+    t.nav
+  );
+
+
+/*
+ * Home route is also used by
+ * the Mato Cashew brand lockup.
+ */
+const homeItem =
+  menuItems.find(
+    item => item.id === "home"
+  );
+
+const homePath =
+  homeItem?.href ??
+  (isKhmer ? "/km/" : "/");
+
+
+const brandName =
+  "ចន្ទីមាតុភូមិ — Mato Cashew";
 ---
 
 <header class="header">
@@ -67,101 +103,133 @@ const brandName = "ចន្ទីមាតុភូមិ — Mato Cashew";
       </button>
 
       <ul id="main-menu" class="nav-menu">
+        {
+          menuItems.map((item) => {
+            const hasChildren =
+              Boolean(item.children?.length);
 
-        <li>
-          <a
-            href={homePath}
-            class={
-              currentPath === "/" ||
-              currentPath === "/km" ||
-              currentPath === "/km/"
-                ? "active"
-                : ""
-            }
-          >
-            {t.nav.home}
-          </a>
-        </li>
+            const isActive =
+              navigationService.isParentActive(
+                item,
+                currentPath
+              );
 
-        <li>
-          <a
-            href={aboutPath}
-            class={currentPath === aboutPath ? "active" : ""}
-          >
-            {t.nav.about}
-          </a>
-        </li>
+            return (
+              <li
+                class:list={[
+                  "nav-item",
+                  hasChildren && "has-submenu",
+                  item.variant &&
+                    `nav-${item.variant}`,
+                ]}
+              >
+              <div class="nav-link-row">
+                <a
+                  href={item.href}
+                  class:list={[
+                    "nav-link",
+                    isActive && "active",
+                  ]}
+                  aria-current={
+                    navigationService.isActive(
+                      item,
+                      currentPath
+                    )
+                      ? "page"
+                      : undefined
+                  }
+                >
+                  <span class="nav-label">
+                    {item.label}
+                  </span>
+                </a>
 
-        <li>
-          <a
-            href={productsPath}
-            class={
-              currentPath === productsPath ||
-              currentPath.startsWith(`${productsPath}/`)
-                ? "active"
-                : ""
-            }
-          >
-            {t.nav.products}
-          </a>
-        </li>
+                {
+                  hasChildren && (
+                    <button
+                      type="button"
+                      class="submenu-toggle"
+                      aria-expanded="false"
+                      aria-label={
+                        isKhmer
+                          ? `បើកម៉ឺនុយរង ${item.label}`
+                          : `Open ${item.label} submenu`
+                      }
+                    >
+                      <span
+                        class="nav-chevron"
+                        aria-hidden="true"
+                      >
+                        ▾
+                      </span>
+                    </button>
+                  )
+                }
+              </div>
 
-        <li>
-          <a
-            href={knowledgePath}
-            class={
-              currentPath === knowledgePath ||
-              currentPath === knowledgePath.replace(/\/$/, "") ||
-              currentPath.startsWith(knowledgePath)
-                ? "active"
-                : ""
-            }
-          >
-            {t.nav.knowledge}
-          </a>
-        </li>
+                {
+                  hasChildren &&
+                  item.children && (
+                    <div class="submenu-panel mega-menu">
+                     <div class="mega-menu-inner">
 
-        <li>
-          <a
-            href={resourcesPath}
-            class={
-              currentPath === resourcesPath ||
-              currentPath.startsWith(`${resourcesPath}/`)
-                ? "active"
-                : ""
-            }
-          >
-            {t.nav.resources}
-          </a>
-        </li>
+                        <div class="mega-menu-intro">
+                          <span class="mega-menu-eyebrow">
+                            {item.label}
+                          </span>
 
-        <li>
-          <a
-            href={galleryPath}
-            class={currentPath === galleryPath ? "active" : ""}
-          >
-            {t.nav.gallery}
-          </a>
-        </li>
+                          {
+                            item.description && (
+                              <p class="mega-menu-description">
+                                {item.description}
+                              </p>
+                            )
+                          }
+                        </div>
 
-        <li>
-          <a
-            href={wholesalePath}
-            class={currentPath === wholesalePath ? "active" : ""}
-          >
-            {t.nav.wholesale}
-          </a>
-        </li>
+                        <div class="mega-menu-grid">
+                          {
+                            item.children.map(
+                              (child) => (
+                                <a
+                                  href={child.href}
+                                  class:list={[
+                                    "mega-menu-link",
+                                    child.featured &&
+                                      "featured",
+                                    navigationService
+                                      .isActive(
+                                        child,
+                                        currentPath
+                                      ) &&
+                                      "active",
+                                  ]}
+                                >
+                                  <span class="mega-menu-link-title">
+                                    {child.label}
+                                  </span>
 
-        <li>
-          <a
-            href={contactPath}
-            class={currentPath === contactPath ? "active" : ""}
-          >
-            {t.nav.contact}
-          </a>
-        </li>
+                                  {
+                                    child.description && (
+                                      <span class="mega-menu-link-description">
+                                        {child.description}
+                                      </span>
+                                    )
+                                  }
+                                </a>
+                              )
+                            )
+                          }
+                        </div>
 
+                      </div>
+                    </div>
+                  )
+                }
+              </li>
+            );
+          })
+        }
       </ul>
 
     </nav>
@@ -242,7 +310,147 @@ const brandName = "ចន្ទីមាតុភូមិ — Mato Cashew";
       );
     }
 
+    /*
+     * Mobile submenu accordion.
+     *
+     * Parent navigation links remain normal links.
+     * The dedicated submenu button controls only
+     * the nested dropdown / mega-menu panel.
+     */
+    const submenuToggles =
+      document.querySelectorAll<HTMLButtonElement>(
+        ".submenu-toggle"
+      );
 
+    const closeSubmenu = (
+      button: HTMLButtonElement
+    ) => {
+      const navItem =
+        button.closest<HTMLElement>(
+          ".nav-item"
+        );
+
+      if (!navItem) return;
+
+      navItem.classList.remove(
+        "submenu-open"
+      );
+
+      button.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+      clearMegaMenuOcclusion();
+    };
+
+    const closeAllSubmenus = (
+      except?: HTMLButtonElement
+    ) => {
+      submenuToggles.forEach(
+        (button) => {
+          if (button !== except) {
+            closeSubmenu(button);
+          }
+        }
+      );
+    };
+
+    submenuToggles.forEach(
+      (button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            const navItem =
+              button.closest<HTMLElement>(
+                ".nav-item"
+              );
+
+            if (!navItem) return;
+
+            const willOpen =
+              !navItem.classList.contains(
+                "submenu-open"
+              );
+
+            closeAllSubmenus(button);
+
+            navItem.classList.toggle(
+              "submenu-open",
+              willOpen
+            );
+
+            button.setAttribute(
+              "aria-expanded",
+              String(willOpen)
+            );
+            const panel =
+              navItem.querySelector<HTMLElement>(
+                ":scope > .submenu-panel"
+              );
+
+            if (
+              willOpen &&
+              panel
+            ) {
+              requestAnimationFrame(() => {
+                applyMegaMenuOcclusion(
+                  panel
+                );
+              });
+            } else {
+              clearMegaMenuOcclusion();
+            }
+          }
+        );
+      }
+    );
+    /* =========================================
+       DESKTOP SUBMENU HOVER OCCLUSION
+       ========================================= */
+
+    const submenuItems =
+      document.querySelectorAll<HTMLElement>(
+        ".has-submenu"
+      );
+
+    submenuItems.forEach((navItem) => {
+      navItem.addEventListener(
+        "mouseenter",
+        () => {
+          if (
+            window.innerWidth <= 768
+          ) {
+            return;
+          }
+
+          const panel =
+            navItem.querySelector<HTMLElement>(
+              ":scope > .submenu-panel"
+            );
+
+          if (!panel) return;
+
+          requestAnimationFrame(() => {
+            applyMegaMenuOcclusion(
+              panel
+            );
+          });
+        }
+      );
+
+      navItem.addEventListener(
+        "mouseleave",
+        () => {
+          if (
+            window.innerWidth <= 768
+          ) {
+            return;
+          }
+
+          clearMegaMenuOcclusion();
+        }
+      );
+    });
     /*
      * Close mobile menu after clicking
      * any navigation link.
@@ -257,7 +465,7 @@ const brandName = "ចន្ទីមាតុភូមិ — Mato Cashew";
         "click",
         () => {
           navMenu?.classList.remove("open");
-
+          clearMegaMenuOcclusion();
           if (menuToggle) {
             menuToggle.textContent = "☰";
 
@@ -269,6 +477,175 @@ const brandName = "ចន្ទីមាតុភូមិ — Mato Cashew";
         }
       );
     });
+    /*
+     * -------------------------------------------------------
+     * Local Mega Menu glass occlusion
+     *
+     * Hide Hero foreground only where
+     * the visible submenu overlaps it.
+     * -------------------------------------------------------
+     */
+
+    const heroForeground =
+      document.querySelector<HTMLElement>(
+        ".hero-content"
+      );
+
+    const heroTrust =
+      document.querySelector<HTMLElement>(
+        ".hero-trust"
+      );
+
+
+    const clearMegaMenuOcclusion = () => {
+
+      document.body.classList.remove(
+        "mega-menu-occlusion-active"
+      );
+
+      for (
+        const element
+        of [heroForeground, heroTrust]
+      ) {
+        if (!element) continue;
+
+        element.style.removeProperty(
+          "--menu-hole-left"
+        );
+
+        element.style.removeProperty(
+          "--menu-hole-right"
+        );
+
+        element.style.removeProperty(
+          "--menu-hole-top"
+        );
+
+        element.style.removeProperty(
+          "--menu-hole-bottom"
+        );
+      }
+    };
+
+
+    const applyMegaMenuOcclusion = (
+      panel: HTMLElement
+    ) => {
+
+      const panelRect =
+        panel.getBoundingClientRect();
+
+      for (
+        const element
+        of [heroForeground, heroTrust]
+      ) {
+
+        if (!element) continue;
+
+        const rect =
+          element.getBoundingClientRect();
+
+        /*
+         * Convert the Mega Menu viewport
+         * rectangle into coordinates local
+         * to this Hero foreground element.
+         */
+        const left =
+          panelRect.left -
+          rect.left;
+
+        const right =
+          panelRect.right -
+          rect.left;
+
+        const top =
+          panelRect.top -
+          rect.top;
+
+        const bottom =
+          panelRect.bottom -
+          rect.top;
+
+
+        /*
+         * Clamp values to the element.
+         */
+        const clampedLeft =
+          Math.max(
+            0,
+            Math.min(
+              rect.width,
+              left
+            )
+          );
+
+        const clampedRight =
+          Math.max(
+            0,
+            Math.min(
+              rect.width,
+              right
+            )
+          );
+
+        const clampedTop =
+          Math.max(
+            0,
+            Math.min(
+              rect.height,
+              top
+            )
+          );
+
+        const clampedBottom =
+          Math.max(
+            0,
+            Math.min(
+              rect.height,
+              bottom
+            )
+          );
+
+
+        /*
+         * No overlap = leave this element
+         * completely visible.
+         */
+        if (
+          clampedRight <=
+            clampedLeft ||
+          clampedBottom <=
+            clampedTop
+        ) {
+          continue;
+        }
+
+
+        element.style.setProperty(
+          "--menu-hole-left",
+          `${clampedLeft}px`
+        );
+
+        element.style.setProperty(
+          "--menu-hole-right",
+          `${clampedRight}px`
+        );
+
+        element.style.setProperty(
+          "--menu-hole-top",
+          `${clampedTop}px`
+        );
+
+        element.style.setProperty(
+          "--menu-hole-bottom",
+          `${clampedBottom}px`
+        );
+      }
+
+      document.body.classList.add(
+        "mega-menu-occlusion-active"
+      );
+    };
   }
 
 
