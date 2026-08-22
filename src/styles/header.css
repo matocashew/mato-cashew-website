@@ -3208,3 +3208,79 @@ text-decoration: none !important;
    This prevents About or other right-side panels from
    hiding unrelated Hero content.
    ========================================================= */
+
+/* =========================================================
+   B7.16A2 ? DESKTOP HOVER BRIDGE REPAIR
+
+   Preserve hover continuity between the
+   top-level navigation trigger and its
+   submenu panel.
+
+   The desktop submenu begins 10px below
+   its parent:
+       top: calc(100% + 10px)
+
+   This transparent bridge fills that gap
+   without changing visible menu geometry.
+
+   DESKTOP ONLY.
+   No visual redesign.
+   No JavaScript timer.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .has-submenu {
+    position:
+      relative;
+  }
+
+
+  /*
+   * Invisible interaction bridge.
+   *
+   * Starts at the bottom edge of the
+   * parent nav item and covers the
+   * complete 10px submenu offset.
+   */
+  .has-submenu::after {
+    content:
+      "";
+
+    position:
+      absolute;
+
+    left:
+      0;
+
+    right:
+      0;
+
+    top:
+      100%;
+
+    height:
+      12px;
+
+    background:
+      transparent;
+
+    pointer-events:
+      auto;
+
+    z-index:
+      1499;
+  }
+
+
+  /*
+   * Keep the real submenu above
+   * the transparent bridge.
+   */
+  .has-submenu
+  > .submenu-panel {
+    z-index:
+      1500;
+  }
+
+}

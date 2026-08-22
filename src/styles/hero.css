@@ -2775,3 +2775,961 @@ html[lang="km"] .hero-description,
   }
 
 }
+
+/* =========================================================
+   B7.14D1 ? UNIFIED BRANCH NATURAL WIND
+
+   One connected botanical layer moves as one plant.
+
+   Design goals:
+   - no detached fruits
+   - no detached leaves
+   - no large translation
+   - minimal raster blur
+   - slow irregular natural sway
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .hero-v2-layer--branch {
+
+    /*
+     * Anchor close to the branch attachment
+     * in the upper-right area.
+     */
+    transform-origin:
+      96% 8%;
+
+    /*
+     * Slow, very small rotational movement.
+     * No scale.
+     * No filter.
+     * No opacity animation.
+     */
+    animation:
+      mato-unified-branch-wind
+      9.6s
+      ease-in-out
+      infinite;
+
+    backface-visibility:
+      hidden;
+  }
+
+
+  @keyframes mato-unified-branch-wind {
+
+    0%,
+    100% {
+      transform:
+        rotate(0deg);
+    }
+
+    18% {
+      transform:
+        rotate(0.14deg);
+    }
+
+    38% {
+      transform:
+        rotate(-0.09deg);
+    }
+
+    58% {
+      transform:
+        rotate(0.18deg);
+    }
+
+    77% {
+      transform:
+        rotate(-0.12deg);
+    }
+
+    90% {
+      transform:
+        rotate(0.05deg);
+    }
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hero-v2-layer--branch {
+    animation:
+      none !important;
+
+    transform:
+      none !important;
+  }
+
+}
+
+/* =========================================================
+   B7.14D2 ? STRONGER NATURAL WIND
+   More visible sway while preserving a natural pivot.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .hero-v2-layer--branch {
+
+    transform-origin:
+      96% 8%;
+
+    animation:
+      mato-unified-branch-wind-v2
+      7.8s
+      ease-in-out
+      infinite;
+  }
+
+
+  @keyframes mato-unified-branch-wind-v2 {
+
+    0%,
+    100% {
+      transform:
+        rotate(0deg);
+    }
+
+    16% {
+      transform:
+        rotate(0.42deg);
+    }
+
+    34% {
+      transform:
+        rotate(-0.28deg);
+    }
+
+    53% {
+      transform:
+        rotate(0.52deg);
+    }
+
+    72% {
+      transform:
+        rotate(-0.34deg);
+    }
+
+    88% {
+      transform:
+        rotate(0.18deg);
+    }
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hero-v2-layer--branch {
+    animation:
+      none !important;
+
+    transform:
+      none !important;
+  }
+
+}
+
+/* =========================================================
+   B7.14D3 ? BRANCH OVERFLOW BELOW HERO
+
+   Allow the moving unified cashew branch to extend
+   below the Hero and remain visible in front of the
+   white section beneath it.
+
+   Background / content layout remain unchanged.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * The scenic wrapper must not clip the moving branch.
+   */
+  .home-scenic-canvas {
+    overflow:
+      visible;
+  }
+
+  /*
+   * Keep the branch visually above the lower white area.
+   */
+  .hero-v2-layer--branch {
+    z-index:
+      3;
+  }
+
+  /*
+   * Hero content / product / trust bar must stay above
+   * the moving branch where they overlap.
+   */
+  .home-scenic-canvas > :not(.hero-v2-layer) {
+    position:
+      relative;
+
+    z-index:
+      4;
+  }
+}
+
+/* =========================================================
+   B7.14D4 ? LOWER SECTION STACKING REPAIR
+
+   Goal:
+   - Hero content stays above branch
+   - Trust Bar stays above branch
+   - Moving branch can extend over the white section below
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .home-scenic-canvas {
+    overflow:
+      visible;
+  }
+
+
+  /*
+   * Unified botanical layer.
+   * Must remain above lower scenic sections.
+   */
+  .hero-v2-layer--branch {
+    z-index:
+      3;
+  }
+
+
+  /*
+   * Override the broad B7.14D3 stacking rule
+   * for lower scenic sections.
+   */
+  .home-scenic-canvas
+  > .home-why-choose,
+
+  .home-scenic-canvas
+  > .home-process,
+
+  .home-scenic-canvas
+  > .home-stats {
+    position:
+      relative;
+
+    z-index:
+      1;
+  }
+
+
+  /*
+   * Hero itself must remain above the branch
+   * so text / CTA / product carousel stay clean.
+   */
+  .home-scenic-canvas
+  > .hero {
+    position:
+      relative;
+
+    z-index:
+      4;
+  }
+
+
+  /*
+   * Trust Bar also remains above the branch.
+   */
+  .home-scenic-canvas
+  > .trust-bar {
+    position:
+      relative;
+
+    z-index:
+      4;
+  }
+
+}
+
+/* =========================================================
+   B7.14D6 ? PRODUCTS SURFACE STACKING REPAIR
+
+   Runtime audit confirmed:
+   branch z-index   = 3
+   products section = 4
+
+   Therefore the Products surface was painting
+   over the lower moving cashew leaves.
+
+   Desired stack:
+   Hero / Trust Bar > Branch > Products surface
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * Moving botanical foreground.
+   */
+  .hero-v2-layer--branch {
+    z-index:
+      3;
+  }
+
+
+  /*
+   * Allow the lower part of the branch / leaves
+   * to appear in front of the Products background.
+   */
+  .home-scenic-canvas
+  > .products.products-showcase {
+    position:
+      relative;
+
+    z-index:
+      1;
+  }
+
+
+  /*
+   * Hero content must remain above the branch.
+   */
+  .home-scenic-canvas
+  > .hero {
+    position:
+      relative;
+
+    z-index:
+      4;
+  }
+
+
+  /*
+   * Trust Bar must remain above the branch.
+   */
+  .home-scenic-canvas
+  > .trust-bar {
+    position:
+      relative;
+
+    z-index:
+      5;
+  }
+
+}
+
+
+/* =========================================================
+   B7.15C2B ? CUSTOM UPPER-RIGHT LEAF
+   Static placement validation only.
+
+   Asset 1 only.
+   No animation.
+   Approved Branch unchanged.
+   Hero geometry unchanged.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .hero-motion-leaf {
+    position: absolute;
+
+    display: block;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    object-fit: contain;
+
+    object-position: center;
+
+    z-index: 3;
+  }
+
+
+  /*
+   * B7.15A runtime target at 1920px:
+   *
+   * left   ~= 1344px
+   * top    ~= 12.8px
+   * width  ~= 403.2px
+   * height ~= 160px
+   *
+   * Convert horizontal geometry to viewport-relative
+   * positioning while keeping the visual compact.
+   */
+
+  .hero-motion-leaf--upper {
+    top:
+      13px;
+
+    left:
+      70vw;
+
+    width:
+      21vw;
+
+    height:
+      160px;
+
+    max-width:
+      403px;
+
+    animation:
+      none;
+
+    transform:
+      none;
+  }
+}
+
+
+@media (max-width: 768px) {
+
+  .hero-motion-leaf {
+    display:
+      none !important;
+  }
+}
+
+/* =========================================================
+   B7.15C2I ? ASSET 1 PLACEMENT CALIBRATION
+
+   Move custom foliage away from Header
+   and integrate it more naturally into
+   the existing upper-right botanical branch.
+
+   STATIC ONLY.
+   No wind animation yet.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .home-scenic-canvas
+  > .hero-motion-leaf.hero-motion-leaf--upper {
+
+    top:
+      95px;
+
+    left:
+      73vw;
+
+    width:
+      17vw;
+
+    height:
+      145px;
+
+    max-width:
+      330px;
+
+    position:
+      absolute;
+
+    z-index:
+      3;
+
+    animation:
+      none;
+
+    transform:
+      none;
+  }
+
+}
+
+/* =========================================================
+   B7.15C2J ? ASSET 1 SCALE CALIBRATION
+
+   Increase visual presence while preserving
+   the approved upper-right integration.
+
+   STATIC ONLY.
+   No animation yet.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .home-scenic-canvas
+  > .hero-motion-leaf.hero-motion-leaf--upper {
+
+    top:
+      78px;
+
+    left:
+      70.5vw;
+
+    width:
+      22vw;
+
+    height:
+      190px;
+
+    max-width:
+      430px;
+
+    position:
+      absolute;
+
+    z-index:
+      3;
+
+    animation:
+      none;
+
+    transform:
+      none;
+  }
+
+}
+
+/* =========================================================
+   B7.15C2K ? ASSET 1 ARROW POSITION CALIBRATION
+
+   Move Asset 1 toward the upper-right branch
+   indicated in visual review.
+
+   Slightly larger.
+   Right anchored.
+   STATIC ONLY.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .home-scenic-canvas
+  > .hero-motion-leaf.hero-motion-leaf--upper {
+
+    top:
+      48px;
+
+    left:
+      auto;
+
+    right:
+      -8px;
+
+    width:
+      25vw;
+
+    height:
+      215px;
+
+    max-width:
+      475px;
+
+    position:
+      absolute;
+
+    z-index:
+      3;
+
+    animation:
+      none;
+
+    transform:
+      none;
+  }
+
+}
+
+/* =========================================================
+   B7.15C2L ? ASSET 1 FINAL SCALE UP
+
+   Keep approved upper-right position.
+   Increase size slightly to better match
+   the botanical scale behind it.
+
+   STATIC ONLY.
+   No animation yet.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .home-scenic-canvas
+  > .hero-motion-leaf.hero-motion-leaf--upper {
+
+    top:
+      42px;
+
+    left:
+      auto;
+
+    right:
+      -12px;
+
+    width:
+      28vw;
+
+    height:
+      240px;
+
+    max-width:
+      535px;
+
+    position:
+      absolute;
+
+    z-index:
+      3;
+
+    animation:
+      none;
+
+    transform:
+      none;
+  }
+
+}
+
+/* =========================================================
+   B7.15C3 ? ASSET 1 GENTLE WIND MOTION
+
+   Natural upper-right leaf sway.
+   Small amplitude.
+   Weighted around the branch attachment point.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .home-scenic-canvas
+  > .hero-motion-leaf.hero-motion-leaf--upper {
+
+    transform-origin:
+      96% 22%;
+
+    animation:
+      mato-custom-leaf-upper-wind
+      6.8s
+      ease-in-out
+      infinite;
+
+    will-change:
+      transform;
+  }
+
+
+  @keyframes mato-custom-leaf-upper-wind {
+
+    0%,
+    100% {
+      transform:
+        translate3d(0, 0, 0)
+        rotate(0deg);
+    }
+
+    22% {
+      transform:
+        translate3d(-1px, 0.5px, 0)
+        rotate(-0.65deg);
+    }
+
+    48% {
+      transform:
+        translate3d(1.5px, -0.5px, 0)
+        rotate(0.85deg);
+    }
+
+    72% {
+      transform:
+        translate3d(-0.5px, 0.8px, 0)
+        rotate(-0.45deg);
+    }
+
+    88% {
+      transform:
+        translate3d(0.8px, -0.2px, 0)
+        rotate(0.30deg);
+    }
+  }
+
+}
+
+
+@media (
+  min-width: 769px
+) and (
+  prefers-reduced-motion: reduce
+) {
+
+  .home-scenic-canvas
+  > .hero-motion-leaf.hero-motion-leaf--upper {
+
+    animation:
+      none !important;
+
+    transform:
+      none !important;
+  }
+
+}
+
+/* =========================================================
+   B7.15C3B ? SMOOTH NATURAL WIND TUNING
+
+   Softer and slower motion.
+   Fewer direction changes.
+   Reduced translation.
+   Natural branch-attached sway.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .home-scenic-canvas
+  > .hero-motion-leaf.hero-motion-leaf--upper {
+
+    transform-origin:
+      96% 20%;
+
+    animation:
+      mato-custom-leaf-upper-wind-smooth
+      10.8s
+      cubic-bezier(0.45, 0.05, 0.55, 0.95)
+      infinite;
+
+    will-change:
+      transform;
+  }
+
+
+  @keyframes mato-custom-leaf-upper-wind-smooth {
+
+    0%,
+    100% {
+      transform:
+        translate3d(0, 0, 0)
+        rotate(0deg);
+    }
+
+    33% {
+      transform:
+        translate3d(-0.6px, 0.2px, 0)
+        rotate(-0.42deg);
+    }
+
+    66% {
+      transform:
+        translate3d(0.7px, -0.2px, 0)
+        rotate(0.48deg);
+    }
+  }
+
+}
+
+
+@media (
+  min-width: 769px
+) and (
+  prefers-reduced-motion: reduce
+) {
+
+  .home-scenic-canvas
+  > .hero-motion-leaf.hero-motion-leaf--upper {
+
+    animation:
+      none !important;
+
+    transform:
+      none !important;
+  }
+
+}
+
+/* =========================================================
+   B7.15C3C ? SOFT BREEZE SYNC
+
+   Faster than C3B.
+   Softer direction changes.
+   Small organic drift.
+   Reduced rigid rotation.
+   Designed to visually blend with background foliage.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .home-scenic-canvas
+  > .hero-motion-leaf.hero-motion-leaf--upper {
+
+    transform-origin:
+      97% 18%;
+
+    animation:
+      mato-leaf-soft-breeze
+      6.4s
+      linear
+      infinite;
+
+    will-change:
+      transform;
+  }
+
+
+  @keyframes mato-leaf-soft-breeze {
+
+    0% {
+      transform:
+        translate3d(0, 0, 0)
+        rotate(0deg);
+    }
+
+    12.5% {
+      transform:
+        translate3d(-0.5px, 0.15px, 0)
+        rotate(-0.16deg);
+    }
+
+    25% {
+      transform:
+        translate3d(-0.9px, 0.35px, 0)
+        rotate(-0.28deg);
+    }
+
+    37.5% {
+      transform:
+        translate3d(-0.45px, 0.18px, 0)
+        rotate(-0.12deg);
+    }
+
+    50% {
+      transform:
+        translate3d(0.15px, -0.08px, 0)
+        rotate(0.08deg);
+    }
+
+    62.5% {
+      transform:
+        translate3d(0.75px, -0.3px, 0)
+        rotate(0.25deg);
+    }
+
+    75% {
+      transform:
+        translate3d(0.95px, -0.38px, 0)
+        rotate(0.30deg);
+    }
+
+    87.5% {
+      transform:
+        translate3d(0.4px, -0.12px, 0)
+        rotate(0.13deg);
+    }
+
+    100% {
+      transform:
+        translate3d(0, 0, 0)
+        rotate(0deg);
+    }
+  }
+
+}
+
+
+@media (
+  min-width: 769px
+) and (
+  prefers-reduced-motion: reduce
+) {
+
+  .home-scenic-canvas
+  > .hero-motion-leaf.hero-motion-leaf--upper {
+
+    animation:
+      none !important;
+
+    transform:
+      none !important;
+  }
+
+}
+
+/* =========================================================
+   B7.15C4 ? ASSET 2 MID-RIGHT STATIC PLACEMENT
+
+   Asset 1 remains LOCKED.
+   Asset 2 placement only.
+   No Asset 2 animation yet.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .home-scenic-canvas
+  > .hero-motion-leaf.hero-motion-leaf--mid {
+
+    position:
+      absolute;
+
+    top:
+      155px;
+
+    left:
+      auto;
+
+    right:
+      18px;
+
+    width:
+      24vw;
+
+    height:
+      215px;
+
+    max-width:
+      455px;
+
+    display:
+      block;
+
+    object-fit:
+      contain;
+
+    object-position:
+      center;
+
+    pointer-events:
+      none;
+
+    user-select:
+      none;
+
+    z-index:
+      3;
+
+    animation:
+      none;
+
+    transform:
+      none;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .hero-motion-leaf--mid {
+    display:
+      none !important;
+  }
+
+}
+
+/* =========================================================
+   B7.15C5 ? ASSET 2 DISABLED
+
+   Final Hero motion direction:
+   - Asset 1 remains active
+   - Asset 1 Soft Breeze motion remains active
+   - Asset 2 removed from DOM
+   - Asset 2 image file preserved
+   ========================================================= */
+
+.hero-motion-leaf--mid {
+  display:
+    none !important;
+
+  animation:
+    none !important;
+}
