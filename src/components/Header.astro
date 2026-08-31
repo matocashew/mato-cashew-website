@@ -5,6 +5,9 @@ import { getCurrentLanguage }
 import LanguageSwitcher
   from "./LanguageSwitcher.astro";
 
+import MegaMenuIcon
+  from "./navigation/MegaMenuIcon.astro";
+
 import { navigationService }
   from "@services/navigationService";
 
@@ -205,9 +208,14 @@ const brandName =
                                       "active",
                                   ]}
                                 >
-                                  <span class="mega-menu-link-title">
-                                    {child.label}
-                                  </span>
+                                  <MegaMenuIcon
+                                    name={child.icon}
+                                  />
+
+                                  <span class="mega-menu-link-content">
+                                    <span class="mega-menu-link-title">
+                                      {child.label}
+                                    </span>
 
                                   {
                                     child.description && (
@@ -216,6 +224,7 @@ const brandName =
                                       </span>
                                     )
                                   }
+                                  </span>
                                 </a>
                               )
                             )

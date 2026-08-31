@@ -72,6 +72,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "cambodian-cashew-overview",
+        icon: "badge-check",
 
         label: "Why Cambodian Cashews",
 
@@ -98,6 +99,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "what-is-cashew",
+        icon: "book-open",
 
         label: "What Is Cashew?",
 
@@ -123,6 +125,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "cashew-tree",
+        icon: "sprout",
 
         label: "The Cashew Tree",
 
@@ -148,6 +151,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "cashew-processing",
+        icon: "factory",
 
         label: "Cashew Processing",
 
@@ -173,6 +177,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "cambodia-cashew-export",
+        icon: "ship",
 
         label: "Export Guide",
 
@@ -227,6 +232,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "knowledge-center",
+        icon: "book-open",
 
         label: "Knowledge Center",
 
@@ -250,6 +256,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "knowledge-quality",
+        icon: "badge-check",
 
         label: "Quality Standards",
 
@@ -275,6 +282,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "knowledge-grading",
+        icon: "layers",
 
         label: "Grading Standards",
 
@@ -300,6 +308,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "knowledge-kernel-grades",
+        icon: "layers",
 
         label: "Kernel Grades & Uses",
 
@@ -325,6 +334,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "knowledge-food-safety",
+        icon: "shield-check",
 
         label: "Food Safety",
 
@@ -350,6 +360,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "knowledge-moisture",
+        icon: "droplets",
 
         label: "Moisture Standards",
 
@@ -375,6 +386,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "knowledge-storage",
+        icon: "archive",
 
         label: "Storage Guide",
 
@@ -400,6 +412,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "knowledge-packaging",
+        icon: "package",
 
         label: "Packaging Guide",
 
@@ -425,6 +438,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "knowledge-shelf-life",
+        icon: "clock",
 
         label: "Shelf Life",
 
@@ -487,6 +501,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "market-export",
+        icon: "ship",
 
         label: "Export & Trade",
 
@@ -513,6 +528,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "market-quality",
+        icon: "badge-check",
 
         label: "Quality Standards",
 
@@ -538,6 +554,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "market-grading",
+        icon: "layers",
 
         label: "Commercial Grading",
 
@@ -563,6 +580,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "market-packaging",
+        icon: "package",
 
         label: "Packaging",
 
@@ -588,6 +606,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "market-wholesale",
+        icon: "briefcase",
 
         label: "Wholesale / B2B",
 
@@ -639,6 +658,7 @@ export const navigation: MenuItem[] = [
 
     {
       id: "all-products",
+      icon: "package",
 
       label: "All Products",
       labelKm: "ផលិតផលទាំងអស់",
@@ -658,6 +678,7 @@ export const navigation: MenuItem[] = [
 
     {
       id: "products-wholesale",
+      icon: "briefcase",
 
       label: "Wholesale / B2B",
       labelKm: "លក់ដុំ / B2B",
@@ -707,6 +728,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "about-mato",
+        icon: "badge-check",
 
         label: "About Mato Cashew",
         labelKm: "អំពីចន្ទីមាតុភូមិ",
@@ -726,6 +748,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "about-resources",
+        icon: "book-open",
 
         label: "Resources",
         labelKm: "ធនធាន",
@@ -745,6 +768,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "about-gallery",
+        icon: "image",
 
         label: "Gallery",
         labelKm: "វិចិត្រសាល",
@@ -764,6 +788,7 @@ export const navigation: MenuItem[] = [
 
       {
         id: "about-contact",
+        icon: "mail",
 
         label: "Contact",
         labelKm: "ទំនាក់ទំនង",
