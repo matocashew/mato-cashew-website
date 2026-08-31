@@ -3733,3 +3733,64 @@ html[lang="km"] .hero-description,
   animation:
     none !important;
 }
+
+/* =========================================================
+   B7.18E ? HERO BRANCH SEAM + WIND FINAL
+
+   Keep the approved original branch scale.
+   Shift the branch slightly right to prevent edge seams.
+   Slow the unified branch wind for a softer natural sway.
+
+   Asset 1 remains unchanged.
+   Branch keyframes remain unchanged.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .hero-v2-layer--branch {
+    right:
+      -12px;
+
+    animation-duration:
+      14.5s;
+  }
+
+}
+
+/* =========================================================
+   B7.19G ? HERO PRODUCT FINAL POSITION
+
+   Shift desktop Hero product slides left to reveal more
+   of the approved botanical branch on the right.
+
+   Product image scale remains unchanged.
+   Branch and Asset 1 remain unchanged.
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+  .hero-product-slide.is-active {
+    transform:
+      translateX(-108px)
+      scale(1) !important;
+  }
+
+}
+
+/* =========================================================
+   B7.20C ? HERO PRODUCT SELECTOR FINAL POSITION
+
+   Keep the product selector centered below the approved
+   desktop product position.
+
+   Preserve the controls' existing centering transform.
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+  .hero-slider-controls {
+    margin-left:
+      -108px;
+  }
+
+}
