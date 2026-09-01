@@ -202,6 +202,8 @@ const t = getCurrentLanguage(
       const closeButton =
         gallery.querySelector("[data-story-close]");
 
+      let lightboxTrigger: HTMLElement | null = null;
+
 
       if (!(mainImage instanceof HTMLImageElement)) {
         return;
@@ -326,6 +328,10 @@ const t = getCurrentLanguage(
         lightbox.setAttribute("aria-hidden", "false");
 
         document.body.classList.add("story-lightbox-open");
+
+        if (closeButton instanceof HTMLElement) {
+          closeButton.focus();
+        }
       };
 
 
@@ -338,6 +344,12 @@ const t = getCurrentLanguage(
         lightbox.setAttribute("aria-hidden", "true");
 
         document.body.classList.remove("story-lightbox-open");
+
+        if (lightboxTrigger instanceof HTMLElement) {
+          lightboxTrigger.focus();
+        }
+
+        lightboxTrigger = null;
       };
 
 
@@ -353,6 +365,7 @@ const t = getCurrentLanguage(
         event.preventDefault();
         event.stopPropagation();
 
+        lightboxTrigger = mainImage;
         openLightbox();
       });
 
@@ -363,6 +376,9 @@ const t = getCurrentLanguage(
       if (openButton && openButton !== mainImage) {
         openButton.addEventListener("click", (event) => {
           event.preventDefault();
+          if (openButton instanceof HTMLElement) {
+            lightboxTrigger = openButton;
+          }
           openLightbox();
         });
       }

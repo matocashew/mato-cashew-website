@@ -3170,3 +3170,46 @@ body.story-lightbox-open {
   }
 
 }
+
+/* B8.7 - Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .story-zoom-icon,
+  .story-lightbox,
+  .story-lightbox-content,
+  .story-main-image img,
+  .story-gallery-item,
+  .story-gallery-item img,
+  .mv-card,
+  .mv-icon,
+  .value-card,
+  .value-icon,
+  .value-card-line,
+  .process-card,
+  .process-icon,
+  .quality-image img,
+  .choose-card,
+  .choose-icon,
+  .choose-card-line,
+  .about-cta-actions .btn,
+  .about-cta-visual img {
+    transition-duration: 0.01ms !important;
+  }
+
+  .story-main-image:hover .story-zoom-icon,
+  .story-gallery-item:hover,
+  .story-gallery-item:hover img,
+  .story-lightbox.is-open .story-lightbox-content,
+  .mv-card:hover,
+  .mv-card:hover .mv-icon,
+  .value-card:hover,
+  .value-card:hover .value-icon,
+  .process-card:hover,
+  .process-card:hover .process-icon,
+  .quality-image:hover img,
+  .choose-card:hover,
+  .choose-card:hover .choose-icon,
+  .about-cta-actions .btn:hover,
+  .about-cta-visual:hover img {
+    transform: none !important;
+  }
+}

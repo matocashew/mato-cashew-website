@@ -6,7 +6,8 @@
 .about-hero {
     position: relative;
 
-    min-height: 728px;
+    height: 640px;
+    min-height: 640px;
 
     display: flex;
     align-items: center;
@@ -16,7 +17,7 @@
     /*
        Pull Hero upward behind the fixed Header
     */
-    margin-top: -88px;
+    margin-top: 0;
 
     /*
        Restore the space needed by Hero content
