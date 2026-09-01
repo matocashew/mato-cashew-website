@@ -3794,3 +3794,28 @@ html[lang="km"] .hero-description,
   }
 
 }
+
+
+/* =========================================================
+   B7.HOME-APPROVED-HERO-TRUST-BASELINE
+
+   Approved desktop Home geometry.
+   Scoped to Home only. Shared Trust Bar remains unchanged.
+   ========================================================= */
+
+@media (min-width: 993px) {
+  .home-scenic-canvas > .hero {
+    height: 729px;
+    min-height: 729px;
+  }
+
+  .home-scenic-canvas > .trust-bar {
+    margin-top: 24px;
+    margin-bottom: 30px;
+    transform: translateY(-10px);
+  }
+
+  .home-scenic-canvas > .products.products-showcase {
+    transform: translateY(20px);
+  }
+}
