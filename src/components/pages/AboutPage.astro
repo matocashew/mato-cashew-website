@@ -1,4 +1,6 @@
----
+﻿---
+import ScenicHeroShell from "../layout/ScenicHeroShell.astro";
+
 import AboutHero from "../about/AboutHero.astro";
 import TrustBar from "../TrustBar.astro";
 import CompanyStory from "../about/CompanyStory.astro";
@@ -16,15 +18,19 @@ const t = getCurrentLanguage(
 );
 ---
 
-<AboutHero
-  tag={t.about.pageHero.tag}
-  title={t.about.pageHero.title}
-  description={t.about.pageHero.description}
-  primaryCta={t.about.pageHero.primaryCta}
-  secondaryCta={t.about.pageHero.secondaryCta}
-/>
+<ScenicHeroShell variant="about">
 
-<TrustBar />
+  <AboutHero
+    tag={t.about.pageHero.tag}
+    title={t.about.pageHero.title}
+    description={t.about.pageHero.description}
+    primaryCta={t.about.pageHero.primaryCta}
+    secondaryCta={t.about.pageHero.secondaryCta}
+  />
+
+  <TrustBar />
+
+</ScenicHeroShell>
 
 <CompanyStory />
 

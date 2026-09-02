@@ -3213,3 +3213,46 @@ body.story-lightbox-open {
     transform: none !important;
   }
 }
+
+/* PHASE-5G-OUR-STORY-START */
+
+/* =========================================================
+   ABOUT - OUR STORY BACKDROP BEHIND TRUST BAR
+
+   Goal:
+   - move the white Our Story section upward
+   - let its background sit behind Trust Bar
+   - keep Trust Bar visually on top
+   - preserve Our Story content spacing
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+  /*
+   * The first section immediately after ScenicHeroShell
+   * is Company Story / Our Story.
+   *
+   * Pull the section background upward behind Trust Bar.
+   */
+  .scenic-hero-shell + section {
+    position: relative;
+
+    margin-top: -95px;
+
+    padding-top: 95px;
+
+    z-index: 1;
+  }
+
+
+  /*
+   * Trust Bar must remain above the lifted section.
+   */
+  .scenic-hero-shell--about > .trust-bar {
+    position: relative;
+    z-index: 4;
+  }
+
+}
+
+/* PHASE-5G-OUR-STORY-END */

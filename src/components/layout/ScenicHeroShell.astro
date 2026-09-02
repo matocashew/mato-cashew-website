@@ -1,0 +1,22 @@
+﻿---
+import "../../styles/scenic-hero-system.css";
+
+interface Props {
+  variant: string;
+}
+
+const {
+  variant
+} = Astro.props;
+---
+
+<div class={`scenic-hero-shell scenic-hero-shell--${variant}`}>
+
+  <div
+    class="scenic-hero-shell__background"
+    aria-hidden="true"
+  ></div>
+
+  <slot />
+
+</div>

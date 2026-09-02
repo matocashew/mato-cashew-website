@@ -1,0 +1,13 @@
+/* =========================================================
+   MATO CASHEW - SCENIC HERO DESIGN CONTRACT
+   ========================================================= */
+
+:root {
+  --mc-hero-desktop-height: 729px;
+
+  --mc-trust-margin-top: 24px;
+  --mc-trust-margin-bottom: 30px;
+  --mc-trust-translate-y: -10px;
+
+  --mc-scenic-desktop-reference-width: 1920px;
+}

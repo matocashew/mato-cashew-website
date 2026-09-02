@@ -2842,6 +2842,7 @@ text-decoration: none !important;
 @media (min-width: 769px) {
 
   .hero-content,
+  .about-hero__content,
   .hero-trust,
   .home-stat-content,
   .trust-item__content,
@@ -2852,6 +2853,8 @@ text-decoration: none !important;
   }
 
   .hero-content.mega-menu-local-occluded,
+
+  .about-hero__content.mega-menu-local-occluded,
 
   .hero-trust.mega-menu-local-occluded,
 
@@ -3551,3 +3554,222 @@ text-decoration: none !important;
   }
 
 }
+
+/* PHASE-5L-GLOBAL-MEGA-BLUR-CSS-START */
+
+/* =========================================================
+   MATO GLOBAL MEGA MENU BACKDROP BLUR
+
+   Global navigation behavior.
+
+   Applies on every desktop page when a real Mega Menu
+   panel is visible.
+
+   Does NOT apply to compact dropdown menus.
+
+   Approved glass strength:
+     blur        4px
+     saturation  103%
+     brightness  1.005
+     fill alpha  0.04
+
+   Layer contract:
+     page content         < 900
+     blur surface           900
+     header                2000
+     submenu               2100
+
+   Therefore:
+   - page content behind Mega Menu is blurred
+   - Hero / Trust / Story / Products / Knowledge can blur
+   - Mega Menu text and icons remain sharp
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  body.mega-menu-page-blur-active::before {
+    content: "";
+
+    position: fixed;
+
+    left:
+      var(
+        --mega-menu-blur-left,
+        0px
+      );
+
+    top:
+      var(
+        --mega-menu-blur-top,
+        0px
+      );
+
+    width:
+      var(
+        --mega-menu-blur-width,
+        0px
+      );
+
+    height:
+      var(
+        --mega-menu-blur-height,
+        0px
+      );
+
+    z-index: 900;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    background:
+      rgba(
+        255,
+        255,
+        255,
+        0.04
+      );
+
+    -webkit-backdrop-filter:
+      blur(4px)
+      saturate(103%)
+      brightness(1.005);
+
+    backdrop-filter:
+      blur(4px)
+      saturate(103%)
+      brightness(1.005);
+
+  }
+
+
+  /*
+   * The actual Mato Header must always stay above
+   * the global blur surface.
+   */
+  body.mega-menu-page-blur-active
+  .header {
+    z-index:
+      2000 !important;
+  }
+
+
+  /*
+   * Actual submenu / Mega Menu panel.
+   * Text, icons and glass remain completely sharp.
+   */
+  body.mega-menu-page-blur-active
+  .has-submenu
+  > .submenu-panel {
+    z-index:
+      2100 !important;
+  }
+
+}
+
+/* PHASE-5L-GLOBAL-MEGA-BLUR-CSS-END */
+
+/* PHASE-5M-GLOBAL-OCCLUSION-CSS-START */
+
+/* =========================================================
+   MATO GLOBAL MEGA MENU FOREGROUND OCCLUSION
+
+   The page-level blur remains visible.
+
+   Foreground text / buttons that physically intersect
+   the open Mega Menu rectangle receive a transparent
+   hole exactly matching that overlap.
+
+   Backgrounds are not removed.
+   Mega Menu itself is not affected.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .mega-menu-global-occluded {
+
+    /*
+     * Layer 1 = entire foreground element.
+     * Layer 2 = Mega Menu overlap rectangle.
+     */
+
+    -webkit-mask-image:
+      linear-gradient(
+        #000 0 0
+      ),
+      linear-gradient(
+        #000 0 0
+      );
+
+    mask-image:
+      linear-gradient(
+        #000 0 0
+      ),
+      linear-gradient(
+        #000 0 0
+      );
+
+
+    -webkit-mask-size:
+      100% 100%,
+      calc(
+        100%
+        - var(--menu-hole-left)
+        - var(--menu-hole-right)
+      )
+      calc(
+        100%
+        - var(--menu-hole-top)
+        - var(--menu-hole-bottom)
+      );
+
+    mask-size:
+      100% 100%,
+      calc(
+        100%
+        - var(--menu-hole-left)
+        - var(--menu-hole-right)
+      )
+      calc(
+        100%
+        - var(--menu-hole-top)
+        - var(--menu-hole-bottom)
+      );
+
+
+    -webkit-mask-position:
+      0 0,
+      var(--menu-hole-left)
+      var(--menu-hole-top);
+
+    mask-position:
+      0 0,
+      var(--menu-hole-left)
+      var(--menu-hole-top);
+
+
+    -webkit-mask-repeat:
+      no-repeat,
+      no-repeat;
+
+    mask-repeat:
+      no-repeat,
+      no-repeat;
+
+
+    /*
+     * Subtract overlap rectangle from element.
+     */
+    -webkit-mask-composite:
+      xor;
+
+    mask-composite:
+      exclude;
+
+  }
+
+}
+
+/* PHASE-5M-GLOBAL-OCCLUSION-CSS-END */

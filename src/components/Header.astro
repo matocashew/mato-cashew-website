@@ -1,4 +1,4 @@
-﻿---
+---
 import { getCurrentLanguage }
   from "../i18n/getCurrentLanguage";
 
@@ -588,7 +588,7 @@ const brandName =
 
     const heroForeground =
       document.querySelector<HTMLElement>(
-        ".hero-content"
+        ".hero-content, .about-hero__content"
       );
 
     const heroTrust =
@@ -640,6 +640,62 @@ const brandName =
 
 
     const clearMegaMenuOcclusion = () => {
+      /* PHASE-5M-GLOBAL-OCCLUSION-CLEAR-START */
+
+      document
+        .querySelectorAll<HTMLElement>(
+          ".mega-menu-global-occluded"
+        )
+        .forEach((element) => {
+
+          element.classList.remove(
+            "mega-menu-global-occluded"
+          );
+
+          element.style.removeProperty(
+            "--menu-hole-left"
+          );
+
+          element.style.removeProperty(
+            "--menu-hole-right"
+          );
+
+          element.style.removeProperty(
+            "--menu-hole-top"
+          );
+
+          element.style.removeProperty(
+            "--menu-hole-bottom"
+          );
+
+        });
+
+      /* PHASE-5M-GLOBAL-OCCLUSION-CLEAR-END */
+      /* PHASE-5L-GLOBAL-BLUR-CLEAR-START */
+
+      document.body.classList.remove(
+        "mega-menu-page-blur-active"
+      );
+
+      document.body.style.removeProperty(
+        "--mega-menu-blur-left"
+      );
+
+      document.body.style.removeProperty(
+        "--mega-menu-blur-top"
+      );
+
+      document.body.style.removeProperty(
+        "--mega-menu-blur-width"
+      );
+
+      document.body.style.removeProperty(
+        "--mega-menu-blur-height"
+      );
+
+      /* PHASE-5L-GLOBAL-BLUR-CLEAR-END */
+
+
 
       document.body.classList.remove(
         "mega-menu-occlusion-active"
@@ -681,6 +737,262 @@ const brandName =
 
       const panelRect =
         panel.getBoundingClientRect();
+      /* PHASE-5M-GLOBAL-OCCLUSION-APPLY-START */
+
+      /*
+       * Clear previous global occlusion first.
+       */
+      document
+        .querySelectorAll<HTMLElement>(
+          ".mega-menu-global-occluded"
+        )
+        .forEach((element) => {
+
+          element.classList.remove(
+            "mega-menu-global-occluded"
+          );
+
+          element.style.removeProperty(
+            "--menu-hole-left"
+          );
+
+          element.style.removeProperty(
+            "--menu-hole-right"
+          );
+
+          element.style.removeProperty(
+            "--menu-hole-top"
+          );
+
+          element.style.removeProperty(
+            "--menu-hole-bottom"
+          );
+
+        });
+
+
+      /*
+       * Global foreground candidates.
+       *
+       * Header is intentionally excluded because
+       * this query starts inside <main>.
+       *
+       * We target semantic foreground elements rather
+       * than whole sections, so page backgrounds remain
+       * visible through the Mega Menu glass.
+       */
+      const globalOcclusionCandidates =
+        document.querySelectorAll<HTMLElement>(
+          [
+            "main h1",
+            "main h2",
+            "main h3",
+            "main h4",
+            "main h5",
+            "main h6",
+            "main p",
+            "main a",
+            "main button",
+            "main li",
+            "main dt",
+            "main dd",
+            "main figcaption",
+            "main small",
+            "main .trust-bar__item"
+          ].join(", ")
+        );
+
+
+      globalOcclusionCandidates.forEach(
+        (element) => {
+
+          /*
+           * Ignore hidden / zero-size elements.
+           */
+          const rect =
+            element.getBoundingClientRect();
+
+          if (
+            rect.width <= 0 ||
+            rect.height <= 0
+          ) {
+            return;
+          }
+
+
+          /*
+           * Intersection with active Mega Menu.
+           */
+          const overlapLeft =
+            Math.max(
+              rect.left,
+              panelRect.left
+            );
+
+          const overlapTop =
+            Math.max(
+              rect.top,
+              panelRect.top
+            );
+
+          const overlapRight =
+            Math.min(
+              rect.right,
+              panelRect.right
+            );
+
+          const overlapBottom =
+            Math.min(
+              rect.bottom,
+              panelRect.bottom
+            );
+
+
+          if (
+            overlapRight <= overlapLeft ||
+            overlapBottom <= overlapTop
+          ) {
+            return;
+          }
+
+
+          /*
+           * Convert intersection into coordinates
+           * local to this individual element.
+           */
+          const holeLeft =
+            Math.max(
+              overlapLeft - rect.left,
+              0
+            );
+
+          const holeRight =
+            Math.max(
+              rect.right - overlapRight,
+              0
+            );
+
+          const holeTop =
+            Math.max(
+              overlapTop - rect.top,
+              0
+            );
+
+          const holeBottom =
+            Math.max(
+              rect.bottom - overlapBottom,
+              0
+            );
+
+
+          element.style.setProperty(
+            "--menu-hole-left",
+            `${holeLeft}px`
+          );
+
+          element.style.setProperty(
+            "--menu-hole-right",
+            `${holeRight}px`
+          );
+
+          element.style.setProperty(
+            "--menu-hole-top",
+            `${holeTop}px`
+          );
+
+          element.style.setProperty(
+            "--menu-hole-bottom",
+            `${holeBottom}px`
+          );
+
+          element.classList.add(
+            "mega-menu-global-occluded"
+          );
+
+        });
+
+      /* PHASE-5M-GLOBAL-OCCLUSION-APPLY-END */
+      /* PHASE-5L-GLOBAL-BLUR-APPLY-START */
+
+      /*
+       * Global Mega Menu page blur.
+       *
+       * This uses viewport coordinates from panelRect,
+       * therefore it works regardless of which page or
+       * section is physically underneath the Mega Menu.
+       *
+       * Compact dropdowns are intentionally excluded.
+       */
+
+      const globalBlurBody =
+        document.body;
+
+      const isMegaMenuPanel =
+        panel.classList.contains(
+          "mega-menu"
+        ) ||
+        panel.querySelector(
+          ".mega-menu-inner"
+        ) !== null;
+
+
+      /*
+       * Always clear previous rectangle first.
+       * Important when moving directly between nav items.
+       */
+
+      globalBlurBody.classList.remove(
+        "mega-menu-page-blur-active"
+      );
+
+      globalBlurBody.style.removeProperty(
+        "--mega-menu-blur-left"
+      );
+
+      globalBlurBody.style.removeProperty(
+        "--mega-menu-blur-top"
+      );
+
+      globalBlurBody.style.removeProperty(
+        "--mega-menu-blur-width"
+      );
+
+      globalBlurBody.style.removeProperty(
+        "--mega-menu-blur-height"
+      );
+
+
+      if (isMegaMenuPanel) {
+
+        globalBlurBody.style.setProperty(
+          "--mega-menu-blur-left",
+          `${panelRect.left}px`
+        );
+
+        globalBlurBody.style.setProperty(
+          "--mega-menu-blur-top",
+          `${panelRect.top}px`
+        );
+
+        globalBlurBody.style.setProperty(
+          "--mega-menu-blur-width",
+          `${panelRect.width}px`
+        );
+
+        globalBlurBody.style.setProperty(
+          "--mega-menu-blur-height",
+          `${panelRect.height}px`
+        );
+
+        globalBlurBody.classList.add(
+          "mega-menu-page-blur-active"
+        );
+
+      }
+
+      /* PHASE-5L-GLOBAL-BLUR-APPLY-END */
+
+
 
       for (
         const element

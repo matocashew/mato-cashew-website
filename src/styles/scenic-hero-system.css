@@ -1,0 +1,308 @@
+@import "./scenic-hero-tokens.css";
+
+/* =========================================================
+   MATO CASHEW - SHARED SCENIC HERO SYSTEM
+
+   Shared responsibilities:
+   - Hero geometry
+   - Trust Bar geometry
+   - Scenic layer stacking
+   - Responsive behavior
+
+   Page theme responsibilities:
+   - Image
+   - Image ratio
+   - Focal position
+   - Visual background
+   ========================================================= */
+
+
+/* =========================================================
+   SYSTEM DEFAULTS
+   ========================================================= */
+
+.scenic-hero-shell {
+  --scenic-hero-height: var(--mc-hero-desktop-height);
+
+  --scenic-trust-margin-top: var(--mc-trust-margin-top);
+  --scenic-trust-margin-bottom: var(--mc-trust-margin-bottom);
+  --scenic-trust-translate-y: var(--mc-trust-translate-y);
+
+  --scenic-background-image: none;
+  --scenic-background-size: cover;
+  --scenic-background-position-x: 50%;
+  --scenic-background-position-y: 0px;
+
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   SHARED SCENIC BACKGROUND
+   ========================================================= */
+
+.scenic-hero-shell__background {
+  position: absolute;
+  inset: 0;
+
+  z-index: 0;
+
+  pointer-events: none;
+
+  background-image:
+    var(--scenic-background-image);
+
+  background-repeat:
+    no-repeat;
+
+  background-size:
+    var(--scenic-background-size);
+
+  background-position:
+    var(--scenic-background-position-x)
+    var(--scenic-background-position-y);
+}
+
+
+/* =========================================================
+   DESKTOP SHARED GEOMETRY
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+  .scenic-hero-shell > .about-hero {
+    position: relative;
+
+    z-index: 2;
+
+    height:
+      var(--scenic-hero-height);
+
+    min-height:
+      var(--scenic-hero-height);
+
+    margin-top: 0;
+
+    background: transparent;
+
+    overflow: hidden;
+  }
+
+
+  /*
+   * Desktop scenic image is owned by the shell.
+   *
+   * Original AboutHero picture remains in the DOM so
+   * tablet/mobile continue using the established system.
+   */
+
+  .scenic-hero-shell
+  > .about-hero
+  > .about-hero__media {
+    visibility: hidden;
+  }
+
+
+  /*
+   * Hero overlay remains attached to Hero geometry.
+   */
+
+  .scenic-hero-shell
+  > .about-hero
+  > .about-hero__shade {
+    height:
+      var(--scenic-hero-height);
+  }
+
+
+  /* =======================================================
+     SHARED TRUST BAR BASELINE
+     ======================================================= */
+
+  .scenic-hero-shell > .trust-bar {
+    position: relative;
+
+    z-index: 4;
+
+    margin-top:
+      var(--scenic-trust-margin-top);
+
+    margin-bottom:
+      var(--scenic-trust-margin-bottom);
+
+    transform:
+      translateY(
+        var(--scenic-trust-translate-y)
+      );
+  }
+
+}
+
+
+/* =========================================================
+   ABOUT THEME
+   =========================================================
+
+   Source image:
+     1738 x 905
+
+   Original desktop Hero:
+     729px high
+
+   Original image behavior:
+     object-fit: cover
+     object-position: 62% 80%
+
+   The calculations below reproduce that crop using the
+   shell background layer.
+
+   Minimum rendered image width ~1400px is required for
+   the 905:1738 image to cover a 729px Hero.
+   ========================================================= */
+
+.scenic-hero-shell--about {
+
+  /*
+   * Phase 5
+   * Normalized wide desktop scenic asset.
+   *
+   * Geometry remains owned by the shared design contract.
+   * This block controls About visual composition only.
+   */
+
+  --scenic-background-image:
+    url("/images/about/about-hero-desktop-v3.png");
+
+  --scenic-background-size:
+    var(--mc-scenic-desktop-reference-width) auto;
+
+  --scenic-background-position-x:
+    50%;
+
+  --scenic-background-position-y:
+    0px;
+
+  background:
+    #faf6eb;
+}
+
+
+/* =========================================================
+   TABLET / MOBILE
+
+   Shared scenic desktop layer is disabled.
+   Existing AboutHero responsive picture takes over.
+   ========================================================= */
+
+@media (max-width: 992px) {
+
+  .scenic-hero-shell__background {
+    display: none;
+  }
+
+}
+
+/* PHASE-5F-SHADE-TRANSITION-START */
+
+/* =========================================================
+   ABOUT DESKTOP - HOME-LIKE HERO / TRUST TRANSITION
+
+   IMPORTANT
+   ---------------------------------------------------------
+   The scenic V3 image remains continuous behind Trust Bar.
+
+   We do NOT create a Trust Bar background layer.
+
+   The visible horizontal seam came from the About Hero
+   shade ending abruptly at the 729px Hero boundary.
+
+   Fade only the SHADE itself before Hero bottom so the
+   underlying scenic image becomes fully visible naturally.
+
+   Hero / Trust geometry remains unchanged.
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+  .scenic-hero-shell--about
+  > .about-hero
+  > .about-hero__shade {
+
+    /*
+     * Keep the existing About shade/background.
+     * Only control how its bottom edge disappears.
+     */
+
+    -webkit-mask-image:
+      linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 84%,
+        rgba(0, 0, 0, 0.72) 90%,
+        rgba(0, 0, 0, 0.30) 96%,
+        transparent 100%
+      );
+
+    mask-image:
+      linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 84%,
+        rgba(0, 0, 0, 0.72) 90%,
+        rgba(0, 0, 0, 0.30) 96%,
+        transparent 100%
+      );
+
+  }
+
+}
+
+/* PHASE-5F-SHADE-TRANSITION-END */
+
+/* PHASE-5I-STACKING-START */
+
+/* =========================================================
+   ABOUT - TRUST BAR ABOVE OUR STORY
+
+   Our Story already starts at the vertical center
+   of Trust Bar.
+
+   Remove the About shell isolation boundary so:
+     scenic background = z-index 0
+     Our Story          = z-index 1
+     Hero               = z-index 2
+     Trust Bar          = z-index 4
+
+   This lets the white Our Story background appear
+   behind Trust Bar without covering Trust Bar itself.
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+  .scenic-hero-shell--about {
+    isolation: auto;
+  }
+
+  .scenic-hero-shell--about
+  > .scenic-hero-shell__background {
+    z-index: 0;
+  }
+
+  .scenic-hero-shell--about
+  > .about-hero {
+    position: relative;
+    z-index: 2;
+  }
+
+  .scenic-hero-shell--about
+  > .trust-bar {
+    position: relative;
+    z-index: 4;
+  }
+
+}
+
+/* PHASE-5I-STACKING-END */
