@@ -3819,3 +3819,27 @@ html[lang="km"] .hero-description,
     transform: translateY(20px);
   }
 }
+
+
+/* =========================================================
+   B7.HOME-DESKTOP-BACKGROUND-REFERENCE-LOCK
+
+   Keep the approved Home Hero visual composition stable
+   across desktop browser viewport widths.
+
+   The Hero / Trust Bar layout geometry remains unchanged.
+   Only the scenic base background scale is stabilized.
+
+   <= 1920px:
+     render against the approved 1920px reference width.
+
+   > 1920px:
+     allow the background to scale with the viewport.
+   ========================================================= */
+
+@media (min-width: 993px) and (max-width: 1920px) {
+  .home-scenic-canvas > .hero-v2-layer--base {
+    background-size: 1920px auto;
+    background-position: center top;
+  }
+}
