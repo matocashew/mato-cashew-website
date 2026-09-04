@@ -466,8 +466,16 @@ const brandName =
         if (
           submenuShouldRemainOpen(
             navItem
+          ) ||
+          navItem.classList.contains(
+            "mega-menu-handoff-owner"
           )
         ) {
+
+          setPersistentMegaMenuOwner(
+            navItem
+          );
+
           applyMegaMenuOcclusion(
             panel
           );
@@ -476,45 +484,858 @@ const brandName =
     };
 
 
-    const releaseSubmenuOcclusion = (
-      navItem: HTMLElement
-    ) => {
+    /* PHASE-5N23A-TRUE-HANDOFF-START */
+
+let megaMenuHandoffTimer:
+  number | null =
+    null;
+
+
+const cancelMegaMenuHandoff = () => {
+
+  if (
+    megaMenuHandoffTimer === null
+  ) {
+    return;
+  }
+
+  window.clearTimeout(
+    megaMenuHandoffTimer
+  );
+
+  megaMenuHandoffTimer =
+    null;
+};
+
+
+const getActiveDesktopSubmenu = () =>
+  Array.from(
+    submenuItems
+  ).find(
+    (item) =>
+      submenuShouldRemainOpen(
+        item
+      )
+  ) ?? null;
+
+
+let persistentMegaMenuOwner:
+  HTMLElement | null =
+    null;
+
+
+const clearPersistentMegaMenuOwner = () => {
+
+  submenuItems.forEach(
+    (item) => {
+
+      item.classList.remove(
+        "mega-menu-handoff-owner"
+      );
+
+    }
+  );
+
+  persistentMegaMenuOwner =
+    null;
+};
+
+
+const setPersistentMegaMenuOwner = (
+  navItem: HTMLElement
+) => {
+
+  submenuItems.forEach(
+    (item) => {
+
+      if (item !== navItem) {
+
+        item.classList.remove(
+          "mega-menu-handoff-owner"
+        );
+
+      }
+    }
+  );
+
+  navItem.classList.add(
+    "mega-menu-handoff-owner"
+  );
+
+  persistentMegaMenuOwner =
+    navItem;
+};
+
+
+const transferMegaMenuOwner = (
+  navItem: HTMLElement
+) => {
+
+  cancelMegaMenuHandoff();
+
+  setPersistentMegaMenuOwner(
+    navItem
+  );
+};
+
+
+const activateMegaMenuOwner = (
+  navItem: HTMLElement
+) => {
+
+  if (
+    window.innerWidth <= 768
+  ) {
+    return;
+  }
+
+  transferMegaMenuOwner(
+    navItem
+  );
+
+  applySubmenuOcclusion(
+    navItem
+  );
+};
+
+
+/*
+ * Leaving an individual item does NOT close the menu.
+ * Final release is nav-level only.
+ */
+const releaseSubmenuOcclusion = (
+  _navItem: HTMLElement
+) => {
+
+  if (
+    window.innerWidth <= 768
+  ) {
+    return;
+  }
+};
+
+
+const pointerInsideMegaMenuSystem = (
+  clientX: number,
+  clientY: number
+) => {
+
+  const nav =
+    document.querySelector<HTMLElement>(
+      ".nav-menu"
+    );
+
+  const header =
+    document.querySelector<HTMLElement>(
+      ".header"
+    );
+
+
+  const pointInsideRect = (
+    rect: DOMRect,
+    padding = 0
+  ) => {
+
+    return (
+      clientX >= rect.left - padding &&
+      clientX <= rect.right + padding &&
+      clientY >= rect.top - padding &&
+      clientY <= rect.bottom + padding
+    );
+  };
+
+
+  /*
+   * ======================================================
+   * 1. REAL TOP-LEVEL NAV ITEMS
+   * ======================================================
+   *
+   * Do NOT treat the entire .nav-menu bounding box as an
+   * active Mega Menu region.
+   *
+   * Blank space after About or elsewhere in Header must
+   * be allowed to close the Mega Menu.
+   */
+  const topLevelItems =
+    nav
+      ? Array.from(
+          nav.querySelectorAll<HTMLElement>(
+            ":scope > .nav-item"
+          )
+        )
+      : [];
+
+
+  for (
+    const item of topLevelItems
+  ) {
+
+    if (
+      pointInsideRect(
+        item.getBoundingClientRect(),
+        1
+      )
+    ) {
+      return true;
+    }
+  }
+
+
+  /*
+   * ======================================================
+   * 2. SMALL HORIZONTAL BRIDGES BETWEEN ADJACENT ITEMS
+   * ======================================================
+   *
+   * Preserve the already-working:
+   *
+   *   Mega A -> tiny physical gap -> Mega B
+   *
+   * but ONLY for the actual small gap between two adjacent
+   * top-level nav items.
+   *
+   * We do not extend this bridge beyond the first/last item.
+   */
+  for (
+    let index = 0;
+    index < topLevelItems.length - 1;
+    index++
+  ) {
+
+    const currentRect =
+      topLevelItems[
+        index
+      ].getBoundingClientRect();
+
+    const nextRect =
+      topLevelItems[
+        index + 1
+      ].getBoundingClientRect();
+
+
+    /*
+     * Only bridge realistic small menu gaps.
+     *
+     * This prevents a large blank Header area from being
+     * treated as part of the Mega Menu system.
+     */
+    const gapWidth =
+      nextRect.left -
+      currentRect.right;
+
+
+    if (
+      gapWidth < 0 ||
+      gapWidth > 28
+    ) {
+      continue;
+    }
+
+
+    const bridgeTop =
+      Math.min(
+        currentRect.top,
+        nextRect.top
+      );
+
+    const bridgeBottom =
+      Math.max(
+        currentRect.bottom,
+        nextRect.bottom
+      );
+
+
+    if (
+      clientX >= currentRect.right &&
+      clientX <= nextRect.left &&
+      clientY >= bridgeTop &&
+      clientY <= bridgeBottom
+    ) {
+      return true;
+    }
+  }
+
+
+  /*
+   * ======================================================
+   * 3. VERTICAL CORRIDOR ABOVE CURRENT OWNER TAB ONLY
+   * ======================================================
+   *
+   * Phase 5N24 fixed upward movement, but its original
+   * corridor was too broad.
+   *
+   * Keep the owner alive only directly above the ACTIVE
+   * owner Tab — not across the full navigation width.
+   */
+  if (
+    persistentMegaMenuOwner &&
+    header
+  ) {
+
+    const ownerTab =
+      persistentMegaMenuOwner
+        .querySelector<HTMLElement>(
+          ":scope > .nav-link-row"
+        );
+
+
+    if (ownerTab) {
+
+      const tabRect =
+        ownerTab.getBoundingClientRect();
+
+      const headerRect =
+        header.getBoundingClientRect();
+
+
+      const corridorPaddingX =
+        8;
+
+
+      const insideOwnerVerticalCorridor =
+        clientX >=
+          tabRect.left -
+          corridorPaddingX &&
+        clientX <=
+          tabRect.right +
+          corridorPaddingX &&
+        clientY >=
+          headerRect.top &&
+        clientY <=
+          tabRect.bottom;
+
 
       if (
-        window.innerWidth <= 768
+        insideOwnerVerticalCorridor
       ) {
-        return;
+        return true;
       }
+    }
+  }
 
-      /*
-       * Wait until browser hover/focus state
-       * has settled before deciding whether
-       * the visible submenu has actually closed.
-       */
-      requestAnimationFrame(() => {
 
-        if (
-          submenuShouldRemainOpen(
-            navItem
+  /*
+   * ======================================================
+   * 4. CURRENT OWNER'S REAL MEGA MENU PANEL
+   * ======================================================
+   */
+  if (
+    persistentMegaMenuOwner
+  ) {
+
+    const ownerPanel =
+      persistentMegaMenuOwner
+        .querySelector<HTMLElement>(
+          ":scope > .submenu-panel"
+        );
+
+
+    if (ownerPanel) {
+
+      const panelRect =
+        ownerPanel.getBoundingClientRect();
+
+
+      if (
+        pointInsideRect(
+          panelRect,
+          1
+        )
+      ) {
+        return true;
+      }
+    }
+  }
+
+
+  /*
+   * Anything else is a TRUE exit.
+   */
+  return false;
+};
+
+
+/* PHASE-5N28-PRECISE-NAV-GEOMETRY */
+
+/* PHASE-5N30A-STRICT-HEADER-EXIT-START */
+
+/*
+ * Immediate Header exit authority.
+ *
+ * This handler exists only for pointer movement INSIDE
+ * the Header while a Mega Menu owner is active.
+ *
+ * Important behavior:
+ *
+ * - Mega A -> Mega B remains handled by normal nav handoff.
+ * - Moving upward over the active Tab remains protected.
+ * - Moving into the Mega panel remains protected.
+ * - Moving beyond the OUTER edge of the final nav item
+ *   closes immediately with no corridor padding.
+ */
+
+const atomicExitHeader =
+  document.querySelector<HTMLElement>(
+    ".header"
+  );
+
+
+const atomicExitNav =
+  document.querySelector<HTMLElement>(
+    ".nav-menu"
+  );
+
+
+atomicExitHeader?.addEventListener(
+  "pointermove",
+  (event) => {
+
+    if (
+      window.innerWidth <= 768 ||
+      !persistentMegaMenuOwner
+    ) {
+      return;
+    }
+
+
+    const headerRect =
+      atomicExitHeader
+        .getBoundingClientRect();
+
+
+    const pointerInsideHeader =
+      event.clientX >= headerRect.left &&
+      event.clientX <= headerRect.right &&
+      event.clientY >= headerRect.top &&
+      event.clientY <= headerRect.bottom;
+
+
+    if (
+      !pointerInsideHeader
+    ) {
+      return;
+    }
+
+
+    /*
+     * -----------------------------------------------------
+     * STRICT OUTER EDGE OF FINAL NAV ITEM
+     * -----------------------------------------------------
+     *
+     * This specifically fixes:
+     *
+     *   About -> blank Header area on the right
+     *
+     * The general vertical corridor may include a few pixels
+     * beyond the active Tab. That padding must NOT apply on
+     * the OUTER side of the final top-level nav item.
+     */
+    if (
+      atomicExitNav
+    ) {
+
+      const topLevelNavItems =
+        Array.from(
+          atomicExitNav.querySelectorAll<HTMLElement>(
+            ":scope > .nav-item"
           )
+        );
+
+
+      const lastTopLevelNavItem =
+        topLevelNavItems.length > 0
+          ? topLevelNavItems[
+              topLevelNavItems.length - 1
+            ]
+          : null;
+
+
+      if (
+        lastTopLevelNavItem &&
+        persistentMegaMenuOwner ===
+          lastTopLevelNavItem
+      ) {
+
+        const lastItemRect =
+          lastTopLevelNavItem
+            .getBoundingClientRect();
+
+
+        /*
+         * No padding.
+         *
+         * The first physical pixel beyond About's right edge
+         * is a definite exit because there is no next Menu
+         * item to hand ownership to.
+         */
+        if (
+          event.clientX >
+            lastItemRect.right
         ) {
-          applySubmenuOcclusion(
-            navItem
-          );
+
+          cancelMegaMenuHandoff();
+
+          clearMegaMenuOcclusion();
 
           return;
         }
+      }
+    }
+
+
+    /*
+     * Existing precise interaction geometry still protects:
+     *
+     * - a real top-level nav item
+     * - small gaps between adjacent items
+     * - the vertical corridor over the active owner
+     * - the active Mega Menu panel
+     */
+    if (
+      pointerInsideMegaMenuSystem(
+        event.clientX,
+        event.clientY
+      )
+    ) {
+      return;
+    }
+
+
+    /*
+     * Pointer is inside Header but belongs to no valid
+     * Mega interaction region.
+     *
+     * Clear synchronously. No 90ms delay here.
+     */
+    cancelMegaMenuHandoff();
+
+    clearMegaMenuOcclusion();
+
+  },
+  {
+    passive: true,
+    capture: true
+  }
+);
+
+/* PHASE-5N30A-STRICT-HEADER-EXIT-END */
+
+/* PHASE-5N27-DEFINITIVE-PHYSICAL-EXIT-START */
+
+/*
+ * Desktop Mega Menu physical-pointer lifecycle.
+ *
+ * IMPORTANT:
+ *
+ * Opening / transferring ownership is still handled by the
+ * existing nav-item lifecycle.
+ *
+ * This listener owns only the final EXIT decision.
+ *
+ * A -> physical gap -> B:
+ *   pointer remains inside the Mega interaction system,
+ *   therefore the current owner is preserved.
+ *
+ * Tab -> upper Header corridor:
+ *   pointer remains inside the protected geometry,
+ *   therefore the current owner is preserved.
+ *
+ * True exit:
+ *   after the short guard, the pointer coordinates are tested
+ *   again against REAL geometry.
+ *
+ * We intentionally DO NOT call getActiveDesktopSubmenu()
+ * here because CSS :hover / :focus-within can briefly remain
+ * stale after the pointer has physically left the system.
+ */
+
+let lastMegaPointerX =
+  0;
+
+let lastMegaPointerY =
+  0;
+
+
+document.addEventListener(
+  "pointermove",
+  (event) => {
+
+    if (
+      window.innerWidth <= 768
+    ) {
+      return;
+    }
+
+
+    lastMegaPointerX =
+      event.clientX;
+
+    lastMegaPointerY =
+      event.clientY;
+
+
+    if (
+      !persistentMegaMenuOwner
+    ) {
+      return;
+    }
+
+
+    /*
+     * Pointer is physically inside the protected Mega system.
+     *
+     * Keep the current owner and cancel any pending exit.
+     */
+    if (
+      pointerInsideMegaMenuSystem(
+        lastMegaPointerX,
+        lastMegaPointerY
+      )
+    ) {
+
+      cancelMegaMenuHandoff();
+
+      return;
+    }
+
+
+    /*
+     * Pointer is currently outside.
+     *
+     * One pending exit timer is enough.
+     */
+    if (
+      megaMenuHandoffTimer !== null
+    ) {
+      return;
+    }
+
+
+    megaMenuHandoffTimer =
+      window.setTimeout(
+        () => {
+
+          megaMenuHandoffTimer =
+            null;
+
+
+          /*
+           * Re-test PHYSICAL pointer geometry after the guard.
+           *
+           * If the pointer crossed a legitimate corridor and
+           * returned to the Mega system, preserve the owner.
+           */
+          if (
+            pointerInsideMegaMenuSystem(
+              lastMegaPointerX,
+              lastMegaPointerY
+            )
+          ) {
+
+            return;
+          }
+
+
+          /*
+           * Definitive physical exit.
+           *
+           * Do not resurrect an owner from stale CSS :hover.
+           *
+           * clearMegaMenuOcclusion() already clears:
+           * - persistent owner
+           * - unified glass
+           * - Header cutout
+           * - page blur
+           * - local occlusion state
+           */
+          clearMegaMenuOcclusion();
+
+        },
+        90
+      );
+
+  },
+  {
+    passive: true
+  }
+);
+
+/* PHASE-5N27-DEFINITIVE-PHYSICAL-EXIT-END */
+
+const desktopNavForHandoff =
+  document.querySelector<HTMLElement>(
+    ".nav-menu"
+  );
+
+
+/* PHASE-5N25C-DIRECT-NAV-EXIT-START */
+
+desktopNavForHandoff?.addEventListener(
+  "pointerover",
+  (event) => {
+
+    if (
+      window.innerWidth <= 768
+    ) {
+      return;
+    }
+
+
+    const target =
+      event.target;
+
+
+    if (
+      !(target instanceof Element)
+    ) {
+      return;
+    }
+
+
+    /*
+     * Resolve the REAL top-level navigation item first.
+     *
+     * This is intentionally .nav-item, not .has-submenu.
+     *
+     * Examples:
+     *
+     * Home                -> .nav-item only
+     * Cambodian Cashew    -> .nav-item.has-submenu
+     * Knowledge           -> .nav-item.has-submenu
+     */
+    const physicalNavItem =
+      target.closest<HTMLElement>(
+        ".nav-item"
+      );
+
+
+    /*
+     * Pointer may be in the physical gap between items.
+     *
+     * That gap belongs to nav-menu but not to any nav-item.
+     * Preserve the current Mega owner in that case.
+     */
+    if (!physicalNavItem) {
+
+      cancelMegaMenuHandoff();
+
+      return;
+    }
+
+
+    if (
+      !desktopNavForHandoff.contains(
+        physicalNavItem
+      )
+    ) {
+      return;
+    }
+
+
+    /*
+     * DIRECT NAV ITEM
+     * =====================================================
+     *
+     * Home and any other top-level nav item without a
+     * submenu must terminate the currently-open Mega Menu.
+     *
+     * This is the missing lifecycle case:
+     *
+     * Cambodian Cashew -> Home
+     * Knowledge        -> Home
+     * Mega Menu        -> any direct nav item
+     */
+    if (
+      !physicalNavItem.classList.contains(
+        "has-submenu"
+      )
+    ) {
+
+      cancelMegaMenuHandoff();
+
+
+      if (
+        persistentMegaMenuOwner
+      ) {
 
         clearMegaMenuOcclusion();
-      });
-    };
+
+      }
 
 
-    submenuItems.forEach((navItem) => {
+      return;
+    }
+
+
+    /*
+     * From here onward we know this item owns a submenu.
+     */
+    const navItem =
+      physicalNavItem;
+
+
+    /*
+     * Same Mega Menu owner.
+     *
+     * Do not rebuild glass geometry unnecessarily.
+     */
+    if (
+      persistentMegaMenuOwner ===
+      navItem
+    ) {
+
+      cancelMegaMenuHandoff();
+
+      return;
+    }
+
+
+    /*
+     * Different Mega Menu.
+     *
+     * Existing 5N23A ownership model handles:
+     *
+     * A -> gap -> B
+     *
+     * without clearing Header / Glass between them.
+     */
+    activateMegaMenuOwner(
+      navItem
+    );
+
+  },
+  {
+    capture: true
+  }
+);
+
+/* PHASE-5N25C-DIRECT-NAV-EXIT-END */
+
+submenuItems.forEach(
+  (handoffItem) => {
+
+    handoffItem.addEventListener(
+      "focusin",
+      () => {
+
+        activateMegaMenuOwner(
+          handoffItem
+        );
+
+      }
+    );
+
+  }
+);
+
+/* PHASE-5N23A-TRUE-HANDOFF-END */
+
+submenuItems.forEach((navItem) => {
 
       navItem.addEventListener(
         "mouseenter",
         () => {
+          transferMegaMenuOwner(navItem);
+
           applySubmenuOcclusion(
             navItem
           );
@@ -535,6 +1356,8 @@ const brandName =
       navItem.addEventListener(
         "focusin",
         () => {
+          transferMegaMenuOwner(navItem);
+
           applySubmenuOcclusion(
             navItem
           );
@@ -640,6 +1463,265 @@ const brandName =
 
 
     const clearMegaMenuOcclusion = () => {
+
+      /* PHASE-5N34-ATOMIC-HEADER-RESTORE-START */
+
+      /*
+       * =====================================================
+       * RESTORE THE SOLID HEADER BEFORE TEARING DOWN GLASS
+       * =====================================================
+       *
+       * Mega Menu close previously removed several visual
+       * layers sequentially:
+       *
+       *   owner
+       *   unified glass
+       *   tab compatibility state
+       *   Header cutout
+       *   page blur
+       *   occlusion
+       *
+       * During that teardown the transparent Header could be
+       * painted for one frame before its solid surface returned.
+       *
+       * Restore the Header surface FIRST.
+       *
+       * This applies to every close path because all exits
+       * converge on clearMegaMenuOcclusion().
+       */
+
+      const atomicRestoreHeader =
+        document.querySelector<HTMLElement>(
+          ".header"
+        );
+
+      if (atomicRestoreHeader) {
+
+        /*
+         * Remove active cutout first.
+         *
+         * Normal .header CSS immediately becomes authoritative.
+         */
+        atomicRestoreHeader.classList.remove(
+          "mega-menu-header-cutout-active"
+        );
+
+        /*
+         * Remove all runtime cutout geometry before any Glass
+         * state is removed.
+         */
+        atomicRestoreHeader.style.removeProperty(
+          "--mato-header-surface-clip"
+        );
+
+        atomicRestoreHeader.style.removeProperty(
+          "--mato-header-cut-left"
+        );
+
+        atomicRestoreHeader.style.removeProperty(
+          "--mato-header-cut-top"
+        );
+
+        atomicRestoreHeader.style.removeProperty(
+          "--mato-header-cut-width"
+        );
+
+        atomicRestoreHeader.style.removeProperty(
+          "--mato-header-cut-height"
+        );
+
+        /*
+         * Historical surface overrides must not survive the
+         * transition back to the normal Header.
+         */
+        atomicRestoreHeader.style.removeProperty(
+          "--mato-header-surface-background"
+        );
+
+        atomicRestoreHeader.style.removeProperty(
+          "--mato-header-surface-box-shadow"
+        );
+
+        atomicRestoreHeader.style.removeProperty(
+          "--mato-header-surface-border-bottom"
+        );
+
+        atomicRestoreHeader.style.removeProperty(
+          "--mato-header-surface-backdrop"
+        );
+
+        atomicRestoreHeader.style.removeProperty(
+          "--mato-header-surface-webkit-backdrop"
+        );
+
+        /*
+         * Force style resolution NOW, while Glass is still
+         * present underneath.
+         *
+         * This prevents the browser from batching:
+         *
+         *   transparent Header
+         *       +
+         *   removed Glass
+         *
+         * into the same intermediate paint.
+         */
+        void atomicRestoreHeader.offsetHeight;
+      }
+
+      /* PHASE-5N34-ATOMIC-HEADER-RESTORE-END */
+clearPersistentMegaMenuOwner();
+      /* PHASE-5N14-UNIFIED-GLASS-CLEAR-START */
+
+      document.body.classList.remove(
+        "mega-menu-unified-glass-active"
+      );
+
+      const unifiedGlass =
+        document.querySelector<HTMLElement>(
+          "#mato-unified-mega-glass"
+        );
+
+      if (unifiedGlass) {
+
+        unifiedGlass.style.removeProperty(
+          "left"
+        );
+
+        unifiedGlass.style.removeProperty(
+          "top"
+        );
+
+        unifiedGlass.style.removeProperty(
+          "width"
+        );
+
+        unifiedGlass.style.removeProperty(
+          "height"
+        );
+
+        unifiedGlass.style.removeProperty(
+          "clip-path"
+        );
+
+        unifiedGlass.style.removeProperty(
+          "-webkit-clip-path"
+        );
+      }
+
+      /* PHASE-5N14-UNIFIED-GLASS-CLEAR-END */
+      /* PHASE-5N8-FULL-CUTOUT-CLEAR-START */
+
+      const fullCutoutHeader =
+        document.querySelector<HTMLElement>(
+          ".header"
+        );
+
+      if (fullCutoutHeader) {
+
+        fullCutoutHeader.style.removeProperty(
+          "--mato-header-surface-clip"
+        );
+      }
+
+      /* PHASE-5N8-FULL-CUTOUT-CLEAR-END */
+      /* PHASE-5N7-TAB-GLASS-CLEAR-START */
+
+      document.body.classList.remove(
+        "mega-menu-tab-glass-active"
+      );
+
+      const tabGlassLayer =
+        document.querySelector<HTMLElement>(
+          "#mega-menu-tab-glass-layer"
+        );
+
+      if (tabGlassLayer) {
+
+        tabGlassLayer.style.removeProperty(
+          "--tab-glass-left"
+        );
+
+        tabGlassLayer.style.removeProperty(
+          "--tab-glass-top"
+        );
+
+        tabGlassLayer.style.removeProperty(
+          "--tab-glass-width"
+        );
+
+        tabGlassLayer.style.removeProperty(
+          "--tab-glass-height"
+        );
+      }
+
+      /* PHASE-5N7-TAB-GLASS-CLEAR-END */
+      /* PHASE-5N6-ROUNDED-NOTCH-CLEAR-START */
+
+      const roundedNotchHeader =
+        document.querySelector<HTMLElement>(
+          ".header"
+        );
+
+      if (roundedNotchHeader) {
+
+        roundedNotchHeader.style.removeProperty(
+          "--mato-header-surface-clip"
+        );
+      }
+
+      /* PHASE-5N6-ROUNDED-NOTCH-CLEAR-END */
+      /* PHASE-5N3-HEADER-CUTOUT-CLEAR-START */
+
+      const headerCutout =
+        document.querySelector<HTMLElement>(
+          ".header"
+        );
+
+      if (headerCutout) {
+
+        headerCutout.classList.remove(
+          "mega-menu-header-cutout-active"
+        );
+
+        headerCutout.style.removeProperty(
+          "--mato-header-cut-left"
+        );
+
+        headerCutout.style.removeProperty(
+          "--mato-header-cut-top"
+        );
+
+        headerCutout.style.removeProperty(
+          "--mato-header-cut-width"
+        );
+
+        headerCutout.style.removeProperty(
+          "--mato-header-cut-height"
+        );
+
+        headerCutout.style.removeProperty(
+          "--mato-header-surface-background"
+        );
+
+        headerCutout.style.removeProperty(
+          "--mato-header-surface-box-shadow"
+        );
+
+        headerCutout.style.removeProperty(
+          "--mato-header-surface-border-bottom"
+        );
+
+        headerCutout.style.removeProperty(
+          "--mato-header-surface-backdrop"
+        );
+
+        headerCutout.style.removeProperty(
+          "--mato-header-surface-webkit-backdrop"
+        );
+      }
+
+      /* PHASE-5N3-HEADER-CUTOUT-CLEAR-END */
       /* PHASE-5M-GLOBAL-OCCLUSION-CLEAR-START */
 
       document
@@ -963,6 +2045,2523 @@ const brandName =
 
 
       if (isMegaMenuPanel) {
+        /* PHASE-5N3-HEADER-CUTOUT-APPLY-START */
+
+        const headerElement =
+          document.querySelector<HTMLElement>(
+            ".header"
+          );
+
+        const menuOwner =
+          panel.closest<HTMLElement>(
+            ".has-submenu"
+          );
+
+        const activeTab =
+          menuOwner?.querySelector<HTMLElement>(
+            ":scope > .nav-link-row"
+          );
+
+
+        if (
+          headerElement &&
+          activeTab
+        ) {
+
+          const headerRect =
+            headerElement.getBoundingClientRect();
+
+          const tabRect =
+            activeTab.getBoundingClientRect();
+
+
+          /*
+           * Capture the CURRENT Header visual recipe
+           * before making the real Header transparent.
+           *
+           * This lets ::before faithfully reproduce
+           * the existing Header surface everywhere
+           * except behind the active tab.
+           */
+          const headerStyle =
+            getComputedStyle(
+              headerElement
+            );
+
+
+          headerElement.style.setProperty(
+            "--mato-header-surface-background",
+            headerStyle.background
+          );
+
+          headerElement.style.setProperty(
+            "--mato-header-surface-box-shadow",
+            headerStyle.boxShadow
+          );
+
+          headerElement.style.setProperty(
+            "--mato-header-surface-border-bottom",
+            headerStyle.borderBottom
+          );
+
+          headerElement.style.setProperty(
+            "--mato-header-surface-backdrop",
+            headerStyle.backdropFilter || "none"
+          );
+
+          headerElement.style.setProperty(
+            "--mato-header-surface-webkit-backdrop",
+            headerStyle.webkitBackdropFilter || "none"
+          );
+
+
+          /*
+           * Hole coordinates are local to Header.
+           *
+           * Slight expansion prevents white anti-alias
+           * seams around the rounded glass tab.
+           */
+          const cutLeft =
+            Math.max(
+              tabRect.left -
+              headerRect.left -
+              2,
+              0
+            );
+
+          const cutTop =
+            Math.max(
+              tabRect.top -
+              headerRect.top -
+              2,
+              0
+            );
+
+          const cutWidth =
+            Math.min(
+              tabRect.width + 4,
+              headerRect.width - cutLeft
+            );
+
+          const cutHeight =
+            Math.min(
+              tabRect.height + 6,
+              headerRect.height - cutTop + 8
+            );
+
+
+          headerElement.style.setProperty(
+            "--mato-header-cut-left",
+            `${cutLeft}px`
+          );
+
+          headerElement.style.setProperty(
+            "--mato-header-cut-top",
+            `${cutTop}px`
+          );
+
+          headerElement.style.setProperty(
+            "--mato-header-cut-width",
+            `${cutWidth}px`
+          );
+
+          headerElement.style.setProperty(
+            "--mato-header-cut-height",
+            `${cutHeight}px`
+          );
+
+
+          headerElement.classList.add(
+            "mega-menu-header-cutout-active"
+          );
+          /* PHASE-5N6-ROUNDED-NOTCH-APPLY-START */
+
+          /*
+           * Build a concave Header surface.
+           *
+           * Instead of cutting a rectangular hole,
+           * the Header surface now flows around the
+           * active Tab with rounded upper shoulders.
+           *
+           * The notch stays open through the bottom
+           * edge of Header so Tab and Mega Menu can
+           * visually become one continuous object.
+           */
+
+          const surfaceWidth =
+            headerRect.width;
+
+          const surfaceHeight =
+            headerRect.height;
+
+
+          const notchLeft =
+            Math.max(
+              tabRect.left -
+              headerRect.left -
+              1,
+              0
+            );
+
+          const notchRight =
+            Math.min(
+              tabRect.right -
+              headerRect.left +
+              1,
+              surfaceWidth
+            );
+
+          const notchTop =
+            Math.max(
+              tabRect.top -
+              headerRect.top -
+              1,
+              0
+            );
+
+
+          const radius =
+            Math.min(
+              18,
+              (notchRight - notchLeft) / 2
+            );
+
+
+          /*
+           * Quarter-circle approximation factors.
+           */
+          const p1 =
+            radius * 0.076;
+
+          const p2 =
+            radius * 0.293;
+
+          const p3 =
+            radius * 0.617;
+
+
+          const roundedNotchClip =
+            [
+              "polygon(",
+
+              "0px 0px,",
+
+              `${surfaceWidth}px 0px,`,
+
+              `${surfaceWidth}px ${surfaceHeight}px,`,
+
+              `${notchRight}px ${surfaceHeight}px,`,
+
+              `${notchRight}px ${notchTop + radius}px,`,
+
+              `${notchRight - p1}px ${notchTop + p3}px,`,
+
+              `${notchRight - p2}px ${notchTop + p2}px,`,
+
+              `${notchRight - p3}px ${notchTop + p1}px,`,
+
+              `${notchRight - radius}px ${notchTop}px,`,
+
+              `${notchLeft + radius}px ${notchTop}px,`,
+
+              `${notchLeft + p3}px ${notchTop + p1}px,`,
+
+              `${notchLeft + p2}px ${notchTop + p2}px,`,
+
+              `${notchLeft + p1}px ${notchTop + p3}px,`,
+
+              `${notchLeft}px ${notchTop + radius}px,`,
+
+              `${notchLeft}px ${surfaceHeight}px,`,
+
+              `0px ${surfaceHeight}px`,
+
+              ")"
+            ].join(" ");
+
+
+          headerElement.style.setProperty(
+            "--mato-header-surface-clip",
+            roundedNotchClip
+          );
+
+          /* PHASE-5N6-ROUNDED-NOTCH-APPLY-END */
+                    /* PHASE-5N33-TAB-STATE-COMPATIBILITY-START */
+
+          /*
+           * =====================================================
+           * LEGACY PHYSICAL TAB GLASS RETIRED
+           * =====================================================
+           *
+           * The old #mega-menu-tab-glass-layer is no longer
+           * created or positioned.
+           *
+           * The body state is intentionally retained temporarily
+           * because historical runtime selectors still use it
+           * to keep the active Tab foreground transparent/crisp.
+           *
+           * Actual visible glass is now owned exclusively by:
+           *
+           *   #mato-unified-mega-glass
+           *
+           * This prevents two physical translucent surfaces from
+           * competing during Mega Menu open/close.
+           */
+
+          document.body.classList.add(
+            "mega-menu-tab-glass-active"
+          );
+
+          /* PHASE-5N33-TAB-STATE-COMPATIBILITY-END */
+          /* PHASE-5N12-RUNTIME-CASCADE-LOCK-START */
+
+          /*
+           * FINAL CASCADE AUTHORITY
+           *
+           * Runtime audit proved that historical CSS rules
+           * are still painting:
+           *
+           * - nav-link-row glass
+           * - nav-link-row border
+           * - nav-link-row radius
+           * - Mega Menu top border
+           * - historical pseudo join surfaces
+           *
+           * Instead of competing with those rules inside
+           * header.css, append one authoritative stylesheet
+           * at the END of <head>.
+           *
+           * Header ::before Bezier clip-path becomes the
+           * only visible upper silhouette.
+           */
+
+          let runtimeAuthority =
+            document.querySelector<HTMLStyleElement>(
+              "#mato-mega-menu-runtime-authority"
+            );
+
+
+          if (!runtimeAuthority) {
+
+            runtimeAuthority =
+              document.createElement(
+                "style"
+              );
+
+            runtimeAuthority.id =
+              "mato-mega-menu-runtime-authority";
+
+
+            runtimeAuthority.textContent = `
+              @media (min-width: 769px) {
+
+                /*
+                 * ==========================================
+                 * ACTIVE NAV TAB = FOREGROUND ONLY
+                 * ==========================================
+                 */
+
+                html body.mega-menu-tab-glass-active
+                .header
+                li.has-submenu.nav-mega:hover
+                > .nav-link-row,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                li.has-submenu.nav-mega:focus-within
+                > .nav-link-row,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu):hover
+                > .nav-link-row,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu):focus-within
+                > .nav-link-row {
+
+                  background:
+                    transparent !important;
+
+                  background-color:
+                    transparent !important;
+
+                  background-image:
+                    none !important;
+
+                  border:
+                    0 !important;
+
+                  border-top:
+                    0 !important;
+
+                  border-right:
+                    0 !important;
+
+                  border-bottom:
+                    0 !important;
+
+                  border-left:
+                    0 !important;
+
+                  border-radius:
+                    0 !important;
+
+                  outline:
+                    0 !important;
+
+                  box-shadow:
+                    none !important;
+
+                  -webkit-backdrop-filter:
+                    none !important;
+
+                  backdrop-filter:
+                    none !important;
+
+                  filter:
+                    none !important;
+                }
+
+
+                /*
+                 * ==========================================
+                 * DESTROY HISTORICAL TAB JOIN PSEUDOS
+                 * ==========================================
+                 */
+
+                html body.mega-menu-tab-glass-active
+                .header
+                li.has-submenu.nav-mega
+                > .nav-link-row::before,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                li.has-submenu.nav-mega
+                > .nav-link-row::after,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .nav-link-row::before,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .nav-link-row::after {
+
+                  content:
+                    none !important;
+
+                  display:
+                    none !important;
+
+                  background:
+                    none !important;
+
+                  border:
+                    0 !important;
+
+                  outline:
+                    0 !important;
+
+                  box-shadow:
+                    none !important;
+
+                  -webkit-backdrop-filter:
+                    none !important;
+
+                  backdrop-filter:
+                    none !important;
+                }
+
+
+                /*
+                 * ==========================================
+                 * DEDICATED TAB GLASS = GLASS ONLY
+                 *
+                 * No curve / border of its own.
+                 * Header Bezier opening determines shape.
+                 * ==========================================
+                 */
+
+                html body.mega-menu-tab-glass-active
+                #mega-menu-tab-glass-layer {
+
+                  border:
+                    0 !important;
+
+                  outline:
+                    0 !important;
+
+                  border-radius:
+                    0 !important;
+
+                  box-shadow:
+                    none !important;
+
+                  clip-path:
+                    none !important;
+
+                  -webkit-clip-path:
+                    none !important;
+                }
+
+
+                /*
+                 * ==========================================
+                 * MEGA MENU
+                 *
+                 * No independent upper border/shoulder.
+                 * ==========================================
+                 */
+
+                html body.mega-menu-tab-glass-active
+                .header
+                li.has-submenu.nav-mega
+                > .mega-menu,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .mega-menu {
+
+                  border-top:
+                    0 !important;
+
+                  border-top-left-radius:
+                    0 !important;
+
+                  border-top-right-radius:
+                    0 !important;
+
+                  outline:
+                    0 !important;
+                }
+
+
+                /*
+                 * ==========================================
+                 * DESTROY MEGA MENU SHOULDER PSEUDOS
+                 * ==========================================
+                 */
+
+                html body.mega-menu-tab-glass-active
+                .header
+                li.has-submenu.nav-mega
+                > .mega-menu::before,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                li.has-submenu.nav-mega
+                > .mega-menu::after,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .mega-menu::before,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .mega-menu::after {
+
+                  content:
+                    none !important;
+
+                  display:
+                    none !important;
+
+                  background:
+                    none !important;
+
+                  border:
+                    0 !important;
+
+                  outline:
+                    0 !important;
+
+                  box-shadow:
+                    none !important;
+                }
+
+
+                /*
+                 * ==========================================
+                 * NAV TEXT / CHEVRON
+                 * ==========================================
+                 */
+
+                html body.mega-menu-tab-glass-active
+                .header
+                li.has-submenu.nav-mega
+                > .nav-link-row
+                > .nav-link,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                li.has-submenu.nav-mega
+                > .nav-link-row
+                > .submenu-toggle {
+
+                  position:
+                    relative !important;
+
+                  z-index:
+                    3 !important;
+
+                  opacity:
+                    1 !important;
+
+                  filter:
+                    none !important;
+
+                  -webkit-filter:
+                    none !important;
+
+                  -webkit-backdrop-filter:
+                    none !important;
+
+                  backdrop-filter:
+                    none !important;
+                }
+
+              }
+            `;
+
+
+            /*
+             * IMPORTANT:
+             * append last so no normal stylesheet loaded
+             * earlier can override this authority.
+             */
+            document.head.appendChild(
+              runtimeAuthority
+            );
+          }
+
+          /* PHASE-5N12-RUNTIME-CASCADE-LOCK-END */
+          /* PHASE-5N14-UNIFIED-GLASS-APPLY-START */
+
+          /*
+           * =================================================
+           * UNIFIED CONNECTED GLASS
+           *
+           * ONE physical glass surface owns:
+           *
+           *    Tab
+           *     │
+           *     └── Mega Menu Card
+           *
+           * No separate Tab glass.
+           * No separate Mega Menu backdrop.
+           * No horizontal join seam.
+           * =================================================
+           */
+
+
+          /*
+           * -------------------------------------------------
+           * 1. CREATE BODY-LEVEL UNIFIED GLASS
+           * -------------------------------------------------
+           */
+
+          let unifiedGlass =
+            document.querySelector<HTMLElement>(
+              "#mato-unified-mega-glass"
+            );
+
+
+          if (!unifiedGlass) {
+
+            unifiedGlass =
+              document.createElement(
+                "div"
+              );
+
+            unifiedGlass.id =
+              "mato-unified-mega-glass";
+
+            unifiedGlass.setAttribute(
+              "aria-hidden",
+              "true"
+            );
+
+            document.body.appendChild(
+              unifiedGlass
+            );
+          }
+
+
+          /*
+           * -------------------------------------------------
+           * 2. GEOMETRY
+           * -------------------------------------------------
+           *
+           * Fixed layer bounds:
+           *
+           * left   = Mega Menu left
+           * top    = Tab top
+           * right  = Mega Menu right
+           * bottom = Mega Menu bottom
+           */
+
+          const unifiedLeft =
+            panelRect.left;
+
+          const unifiedTop =
+            tabRect.top;
+
+          const unifiedWidth =
+            panelRect.width;
+
+          const unifiedHeight =
+            panelRect.bottom -
+            tabRect.top;
+
+
+          const panelLocalTop =
+            panelRect.top -
+            tabRect.top;
+
+
+          const tabLocalLeft =
+            tabRect.left -
+            panelRect.left;
+
+          const tabLocalRight =
+            tabRect.right -
+            panelRect.left;
+
+
+          const unifiedRadius =
+            18;
+
+
+          /*
+           * -------------------------------------------------
+           * 3. ONE CONNECTED SILHOUETTE
+           * -------------------------------------------------
+           *
+           *        ╭────────────╮
+           *        │    TAB     │
+           * ╭──────╯            ╰──────╮
+           * │                           │
+           * │        MEGA MENU          │
+           * │                           │
+           * ╰───────────────────────────╯
+           */
+
+          const unifiedPath =
+            [
+              'path("',
+
+              /*
+               * Start on panel top-left after radius.
+               */
+              `M ${unifiedRadius} ${panelLocalTop} `,
+
+
+              /*
+               * Panel top toward Tab left shoulder.
+               */
+              `L ${
+                tabLocalLeft - unifiedRadius
+              } ${panelLocalTop} `,
+
+
+              /*
+               * Rise smoothly into Tab.
+               */
+              `Q ${tabLocalLeft} ${panelLocalTop} ${
+                tabLocalLeft
+              } ${
+                panelLocalTop - unifiedRadius
+              } `,
+
+
+              /*
+               * Tab left wall.
+               */
+              `L ${tabLocalLeft} ${unifiedRadius} `,
+
+
+              /*
+               * Tab top-left.
+               */
+              `Q ${tabLocalLeft} 0 ${
+                tabLocalLeft + unifiedRadius
+              } 0 `,
+
+
+              /*
+               * Tab top.
+               */
+              `L ${
+                tabLocalRight - unifiedRadius
+              } 0 `,
+
+
+              /*
+               * Tab top-right.
+               */
+              `Q ${tabLocalRight} 0 ${
+                tabLocalRight
+              } ${unifiedRadius} `,
+
+
+              /*
+               * Tab right wall.
+               */
+              `L ${tabLocalRight} ${
+                panelLocalTop - unifiedRadius
+              } `,
+
+
+              /*
+               * Fall smoothly into panel top.
+               */
+              `Q ${tabLocalRight} ${panelLocalTop} ${
+                tabLocalRight + unifiedRadius
+              } ${panelLocalTop} `,
+
+
+              /*
+               * Panel top-right.
+               */
+              `L ${
+                unifiedWidth - unifiedRadius
+              } ${panelLocalTop} `,
+
+              `Q ${unifiedWidth} ${panelLocalTop} ${
+                unifiedWidth
+              } ${
+                panelLocalTop + unifiedRadius
+              } `,
+
+
+              /*
+               * Right side.
+               */
+              `L ${unifiedWidth} ${
+                unifiedHeight - unifiedRadius
+              } `,
+
+
+              /*
+               * Bottom-right.
+               */
+              `Q ${unifiedWidth} ${unifiedHeight} ${
+                unifiedWidth - unifiedRadius
+              } ${unifiedHeight} `,
+
+
+              /*
+               * Bottom.
+               */
+              `L ${unifiedRadius} ${unifiedHeight} `,
+
+
+              /*
+               * Bottom-left.
+               */
+              `Q 0 ${unifiedHeight} 0 ${
+                unifiedHeight - unifiedRadius
+              } `,
+
+
+              /*
+               * Left side.
+               */
+              `L 0 ${
+                panelLocalTop + unifiedRadius
+              } `,
+
+
+              /*
+               * Panel top-left.
+               */
+              `Q 0 ${panelLocalTop} ${
+                unifiedRadius
+              } ${panelLocalTop} `,
+
+              `Z`,
+
+              '")'
+            ].join("");
+
+
+          unifiedGlass.style.left =
+            `${unifiedLeft}px`;
+
+          unifiedGlass.style.top =
+            `${unifiedTop}px`;
+
+          unifiedGlass.style.width =
+            `${unifiedWidth}px`;
+
+          unifiedGlass.style.height =
+            `${unifiedHeight}px`;
+
+          unifiedGlass.style.clipPath =
+            unifiedPath;
+
+          unifiedGlass.style.webkitClipPath =
+            unifiedPath;
+
+
+          /*
+           * -------------------------------------------------
+           * 4. HEADER OPENING
+           *
+           * Reuse the same silhouette, but expand the
+           * Header opening slightly so Header anti-aliasing
+           * cannot draw a visible competing seam.
+           * -------------------------------------------------
+           */
+
+          if (headerElement) {
+
+            const hWidth =
+              headerRect.width;
+
+            const hHeight =
+              headerRect.height;
+
+
+            const cutPanelLeft =
+              Math.max(
+                panelRect.left -
+                headerRect.left -
+                3,
+                0
+              );
+
+            const cutPanelRight =
+              Math.min(
+                panelRect.right -
+                headerRect.left +
+                3,
+                hWidth
+              );
+
+            const cutPanelTop =
+              Math.max(
+                panelRect.top -
+                headerRect.top -
+                3,
+                0
+              );
+
+
+            const cutTabLeft =
+              Math.max(
+                tabRect.left -
+                headerRect.left -
+                3,
+                cutPanelLeft
+              );
+
+            const cutTabRight =
+              Math.min(
+                tabRect.right -
+                headerRect.left +
+                3,
+                cutPanelRight
+              );
+
+            const cutTabTop =
+              Math.max(
+                tabRect.top -
+                headerRect.top -
+                3,
+                0
+              );
+
+
+            const r =
+              20;
+
+
+            const headerOpening =
+              [
+                'path("',
+
+                `M 0 0 `,
+                `L ${hWidth} 0 `,
+                `L ${hWidth} ${hHeight} `,
+
+                `L ${cutPanelRight} ${hHeight} `,
+
+                `L ${cutPanelRight} ${
+                  cutPanelTop + r
+                } `,
+
+                `Q ${cutPanelRight} ${cutPanelTop} ${
+                  cutPanelRight - r
+                } ${cutPanelTop} `,
+
+                `L ${
+                  cutTabRight + r
+                } ${cutPanelTop} `,
+
+                `Q ${cutTabRight} ${cutPanelTop} ${
+                  cutTabRight
+                } ${
+                  cutPanelTop - r
+                } `,
+
+                `L ${cutTabRight} ${
+                  cutTabTop + r
+                } `,
+
+                `Q ${cutTabRight} ${cutTabTop} ${
+                  cutTabRight - r
+                } ${cutTabTop} `,
+
+                `L ${
+                  cutTabLeft + r
+                } ${cutTabTop} `,
+
+                `Q ${cutTabLeft} ${cutTabTop} ${
+                  cutTabLeft
+                } ${
+                  cutTabTop + r
+                } `,
+
+                `L ${cutTabLeft} ${
+                  cutPanelTop - r
+                } `,
+
+                `Q ${cutTabLeft} ${cutPanelTop} ${
+                  cutTabLeft - r
+                } ${cutPanelTop} `,
+
+                `L ${
+                  cutPanelLeft + r
+                } ${cutPanelTop} `,
+
+                `Q ${cutPanelLeft} ${cutPanelTop} ${
+                  cutPanelLeft
+                } ${
+                  cutPanelTop + r
+                } `,
+
+                `L ${cutPanelLeft} ${hHeight} `,
+
+                `L 0 ${hHeight} `,
+
+                `Z`,
+
+                '")'
+              ].join("");
+
+
+            headerElement.style.setProperty(
+              "--mato-header-surface-clip",
+              headerOpening
+            );
+          }
+
+
+          /*
+           * -------------------------------------------------
+           * 5. AUTHORITATIVE STYLE
+           * -------------------------------------------------
+           */
+
+          let unifiedAuthority =
+            document.querySelector<HTMLStyleElement>(
+              "#mato-unified-mega-glass-authority"
+            );
+
+
+          if (!unifiedAuthority) {
+
+            unifiedAuthority =
+              document.createElement(
+                "style"
+              );
+
+            unifiedAuthority.id =
+              "mato-unified-mega-glass-authority";
+
+
+            unifiedAuthority.textContent = `
+              @media (min-width: 769px) {
+                /*
+                 * PHASE-5N33
+                 *
+                 * Hard retirement of the historical physical
+                 * Tab Glass element.
+                 *
+                 * Keep compatibility body state for old
+                 * foreground selectors, but never allow the
+                 * separate glass rectangle to paint.
+                 */
+                #mega-menu-tab-glass-layer {
+                  display: none !important;
+                  visibility: hidden !important;
+                  opacity: 0 !important;
+                  background: transparent !important;
+                  border: 0 !important;
+                  box-shadow: none !important;
+                  -webkit-backdrop-filter: none !important;
+                  backdrop-filter: none !important;
+                }
+
+
+                /*
+                 * =========================================
+                 * ONE GLASS SURFACE
+                 * =========================================
+                 */
+
+                #mato-unified-mega-glass {
+
+                  position:
+                    fixed;
+
+                  z-index:
+                    1990;
+
+                  pointer-events:
+                    none;
+
+                  opacity:
+                    0;
+
+                  visibility:
+                    hidden;
+
+                  background:
+                    linear-gradient(
+                      145deg,
+                      rgba(255,255,255,0.095) 0%,
+                      rgba(248,251,249,0.055) 48%,
+                      rgba(238,246,241,0.075) 100%
+                    );
+
+                  -webkit-backdrop-filter:
+                    blur(4px)
+                    saturate(106%)
+                    brightness(1.005);
+
+                  backdrop-filter:
+                    blur(4px)
+                    saturate(106%)
+                    brightness(1.005);
+
+                  /*
+                   * One subtle outline around the complete
+                   * connected silhouette.
+                   */
+                  filter:
+                    drop-shadow(
+                      0 0 1px
+                      rgba(255,255,255,0.72)
+                    )
+                    drop-shadow(
+                      0 24px 52px
+                      rgba(18,50,35,0.12)
+                    );
+
+                  transition: none;
+                }
+
+
+                body.mega-menu-unified-glass-active
+                #mato-unified-mega-glass {
+
+                  opacity:
+                    1;
+
+                  visibility:
+                    visible;
+                }
+
+
+                /*
+                 * =========================================
+                 * OLD TAB GLASS MUST DISAPPEAR
+                 * =========================================
+                 */
+
+                body.mega-menu-unified-glass-active
+                #mega-menu-tab-glass-layer {
+
+                  display:
+                    none !important;
+                }
+
+
+                /*
+                 * =========================================
+                 * TAB = CONTENT ONLY
+                 * =========================================
+                 */
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu):hover
+                > .nav-link-row,
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu):focus-within
+                > .nav-link-row {
+
+                  background:
+                    transparent !important;
+
+                  background-image:
+                    none !important;
+
+                  border:
+                    0 !important;
+
+                  border-radius:
+                    0 !important;
+
+                  outline:
+                    0 !important;
+
+                  box-shadow:
+                    none !important;
+
+                  -webkit-backdrop-filter:
+                    none !important;
+
+                  backdrop-filter:
+                    none !important;
+
+                  filter:
+                    none !important;
+                }
+
+
+                /*
+                 * =========================================
+                 * MEGA MENU = CONTENT CONTAINER ONLY
+                 * =========================================
+                 */
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .mega-menu {
+
+                  background:
+                    transparent !important;
+
+                  background-image:
+                    none !important;
+
+                  border:
+                    0 !important;
+
+                  border-radius:
+                    0 !important;
+
+                  outline:
+                    0 !important;
+
+                  box-shadow:
+                    none !important;
+
+                  -webkit-backdrop-filter:
+                    none !important;
+
+                  backdrop-filter:
+                    none !important;
+                }
+
+
+                /*
+                 * =========================================
+                 * NO HISTORICAL JOIN ART
+                 * =========================================
+                 */
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .nav-link-row::before,
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .nav-link-row::after,
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .mega-menu::before,
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .mega-menu::after {
+
+                  content:
+                    none !important;
+
+                  display:
+                    none !important;
+
+                  background:
+                    none !important;
+
+                  border:
+                    0 !important;
+
+                  box-shadow:
+                    none !important;
+                }
+
+
+                /*
+                 * =========================================
+                 * HEADER SURFACE
+                 *
+                 * No horizontal divider may cut the
+                 * connected silhouette.
+                 * =========================================
+                 */
+
+                body.mega-menu-unified-glass-active
+                .header.mega-menu-header-cutout-active::before {
+
+                  border-bottom:
+                    0 !important;
+
+                  box-shadow:
+                    none !important;
+                }
+
+
+                /*
+                 * =========================================
+                 * SHARP CONTENT
+                 * =========================================
+                 */
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .nav-link-row
+                > .nav-link,
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .nav-link-row
+                > .submenu-toggle {
+
+                  position:
+                    relative !important;
+
+                  z-index:
+                    3 !important;
+
+                  opacity:
+                    1 !important;
+
+                  filter:
+                    none !important;
+                }
+
+              }
+            `;
+
+
+            document.head.appendChild(
+              unifiedAuthority
+            );
+          }
+
+
+          /*
+           * Activate LAST so geometry and style are ready.
+           */
+          document.body.classList.add(
+            "mega-menu-unified-glass-active"
+          );
+
+          /* PHASE-5N14-UNIFIED-GLASS-APPLY-END */
+          /* PHASE-5N15-FULL-UNIFIED-OUTLINE-START */
+
+          /*
+           * FULL CONNECTED PREMIUM OUTLINE
+           *
+           * Problem with 5N14:
+           * drop-shadow gives nice depth but it does not
+           * behave like a true outline around concave
+           * shoulders and the Tab crest.
+           *
+           * Solution:
+           * create a second fixed layer using the EXACT
+           * same geometry as #mato-unified-mega-glass.
+           *
+           * It paints only a subtle perimeter stroke.
+           */
+
+          let unifiedOutline =
+            document.querySelector<HTMLElement>(
+              "#mato-unified-mega-outline"
+            );
+
+
+          if (!unifiedOutline) {
+
+            unifiedOutline =
+              document.createElement(
+                "div"
+              );
+
+            unifiedOutline.id =
+              "mato-unified-mega-outline";
+
+            unifiedOutline.setAttribute(
+              "aria-hidden",
+              "true"
+            );
+
+            document.body.appendChild(
+              unifiedOutline
+            );
+          }
+
+
+          /*
+           * Exact same rectangle.
+           */
+          unifiedOutline.style.left =
+            `${unifiedLeft}px`;
+
+          unifiedOutline.style.top =
+            `${unifiedTop}px`;
+
+          unifiedOutline.style.width =
+            `${unifiedWidth}px`;
+
+          unifiedOutline.style.height =
+            `${unifiedHeight}px`;
+
+
+          /*
+           * Exact same connected silhouette.
+           */
+          unifiedOutline.style.clipPath =
+            unifiedPath;
+
+          unifiedOutline.style.webkitClipPath =
+            unifiedPath;
+
+
+          /*
+           * Authoritative outline CSS.
+           */
+          let unifiedOutlineAuthority =
+            document.querySelector<HTMLStyleElement>(
+              "#mato-unified-mega-outline-authority"
+            );
+
+
+          if (!unifiedOutlineAuthority) {
+
+            unifiedOutlineAuthority =
+              document.createElement(
+                "style"
+              );
+
+            unifiedOutlineAuthority.id =
+              "mato-unified-mega-outline-authority";
+
+
+            unifiedOutlineAuthority.textContent = `
+              @media (min-width: 769px) {
+
+                /*
+                 * =========================================
+                 * UNIFIED OUTLINE LAYER
+                 * =========================================
+                 */
+
+                #mato-unified-mega-outline {
+
+                  position:
+                    fixed;
+
+                  z-index:
+                    1991;
+
+                  pointer-events:
+                    none;
+
+                  opacity:
+                    0;
+
+                  visibility:
+                    hidden;
+
+
+                  /*
+                   * No fill.
+                   */
+                  background:
+                    transparent;
+
+
+                  /*
+                   * Premium outer stroke.
+                   *
+                   * Multiple inset shadows create a crisp,
+                   * even 1px-style edge around the whole
+                   * connected silhouette, including:
+                   * - Tab top
+                   * - Tab shoulders
+                   * - Mega Menu top shoulders
+                   * - left / right sides
+                   * - bottom edge
+                   */
+                  box-shadow:
+                    inset 0 0 0 1px
+                    rgba(255,255,255,0.46),
+
+                    inset 0 1px 0
+                    rgba(255,255,255,0.18),
+
+                    inset 1px 0 0
+                    rgba(255,255,255,0.08),
+
+                    inset -1px 0 0
+                    rgba(255,255,255,0.08),
+
+                    inset 0 -1px 0
+                    rgba(255,255,255,0.10);
+
+
+                  /*
+                   * Keep outline visually premium,
+                   * not harsh.
+                   */
+                  filter:
+                    drop-shadow(
+                      0 1px 1px
+                      rgba(255,255,255,0.06)
+                    );
+
+
+                  transition: none;
+                }
+
+
+                body.mega-menu-unified-glass-active
+                #mato-unified-mega-outline {
+
+                  opacity:
+                    1;
+
+                  visibility:
+                    visible;
+                }
+
+
+                /*
+                 * =========================================
+                 * REMOVE OLD OUTLINE RESPONSIBILITY
+                 * FROM THE GLASS LAYER
+                 * =========================================
+                 */
+
+                body.mega-menu-unified-glass-active
+                #mato-unified-mega-glass {
+
+                  /*
+                   * Glass layer only owns:
+                   * - background
+                   * - backdrop blur
+                   * - depth shadow
+                   *
+                   * Outline is now handled separately.
+                   */
+                  filter:
+                    drop-shadow(
+                      0 24px 52px
+                      rgba(18,50,35,0.12)
+                    ) !important;
+                }
+
+
+                /*
+                 * =========================================
+                 * MAKE SURE INTERNAL ELEMENTS DRAW NO EDGE
+                 * =========================================
+                 */
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu):hover
+                > .nav-link-row,
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu):focus-within
+                > .nav-link-row,
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .mega-menu {
+
+                  border:
+                    0 !important;
+
+                  outline:
+                    0 !important;
+
+                  box-shadow:
+                    none !important;
+                }
+
+
+                /*
+                 * No pseudo join decorations.
+                 */
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .nav-link-row::before,
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .nav-link-row::after,
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .mega-menu::before,
+
+                body.mega-menu-unified-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .mega-menu::after {
+
+                  content:
+                    none !important;
+
+                  display:
+                    none !important;
+                }
+
+              }
+            `;
+
+
+            document.head.appendChild(
+              unifiedOutlineAuthority
+            );
+          }
+
+          /* PHASE-5N15-FULL-UNIFIED-OUTLINE-END */
+          /* PHASE-5N13-PREMIUM-CONTINUOUS-EDGE-START */
+
+          /*
+           * FINAL MICRO-CALIBRATION
+           *
+           * Runtime audit + visual test established that:
+           *
+           * 1. Tab must NOT draw its own border.
+           * 2. Mega Menu must NOT draw a top border.
+           * 3. Header reconstructed surface must NOT draw
+           *    a bottom divider through the connected area.
+           * 4. Mega Menu still needs strong enough
+           *    left / right / bottom edges to read as a
+           *    premium glass card.
+           */
+
+          let premiumEdgeAuthority =
+            document.querySelector<HTMLStyleElement>(
+              "#mato-mega-menu-premium-edge-authority"
+            );
+
+
+          if (!premiumEdgeAuthority) {
+
+            premiumEdgeAuthority =
+              document.createElement(
+                "style"
+              );
+
+            premiumEdgeAuthority.id =
+              "mato-mega-menu-premium-edge-authority";
+
+
+            premiumEdgeAuthority.textContent = `
+              @media (min-width: 769px) {
+
+                /*
+                 * =========================================
+                 * 1. REMOVE HEADER DIVIDER FROM JOIN
+                 * =========================================
+                 *
+                 * This is the horizontal line currently
+                 * cutting Tab and Mega Menu apart.
+                 */
+
+                html body.mega-menu-tab-glass-active
+                .header.mega-menu-header-cutout-active::before {
+
+                  border-bottom:
+                    0 !important;
+
+                  box-shadow:
+                    none !important;
+                }
+
+
+                /*
+                 * =========================================
+                 * 2. TAB = PURE FOREGROUND
+                 * =========================================
+                 */
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu):hover
+                > .nav-link-row,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu):focus-within
+                > .nav-link-row {
+
+                  background:
+                    transparent !important;
+
+                  border:
+                    0 !important;
+
+                  border-radius:
+                    0 !important;
+
+                  outline:
+                    0 !important;
+
+                  box-shadow:
+                    none !important;
+
+                  -webkit-backdrop-filter:
+                    none !important;
+
+                  backdrop-filter:
+                    none !important;
+                }
+
+
+                /*
+                 * =========================================
+                 * 3. TAB GLASS = EFFECT ONLY
+                 * =========================================
+                 *
+                 * It must never generate a second visible
+                 * contour.
+                 */
+
+                html body.mega-menu-tab-glass-active
+                #mega-menu-tab-glass-layer {
+
+                  border:
+                    0 !important;
+
+                  outline:
+                    0 !important;
+
+                  border-radius:
+                    0 !important;
+
+                  box-shadow:
+                    none !important;
+                }
+
+
+                /*
+                 * =========================================
+                 * 4. MEGA MENU BODY
+                 *
+                 * Restore card identity only on:
+                 * - left
+                 * - right
+                 * - bottom
+                 *
+                 * NO top border.
+                 * =========================================
+                 */
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .mega-menu {
+
+                  border-top:
+                    0 !important;
+
+                  border-left:
+                    1px solid
+                    rgba(255, 255, 255, 0.48) !important;
+
+                  border-right:
+                    1px solid
+                    rgba(255, 255, 255, 0.48) !important;
+
+                  border-bottom:
+                    1px solid
+                    rgba(255, 255, 255, 0.48) !important;
+
+
+                  /*
+                   * Top corners belong to connected
+                   * Header silhouette, not panel.
+                   */
+                  border-top-left-radius:
+                    0 !important;
+
+                  border-top-right-radius:
+                    0 !important;
+
+
+                  /*
+                   * Premium lower card shape.
+                   */
+                  border-bottom-left-radius:
+                    18px !important;
+
+                  border-bottom-right-radius:
+                    18px !important;
+
+
+                  /*
+                   * Restore depth without a top seam.
+                   */
+                  box-shadow:
+                    0 22px 52px
+                    rgba(18, 50, 35, 0.12),
+
+                    inset 1px 0 0
+                    rgba(255, 255, 255, 0.06),
+
+                    inset -1px 0 0
+                    rgba(255, 255, 255, 0.06),
+
+                    inset 0 -1px 0
+                    rgba(255, 255, 255, 0.07)
+                    !important;
+                }
+
+
+                /*
+                 * =========================================
+                 * 5. NO JOIN PSEUDOS
+                 * =========================================
+                 */
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .nav-link-row::before,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .nav-link-row::after,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .mega-menu::before,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .mega-menu::after {
+
+                  content:
+                    none !important;
+
+                  display:
+                    none !important;
+
+                  border:
+                    0 !important;
+
+                  background:
+                    none !important;
+
+                  box-shadow:
+                    none !important;
+                }
+
+
+                /*
+                 * =========================================
+                 * 6. KEEP TEXT SHARP
+                 * =========================================
+                 */
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .nav-link-row
+                > .nav-link,
+
+                html body.mega-menu-tab-glass-active
+                .header
+                .has-submenu:has(> .mega-menu)
+                > .nav-link-row
+                > .submenu-toggle {
+
+                  position:
+                    relative !important;
+
+                  z-index:
+                    3 !important;
+
+                  opacity:
+                    1 !important;
+
+                  filter:
+                    none !important;
+
+                  -webkit-filter:
+                    none !important;
+                }
+
+              }
+            `;
+
+
+            /*
+             * Append AFTER the previous runtime authority.
+             */
+            document.head.appendChild(
+              premiumEdgeAuthority
+            );
+          }
+
+          /* PHASE-5N13-PREMIUM-CONTINUOUS-EDGE-END */
+          /* PHASE-5N8-FULL-CUTOUT-APPLY-START */
+
+          /*
+           * FINAL HEADER CUTOUT SILHOUETTE
+           *
+           * Cut out:
+           *
+           * 1. the complete Mega Menu overlap inside Header
+           * 2. the active Tab rising above that panel
+           *
+           * The resulting Header edge therefore follows:
+           *
+           * Header
+           * -----------╮      ╭----------------
+           *            │ TAB  │
+           *       ╭────╯      ╰────╮
+           *       │   MEGA MENU    │
+           *
+           * This matches the intended connected shape.
+           */
+
+
+          const connectedSurfaceWidth =
+            headerRect.width;
+
+          const connectedSurfaceHeight =
+            headerRect.height;
+
+
+          /*
+           * Mega Menu coordinates local to Header.
+           *
+           * Expand 1px to remove anti-aliasing seams.
+           */
+          const panelCutLeft =
+            Math.max(
+              panelRect.left -
+              headerRect.left -
+              1,
+              0
+            );
+
+          const panelCutRight =
+            Math.min(
+              panelRect.right -
+              headerRect.left +
+              1,
+              connectedSurfaceWidth
+            );
+
+          const panelCutTop =
+            Math.max(
+              panelRect.top -
+              headerRect.top -
+              1,
+              0
+            );
+
+
+          /*
+           * Active Tab coordinates local to Header.
+           */
+          const tabCutLeft =
+            Math.max(
+              tabRect.left -
+              headerRect.left -
+              1,
+              panelCutLeft
+            );
+
+          const tabCutRight =
+            Math.min(
+              tabRect.right -
+              headerRect.left +
+              1,
+              panelCutRight
+            );
+
+          const tabCutTop =
+            Math.max(
+              tabRect.top -
+              headerRect.top -
+              1,
+              0
+            );
+
+
+          /*
+           * Corner radii.
+           */
+          const panelShoulderRadius =
+            Math.min(
+              18,
+              Math.max(
+                8,
+                (panelCutRight - panelCutLeft) / 12
+              )
+            );
+
+          const tabRadius =
+            Math.min(
+              18,
+              Math.max(
+                8,
+                (tabCutRight - tabCutLeft) / 3
+              )
+            );
+
+
+          /*
+           * Approximation points for smooth corners.
+           */
+          const panelP1 =
+            panelShoulderRadius * 0.076;
+
+          const panelP2 =
+            panelShoulderRadius * 0.293;
+
+          const panelP3 =
+            panelShoulderRadius * 0.617;
+
+
+          const tabP1 =
+            tabRadius * 0.076;
+
+          const tabP2 =
+            tabRadius * 0.293;
+
+          const tabP3 =
+            tabRadius * 0.617;
+
+
+          /*
+           * Remaining Header surface.
+           *
+           * The polygon walks around the OUTSIDE Header,
+           * then travels through the connected concave
+           * Mega Menu + Tab opening.
+           */
+          const connectedHeaderClip =
+            [
+              "polygon(",
+
+              /*
+               * Outer Header:
+               * top-left -> top-right -> bottom-right
+               */
+              "0px 0px,",
+
+              `${connectedSurfaceWidth}px 0px,`,
+
+              `${connectedSurfaceWidth}px ${connectedSurfaceHeight}px,`,
+
+
+              /*
+               * Right side of Mega Menu opening.
+               */
+              `${panelCutRight}px ${connectedSurfaceHeight}px,`,
+
+              `${panelCutRight}px ${panelCutTop + panelShoulderRadius}px,`,
+
+              `${panelCutRight - panelP1}px ${panelCutTop + panelP3}px,`,
+
+              `${panelCutRight - panelP2}px ${panelCutTop + panelP2}px,`,
+
+              `${panelCutRight - panelP3}px ${panelCutTop + panelP1}px,`,
+
+              `${panelCutRight - panelShoulderRadius}px ${panelCutTop}px,`,
+
+
+              /*
+               * Mega Menu top edge ->
+               * right side of active Tab.
+               */
+              `${tabCutRight + tabRadius}px ${panelCutTop}px,`,
+
+              `${tabCutRight + tabP3}px ${panelCutTop - tabP1}px,`,
+
+              `${tabCutRight + tabP2}px ${panelCutTop - tabP2}px,`,
+
+              `${tabCutRight + tabP1}px ${panelCutTop - tabP3}px,`,
+
+              `${tabCutRight}px ${panelCutTop - tabRadius}px,`,
+
+
+              /*
+               * Right wall of Tab.
+               */
+              `${tabCutRight}px ${tabCutTop + tabRadius}px,`,
+
+              `${tabCutRight - tabP1}px ${tabCutTop + tabP3}px,`,
+
+              `${tabCutRight - tabP2}px ${tabCutTop + tabP2}px,`,
+
+              `${tabCutRight - tabP3}px ${tabCutTop + tabP1}px,`,
+
+              `${tabCutRight - tabRadius}px ${tabCutTop}px,`,
+
+
+              /*
+               * Tab top edge.
+               */
+              `${tabCutLeft + tabRadius}px ${tabCutTop}px,`,
+
+
+              /*
+               * Left upper Tab corner.
+               */
+              `${tabCutLeft + tabP3}px ${tabCutTop + tabP1}px,`,
+
+              `${tabCutLeft + tabP2}px ${tabCutTop + tabP2}px,`,
+
+              `${tabCutLeft + tabP1}px ${tabCutTop + tabP3}px,`,
+
+              `${tabCutLeft}px ${tabCutTop + tabRadius}px,`,
+
+
+              /*
+               * Left wall of Tab down toward panel.
+               */
+              `${tabCutLeft}px ${panelCutTop - tabRadius}px,`,
+
+              `${tabCutLeft - tabP1}px ${panelCutTop - tabP3}px,`,
+
+              `${tabCutLeft - tabP2}px ${panelCutTop - tabP2}px,`,
+
+              `${tabCutLeft - tabP3}px ${panelCutTop - tabP1}px,`,
+
+              `${tabCutLeft - tabRadius}px ${panelCutTop}px,`,
+
+
+              /*
+               * Mega Menu top edge to left shoulder.
+               */
+              `${panelCutLeft + panelShoulderRadius}px ${panelCutTop}px,`,
+
+              `${panelCutLeft + panelP3}px ${panelCutTop + panelP1}px,`,
+
+              `${panelCutLeft + panelP2}px ${panelCutTop + panelP2}px,`,
+
+              `${panelCutLeft + panelP1}px ${panelCutTop + panelP3}px,`,
+
+              `${panelCutLeft}px ${panelCutTop + panelShoulderRadius}px,`,
+
+
+              /*
+               * Left side of opening -> Header bottom.
+               */
+              `${panelCutLeft}px ${connectedSurfaceHeight}px,`,
+
+              `0px ${connectedSurfaceHeight}px`,
+
+              ")"
+            ].join(" ");
+
+
+          /*
+           * Override 5N6's smaller Tab-only notch.
+           */
+          headerElement.style.setProperty(
+            "--mato-header-surface-clip",
+            connectedHeaderClip
+          );
+
+          /* PHASE-5N8-FULL-CUTOUT-APPLY-END */
+          /* PHASE-5N10-BEZIER-CUTOUT-START */
+
+          /*
+           * PREMIUM CURVE ENGINE
+           *
+           * 5N8 established the correct connected geometry,
+           * but polygon() approximates curves with small
+           * straight facets.
+           *
+           * Here we reuse the SAME coordinates and override
+           * only the final Header clipping shape using
+           * true quadratic Bezier curves.
+           */
+
+
+          /*
+           * Shoulder radius:
+           * transition between Mega Menu top and Tab wall.
+           */
+          const bezierShoulderRadius =
+            Math.min(
+              18,
+              Math.max(
+                12,
+                panelShoulderRadius
+              )
+            );
+
+
+          /*
+           * Tab upper corner radius.
+           */
+          const bezierTabRadius =
+            Math.min(
+              18,
+              Math.max(
+                12,
+                tabRadius
+              )
+            );
+
+
+          /*
+           * Small safety expansion.
+           *
+           * This moves the glass opening slightly under
+           * the panel so anti-aliasing from the Header
+           * surface cannot create a pale 1px wedge.
+           */
+          const seamSafety =
+            2;
+
+
+          const smoothPanelLeft =
+            Math.max(
+              panelCutLeft - seamSafety,
+              0
+            );
+
+          const smoothPanelRight =
+            Math.min(
+              panelCutRight + seamSafety,
+              connectedSurfaceWidth
+            );
+
+          const smoothPanelTop =
+            Math.max(
+              panelCutTop - seamSafety,
+              0
+            );
+
+
+          const smoothTabLeft =
+            Math.max(
+              tabCutLeft - 1,
+              smoothPanelLeft
+            );
+
+          const smoothTabRight =
+            Math.min(
+              tabCutRight + 1,
+              smoothPanelRight
+            );
+
+          const smoothTabTop =
+            Math.max(
+              tabCutTop - 1,
+              0
+            );
+
+
+          /*
+           * SVG/CSS path.
+           *
+           * Q = true quadratic curve.
+           *
+           * No polygon facets remain at:
+           * - panel → tab left shoulder
+           * - tab top-left
+           * - tab top-right
+           * - tab → panel right shoulder
+           */
+          const smoothConnectedPath =
+            [
+              'path("',
+
+              /*
+               * Header outer boundary.
+               */
+              `M 0 0 `,
+              `L ${connectedSurfaceWidth} 0 `,
+              `L ${connectedSurfaceWidth} ${connectedSurfaceHeight} `,
+
+
+              /*
+               * Bottom-right toward Mega Menu opening.
+               */
+              `L ${smoothPanelRight} ${connectedSurfaceHeight} `,
+
+              `L ${smoothPanelRight} ${
+                smoothPanelTop + bezierShoulderRadius
+              } `,
+
+
+              /*
+               * RIGHT OUTER SHOULDER
+               */
+              `Q ${smoothPanelRight} ${smoothPanelTop} ${
+                smoothPanelRight - bezierShoulderRadius
+              } ${smoothPanelTop} `,
+
+
+              /*
+               * Panel top → right side of Tab.
+               */
+              `L ${
+                smoothTabRight + bezierShoulderRadius
+              } ${smoothPanelTop} `,
+
+
+              /*
+               * Smooth rise from panel into Tab right wall.
+               */
+              `Q ${smoothTabRight} ${smoothPanelTop} ${
+                smoothTabRight
+              } ${
+                smoothPanelTop - bezierShoulderRadius
+              } `,
+
+
+              /*
+               * Tab right wall.
+               */
+              `L ${smoothTabRight} ${
+                smoothTabTop + bezierTabRadius
+              } `,
+
+
+              /*
+               * TAB TOP-RIGHT CURVE
+               */
+              `Q ${smoothTabRight} ${smoothTabTop} ${
+                smoothTabRight - bezierTabRadius
+              } ${smoothTabTop} `,
+
+
+              /*
+               * Tab top.
+               */
+              `L ${
+                smoothTabLeft + bezierTabRadius
+              } ${smoothTabTop} `,
+
+
+              /*
+               * TAB TOP-LEFT CURVE
+               */
+              `Q ${smoothTabLeft} ${smoothTabTop} ${
+                smoothTabLeft
+              } ${
+                smoothTabTop + bezierTabRadius
+              } `,
+
+
+              /*
+               * Tab left wall.
+               */
+              `L ${smoothTabLeft} ${
+                smoothPanelTop - bezierShoulderRadius
+              } `,
+
+
+              /*
+               * Smooth fall from Tab left wall to panel top.
+               */
+              `Q ${smoothTabLeft} ${smoothPanelTop} ${
+                smoothTabLeft - bezierShoulderRadius
+              } ${smoothPanelTop} `,
+
+
+              /*
+               * Panel top toward left outer shoulder.
+               */
+              `L ${
+                smoothPanelLeft + bezierShoulderRadius
+              } ${smoothPanelTop} `,
+
+
+              /*
+               * LEFT OUTER SHOULDER
+               */
+              `Q ${smoothPanelLeft} ${smoothPanelTop} ${
+                smoothPanelLeft
+              } ${
+                smoothPanelTop + bezierShoulderRadius
+              } `,
+
+
+              /*
+               * Return around Header outer boundary.
+               */
+              `L ${smoothPanelLeft} ${connectedSurfaceHeight} `,
+              `L 0 ${connectedSurfaceHeight} `,
+              `Z`,
+
+              '")'
+            ].join("");
+
+
+          /*
+           * Override polygon generated by 5N8.
+           */
+          headerElement.style.setProperty(
+            "--mato-header-surface-clip",
+            smoothConnectedPath
+          );
+
+          /* PHASE-5N10-BEZIER-CUTOUT-END */
+          /* PHASE-5N10C-EXACT-TAB-SYNC-START */
+
+          /*
+           * EXACT CURVE SYNCHRONIZATION
+           *
+           * The Header Bezier opening and the body-level
+           * Tab glass must use the EXACT SAME geometry.
+           *
+           * Previously:
+           * Header cutout and Tab glass differed by
+           * approximately 1–2px because each system
+           * performed its own safety expansion.
+           *
+           * That produced the apparent double curve.
+           */
+
+          const syncedTabGlass =
+            document.querySelector<HTMLElement>(
+              "#mega-menu-tab-glass-layer"
+            );
+
+
+          if (syncedTabGlass) {
+
+            /*
+             * Convert Bezier-local Header coordinates
+             * back into viewport coordinates.
+             */
+
+            const syncedLeft =
+              headerRect.left +
+              smoothTabLeft;
+
+            const syncedTop =
+              headerRect.top +
+              smoothTabTop;
+
+            const syncedWidth =
+              Math.max(
+                smoothTabRight -
+                smoothTabLeft,
+                0
+              );
+
+
+            /*
+             * Continue the Tab glass exactly down to the
+             * Mega Menu shoulder plane plus a tiny 2px
+             * physical overlap.
+             */
+
+            const syncedPanelTop =
+              headerRect.top +
+              smoothPanelTop;
+
+            const syncedHeight =
+              Math.max(
+                syncedPanelTop -
+                syncedTop +
+                3,
+                tabRect.height
+              );
+
+
+            syncedTabGlass.style.setProperty(
+              "--tab-glass-left",
+              `${syncedLeft}px`
+            );
+
+            syncedTabGlass.style.setProperty(
+              "--tab-glass-top",
+              `${syncedTop}px`
+            );
+
+            syncedTabGlass.style.setProperty(
+              "--tab-glass-width",
+              `${syncedWidth}px`
+            );
+
+            syncedTabGlass.style.setProperty(
+              "--tab-glass-height",
+              `${syncedHeight}px`
+            );
+
+
+            /*
+             * Same radius used by the Header Bezier.
+             */
+            syncedTabGlass.style.setProperty(
+              "--tab-glass-radius",
+              `${bezierTabRadius}px`
+            );
+
+
+            /*
+             * Explicitly mark synchronized state so CSS
+             * can override all historical approximations.
+             */
+            syncedTabGlass.classList.add(
+              "mega-menu-tab-glass-synced"
+            );
+          }
+
+          /* PHASE-5N10C-EXACT-TAB-SYNC-END */
+        }
+
+        /* PHASE-5N3-HEADER-CUTOUT-APPLY-END */
 
         globalBlurBody.style.setProperty(
           "--mega-menu-blur-left",
@@ -1148,5 +4747,46 @@ document.body.classList.add(
   document.addEventListener(
     "astro:page-load",
     initLanguageSwitcher
+  );
+
+  /*
+   * PHASE-5N34-ATOMIC-HEADER-RESTORE-AUTHORITY
+   *
+   * Normal Header must always be opaque.
+   *
+   * Only the explicit active cutout state may expose the
+   * connected Mega Glass through the Header.
+   */
+  const atomicHeaderRestoreAuthority =
+    document.createElement(
+      "style"
+    );
+
+  atomicHeaderRestoreAuthority.id =
+    "mato-atomic-header-restore-authority";
+
+  atomicHeaderRestoreAuthority.textContent = `
+    @media (min-width: 769px) {
+
+      html body
+      .header:not(.mega-menu-header-cutout-active) {
+        background: #fffdf8 !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        filter: none !important;
+      }
+
+      html body
+      .header:not(.mega-menu-header-cutout-active)::before {
+        background: #fffdf8 !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        filter: none !important;
+      }
+    }
+  `;
+
+  document.head.appendChild(
+    atomicHeaderRestoreAuthority
   );
 </script>

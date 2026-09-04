@@ -1,9 +1,9 @@
 /* =========================================================
-   MATO CASHEW — HEADER
+   MATO CASHEW â€” HEADER
    ========================================================= */
 
 /* =========================================================
-   MATO CASHEW — HEADER
+   MATO CASHEW â€” HEADER
    ========================================================= */
 
 .header {
@@ -818,7 +818,7 @@
 }
 
 /* =========================================================
-   PHASE 1 — HEADER FINAL RESPONSIVE POLISH
+   PHASE 1 â€” HEADER FINAL RESPONSIVE POLISH
    ========================================================= */
 
 
@@ -1027,7 +1027,7 @@
 }
 
 /* =========================================================
-   MOBILE HEADER — HERO GLASS EFFECT
+   MOBILE HEADER â€” HERO GLASS EFFECT
    ========================================================= */
 
 @media (max-width: 768px) {
@@ -1064,7 +1064,7 @@
 
 }
 /* =========================================================
-   ABOUT HERO — MOBILE GLASS HEADER FINAL OVERRIDE
+   ABOUT HERO â€” MOBILE GLASS HEADER FINAL OVERRIDE
    IMPORTANT: KEEP THIS AT THE VERY END OF Header.css
    ========================================================= */
 
@@ -1111,7 +1111,7 @@
 
 }
 /* =========================================================
-   MATO CASHEW V2 — MOBILE PREMIUM GLASS ACCORDION
+   MATO CASHEW V2 â€” MOBILE PREMIUM GLASS ACCORDION
    Step 4C.3
    ========================================================= */
 
@@ -1652,7 +1652,7 @@
 
 
 /* =========================================================
-   Mobile Accordion — Reduced Motion
+   Mobile Accordion â€” Reduced Motion
    ========================================================= */
 
 @media (
@@ -1892,7 +1892,7 @@
 }
 
 /* =========================================================
-   MATO NAVIGATION V2 — DESKTOP INLINE SUBMENU TOGGLE
+   MATO NAVIGATION V2 â€” DESKTOP INLINE SUBMENU TOGGLE
    Keep desktop parent label + chevron on one row.
    Mobile accordion styles remain unchanged.
    ========================================================= */
@@ -2431,7 +2431,7 @@ transform:
   }
 
   .mega-menu-link::after {
-    content: "›";
+    content: "â€º";
 
     position: absolute;
 
@@ -2462,7 +2462,7 @@ transform:
 
 
   /* ---------------------------------------------------------
-     SUBMENU TEXT — NO UNDERLINE
+     SUBMENU TEXT â€” NO UNDERLINE
      --------------------------------------------------------- */
 
   .mega-menu-link-title,
@@ -2829,12 +2829,12 @@ text-decoration: none !important;
 
 }
 /* =========================================================
-   MATO NAVIGATION V2 — UNIFIED SUBMENU VISUAL SYSTEM
+   MATO NAVIGATION V2 â€” UNIFIED SUBMENU VISUAL SYSTEM
    Mega menu + compact dropdown share one premium language
    ========================================================= */
 
 /* =========================================================
-   MATO MEGA MENU — LOCAL GLASS OCCLUSION
+   MATO MEGA MENU â€” LOCAL GLASS OCCLUSION
    Hide hero foreground ONLY behind the open glass panel.
    Background image remains untouched.
    ========================================================= */
@@ -2941,7 +2941,7 @@ text-decoration: none !important;
   }
 }
 /* =========================================================
-   MATO NAVIGATION V2 — FINAL BALANCED GLASS V2
+   MATO NAVIGATION V2 â€” FINAL BALANCED GLASS V2
    Clear text + stronger backdrop blur + light glass depth
    ========================================================= */
 
@@ -3148,7 +3148,7 @@ text-decoration: none !important;
 
   /* -------------------------------------------------------
      HOVER / FOCUS / ACTIVE
-     Still glass — not a solid green block.
+     Still glass â€” not a solid green block.
      ------------------------------------------------------- */
 
   .mega-menu-link:hover,
@@ -3773,3 +3773,6965 @@ text-decoration: none !important;
 }
 
 /* PHASE-5M-GLOBAL-OCCLUSION-CSS-END */
+
+/* PHASE-5N-CONNECTED-MEGA-TABS-START */
+
+/* =========================================================
+   MATO CASHEW
+   CONNECTED MEGA MENU TAB SYSTEM
+
+   Applies only to desktop nav items that own a real
+   .mega-menu.
+
+   Compact dropdowns remain unchanged.
+
+   Existing:
+   - Mega Menu blur
+   - foreground occlusion
+   - positioning
+   - interaction bridge
+   are preserved.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * -------------------------------------------------------
+   * MEGA-MENU OWNER
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu) {
+    isolation: isolate;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * ACTIVE NAV TAB
+   *
+   * On hover/focus the nav row becomes the visible
+   * upper tab of the Mega Menu.
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row {
+    position: relative;
+
+    z-index: 2110;
+
+    border:
+      1px solid transparent;
+
+    border-radius:
+      18px;
+
+    transition:
+      background 160ms ease,
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      border-radius 160ms ease;
+  }
+
+
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.18) 0%,
+        rgba(248, 251, 249, 0.11) 48%,
+        rgba(238, 246, 241, 0.13) 100%
+      );
+
+    border-color:
+      rgba(255, 255, 255, 0.50);
+
+    border-bottom-color:
+      transparent;
+
+    border-radius:
+      18px 18px 0 0;
+
+    box-shadow:
+      0 -5px 18px
+      rgba(28, 67, 47, 0.055);
+
+    -webkit-backdrop-filter:
+      blur(14px)
+      saturate(108%);
+
+    backdrop-filter:
+      blur(14px)
+      saturate(108%);
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * TAB-TO-PANEL CONNECTOR
+   *
+   * Existing Mega Menu sits 10px below the parent.
+   * This surface fills that exact visual gap.
+   *
+   * It is attached to .nav-link-row rather than
+   * .has-submenu::after because the parent pseudo-element
+   * is already used as the interaction bridge.
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: -1px;
+    right: -1px;
+
+    top:
+      calc(100% - 1px);
+
+    height:
+      12px;
+
+    z-index:
+      -1;
+
+    pointer-events:
+      none;
+
+    opacity:
+      0;
+
+    visibility:
+      hidden;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.18) 0%,
+        rgba(248, 251, 249, 0.11) 52%,
+        rgba(238, 246, 241, 0.13) 100%
+      );
+
+    border-left:
+      1px solid
+      rgba(255, 255, 255, 0.50);
+
+    border-right:
+      1px solid
+      rgba(255, 255, 255, 0.50);
+
+    transition:
+      opacity 120ms ease;
+  }
+
+
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row::after,
+
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row::after {
+
+    opacity:
+      1;
+
+    visibility:
+      visible;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * MEGA MENU PANEL
+   *
+   * Keep current horizontal geometry and animation.
+   * Only shape the upper edge so it visually joins
+   * the active tab.
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    border-radius:
+      18px;
+
+    overflow:
+      visible;
+  }
+
+
+  /*
+   * Slight overlap prevents a hairline seam between
+   * connector and panel.
+   */
+
+  .has-submenu:has(> .mega-menu):hover
+  > .mega-menu,
+
+  .has-submenu:has(> .mega-menu):focus-within
+  > .mega-menu {
+
+    margin-top:
+      -1px;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * SHOULDER SOFTENING
+   *
+   * Creates the visual impression that the Mega Menu
+   * expands outward from the active navigation tab.
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::before,
+
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::after {
+
+    content: "";
+
+    position: absolute;
+
+    top:
+      -11px;
+
+    width:
+      22px;
+
+    height:
+      22px;
+
+    pointer-events:
+      none;
+
+    opacity:
+      0;
+
+    transition:
+      opacity 120ms ease;
+  }
+
+
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::before {
+
+    left:
+      calc(50% - 50%);
+
+    border-bottom-right-radius:
+      18px;
+
+    box-shadow:
+      8px 8px 0
+      rgba(255, 255, 255, 0.055);
+  }
+
+
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::after {
+
+    right:
+      calc(50% - 50%);
+
+    border-bottom-left-radius:
+      18px;
+
+    box-shadow:
+      -8px 8px 0
+      rgba(255, 255, 255, 0.055);
+  }
+
+
+  .has-submenu:has(> .mega-menu):hover
+  > .mega-menu::before,
+
+  .has-submenu:has(> .mega-menu):hover
+  > .mega-menu::after,
+
+  .has-submenu:has(> .mega-menu):focus-within
+  > .mega-menu::before,
+
+  .has-submenu:has(> .mega-menu):focus-within
+  > .mega-menu::after {
+
+    opacity:
+      1;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * TEXT / CHEVRON
+   *
+   * Keep active parent visually unified with the panel.
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row
+  > .nav-link,
+
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row
+  > .nav-link {
+
+    color:
+      #07583a;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * REDUCED MOTION
+   * -------------------------------------------------------
+   */
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .has-submenu:has(> .mega-menu)
+    > .nav-link-row,
+
+    .has-submenu:has(> .mega-menu)
+    > .nav-link-row::after,
+
+    .has-submenu:has(> .mega-menu)
+    > .mega-menu::before,
+
+    .has-submenu:has(> .mega-menu)
+    > .mega-menu::after {
+
+      transition:
+        none !important;
+    }
+  }
+
+}
+
+/* PHASE-5N-CONNECTED-MEGA-TABS-END */
+
+/* PHASE-5N1-SEAMLESS-MEGA-START */
+
+/* =========================================================
+   SEAMLESS CONNECTED MEGA MENU
+
+   The active nav tab and its real Mega Menu now form
+   one continuous glass silhouette.
+
+   Compact dropdowns are intentionally excluded.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * -------------------------------------------------------
+   * 1. REMOVE THE LEGACY 10PX VISUAL GAP
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    top:
+      calc(100% - 1px) !important;
+
+    margin-top:
+      0 !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 2. ACTIVE TAB BECOMES THE UPPER EXTENSION
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    position:
+      relative;
+
+    z-index:
+      2120;
+
+    border-bottom-color:
+      transparent !important;
+
+    border-radius:
+      18px 18px 0 0 !important;
+
+    /*
+     * Tiny downward overlap removes anti-aliasing seam.
+     */
+    transform:
+      translateY(1px);
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 3. CENTRAL JOIN SURFACE
+   *
+   * This is no longer a long 10px bridge.
+   * It is only a small overlap that fuses both glass
+   * surfaces into one visual object.
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::after {
+
+    left:
+      -1px !important;
+
+    right:
+      -1px !important;
+
+    top:
+      calc(100% - 2px) !important;
+
+    height:
+      5px !important;
+
+    z-index:
+      2 !important;
+
+    background:
+      rgba(248, 251, 249, 0.12) !important;
+
+    border-left:
+      1px solid
+      rgba(255, 255, 255, 0.50) !important;
+
+    border-right:
+      1px solid
+      rgba(255, 255, 255, 0.50) !important;
+
+    border-bottom:
+      0 !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 4. PANEL SHAPE
+   *
+   * Mega Menu keeps rounded outer corners.
+   * Its top edge now touches the active tab directly.
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    border-radius:
+      18px !important;
+
+    overflow:
+      visible !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 5. REMOVE PHASE 5N DECORATIVE SHOULDERS
+   *
+   * With real geometry connected, synthetic shadow
+   * shoulders are no longer required.
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::before,
+
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 6. HIDE THE PANEL TOP BORDER DIRECTLY UNDER TAB
+   *
+   * The tab overlap visually covers this section,
+   * producing one continuous glass body.
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu):hover
+  > .mega-menu,
+
+  .has-submenu:has(> .mega-menu):focus-within
+  > .mega-menu {
+
+    box-shadow:
+      0 20px 50px
+      rgba(20, 52, 37, 0.15),
+      0 6px 18px
+      rgba(20, 52, 37, 0.08) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 7. PRESERVE POINTER PATH
+   *
+   * Existing .has-submenu::after interaction bridge
+   * remains in the project. Since the real panel now
+   * touches the nav item, it becomes harmless redundancy
+   * rather than a visual gap.
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    pointer-events:
+      none;
+  }
+
+  .has-submenu:has(> .mega-menu):hover
+  > .mega-menu,
+
+  .has-submenu:has(> .mega-menu):focus-within
+  > .mega-menu {
+
+    pointer-events:
+      auto;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * REDUCED MOTION
+   * -------------------------------------------------------
+   */
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .has-submenu:has(> .mega-menu)
+    > .nav-link-row {
+
+      transform:
+        none !important;
+    }
+  }
+
+}
+
+/* PHASE-5N1-SEAMLESS-MEGA-END */
+
+/* PHASE-5N2-HERO-THROUGH-TAB-START */
+
+/* =========================================================
+   ACTIVE MEGA MENU â€” HERO THROUGH TAB
+
+   Goal:
+   The active navigation tab visually belongs to the
+   Mega Menu glass surface instead of the opaque header.
+
+   Important:
+   - Header itself stays unchanged.
+   - Logo / other nav items stay on normal header surface.
+   - Only a real Mega Menu owner receives this treatment.
+   - Existing Global Blur / Occlusion remain untouched.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * -------------------------------------------------------
+   * ACTIVE TAB
+   *
+   * Reduce the white glass fill substantially.
+   * The tab now behaves as the transparent upper extension
+   * of the Mega Menu rather than a white header button.
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.055) 0%,
+        rgba(248, 251, 249, 0.025) 52%,
+        rgba(238, 246, 241, 0.040) 100%
+      ) !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.48) !important;
+
+    border-bottom-color:
+      transparent !important;
+
+    -webkit-backdrop-filter:
+      blur(2px)
+      saturate(108%)
+      brightness(1.01) !important;
+
+    backdrop-filter:
+      blur(2px)
+      saturate(108%)
+      brightness(1.01) !important;
+
+    box-shadow:
+      inset 0 1px 0
+        rgba(255, 255, 255, 0.28),
+      0 -4px 14px
+        rgba(17, 76, 52, 0.035) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * TAB / PANEL JOIN
+   *
+   * Match the connector to the Mega Menu's transparent
+   * glass recipe. No opaque white bridge.
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::after {
+
+    background:
+      rgba(255, 255, 255, 0.035) !important;
+
+    border-left-color:
+      rgba(255, 255, 255, 0.48) !important;
+
+    border-right-color:
+      rgba(255, 255, 255, 0.48) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * OPEN MEGA MENU
+   *
+   * Keep the same low-opacity glass language across
+   * Tab -> Join -> Mega Menu.
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu):hover
+  > .mega-menu,
+
+  .has-submenu:has(> .mega-menu):focus-within
+  > .mega-menu {
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.10) 0%,
+        rgba(248, 251, 249, 0.065) 48%,
+        rgba(238, 246, 241, 0.085) 100%
+      ) !important;
+
+    -webkit-backdrop-filter:
+      blur(2px)
+      saturate(108%)
+      brightness(1.01) !important;
+
+    backdrop-filter:
+      blur(2px)
+      saturate(108%)
+      brightness(1.01) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * ACTIVE LABEL
+   * -------------------------------------------------------
+   */
+
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row
+  > .nav-link,
+
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row
+  > .nav-link {
+
+    position:
+      relative;
+
+    z-index:
+      3;
+  }
+
+}
+
+/* PHASE-5N2-HERO-THROUGH-TAB-END */
+
+/* PHASE-5N3-TRUE-HEADER-CUTOUT-START */
+
+/* =========================================================
+   TRUE HEADER CUTOUT
+
+   When a real Mega Menu is open:
+
+   1. The real Header painting becomes transparent.
+   2. Header::before reconstructs the original Header
+      appearance from runtime-captured computed styles.
+   3. A rectangular hole is subtracted exactly behind
+      the active Mega Menu tab.
+   4. Header content stays sharp and fully interactive.
+   5. Hero image can now physically show through the tab.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .header.mega-menu-header-cutout-active {
+
+    background:
+      transparent !important;
+
+    background-image:
+      none !important;
+
+    box-shadow:
+      none !important;
+
+    border-bottom-color:
+      transparent !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+  }
+
+
+  /*
+   * Reconstruct Header surface behind all Header content.
+   *
+   * Only this pseudo surface receives the cutout.
+   * Children are NOT masked.
+   */
+  .header.mega-menu-header-cutout-active::before {
+
+    content:
+      "";
+
+    position:
+      absolute;
+
+    inset:
+      0;
+
+    z-index:
+      0;
+
+    pointer-events:
+      none;
+
+    background:
+      var(
+        --mato-header-surface-background,
+        rgba(255,255,255,0.94)
+      );
+
+    box-shadow:
+      var(
+        --mato-header-surface-box-shadow,
+        none
+      );
+
+    border-bottom:
+      var(
+        --mato-header-surface-border-bottom,
+        0
+      );
+
+    -webkit-backdrop-filter:
+      var(
+        --mato-header-surface-webkit-backdrop,
+        none
+      );
+
+    backdrop-filter:
+      var(
+        --mato-header-surface-backdrop,
+        none
+      );
+
+
+    /*
+     * Layer 1 = complete Header surface.
+     * Layer 2 = rectangle behind active Tab.
+     *
+     * exclude/xor removes Layer 2 from Layer 1.
+     */
+
+    -webkit-mask-image:
+      linear-gradient(
+        #000 0 0
+      ),
+      linear-gradient(
+        #000 0 0
+      );
+
+    mask-image:
+      linear-gradient(
+        #000 0 0
+      ),
+      linear-gradient(
+        #000 0 0
+      );
+
+
+    -webkit-mask-size:
+      100% 100%,
+      var(--mato-header-cut-width, 0px)
+      var(--mato-header-cut-height, 0px);
+
+    mask-size:
+      100% 100%,
+      var(--mato-header-cut-width, 0px)
+      var(--mato-header-cut-height, 0px);
+
+
+    -webkit-mask-position:
+      0 0,
+      var(--mato-header-cut-left, 0px)
+      var(--mato-header-cut-top, 0px);
+
+    mask-position:
+      0 0,
+      var(--mato-header-cut-left, 0px)
+      var(--mato-header-cut-top, 0px);
+
+
+    -webkit-mask-repeat:
+      no-repeat,
+      no-repeat;
+
+    mask-repeat:
+      no-repeat,
+      no-repeat;
+
+
+    -webkit-mask-composite:
+      xor;
+
+    mask-composite:
+      exclude;
+  }
+
+
+  /*
+   * Keep all actual Header content above reconstructed
+   * Header surface.
+   */
+  .header.mega-menu-header-cutout-active
+  > .header-wrapper {
+
+    position:
+      relative;
+
+    z-index:
+      1;
+  }
+
+
+  /*
+   * Mega Menu must remain above both Header and global
+   * page blur surfaces.
+   */
+  .header.mega-menu-header-cutout-active
+  .has-submenu
+  > .mega-menu {
+
+    z-index:
+      2100 !important;
+  }
+
+
+  /*
+   * Active tab itself sits above the reconstructed
+   * Header surface while its backdrop can now see
+   * the Hero image through the cutout.
+   */
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.10) 0%,
+        rgba(248, 251, 249, 0.055) 50%,
+        rgba(238, 246, 241, 0.075) 100%
+      ) !important;
+
+    -webkit-backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+
+    backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+  }
+
+}
+
+/* PHASE-5N3-TRUE-HEADER-CUTOUT-END */
+
+/* PHASE-5N4-UNIFIED-CONNECTED-GLASS-START */
+
+/* =========================================================
+   FINAL CONNECTED MEGA MENU VISUAL CONSOLIDATION
+
+   Purpose:
+   - one glass recipe
+   - one border language
+   - clean top-tab curve
+   - no doubled seam
+   - no decorative shoulder lines
+   - Tab + Mega Menu read as one object
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * Shared glass tokens for the connected system.
+   */
+  .header.mega-menu-header-cutout-active {
+
+    --mato-connected-glass-bg:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.095) 0%,
+        rgba(248, 251, 249, 0.055) 48%,
+        rgba(238, 246, 241, 0.075) 100%
+      );
+
+    --mato-connected-glass-border:
+      rgba(255, 255, 255, 0.46);
+
+    --mato-connected-glass-radius:
+      18px;
+  }
+
+
+  /*
+   * =======================================================
+   * ACTIVE TAB
+   * =======================================================
+   *
+   * Only top corners remain rounded.
+   * Bottom corners become part of the Mega Menu body.
+   */
+
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    background:
+      var(--mato-connected-glass-bg) !important;
+
+    border:
+      1px solid
+      var(--mato-connected-glass-border) !important;
+
+    border-bottom:
+      0 !important;
+
+    border-radius:
+      var(--mato-connected-glass-radius)
+      var(--mato-connected-glass-radius)
+      0
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    -webkit-backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+
+    backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+
+    transform:
+      translateY(1px) !important;
+  }
+
+
+  /*
+   * =======================================================
+   * REMOVE OLD CONNECTOR VISUALS
+   * =======================================================
+   *
+   * The panel now physically overlaps the tab.
+   * We do not need another visible glass strip.
+   */
+
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::after {
+
+    content:
+      "" !important;
+
+    left:
+      0 !important;
+
+    right:
+      0 !important;
+
+    top:
+      calc(100% - 3px) !important;
+
+    height:
+      5px !important;
+
+    background:
+      var(--mato-connected-glass-bg) !important;
+
+    border:
+      0 !important;
+
+    border-radius:
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    opacity:
+      0 !important;
+
+    visibility:
+      hidden !important;
+
+    pointer-events:
+      none !important;
+  }
+
+
+  /*
+   * =======================================================
+   * MEGA MENU
+   * =======================================================
+   */
+
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    top:
+      calc(100% - 2px) !important;
+
+    margin-top:
+      0 !important;
+
+    background:
+      var(--mato-connected-glass-bg) !important;
+
+    border:
+      1px solid
+      var(--mato-connected-glass-border) !important;
+
+    border-radius:
+      var(--mato-connected-glass-radius) !important;
+
+    -webkit-backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+
+    backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+
+    box-shadow:
+      0 24px 58px
+      rgba(19, 53, 37, 0.13) !important;
+
+    overflow:
+      visible !important;
+  }
+
+
+  /*
+   * =======================================================
+   * REMOVE LEGACY MEGA-MENU PSEUDO SHOULDERS
+   * =======================================================
+   */
+
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::before,
+
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+  }
+
+
+  /*
+   * =======================================================
+   * CLEAN JOIN
+   *
+   * The tab must sit above panel top border so the
+   * central border segment disappears naturally.
+   * =======================================================
+   */
+
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row {
+
+    z-index:
+      2120 !important;
+  }
+
+
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    z-index:
+      2110 !important;
+  }
+
+
+  /*
+   * Small glass bridge underneath the tab itself.
+   *
+   * It covers only the central seam and has no border,
+   * so no extra straight or curved line is created.
+   */
+
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row::before,
+
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row::before {
+
+    content:
+      "";
+
+    position:
+      absolute;
+
+    left:
+      0;
+
+    right:
+      0;
+
+    bottom:
+      -4px;
+
+    height:
+      6px;
+
+    z-index:
+      -1;
+
+    pointer-events:
+      none;
+
+    background:
+      var(--mato-connected-glass-bg);
+
+    border:
+      0;
+
+    border-radius:
+      0;
+
+    box-shadow:
+      none;
+  }
+
+
+  /*
+   * =======================================================
+   * REMOVE INNER TOP HIGHLIGHT CONFLICT
+   * =======================================================
+   */
+
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    outline:
+      none !important;
+  }
+
+
+  /*
+   * Keep label and chevron sharp.
+   */
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .nav-link,
+
+  .header.mega-menu-header-cutout-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .submenu-toggle {
+
+    position:
+      relative;
+
+    z-index:
+      3;
+  }
+
+
+  /*
+   * Reduced motion.
+   */
+  @media (prefers-reduced-motion: reduce) {
+
+    .header.mega-menu-header-cutout-active
+    .has-submenu:has(> .mega-menu)
+    > .nav-link-row {
+
+      transition:
+        none !important;
+    }
+  }
+
+}
+
+/* PHASE-5N4-UNIFIED-CONNECTED-GLASS-END */
+
+/* PHASE-5N5-UNIFIED-OPEN-HEADER-GLASS-START */
+
+/* =========================================================
+   UNIFIED OPEN HEADER GLASS
+
+   When a real Mega Menu is open:
+   - remove the local rectangular Header cutout visually
+   - make Header one continuous transparent glass layer
+   - make active Tab + Mega Menu use the SAME glass recipe
+   - remove duplicate tab/panel seam decoration
+
+   When Mega Menu closes:
+   normal Header remains unchanged.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * -------------------------------------------------------
+   * SHARED OPEN-STATE GLASS TOKENS
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-page-blur-active {
+
+    --mc-open-glass-bg:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.105) 0%,
+        rgba(250, 252, 250, 0.060) 48%,
+        rgba(239, 246, 242, 0.080) 100%
+      );
+
+    --mc-open-glass-border:
+      rgba(255, 255, 255, 0.48);
+
+    --mc-open-glass-blur:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005);
+
+    --mc-open-glass-radius:
+      18px;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 1. HEADER
+   *
+   * While Mega Menu is open the actual Header becomes
+   * one subtle glass sheet over the Hero.
+   *
+   * This removes the white rectangle behind the tab.
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-page-blur-active
+  .header {
+
+    background:
+      rgba(255, 255, 255, 0.055) !important;
+
+    background-image:
+      none !important;
+
+    -webkit-backdrop-filter:
+      blur(4px)
+      saturate(104%)
+      brightness(1.005) !important;
+
+    backdrop-filter:
+      blur(4px)
+      saturate(104%)
+      brightness(1.005) !important;
+
+    border-bottom-color:
+      rgba(255, 255, 255, 0.22) !important;
+
+    box-shadow:
+      0 1px 0
+      rgba(255, 255, 255, 0.13) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 2. DISABLE 5N3 RECTANGULAR CUTOUT SURFACE
+   *
+   * This is the source of the square/rounded conflict.
+   *
+   * Runtime class may remain for now, but its pseudo
+   * surface no longer paints or masks anything.
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-page-blur-active
+  .header.mega-menu-header-cutout-active::before {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+
+    -webkit-mask-image:
+      none !important;
+
+    mask-image:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+  }
+
+
+  /*
+   * 5N3 previously makes the real Header transparent
+   * because ::before reconstructed the Header.
+   *
+   * Override that state with the new unified Header glass.
+   */
+
+  body.mega-menu-page-blur-active
+  .header.mega-menu-header-cutout-active {
+
+    background:
+      rgba(255, 255, 255, 0.055) !important;
+
+    background-image:
+      none !important;
+
+    -webkit-backdrop-filter:
+      blur(4px)
+      saturate(104%)
+      brightness(1.005) !important;
+
+    backdrop-filter:
+      blur(4px)
+      saturate(104%)
+      brightness(1.005) !important;
+
+    border-bottom:
+      1px solid
+      rgba(255, 255, 255, 0.22) !important;
+
+    box-shadow:
+      0 1px 0
+      rgba(255, 255, 255, 0.13) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 3. ACTIVE TAB
+   *
+   * Same glass as Mega Menu.
+   * Only the two TOP corners are rounded.
+   * Bottom becomes part of the panel.
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    background:
+      var(--mc-open-glass-bg) !important;
+
+    border:
+      1px solid
+      var(--mc-open-glass-border) !important;
+
+    border-bottom:
+      0 !important;
+
+    border-radius:
+      var(--mc-open-glass-radius)
+      var(--mc-open-glass-radius)
+      0
+      0 !important;
+
+    -webkit-backdrop-filter:
+      var(--mc-open-glass-blur) !important;
+
+    backdrop-filter:
+      var(--mc-open-glass-blur) !important;
+
+    box-shadow:
+      none !important;
+
+    transform:
+      translateY(1px) !important;
+
+    overflow:
+      visible !important;
+
+    z-index:
+      2120 !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 4. REMOVE ALL OLD TAB CONNECTOR ART
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::before,
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+
+    background:
+      none !important;
+
+    border:
+      0 !important;
+
+    box-shadow:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 5. MEGA MENU
+   *
+   * Identical glass recipe to the active Tab.
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    top:
+      calc(100% - 2px) !important;
+
+    margin-top:
+      0 !important;
+
+    background:
+      var(--mc-open-glass-bg) !important;
+
+    border:
+      1px solid
+      var(--mc-open-glass-border) !important;
+
+    border-radius:
+      var(--mc-open-glass-radius) !important;
+
+    -webkit-backdrop-filter:
+      var(--mc-open-glass-blur) !important;
+
+    backdrop-filter:
+      var(--mc-open-glass-blur) !important;
+
+    box-shadow:
+      0 24px 58px
+      rgba(19, 53, 37, 0.13) !important;
+
+    outline:
+      none !important;
+
+    overflow:
+      visible !important;
+
+    z-index:
+      2110 !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 6. REMOVE PANEL DECORATIVE PSEUDO ELEMENTS
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::before,
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 7. KEEP HEADER CONTENT SHARP
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-page-blur-active
+  .header-wrapper {
+
+    position:
+      relative;
+
+    z-index:
+      1;
+  }
+
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .nav-link,
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .submenu-toggle {
+
+    position:
+      relative;
+
+    z-index:
+      3;
+  }
+
+}
+
+/* PHASE-5N5-UNIFIED-OPEN-HEADER-GLASS-END */
+
+/* PHASE-5N6-LOCALIZED-ROUNDED-GLASS-START */
+
+/* =========================================================
+   LOCALIZED ROUNDED GLASS
+
+   NORMAL HEADER
+   = unchanged original Header surface
+
+   OPEN MEGA MENU
+   = only Active Tab + Mega Menu become glass
+
+   A rounded notch in the reconstructed Header surface
+   lets the Hero image reach only the active Tab.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * Shared Tab / Mega Menu glass recipe.
+   */
+
+  body.mega-menu-page-blur-active {
+
+    --mc-local-glass-bg:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.095) 0%,
+        rgba(248, 251, 249, 0.055) 48%,
+        rgba(238, 246, 241, 0.075) 100%
+      );
+
+    --mc-local-glass-border:
+      rgba(255, 255, 255, 0.48);
+
+    --mc-local-glass-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005);
+
+    --mc-local-glass-radius:
+      18px;
+  }
+
+
+  /*
+   * =======================================================
+   * 1. CANCEL PHASE 5N5 WHOLE-HEADER GLASS
+   * =======================================================
+   *
+   * The actual Header must be transparent only because
+   * ::before reconstructs the ORIGINAL Header surface.
+   *
+   * We are NOT displaying the whole Header as glass.
+   */
+
+  body.mega-menu-page-blur-active
+  .header.mega-menu-header-cutout-active {
+
+    background:
+      transparent !important;
+
+    background-image:
+      none !important;
+
+    box-shadow:
+      none !important;
+
+    border-bottom:
+      0 !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+  }
+
+
+  /*
+   * =======================================================
+   * 2. RECONSTRUCT ORIGINAL HEADER
+   *
+   * Use styles captured by 5N3 runtime.
+   *
+   * clip-path removes only the rounded Tab notch.
+   * =======================================================
+   */
+
+  body.mega-menu-page-blur-active
+  .header.mega-menu-header-cutout-active::before {
+
+    content:
+      "" !important;
+
+    display:
+      block !important;
+
+    position:
+      absolute !important;
+
+    inset:
+      0 !important;
+
+    z-index:
+      0 !important;
+
+    pointer-events:
+      none !important;
+
+
+    background:
+      var(
+        --mato-header-surface-background,
+        rgba(255,255,255,0.96)
+      ) !important;
+
+
+    box-shadow:
+      var(
+        --mato-header-surface-box-shadow,
+        none
+      ) !important;
+
+
+    border-bottom:
+      var(
+        --mato-header-surface-border-bottom,
+        0
+      ) !important;
+
+
+    -webkit-backdrop-filter:
+      var(
+        --mato-header-surface-webkit-backdrop,
+        none
+      ) !important;
+
+    backdrop-filter:
+      var(
+        --mato-header-surface-backdrop,
+        none
+      ) !important;
+
+
+    /*
+     * IMPORTANT:
+     * no rectangular mask anymore.
+     */
+
+    -webkit-mask-image:
+      none !important;
+
+    mask-image:
+      none !important;
+
+
+    clip-path:
+      var(
+        --mato-header-surface-clip,
+        inset(0)
+      ) !important;
+  }
+
+
+  /*
+   * =======================================================
+   * 3. HEADER CONTENT REMAINS NORMAL
+   * =======================================================
+   */
+
+  body.mega-menu-page-blur-active
+  .header-wrapper {
+
+    position:
+      relative;
+
+    z-index:
+      1;
+  }
+
+
+  /*
+   * =======================================================
+   * 4. ACTIVE TAB ONLY
+   * =======================================================
+   */
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    background:
+      var(--mc-local-glass-bg) !important;
+
+    border:
+      1px solid
+      var(--mc-local-glass-border) !important;
+
+    border-bottom:
+      0 !important;
+
+    border-radius:
+      var(--mc-local-glass-radius)
+      var(--mc-local-glass-radius)
+      0
+      0 !important;
+
+    -webkit-backdrop-filter:
+      var(--mc-local-glass-filter) !important;
+
+    backdrop-filter:
+      var(--mc-local-glass-filter) !important;
+
+    box-shadow:
+      none !important;
+
+    transform:
+      translateY(1px) !important;
+
+    overflow:
+      visible !important;
+
+    z-index:
+      2120 !important;
+  }
+
+
+  /*
+   * Remove every historical connector visual.
+   */
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::before,
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+
+    border:
+      0 !important;
+
+    background:
+      none !important;
+
+    box-shadow:
+      none !important;
+  }
+
+
+  /*
+   * =======================================================
+   * 5. MEGA MENU CARD
+   * =======================================================
+   *
+   * Exact same glass recipe as Tab.
+   */
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    top:
+      calc(100% - 2px) !important;
+
+    margin-top:
+      0 !important;
+
+    background:
+      var(--mc-local-glass-bg) !important;
+
+    border:
+      1px solid
+      var(--mc-local-glass-border) !important;
+
+    border-radius:
+      var(--mc-local-glass-radius) !important;
+
+    -webkit-backdrop-filter:
+      var(--mc-local-glass-filter) !important;
+
+    backdrop-filter:
+      var(--mc-local-glass-filter) !important;
+
+    box-shadow:
+      0 24px 58px
+      rgba(19, 53, 37, 0.13) !important;
+
+    outline:
+      none !important;
+
+    overflow:
+      visible !important;
+
+    z-index:
+      2110 !important;
+  }
+
+
+  /*
+   * Remove historical decorative shoulders.
+   */
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::before,
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+  }
+
+
+  /*
+   * Keep Tab content sharp.
+   */
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .nav-link,
+
+  body.mega-menu-page-blur-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .submenu-toggle {
+
+    position:
+      relative;
+
+    z-index:
+      3;
+  }
+
+}
+
+/* PHASE-5N6-LOCALIZED-ROUNDED-GLASS-END */
+
+/* PHASE-5N7-DEDICATED-TAB-GLASS-START */
+
+/* =========================================================
+   DEDICATED HERO-THROUGH TAB GLASS
+
+   Header:
+   stays on its normal reconstructed surface.
+
+   Active Tab:
+   its own CSS background becomes transparent.
+
+   #mega-menu-tab-glass-layer:
+   provides the actual glass and samples the Hero/page
+   directly through the rounded Header notch.
+
+   Mega Menu:
+   remains the existing Hero-through glass card.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * -------------------------------------------------------
+   * BODY-LEVEL TAB GLASS
+   * -------------------------------------------------------
+   */
+
+  #mega-menu-tab-glass-layer {
+
+    position:
+      fixed;
+
+    left:
+      var(--tab-glass-left, 0px);
+
+    top:
+      var(--tab-glass-top, 0px);
+
+    width:
+      var(--tab-glass-width, 0px);
+
+    height:
+      var(--tab-glass-height, 0px);
+
+    z-index:
+      2050;
+
+    display:
+      block;
+
+    opacity:
+      0;
+
+    visibility:
+      hidden;
+
+    pointer-events:
+      none;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.48);
+
+    border-bottom:
+      0;
+
+    border-radius:
+      18px 18px 0 0;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.085) 0%,
+        rgba(248, 251, 249, 0.045) 48%,
+        rgba(238, 246, 241, 0.065) 100%
+      );
+
+    -webkit-backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005);
+
+    backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005);
+
+    box-shadow:
+      none;
+
+    transition:
+      opacity 100ms ease;
+  }
+
+
+  body.mega-menu-tab-glass-active
+  #mega-menu-tab-glass-layer {
+
+    opacity:
+      1;
+
+    visibility:
+      visible;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * ACTIVE TAB
+   *
+   * Tab element itself must no longer paint a white/glass
+   * backdrop. It only carries text / chevron / border.
+   *
+   * Glass is supplied by body-level layer behind it.
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    background:
+      transparent !important;
+
+    background-image:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+
+    box-shadow:
+      none !important;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.48) !important;
+
+    border-bottom:
+      0 !important;
+
+    border-radius:
+      18px 18px 0 0 !important;
+
+    z-index:
+      2120 !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * REMOVE EVERY HISTORICAL TAB CONNECTOR
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::before,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+
+    background:
+      none !important;
+
+    border:
+      0 !important;
+
+    box-shadow:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * MEGA MENU
+   *
+   * Match Tab glass recipe exactly.
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.085) 0%,
+        rgba(248, 251, 249, 0.045) 48%,
+        rgba(238, 246, 241, 0.065) 100%
+      ) !important;
+
+    -webkit-backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+
+    backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.48) !important;
+
+    box-shadow:
+      0 24px 58px
+      rgba(19, 53, 37, 0.13) !important;
+  }
+
+
+  /*
+   * Tab text / chevron must remain above dedicated glass.
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .nav-link,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .submenu-toggle {
+
+    position:
+      relative;
+
+    z-index:
+      3;
+  }
+
+}
+
+/* PHASE-5N7-DEDICATED-TAB-GLASS-END */
+
+/* PHASE-5N7A-TAB-STACKING-FIX-START */
+
+/* =========================================================
+   DEDICATED TAB GLASS â€” STACKING CORRECTION
+
+   Layer order:
+
+   Mega Menu / Header content
+           â†‘
+       Header 2000
+           â†‘
+   Tab glass 1990
+           â†‘
+       Page / Hero
+           â†‘
+   Global page blur 900
+
+   The glass is therefore visible through the Header notch,
+   but it can no longer cover the navigation text.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  #mega-menu-tab-glass-layer {
+
+    /*
+     * MUST stay below Header stacking context.
+     */
+    z-index:
+      1990 !important;
+  }
+
+
+  /*
+   * Header remains above the dedicated glass.
+   */
+  body.mega-menu-tab-glass-active
+  .header {
+
+    z-index:
+      2000 !important;
+  }
+
+
+  /*
+   * Actual navigation row/text remains completely sharp.
+   */
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row {
+
+    position:
+      relative;
+
+    z-index:
+      2 !important;
+  }
+
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .nav-link,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .submenu-toggle {
+
+    position:
+      relative;
+
+    z-index:
+      3 !important;
+
+    filter:
+      none !important;
+
+    -webkit-filter:
+      none !important;
+  }
+
+
+  /*
+   * Mega Menu remains above Header glass/tab glass.
+   */
+  body.mega-menu-tab-glass-active
+  .has-submenu
+  > .mega-menu {
+
+    z-index:
+      2100 !important;
+  }
+
+}
+
+/* PHASE-5N7A-TAB-STACKING-FIX-END */
+
+/* PHASE-5N9-PREMIUM-SEAM-START */
+
+/* =========================================================
+   PREMIUM TAB â†” MEGA MENU SEAM
+
+   No architecture changes.
+
+   Purpose:
+   - same radius language
+   - smoother shoulder transition
+   - hide top-border segment directly under Tab
+   - remove visible double edge
+   - preserve Hero-through glass
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  body.mega-menu-tab-glass-active {
+
+    --mc-premium-join-radius:
+      16px;
+
+    --mc-premium-join-border:
+      rgba(255, 255, 255, 0.44);
+
+    --mc-premium-seam-fill:
+      rgba(246, 250, 247, 0.075);
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 1. BODY-LEVEL TAB GLASS
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-tab-glass-active
+  #mega-menu-tab-glass-layer {
+
+    border-color:
+      var(--mc-premium-join-border) !important;
+
+    border-bottom:
+      0 !important;
+
+    border-radius:
+      var(--mc-premium-join-radius)
+      var(--mc-premium-join-radius)
+      0
+      0 !important;
+
+    /*
+     * Tiny downward extension creates optical continuity
+     * without making the tab visibly taller.
+     */
+    height:
+      calc(
+        var(--tab-glass-height, 0px)
+        + 3px
+      ) !important;
+
+    box-shadow:
+      inset 0 1px 0
+      rgba(255, 255, 255, 0.16) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 2. ACTIVE TAB
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    border-color:
+      var(--mc-premium-join-border) !important;
+
+    border-bottom:
+      0 !important;
+
+    border-radius:
+      var(--mc-premium-join-radius)
+      var(--mc-premium-join-radius)
+      0
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    /*
+     * Slightly deeper overlap into panel.
+     */
+    transform:
+      translateY(2px) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 3. MEGA MENU POSITION
+   *
+   * Move panel 2px farther upward.
+   * This removes the optical gap at the connection.
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    top:
+      calc(100% - 4px) !important;
+
+    margin-top:
+      0 !important;
+
+    border-color:
+      var(--mc-premium-join-border) !important;
+
+    border-radius:
+      var(--mc-premium-join-radius) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 4. PREMIUM SEAM ERASER
+   *
+   * Re-enable only ONE tiny pseudo surface.
+   *
+   * It sits above the Mega Menu top border and covers
+   * only the border segment directly under the active Tab.
+   *
+   * No decorative line, no extra rounded card.
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row::after,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row::after {
+
+    content:
+      "" !important;
+
+    display:
+      block !important;
+
+    position:
+      absolute !important;
+
+    left:
+      1px !important;
+
+    right:
+      1px !important;
+
+    bottom:
+      -6px !important;
+
+    height:
+      8px !important;
+
+    z-index:
+      1 !important;
+
+    pointer-events:
+      none !important;
+
+    visibility:
+      visible !important;
+
+    opacity:
+      1 !important;
+
+    background:
+      var(--mc-premium-seam-fill) !important;
+
+    border:
+      0 !important;
+
+    border-radius:
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    -webkit-backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+
+    backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 5. KEEP ::before DISABLED
+   *
+   * Only ::after is allowed to act as seam eraser.
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::before {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 6. REMOVE PANEL SHOULDER ART
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::before,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 7. CONTENT ABOVE SEAM
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .nav-link,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .submenu-toggle {
+
+    position:
+      relative;
+
+    z-index:
+      3 !important;
+  }
+
+}
+
+/* PHASE-5N9-PREMIUM-SEAM-END */
+
+/* PHASE-5N10-BEZIER-SEAM-CSS-START */
+
+@media (min-width: 769px) {
+
+  /*
+   * Let geometry, not decorative pseudo elements,
+   * define the premium join.
+   *
+   * 5N9 seam eraser is no longer needed after the
+   * true Bezier cutout is active.
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::before,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+
+    background:
+      none !important;
+
+    border:
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+  }
+
+
+  /*
+   * Minimal physical overlap.
+   *
+   * Enough to remove a 1px seam, but not enough to
+   * distort the shoulder curves.
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    top:
+      calc(100% - 3px) !important;
+  }
+
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    transform:
+      translateY(1px) !important;
+  }
+
+
+  /*
+   * Keep both surfaces on exactly the same radius.
+   */
+
+  body.mega-menu-tab-glass-active
+  #mega-menu-tab-glass-layer {
+
+    border-radius:
+      18px 18px 0 0 !important;
+
+    box-shadow:
+      none !important;
+  }
+
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    border-radius:
+      18px !important;
+  }
+
+}
+
+/* PHASE-5N10-BEZIER-SEAM-CSS-END */
+
+/* PHASE-5N10A-SINGLE-SEAM-START */
+
+/* =========================================================
+   SINGLE VISUAL SEAM
+
+   The Bezier Header cutout owns the silhouette.
+
+   The Tab glass must NOT draw another lower/side seam
+   where it meets the Mega Menu.
+
+   This removes the competing:
+     - square white corner
+     - curved white corner
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * TAB GLASS
+   *
+   * Keep only the premium top outline.
+   * Do not allow its lower corners to create a second
+   * visible border beside the Bezier opening.
+   */
+
+  body.mega-menu-tab-glass-active
+  #mega-menu-tab-glass-layer {
+
+    border:
+      0 !important;
+
+    border-top:
+      1px solid
+      rgba(255, 255, 255, 0.40) !important;
+
+    border-radius:
+      18px 18px 0 0 !important;
+
+    box-shadow:
+      none !important;
+
+    /*
+     * Extend underneath panel by a few pixels so the
+     * two glass surfaces optically become one surface.
+     */
+    height:
+      calc(
+        var(--tab-glass-height, 0px)
+        + 5px
+      ) !important;
+  }
+
+
+  /*
+   * ACTIVE NAV ROW
+   *
+   * The DOM tab itself must not paint a competing border.
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    border:
+      0 !important;
+
+    outline:
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    background:
+      transparent !important;
+
+    border-radius:
+      18px 18px 0 0 !important;
+  }
+
+
+  /*
+   * MEGA MENU
+   *
+   * Mega Menu keeps the exterior card outline, but its
+   * TOP border is removed because the connected Header
+   * silhouette already defines that edge.
+   *
+   * This is the key part: there is no longer a horizontal
+   * border trying to intersect the Tab shoulders.
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.44) !important;
+
+    border-top:
+      0 !important;
+
+    border-radius:
+      0 0 18px 18px !important;
+
+    top:
+      calc(100% - 3px) !important;
+
+    box-shadow:
+      0 24px 58px
+      rgba(19, 53, 37, 0.13) !important;
+  }
+
+
+  /*
+   * No pseudo-element is allowed to redraw the join.
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::before,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::after,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::before,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+
+    border:
+      0 !important;
+
+    background:
+      none !important;
+
+    box-shadow:
+      none !important;
+  }
+
+
+  /*
+   * Preserve sharp foreground content.
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .nav-link,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .submenu-toggle {
+
+    position:
+      relative;
+
+    z-index:
+      3 !important;
+
+    filter:
+      none !important;
+  }
+
+}
+
+/* PHASE-5N10A-SINGLE-SEAM-END */
+
+/* PHASE-5N10B-SINGLE-OUTLINE-START */
+
+/* =========================================================
+   FINAL TAB OUTLINE CLEANUP
+
+   The Header Bezier cutout already defines the premium
+   outer silhouette.
+
+   Therefore:
+   - Tab glass draws NO border.
+   - Nav row draws NO border.
+   - No pseudo element redraws the join.
+   - Mega Menu retains only its outer body border.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * -------------------------------------------------------
+   * DEDICATED TAB GLASS
+   *
+   * Remove the second visible curve completely.
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-tab-glass-active
+  #mega-menu-tab-glass-layer {
+
+    border:
+      0 !important;
+
+    border-top:
+      0 !important;
+
+    border-right:
+      0 !important;
+
+    border-bottom:
+      0 !important;
+
+    border-left:
+      0 !important;
+
+    outline:
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    border-radius:
+      18px 18px 0 0 !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * REAL NAV TAB
+   *
+   * Text container must not draw another outline either.
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    border:
+      0 !important;
+
+    outline:
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    background:
+      transparent !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * REMOVE ALL JOIN PSEUDO ELEMENTS
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::before,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::after,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::before,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+
+    border:
+      0 !important;
+
+    outline:
+      0 !important;
+
+    background:
+      none !important;
+
+    box-shadow:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * MEGA MENU BODY
+   *
+   * Keep only the card's external lower/side outline.
+   * Top edge is owned visually by the connected
+   * Header/Tab silhouette.
+   * -------------------------------------------------------
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.40) !important;
+
+    border-top:
+      0 !important;
+
+    border-radius:
+      0 0 18px 18px !important;
+
+    outline:
+      0 !important;
+  }
+
+
+  /*
+   * Keep text and chevron sharp.
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .nav-link,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .submenu-toggle {
+
+    position:
+      relative;
+
+    z-index:
+      3 !important;
+
+    filter:
+      none !important;
+  }
+
+}
+
+/* PHASE-5N10B-SINGLE-OUTLINE-END */
+
+/* PHASE-5N10C-EXACT-CURVE-CSS-START */
+
+/* =========================================================
+   EXACT TAB / HEADER CURVE SYNCHRONIZATION
+
+   The body-level Tab glass now receives its:
+   - left
+   - top
+   - width
+   - height
+   - radius
+
+   directly from the SAME geometry used to build the
+   Header Bezier cutout.
+
+   No independent visual approximation remains.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  body.mega-menu-tab-glass-active
+  #mega-menu-tab-glass-layer.mega-menu-tab-glass-synced {
+
+    /*
+     * Use runtime geometry exactly.
+     */
+
+    left:
+      var(--tab-glass-left) !important;
+
+    top:
+      var(--tab-glass-top) !important;
+
+    width:
+      var(--tab-glass-width) !important;
+
+    height:
+      var(--tab-glass-height) !important;
+
+
+    /*
+     * EXACT SAME radius as Header Bezier.
+     */
+
+    border-radius:
+      var(--tab-glass-radius, 18px)
+      var(--tab-glass-radius, 18px)
+      0
+      0 !important;
+
+
+    /*
+     * Absolutely no independent edge painting.
+     */
+
+    border:
+      0 !important;
+
+    outline:
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+
+    /*
+     * Keep only the glass itself.
+     */
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.085) 0%,
+        rgba(248, 251, 249, 0.045) 48%,
+        rgba(238, 246, 241, 0.065) 100%
+      ) !important;
+
+    -webkit-backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+
+    backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+  }
+
+
+  /*
+   * Real navigation row remains only a foreground carrier.
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    background:
+      transparent !important;
+
+    border:
+      0 !important;
+
+    outline:
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    /*
+     * Remove independent radius painting.
+     * The dedicated glass owns the visual curve.
+     */
+    border-radius:
+      0 !important;
+  }
+
+
+  /*
+   * No pseudo element may create another edge.
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::before,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+
+    border:
+      0 !important;
+
+    background:
+      none !important;
+
+    box-shadow:
+      none !important;
+  }
+
+
+  /*
+   * Mega Menu slightly overlaps the synchronized glass.
+   * No visible top border.
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    top:
+      calc(100% - 3px) !important;
+
+    border-top:
+      0 !important;
+
+    outline:
+      0 !important;
+  }
+
+}
+
+/* PHASE-5N10C-EXACT-CURVE-CSS-END */
+
+/* PHASE-5N10D-SINGLE-CURVE-SOURCE-START */
+
+/* =========================================================
+   SINGLE CURVE SOURCE
+
+   IMPORTANT ARCHITECTURE:
+
+   Header Bezier Cutout
+       = the ONLY visible curve.
+
+   Dedicated Tab Glass
+       = deliberately oversized rectangle.
+       = no radius
+       = no border
+       = no outline
+       = no curved clipping edge
+
+   The normal Header surface hides the oversized glass
+   everywhere except inside the Bezier opening.
+
+   Therefore only ONE anti-aliased curve can be visible.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * =======================================================
+   * 1. TAB GLASS BECOMES SHAPELESS
+   * =======================================================
+   *
+   * Previous versions gave this layer the same rounded
+   * shape as the Header notch.
+   *
+   * Even with exact coordinates, two independent
+   * anti-aliased edges remained visible.
+   *
+   * Remove that second edge completely.
+   */
+
+  body.mega-menu-tab-glass-active
+  #mega-menu-tab-glass-layer {
+
+    /*
+     * Oversize horizontally.
+     *
+     * Header surface above it will hide the extra area.
+     */
+    left:
+      calc(
+        var(--tab-glass-left, 0px)
+        - 10px
+      ) !important;
+
+    width:
+      calc(
+        var(--tab-glass-width, 0px)
+        + 20px
+      ) !important;
+
+
+    /*
+     * Oversize slightly upward/downward too.
+     */
+    top:
+      calc(
+        var(--tab-glass-top, 0px)
+        - 6px
+      ) !important;
+
+    height:
+      calc(
+        var(--tab-glass-height, 0px)
+        + 16px
+      ) !important;
+
+
+    /*
+     * CRITICAL:
+     *
+     * No geometric shape on Glass itself.
+     */
+    border:
+      0 !important;
+
+    outline:
+      0 !important;
+
+    border-radius:
+      0 !important;
+
+    clip-path:
+      none !important;
+
+    -webkit-clip-path:
+      none !important;
+
+    box-shadow:
+      none !important;
+
+
+    /*
+     * Glass effect remains unchanged.
+     */
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.085) 0%,
+        rgba(248, 251, 249, 0.045) 48%,
+        rgba(238, 246, 241, 0.065) 100%
+      ) !important;
+
+    -webkit-backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+
+    backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+  }
+
+
+  /*
+   * =======================================================
+   * 2. ACTIVE TAB IS FOREGROUND ONLY
+   * =======================================================
+   *
+   * Absolutely no shape/border/background on this DOM
+   * element. It carries only text + chevron.
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    background:
+      transparent !important;
+
+    background-image:
+      none !important;
+
+    border:
+      0 !important;
+
+    outline:
+      0 !important;
+
+    border-radius:
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+  }
+
+
+  /*
+   * =======================================================
+   * 3. ZERO JOIN DECORATION
+   * =======================================================
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::before,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::after,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::before,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+
+    border:
+      0 !important;
+
+    outline:
+      0 !important;
+
+    background:
+      none !important;
+
+    box-shadow:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+  }
+
+
+  /*
+   * =======================================================
+   * 4. MEGA MENU BODY
+   * =======================================================
+   *
+   * Keep panel side/bottom outline.
+   *
+   * Top edge remains open because the Header Bezier
+   * silhouette owns the upper connected shape.
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    top:
+      calc(100% - 3px) !important;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.40) !important;
+
+    border-top:
+      0 !important;
+
+    /*
+     * Only the bottom corners belong to the card itself.
+     */
+    border-radius:
+      0 0 18px 18px !important;
+
+    outline:
+      0 !important;
+  }
+
+
+  /*
+   * =======================================================
+   * 5. SHARP TAB CONTENT
+   * =======================================================
+   */
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .nav-link,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row
+  > .submenu-toggle {
+
+    position:
+      relative;
+
+    z-index:
+      3 !important;
+
+    filter:
+      none !important;
+
+    -webkit-filter:
+      none !important;
+  }
+
+}
+
+/* PHASE-5N10D-SINGLE-CURVE-SOURCE-END */
+
+/* PHASE-5N11-RUNTIME-AUTHORITY-START */
+
+/*
+ * Runtime audit proved that historical rules were still
+ * painting their own tab and panel contours.
+ *
+ * Architecture from this point:
+ *
+ * Header ::before clip-path
+ *      = ONE authoritative upper silhouette.
+ *
+ * #mega-menu-tab-glass-layer
+ *      = glass only, never a visible border.
+ *
+ * .nav-link-row
+ *      = text / chevron only.
+ *
+ * .mega-menu
+ *      = glass body; its top edge is visually merged
+ *        underneath the Header silhouette.
+ */
+
+@media (min-width: 769px) {
+
+  /* =====================================================
+     1. ACTIVE TAB DOM MUST NOT PAINT A SECOND CARD
+     ===================================================== */
+
+  body.mega-menu-tab-glass-active
+  li.has-submenu.nav-mega:hover
+  > .nav-link-row,
+
+  body.mega-menu-tab-glass-active
+  li.has-submenu.nav-mega:focus-within
+  > .nav-link-row,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):hover
+  > .nav-link-row,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu):focus-within
+  > .nav-link-row {
+
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+
+    border: 0 !important;
+    border-top: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+
+    border-radius: 0 !important;
+
+    outline: 0 !important;
+    box-shadow: none !important;
+
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+
+    filter: none !important;
+  }
+
+
+  /* =====================================================
+     2. REMOVE ALL HISTORICAL TAB JOIN PSEUDOS
+     ===================================================== */
+
+  body.mega-menu-tab-glass-active
+  li.has-submenu.nav-mega
+  > .nav-link-row::before,
+
+  body.mega-menu-tab-glass-active
+  li.has-submenu.nav-mega
+  > .nav-link-row::after,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::before,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .nav-link-row::after {
+
+    content: none !important;
+    display: none !important;
+
+    background: none !important;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+
+  /* =====================================================
+     3. DEDICATED TAB GLASS = EFFECT ONLY
+     ===================================================== */
+
+  body.mega-menu-tab-glass-active
+  #mega-menu-tab-glass-layer {
+
+    /*
+     * Keep the glass slightly beyond the measured tab.
+     * Header clip-path supplies the visible contour.
+     */
+    left:
+      calc(
+        var(--tab-glass-left, 0px) - 2px
+      ) !important;
+
+    top:
+      calc(
+        var(--tab-glass-top, 0px) - 2px
+      ) !important;
+
+    width:
+      calc(
+        var(--tab-glass-width, 0px) + 4px
+      ) !important;
+
+    height:
+      calc(
+        var(--tab-glass-height, 0px) + 8px
+      ) !important;
+
+    border: 0 !important;
+    outline: 0 !important;
+
+    /*
+     * No independently visible contour.
+     */
+    border-radius: 0 !important;
+
+    box-shadow: none !important;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.085) 0%,
+        rgba(248, 251, 249, 0.045) 48%,
+        rgba(238, 246, 241, 0.065) 100%
+      ) !important;
+
+    -webkit-backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+
+    backdrop-filter:
+      blur(4px)
+      saturate(106%)
+      brightness(1.005) !important;
+  }
+
+
+  /* =====================================================
+     4. MEGA MENU BODY â€” REMOVE COMPETING TOP CONTOUR
+     ===================================================== */
+
+  body.mega-menu-tab-glass-active
+  li.has-submenu.nav-mega
+  > .mega-menu,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu {
+
+    /*
+     * Audit:
+     * panel top = 65px
+     * header bottom = 88px
+     *
+     * This overlap is useful. Keep the panel behind the
+     * Header silhouette so the join has no independent
+     * horizontal seam.
+     */
+
+    border-top: 0 !important;
+
+    /*
+     * Top corners must not generate another shoulder.
+     */
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+
+    border-bottom-left-radius: 18px !important;
+    border-bottom-right-radius: 18px !important;
+
+    outline: 0 !important;
+  }
+
+
+  /* =====================================================
+     5. REMOVE MEGA MENU TOP JOIN PSEUDOS
+     ===================================================== */
+
+  body.mega-menu-tab-glass-active
+  li.has-submenu.nav-mega
+  > .mega-menu::before,
+
+  body.mega-menu-tab-glass-active
+  li.has-submenu.nav-mega
+  > .mega-menu::after,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::before,
+
+  body.mega-menu-tab-glass-active
+  .has-submenu:has(> .mega-menu)
+  > .mega-menu::after {
+
+    content: none !important;
+    display: none !important;
+
+    background: none !important;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+
+
+  /* =====================================================
+     6. TEXT / CHEVRON REMAIN SHARP
+     ===================================================== */
+
+  body.mega-menu-tab-glass-active
+  li.has-submenu.nav-mega
+  > .nav-link-row
+  > .nav-link,
+
+  body.mega-menu-tab-glass-active
+  li.has-submenu.nav-mega
+  > .nav-link-row
+  > .submenu-toggle {
+
+    position: relative;
+    z-index: 3 !important;
+
+    opacity: 1 !important;
+
+    filter: none !important;
+    -webkit-filter: none !important;
+
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+}
+
+/* PHASE-5N11-RUNTIME-AUTHORITY-END */
+
+/* PHASE-5N16-SOLID-HEADER-START */
+
+/* =========================================================
+   SOLID HEADER â€” NO GLASS
+
+   Header:
+   - opaque warm-white surface
+   - no transparency
+   - no backdrop blur
+   - no saturation filter
+   - no glass shadow
+
+   Mega Menu / Tab:
+   - unchanged
+   - keeps Hero-through glass
+
+   When Mega Menu is active:
+   - real Header stays transparent
+   - Header ::before reconstructs SOLID Header
+   - existing connected cutout remains active
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   NORMAL HEADER
+   --------------------------------------------------------- */
+
+html body
+.header:not(.mega-menu-header-cutout-active) {
+
+  background:
+    #fffdf8 !important;
+
+  background-color:
+    #fffdf8 !important;
+
+  background-image:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+
+  filter:
+    none !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+/* ---------------------------------------------------------
+   ACTIVE MEGA MENU HEADER
+
+   Important:
+   Keep the real Header transparent.
+   The solid surface is reconstructed by ::before,
+   allowing the existing Tab/Mega cutout to remain open.
+   --------------------------------------------------------- */
+
+html body
+.header.mega-menu-header-cutout-active {
+
+  background:
+    transparent !important;
+
+  background-color:
+    transparent !important;
+
+  background-image:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+
+  filter:
+    none !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+/* ---------------------------------------------------------
+   RECONSTRUCTED HEADER SURFACE
+
+   This replaces the old:
+     rgba(...0.78) + blur(...)
+
+   with a truly opaque Header.
+
+   DO NOT change clip-path here.
+   Existing Mega Menu cutout remains intact.
+   --------------------------------------------------------- */
+
+html body
+.header.mega-menu-header-cutout-active::before {
+
+  background:
+    #fffdf8 !important;
+
+  background-color:
+    #fffdf8 !important;
+
+  background-image:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+
+  filter:
+    none !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+/* ---------------------------------------------------------
+   SCROLLED HEADER
+
+   Prevent historical glass rules from returning after
+   scrolling.
+   --------------------------------------------------------- */
+
+html body
+.header.scrolled:not(.mega-menu-header-cutout-active) {
+
+  background:
+    #fffdf8 !important;
+
+  background-color:
+    #fffdf8 !important;
+
+  background-image:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+
+  filter:
+    none !important;
+}
+
+
+/* ---------------------------------------------------------
+   DESKTOP MEGA MENU OPEN STATE
+
+   Protect Header from older whole-header glass rules.
+   --------------------------------------------------------- */
+
+@media (min-width: 769px) {
+
+  html body.mega-menu-page-blur-active
+  .header.mega-menu-header-cutout-active {
+
+    background:
+      transparent !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+  }
+
+
+  html body.mega-menu-page-blur-active
+  .header.mega-menu-header-cutout-active::before {
+
+    background:
+      #fffdf8 !important;
+
+    background-image:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+
+    filter:
+      none !important;
+  }
+
+
+  html body.mega-menu-unified-glass-active
+  .header.mega-menu-header-cutout-active::before {
+
+    background:
+      #fffdf8 !important;
+
+    background-image:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+
+    filter:
+      none !important;
+  }
+
+}
+
+/* PHASE-5N16-SOLID-HEADER-END */
+
+/* PHASE-5N16A-PERMANENT-NO-GLASS-START */
+
+/* =========================================================
+   PERMANENT HEADER NO-GLASS AUTHORITY
+
+   Header must NEVER become glass again.
+
+   Covered states:
+   - normal
+   - scrolled
+   - hover / focus
+   - Mega Menu open
+   - unified glass active
+   - page blur active
+   - Header ::before / ::after
+   - Header wrapper
+
+   Important:
+   Mega Menu / Tab unified glass is NOT changed.
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. ALL NORMAL / SCROLLED HEADER STATES
+   --------------------------------------------------------- */
+
+html body .header,
+html body .header.scrolled,
+html body .header:hover,
+html body .header:focus-within {
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+
+  filter:
+    none !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+/* ---------------------------------------------------------
+   2. NORMAL HEADER MUST BE SOLID
+   --------------------------------------------------------- */
+
+html body
+.header:not(.mega-menu-header-cutout-active),
+
+html body
+.header.scrolled:not(.mega-menu-header-cutout-active) {
+
+  background:
+    #fffdf8 !important;
+
+  background-color:
+    #fffdf8 !important;
+
+  background-image:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+
+  filter:
+    none !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+/* ---------------------------------------------------------
+   3. ACTIVE HEADER BODY STAYS TRANSPARENT
+
+   The Header itself must not paint glass.
+   ::before owns the solid Header surface so the connected
+   Mega Menu cutout can stay open.
+   --------------------------------------------------------- */
+
+html body
+.header.mega-menu-header-cutout-active,
+
+html body.mega-menu-page-blur-active
+.header.mega-menu-header-cutout-active,
+
+html body.mega-menu-tab-glass-active
+.header.mega-menu-header-cutout-active,
+
+html body.mega-menu-unified-glass-active
+.header.mega-menu-header-cutout-active {
+
+  background:
+    transparent !important;
+
+  background-color:
+    transparent !important;
+
+  background-image:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+
+  filter:
+    none !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+/* ---------------------------------------------------------
+   4. RECONSTRUCTED HEADER SURFACE = SOLID ONLY
+
+   CRITICAL:
+   preserve existing clip-path.
+   Do NOT set clip-path here.
+   --------------------------------------------------------- */
+
+html body
+.header.mega-menu-header-cutout-active::before,
+
+html body.mega-menu-page-blur-active
+.header.mega-menu-header-cutout-active::before,
+
+html body.mega-menu-tab-glass-active
+.header.mega-menu-header-cutout-active::before,
+
+html body.mega-menu-unified-glass-active
+.header.mega-menu-header-cutout-active::before {
+
+  background:
+    #fffdf8 !important;
+
+  background-color:
+    #fffdf8 !important;
+
+  background-image:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+
+  filter:
+    none !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+/* ---------------------------------------------------------
+   5. HEADER ::after MUST NEVER CREATE GLASS
+   --------------------------------------------------------- */
+
+html body .header::after,
+html body .header.scrolled::after,
+html body
+.header.mega-menu-header-cutout-active::after {
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+
+  filter:
+    none !important;
+
+  box-shadow:
+    none !important;
+
+  background-image:
+    none !important;
+}
+
+
+/* ---------------------------------------------------------
+   6. HEADER WRAPPER MUST NEVER BECOME GLASS
+
+   Some historical Header treatments can live on wrapper
+   instead of Header itself, so lock this surface too.
+   --------------------------------------------------------- */
+
+html body .header .header-wrapper,
+html body .header.scrolled .header-wrapper,
+html body.mega-menu-page-blur-active
+.header .header-wrapper,
+html body.mega-menu-unified-glass-active
+.header .header-wrapper {
+
+  background:
+    transparent !important;
+
+  background-color:
+    transparent !important;
+
+  background-image:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+
+  filter:
+    none !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+/* ---------------------------------------------------------
+   7. DESKTOP FINAL AUTHORITY
+   --------------------------------------------------------- */
+
+@media (min-width: 769px) {
+
+  html body .header,
+  html body .header.scrolled {
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+
+    filter:
+      none !important;
+  }
+
+
+  html body
+  .header:not(.mega-menu-header-cutout-active) {
+
+    background:
+      #fffdf8 !important;
+  }
+
+
+  html body
+  .header.mega-menu-header-cutout-active::before {
+
+    background:
+      #fffdf8 !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+
+    filter:
+      none !important;
+  }
+
+}
+
+/* PHASE-5N16A-PERMANENT-NO-GLASS-END */
+
+
+/* PHASE-5N19-OWNERSHIP-HANDOFF-START */
+
+/*
+ * Desktop Mega Menu ownership contract.
+ *
+ * PHASE-5N17 in Header.astro is the single authority
+ * for pointer handoff between adjacent Mega Menus.
+ *
+ * During A -> gap -> B:
+ *
+ *   A remains visually active during the grace period.
+ *   B takes ownership directly when entered.
+ *   Header / unified glass must not enter a NONE state.
+ *
+ * Do not add CSS :has() gap-hiding logic here.
+ * Do not hide the unified glass merely because no
+ * submenu is hovered for a few milliseconds.
+ */
+
+/* PHASE-5N19-OWNERSHIP-HANDOFF-END */
+
+/* PHASE-5N23A-OWNER-TAB-STATE-START */
+
+@media (min-width: 769px) {
+
+  .has-submenu.mega-menu-handoff-owner
+  > .nav-link-row
+  > .submenu-toggle
+  .nav-chevron {
+
+    opacity: 1;
+
+    transform:
+      translateY(-1px)
+      rotate(180deg);
+  }
+
+}
+
+/* PHASE-5N23A-OWNER-TAB-STATE-END */
+
+/* PHASE-5N26A-OWNER-CONTENT-START */
+
+@media (min-width: 769px) {
+
+  /*
+   * The JavaScript owner is the visibility authority.
+   *
+   * When pointer temporarily crosses a small physical
+   * space between top-level tabs, CSS :hover can disappear
+   * even though JavaScript intentionally preserves the
+   * Mega Menu owner.
+   *
+   * Keep the real owner panel visible for exactly the same
+   * lifetime as .mega-menu-handoff-owner.
+   */
+
+
+  .nav-menu
+  .has-submenu.mega-menu-handoff-owner
+  > .submenu-panel {
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+
+    pointer-events: auto !important;
+
+    transform:
+      translateY(0)
+      scale(1) !important;
+  }
+
+
+  /*
+   * Mega Menu panels use horizontal centering.
+   * Preserve that geometry while the owner survives
+   * the pointer gap.
+   */
+
+  .nav-menu
+  .has-submenu.mega-menu-handoff-owner
+  > .submenu-panel.mega-menu {
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+
+    pointer-events: auto !important;
+
+    transform:
+      translateX(-50%)
+      translateY(0)
+      scale(1) !important;
+  }
+
+}
+
+/* PHASE-5N26A-OWNER-CONTENT-END */
+
+/* PHASE-5N35A-INSTANT-NAV-VISUAL-EXIT-START */
+
+/*
+ * =========================================================
+ * INSTANT MEGA -> NORMAL HEADER VISUAL EXIT
+ * =========================================================
+ *
+ * JS ownership may remain active briefly after the pointer
+ * physically reaches Home or another direct navigation item.
+ *
+ * Do not wait for JS cleanup for visual correctness.
+ *
+ * CSS :hover is browser-native and reacts immediately.
+ */
+
+@media (min-width: 769px) {
+
+  /*
+   * -------------------------------------------------------
+   * CASE 1:
+   * MEGA MENU -> DIRECT TOP-LEVEL NAV
+   *
+   * Example:
+   * Cambodian Cashew -> Home
+   * -------------------------------------------------------
+   */
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header {
+
+    background:
+      #fffdf8 !important;
+
+    background-color:
+      #fffdf8 !important;
+
+    background-image:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+
+    filter:
+      none !important;
+
+    box-shadow:
+      none !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * Reconstruct the WHOLE Header even if stale
+   * mega-menu-header-cutout-active still exists.
+   */
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header::before {
+
+    content:
+      "" !important;
+
+    position:
+      absolute !important;
+
+    inset:
+      0 !important;
+
+    background:
+      #fffdf8 !important;
+
+    background-color:
+      #fffdf8 !important;
+
+    background-image:
+      none !important;
+
+    -webkit-clip-path:
+      none !important;
+
+    clip-path:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+
+    filter:
+      none !important;
+
+    box-shadow:
+      none !important;
+
+    opacity:
+      1 !important;
+
+    visibility:
+      visible !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * Hide stale Mega visual layers while JavaScript performs
+   * its final owner/state cleanup.
+   *
+   * These IDs may be runtime-created by Header.astro.
+   * They do NOT need to already exist in header.css.
+   */
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  #mato-unified-mega-glass,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  #mato-unified-mega-outline,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  #mega-menu-tab-glass-layer {
+
+    opacity:
+      0 !important;
+
+    visibility:
+      hidden !important;
+
+    filter:
+      none !important;
+
+    box-shadow:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * CASE 2:
+   * POINTER IS ON HEADER BUT OUTSIDE NAV-MENU
+   *
+   * Example:
+   * About -> blank Header area on the right.
+   *
+   * Give the Header its normal solid paint immediately.
+   * -------------------------------------------------------
+   */
+
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  .header {
+
+    background:
+      #fffdf8 !important;
+
+    background-color:
+      #fffdf8 !important;
+
+    background-image:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+
+    filter:
+      none !important;
+
+    transition:
+      none !important;
+  }
+
+
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  .header::before {
+
+    content:
+      "" !important;
+
+    position:
+      absolute !important;
+
+    inset:
+      0 !important;
+
+    background:
+      #fffdf8 !important;
+
+    background-color:
+      #fffdf8 !important;
+
+    background-image:
+      none !important;
+
+    -webkit-clip-path:
+      none !important;
+
+    clip-path:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+
+    filter:
+      none !important;
+
+    opacity:
+      1 !important;
+
+    visibility:
+      visible !important;
+
+    transition:
+      none !important;
+  }
+
+
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  #mato-unified-mega-glass,
+
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  #mato-unified-mega-outline,
+
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  #mega-menu-tab-glass-layer {
+
+    opacity:
+      0 !important;
+
+    visibility:
+      hidden !important;
+
+    transition:
+      none !important;
+  }
+
+}
+
+/* PHASE-5N35A-INSTANT-NAV-VISUAL-EXIT-END */
+
+/* PHASE-5N35B-RESTORE-LOGO-START */
+
+/*
+ * =========================================================
+ * RESTORE BRAND / LOGO DURING MEGA -> NORMAL NAV EXIT
+ * =========================================================
+ *
+ * Phase 5N35A restores the solid Header immediately when
+ * the pointer reaches Home/direct navigation.
+ *
+ * Mega Menu occlusion state may still survive briefly until
+ * JavaScript completes its cleanup. Historical occlusion
+ * rules can therefore keep the Header brand/logo hidden.
+ *
+ * During the direct-nav visual exit, the Header is already
+ * visually normal, so its brand must also be normal.
+ */
+
+@media (min-width: 769px) {
+
+  /*
+   * Restore the complete non-navigation brand region.
+   *
+   * Structural selectors are included intentionally so this
+   * remains effective regardless of the exact Logo class.
+   */
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .header-wrapper > a:first-child,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .header-wrapper > :first-child,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .logo,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .logo-link,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .header-logo,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .site-logo,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .brand,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .brand-logo,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .navbar-brand {
+
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    -webkit-clip-path: none !important;
+    clip-path: none !important;
+
+    -webkit-mask: none !important;
+    mask: none !important;
+
+    filter: none !important;
+
+    transform: none !important;
+
+    transition: none !important;
+  }
+
+
+  /*
+   * Restore descendants too.
+   *
+   * Some historical occlusion implementations apply their
+   * visual state directly to the image / picture / text
+   * inside the brand element rather than to its wrapper.
+   */
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .header-wrapper > :first-child *,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .logo *,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .logo-link *,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .header-logo *,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .site-logo *,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .brand *,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .brand-logo *,
+
+  html body:has(
+    .header .nav-menu > .nav-item:not(.has-submenu):hover
+  )
+  .header .navbar-brand * {
+
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    -webkit-clip-path: none !important;
+    clip-path: none !important;
+
+    -webkit-mask: none !important;
+    mask: none !important;
+
+    filter: none !important;
+
+    transform: none !important;
+
+    transition: none !important;
+  }
+
+
+  /*
+   * Same protection for the blank Header exit state that
+   * solved About -> right.
+   */
+
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  .header .header-wrapper > :first-child,
+
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  .header .logo,
+
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  .header .logo-link,
+
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  .header .header-logo,
+
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  .header .site-logo,
+
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  .header .brand,
+
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  .header .brand-logo {
+
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    -webkit-clip-path: none !important;
+    clip-path: none !important;
+
+    -webkit-mask: none !important;
+    mask: none !important;
+
+    filter: none !important;
+
+    transform: none !important;
+
+    transition: none !important;
+  }
+
+}
+
+/* PHASE-5N35B-RESTORE-LOGO-END */
+
+/* PHASE-5N37-HEADER-CONTENT-LAYER-START */
+
+/*
+ * Header stacking contract
+ * ---------------------------------------------------------
+ *
+ * Header ::before owns only the painted Header surface.
+ *
+ * Actual Header content must remain above that surface:
+ *
+ *   Logo / brand
+ *   Navigation
+ *   Language selector
+ *   Header controls
+ *
+ * This intentionally does NOT alter:
+ *
+ *   Mega Menu glass geometry
+ *   Header cutout geometry
+ *   Hero
+ *   Home Page
+ *   page blur
+ *   Mega ownership lifecycle
+ */
+
+
+/*
+ * Establish one predictable stacking context.
+ */
+html body .header {
+  isolation: isolate;
+}
+
+
+/*
+ * Reconstructed solid Header is BACKGROUND ONLY.
+ *
+ * Existing clip-path and visual properties are preserved.
+ */
+html body
+.header::before {
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+
+/*
+ * Real Header content sits above reconstructed surface.
+ *
+ * We elevate the wrapper as a whole instead of guessing
+ * individual Logo selectors.
+ */
+html body
+.header > .header-wrapper {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+
+/*
+ * Preserve the same content ordering while Mega Menu
+ * runtime classes are active.
+ */
+html body.mega-menu-page-blur-active
+.header.mega-menu-header-cutout-active
+> .header-wrapper,
+
+html body.mega-menu-unified-glass-active
+.header.mega-menu-header-cutout-active
+> .header-wrapper {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+
+/*
+ * Direct-nav restore state:
+ *
+ * 5N35A may reconstruct the WHOLE Header using ::before.
+ * Keep all actual Header content above that painted surface.
+ */
+html body:has(
+  .header .nav-menu > .nav-item:not(.has-submenu):hover
+)
+.header > .header-wrapper {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* PHASE-5N37-HEADER-CONTENT-LAYER-END */
+
+/* PHASE-5N38-FIXED-HEADER-SIZE-START */
+
+/*
+ * =========================================================
+ * FIXED DESKTOP HEADER SIZE
+ * =========================================================
+ *
+ * Design contract:
+ *
+ *   Top of page
+ *        =
+ *   Scrolled page
+ *
+ * Header must NOT shrink or expand according to scroll.
+ *
+ * IMPORTANT:
+ * This block changes only Header sizing behavior.
+ *
+ * It does NOT change:
+ *   - Mega Menu Glass
+ *   - connected Tab geometry
+ *   - Header cutout
+ *   - Header stacking
+ *   - Hero geometry
+ *   - Home Page layout
+ */
+
+
+/*
+ * ---------------------------------------------------------
+ * DESKTOP
+ * ---------------------------------------------------------
+ *
+ * Canonical Header height = 80px.
+ *
+ * Existing screenshot/runtime architecture already places
+ * the desktop Header in this visual range.
+ *
+ * Lock Header and wrapper to the same height regardless of
+ * .scrolled state.
+ */
+
+@media (min-width: 769px) {
+
+  html body .header,
+  html body .header.scrolled {
+
+    height:
+      80px !important;
+
+    min-height:
+      80px !important;
+
+    max-height:
+      80px !important;
+
+    padding-top:
+      0 !important;
+
+    padding-bottom:
+      0 !important;
+
+    transition-property:
+      background-color,
+      background,
+      box-shadow,
+      border-color !important;
+  }
+
+
+  /*
+   * Wrapper owns vertical alignment.
+   *
+   * This prevents historical .scrolled rules from reducing
+   * top/bottom padding and visually shrinking the Header.
+   */
+
+  html body .header > .header-wrapper,
+  html body .header.scrolled > .header-wrapper {
+
+    height:
+      80px !important;
+
+    min-height:
+      80px !important;
+
+    max-height:
+      80px !important;
+
+    padding-top:
+      0 !important;
+
+    padding-bottom:
+      0 !important;
+
+    align-items:
+      center !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * SCROLLED STATE
+   * -------------------------------------------------------
+   *
+   * Explicitly cancel size-changing transforms.
+   */
+
+  html body .header.scrolled,
+  html body .header.scrolled > .header-wrapper {
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+  }
+
+
+  /*
+   * Navigation keeps the same vertical geometry.
+   */
+
+  html body .header .nav-menu,
+  html body .header.scrolled .nav-menu {
+
+    height:
+      100% !important;
+
+    min-height:
+      0 !important;
+
+    align-items:
+      center !important;
+
+    margin-top:
+      0 !important;
+
+    margin-bottom:
+      0 !important;
+
+    transform:
+      none !important;
+  }
+
+
+  /*
+   * Top-level nav items also retain one geometry.
+   */
+
+  html body .header .nav-menu > .nav-item,
+  html body .header.scrolled .nav-menu > .nav-item {
+
+    height:
+      100% !important;
+
+    display:
+      flex !important;
+
+    align-items:
+      center !important;
+
+    transform:
+      none !important;
+  }
+
+
+  /*
+   * Do NOT allow scrolled state to scale Header branding.
+   *
+   * We intentionally avoid forcing an exact Logo width or
+   * height; its normal design dimensions remain authoritative.
+   */
+
+  html body .header.scrolled
+  .header-wrapper > :first-child {
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+  }
+
+
+  /*
+   * Mega Menu active state uses exactly the same Header
+   * height, so connected Glass geometry continues to read
+   * the real 80px Header rectangle.
+   */
+
+  html body
+  .header.mega-menu-header-cutout-active,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active {
+
+    height:
+      80px !important;
+
+    min-height:
+      80px !important;
+
+    max-height:
+      80px !important;
+  }
+
+
+  html body
+  .header.mega-menu-header-cutout-active
+  > .header-wrapper,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  > .header-wrapper {
+
+    height:
+      80px !important;
+
+    min-height:
+      80px !important;
+
+    max-height:
+      80px !important;
+  }
+
+}
+
+/* PHASE-5N38-FIXED-HEADER-SIZE-END */
+
+/* PHASE-5N39-FIXED-LOGO-SIZE-START */
+
+/*
+ * =========================================================
+ * FIXED DESKTOP LOGO SIZE
+ * =========================================================
+ *
+ * Header height is already fixed by Phase 5N38.
+ *
+ * This phase removes the remaining scroll-dependent Logo
+ * resizing without changing Mega Menu or Header geometry.
+ *
+ * Canonical desktop Logo box:
+ *
+ *   width  = 176px
+ *   height = 56px
+ *
+ * The image keeps its aspect ratio with object-fit contain.
+ */
+
+@media (min-width: 769px) {
+
+  /*
+   * -------------------------------------------------------
+   * BRAND CONTAINER
+   * -------------------------------------------------------
+   */
+
+  html body .header .brand,
+  html body .header.scrolled .brand,
+
+  html body .header .brand-link,
+  html body .header.scrolled .brand-link,
+
+  html body .header .logo,
+  html body .header.scrolled .logo,
+
+  html body .header .logo-link,
+  html body .header.scrolled .logo-link {
+
+    flex-shrink:
+      0 !important;
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    zoom:
+      1 !important;
+
+    transition-property:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * LOGO IMAGE
+   * -------------------------------------------------------
+   *
+   * Normal and scrolled states intentionally use exactly
+   * the same dimensions.
+   */
+
+  html body .header .brand img,
+  html body .header.scrolled .brand img,
+
+  html body .header .brand-link img,
+  html body .header.scrolled .brand-link img,
+
+  html body .header .logo img,
+  html body .header.scrolled .logo img,
+
+  html body .header .logo-link img,
+  html body .header.scrolled .logo-link img,
+
+  html body .header img.brand-logo,
+  html body .header.scrolled img.brand-logo,
+
+  html body .header .brand-logo img,
+  html body .header.scrolled .brand-logo img {
+
+    width:
+      176px !important;
+
+    height:
+      56px !important;
+
+    min-width:
+      176px !important;
+
+    max-width:
+      176px !important;
+
+    min-height:
+      56px !important;
+
+    max-height:
+      56px !important;
+
+    object-fit:
+      contain !important;
+
+    object-position:
+      left center !important;
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    zoom:
+      1 !important;
+
+    opacity:
+      1 !important;
+
+    visibility:
+      visible !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * SVG LOGO FALLBACK
+   * -------------------------------------------------------
+   */
+
+  html body .header .brand svg,
+  html body .header.scrolled .brand svg,
+
+  html body .header .brand-link svg,
+  html body .header.scrolled .brand-link svg,
+
+  html body .header .logo svg,
+  html body .header.scrolled .logo svg,
+
+  html body .header .logo-link svg,
+  html body .header.scrolled .logo-link svg {
+
+    width:
+      176px !important;
+
+    height:
+      56px !important;
+
+    min-width:
+      176px !important;
+
+    max-width:
+      176px !important;
+
+    min-height:
+      56px !important;
+
+    max-height:
+      56px !important;
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * MEGA ACTIVE + SCROLLED
+   * -------------------------------------------------------
+   *
+   * Opening a Mega Menu while the page is scrolled must not
+   * create a third Logo size.
+   */
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand img,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-link img,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .logo img,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .logo-link img,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  img.brand-logo {
+
+    width:
+      176px !important;
+
+    height:
+      56px !important;
+
+    min-width:
+      176px !important;
+
+    max-width:
+      176px !important;
+
+    min-height:
+      56px !important;
+
+    max-height:
+      56px !important;
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+}
+
+/* PHASE-5N39-FIXED-LOGO-SIZE-END */
+
+/* PHASE-5N40-FIXED-BRAND-TEXT-START */
+
+/*
+ * =========================================================
+ * FIXED BRAND TYPOGRAPHY
+ * =========================================================
+ *
+ * Header height and Logo image are already fixed.
+ *
+ * The remaining brand text must also keep exactly one
+ * visual size while scrolling:
+ *
+ *   ចន្ទីមាតុភូមិ
+ *   MATO CASHEW
+ *
+ * Normal / scrolled / Mega-active states intentionally use
+ * identical typography.
+ */
+
+@media (min-width: 769px) {
+
+  /*
+   * -------------------------------------------------------
+   * BRAND TEXT CONTAINER
+   * -------------------------------------------------------
+   *
+   * Prevent the whole text group from being scaled.
+   */
+
+  html body .header .brand-text,
+  html body .header.scrolled .brand-text,
+
+  html body .header .logo-text,
+  html body .header.scrolled .logo-text,
+
+  html body .header .brand-copy,
+  html body .header.scrolled .brand-copy,
+
+  html body .header .brand-content,
+  html body .header.scrolled .brand-content {
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    zoom:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * KHMER BRAND NAME
+   * -------------------------------------------------------
+   */
+
+  html body .header .brand-khmer,
+  html body .header.scrolled .brand-khmer,
+
+  html body .header .brand-name,
+  html body .header.scrolled .brand-name,
+
+  html body .header .brand-title,
+  html body .header.scrolled .brand-title,
+
+  html body .header .brand-text > :first-child,
+  html body .header.scrolled .brand-text > :first-child {
+
+    font-size:
+      20px !important;
+
+    line-height:
+      1.15 !important;
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    zoom:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * ENGLISH BRAND NAME — MATO CASHEW
+   * -------------------------------------------------------
+   */
+
+  html body .header .brand-english,
+  html body .header.scrolled .brand-english,
+
+  html body .header .brand-subtitle,
+  html body .header.scrolled .brand-subtitle,
+
+  html body .header .brand-tagline,
+  html body .header.scrolled .brand-tagline,
+
+  html body .header .brand-text > :last-child,
+  html body .header.scrolled .brand-text > :last-child {
+
+    font-size:
+      12px !important;
+
+    line-height:
+      1.2 !important;
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    zoom:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * MEGA MENU ACTIVE
+   * -------------------------------------------------------
+   *
+   * Opening Mega Menu while scrolled must not create another
+   * typography size.
+   */
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-text,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .logo-text,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-copy,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-content {
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    zoom:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-khmer,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-name,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-title,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-text > :first-child {
+
+    font-size:
+      20px !important;
+
+    line-height:
+      1.15 !important;
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-english,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-subtitle,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-tagline,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-text > :last-child {
+
+    font-size:
+      12px !important;
+
+    line-height:
+      1.2 !important;
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+}
+
+/* PHASE-5N40-FIXED-BRAND-TEXT-END */
+
+/* PHASE-5N42-FIXED-BRAND-SEPARATOR-START */
+
+/*
+ * =========================================================
+ * FIXED BRAND SEPARATOR LINE
+ * =========================================================
+ *
+ * Locks the visual separator between:
+ *
+ *   Khmer brand name
+ *   MATO CASHEW
+ *
+ * Normal / scrolled / Mega-active states must render
+ * exactly the same line geometry.
+ *
+ * This phase does NOT change:
+ *
+ *   Header height
+ *   Logo size
+ *   Brand typography
+ *   Mega Menu glass
+ *   Header cutout
+ *   Hero geometry
+ */
+
+
+/* =========================================================
+ * DESKTOP ONLY
+ * ========================================================= */
+
+@media (min-width: 769px) {
+
+
+  /*
+   * -------------------------------------------------------
+   * BRAND TEXT GROUP
+   * -------------------------------------------------------
+   *
+   * Keep the coordinate system stable so a border or
+   * pseudo-element separator cannot inherit scroll scaling.
+   */
+
+  html body .header .brand-text,
+  html body .header.scrolled .brand-text,
+
+  html body .header .logo-text,
+  html body .header.scrolled .logo-text,
+
+  html body .header .brand-copy,
+  html body .header.scrolled .brand-copy,
+
+  html body .header .brand-content,
+  html body .header.scrolled .brand-content {
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    zoom:
+      1 !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * EXPLICIT SEPARATOR ELEMENTS
+   * -------------------------------------------------------
+   */
+
+  html body .header .brand-separator,
+  html body .header.scrolled .brand-separator,
+
+  html body .header .brand-divider,
+  html body .header.scrolled .brand-divider,
+
+  html body .header .logo-separator,
+  html body .header.scrolled .logo-separator,
+
+  html body .header .logo-divider,
+  html body .header.scrolled .logo-divider {
+
+    width:
+      100% !important;
+
+    max-width:
+      none !important;
+
+    height:
+      1px !important;
+
+    min-height:
+      1px !important;
+
+    max-height:
+      1px !important;
+
+    flex:
+      0 0 1px !important;
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    zoom:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * KHMER TITLE BORDER
+   * -------------------------------------------------------
+   *
+   * If the separator is implemented as border-bottom on
+   * the Khmer line, keep its box and border stable.
+   */
+
+  html body .header .brand-khmer,
+  html body .header.scrolled .brand-khmer,
+
+  html body .header .brand-name,
+  html body .header.scrolled .brand-name,
+
+  html body .header .brand-title,
+  html body .header.scrolled .brand-title,
+
+  html body .header .brand-text > :first-child,
+  html body .header.scrolled .brand-text > :first-child {
+
+    border-bottom-width:
+      1px !important;
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    zoom:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * PSEUDO-ELEMENT SEPARATOR
+   * -------------------------------------------------------
+   *
+   * Covers implementations where the line is ::after or
+   * ::before rather than a real DOM element.
+   *
+   * Width remains tied to the fixed Khmer text box rather
+   * than changing between normal/scrolled states.
+   */
+
+  html body .header .brand-khmer::after,
+  html body .header.scrolled .brand-khmer::after,
+
+  html body .header .brand-name::after,
+  html body .header.scrolled .brand-name::after,
+
+  html body .header .brand-title::after,
+  html body .header.scrolled .brand-title::after,
+
+  html body .header .brand-text > :first-child::after,
+  html body .header.scrolled .brand-text > :first-child::after {
+
+    height:
+      1px !important;
+
+    min-height:
+      1px !important;
+
+    max-height:
+      1px !important;
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    zoom:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+
+  html body .header .brand-khmer::before,
+  html body .header.scrolled .brand-khmer::before,
+
+  html body .header .brand-name::before,
+  html body .header.scrolled .brand-name::before,
+
+  html body .header .brand-title::before,
+  html body .header.scrolled .brand-title::before,
+
+  html body .header .brand-text > :first-child::before,
+  html body .header.scrolled .brand-text > :first-child::before {
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    zoom:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * MEGA MENU + SCROLLED STATE
+   * -------------------------------------------------------
+   *
+   * Opening Mega Menu while scrolled must not introduce
+   * another separator geometry.
+   */
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-separator,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-divider,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .logo-separator,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .logo-divider {
+
+    width:
+      100% !important;
+
+    height:
+      1px !important;
+
+    min-height:
+      1px !important;
+
+    max-height:
+      1px !important;
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-khmer,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-name,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-title,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  .brand-text > :first-child {
+
+    border-bottom-width:
+      1px !important;
+
+    transform:
+      none !important;
+
+    scale:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+}
+
+/* PHASE-5N42-FIXED-BRAND-SEPARATOR-END */
+
+/* PHASE-5N44-STATIC-HEADER-GEOMETRY-START */
+
+/*
+ * STATIC DESKTOP HEADER GEOMETRY
+ *
+ * .scrolled remains available as a compatibility state,
+ * but it must not change physical Header/Brand dimensions.
+ */
+
+@media (min-width: 769px) {
+
+  /* Header */
+  html body .header,
+  html body .header.scrolled {
+    height: 80px !important;
+    min-height: 80px !important;
+    max-height: 80px !important;
+
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+
+    transform: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+  }
+
+
+  /* Header wrapper */
+  html body .header > .header-wrapper,
+  html body .header.scrolled > .header-wrapper {
+    height: 80px !important;
+    min-height: 80px !important;
+    max-height: 80px !important;
+
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+
+    transform: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+  }
+
+
+  /*
+   * Complete Brand root.
+   * Prevent parent-level scroll scaling.
+   */
+  html body .header .brand,
+  html body .header.scrolled .brand,
+
+  html body .header .brand-link,
+  html body .header.scrolled .brand-link,
+
+  html body .header .brand-wrapper,
+  html body .header.scrolled .brand-wrapper,
+
+  html body .header .brand-identity,
+  html body .header.scrolled .brand-identity,
+
+  html body .header .logo,
+  html body .header.scrolled .logo,
+
+  html body .header .logo-link,
+  html body .header.scrolled .logo-link,
+
+  html body .header .navbar-brand,
+  html body .header.scrolled .navbar-brand,
+
+  html body .header .header-brand,
+  html body .header.scrolled .header-brand,
+
+  html body .header .header-logo,
+  html body .header.scrolled .header-logo,
+
+  html body .header .header-wrapper > :first-child,
+  html body .header.scrolled .header-wrapper > :first-child {
+
+    transform: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    flex-shrink: 0 !important;
+  }
+
+
+  /* Logo */
+  html body .header .brand img,
+  html body .header.scrolled .brand img,
+
+  html body .header .brand-link img,
+  html body .header.scrolled .brand-link img,
+
+  html body .header .logo img,
+  html body .header.scrolled .logo img,
+
+  html body .header .logo-link img,
+  html body .header.scrolled .logo-link img,
+
+  html body .header .header-logo img,
+  html body .header.scrolled .header-logo img,
+
+  html body .header .navbar-brand img,
+  html body .header.scrolled .navbar-brand img,
+
+  html body .header .header-wrapper > :first-child img,
+  html body .header.scrolled .header-wrapper > :first-child img {
+
+    transform: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    flex-shrink: 0 !important;
+  }
+
+
+  /* Brand text group */
+  html body .header .brand-copy,
+  html body .header.scrolled .brand-copy,
+
+  html body .header .brand-text,
+  html body .header.scrolled .brand-text,
+
+  html body .header .brand-content,
+  html body .header.scrolled .brand-content {
+
+    transform: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    flex-shrink: 0 !important;
+  }
+
+
+  /* Khmer + English text */
+  html body .header .brand-khmer,
+  html body .header.scrolled .brand-khmer,
+
+  html body .header .brand-name,
+  html body .header.scrolled .brand-name,
+
+  html body .header .brand-title,
+  html body .header.scrolled .brand-title,
+
+  html body .header .brand-english,
+  html body .header.scrolled .brand-english,
+
+  html body .header .brand-subtitle,
+  html body .header.scrolled .brand-subtitle {
+
+    transform: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    flex-shrink: 0 !important;
+  }
+
+
+  /* Separator */
+  html body .header .brand-divider,
+  html body .header.scrolled .brand-divider,
+
+  html body .header .brand-separator,
+  html body .header.scrolled .brand-separator,
+
+  html body .header .logo-divider,
+  html body .header.scrolled .logo-divider,
+
+  html body .header .logo-separator,
+  html body .header.scrolled .logo-separator {
+
+    transform: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    flex-shrink: 0 !important;
+  }
+
+
+  /*
+   * Navigation must also remain in the same coordinate
+   * system when .scrolled is present.
+   */
+  html body .header .nav-menu,
+  html body .header.scrolled .nav-menu,
+
+  html body .header .nav-item,
+  html body .header.scrolled .nav-item,
+
+  html body .header .nav-link,
+  html body .header.scrolled .nav-link {
+
+    transform: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+  }
+
+
+  /*
+   * Preserve identical Header geometry during Mega Menu.
+   */
+  html body .header.mega-menu-header-cutout-active,
+  html body
+  .header.scrolled.mega-menu-header-cutout-active {
+
+    height: 80px !important;
+    min-height: 80px !important;
+    max-height: 80px !important;
+
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+
+    transform: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+  }
+
+
+  html body
+  .header.mega-menu-header-cutout-active
+  > .header-wrapper,
+
+  html body
+  .header.scrolled.mega-menu-header-cutout-active
+  > .header-wrapper {
+
+    height: 80px !important;
+    min-height: 80px !important;
+    max-height: 80px !important;
+
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+
+    transform: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+  }
+
+}
+
+/* PHASE-5N44-STATIC-HEADER-GEOMETRY-END */
+
+/* PHASE-5N45-BRAND-GEOMETRY-LOCK-START */
+
+/*
+ * Browser-measured canonical desktop Brand geometry.
+ *
+ * TOP state is authoritative.
+ *
+ * Scroll must not modify typography metrics or the
+ * separator geometry.
+ */
+
+@media (min-width: 769px) {
+
+  /*
+   * -------------------------------------------------------
+   * KHMER BRAND
+   * -------------------------------------------------------
+   */
+
+  html body .header .brand-khmer,
+  html body .header.scrolled .brand-khmer,
+  html body
+    .header.mega-menu-header-cutout-active
+    .brand-khmer,
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .brand-khmer {
+
+    font-size: 20px !important;
+    line-height: 23px !important;
+
+    letter-spacing: normal !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    transition: none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * ENGLISH BRAND
+   *
+   * Critical root-cause fix:
+   *
+   * .scrolled previously changed letter-spacing
+   * from 2.16px to 1.92px.
+   * -------------------------------------------------------
+   */
+
+  html body .header .brand-english,
+  html body .header.scrolled .brand-english,
+  html body
+    .header.mega-menu-header-cutout-active
+    .brand-english,
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .brand-english {
+
+    font-size: 12px !important;
+    line-height: 14.4px !important;
+
+    letter-spacing: 2.16px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    transition: none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * SEPARATOR
+   *
+   * Match the measured TOP-state English text width.
+   * -------------------------------------------------------
+   */
+
+  html body .header .brand-divider,
+  html body .header.scrolled .brand-divider,
+  html body
+    .header.mega-menu-header-cutout-active
+    .brand-divider,
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .brand-divider {
+
+    width: 124.9px !important;
+    min-width: 124.9px !important;
+    max-width: 124.9px !important;
+
+    height: 1px !important;
+    min-height: 1px !important;
+    max-height: 1px !important;
+
+    margin-top: 3px !important;
+    margin-bottom: 5px !important;
+
+    padding: 0 !important;
+
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    transition: none !important;
+
+    flex-shrink: 0 !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * BRAND LOCKUP
+   *
+   * Do not allow scroll state to recalculate the complete
+   * text-side width from different letter metrics.
+   * -------------------------------------------------------
+   */
+
+  html body .header .logo.brand-lockup,
+  html body .header.scrolled .logo.brand-lockup,
+  html body
+    .header.mega-menu-header-cutout-active
+    .logo.brand-lockup,
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .logo.brand-lockup {
+
+    gap: 14px !important;
+
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    transition: none !important;
+  }
+
+}
+
+/* PHASE-5N45-BRAND-GEOMETRY-LOCK-END */
+
+/* PHASE-5N46-BRAND-SPACING-POLISH-START */
+
+/*
+ * Desktop Brand visual spacing polish.
+ *
+ * Preserve Phase 5N45 typography/geometry.
+ * Only reduce the horizontal breathing space between
+ * the Logo mark and Brand copy.
+ *
+ * Previous: 14px
+ * Final:     8px
+ */
+
+@media (min-width: 769px) {
+
+  html body .header .logo.brand-lockup,
+  html body .header.scrolled .logo.brand-lockup,
+  html body
+    .header.mega-menu-header-cutout-active
+    .logo.brand-lockup,
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .logo.brand-lockup {
+
+    gap: 8px !important;
+    column-gap: 8px !important;
+
+  }
+
+}
+
+/* PHASE-5N46-BRAND-SPACING-POLISH-END */
+
+/* PHASE-5N47-BRAND-SIGNATURE-ALIGNMENT-START */
+
+/*
+ * Brand signature optical alignment.
+ *
+ * DOM:
+ *
+ * .logo.brand-lockup
+ *   .brand-symbol
+ *   .brand-signature
+ *     .brand-khmer
+ *     .brand-divider
+ *     .brand-english
+ *
+ * Keep all Phase 5N45 typography metrics unchanged.
+ * Keep the Logo geometry unchanged.
+ *
+ * Move the complete signature group toward the visual
+ * cashew mark as one unit.
+ */
+
+@media (min-width: 769px) {
+
+  html body .header .logo.brand-lockup > .brand-signature,
+  html body .header.scrolled .logo.brand-lockup > .brand-signature,
+  html body
+    .header.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-signature,
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-signature {
+
+    position: relative !important;
+
+    left: -12px !important;
+
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    flex-shrink: 0 !important;
+
+    transition: none !important;
+  }
+
+}
+
+/* PHASE-5N47-BRAND-SIGNATURE-ALIGNMENT-END */
+
+/* PHASE-5N48-LOGO-VIEWPORT-FIX-START */
+
+/*
+ * ROOT CAUSE:
+ *
+ * .brand-symbol was rendered as 176px × 56px,
+ * but the visible circular Logo occupies only the
+ * left portion of that image.
+ *
+ * The remaining transparent image area created a
+ * large visual gap before .brand-signature.
+ *
+ * Solution:
+ * - use a 56px square viewport
+ * - crop from the LEFT
+ * - keep Logo visual height unchanged
+ * - keep typography untouched
+ */
+
+@media (min-width: 769px) {
+
+  html body .header
+    .logo.brand-lockup > .brand-symbol,
+  html body .header.scrolled
+    .logo.brand-lockup > .brand-symbol,
+  html body
+    .header.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-symbol,
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-symbol {
+
+    width: 56px !important;
+    min-width: 56px !important;
+    max-width: 56px !important;
+
+    height: 56px !important;
+    min-height: 56px !important;
+    max-height: 56px !important;
+
+    object-fit: cover !important;
+    object-position: left center !important;
+
+    flex: 0 0 56px !important;
+
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    transition: none !important;
+  }
+
+
+  /*
+   * Remove the optical compensation from Phase 5N47.
+   * The image box itself is now correct.
+   */
+
+  html body .header
+    .logo.brand-lockup > .brand-signature,
+  html body .header.scrolled
+    .logo.brand-lockup > .brand-signature,
+  html body
+    .header.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-signature,
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-signature {
+
+    position: relative !important;
+
+    left: 0 !important;
+
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    flex-shrink: 0 !important;
+
+    transition: none !important;
+  }
+
+
+  /*
+   * Final visual spacing:
+   *
+   * Logo mark -> 8px -> Brand signature
+   */
+
+  html body .header .logo.brand-lockup,
+  html body .header.scrolled .logo.brand-lockup,
+  html body
+    .header.mega-menu-header-cutout-active
+    .logo.brand-lockup,
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .logo.brand-lockup {
+
+    gap: 8px !important;
+    column-gap: 8px !important;
+  }
+
+}
+
+/* PHASE-5N48-LOGO-VIEWPORT-FIX-END */
+
+/* PHASE-5N49-BRAND-SIGNATURE-FINE-TUNE-START */
+
+@media (min-width: 769px) {
+
+  html body .header
+    .logo.brand-lockup > .brand-signature,
+  html body .header.scrolled
+    .logo.brand-lockup > .brand-signature,
+  html body
+    .header.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-signature,
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-signature {
+
+    position: relative !important;
+
+    left: 4px !important;
+
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    flex-shrink: 0 !important;
+
+    transition: none !important;
+  }
+
+}
+
+/* PHASE-5N49-BRAND-SIGNATURE-FINE-TUNE-END */
+
+/* PHASE-5N50-FINAL-BRAND-CLEARANCE-START */
+
+@media (min-width: 769px) {
+
+  /*
+   * Final physical clearance between the visible
+   * cashew mark and the complete Brand signature.
+   *
+   * Khmer + divider + English move as ONE unit.
+   */
+
+  html body .header
+    .logo.brand-lockup > .brand-signature,
+
+  html body .header.scrolled
+    .logo.brand-lockup > .brand-signature,
+
+  html body
+    .header.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-signature,
+
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-signature {
+
+    position: relative !important;
+
+    left: 12px !important;
+
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    flex-shrink: 0 !important;
+
+    transition: none !important;
+  }
+
+}
+
+/* PHASE-5N50-FINAL-BRAND-CLEARANCE-END */
+
+/* PHASE-5N51-LOGO-WHITE-EDGE-FIX-START */
+
+/*
+ * Keep the 56x56 Logo geometry from Phase 5N48.
+ *
+ * The source artwork contains a small visible white/padded
+ * strip at the right edge. Clip only that edge.
+ *
+ * Brand signature position from Phase 5N50 stays unchanged.
+ */
+
+@media (min-width: 769px) {
+
+  html body .header
+    .logo.brand-lockup > .brand-symbol,
+
+  html body .header.scrolled
+    .logo.brand-lockup > .brand-symbol,
+
+  html body
+    .header.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-symbol,
+
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-symbol {
+
+    width: 56px !important;
+    min-width: 56px !important;
+    max-width: 56px !important;
+
+    height: 56px !important;
+    min-height: 56px !important;
+    max-height: 56px !important;
+
+    object-fit: cover !important;
+    object-position: left center !important;
+
+    /*
+     * Remove only the unwanted right white strip.
+     */
+    clip-path: inset(0 6px 0 0) !important;
+    -webkit-clip-path: inset(0 6px 0 0) !important;
+
+    background: transparent !important;
+
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    transition: none !important;
+  }
+
+
+  /*
+   * Ensure the Brand text surface itself never paints
+   * an opaque background over the Logo.
+   */
+
+  html body .header
+    .logo.brand-lockup > .brand-signature,
+
+  html body .header.scrolled
+    .logo.brand-lockup > .brand-signature,
+
+  html body
+    .header.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-signature,
+
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-signature {
+
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+}
+
+/* PHASE-5N51-LOGO-WHITE-EDGE-FIX-END */
+
+/* PHASE-5N52-LOGO-FOREGROUND-LAYER-START */
+
+/*
+ * Final Brand stacking authority.
+ *
+ * Problem:
+ * A white visual surface inside the Brand area overlaps
+ * the right side of the visible Logo.
+ *
+ * Solution:
+ *
+ * 1. Undo Phase 5N51 clipping.
+ * 2. Create a local stacking context.
+ * 3. Put the Logo symbol above the Brand signature layer.
+ * 4. Keep current text positioning unchanged.
+ */
+
+@media (min-width: 769px) {
+
+  /*
+   * -------------------------------------------------------
+   * BRAND LOCAL STACKING CONTEXT
+   * -------------------------------------------------------
+   */
+
+  html body .header .logo.brand-lockup,
+  html body .header.scrolled .logo.brand-lockup,
+  html body
+    .header.mega-menu-header-cutout-active
+    .logo.brand-lockup,
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .logo.brand-lockup {
+
+    position: relative !important;
+    isolation: isolate !important;
+
+    overflow: visible !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * LOGO SYMBOL = FRONT LAYER
+   * -------------------------------------------------------
+   *
+   * Restore full visible 56x56 Logo.
+   * No clipping.
+   */
+
+  html body .header
+    .logo.brand-lockup > .brand-symbol,
+
+  html body .header.scrolled
+    .logo.brand-lockup > .brand-symbol,
+
+  html body
+    .header.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-symbol,
+
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-symbol {
+
+    position: relative !important;
+
+    z-index: 4 !important;
+
+    width: 56px !important;
+    min-width: 56px !important;
+    max-width: 56px !important;
+
+    height: 56px !important;
+    min-height: 56px !important;
+    max-height: 56px !important;
+
+    flex: 0 0 56px !important;
+
+    object-fit: cover !important;
+    object-position: left center !important;
+
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
+
+    overflow: visible !important;
+
+    background: transparent !important;
+
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    transition: none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * BRAND SIGNATURE = BELOW LOGO
+   * -------------------------------------------------------
+   *
+   * Keep Phase 5N50 horizontal position.
+   */
+
+  html body .header
+    .logo.brand-lockup > .brand-signature,
+
+  html body .header.scrolled
+    .logo.brand-lockup > .brand-signature,
+
+  html body
+    .header.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-signature,
+
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .logo.brand-lockup > .brand-signature {
+
+    position: relative !important;
+
+    z-index: 2 !important;
+
+    left: 12px !important;
+
+    background: transparent !important;
+    background-color: transparent !important;
+
+    box-shadow: none !important;
+
+    overflow: visible !important;
+
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    transition: none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * CHILDREN MUST NOT PAINT A WHITE PANEL
+   * -------------------------------------------------------
+   */
+
+  html body .header .brand-signature,
+  html body .header .brand-khmer,
+  html body .header .brand-divider,
+  html body .header .brand-english,
+
+  html body .header.scrolled .brand-signature,
+  html body .header.scrolled .brand-khmer,
+  html body .header.scrolled .brand-divider,
+  html body .header.scrolled .brand-english {
+
+    background-color: transparent !important;
+
+    box-shadow: none !important;
+
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
+  }
+
+}
+
+/* PHASE-5N52-LOGO-FOREGROUND-LAYER-END */
+
+/* PHASE-5N53-RESTORE-BRAND-DIVIDER-START */
+
+/*
+ * Restore the visual separator between:
+ *
+ *   ចន្ទីមាតុភូមិ
+ *   ----------------
+ *   MATO CASHEW
+ *
+ * Phase 5N52 foreground stacking remains untouched.
+ * No Logo/Text positioning changes in this phase.
+ */
+
+@media (min-width: 769px) {
+
+  html body .header
+    .logo.brand-lockup
+    > .brand-signature
+    > .brand-divider,
+
+  html body .header.scrolled
+    .logo.brand-lockup
+    > .brand-signature
+    > .brand-divider,
+
+  html body
+    .header.mega-menu-header-cutout-active
+    .logo.brand-lockup
+    > .brand-signature
+    > .brand-divider,
+
+  html body
+    .header.scrolled.mega-menu-header-cutout-active
+    .logo.brand-lockup
+    > .brand-signature
+    > .brand-divider {
+
+    display: block !important;
+
+    position: relative !important;
+    z-index: 5 !important;
+
+    width: 124.9px !important;
+    min-width: 124.9px !important;
+    max-width: 124.9px !important;
+
+    height: 1px !important;
+    min-height: 1px !important;
+    max-height: 1px !important;
+
+    flex: 0 0 1px !important;
+
+    margin-top: 3px !important;
+    margin-right: 0 !important;
+    margin-bottom: 5px !important;
+    margin-left: 0 !important;
+
+    padding: 0 !important;
+
+    /*
+     * Explicit visible divider surface.
+     */
+    background: #CBA046 !important;
+    background-color: #CBA046 !important;
+
+    opacity: 0.95 !important;
+    visibility: visible !important;
+
+    border: 0 !important;
+
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
+
+    transform: none !important;
+    translate: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+
+    transition: none !important;
+
+    pointer-events: none !important;
+  }
+
+}
+
+/* PHASE-5N54-ORIGINAL-DIVIDER-COLOR
+ * Original divider visual restored:
+ * background = #CBA046
+ * opacity    = 0.95
+ */
+/* PHASE-5N53-RESTORE-BRAND-DIVIDER-END */

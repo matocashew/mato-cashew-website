@@ -1,3 +1,5 @@
+@import "./scenic-hero-tokens.css";
+
 /* =========================================================
    HERO — PREMIUM RESPONSIVE BACKGROUND
    ========================================================= */
@@ -3805,14 +3807,14 @@ html[lang="km"] .hero-description,
 
 @media (min-width: 993px) {
   .home-scenic-canvas > .hero {
-    height: 729px;
-    min-height: 729px;
+    height: var(--mc-hero-desktop-height);
+    min-height: var(--mc-hero-desktop-height);
   }
 
   .home-scenic-canvas > .trust-bar {
-    margin-top: 24px;
-    margin-bottom: 30px;
-    transform: translateY(-10px);
+    margin-top: var(--mc-trust-margin-top);
+    margin-bottom: var(--mc-trust-margin-bottom);
+    transform: translateY(var(--mc-trust-translate-y));
   }
 
   .home-scenic-canvas > .products.products-showcase {
@@ -3839,7 +3841,7 @@ html[lang="km"] .hero-description,
 
 @media (min-width: 993px) and (max-width: 1920px) {
   .home-scenic-canvas > .hero-v2-layer--base {
-    background-size: 1920px auto;
+    background-size: var(--mc-scenic-desktop-reference-width) auto;
     background-position: center top;
   }
 }
