@@ -619,6 +619,21 @@ const productSlides = [
 
         const startAutoPlay = (): void => {
           stopAutoPlay();
+          /*
+           * PHASE-5N56I-R4-MEGA-MENU-AUTOPLAY-PAUSE
+           *
+           * Never allow Product Image autoplay to advance
+           * while the connected Mega Menu glass is open.
+           * This prevents image raster replacement beneath
+           * backdrop-filter, which caused visible jitter.
+           */
+          if (
+            document.body.classList.contains(
+              "mega-menu-unified-glass-active"
+            )
+          ) {
+            return;
+          }
 
           if (reduceMotion) {
             return;
@@ -635,6 +650,95 @@ const productSlides = [
               4500
             );
         };
+
+      /* =========================================
+         MEGA MENU / PRODUCT AUTOPLAY SYNC
+         PHASE 5N56I-R4
+         ========================================= */
+
+      /*
+       * Track only changes to the Mega Menu active state.
+       *
+       * OPEN:
+       *   stop interval immediately.
+       *
+       * CLOSE:
+       *   resume a fresh 4.5 second interval.
+       *
+       * No Product Image is changed by this observer.
+       */
+      let megaMenuWasOpen =
+        document.body.classList.contains(
+          "mega-menu-unified-glass-active"
+        );
+
+
+      const syncMegaMenuAutoPlay =
+        (): void => {
+
+          const megaMenuIsOpen =
+            document.body.classList.contains(
+              "mega-menu-unified-glass-active"
+            );
+
+          if (
+            megaMenuIsOpen ===
+            megaMenuWasOpen
+          ) {
+            return;
+          }
+
+          megaMenuWasOpen =
+            megaMenuIsOpen;
+
+
+          if (megaMenuIsOpen) {
+
+            stopAutoPlay();
+
+            return;
+          }
+
+
+          if (!document.hidden) {
+
+            startAutoPlay();
+          }
+        };
+
+
+      const megaMenuAutoPlayObserver =
+        new MutationObserver(
+          syncMegaMenuAutoPlay
+        );
+
+
+      megaMenuAutoPlayObserver.observe(
+        document.body,
+        {
+          attributes: true,
+          attributeFilter: [
+            "class",
+          ],
+        }
+      );
+
+
+      /*
+       * Slider instances are recreated on Astro navigation.
+       * Disconnect observer together with this instance.
+       */
+      controller.signal.addEventListener(
+        "abort",
+        () => {
+
+          megaMenuAutoPlayObserver.disconnect();
+        },
+        {
+          once: true,
+        }
+      );
+
 
 
       /* =========================================

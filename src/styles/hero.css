@@ -3845,3 +3845,50 @@ html[lang="km"] .hero-description,
     background-position: center top;
   }
 }
+
+/* =========================================================
+   PHASE-5N56I-R1-MEGA-BRANCH-COMPOSITOR-STABILITY
+
+   Diagnostic/final-safe stabilization:
+   - Mega Menu glass remains active
+   - Product Slide remains visible
+   - Product Slide positioning remains unchanged
+   - Pause only decorative branch motion while Mega Menu
+     connected glass is open
+   - Prevent animated layer + backdrop-filter compositor
+     shimmer on the right side of the Hero product
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+  body.mega-menu-unified-glass-active
+  .home-scenic-canvas
+  .hero-v2-layer--branch {
+
+    animation-play-state:
+      paused !important;
+  }
+
+}
+
+/* =========================================================
+   PHASE-5N56I-R6B-UPPER-LEAF-MEGA-PAUSE
+
+   Pause only the approved upper-right Hero leaf while
+   the unified Mega Menu glass is active.
+
+   Preserve current transform position and resume from
+   the same animation point after Mega Menu closes.
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+  body.mega-menu-unified-glass-active
+  .home-scenic-canvas
+  > .hero-motion-leaf.hero-motion-leaf--upper {
+
+    animation-play-state:
+      paused !important;
+  }
+
+}

@@ -107,7 +107,7 @@ const brandName =
 
       <ul id="main-menu" class="nav-menu">
         {
-          menuItems.map((item) => {
+          menuItems.map((item, itemIndex) => {
             const hasChildren =
               Boolean(item.children?.length);
 
@@ -142,9 +142,83 @@ const brandName =
                       : undefined
                   }
                 >
-                  <span class="nav-label">
-                    {item.label}
-                  </span>
+                  <!-- PHASE-5N57A-PREMIUM-DESKTOP-NAV -->
+<!--
+  PHASE-5N57B-LANGUAGE-INDEPENDENT-NAV-ICONS
+
+  Premium top-level navigation icons use stable menu order,
+  not translated label text.
+
+  This keeps English and Khmer icon identity identical.
+-->
+<span
+  class="nav-premium-icon"
+  aria-hidden="true"
+>
+  {
+    itemIndex === 0 ? (
+
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M4.75 10.25 12 4.5l7.25 5.75" />
+        <path d="M6.5 9.5v9.25h11V9.5" />
+        <path d="M9.75 18.75v-5.5h4.5v5.5" />
+      </svg>
+
+    ) : itemIndex === 1 ? (
+
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M18.6 5.3c-5.6-.1-10.1 2.4-12.2 7" />
+        <path d="M18.6 5.3c-.2 5.1-2.9 8.2-7.2 8.2-2.2 0-3.9 1.4-3.9 3.3 0 1.3.8 2.2 2.1 2.2 1.8 0 2.7-1.2 2.7-2.7" />
+        <path d="M10.2 10.8c1.8.2 3.5-.3 5-1.5" />
+      </svg>
+
+    ) : itemIndex === 2 ? (
+
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M4.3 5.3c2.9-.6 5.4 0 7.7 1.8v11.1c-2.3-1.7-4.8-2.3-7.7-1.8Z" />
+        <path d="M19.7 5.3c-2.9-.6-5.4 0-7.7 1.8v11.1c2.3-1.7 4.8-2.3 7.7-1.8Z" />
+      </svg>
+
+    ) : itemIndex === 3 ? (
+
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M5 18.5V14" />
+        <path d="M10 18.5v-7.7" />
+        <path d="M15 18.5v-11" />
+        <path d="M19 18.5V4.8" />
+        <path d="m5 10 4-3 3 1.5 6-5" />
+      </svg>
+
+    ) : itemIndex === 4 ? (
+
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="m5 8.3 7-3.5 7 3.5-7 3.5Z" />
+        <path d="M5 8.3v7.5l7 3.5 7-3.5V8.3" />
+        <path d="M12 11.8v7.5" />
+      </svg>
+
+    ) : itemIndex === 5 ? (
+
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="7.5" />
+        <path d="M12 10.7v5" />
+        <path d="M12 7.7h.01" />
+      </svg>
+
+    ) : (
+
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="7" />
+        <path d="M12 8v8M8 12h8" />
+      </svg>
+
+    )
+  }
+</span>
+
+<span class="nav-label">
+  {item.label}
+</span>
                 </a>
 
                 {
@@ -248,7 +322,455 @@ const brandName =
   </div>
 
 </header>
+<style is:global>
+  /*
+   * ========================================================
+   * PHASE-5N58B-LEGACY-TAB-TRANSIENT-NEUTRALIZATION
+   *
+   * The final unified body-level glass and SVG perimeter
+   * already own the connected Mega Menu silhouette.
+   *
+   * While that unified glass is active, suppress historical
+   * per-nav-item glass / border / connector / shoulder
+   * transitions so owner handoff cannot expose a one-frame
+   * dark edge between adjacent top-level menu items.
+   *
+   * Geometry, hover ownership, occlusion, SVG perimeter,
+   * Header cutout and Mobile behavior remain unchanged.
+   * ========================================================
+   */
 
+  @media (min-width: 993px) {
+
+    /*
+     * Historical nav-tab glass must not animate independently
+     * underneath / above the unified connected glass.
+     */
+    html body.mega-menu-unified-glass-active
+    .header
+    .has-submenu:has(> .mega-menu)
+    > .nav-link-row {
+
+      background:
+        transparent !important;
+
+      border-color:
+        transparent !important;
+
+      border-bottom-color:
+        transparent !important;
+
+      box-shadow:
+        none !important;
+
+      -webkit-backdrop-filter:
+        none !important;
+
+      backdrop-filter:
+        none !important;
+
+      transition:
+        none !important;
+    }
+
+
+    /*
+     * Retire the historical tab-to-panel connector while
+     * unified glass owns the complete silhouette.
+     */
+    html body.mega-menu-unified-glass-active
+    .header
+    .has-submenu:has(> .mega-menu)
+    > .nav-link-row::after {
+
+      content:
+        none !important;
+
+      display:
+        none !important;
+
+      opacity:
+        0 !important;
+
+      visibility:
+        hidden !important;
+
+      transition:
+        none !important;
+    }
+
+
+    /*
+     * Retire old shoulder pseudo-surfaces.
+     * Final shoulder geometry is already represented by the
+     * unified glass path and its SVG connected perimeter.
+     */
+    html body.mega-menu-unified-glass-active
+    .header
+    .has-submenu:has(> .mega-menu)
+    > .mega-menu::before,
+
+    html body.mega-menu-unified-glass-active
+    .header
+    .has-submenu:has(> .mega-menu)
+    > .mega-menu::after {
+
+      content:
+        none !important;
+
+      display:
+        none !important;
+
+      opacity:
+        0 !important;
+
+      box-shadow:
+        none !important;
+
+      transition:
+        none !important;
+    }
+
+
+    /*
+     * Owner handoff itself must be visually atomic.
+     * Do not allow a historical border/background transition
+     * on either the outgoing or incoming owner tab.
+     */
+    html body.mega-menu-unified-glass-active
+    .header
+    .nav-item.mega-menu-handoff-owner
+    > .nav-link-row {
+
+      background:
+        transparent !important;
+
+      border-color:
+        transparent !important;
+
+      box-shadow:
+        none !important;
+
+      transition:
+        none !important;
+    }
+  }
+</style>
+<style is:global>
+  /*
+   * ========================================================
+   * PHASE-5N57A-PREMIUM-DESKTOP-NAV-AUTHORITY
+   *
+   * Desktop navigation:
+   * - hover-driven Mega Menu
+   * - dedicated submenu chevron hidden
+   * - premium outline icon before each menu label
+   *
+   * Mobile submenu controls remain unchanged.
+   * ========================================================
+   */
+
+  @media (min-width: 993px) {
+
+    html body .header
+    .nav-menu
+    .nav-item
+    > .nav-link-row
+    > .submenu-toggle {
+      display: none !important;
+    }
+
+
+    html body .header
+    .nav-menu
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+
+    html body .header
+    .nav-premium-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 17px;
+      height: 17px;
+      flex: 0 0 17px;
+
+      color: #0b6b46;
+      opacity: 0.86;
+
+      transform:
+        translateY(-0.25px);
+
+      transition:
+        color 180ms ease,
+        opacity 180ms ease,
+        transform 180ms ease;
+    }
+
+
+    html body .header
+    .nav-premium-icon svg {
+      display: block;
+
+      width: 100%;
+      height: 100%;
+
+      fill: none;
+      stroke: currentColor;
+
+      stroke-width: 1.65;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+
+      overflow: visible;
+    }
+
+
+    html body .header
+    .nav-link:hover
+    .nav-premium-icon,
+
+    html body .header
+    .nav-link:focus-visible
+    .nav-premium-icon,
+
+    html body .header
+    .nav-link.active
+    .nav-premium-icon {
+      color: #087047;
+      opacity: 1;
+
+      transform:
+        translateY(-1px);
+    }
+
+
+    html body .header
+    .nav-link:hover
+    .nav-premium-icon svg,
+
+    html body .header
+    .nav-link:focus-visible
+    .nav-premium-icon svg {
+      filter:
+        drop-shadow(
+          0 1px 1px
+          rgba(8, 86, 55, 0.14)
+        );
+    }
+  }
+
+
+  @media (max-width: 992px) {
+
+    html body .header
+    .nav-premium-icon {
+      display: none !important;
+    }
+  }
+</style>
+
+
+<style>
+/*
+ * =========================================================
+ * PHASE-5N60A-PERSISTENT-OWNER-VISUAL-AUTHORITY
+ *
+ * Root cause:
+ *
+ * Mega Menu ownership is persistent in JavaScript, but some
+ * connected-tab visual rules are still driven by :hover /
+ * :focus-within.
+ *
+ * When pointer leaves About and enters the blank space toward
+ * Language, About is still persistentMegaMenuOwner while
+ * :hover disappears immediately.
+ *
+ * That creates a temporary disagreement:
+ *
+ *   JS owner        = About
+ *   unified glass   = active
+ *   Header cutout   = active
+ *   CSS :hover      = false
+ *
+ * Keep the persistent owner visually identical to the hovered
+ * owner for the complete lifetime of unified glass.
+ *
+ * No geometry changes.
+ * No Hero changes.
+ * No pointer lifecycle changes.
+ * No Mega Menu close timing changes.
+ * =========================================================
+ */
+
+@media (min-width: 993px) {
+
+  html
+  body.mega-menu-unified-glass-active
+  .header
+  .nav-item.mega-menu-handoff-owner
+  > .nav-link-row {
+
+    /*
+     * Connected Tab is content-only.
+     * The unified body-level glass owns the visible surface.
+     */
+    background:
+      transparent !important;
+
+    background-image:
+      none !important;
+
+    border:
+      0 !important;
+
+    border-color:
+      transparent !important;
+
+    border-bottom-color:
+      transparent !important;
+
+    border-radius:
+      0 !important;
+
+    outline:
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+
+    /*
+     * Owner transfer must remain atomic.
+     */
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * Do not allow historical connector art to reappear when
+   * the physical :hover state disappears but About remains
+   * the persistent owner.
+   */
+  html
+  body.mega-menu-unified-glass-active
+  .header
+  .nav-item.mega-menu-handoff-owner
+  > .nav-link-row::before,
+
+  html
+  body.mega-menu-unified-glass-active
+  .header
+  .nav-item.mega-menu-handoff-owner
+  > .nav-link-row::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+
+    visibility:
+      hidden !important;
+
+    opacity:
+      0 !important;
+
+    background:
+      none !important;
+
+    border:
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * The real Mega panel is also content-only while its owner
+   * persists. This avoids a hover-off frame restoring any
+   * historical panel surface below the unified glass.
+   */
+  html
+  body.mega-menu-unified-glass-active
+  .header
+  .nav-item.mega-menu-handoff-owner
+  > .mega-menu {
+
+    background:
+      transparent !important;
+
+    background-image:
+      none !important;
+
+    border:
+      0 !important;
+
+    border-radius:
+      0 !important;
+
+    outline:
+      0 !important;
+
+    box-shadow:
+      none !important;
+  }
+
+
+  html
+  body.mega-menu-unified-glass-active
+  .header
+  .nav-item.mega-menu-handoff-owner
+  > .mega-menu::before,
+
+  html
+  body.mega-menu-unified-glass-active
+  .header
+  .nav-item.mega-menu-handoff-owner
+  > .mega-menu::after {
+
+    content:
+      none !important;
+
+    display:
+      none !important;
+
+    visibility:
+      hidden !important;
+
+    opacity:
+      0 !important;
+
+    background:
+      none !important;
+
+    border:
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    transition:
+      none !important;
+  }
+
+}
+</style>
 <script>
   /**
    * Global scroll handler.
@@ -615,6 +1137,625 @@ const releaseSubmenuOcclusion = (
 };
 
 
+/*
+ * =========================================================
+ * PHASE-5N59B-ABOUT-LANGUAGE-NEUTRAL-CORRIDOR
+ *
+ * Preserve the final Mega Menu owner while the pointer moves
+ * through the physical space from About to Language Switcher,
+ * including the Language control itself.
+ *
+ * Prevents Header cutout / unified glass teardown-rebuild
+ * churn near the right side of the Header.
+ *
+ * All other blank Header regions remain normal true exits.
+ * =========================================================
+ */
+/*
+ * =========================================================
+ * PHASE-5N59F-STABLE-BLANK-GAP-DWELL-CLOSE
+ *
+ * Blank space between About and Language must close About,
+ * but it must NOT synchronously tear down Header compositor
+ * state on the first boundary pixel.
+ *
+ * Strategy:
+ *
+ * 1. Keep the successful 5N59D stability lane active.
+ * 2. When pointer settles inside the real blank Header gap,
+ *    start one short dwell timer.
+ * 3. Re-check physical geometry before closing.
+ * 4. Close exactly once only if pointer is still in the gap.
+ *
+ * This avoids:
+ *
+ *   inside -> outside -> inside
+ *
+ * teardown/rebuild churn around the About/Language edge.
+ * =========================================================
+ */
+
+/*
+ * =========================================================
+ * PHASE-5N59G-HEADER-EXIT-SHIELD
+ *
+ * During the final About -> blank-gap close, the connected
+ * Header cutout / unified glass compositor is dismantled.
+ *
+ * Even though Header state is restored atomically, browsers
+ * may expose the Hero layer for one compositor frame while
+ * the clipped Header surface is being rebuilt.
+ *
+ * Place a temporary SOLID surface directly underneath Header
+ * content and above page/Hero content during that tiny exit
+ * window.
+ *
+ * The shield:
+ * - does not receive pointer events
+ * - does not modify Header geometry
+ * - does not modify Hero
+ * - does not modify Mega Menu geometry
+ * - exists only during final blank-gap teardown
+ * =========================================================
+ */
+
+const ensureAboutLanguageHeaderExitShield = () => {
+
+  let shield =
+    document.querySelector<HTMLElement>(
+      "#mato-about-language-header-exit-shield"
+    );
+
+
+  if (!shield) {
+
+    shield =
+      document.createElement(
+        "div"
+      );
+
+    shield.id =
+      "mato-about-language-header-exit-shield";
+
+    shield.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    document.body.appendChild(
+      shield
+    );
+  }
+
+
+  return shield;
+};
+
+
+const showAboutLanguageHeaderExitShield = () => {
+
+  const header =
+    document.querySelector<HTMLElement>(
+      ".header"
+    );
+
+  if (!header) {
+    return;
+  }
+
+
+  const shield =
+    ensureAboutLanguageHeaderExitShield();
+
+  const headerRect =
+    header.getBoundingClientRect();
+
+
+  shield.style.position =
+    "fixed";
+
+  shield.style.left =
+    `${headerRect.left}px`;
+
+  shield.style.top =
+    `${headerRect.top}px`;
+
+  shield.style.width =
+    `${headerRect.width}px`;
+
+  shield.style.height =
+    `${headerRect.height}px`;
+
+  /*
+   * Approved normal Header surface.
+   *
+   * Keep this intentionally opaque: its only job is to make
+   * it physically impossible for Hero pixels to appear
+   * through the Header during compositor teardown.
+   */
+  shield.style.background =
+    "#fffdf8";
+
+  shield.style.opacity =
+    "1";
+
+  shield.style.pointerEvents =
+    "none";
+
+  /*
+   * Unified glass body is around 1990 and Header is 2000.
+   * 1998 therefore covers page / Hero / retiring glass while
+   * remaining behind the real Header and its content.
+   */
+  shield.style.zIndex =
+    "1998";
+
+  shield.style.display =
+    "block";
+
+  shield.style.visibility =
+    "visible";
+
+  shield.style.transform =
+    "translateZ(0)";
+
+  shield.style.willChange =
+    "opacity";
+
+};
+
+
+const hideAboutLanguageHeaderExitShield = () => {
+
+  const shield =
+    document.querySelector<HTMLElement>(
+      "#mato-about-language-header-exit-shield"
+    );
+
+  if (!shield) {
+    return;
+  }
+
+  shield.style.display =
+    "none";
+
+  shield.style.visibility =
+    "hidden";
+
+};
+
+
+const releaseAboutLanguageHeaderExitShield = () => {
+
+  /*
+   * Keep shield through two paint opportunities.
+   *
+   * Frame 1:
+   *   old glass/cutout compositor is removed.
+   *
+   * Frame 2:
+   *   normal solid Header has been painted.
+   *
+   * Only then remove the temporary shield.
+   */
+  window.requestAnimationFrame(
+    () => {
+
+      window.requestAnimationFrame(
+        () => {
+
+          hideAboutLanguageHeaderExitShield();
+
+        }
+      );
+
+    }
+  );
+
+};
+
+let aboutLanguageBlankGapCloseTimer:
+  number | null = null;
+
+let aboutLanguageBlankGapPointerX = 0;
+let aboutLanguageBlankGapPointerY = 0;
+
+
+const cancelAboutLanguageBlankGapClose = () => {
+
+  if (
+    aboutLanguageBlankGapCloseTimer !== null
+  ) {
+
+    window.clearTimeout(
+      aboutLanguageBlankGapCloseTimer
+    );
+
+    aboutLanguageBlankGapCloseTimer = null;
+  }
+};
+
+
+const scheduleAboutLanguageBlankGapClose = (
+  clientX: number,
+  clientY: number
+) => {
+
+  aboutLanguageBlankGapPointerX =
+    clientX;
+
+  aboutLanguageBlankGapPointerY =
+    clientY;
+
+
+  /*
+   * One timer only.
+   *
+   * Repeated pointermove events inside the same physical gap
+   * update coordinates without creating additional timers.
+   */
+  if (
+    aboutLanguageBlankGapCloseTimer !== null
+  ) {
+    return;
+  }
+
+
+  aboutLanguageBlankGapCloseTimer =
+    window.setTimeout(
+      () => {
+
+        aboutLanguageBlankGapCloseTimer =
+          null;
+
+
+        if (
+          !persistentMegaMenuOwner
+        ) {
+          return;
+        }
+
+
+        const nav =
+          document.querySelector<HTMLElement>(
+            ".nav-menu"
+          );
+
+        const header =
+          document.querySelector<HTMLElement>(
+            ".header"
+          );
+
+        const languageSwitcher =
+          document.querySelector<HTMLElement>(
+            ".language-switcher"
+          );
+
+
+        if (
+          !nav ||
+          !header ||
+          !languageSwitcher
+        ) {
+          return;
+        }
+
+
+        const topLevelItems =
+          Array.from(
+            nav.querySelectorAll<HTMLElement>(
+              ":scope > .nav-item"
+            )
+          );
+
+
+        if (
+          topLevelItems.length === 0
+        ) {
+          return;
+        }
+
+
+        const finalNavItem =
+          topLevelItems[
+            topLevelItems.length - 1
+          ];
+
+
+        /*
+         * Only About/final-item ownership participates in
+         * this specialized close behavior.
+         */
+        if (
+          persistentMegaMenuOwner !==
+          finalNavItem
+        ) {
+          return;
+        }
+
+
+        const aboutRect =
+          finalNavItem.getBoundingClientRect();
+
+        const languageRect =
+          languageSwitcher.getBoundingClientRect();
+
+        const headerRect =
+          header.getBoundingClientRect();
+
+
+        const stillInsideBlankGap =
+          aboutLanguageBlankGapPointerY >=
+            headerRect.top &&
+          aboutLanguageBlankGapPointerY <=
+            headerRect.bottom &&
+          aboutLanguageBlankGapPointerX >
+            aboutRect.right &&
+          aboutLanguageBlankGapPointerX <
+            languageRect.left;
+
+
+        /*
+         * Pointer moved elsewhere during dwell.
+         * Do not close.
+         */
+        if (!stillInsideBlankGap) {
+          return;
+        }
+
+
+        /*
+         * Definitive settled blank-gap exit.
+         *
+         * Clear only once after geometry has stabilized.
+         */
+        showAboutLanguageHeaderExitShield();
+
+        cancelMegaMenuHandoff();
+
+        clearMegaMenuOcclusion();
+
+        releaseAboutLanguageHeaderExitShield();
+
+      },
+      120
+    );
+};
+
+const pointerInsideAboutLanguageCorridor = (
+  clientX: number,
+  clientY: number
+) => {
+
+  if (
+    window.innerWidth <= 768 ||
+    !persistentMegaMenuOwner
+  ) {
+    return false;
+  }
+
+
+  const nav =
+    document.querySelector<HTMLElement>(
+      ".nav-menu"
+    );
+
+  const header =
+    document.querySelector<HTMLElement>(
+      ".header"
+    );
+
+  const languageSwitcher =
+    document.querySelector<HTMLElement>(
+      ".language-switcher"
+    );
+
+
+  if (
+    !nav ||
+    !header ||
+    !languageSwitcher
+  ) {
+    return false;
+  }
+
+
+  const topLevelItems =
+    Array.from(
+      nav.querySelectorAll<HTMLElement>(
+        ":scope > .nav-item"
+      )
+    );
+
+
+  if (topLevelItems.length === 0) {
+    return false;
+  }
+
+
+  const finalNavItem =
+    topLevelItems[
+      topLevelItems.length - 1
+    ];
+
+
+  /*
+   * Corridor applies only when the final Menu item owns
+   * the Mega Menu — currently About.
+   */
+  if (
+    persistentMegaMenuOwner !== finalNavItem
+  ) {
+    return false;
+  }
+
+
+  const aboutRect =
+    finalNavItem.getBoundingClientRect();
+
+  const languageRect =
+    languageSwitcher.getBoundingClientRect();
+
+  const headerRect =
+    header.getBoundingClientRect();
+
+  /*
+   * Keep this lane narrow.
+   *
+   * 4px left overlap prevents a one-pixel boundary oscillation
+   * at About's outer edge; 6px right tolerance covers the
+   * Language control edge without taking over blank Header.
+   */
+  const corridorLeft =
+    aboutRect.right - 4;
+
+  const corridorRight =
+    languageRect.right + 6;
+  /*
+   * =========================================================
+   * PHASE-5N59D-RIGHT-SIDE-VERTICAL-STABILITY-LANE
+   *
+   * 5N59B protected only the physical height of About and
+   * Language. That was still too narrow for real vertical
+   * pointer movement near the right side of the Header.
+   *
+   * Extend this SAME narrow horizontal lane vertically from
+   * the Header through the active Mega Menu panel.
+   *
+   * Important:
+   * - horizontal protection remains narrow
+   * - applies only while About is the persistent owner
+   * - does not enlarge other Menu handoff geometry
+   * - does not change Hero, glass or perimeter geometry
+   * =========================================================
+   */
+
+  const activePanel =
+    persistentMegaMenuOwner.querySelector<HTMLElement>(
+      ":scope > .mega-menu"
+    );
+
+  const panelRect =
+    activePanel?.getBoundingClientRect();
+
+
+  /*
+   * Start at the Header top.
+   *
+   * Small 4px tolerance protects natural pointer movement
+   * around the top edge without creating a wide exit zone.
+   */
+  const corridorTop =
+    headerRect.top - 4;
+
+
+  /*
+   * Continue through the active Mega Menu height.
+   *
+   * If panel geometry is temporarily unavailable, fall back
+   * safely to the Header bottom.
+   */
+  const corridorBottom =
+    panelRect
+      ? Math.max(
+          headerRect.bottom,
+          panelRect.bottom
+        ) + 4
+      : headerRect.bottom + 4;
+
+  /*
+   * =========================================================
+   * PHASE-5N59E-ABOUT-BLANK-GAP-TRUE-EXIT
+   *
+   * 5N59D intentionally stabilizes the narrow right-side lane
+   * from Header through the active About Mega Menu.
+   *
+   * However, the real EMPTY Header space between About and
+   * Language Switcher must remain a TRUE EXIT.
+   *
+   * Result:
+   *
+   * About -> empty Header gap
+   *   = close About immediately.
+   *
+   * About -> active Mega Menu / right-side vertical lane
+   *   = preserve stable compositor state.
+   *
+   * Language control itself
+   *   = remains protected.
+   *
+   * This preserves the successful 5N59D Header/Hero jitter
+   * fix without making the blank Header gap sticky.
+   * =========================================================
+   */
+
+  const insideHeaderBand =
+    clientY >= headerRect.top &&
+    clientY <= headerRect.bottom;
+
+
+  const insideBlankAboutLanguageGap =
+    insideHeaderBand &&
+    clientX > aboutRect.right &&
+    clientX < languageRect.left;
+
+
+  /*
+   * Empty Header space has higher priority than the
+   * 5N59D stability lane.
+   */
+  if (insideBlankAboutLanguageGap) {
+
+    /*
+     * 5N59F:
+     *
+     * Keep compositor geometry stable while pointer settles.
+     * About will close after the short verified dwell.
+     */
+    scheduleAboutLanguageBlankGapClose(
+      clientX,
+      clientY
+    );
+
+    return true;
+  }
+
+
+  /*
+   * Pointer is no longer in the real blank Header gap.
+   * Cancel any pending specialized close.
+   */
+  cancelAboutLanguageBlankGapClose();
+
+
+  /*
+   * The Language control itself remains part of the stable
+   * system while About is still the active owner.
+   */
+  const insideLanguageControl =
+    clientX >= languageRect.left &&
+    clientX <= languageRect.right &&
+    clientY >= languageRect.top &&
+    clientY <= languageRect.bottom;
+
+
+  if (insideLanguageControl) {
+    return true;
+  }
+
+
+  /*
+   * Outside the blank Header band, retain the successful
+   * 5N59D narrow vertical stability lane.
+   */
+  return (
+    clientX >= corridorLeft &&
+    clientX <= corridorRight &&
+    clientY >= corridorTop &&
+    clientY <= corridorBottom
+  );
+};
+
 const pointerInsideMegaMenuSystem = (
   clientX: number,
   clientY: number
@@ -848,6 +1989,19 @@ const pointerInsideMegaMenuSystem = (
 
 
   /*
+   * About -> Language is a neutral Header corridor.
+   */
+  if (
+    pointerInsideAboutLanguageCorridor(
+      clientX,
+      clientY
+    )
+  ) {
+    return true;
+  }
+
+
+  /*
    * Anything else is a TRUE exit.
    */
   return false;
@@ -971,6 +2125,21 @@ atomicExitHeader?.addEventListener(
           event.clientX >
             lastItemRect.right
         ) {
+
+          /*
+           * PHASE 5N59B:
+           * About -> Language is not a true exit while pointer
+           * remains inside the real Language corridor.
+           */
+          if (
+            pointerInsideAboutLanguageCorridor(
+              event.clientX,
+              event.clientY
+            )
+          ) {
+            return;
+          }
+
 
           cancelMegaMenuHandoff();
 
@@ -1887,6 +3056,25 @@ clearPersistentMegaMenuOwner();
 
       globalOcclusionCandidates.forEach(
         (element) => {
+
+          /* PHASE-5N56A-HERO-PRODUCT-BLUR-PRESERVE
+           *
+           * Keep Hero Product Slider visible beneath
+           * the Mega Menu glass.
+           *
+           * Do not apply foreground occlusion to slider
+           * links or controls.
+           *
+           * Existing page backdrop blur remains active.
+           */
+          if (
+            element.closest(
+              ".hero-product-slider"
+            )
+          ) {
+            return;
+          }
+
 
           /*
            * Ignore hidden / zero-size elements.
@@ -3458,6 +4646,190 @@ clearPersistentMegaMenuOwner();
 
           unifiedOutline.style.webkitClipPath =
             unifiedPath;
+          /* PHASE-5N56F-SVG-CONNECTED-STROKE-GEOMETRY-START */
+
+          /*
+           * TRUE CONNECTED PERIMETER
+           *
+           * CSS inset shadows cannot reliably trace the
+           * concave clip-path shoulders.
+           *
+           * Reuse the exact unifiedPath as an SVG path so
+           * the browser paints one real continuous stroke.
+           */
+          let unifiedStrokeSvg =
+            document.querySelector<SVGSVGElement>(
+              "#mato-unified-mega-stroke"
+            );
+
+          if (!unifiedStrokeSvg) {
+
+            unifiedStrokeSvg =
+              document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "svg"
+              ) as SVGSVGElement;
+
+            unifiedStrokeSvg.id =
+              "mato-unified-mega-stroke";
+
+            unifiedStrokeSvg.setAttribute(
+              "aria-hidden",
+              "true"
+            );
+
+            const unifiedStrokePath =
+              document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "path"
+              );
+
+            unifiedStrokePath.id =
+              "mato-unified-mega-stroke-path";
+
+            /*
+             * PHASE-5N56G-DOUBLE-CONNECTED-PERIMETER
+             *
+             * Add a second companion path behind the
+             * primary perimeter. Both paths share exactly
+             * the same connected geometry.
+             */
+            const unifiedOuterStrokePath =
+              document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "path"
+              );
+
+            unifiedOuterStrokePath.id =
+              "mato-unified-mega-outer-stroke-path";
+
+            unifiedStrokeSvg.appendChild(
+              unifiedOuterStrokePath
+            );
+
+            unifiedStrokeSvg.appendChild(
+              unifiedStrokePath
+            );
+
+            document.body.appendChild(
+              unifiedStrokeSvg
+            );
+          }
+
+
+          /*
+           * Exact same viewport rectangle as glass/outline.
+           */
+          unifiedStrokeSvg.style.left =
+            `${unifiedLeft}px`;
+
+          unifiedStrokeSvg.style.top =
+            `${unifiedTop}px`;
+
+          unifiedStrokeSvg.style.width =
+            `${unifiedWidth}px`;
+
+          unifiedStrokeSvg.style.height =
+            `${unifiedHeight}px`;
+
+          unifiedStrokeSvg.setAttribute(
+            "width",
+            `${unifiedWidth}`
+          );
+
+          unifiedStrokeSvg.setAttribute(
+            "height",
+            `${unifiedHeight}`
+          );
+
+          unifiedStrokeSvg.setAttribute(
+            "viewBox",
+            `0 0 ${unifiedWidth} ${unifiedHeight}`
+          );
+
+
+          /*
+           * unifiedPath format:
+           *
+           * path("M ... Q ... Z")
+           *
+           * SVG needs only:
+           *
+           * M ... Q ... Z
+           */
+          const unifiedSvgPathData =
+            unifiedPath.startsWith('path("') &&
+            unifiedPath.endsWith('")')
+              ? unifiedPath.slice(6, -2)
+              : "";
+
+          const unifiedStrokePath =
+            unifiedStrokeSvg.querySelector<SVGPathElement>(
+              "#mato-unified-mega-stroke-path"
+            );
+
+          const unifiedOuterStrokePath =
+            unifiedStrokeSvg.querySelector<SVGPathElement>(
+              "#mato-unified-mega-outer-stroke-path"
+            );
+
+          if (
+            unifiedOuterStrokePath &&
+            unifiedSvgPathData
+          ) {
+
+            unifiedOuterStrokePath.setAttribute(
+              "d",
+              unifiedSvgPathData
+            );
+
+            /*
+             * PHASE-5N56H-OUTER-PERIMETER-GAP
+             *
+             * Expand the companion path outside the
+             * primary perimeter instead of drawing a
+             * wider stroke directly on top of it.
+             *
+             * Result:
+             * primary line = original silhouette
+             * outer line   = approximately 5px outside
+             */
+            const outerGap =
+              5;
+
+            const outerScaleX =
+              (unifiedWidth + outerGap * 2) /
+              unifiedWidth;
+
+            const outerScaleY =
+              (unifiedHeight + outerGap * 2) /
+              unifiedHeight;
+
+            unifiedOuterStrokePath.setAttribute(
+              "transform",
+              `matrix(
+                ${outerScaleX}
+                0
+                0
+                ${outerScaleY}
+                ${-outerGap}
+                ${-outerGap}
+              )`
+            );
+          }
+
+          if (
+            unifiedStrokePath &&
+            unifiedSvgPathData
+          ) {
+
+            unifiedStrokePath.setAttribute(
+              "d",
+              unifiedSvgPathData
+            );
+          }
+
+          /* PHASE-5N56F-SVG-CONNECTED-STROKE-GEOMETRY-END */
 
 
           /*
@@ -3667,6 +5039,100 @@ clearPersistentMegaMenuOwner();
           }
 
           /* PHASE-5N15-FULL-UNIFIED-OUTLINE-END */
+          /* PHASE-5N56E-CONNECTED-OUTLINE-OWNERSHIP-START */
+
+          /*
+           * FINAL OUTLINE OWNERSHIP
+           *
+           * The body-level unified outline is the only
+           * perimeter stroke for the connected Mega Menu
+           * + active Tab silhouette.
+           *
+           * Legacy panel / tab edge effects are disabled
+           * so no second white stripe appears inside or
+           * beside the connected card.
+           */
+          let connectedOutlineOwnershipAuthority =
+            document.querySelector<HTMLStyleElement>(
+              "#mato-connected-outline-ownership-authority"
+            );
+
+          if (!connectedOutlineOwnershipAuthority) {
+
+            connectedOutlineOwnershipAuthority =
+              document.createElement(
+                "style"
+              );
+
+            connectedOutlineOwnershipAuthority.id =
+              "mato-connected-outline-ownership-authority";
+
+            connectedOutlineOwnershipAuthority.textContent = `
+              @media (min-width: 769px) {
+
+                /*
+                 * Unified body-level silhouette owns
+                 * the complete visible perimeter.
+                 */
+                body.mega-menu-unified-glass-active
+                #mato-unified-mega-outline {
+
+                  opacity:
+                    1 !important;
+
+                  visibility:
+                    visible !important;
+                }
+
+
+                /*
+                 * The physical Mega Menu card must not
+                 * draw another perimeter beside the
+                 * connected body-level outline.
+                 */
+                body.mega-menu-unified-glass-active
+                .mega-menu {
+
+                  border:
+                    0 !important;
+
+                  outline:
+                    0 !important;
+
+                  box-shadow:
+                    none !important;
+                }
+
+
+                /*
+                 * Retired physical Tab must not contribute
+                 * its own border / outline / shadow.
+                 */
+                body.mega-menu-unified-glass-active
+                .nav-item.mega-menu-tab-glass-active,
+                body.mega-menu-unified-glass-active
+                .nav-item.mega-menu-tab-glass-active::before,
+                body.mega-menu-unified-glass-active
+                .nav-item.mega-menu-tab-glass-active::after {
+
+                  border:
+                    0 !important;
+
+                  outline:
+                    0 !important;
+
+                  box-shadow:
+                    none !important;
+                }
+              }
+            `;
+
+            document.head.appendChild(
+              connectedOutlineOwnershipAuthority
+            );
+          }
+
+          /* PHASE-5N56E-CONNECTED-OUTLINE-OWNERSHIP-END */
           /* PHASE-5N13-PREMIUM-CONTINUOUS-EDGE-START */
 
           /*
@@ -3806,59 +5272,32 @@ clearPersistentMegaMenuOwner();
                 .has-submenu:has(> .mega-menu)
                 > .mega-menu {
 
-                  border-top:
-                    0 !important;
-
-                  border-left:
-                    1px solid
-                    rgba(255, 255, 255, 0.48) !important;
-
-                  border-right:
-                    1px solid
-                    rgba(255, 255, 255, 0.48) !important;
-
-                  border-bottom:
-                    1px solid
-                    rgba(255, 255, 255, 0.48) !important;
-
-
                   /*
-                   * Top corners belong to connected
-                   * Header silhouette, not panel.
+                   * PHASE-5N56D-SINGLE-CONNECTED-OUTLINE
+                   *
+                   * The body-level unified outline owns the
+                   * complete connected silhouette:
+                   * Tab + shoulders + panel sides + bottom.
+                   *
+                   * The internal Mega Menu body must not
+                   * draw a second contour.
                    */
-                  border-top-left-radius:
+                  border:
                     0 !important;
 
-                  border-top-right-radius:
+                  outline:
                     0 !important;
 
+                  border-radius:
+                    0 !important;
 
                   /*
-                   * Premium lower card shape.
-                   */
-                  border-bottom-left-radius:
-                    18px !important;
-
-                  border-bottom-right-radius:
-                    18px !important;
-
-
-                  /*
-                   * Restore depth without a top seam.
+                   * Depth belongs to the unified glass layer.
+                   * Remove local edge/inset shadows so curved
+                   * shoulders render as one clean contour.
                    */
                   box-shadow:
-                    0 22px 52px
-                    rgba(18, 50, 35, 0.12),
-
-                    inset 1px 0 0
-                    rgba(255, 255, 255, 0.06),
-
-                    inset -1px 0 0
-                    rgba(255, 255, 255, 0.06),
-
-                    inset 0 -1px 0
-                    rgba(255, 255, 255, 0.07)
-                    !important;
+                    none !important;
                 }
 
 
@@ -3952,6 +5391,185 @@ clearPersistentMegaMenuOwner();
           }
 
           /* PHASE-5N13-PREMIUM-CONTINUOUS-EDGE-END */
+          /* PHASE-5N56F-SVG-CONNECTED-STROKE-AUTHORITY-START */
+
+          /*
+           * Append AFTER historical premium edge authority.
+           * This is the final visible perimeter authority.
+           */
+          let svgStrokeAuthority =
+            document.querySelector<HTMLStyleElement>(
+              "#mato-svg-connected-stroke-authority"
+            );
+
+          if (!svgStrokeAuthority) {
+
+            svgStrokeAuthority =
+              document.createElement(
+                "style"
+              );
+
+            svgStrokeAuthority.id =
+              "mato-svg-connected-stroke-authority";
+
+            svgStrokeAuthority.textContent = `
+              @media (min-width: 769px) {
+
+                /*
+                 * Retire historical DIV outline.
+                 * Geometry remains available, but it must
+                 * not paint another contour.
+                 */
+                body.mega-menu-unified-glass-active
+                #mato-unified-mega-outline {
+
+                  opacity:
+                    0 !important;
+
+                  visibility:
+                    hidden !important;
+                }
+
+
+                /*
+                 * True body-level connected perimeter.
+                 *
+                 * 2101 places the stroke above the physical
+                 * Mega Menu foreground surface while keeping
+                 * it pointer-transparent.
+                 */
+                #mato-unified-mega-stroke {
+
+                  position:
+                    fixed;
+
+                  z-index:
+                    2101;
+
+                  pointer-events:
+                    none;
+
+                  overflow:
+                    visible;
+
+                  opacity:
+                    0;
+
+                  visibility:
+                    hidden;
+
+                  transition:
+                    none;
+                }
+
+
+                body.mega-menu-unified-glass-active
+                #mato-unified-mega-stroke {
+
+                  opacity:
+                    1 !important;
+
+                  visibility:
+                    visible !important;
+                }
+
+
+                /*
+                 * OUTER COMPANION PERIMETER
+                 *
+                 * A softer wider stroke sits behind the
+                 * primary line. This creates the second
+                 * perimeter layer requested around the
+                 * complete connected silhouette.
+                 */
+                #mato-unified-mega-outer-stroke-path {
+
+                  fill:
+                    none;
+
+                  /*
+                   * 5N56H:
+                   * keep this line thin because separation
+                   * now comes from geometry, not width.
+                   */
+                  stroke:
+                    rgba(255,255,255,0.62);
+
+                  stroke-width:
+                    1.15;
+
+                  stroke-linecap:
+                    round;
+
+                  stroke-linejoin:
+                    round;
+
+                  vector-effect:
+                    non-scaling-stroke;
+
+                  filter:
+                    drop-shadow(
+                      0 1px 2px
+                      rgba(18,50,35,0.08)
+                    );
+                }
+
+
+                /*
+                 * INNER PRIMARY PERIMETER.
+                 */
+                #mato-unified-mega-stroke-path {
+
+                  fill:
+                    none;
+
+                  stroke:
+                    rgba(255,255,255,0.82);
+
+                  stroke-width:
+                    1.35;
+
+                  stroke-linecap:
+                    round;
+
+                  stroke-linejoin:
+                    round;
+
+                  vector-effect:
+                    non-scaling-stroke;
+
+                  filter:
+                    drop-shadow(
+                      0 1px 1px
+                      rgba(18,50,35,0.10)
+                    );
+                }
+
+
+                /*
+                 * Absolute final protection:
+                 * physical panel cannot redraw a second
+                 * border beside the SVG perimeter.
+                 */
+                body.mega-menu-unified-glass-active
+                .mega-menu {
+
+                  border:
+                    0 !important;
+
+                  outline:
+                    0 !important;
+                }
+              }
+            `;
+
+            document.head.appendChild(
+              svgStrokeAuthority
+            );
+          }
+
+          /* PHASE-5N56F-SVG-CONNECTED-STROKE-AUTHORITY-END */
+
           /* PHASE-5N8-FULL-CUTOUT-APPLY-START */
 
           /*
@@ -4266,8 +5884,16 @@ clearPersistentMegaMenuOwner();
            * the panel so anti-aliasing from the Header
            * surface cannot create a pale 1px wedge.
            */
+          /*
+           * PHASE-5N56B-LEFT-SHOULDER-SEAM-SAFETY
+           *
+           * Preserve connected-glass geometry and radii.
+           * Expand only the final Header cutout overlap
+           * to prevent the solid Header surface from
+           * leaking through the anti-aliased shoulder.
+           */
           const seamSafety =
-            2;
+            4;
 
 
           const smoothPanelLeft =
