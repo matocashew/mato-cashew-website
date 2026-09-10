@@ -58,6 +58,16 @@ const homePath =
   (isKhmer ? "/km/" : "/");
 
 
+/*
+ * Resolve exactly one active top-level navigation owner.
+ */
+const activeTopLevelId =
+  navigationService.getActiveTopLevelId(
+    menuItems,
+    currentPath
+  );
+
+
 const brandName =
   "ចន្ទីមាតុភូមិ — Mato Cashew";
 ---
@@ -112,10 +122,7 @@ const brandName =
               Boolean(item.children?.length);
 
             const isActive =
-              navigationService.isParentActive(
-                item,
-                currentPath
-              );
+              item.id === activeTopLevelId;
 
             return (
               <li
@@ -7247,3 +7254,4 @@ document.body.classList.add(
     atomicHeaderRestoreAuthority
   );
 </script>
+

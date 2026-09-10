@@ -399,6 +399,55 @@ export const navigationService = {
       )
     );
   },
+  /**
+   * Resolve exactly one active top-level navigation owner.
+   *
+   * Priority:
+   * 1. A top-level item's own route/section.
+   * 2. Nested child routes only when no top-level route
+   *    directly owns the current pathname.
+   *
+   * When multiple direct owners match, the most specific
+   * normalized href wins.
+   */
+  getActiveTopLevelId(
+    items: ResolvedMenuItem[],
+    pathname: string
+  ): string | undefined {
+
+    const directOwners =
+      items
+        .filter(item =>
+          this.isSectionActive(
+            item,
+            pathname
+          )
+        )
+        .sort(
+          (a, b) =>
+            normalizePath(b.href).length -
+            normalizePath(a.href).length
+        );
+
+    if (directOwners.length > 0) {
+      return directOwners[0].id;
+    }
+
+    const descendantOwner =
+      items.find(
+        item =>
+          item.children?.some(
+            child =>
+              this.isParentActive(
+                child,
+                pathname
+              )
+          ) ?? false
+      );
+
+    return descendantOwner?.id;
+  },
+
 
 
   /**
@@ -433,3 +482,4 @@ export const navigationService = {
 
 
 export default navigationService;
+

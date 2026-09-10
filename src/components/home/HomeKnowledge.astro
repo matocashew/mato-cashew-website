@@ -1,10 +1,19 @@
----
+﻿---
 import SectionTitle from "../SectionTitle.astro";
 import KnowledgeArticleCard from "../knowledge/KnowledgeArticleCard.astro";
 
 import { knowledgeService } from "../../services/knowledgeService";
+import { getKnowledgeTranslations } from "../../i18n/knowledge";
 
-const articles = (await knowledgeService.getAll())
+const lang =
+  Astro.url.pathname.startsWith("/km/")
+    ? "km"
+    : "en";
+
+const t = getKnowledgeTranslations(lang);
+
+const articles =
+  (await knowledgeService.getAll(lang))
   .sort(
     (a, b) =>
       b.publishedAt.getTime() -
@@ -23,14 +32,12 @@ const articles = (await knowledgeService.getAll())
 
         <div class="home-knowledge-header">
           <SectionTitle
-            tag="Cashew Knowledge"
-            title="Learn More About Cambodian Cashew"
+            tag={t.homeTag}
+            title={t.homeTitle}
           />
 
           <p class="home-knowledge-description">
-            Explore practical knowledge about Cambodian cashew,
-            from grading and processing to quality, storage,
-            and the cashew value chain.
+            {t.homeDescription}
           </p>
         </div>
 
@@ -39,6 +46,7 @@ const articles = (await knowledgeService.getAll())
             articles.map((article) => (
               <KnowledgeArticleCard
                 article={article}
+                lang={lang}
               />
             ))
           }
@@ -46,10 +54,14 @@ const articles = (await knowledgeService.getAll())
 
         <div class="home-knowledge-action">
           <a
-            href="/knowledge/"
+            href={
+              lang === "km"
+                ? "/km/knowledge/"
+                : "/knowledge/"
+            }
             class="btn btn-primary"
           >
-            Explore Knowledge Center
+            {t.exploreKnowledgeCenter}
           </a>
         </div>
 
