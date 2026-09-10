@@ -1,4 +1,4 @@
-/* =========================================================
+﻿/* =========================================================
    MATO CASHEW â€” HEADER
    ========================================================= */
 
@@ -2232,8 +2232,8 @@
     pointer-events: none;
 
     transform:
-      translateY(8px)
-      scale(0.99);
+      translateY(0)
+      scale(1);
 
     transform-origin:
       top center;
@@ -2268,8 +2268,7 @@
 
     transition:
       opacity 180ms ease,
-      visibility 180ms ease,
-      transform 180ms ease;
+      visibility 180ms ease;
   }
 
   .has-submenu:hover
@@ -2304,8 +2303,8 @@
 
     transform:
       translateX(-50%)
-      translateY(8px)
-      scale(0.99);
+      translateY(0)
+      scale(1);
   }
 
   .has-submenu:hover
@@ -10735,3 +10734,413 @@ html body:has(
  * opacity    = 0.95
  */
 /* PHASE-5N53-RESTORE-BRAND-DIVIDER-END */
+
+/* =========================================================
+   E5N41-R3-BEGIN-BLANK-GAP-BLUR-PAINT-OFF
+
+   About -> Language blank Header gap.
+
+   Keep the successful no-jitter Mega ownership and
+   compositor geometry alive.
+
+   While Header.astro applies:
+     mega-menu-blank-gap-hidden
+
+   suppress ONLY the remaining global Phase-5L BODY
+   page-blur paint.
+
+   No ownership teardown.
+   No geometry change.
+   No timer.
+   No RAF.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  body.mega-menu-page-blur-active:has(
+    .nav-item.mega-menu-blank-gap-hidden
+  )::before {
+
+    opacity: 0 !important;
+    visibility: hidden !important;
+
+    background: transparent !important;
+
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+
+    filter: none !important;
+
+    transition: none !important;
+  }
+}
+
+/* E5N41-R3-FINISH-BLANK-GAP-BLUR-PAINT-OFF */
+
+/* E5N-FINAL-R2-STABILITY-START */
+
+/*
+ * =========================================================
+ * MATO CASHEW — FINAL DESKTOP MEGA STABILITY AUTHORITY
+ *
+ * Scope:
+ * - no Mega scale/growth
+ * - no Mega vertical transform motion
+ * - no active-tab box-model reflow
+ * - no Header foreground movement
+ *
+ * Intentionally NOT changed:
+ * - Header background
+ * - Header ::before / cutout
+ * - unified glass
+ * - SVG perimeter
+ * - Hero
+ * - Mega ownership JavaScript
+ * =========================================================
+ */
+
+@media (min-width: 993px) {
+
+  /*
+   * -------------------------------------------------------
+   * 1. MEGA PANEL GEOMETRY IS CONSTANT
+   * -------------------------------------------------------
+   */
+
+  html body .header
+  #main-menu
+  > .nav-item.has-submenu.nav-mega
+  > .submenu-panel.mega-menu,
+
+  html body .header
+  #main-menu
+  > .nav-item.has-submenu.nav-mega:hover
+  > .submenu-panel.mega-menu,
+
+  html body .header
+  #main-menu
+  > .nav-item.has-submenu.nav-mega:focus-within
+  > .submenu-panel.mega-menu,
+
+  html body .header
+  #main-menu
+  > .nav-item.has-submenu.nav-mega.mega-menu-handoff-owner
+  > .submenu-panel.mega-menu {
+
+    transform:
+      translateX(-50%)
+      translateY(0)
+      scale(1) !important;
+
+    transform-origin:
+      top center !important;
+
+    transition-property:
+      opacity,
+      visibility !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 2. TOP-LEVEL MEGA TAB KEEPS EXACT SAME BOX
+   *
+   * Unified glass/SVG owns the visible border.
+   * This transparent 1px border is geometry reservation only.
+   * -------------------------------------------------------
+   */
+
+  html body .header
+  #main-menu
+  > .nav-item.has-submenu.nav-mega
+  > .nav-link-row,
+
+  html body.mega-menu-tab-glass-active
+  .header
+  #main-menu
+  > .nav-item.has-submenu.nav-mega
+  > .nav-link-row,
+
+  html body.mega-menu-unified-glass-active
+  .header
+  #main-menu
+  > .nav-item.has-submenu.nav-mega
+  > .nav-link-row,
+
+  html body.mega-menu-unified-glass-active
+  .header
+  #main-menu
+  > .nav-item.has-submenu.nav-mega.mega-menu-handoff-owner
+  > .nav-link-row {
+
+    box-sizing:
+      border-box !important;
+
+    border:
+      1px solid transparent !important;
+
+    border-radius:
+      0 !important;
+
+    background:
+      transparent !important;
+
+    background-image:
+      none !important;
+
+    outline:
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+
+    filter:
+      none !important;
+
+    transform:
+      none !important;
+
+    translate:
+      none !important;
+
+    scale:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 3. FOREGROUND MUST NEVER SHIFT WITH MEGA STATE
+   * -------------------------------------------------------
+   */
+
+  html body.mega-menu-tab-glass-active
+  .header
+  #main-menu
+  > .nav-item
+  > .nav-link-row
+  > .nav-link,
+
+  html body.mega-menu-unified-glass-active
+  .header
+  #main-menu
+  > .nav-item
+  > .nav-link-row
+  > .nav-link {
+
+    transform:
+      none !important;
+
+    translate:
+      none !important;
+
+    scale:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * Keep premium icon on one fixed optical baseline.
+   */
+
+  html body.mega-menu-tab-glass-active
+  .header
+  #main-menu
+  .nav-premium-icon,
+
+  html body.mega-menu-unified-glass-active
+  .header
+  #main-menu
+  .nav-premium-icon {
+
+    transform:
+      translateY(-0.25px) !important;
+
+    transition-property:
+      color,
+      opacity !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 4. HEADER FOREGROUND WRAPPER
+   *
+   * Paint surface/cutout is NOT touched.
+   * -------------------------------------------------------
+   */
+
+  html body.mega-menu-tab-glass-active
+  .header
+  > .header-wrapper,
+
+  html body.mega-menu-unified-glass-active
+  .header
+  > .header-wrapper {
+
+    position:
+      relative !important;
+
+    z-index:
+      2 !important;
+
+    transform:
+      none !important;
+
+    translate:
+      none !important;
+
+    scale:
+      1 !important;
+
+    filter:
+      none !important;
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * Header may change paint authority through its existing
+   * cutout system, but it must not animate that state.
+   *
+   * No background value is forced here.
+   */
+
+  html body.mega-menu-tab-glass-active
+  .header,
+
+  html body.mega-menu-unified-glass-active
+  .header {
+
+    transition:
+      none !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 5. LANGUAGE CONTROL
+   * -------------------------------------------------------
+   */
+
+  html body.mega-menu-tab-glass-active
+  .header
+  .language-switcher,
+
+  html body.mega-menu-unified-glass-active
+  .header
+  .language-switcher {
+
+    transform:
+      none !important;
+
+    translate:
+      none !important;
+
+    scale:
+      1 !important;
+
+    transition:
+      none !important;
+  }
+}
+
+/* E5N-FINAL-R2-STABILITY-END */
+
+/* E5N-FINAL-R3-HEADER-STACK-STABILITY-START */
+
+/*
+ * =========================================================
+ * MATO CASHEW — DESKTOP HEADER STACK STABILITY
+ *
+ * Confirmed by runtime isolation E5N125.
+ *
+ * Root cause:
+ * Header stacking/paint context changed during Mega lifecycle,
+ * causing Logo / Brand / Menu / Language compositor jitter.
+ *
+ * Permanent authority:
+ * - Header stays at z-index 2000
+ * - Header ancestor transition stays disabled
+ *
+ * Intentionally NOT changed:
+ * - Header background
+ * - Header ::before
+ * - Header cutout
+ * - clip-path
+ * - Header CSS variables
+ * - Header wrapper geometry
+ * - Logo / Brand
+ * - Main navigation
+ * - Language control
+ * - Mega geometry
+ * - Mega no-growth authority
+ * - Mega Glass
+ * - Hero
+ * =========================================================
+ */
+
+@media (min-width: 993px) {
+
+  html body .header,
+  html body .header.scrolled,
+  html body .header.mega-menu-header-cutout-active,
+  html body .header.scrolled.mega-menu-header-cutout-active {
+
+    /*
+     * E5N-FINAL-R5-DESKTOP-HEADER-GEOMETRY
+     *
+     * E5N129 proved:
+     * GOOD = fixed
+     * BAD after Astro navigation = static
+     *
+     * E5N130 proved that position alone is insufficient:
+     * fixed without horizontal anchoring shrink-wraps Header.
+     *
+     * Keep the desktop Header anchored to the viewport
+     * identically across hard refresh and client navigation.
+     */
+    position:
+      fixed !important;
+
+    top:
+      0 !important;
+
+    left:
+      0 !important;
+
+    right:
+      0 !important;
+
+    width:
+      100% !important;
+
+    max-width:
+      none !important;
+
+    box-sizing:
+      border-box !important;
+
+    z-index:
+      2000 !important;
+
+    transition:
+      none !important;
+  }
+}
+
+/* E5N-FINAL-R3-HEADER-STACK-STABILITY-END */

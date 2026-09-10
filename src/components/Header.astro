@@ -1,4 +1,4 @@
----
+﻿---
 import { getCurrentLanguage }
   from "../i18n/getCurrentLanguage";
 
@@ -770,6 +770,137 @@ const brandName =
   }
 
 }
+
+  /*
+   * =========================================================
+   * E5N36-R2 BLANK-GAP VISUAL EXIT
+   *
+   * Hide only the owned Mega panel.
+   * Header / Hero / compositor geometry remains untouched.
+   * =========================================================
+   */
+  .nav-item.mega-menu-blank-gap-hidden
+  > .mega-menu {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  /*
+   * =========================================================
+   * PHASE-E5N39-R1-BLANK-GAP-COMPOSITOR-PAINT-SUPPRESSION
+   *
+   * E5N36-R2 hides the physical Mega panel.
+   *
+   * E5N38 proved the remaining visible card is painted by
+   * persistent BODY-level compositor layers.
+   *
+   * Keep runtime ownership and geometry alive.
+   * Suppress visual paint only.
+   *
+   * No clearMegaMenuOcclusion().
+   * No body-state teardown.
+   * No timer.
+   * No RAF.
+   * No shield.
+   * =========================================================
+   */
+
+  @media (min-width: 769px) {
+
+    body:has(
+      .nav-item.mega-menu-blank-gap-hidden
+    )
+    #mato-unified-mega-glass,
+
+    body:has(
+      .nav-item.mega-menu-blank-gap-hidden
+    )
+    #mato-unified-mega-outline,
+
+    body:has(
+      .nav-item.mega-menu-blank-gap-hidden
+    )
+    #mato-unified-mega-stroke {
+
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+
+    body:has(
+      .nav-item.mega-menu-blank-gap-hidden
+    )
+    #mega-menu-tab-glass-layer {
+
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+  }
+
+
+  /*
+   * =========================================================
+   * PHASE-E5N40-GLOBAL-RUNTIME-GLASS-SUPPRESSION
+   *
+   * The unified Mega compositor elements are created by JS
+   * and appended directly to BODY at runtime.
+   *
+   * They do not carry Header.astro scoped attributes.
+   * Therefore this suppression MUST be global.
+   *
+   * Paint only is suppressed.
+   * Runtime ownership and geometry remain untouched.
+   * =========================================================
+   */
+
+  @media (min-width: 769px) {
+
+    :global(
+      body:has(.nav-item.mega-menu-blank-gap-hidden)
+      #mato-unified-mega-glass
+    ) {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+      filter: none !important;
+    }
+
+    :global(
+      body:has(.nav-item.mega-menu-blank-gap-hidden)
+      #mato-unified-mega-outline
+    ) {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+    :global(
+      body:has(.nav-item.mega-menu-blank-gap-hidden)
+      #mato-unified-mega-stroke
+    ) {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+    :global(
+      body:has(.nav-item.mega-menu-blank-gap-hidden)
+      #mega-menu-tab-glass-layer
+    ) {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+      filter: none !important;
+    }
+  }
+
 </style>
 <script>
   /**
@@ -803,7 +934,57 @@ const brandName =
    * astro:page-load runs on the first page
    * and after every ClientRouter navigation.
    */
+  /*
+   * =========================================================
+   * E5N128-DOCUMENT-POINTER-LIFECYCLE
+   *
+   * initHeader() runs again after Astro client navigation.
+   * document survives that navigation.
+   *
+   * Therefore the previous generation's document-level
+   * Mega pointer listener must be aborted before the new
+   * generation is initialized.
+   * =========================================================
+   */
+  let megaDocumentPointerController:
+    AbortController | null =
+      null;
+
+
   function initHeader() {
+
+
+
+    /*
+
+
+     * E5N128:
+
+
+     * kill the previous document-level Mega pointer
+
+
+     * generation before binding this one.
+
+
+     */
+
+
+    megaDocumentPointerController?.abort();
+
+
+
+    megaDocumentPointerController =
+
+
+      new AbortController();
+
+
+
+    const megaDocumentPointerSignal =
+
+
+      megaDocumentPointerController.signal;
     const menuToggle =
       document.querySelector<HTMLButtonElement>(
         ".menu-toggle"
@@ -1086,6 +1267,102 @@ const setPersistentMegaMenuOwner = (
 
   persistentMegaMenuOwner =
     navItem;
+
+  /*
+   * =========================================================
+   * PHASE-E5N45-R2-OWNER-REACQUISITION-GAP-RECONCILE
+   *
+   * The Header pointer authority may already have processed
+   * the physical pointer event while no persistent Mega owner
+   * existed.
+   *
+   * If About is subsequently reacquired as owner while the
+   * latest remembered pointer is already inside the physical
+   * About -> Language blank Header gap, immediately restore
+   * the existing visual suppression state.
+   *
+   * Reuses:
+   *   aboutLanguageBlankGapPointerX
+   *   aboutLanguageBlankGapPointerY
+   *
+   * No new document pointer listener.
+   * No timer.
+   * No RAF.
+   * No compositor teardown.
+   * =========================================================
+   */
+
+  if (
+    window.innerWidth > 768
+  ) {
+
+    const nav =
+      document.querySelector<HTMLElement>(
+        ".nav-menu"
+      );
+
+    const header =
+      document.querySelector<HTMLElement>(
+        ".header"
+      );
+
+    const languageSwitcher =
+      document.querySelector<HTMLElement>(
+        ".language-switcher"
+      );
+
+    if (
+      nav &&
+      header &&
+      languageSwitcher
+    ) {
+
+      const topLevelItems =
+        Array.from(
+          nav.querySelectorAll<HTMLElement>(
+            ":scope > .nav-item"
+          )
+        );
+
+      const finalNavItem =
+        topLevelItems[
+          topLevelItems.length - 1
+        ];
+
+      if (
+        finalNavItem &&
+        navItem === finalNavItem
+      ) {
+
+        const aboutRect =
+          finalNavItem
+            .getBoundingClientRect();
+
+        const languageRect =
+          languageSwitcher
+            .getBoundingClientRect();
+
+        const headerRect =
+          header
+            .getBoundingClientRect();
+
+        const pointerAlreadyInsideBlankGap =
+          aboutLanguageBlankGapPointerY >=
+            headerRect.top &&
+          aboutLanguageBlankGapPointerY <=
+            headerRect.bottom &&
+          aboutLanguageBlankGapPointerX >
+            aboutRect.right &&
+          aboutLanguageBlankGapPointerX <
+            languageRect.left;
+
+        navItem.classList.toggle(
+          "mega-menu-blank-gap-hidden",
+          pointerAlreadyInsideBlankGap
+        );
+      }
+    }
+  }
 };
 
 
@@ -1325,6 +1602,30 @@ const hideAboutLanguageHeaderExitShield = () => {
 };
 
 
+/*
+ * =========================================================
+ * PHASE-E5N68-R2-SINGLE-FLIGHT-MEGA-EXIT
+ *
+ * Multiple physical-exit authorities may observe the same
+ * pointer transition during one browser event / paint window.
+ *
+ * Only one destructive Mega compositor teardown may execute
+ * during that window.
+ *
+ * This serializes visual teardown only.
+ *
+ * It does NOT change:
+ * - pointer geometry
+ * - Mega ownership acquisition
+ * - About -> Language blank-gap behavior
+ * - LanguageSwitcher behavior
+ * - dwell timing
+ * - Mega opening behavior
+ * =========================================================
+ */
+let megaMenuExitTeardownInFlight = false;
+
+
 const releaseAboutLanguageHeaderExitShield = () => {
 
   /*
@@ -1345,6 +1646,13 @@ const releaseAboutLanguageHeaderExitShield = () => {
         () => {
 
           hideAboutLanguageHeaderExitShield();
+
+          /*
+           * E5N68-R2:
+           * Protected Header repaint has completed.
+           * A future independent exit may now own teardown.
+           */
+          megaMenuExitTeardownInFlight = false;
 
         }
       );
@@ -1376,6 +1684,24 @@ const cancelAboutLanguageBlankGapClose = () => {
 };
 
 
+
+/*
+ * =========================================================
+ * PHASE-E5N19-HOVER-INTENT-DWELL
+ *
+ * 120ms was short enough to treat natural slow pointer
+ * movement as a settled blank-gap exit.
+ *
+ * Use a short hover-intent dwell instead:
+ *
+ * - continuous movement keeps restarting the timer
+ * - a real settled pointer still closes About
+ * - no Header / Hero / Mega geometry changes
+ * =========================================================
+ */
+const aboutLanguageBlankGapDwellMs =
+  320;
+
 const scheduleAboutLanguageBlankGapClose = (
   clientX: number,
   clientY: number
@@ -1394,10 +1720,30 @@ const scheduleAboutLanguageBlankGapClose = (
    * Repeated pointermove events inside the same physical gap
    * update coordinates without creating additional timers.
    */
+  /*
+   * =====================================================
+   * PHASE-E5N9-TRUE-ABOUT-LANGUAGE-DWELL
+   *
+   * A dwell means the pointer has actually stopped.
+   * Restart the 120ms timer on every pointer movement
+   * inside the About -> Language blank gap.
+   *
+   * Moving pointer = preserve compositor state.
+   * Settled pointer = existing 120ms close.
+   *
+   * No visual geometry changes.
+   * =====================================================
+   */
   if (
     aboutLanguageBlankGapCloseTimer !== null
   ) {
-    return;
+
+    window.clearTimeout(
+      aboutLanguageBlankGapCloseTimer
+    );
+
+    aboutLanguageBlankGapCloseTimer =
+      null;
   }
 
 
@@ -1509,18 +1855,123 @@ const scheduleAboutLanguageBlankGapClose = (
          *
          * Clear only once after geometry has stabilized.
          */
+        /*
+         * =====================================================
+         * PHASE-E5N13-PAINT-SHIELD-BEFORE-TEARDOWN
+         *
+         * Paint the opaque Header shield before dismantling
+         * the unified Mega Menu compositor.
+         *
+         * This prevents Hero pixels from becoming visible
+         * during the compositor teardown frame.
+         * =====================================================
+         */
         showAboutLanguageHeaderExitShield();
 
-        cancelMegaMenuHandoff();
+        window.requestAnimationFrame(
+          () => {
 
-        clearMegaMenuOcclusion();
+            cancelMegaMenuHandoff();
 
-        releaseAboutLanguageHeaderExitShield();
+            clearMegaMenuOcclusion();
+
+            releaseAboutLanguageHeaderExitShield();
+
+          }
+        );
 
       },
-      120
+      aboutLanguageBlankGapDwellMs
     );
 };
+
+/*
+ * =========================================================
+ * E5N17-R2 - PURE ABOUT/LANGUAGE BLANK-GAP GEOMETRY
+ *
+ * Detect only the real Header blank space between
+ * the final nav item (About) and LanguageSwitcher.
+ *
+ * No timers.
+ * No compositor mutation.
+ * No owner mutation.
+ * =========================================================
+ */
+const pointerInsideAboutLanguageBlankGap = (
+  clientX: number,
+  clientY: number
+) => {
+
+  if (
+    window.innerWidth <= 768 ||
+    !persistentMegaMenuOwner
+  ) {
+    return false;
+  }
+
+  const nav =
+    document.querySelector<HTMLElement>(
+      ".nav-menu"
+    );
+
+  const header =
+    document.querySelector<HTMLElement>(
+      ".header"
+    );
+
+  const languageSwitcher =
+    document.querySelector<HTMLElement>(
+      ".language-switcher"
+    );
+
+  if (
+    !nav ||
+    !header ||
+    !languageSwitcher
+  ) {
+    return false;
+  }
+
+  const topLevelItems =
+    Array.from(
+      nav.querySelectorAll<HTMLElement>(
+        ":scope > .nav-item"
+      )
+    );
+
+  if (topLevelItems.length === 0) {
+    return false;
+  }
+
+  const finalNavItem =
+    topLevelItems[
+      topLevelItems.length - 1
+    ];
+
+  if (
+    persistentMegaMenuOwner !==
+      finalNavItem
+  ) {
+    return false;
+  }
+
+  const aboutRect =
+    finalNavItem.getBoundingClientRect();
+
+  const languageRect =
+    languageSwitcher.getBoundingClientRect();
+
+  const headerRect =
+    header.getBoundingClientRect();
+
+  return (
+    clientY >= headerRect.top &&
+    clientY <= headerRect.bottom &&
+    clientX > aboutRect.right &&
+    clientX < languageRect.left
+  );
+};
+
 
 const pointerInsideAboutLanguageCorridor = (
   clientX: number,
@@ -1707,16 +2158,14 @@ const pointerInsideAboutLanguageCorridor = (
   if (insideBlankAboutLanguageGap) {
 
     /*
-     * 5N59F:
+     * PHASE-E5N17-R2-SINGLE-BLANK-GAP-AUTHORITY
      *
-     * Keep compositor geometry stable while pointer settles.
-     * About will close after the short verified dwell.
+     * Geometry predicate only.
+     *
+     * Do not schedule or cancel the close timer here.
+     * This function is called by multiple pointer
+     * authorities and must therefore remain side-effect free.
      */
-    scheduleAboutLanguageBlankGapClose(
-      clientX,
-      clientY
-    );
-
     return true;
   }
 
@@ -1740,7 +2189,7 @@ const pointerInsideAboutLanguageCorridor = (
 
 
   if (insideLanguageControl) {
-    return true;
+    return false; // PHASE-E5N47-R2-LANGUAGE-HARD-BOUNDARY
   }
 
 
@@ -1748,11 +2197,30 @@ const pointerInsideAboutLanguageCorridor = (
    * Outside the blank Header band, retain the successful
    * 5N59D narrow vertical stability lane.
    */
+  /*
+   * =========================================================
+   * PHASE-E5N21-ACTUAL-PANEL-CORRIDOR-INTERSECTION
+   *
+   * The historical vertical stability lane must not keep
+   * About open over empty space near LanguageSwitcher.
+   *
+   * Keep the lane only where it intersects the REAL active
+   * Mega Menu panel (plus a 4px seam tolerance).
+   *
+   * Header blank-gap behavior remains owned by E5N17-R2
+   * and E5N19. Language control remains protected above.
+   * =========================================================
+   */
   return (
     clientX >= corridorLeft &&
     clientX <= corridorRight &&
     clientY >= corridorTop &&
-    clientY <= corridorBottom
+    clientY <= corridorBottom &&
+    !!panelRect &&
+    clientX >= panelRect.left - 4 &&
+    clientX <= panelRect.right + 4 &&
+    clientY >= panelRect.top - 4 &&
+    clientY <= panelRect.bottom + 4
   );
 };
 
@@ -2071,6 +2539,112 @@ atomicExitHeader?.addEventListener(
 
 
     /*
+     * E5N17-R2:
+     *
+     * Evaluate the real About -> Language blank gap once
+     * for this physical Header pointer event.
+     */
+    const insideAboutLanguageBlankGap =
+      pointerInsideAboutLanguageBlankGap(
+        event.clientX,
+        event.clientY
+      );
+
+    if (!insideAboutLanguageBlankGap) {
+      cancelAboutLanguageBlankGapClose();
+
+      /*
+       * E5N36-R2:
+       * Pointer is no longer inside the physical blank gap.
+       * Restore normal Mega visibility without rebuilding the
+       * compositor.
+       */
+      persistentMegaMenuOwner
+        ?.classList.remove(
+          "mega-menu-blank-gap-hidden"
+        );
+    }
+
+
+    /*
+     * =====================================================
+     * PHASE-E5N23-R2-RIGHT-OF-LANGUAGE-DEFINITIVE-EXIT
+     *
+     * When About owns the Mega Menu, Header pixels
+     * physically to the RIGHT of LanguageSwitcher are
+     * outside every valid About interaction path.
+     *
+     * This is a definitive exit.
+     *
+     * IMPORTANT:
+     *
+     * - Language control itself remains protected.
+     * - About -> Language blank gap remains controlled by
+     *   the existing dwell authority.
+     * - Mega panel / vertical corridor behavior is unchanged.
+     * - Hero paint-shield behavior is unchanged.
+     * =====================================================
+     */
+
+    const strictLanguageSwitcher =
+      document.querySelector<HTMLElement>(
+        ".language-switcher"
+      );
+
+    if (strictLanguageSwitcher) {
+
+      const strictLanguageRect =
+        strictLanguageSwitcher
+          .getBoundingClientRect();
+
+      const pointerRightOfLanguage =
+        event.clientX >
+          strictLanguageRect.right;
+
+      if (pointerRightOfLanguage) {
+
+        /*
+         * =====================================================
+         * PHASE-E5N25-R1-RIGHT-EXIT-PAINT-SAFE-TEARDOWN
+         *
+         * Right-of-Language remains a definitive exit.
+         *
+         * Cover the Header first, then dismantle the
+         * unified Mega compositor on the next frame.
+         *
+         * This avoids a synchronous Header compositor
+         * teardown during the pointermove event.
+         *
+         * No dwell.
+         * No geometry change.
+         * No sticky right-side zone.
+         * =====================================================
+         */
+
+        cancelAboutLanguageBlankGapClose();
+
+        showAboutLanguageHeaderExitShield();
+
+        window.requestAnimationFrame(
+          () => {
+
+            cancelMegaMenuHandoff();
+
+            clearMegaMenuOcclusion();
+
+            releaseAboutLanguageHeaderExitShield();
+
+          }
+        );
+
+        return;
+      }
+    }
+
+
+
+
+    /*
      * -----------------------------------------------------
      * STRICT OUTER EDGE OF FINAL NAV ITEM
      * -----------------------------------------------------
@@ -2131,6 +2705,67 @@ atomicExitHeader?.addEventListener(
            * About -> Language is not a true exit while pointer
            * remains inside the real Language corridor.
            */
+          if (insideAboutLanguageBlankGap) {
+
+            /*
+             * =====================================================
+             * PHASE-E5N35-JITTER-FREE-BLANK-GAP-BASELINE
+             *
+             * Restore the proven jitter-free interaction baseline.
+             *
+             * The About -> Language blank Header gap must not
+             * dismantle the unified compositor from this nested
+             * outer-edge branch.
+             *
+             * E5N33 introduced a second paint-safe teardown path
+             * here. That competing teardown restored Header jitter.
+             *
+             * For now this branch is preservation-only again.
+             *
+             * A later phase will give blank-gap VISIBILITY to one
+             * dedicated authority without dismantling Header /
+             * Hero compositor geometry from multiple paths.
+             *
+             * No timer.
+             * No RAF.
+             * No shield mutation.
+             * No compositor mutation.
+             * =====================================================
+             */
+
+            cancelAboutLanguageBlankGapClose();
+
+            /*
+             * =====================================================
+             * PHASE-E5N36-R2-BLANK-GAP-VISUAL-EXIT
+             *
+             * Blank Header space between About and Language is a
+             * visual exit from the About Mega Menu.
+             *
+             * Preserve the E5N35 unified compositor geometry so
+             * Header/Hero remain completely stable.
+             *
+             * Only suppress the owned Mega panel.
+             *
+             * No clearMegaMenuOcclusion().
+             * No timer.
+             * No RAF.
+             * No shield.
+             * =====================================================
+             */
+            persistentMegaMenuOwner
+              ?.classList.add(
+                "mega-menu-blank-gap-hidden"
+              );
+
+            return;
+          }
+
+
+          /*
+           * Language control / vertical stability corridor
+           * stays protected but MUST NOT create a gap timer.
+           */
           if (
             pointerInsideAboutLanguageCorridor(
               event.clientX,
@@ -2177,7 +2812,33 @@ atomicExitHeader?.addEventListener(
      */
     cancelMegaMenuHandoff();
 
-    clearMegaMenuOcclusion();
+    /*
+     * =====================================================
+     * PHASE-E5N57-R4-WHITESPACE-SAFE-GENERIC-EXIT
+     *
+     * Generic Header exit remains definitive.
+     *
+     * Paint the existing opaque Header shield first.
+     * Dismantle Mega compositor state behind that
+     * shield on the next animation frame.
+     *
+     * No dwell.
+     * No sticky corridor.
+     * No geometry expansion.
+     * No Language boundary change.
+     * =====================================================
+     */
+    showAboutLanguageHeaderExitShield();
+
+    window.requestAnimationFrame(
+      () => {
+
+        clearMegaMenuOcclusion();
+
+        releaseAboutLanguageHeaderExitShield();
+
+      }
+    );
 
   },
   {
@@ -2277,54 +2938,65 @@ document.addEventListener(
     ) {
       return;
     }
+    /*
+     * =====================================================
+     * PHASE-E5N50-IMMEDIATE-TRUE-PHYSICAL-EXIT
+     *
+     * E5N48/E5N49 proved that a pointer already outside the
+     * protected Mega system was being held open by the legacy
+     * 90ms handoff timer.
+     *
+     * pointerInsideMegaMenuSystem() has already rejected the
+     * current physical pointer position above.
+     *
+     * Therefore this path is a TRUE physical exit and should
+     * close synchronously.
+     *
+     * Legitimate nav-item / corridor handoff protection stays
+     * owned by the earlier geometry authorities.
+     *
+     * No CSS change.
+     * No panel geometry change.
+     * No LanguageSwitcher change.
+     * No About blank-gap change.
+     * =====================================================
+     */
+    cancelMegaMenuHandoff();
 
+    /*
+     * =====================================================
+     * PHASE-E5N62-R2-DOCUMENT-TRUE-EXIT-PAINT-SAFE
+     *
+     * 5N27 has already established that the pointer is
+     * physically outside the protected Mega system.
+     *
+     * Keep that logical exit immediate, but do not tear
+     * down the visible unified compositor in this same
+     * pointermove task.
+     *
+     * Cover the Header first, allow one paint opportunity,
+     * then clear the Mega compositor behind the shield.
+     *
+     * This removes the remaining Header/Hero teardown flash
+     * without restoring dwell or expanding any corridor.
+     * =====================================================
+     */
+    showAboutLanguageHeaderExitShield();
 
-    megaMenuHandoffTimer =
-      window.setTimeout(
-        () => {
+    window.requestAnimationFrame(
+      () => {
 
-          megaMenuHandoffTimer =
-            null;
+        clearMegaMenuOcclusion();
 
+        releaseAboutLanguageHeaderExitShield();
 
-          /*
-           * Re-test PHYSICAL pointer geometry after the guard.
-           *
-           * If the pointer crossed a legitimate corridor and
-           * returned to the Mega system, preserve the owner.
-           */
-          if (
-            pointerInsideMegaMenuSystem(
-              lastMegaPointerX,
-              lastMegaPointerY
-            )
-          ) {
-
-            return;
-          }
-
-
-          /*
-           * Definitive physical exit.
-           *
-           * Do not resurrect an owner from stale CSS :hover.
-           *
-           * clearMegaMenuOcclusion() already clears:
-           * - persistent owner
-           * - unified glass
-           * - Header cutout
-           * - page blur
-           * - local occlusion state
-           */
-          clearMegaMenuOcclusion();
-
-        },
-        90
-      );
+      }
+    );
 
   },
   {
-    passive: true
+    passive: true,
+    signal: megaDocumentPointerSignal
   }
 );
 
@@ -2633,6 +3305,30 @@ submenuItems.forEach((navItem) => {
 
     const clearMegaMenuOcclusion = () => {
 
+      /*
+       * =====================================================
+       * E5N68-R2 SINGLE-FLIGHT GATE
+       *
+       * A second exit authority can arrive before the first
+       * teardown has completed its protected paint window.
+       *
+       * Do not dismantle the same compositor twice.
+       * =====================================================
+       */
+      if (megaMenuExitTeardownInFlight) {
+        return;
+      }
+
+      megaMenuExitTeardownInFlight = true;
+
+      /*
+       * E5N69-R2:
+       * accepted true clear ends geometry ownership.
+       */
+      frozenMegaCutoutOwner = null;
+      frozenMegaHeaderRect = null;
+      frozenMegaTabRect = null;
+
       /* PHASE-5N34-ATOMIC-HEADER-RESTORE-START */
 
       /*
@@ -2739,6 +3435,27 @@ submenuItems.forEach((navItem) => {
       }
 
       /* PHASE-5N34-ATOMIC-HEADER-RESTORE-END */
+
+      /*
+       * E5N68-R2 FALLBACK RELEASE
+       *
+       * Shielded exits normally release this through the shield
+       * lifecycle. Non-shielded legitimate clear paths still
+       * require a deterministic unlock.
+       */
+      window.requestAnimationFrame(
+        () => {
+
+          window.requestAnimationFrame(
+            () => {
+
+              megaMenuExitTeardownInFlight = false;
+
+            }
+          );
+
+        }
+      );
 clearPersistentMegaMenuOwner();
       /* PHASE-5N14-UNIFIED-GLASS-CLEAR-START */
 
@@ -2982,6 +3699,43 @@ clearPersistentMegaMenuOwner();
     };
 
 
+    /*
+     * =========================================================
+     * PHASE-E5N69-R2-FROZEN-MEGA-CUTOUT-GEOMETRY
+     *
+     * Freeze Header/tab geometry for one active Mega owner.
+     *
+     * Repeated applyMegaMenuOcclusion() calls must not re-read
+     * a slightly different live nav-link-row DOMRect while the
+     * same Mega Menu remains active.
+     *
+     * A different owner captures a fresh snapshot.
+     * A true clear releases the snapshot.
+     * =========================================================
+     */
+    let frozenMegaCutoutOwner:
+      HTMLElement | null =
+        null;
+
+    let frozenMegaHeaderRect:
+      {
+        left: number;
+        top: number;
+        width: number;
+        height: number;
+      } | null =
+        null;
+
+    let frozenMegaTabRect:
+      {
+        left: number;
+        right: number;
+        top: number;
+        width: number;
+        height: number;
+      } | null =
+        null;
+
     const applyMegaMenuOcclusion = (
       panel: HTMLElement
     ) => {
@@ -3056,6 +3810,37 @@ clearPersistentMegaMenuOwner();
 
       globalOcclusionCandidates.forEach(
         (element) => {
+
+          /* PHASE-E5N-FINAL-R4-HERO-GLOBAL-OCCLUSION-EXCLUSION-START
+           *
+           * E5N126 runtime isolation confirmed that Hero
+           * foreground was being masked twice:
+           *
+           * 1. parent Hero foreground:
+           *    .mega-menu-local-occluded
+           *
+           * 2. individual Hero descendants:
+           *    .mega-menu-global-occluded
+           *
+           * The nested masks caused glyph-edge clipping,
+           * visible especially on descenders such as
+           * q / y in "Uniquely Cambodian."
+           *
+           * Hero foreground already owns its exact local
+           * Mega occlusion mask, therefore descendants
+           * inside that foreground must not receive the
+           * global mask a second time.
+           *
+           * About Hero follows the same ownership rule.
+           */
+          if (
+            element.closest(
+              ".hero-content, .about-hero__content"
+            )
+          ) {
+            return;
+          }
+          /* PHASE-E5N-FINAL-R4-HERO-GLOBAL-OCCLUSION-EXCLUSION-END */
 
           /* PHASE-5N56A-HERO-PRODUCT-BLUR-PRESERVE
            *
@@ -3256,11 +4041,46 @@ clearPersistentMegaMenuOwner();
           activeTab
         ) {
 
+          /*
+           * E5N69-R2:
+           * capture geometry once for this Mega owner.
+           */
+          if (
+            frozenMegaCutoutOwner !== menuOwner ||
+            !frozenMegaHeaderRect ||
+            !frozenMegaTabRect
+          ) {
+
+            const liveHeaderRect =
+              headerElement.getBoundingClientRect();
+
+            const liveTabRect =
+              activeTab.getBoundingClientRect();
+
+            frozenMegaCutoutOwner =
+              menuOwner ?? null;
+
+            frozenMegaHeaderRect = {
+              left: liveHeaderRect.left,
+              top: liveHeaderRect.top,
+              width: liveHeaderRect.width,
+              height: liveHeaderRect.height
+            };
+
+            frozenMegaTabRect = {
+              left: liveTabRect.left,
+              right: liveTabRect.right,
+              top: liveTabRect.top,
+              width: liveTabRect.width,
+              height: liveTabRect.height
+            };
+          }
+
           const headerRect =
-            headerElement.getBoundingClientRect();
+            frozenMegaHeaderRect;
 
           const tabRect =
-            activeTab.getBoundingClientRect();
+            frozenMegaTabRect;
 
 
           /*
@@ -3299,7 +4119,7 @@ clearPersistentMegaMenuOwner();
 
           headerElement.style.setProperty(
             "--mato-header-surface-webkit-backdrop",
-            headerStyle.webkitBackdropFilter || "none"
+            headerStyle.getPropertyValue("-webkit-backdrop-filter") || "none"
           );
 
 
@@ -4095,8 +4915,10 @@ clearPersistentMegaMenuOwner();
           unifiedGlass.style.clipPath =
             unifiedPath;
 
-          unifiedGlass.style.webkitClipPath =
-            unifiedPath;
+          unifiedGlass.style.setProperty(
+            "-webkit-clip-path",
+            unifiedPath
+          );
 
 
           /*
@@ -4644,8 +5466,10 @@ clearPersistentMegaMenuOwner();
           unifiedOutline.style.clipPath =
             unifiedPath;
 
-          unifiedOutline.style.webkitClipPath =
-            unifiedPath;
+          unifiedOutline.style.setProperty(
+            "-webkit-clip-path",
+            unifiedPath
+          );
           /* PHASE-5N56F-SVG-CONNECTED-STROKE-GEOMETRY-START */
 
           /*
@@ -6358,6 +7182,13 @@ document.body.classList.add(
     };
   }
 
+
+  document.addEventListener(
+    "astro:before-swap",
+    () => {
+      megaDocumentPointerController?.abort();
+    }
+  );
 
   document.addEventListener(
     "astro:page-load",
