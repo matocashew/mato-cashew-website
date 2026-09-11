@@ -1,4 +1,4 @@
-﻿/* =========================================================
+/* =========================================================
    MATO CASHEW â€” HEADER
    ========================================================= */
 
@@ -11144,3 +11144,489 @@ html body:has(
 }
 
 /* E5N-FINAL-R3-HEADER-STACK-STABILITY-END */
+
+/* E5N-HEADER-ACTIVE-GLASS-R4-START */
+
+/*
+ * =========================================================
+ * MATO CASHEW — PREMIUM PERSISTENT ACTIVE NAVIGATION R4
+ * =========================================================
+ *
+ * Visual direction:
+ * - persistent active item belongs to the Mega Glass family
+ * - quieter than an opened / hovered Mega Menu
+ * - short restrained accent
+ * - no navigation geometry changes
+ * - Mega Menu remains visually dominant
+ */
+
+@media (min-width: 993px) {
+
+  /*
+   * -------------------------------------------------------
+   * 1. ACTIVE GLASS CAPSULE
+   * -------------------------------------------------------
+   */
+
+  html body
+  .header:not(.mega-menu-header-cutout-active)
+  #main-menu
+  > .nav-item
+  > .nav-link-row:has(> .nav-link.active) {
+
+    position:
+      relative;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.72),
+        rgba(238, 248, 242, 0.56)
+      );
+
+    border-radius:
+      14px;
+
+    box-shadow:
+      inset 0 0 0 1px
+        rgba(24, 112, 72, 0.13),
+      inset 0 1px 0
+        rgba(255, 255, 255, 0.84),
+      0 5px 16px
+        rgba(24, 73, 50, 0.045);
+
+    transition:
+      background 200ms ease,
+      box-shadow 200ms ease;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 2. ACTIVE LABEL
+   * -------------------------------------------------------
+   */
+
+  html body
+  .header:not(.mega-menu-header-cutout-active)
+  #main-menu
+  > .nav-item
+  > .nav-link-row
+  > .nav-link.active {
+
+    color:
+      var(--primary) !important;
+
+    font-weight:
+      600;
+
+    text-shadow:
+      0 0 16px
+      rgba(25, 107, 68, 0.055);
+
+    transition:
+      color 180ms ease,
+      text-shadow 180ms ease;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 3. ACTIVE PREMIUM ICON
+   * -------------------------------------------------------
+   */
+
+  html body
+  .header:not(.mega-menu-header-cutout-active)
+  #main-menu
+  > .nav-item
+  > .nav-link-row:has(> .nav-link.active)
+  .nav-premium-icon {
+
+    opacity:
+      1;
+
+    filter:
+      saturate(1.04)
+      brightness(0.98);
+
+    transition:
+      opacity 180ms ease,
+      filter 180ms ease;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 4. ACTIVE CHEVRON
+   * -------------------------------------------------------
+   */
+
+  html body
+  .header:not(.mega-menu-header-cutout-active)
+  #main-menu
+  > .nav-item
+  > .nav-link-row:has(> .nav-link.active)
+  .nav-chevron {
+
+    color:
+      var(--primary);
+
+    opacity:
+      0.84;
+
+    transition:
+      color 180ms ease,
+      opacity 180ms ease;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 5. SHORT PREMIUM ACCENT
+   * -------------------------------------------------------
+   *
+   * Keep this deliberately shorter than R3.
+   * The glass capsule is now the primary active indicator.
+   */
+
+  html body
+  .header:not(.mega-menu-header-cutout-active)
+  #main-menu
+  > .nav-item
+  > .nav-link-row
+  > .nav-link.active {
+
+    background-image:
+      linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(24, 117, 72, 0.42) 20%,
+        rgba(24, 117, 72, 0.88) 50%,
+        rgba(24, 117, 72, 0.42) 80%,
+        transparent 100%
+      );
+
+    background-repeat:
+      no-repeat;
+
+    background-position:
+      center calc(100% - 2px);
+
+    background-size:
+      40% 2px;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 6. ACTIVE ITEM HOVER
+   * -------------------------------------------------------
+   *
+   * Only a restrained depth increase.
+   * It must not compete with Mega Menu hover/open state.
+   */
+
+  html body
+  .header:not(.mega-menu-header-cutout-active)
+  #main-menu
+  > .nav-item:hover
+  > .nav-link-row:has(> .nav-link.active) {
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.80),
+        rgba(235, 247, 240, 0.64)
+      );
+
+    box-shadow:
+      inset 0 0 0 1px
+        rgba(23, 111, 71, 0.16),
+      inset 0 1px 0
+        rgba(255, 255, 255, 0.90),
+      0 6px 18px
+        rgba(24, 73, 50, 0.055);
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 7. MEGA MENU VISUAL PRIORITY
+   * -------------------------------------------------------
+   *
+   * Existing Mega Menu state remains authoritative.
+   */
+
+  html body.mega-menu-tab-glass-active
+  .header
+  #main-menu
+  > .nav-item
+  > .nav-link-row:has(> .nav-link.active),
+
+  html body.mega-menu-unified-glass-active
+  .header
+  #main-menu
+  > .nav-item
+  > .nav-link-row:has(> .nav-link.active),
+
+  html body.mega-menu-tab-glass-active
+  .header.mega-menu-header-cutout-active
+  #main-menu
+  > .nav-item
+  > .nav-link-row:has(> .nav-link.active),
+
+  html body.mega-menu-unified-glass-active
+  .header.mega-menu-header-cutout-active
+  #main-menu
+  > .nav-item
+  > .nav-link-row:has(> .nav-link.active) {
+
+    background:
+      transparent;
+
+    box-shadow:
+      none;
+  }
+
+
+  html body.mega-menu-tab-glass-active
+  .header
+  #main-menu
+  > .nav-item
+  > .nav-link-row
+  > .nav-link.active,
+
+  html body.mega-menu-unified-glass-active
+  .header
+  #main-menu
+  > .nav-item
+  > .nav-link-row
+  > .nav-link.active {
+
+    background-image:
+      none;
+  }
+
+}
+
+
+/*
+ * ---------------------------------------------------------
+ * MOTION ACCESSIBILITY
+ * ---------------------------------------------------------
+ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html body
+  .header
+  #main-menu
+  > .nav-item
+  > .nav-link-row:has(> .nav-link.active),
+
+  html body
+  .header
+  #main-menu
+  > .nav-item
+  > .nav-link-row
+  > .nav-link.active {
+
+    transition:
+      none;
+  }
+}
+
+/* E5N-HEADER-ACTIVE-GLASS-R4-END */
+
+/* E5N-HEADER-ACTIVE-GLASS-R4D-START */
+
+/*
+ * =========================================================
+ * MATO CASHEW — MEGA OWNER ACTIVE CAPSULE AUTHORITY
+ * =========================================================
+ *
+ * Verified DOM:
+ *
+ * Home:
+ *   .nav-item
+ *
+ * Mega owners:
+ *   .nav-item.has-submenu.nav-mega
+ *
+ * Verified active structure:
+ *
+ *   .nav-link-row
+ *     > .nav-link.active
+ *
+ * Historical Mega stability CSS owns the background /
+ * shadow of nav-mega rows with !important declarations.
+ *
+ * This final paint authority applies ONLY while the
+ * Mega Menu interaction is closed.
+ *
+ * No sizing.
+ * No transform.
+ * No padding.
+ * No positioning geometry.
+ * No navigation logic.
+ */
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+  /*
+   * -------------------------------------------------------
+   * 1. ACTIVE MEGA OWNER — CLOSED STATE
+   * -------------------------------------------------------
+   *
+   * IMPORTANT:
+   * All :not() states belong to BODY itself.
+   * There are intentionally NO spaces between them.
+   */
+
+  html
+  body:not(.mega-menu-tab-glass-active):not(.mega-menu-unified-glass-active):not(.mega-menu-page-blur-active)
+  .header:not(.mega-menu-header-cutout-active)
+  #main-menu
+  > .nav-item.has-submenu.nav-mega
+  > .nav-link-row:has(> .nav-link.active) {
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.72),
+        rgba(238, 248, 242, 0.56)
+      ) !important;
+
+    border-radius:
+      14px !important;
+
+    box-shadow:
+      inset 0 0 0 1px
+        rgba(24, 112, 72, 0.13),
+      inset 0 1px 0
+        rgba(255, 255, 255, 0.84),
+      0 5px 16px
+        rgba(24, 73, 50, 0.045)
+      !important;
+
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 2. ACTIVE MEGA OWNER — HOVER BEFORE OPEN
+   * -------------------------------------------------------
+   */
+
+  html
+  body:not(.mega-menu-tab-glass-active):not(.mega-menu-unified-glass-active):not(.mega-menu-page-blur-active)
+  .header:not(.mega-menu-header-cutout-active)
+  #main-menu
+  > .nav-item.has-submenu.nav-mega:hover
+  > .nav-link-row:has(> .nav-link.active) {
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.80),
+        rgba(235, 247, 240, 0.64)
+      ) !important;
+
+    box-shadow:
+      inset 0 0 0 1px
+        rgba(23, 111, 71, 0.16),
+      inset 0 1px 0
+        rgba(255, 255, 255, 0.90),
+      0 6px 18px
+        rgba(24, 73, 50, 0.055)
+      !important;
+
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * 3. MEGA GLASS ACTIVE — CONNECTED GLASS WINS
+   * -------------------------------------------------------
+   */
+
+  html
+  body.mega-menu-tab-glass-active
+  .header
+  #main-menu
+  > .nav-item.has-submenu.nav-mega
+  > .nav-link-row:has(> .nav-link.active),
+
+  html
+  body.mega-menu-unified-glass-active
+  .header
+  #main-menu
+  > .nav-item.has-submenu.nav-mega
+  > .nav-link-row:has(> .nav-link.active),
+
+  html
+  body.mega-menu-page-blur-active
+  .header
+  #main-menu
+  > .nav-item.has-submenu.nav-mega
+  > .nav-link-row:has(> .nav-link.active),
+
+  html
+  body
+  .header.mega-menu-header-cutout-active
+  #main-menu
+  > .nav-item.has-submenu.nav-mega
+  > .nav-link-row:has(> .nav-link.active) {
+
+    background:
+      transparent !important;
+
+    box-shadow:
+      none !important;
+
+  }
+
+
+  /*
+   * Persistent page underline also yields to the
+   * connected Mega Glass state.
+   */
+
+  html
+  body.mega-menu-tab-glass-active
+  .header
+  #main-menu
+  > .nav-item.has-submenu.nav-mega
+  > .nav-link-row
+  > .nav-link.active,
+
+  html
+  body.mega-menu-unified-glass-active
+  .header
+  #main-menu
+  > .nav-item.has-submenu.nav-mega
+  > .nav-link-row
+  > .nav-link.active,
+
+  html
+  body.mega-menu-page-blur-active
+  .header
+  #main-menu
+  > .nav-item.has-submenu.nav-mega
+  > .nav-link-row
+  > .nav-link.active {
+
+    background-image:
+      none !important;
+
+  }
+
+}
+
+/* E5N-HEADER-ACTIVE-GLASS-R4D-END */
