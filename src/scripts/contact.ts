@@ -9,14 +9,37 @@ interface ApiResponse {
   errors?: string[];
 }
 
-const form =
-  document.getElementById(
-    "contact-form"
-  ) as HTMLFormElement | null;
+export function initContactForm() {
 
-if (form) {
+  const form =
+    document.getElementById(
+      "contact-form"
+    ) as HTMLFormElement | null;
 
-  const submitBtn =
+  /*
+   * The Contact component can be inserted again by Astro's
+   * ClientRouter without reloading this module.
+   */
+  if (!form) {
+    return;
+  }
+
+  /*
+   * initContactForm() runs on initial load and every
+   * astro:page-load. Prevent two submit listeners from
+   * being attached to the same DOM form.
+   */
+  if (
+    form.dataset.contactInitialized ===
+    "true"
+  ) {
+    return;
+  }
+
+  form.dataset.contactInitialized =
+    "true";
+
+const submitBtn =
     document.getElementById(
       "submitBtn"
     ) as HTMLButtonElement;
@@ -298,3 +321,24 @@ if (form) {
   );
 
 }
+
+/*
+ * Initial page load.
+ *
+ * Required as a fallback for pages rendered without
+ * Astro ClientRouter lifecycle navigation.
+ */
+initContactForm();
+
+
+/*
+ * Astro client-side navigation.
+ *
+ * When navigating away from Contact and back again,
+ * Astro replaces the old form DOM with a new form.
+ * Re-bind the submit behavior to that new instance.
+ */
+document.addEventListener(
+  "astro:page-load",
+  initContactForm
+);
