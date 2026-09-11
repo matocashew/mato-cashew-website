@@ -1,12 +1,259 @@
 declare const turnstile: {
-  getResponse(): string;
-  reset(): void;
+  render(
+    container: HTMLElement,
+    options: {
+      sitekey: string;
+    }
+  ): string;
+
+  getResponse(
+    widgetId?: string
+  ): string;
+
+  reset(
+    widgetId?: string
+  ): void;
+
+  remove(
+    widgetId: string
+  ): void;
 };
 
 interface ApiResponse {
   success: boolean;
   message?: string;
   errors?: string[];
+}
+let turnstileLoadPromise:
+  Promise<void> | null = null;
+
+
+/*
+ * Load Cloudflare Turnstile once for the current browser
+ * document. The API remains available while Astro
+ * ClientRouter swaps page DOM.
+ */
+function ensureTurnstileApi():
+  Promise<void> {
+
+  if (
+    typeof turnstile !== "undefined" &&
+    typeof turnstile.render === "function"
+  ) {
+    return Promise.resolve();
+  }
+
+  if (turnstileLoadPromise) {
+    return turnstileLoadPromise;
+  }
+
+  turnstileLoadPromise =
+    new Promise<void>(
+      (resolve, reject) => {
+
+        const existing =
+          document.querySelector<HTMLScriptElement>(
+            'script[data-contact-turnstile-api="true"]'
+          );
+
+        if (existing) {
+
+          if (
+            typeof turnstile !== "undefined" &&
+            typeof turnstile.render === "function"
+          ) {
+            resolve();
+            return;
+          }
+
+          existing.addEventListener(
+            "load",
+            () => resolve(),
+            { once: true }
+          );
+
+          existing.addEventListener(
+            "error",
+            () => reject(
+              new Error(
+                "Cloudflare Turnstile failed to load."
+              )
+            ),
+            { once: true }
+          );
+
+          return;
+        }
+
+        const script =
+          document.createElement("script");
+
+        script.src =
+          "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+
+        script.async = true;
+        script.defer = true;
+
+        script.dataset.contactTurnstileApi =
+          "true";
+
+        script.addEventListener(
+          "load",
+          () => resolve(),
+          { once: true }
+        );
+
+        script.addEventListener(
+          "error",
+          () => reject(
+            new Error(
+              "Cloudflare Turnstile failed to load."
+            )
+          ),
+          { once: true }
+        );
+
+        document.head.appendChild(script);
+      }
+    );
+
+  return turnstileLoadPromise;
+}
+
+
+/*
+ * Render a widget for the CURRENT Contact DOM.
+ */
+export async function initContactTurnstile() {
+
+  let container =
+    document.querySelector<HTMLElement>(
+      ".cf-turnstile"
+    );
+
+  if (!container) {
+    return;
+  }
+
+  if (
+    container.dataset.turnstileRendered ===
+    "true"
+  ) {
+    return;
+  }
+
+  try {
+
+    await ensureTurnstileApi();
+
+  } catch (error) {
+
+    /*
+     * Allow a later navigation to retry loading the API.
+     */
+    turnstileLoadPromise = null;
+
+    console.error(
+      "[Contact] Unable to load Turnstile.",
+      error
+    );
+
+    return;
+  }
+
+
+  /*
+   * The Contact DOM may have changed while the API loaded.
+   */
+  container =
+    document.querySelector<HTMLElement>(
+      ".cf-turnstile"
+    );
+
+  if (!container) {
+    return;
+  }
+
+  if (
+    container.dataset.turnstileRendered ===
+    "true"
+  ) {
+    return;
+  }
+
+  if (
+    typeof turnstile === "undefined" ||
+    typeof turnstile.render !== "function"
+  ) {
+    return;
+  }
+
+  const sitekey =
+    container.dataset.sitekey;
+
+  if (!sitekey) {
+
+    console.error(
+      "[Contact] Turnstile sitekey is missing."
+    );
+
+    return;
+  }
+
+  const widgetId =
+    turnstile.render(
+      container,
+      {
+        sitekey
+      }
+    );
+
+  container.dataset.turnstileWidgetId =
+    widgetId;
+
+  container.dataset.turnstileRendered =
+    "true";
+}
+
+
+/*
+ * Remove the widget belonging to the Contact DOM that
+ * Astro is about to replace.
+ */
+function destroyContactTurnstile() {
+
+  const container =
+    document.querySelector<HTMLElement>(
+      ".cf-turnstile"
+    );
+
+  if (!container) {
+    return;
+  }
+
+  const widgetId =
+    container.dataset.turnstileWidgetId;
+
+  if (!widgetId) {
+    return;
+  }
+
+  if (
+    typeof turnstile !== "undefined" &&
+    typeof turnstile.remove === "function"
+  ) {
+
+    try {
+      turnstile.remove(widgetId);
+    } catch {
+      /*
+       * DOM is being replaced anyway.
+       */
+    }
+  }
+
+  delete container.dataset.turnstileWidgetId;
+  delete container.dataset.turnstileRendered;
 }
 
 export function initContactForm() {
@@ -153,19 +400,37 @@ const submitBtn =
         return;
       }
 
+      const turnstileContainer =
+        form.querySelector<HTMLElement>(
+          ".cf-turnstile"
+        );
+
+      const turnstileWidgetId =
+        turnstileContainer
+          ?.dataset
+          .turnstileWidgetId;
+
       if (
-        typeof turnstile === "undefined"
+        typeof turnstile === "undefined" ||
+        !turnstileWidgetId
       ) {
 
         errorBox.hidden = false;
         errorBox.textContent =
           securityMessage;
 
+        /*
+         * Recover if widget initialization is still pending.
+         */
+        void initContactTurnstile();
+
         return;
       }
 
       const token =
-        turnstile.getResponse();
+        turnstile.getResponse(
+          turnstileWidgetId
+        );
 
       if (!token) {
 
@@ -275,7 +540,21 @@ const submitBtn =
 
           form.reset();
 
-          turnstile.reset();
+          const turnstileContainer =
+            form.querySelector<HTMLElement>(
+              ".cf-turnstile"
+            );
+
+          const turnstileWidgetId =
+            turnstileContainer
+              ?.dataset
+              .turnstileWidgetId;
+
+          if (turnstileWidgetId) {
+            turnstile.reset(
+              turnstileWidgetId
+            );
+          }
 
           requestAnimationFrame(() => {
 
@@ -323,22 +602,31 @@ const submitBtn =
 }
 
 /*
- * Initial page load.
+ * Unified Contact lifecycle.
  *
- * Required as a fallback for pages rendered without
- * Astro ClientRouter lifecycle navigation.
+ * First browser load + every Astro ClientRouter navigation.
  */
-initContactForm();
+function initContactPage() {
+
+  initContactForm();
+
+  void initContactTurnstile();
+}
+
+
+initContactPage();
+
+
+document.addEventListener(
+  "astro:page-load",
+  initContactPage
+);
 
 
 /*
- * Astro client-side navigation.
- *
- * When navigating away from Contact and back again,
- * Astro replaces the old form DOM with a new form.
- * Re-bind the submit behavior to that new instance.
+ * Dispose the current widget before Astro replaces its DOM.
  */
 document.addEventListener(
-  "astro:page-load",
-  initContactForm
+  "astro:before-swap",
+  destroyContactTurnstile
 );
