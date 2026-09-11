@@ -1,4 +1,4 @@
-const en = {
+﻿const en = {
   nav: {
     home: "Home",
     about: "About",
@@ -76,6 +76,13 @@ const en = {
       location: "Location",
       locationValue:
         "Chanlong Village, Damril Commune, Ou Reang Ov District, Tboung Khmum Province, Cambodia",
+    },
+
+    formIntro: {
+      tag: "Business Inquiry",
+      title: "Send Us an Inquiry",
+      description:
+        "Share your requirements with us and our team will get back to you as soon as possible.",
     },
 
     name: "Full Name",

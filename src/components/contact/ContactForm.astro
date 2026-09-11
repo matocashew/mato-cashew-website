@@ -83,95 +83,132 @@ const volumeOptions = [
   data-submission-failed={t.contact.messages.submissionFailed}
   data-connection-error={t.contact.messages.connectionError}
 >
+  <div class="contact-form-intro">
+    <span class="contact-form-intro__tag">
+      {t.contact.formIntro.tag}
+    </span>
 
-  <FormField
-    id="name"
-    name="name"
-    label={t.contact.name}
-    placeholder={t.contact.placeholders.name}
-    autocomplete="name"
-    required
-  />
+    <h2 class="contact-form-intro__title">
+      {t.contact.formIntro.title}
+    </h2>
 
-  <FormField
-    id="company"
-    name="company"
-    label={t.contact.company}
-    placeholder={t.contact.placeholders.company}
-    autocomplete="organization"
-  />
+    <p class="contact-form-intro__description">
+      {t.contact.formIntro.description}
+    </p>
+  </div>
 
-  <FormField
-    id="country"
-    name="country"
-    label={t.contact.country}
-    placeholder={t.contact.placeholders.country}
-    required
-  />
+  <div class="contact-form-fields">
 
-  <FormField
-    id="email"
-    name="email"
-    type="email"
-    label={t.contact.email}
-    placeholder={t.contact.placeholders.email}
-    autocomplete="email"
-    required
-  />
+    <div class="contact-form-cell">
+      <FormField
+        id="name"
+        name="name"
+        label={t.contact.name}
+        placeholder={t.contact.placeholders.name}
+        autocomplete="name"
+        required
+      />
+    </div>
 
-  <FormField
-    id="phone"
-    name="phone"
-    type="tel"
-    label={t.contact.phone}
-    placeholder={t.contact.placeholders.phone}
-    autocomplete="tel"
-  />
+    <div class="contact-form-cell">
+      <FormField
+        id="company"
+        name="company"
+        label={t.contact.company}
+        placeholder={t.contact.placeholders.company}
+        autocomplete="organization"
+      />
+    </div>
 
-  <FormSelect
-    id="inquiry"
-    name="inquiry"
-    label={t.contact.inquiry}
-    placeholder={t.common.selectOption}
-    required
-    options={inquiryOptions}
-  />
+    <div class="contact-form-cell">
+      <FormField
+        id="country"
+        name="country"
+        label={t.contact.country}
+        placeholder={t.contact.placeholders.country}
+        required
+      />
+    </div>
 
-  <FormSelect
-    id="volume"
-    name="volume"
-    label={t.contact.volume}
-    placeholder={t.common.selectVolume}
-    options={volumeOptions}
-  />
+    <div class="contact-form-cell">
+      <FormField
+        id="email"
+        name="email"
+        type="email"
+        label={t.contact.email}
+        placeholder={t.contact.placeholders.email}
+        autocomplete="email"
+        required
+      />
+    </div>
 
-  <FormTextarea
-    id="message"
-    name="message"
-    label={t.contact.message}
-    placeholder={t.contact.placeholders.message}
-    rows={6}
-    required
-  />
+    <div class="contact-form-cell">
+      <FormField
+        id="phone"
+        name="phone"
+        type="tel"
+        label={t.contact.phone}
+        placeholder={t.contact.placeholders.phone}
+        autocomplete="tel"
+      />
+    </div>
+
+    <div class="contact-form-cell">
+      <FormSelect
+        id="inquiry"
+        name="inquiry"
+        label={t.contact.inquiry}
+        placeholder={t.common.selectOption}
+        required
+        options={inquiryOptions}
+      />
+    </div>
+
+    <div class="contact-form-cell contact-form-cell--wide">
+      <FormSelect
+        id="volume"
+        name="volume"
+        label={t.contact.volume}
+        placeholder={t.common.selectVolume}
+        options={volumeOptions}
+      />
+    </div>
+
+    <div class="contact-form-cell contact-form-cell--wide">
+      <FormTextarea
+        id="message"
+        name="message"
+        label={t.contact.message}
+        placeholder={t.contact.placeholders.message}
+        rows={6}
+        required
+      />
+    </div>
+
+  </div>
 
   <div
     class="cf-turnstile"
     data-sitekey="0x4AAAAAADzApl_-GPhwXu0j"
   ></div>
 
-  <button
-    id="submitBtn"
-    type="submit"
-    class="btn btn-primary"
-  >
-    <span class="btn-text">
-      {t.contact.send}
-    </span>
-  </button>
+  <div class="contact-form-actions">
 
-  <p class="privacy-note">
-    {t.contact.privacy}
-  </p>
+    <button
+      id="submitBtn"
+      type="submit"
+      class="btn btn-primary"
+    >
+      <span class="contact-submit-label">
+        {t.contact.send}
+      </span>
+    </button>
+
+    <p class="privacy-note">
+      {t.contact.privacy}
+    </p>
+
+  </div>
 
 </form>
 
