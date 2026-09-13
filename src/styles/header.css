@@ -2939,6 +2939,236 @@ text-decoration: none !important;
       exclude;
   }
 }
+
+
+/* =========================================================
+   E5N-TRUSTBAR-OCCLUSION-R6B-START
+
+   TRUST BAR SURFACE — DETERMINISTIC LOCAL CUTOUT
+
+   Root cause confirmed:
+   - Unified Mega Glass path is already correct.
+   - Trust Bar opaque surface paints behind lower Mega corners.
+   - Generic mask-composite is unreliable for this surface.
+
+   Keep generic mask system for:
+   - hero content
+   - stats
+   - trust item text/icons
+
+   Override ONLY .trust-bar__surface.
+   Geometry remains owned by Header.astro variables:
+     --menu-hole-left
+     --menu-hole-right
+     --menu-hole-top
+     --menu-hole-bottom
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .trust-bar__surface.mega-menu-local-occluded {
+
+    /*
+     * Disable the generic subtractive mask only
+     * for the Trust Bar background surface.
+     */
+    -webkit-mask-image:
+      none !important;
+
+    mask-image:
+      none !important;
+
+    -webkit-mask-composite:
+      initial !important;
+
+    mask-composite:
+      initial !important;
+
+
+    /*
+     * Remove the normal full-surface paint.
+     */
+    background:
+      transparent !important;
+
+    background-color:
+      transparent !important;
+
+
+    /*
+     * Repaint four regions surrounding the exact
+     * Mega Menu overlap rectangle.
+     *
+     * Region 1: top
+     * Region 2: bottom
+     * Region 3: left
+     * Region 4: right
+     */
+    background-image:
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      ),
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      ),
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      ),
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      )
+      !important;
+
+    background-repeat:
+      no-repeat !important;
+
+    background-position:
+      0 0,
+      0 100%,
+      0 var(--menu-hole-top),
+      100% var(--menu-hole-top)
+      !important;
+
+    background-size:
+      100%
+      var(--menu-hole-top),
+
+      100%
+      calc(
+        100% -
+        var(--menu-hole-bottom)
+      ),
+
+      var(--menu-hole-left)
+      calc(
+        var(--menu-hole-bottom) -
+        var(--menu-hole-top)
+      ),
+
+      calc(
+        100% -
+        var(--menu-hole-right)
+      )
+      calc(
+        var(--menu-hole-bottom) -
+        var(--menu-hole-top)
+      )
+      !important;
+  }
+}
+
+/* E5N-TRUSTBAR-OCCLUSION-R6B-END */
+/* =========================================================
+   E5N-TRUSTBAR-OCCLUSION-R26G-START
+
+   Rounded lower Mega cutout.
+
+   Geometry authority:
+     Header.astro -> --menu-hole-radius
+
+   Keeps R6B deterministic paint.
+   Adds two lower-corner repair layers.
+   No mask-composite dependency.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .trust-bar__surface.mega-menu-local-occluded {
+
+    background-image:
+      radial-gradient(
+        circle at 100% 0%,
+        transparent 0 calc(var(--menu-hole-radius, 18px) - 1px),
+        rgba(255, 253, 248, 0.97) var(--menu-hole-radius, 18px)
+      ),
+      radial-gradient(
+        circle at 0% 0%,
+        transparent 0 calc(var(--menu-hole-radius, 18px) - 1px),
+        rgba(255, 253, 248, 0.97) var(--menu-hole-radius, 18px)
+      ),
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      ),
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      ),
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      ),
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      )
+      !important;
+
+    background-repeat:
+      no-repeat !important;
+
+    background-position:
+      var(--menu-hole-left)
+        calc(
+          var(--menu-hole-bottom) -
+          var(--menu-hole-radius, 18px)
+        ),
+
+      calc(
+        var(--menu-hole-right) -
+        var(--menu-hole-radius, 18px)
+      )
+        calc(
+          var(--menu-hole-bottom) -
+          var(--menu-hole-radius, 18px)
+        ),
+
+      0 0,
+      0 100%,
+      0 var(--menu-hole-top),
+      100% var(--menu-hole-top)
+      !important;
+
+    background-size:
+      var(--menu-hole-radius, 18px)
+        var(--menu-hole-radius, 18px),
+
+      var(--menu-hole-radius, 18px)
+        var(--menu-hole-radius, 18px),
+
+      100%
+        var(--menu-hole-top),
+
+      100%
+        calc(
+          100% -
+          var(--menu-hole-bottom)
+        ),
+
+      var(--menu-hole-left)
+        calc(
+          var(--menu-hole-bottom) -
+          var(--menu-hole-top)
+        ),
+
+      calc(
+        100% -
+        var(--menu-hole-right)
+      )
+        calc(
+          var(--menu-hole-bottom) -
+          var(--menu-hole-top)
+        )
+      !important;
+  }
+}
+
+/* E5N-TRUSTBAR-OCCLUSION-R26G-END */
+
 /* =========================================================
    MATO NAVIGATION V2 â€” FINAL BALANCED GLASS V2
    Clear text + stronger backdrop blur + light glass depth
@@ -11630,3 +11860,871 @@ html body:has(
 }
 
 /* E5N-HEADER-ACTIVE-GLASS-R4D-END */
+
+/* =========================================================
+   E5N-MEGA-READABILITY-R5-START
+
+   FINAL ADAPTIVE OPTICAL ISOLATION
+
+   Goals:
+   - stable readability across bright/dark imagery
+   - preserve premium transparent glass
+   - neutralize local colour interference
+   - reduce text-shadow dependency
+   - keep geometry and interaction unchanged
+   - consolidate prior R2/R3/R4 readability layers
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * -------------------------------------------------------
+   * PRIMARY GLASS SURFACE
+   * -------------------------------------------------------
+   */
+
+  .mega-menu {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.39) 0%,
+        rgba(251, 253, 248, 0.31) 50%,
+        rgba(245, 249, 243, 0.34) 100%
+      ) !important;
+
+    -webkit-backdrop-filter:
+      blur(25px)
+      saturate(103%)
+      brightness(1.045) !important;
+
+    backdrop-filter:
+      blur(25px)
+      saturate(103%)
+      brightness(1.045) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * CONTENT CARD OPTICAL ISOLATION
+   *
+   * Slightly stronger neutral surface than R4,
+   * but still transparent enough to preserve glass.
+   * -------------------------------------------------------
+   */
+
+  .mega-menu-link:not(:hover):not(:focus-visible):not(.active) {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.47) 0%,
+        rgba(255, 255, 255, 0.35) 52%,
+        rgba(248, 250, 246, 0.40) 100%
+      ) !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.72) !important;
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.70),
+      0 5px 16px rgba(18, 54, 36, 0.05) !important;
+
+    -webkit-backdrop-filter:
+      blur(17px)
+      saturate(100%)
+      brightness(1.04) !important;
+
+    backdrop-filter:
+      blur(17px)
+      saturate(100%)
+      brightness(1.04) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * INTRO CONTENT
+   * -------------------------------------------------------
+   */
+
+  .mega-menu-eyebrow {
+    color:
+      #075b37 !important;
+
+    font-weight:
+      720 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.34) !important;
+  }
+
+
+  .mega-menu-description {
+    color:
+      #143526 !important;
+
+    font-weight:
+      600 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.30) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * CARD CONTENT
+   * -------------------------------------------------------
+   */
+
+  .mega-menu-link-title {
+    color:
+      #0e3825 !important;
+
+    font-weight:
+      740 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.34) !important;
+  }
+
+
+  .mega-menu-link-description {
+    color:
+      #153727 !important;
+
+    font-weight:
+      600 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.30) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * ICON GLASS
+   * -------------------------------------------------------
+   */
+
+  .mega-menu-link > .mega-menu-icon {
+    background:
+      rgba(255, 255, 255, 0.50) !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.72) !important;
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.72),
+      0 3px 10px rgba(18, 55, 37, 0.055) !important;
+
+    -webkit-backdrop-filter:
+      blur(14px)
+      saturate(100%) !important;
+
+    backdrop-filter:
+      blur(14px)
+      saturate(100%) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * HOVER / ACTIVE
+   * -------------------------------------------------------
+   */
+
+  .mega-menu-link:hover .mega-menu-link-title,
+  .mega-menu-link:focus-visible .mega-menu-link-title,
+  .mega-menu-link.active .mega-menu-link-title {
+    color:
+      #ffffff !important;
+
+    text-shadow:
+      0 1px 1px rgba(4, 37, 22, 0.14) !important;
+  }
+
+
+  .mega-menu-link:hover .mega-menu-link-description,
+  .mega-menu-link:focus-visible .mega-menu-link-description,
+  .mega-menu-link.active .mega-menu-link-description {
+    color:
+      rgba(255, 255, 255, 0.98) !important;
+
+    text-shadow:
+      0 1px 1px rgba(4, 37, 22, 0.12) !important;
+  }
+
+
+  .mega-menu-link:hover > .mega-menu-icon,
+  .mega-menu-link:focus-visible > .mega-menu-icon,
+  .mega-menu-link.active > .mega-menu-icon {
+    background:
+      rgba(255, 255, 255, 0.18) !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.34) !important;
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.28),
+      0 3px 10px rgba(5, 43, 25, 0.08) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * KHMER OPTICAL BALANCE
+   * -------------------------------------------------------
+   */
+
+  html[lang="km"] .mega-menu-description {
+    font-weight:
+      580 !important;
+  }
+
+  html[lang="km"] .mega-menu-link-title {
+    font-weight:
+      700 !important;
+  }
+
+  html[lang="km"] .mega-menu-link-description {
+    font-weight:
+      580 !important;
+  }
+
+}
+
+/* E5N-MEGA-READABILITY-R5-END */
+
+/* =========================================================
+   E5N-MEGA-READABILITY-R5A-START
+
+   INTRO OPTICAL ISOLATION
+
+   Purpose:
+   - improve mega-menu eyebrow + description readability
+   - isolate intro text from unpredictable hero imagery
+   - preserve premium transparent glass appearance
+   - avoid creating a visible nested card
+   - leave card geometry and interaction untouched
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .mega-menu-intro {
+    position: relative;
+    isolation: isolate;
+  }
+
+
+  .mega-menu-intro::before {
+    content: "";
+    position: absolute;
+
+    inset:
+      -10px
+      -14px
+      -9px
+      -14px;
+
+    z-index: -1;
+
+    pointer-events: none;
+
+    border-radius: 18px;
+
+    background:
+      linear-gradient(
+        100deg,
+        rgba(255, 255, 255, 0.34) 0%,
+        rgba(255, 255, 255, 0.22) 56%,
+        rgba(255, 255, 255, 0.08) 100%
+      );
+
+    -webkit-backdrop-filter:
+      blur(10px)
+      saturate(96%)
+      brightness(1.025);
+
+    backdrop-filter:
+      blur(10px)
+      saturate(96%)
+      brightness(1.025);
+
+    -webkit-mask-image:
+      linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.92) 0%,
+        rgba(0, 0, 0, 0.72) 62%,
+        transparent 100%
+      );
+
+    mask-image:
+      linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.92) 0%,
+        rgba(0, 0, 0, 0.72) 62%,
+        transparent 100%
+      );
+  }
+
+
+  .mega-menu-eyebrow,
+  .mega-menu-description {
+    position: relative;
+    z-index: 1;
+  }
+
+
+  .mega-menu-eyebrow {
+    color:
+      #075634 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.42) !important;
+  }
+
+
+  .mega-menu-description {
+    color:
+      #123526 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.36) !important;
+  }
+
+
+  html[lang="km"] .mega-menu-description {
+    font-weight:
+      580 !important;
+  }
+
+}
+
+/* E5N-MEGA-READABILITY-R5A-END */
+
+/* =========================================================
+   E5N-MEGA-READABILITY-R5B-START
+
+   INTRO OPTICAL REFINEMENT
+
+   Purpose:
+   - retain R5A readability improvement
+   - remove visible nested-card impression
+   - make intro protection read as luminous haze
+   - preserve text contrast over unpredictable imagery
+   - leave mega-menu geometry and interaction untouched
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /*
+   * Refine R5A illumination.
+   *
+   * Wider horizontal spread + softer opacity prevents
+   * the layer from reading as a separate mini-card.
+   */
+
+  .mega-menu-intro::before {
+    inset:
+      -8px
+      -24px
+      -7px
+      -18px;
+
+    border-radius:
+      16px;
+
+    background:
+      linear-gradient(
+        100deg,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0.16) 42%,
+        rgba(255, 255, 255, 0.065) 70%,
+        rgba(255, 255, 255, 0) 100%
+      );
+
+    -webkit-backdrop-filter:
+      blur(7px)
+      saturate(98%)
+      brightness(1.018);
+
+    backdrop-filter:
+      blur(7px)
+      saturate(98%)
+      brightness(1.018);
+
+    /*
+     * Earlier fade removes the perception of a
+     * rectangular secondary surface.
+     */
+
+    -webkit-mask-image:
+      linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.88) 0%,
+        rgba(0, 0, 0, 0.68) 40%,
+        rgba(0, 0, 0, 0.30) 67%,
+        transparent 88%
+      );
+
+    mask-image:
+      linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.88) 0%,
+        rgba(0, 0, 0, 0.68) 40%,
+        rgba(0, 0, 0, 0.30) 67%,
+        transparent 88%
+      );
+  }
+
+
+  /*
+   * Preserve R5A typography exactly.
+   * No additional weight or contrast escalation.
+   */
+
+  .mega-menu-eyebrow {
+    color:
+      #075634 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.42) !important;
+  }
+
+
+  .mega-menu-description {
+    color:
+      #123526 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.36) !important;
+  }
+
+
+  html[lang="km"] .mega-menu-description {
+    font-weight:
+      580 !important;
+  }
+
+}
+
+/* E5N-MEGA-READABILITY-R5B-END */
+
+/* =========================================================
+   E5N-MEGA-READABILITY-R5C-START
+
+   INTRO EDGE DISSOLVE POLISH
+
+   Purpose:
+   - preserve R5B readability
+   - dissolve remaining rectangular intro boundaries
+   - retain transparent premium glass character
+   - no geometry or interaction changes
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .mega-menu-intro::before {
+
+    /*
+     * Extend illumination beyond the text zone so its
+     * physical edge disappears before becoming visible.
+     */
+
+    inset:
+      -10px
+      -34px
+      -9px
+      -26px;
+
+    border-radius:
+      22px;
+
+    background:
+      radial-gradient(
+        ellipse 78% 115% at 24% 50%,
+        rgba(255, 255, 255, 0.23) 0%,
+        rgba(255, 255, 255, 0.16) 42%,
+        rgba(255, 255, 255, 0.07) 68%,
+        rgba(255, 255, 255, 0) 100%
+      );
+
+    -webkit-backdrop-filter:
+      blur(7px)
+      saturate(98%)
+      brightness(1.018);
+
+    backdrop-filter:
+      blur(7px)
+      saturate(98%)
+      brightness(1.018);
+
+    /*
+     * Two-dimensional mask:
+     * horizontal fade removes left/right boundaries;
+     * vertical fade softens top/bottom boundaries.
+     */
+
+    -webkit-mask-image:
+      radial-gradient(
+        ellipse 82% 118% at 30% 50%,
+        rgba(0, 0, 0, 0.94) 0%,
+        rgba(0, 0, 0, 0.86) 42%,
+        rgba(0, 0, 0, 0.54) 67%,
+        rgba(0, 0, 0, 0.18) 84%,
+        transparent 100%
+      );
+
+    mask-image:
+      radial-gradient(
+        ellipse 82% 118% at 30% 50%,
+        rgba(0, 0, 0, 0.94) 0%,
+        rgba(0, 0, 0, 0.86) 42%,
+        rgba(0, 0, 0, 0.54) 67%,
+        rgba(0, 0, 0, 0.18) 84%,
+        transparent 100%
+      );
+  }
+
+}
+
+/* E5N-MEGA-READABILITY-R5C-END */
+
+/* =========================================================
+   E5N-MEGA-CONTENT-R4-START
+
+   FINAL OPTICAL TYPOGRAPHY CALIBRATION
+
+   Purpose:
+   - sharpen mega-menu content hierarchy
+   - improve text/background separation
+   - preserve premium transparent glass
+   - calibrate Latin and Khmer independently
+   - preserve current geometry and interaction
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /* INTRO */
+
+  .mega-menu-eyebrow {
+    font-weight: 720 !important;
+    letter-spacing: -0.008em;
+    line-height: 1.22;
+
+    color: #075634 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.48),
+      0 0 12px rgba(255, 255, 255, 0.10) !important;
+  }
+
+
+  .mega-menu-description {
+    font-weight: 590 !important;
+    line-height: 1.46;
+    letter-spacing: -0.004em;
+
+    color: #123526 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.42) !important;
+  }
+
+
+  /* CARD TITLE */
+
+  .mega-menu-card h3,
+  .mega-menu-card-title {
+    font-weight: 720 !important;
+    line-height: 1.22 !important;
+    letter-spacing: -0.012em;
+
+    color: #0b4932 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.46),
+      0 0 10px rgba(255, 255, 255, 0.08) !important;
+  }
+
+
+  /* CARD DESCRIPTION */
+
+  .mega-menu-card p,
+  .mega-menu-card-description {
+    font-weight: 570 !important;
+    line-height: 1.42 !important;
+    letter-spacing: -0.003em;
+
+    color: #163b2c !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.38) !important;
+  }
+
+
+  /* ICON */
+
+  .mega-menu-card svg {
+    color: #08764f;
+
+    filter:
+      drop-shadow(
+        0 1px 0 rgba(255, 255, 255, 0.34)
+      );
+  }
+
+
+  /* KHMER */
+
+  html[lang="km"] .mega-menu-eyebrow {
+    font-weight: 650 !important;
+    line-height: 1.48 !important;
+    letter-spacing: 0 !important;
+  }
+
+
+  html[lang="km"] .mega-menu-description {
+    font-weight: 560 !important;
+    line-height: 1.62 !important;
+    letter-spacing: 0 !important;
+  }
+
+
+  html[lang="km"] .mega-menu-card h3,
+  html[lang="km"] .mega-menu-card-title {
+    font-weight: 650 !important;
+    line-height: 1.48 !important;
+    letter-spacing: 0 !important;
+  }
+
+
+  html[lang="km"] .mega-menu-card p,
+  html[lang="km"] .mega-menu-card-description {
+    font-weight: 540 !important;
+    line-height: 1.58 !important;
+    letter-spacing: 0 !important;
+  }
+
+}
+
+/* E5N-MEGA-CONTENT-R4-END */
+
+/* =========================================================
+   E5N-MEGA-BOTTOM-CORNERS-R1-START
+
+   Precision fix:
+   restore premium rounded lower corners without touching
+   top notch geometry, menu handoff, glass recipe or cards.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .submenu-panel.mega-menu {
+    border-bottom-left-radius:
+      24px !important;
+
+    border-bottom-right-radius:
+      24px !important;
+  }
+
+
+  .submenu-panel.mega-menu > .mega-menu-inner {
+    border-bottom-left-radius:
+      22px !important;
+
+    border-bottom-right-radius:
+      22px !important;
+  }
+
+}
+
+/* E5N-MEGA-BOTTOM-CORNERS-R1-END */
+
+/* =========================================================
+   E5N-MEGA-BOTTOM-CORNERS-R2-START
+
+   Permanent inner clipping fix.
+   Prevents inner glass/background from painting outside
+   approved rounded lower corners.
+
+   Top notch geometry remains untouched.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .submenu-panel.mega-menu > .mega-menu-inner {
+    overflow:
+      hidden !important;
+
+    border-bottom-left-radius:
+      22px !important;
+
+    border-bottom-right-radius:
+      22px !important;
+  }
+
+}
+
+/* E5N-MEGA-BOTTOM-CORNERS-R2-END */
+
+/* =========================================================
+   E5N-HERO-TRUST-OCCLUSION-R29
+
+   Hero trust cards now participate in the existing local
+   Mega Menu cutout system.
+
+   IMPORTANT:
+   - Do NOT hide the whole card.
+   - Preserve the portion outside the Mega Menu.
+   - Geometry remains owned by Header.astro.
+   ========================================================= */
+
+/* =========================================================
+   E5N-R31-ROUNDED-HERO-TRUST-CLIP
+
+   DIRECT GEOMETRY FIX
+
+   The generic local mask subtracts a rectangular Mega Menu
+   hole. That rectangular edge is the visible vertical defect
+   at the Hero Trust cards.
+
+   Hero Trust therefore uses its own rounded top-notch clip.
+
+   Geometry remains owned by Header.astro:
+     --menu-hole-left
+     --menu-hole-right
+     --menu-hole-bottom
+
+   Mega lower corner radius:
+     30px
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .hero-content.mega-menu-local-occluded,
+  .hero-trust.mega-menu-local-occluded {
+
+    /*
+     * Disable the generic rectangular subtractive mask
+     * only for the Hero Trust group.
+     */
+    -webkit-mask-image:
+      none !important;
+
+    mask-image:
+      none !important;
+
+    -webkit-mask-composite:
+      initial !important;
+
+    mask-composite:
+      initial !important;
+
+
+    /*
+     * Visible polygon with a rounded Mega Menu notch.
+     *
+     * Quarter-circle approximation for r = 30px:
+     *   2.28px
+     *   8.79px
+     *   18.52px
+     *   30px
+     */
+    -webkit-clip-path:
+      polygon(
+
+        /* outer top-left */
+        0 0,
+
+        /* enter Mega left side */
+        var(--menu-hole-left) 0,
+
+        /* lower-left rounded contour */
+        var(--menu-hole-left)
+          calc(var(--menu-hole-bottom) - 30px),
+
+        calc(var(--menu-hole-left) + 2.28px)
+          calc(var(--menu-hole-bottom) - 18.52px),
+
+        calc(var(--menu-hole-left) + 8.79px)
+          calc(var(--menu-hole-bottom) - 8.79px),
+
+        calc(var(--menu-hole-left) + 18.52px)
+          calc(var(--menu-hole-bottom) - 2.28px),
+
+        calc(var(--menu-hole-left) + 30px)
+          var(--menu-hole-bottom),
+
+        /* bottom edge of Mega silhouette */
+        calc(var(--menu-hole-right) - 30px)
+          var(--menu-hole-bottom),
+
+        /* lower-right rounded contour */
+        calc(var(--menu-hole-right) - 18.52px)
+          calc(var(--menu-hole-bottom) - 2.28px),
+
+        calc(var(--menu-hole-right) - 8.79px)
+          calc(var(--menu-hole-bottom) - 8.79px),
+
+        calc(var(--menu-hole-right) - 2.28px)
+          calc(var(--menu-hole-bottom) - 18.52px),
+
+        var(--menu-hole-right)
+          calc(var(--menu-hole-bottom) - 30px),
+
+        /* leave Mega right side */
+        var(--menu-hole-right) 0,
+
+        /* outer box */
+        100% 0,
+        100% 100%,
+        0 100%
+      ) !important;
+
+
+    clip-path:
+      polygon(
+        0 0,
+
+        var(--menu-hole-left) 0,
+
+        var(--menu-hole-left)
+          calc(var(--menu-hole-bottom) - 30px),
+
+        calc(var(--menu-hole-left) + 2.28px)
+          calc(var(--menu-hole-bottom) - 18.52px),
+
+        calc(var(--menu-hole-left) + 8.79px)
+          calc(var(--menu-hole-bottom) - 8.79px),
+
+        calc(var(--menu-hole-left) + 18.52px)
+          calc(var(--menu-hole-bottom) - 2.28px),
+
+        calc(var(--menu-hole-left) + 30px)
+          var(--menu-hole-bottom),
+
+        calc(var(--menu-hole-right) - 30px)
+          var(--menu-hole-bottom),
+
+        calc(var(--menu-hole-right) - 18.52px)
+          calc(var(--menu-hole-bottom) - 2.28px),
+
+        calc(var(--menu-hole-right) - 8.79px)
+          calc(var(--menu-hole-bottom) - 8.79px),
+
+        calc(var(--menu-hole-right) - 2.28px)
+          calc(var(--menu-hole-bottom) - 18.52px),
+
+        var(--menu-hole-right)
+          calc(var(--menu-hole-bottom) - 30px),
+
+        var(--menu-hole-right) 0,
+
+        100% 0,
+        100% 100%,
+        0 100%
+      ) !important;
+  }
+}

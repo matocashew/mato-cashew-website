@@ -1,4 +1,4 @@
-﻿---
+---
 import { getCurrentLanguage }
   from "../i18n/getCurrentLanguage";
 
@@ -3304,7 +3304,16 @@ submenuItems.forEach((navItem) => {
      * Dedicated Trust Bar surface participates
      * in the same Mega Menu geometry.
      */
-    const getTrustBarSurface = () =>
+    // E5N R28B:
+  // Hero trust cards have their own translucent background.
+  // Treat each card as a local occlusion paint owner so a card
+  // cannot repaint underneath the visible Mega Menu silhouette.
+  const getHeroTrustCards = () =>
+    Array.from(
+      document.querySelectorAll<HTMLElement>(".hero-trust-item")
+    );
+
+  const getTrustBarSurface = () =>
       document.querySelector<HTMLElement>(
         ".trust-bar__surface"
       );
@@ -3678,7 +3687,7 @@ clearPersistentMegaMenuOwner();
 
       for (
         const element
-        of [heroForeground, heroTrust, ...getHomeStatContent(), ...getTrustItemContent(), ...getTrustItemIcons(), getTrustBarSurface()]
+        of [heroForeground, heroTrust, ...getHomeStatContent(), ...getHeroTrustCards(), ...getTrustItemContent(), ...getTrustItemIcons(), getTrustBarSurface()]
       ) {
         if (!element) continue;
 
@@ -4753,6 +4762,16 @@ clearPersistentMegaMenuOwner();
           const unifiedRadius =
             18;
 
+          /*
+           * Bottom corners need a stronger visual radius than
+           * the connected Tab shoulders.
+           *
+           * Keep TOP geometry at 18px.
+           * Use 30px ONLY for lower-left / lower-right.
+           */
+          const unifiedBottomRadius =
+            30;
+
 
           /*
            * -------------------------------------------------
@@ -4860,7 +4879,7 @@ clearPersistentMegaMenuOwner();
                * Right side.
                */
               `L ${unifiedWidth} ${
-                unifiedHeight - unifiedRadius
+                unifiedHeight - unifiedBottomRadius
               } `,
 
 
@@ -4868,21 +4887,21 @@ clearPersistentMegaMenuOwner();
                * Bottom-right.
                */
               `Q ${unifiedWidth} ${unifiedHeight} ${
-                unifiedWidth - unifiedRadius
+                unifiedWidth - unifiedBottomRadius
               } ${unifiedHeight} `,
 
 
               /*
                * Bottom.
                */
-              `L ${unifiedRadius} ${unifiedHeight} `,
+              `L ${unifiedBottomRadius} ${unifiedHeight} `,
 
 
               /*
                * Bottom-left.
                */
               `Q 0 ${unifiedHeight} 0 ${
-                unifiedHeight - unifiedRadius
+                unifiedHeight - unifiedBottomRadius
               } `,
 
 
@@ -7052,7 +7071,7 @@ clearPersistentMegaMenuOwner();
 
       for (
         const element
-        of [heroForeground, heroTrust, ...getHomeStatContent(), ...getTrustItemContent(), ...getTrustItemIcons(), getTrustBarSurface()]
+        of [heroForeground, heroTrust, ...getHomeStatContent(), ...getHeroTrustCards(), ...getTrustItemContent(), ...getTrustItemIcons(), getTrustBarSurface()]
       ) {
 
         if (!element) continue;
@@ -7149,6 +7168,10 @@ clearPersistentMegaMenuOwner();
             "--menu-hole-bottom"
           );
 
+          element.style.removeProperty(
+            "--menu-hole-radius"
+          );
+
           element.classList.remove(
             "mega-menu-local-occluded"
           );
@@ -7175,6 +7198,16 @@ clearPersistentMegaMenuOwner();
         element.style.setProperty(
           "--menu-hole-bottom",
           `${clampedBottom}px`
+        );
+
+        /*
+         * E5N R26D:
+         * Approved Unified Mega Glass lower-corner radius.
+         * Local occlusion paint consumes this geometry.
+         */
+        element.style.setProperty(
+          "--menu-hole-radius",
+          "18px"
         );
 
         element.classList.add(
@@ -7254,4 +7287,3 @@ document.body.classList.add(
     atomicHeaderRestoreAuthority
   );
 </script>
-

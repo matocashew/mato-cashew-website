@@ -85,7 +85,7 @@ export const navigation: MenuItem[] = [
           "/km/resources/why-cambodian-cashews/",
 
         description:
-          "Discover what makes Cambodian cashews distinctive.",
+          "Why Cambodian cashews stand out.",
 
         descriptionKm:
           "ស្វែងយល់ពីអ្វីដែលធ្វើឱ្យស្វាយចន្ទីកម្ពុជាមានភាពពិសេស។",
@@ -138,7 +138,7 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/cashew-tree/",
 
         description:
-          "Botany, growth characteristics, and cultivation context.",
+          "Growth, cultivation, and tree characteristics.",
 
         descriptionKm:
           "រុក្ខសាស្ត្រ លក្ខណៈលូតលាស់ និងបរិបទនៃការដាំដុះ។",
@@ -164,7 +164,7 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/complete-guide-to-cashew-processing/",
 
         description:
-          "Follow the journey from raw nut to finished kernel.",
+          "From raw nut to finished kernel.",
 
         descriptionKm:
           "ស្វែងយល់ពីដំណើរការចាប់ពីគ្រាប់ឆៅរហូតដល់គ្រាប់កែច្នៃរួច។",
@@ -190,7 +190,7 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/cashew-export-guide/",
 
         description:
-          "Explore export requirements and commercial considerations.",
+          "Key export requirements and trade basics.",
 
         descriptionKm:
           "ស្វែងយល់ពីតម្រូវការនាំចេញ និងកត្តាពាណិជ្ជកម្ម។",
@@ -218,10 +218,10 @@ export const navigation: MenuItem[] = [
     hrefKm: "/km/knowledge/",
 
     description:
-      "Practical knowledge covering quality, processing, safety, storage, and trade.",
+      "Practical guidance on quality, processing, storage, and trade.",
 
     descriptionKm:
-      "មជ្ឈមណ្ឌលចំណេះដឹងអំពីគុណភាព ការកែច្នៃ សុវត្ថិភាព ការរក្សាទុក និងពាណិជ្ជកម្ម។",
+      "ចំណេះដឹងអំពីគុណភាព ការកែច្នៃ ការរក្សាទុក និងពាណិជ្ជកម្ម។",
 
     variant: "mega",
 
@@ -242,10 +242,10 @@ export const navigation: MenuItem[] = [
         hrefKm: "/km/knowledge/",
 
         description:
-          "Explore Mato Cashew's practical knowledge library covering the Cambodian cashew value chain.",
+          "Explore the Cambodian cashew knowledge library.",
 
         descriptionKm:
-          "ស្វែងយល់ពីបណ្ណាល័យចំណេះដឹងរបស់ចន្ទីមាតុភូមិ ដែលគ្របដណ្តប់លើខ្សែសង្វាក់តម្លៃស្វាយចន្ទីកម្ពុជា។",
+          "ស្វែងយល់ពីបណ្ណាល័យចំណេះដឹងអំពីស្វាយចន្ទីកម្ពុជា។",
 
         group: "discover",
 
@@ -269,10 +269,10 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/cashew-quality-standards/",
 
         description:
-          "Understand key quality requirements used to evaluate premium cashew kernels.",
+          "Key requirements for premium kernel quality.",
 
         descriptionKm:
-          "ស្វែងយល់ពីតម្រូវការគុណភាពសំខាន់ៗសម្រាប់វាយតម្លៃគ្រាប់ស្វាយចន្ទីដែលមានគុណភាពខ្ពស់។",
+          "តម្រូវការសំខាន់ៗសម្រាប់គុណភាពគ្រាប់ស្វាយចន្ទី។",
 
         group: "quality",
 
@@ -295,10 +295,10 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/cashew-grading-standards/",
 
         description:
-          "Learn how cashew kernels are classified by size, appearance, and commercial grade.",
+          "How kernels are graded by size and appearance.",
 
         descriptionKm:
-          "ស្វែងយល់ពីការចាត់ថ្នាក់គ្រាប់ស្វាយចន្ទីតាមទំហំ រូបរាង និងថ្នាក់ពាណិជ្ជកម្ម។",
+          "ការចាត់ថ្នាក់គ្រាប់តាមទំហំ និងរូបរាង។",
 
         group: "quality",
 
@@ -321,10 +321,10 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/cashew-kernel-grades-uses/",
 
         description:
-          "Discover common kernel grades and the best uses for each grade.",
+          "Common grades and their best uses.",
 
         descriptionKm:
-          "ស្វែងយល់ពីថ្នាក់គ្រាប់ស្វាយចន្ទីសំខាន់ៗ និងការប្រើប្រាស់សមស្របសម្រាប់ថ្នាក់នីមួយៗ។",
+          "ថ្នាក់គ្រាប់សំខាន់ៗ និងការប្រើប្រាស់សមស្រប។",
 
         group: "quality",
 
@@ -347,10 +347,10 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/cashew-food-safety/",
 
         description:
-          "Review food-safety practices that help protect product quality and consumer confidence.",
+          "Essential practices for safe cashew handling.",
 
         descriptionKm:
-          "ស្វែងយល់ពីការអនុវត្តសុវត្ថិភាពម្ហូបអាហារ ដើម្បីការពារគុណភាពផលិតផល និងទំនុកចិត្តរបស់អ្នកប្រើប្រាស់។",
+          "ការអនុវត្តសុវត្ថិភាពសំខាន់ៗសម្រាប់ផលិតផលស្វាយចន្ទី។",
 
         group: "safety",
 
@@ -373,10 +373,10 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/cashew-moisture-standards/",
 
         description:
-          "Learn why moisture control is essential for freshness, quality, and shelf stability.",
+          "Control moisture for freshness and shelf life.",
 
         descriptionKm:
-          "ស្វែងយល់ពីសារៈសំខាន់នៃការគ្រប់គ្រងសំណើមសម្រាប់ភាពស្រស់ គុណភាព និងអាយុកាលរក្សាទុក។",
+          "គ្រប់គ្រងសំណើមដើម្បីរក្សាភាពស្រស់ និងគុណភាព។",
 
         group: "handling",
 
@@ -399,10 +399,10 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/cashew-storage-guide/",
 
         description:
-          "Explore proper storage practices for protecting cashew quality after processing.",
+          "Store cashews to protect quality and freshness.",
 
         descriptionKm:
-          "ស្វែងយល់ពីវិធីរក្សាទុកត្រឹមត្រូវ ដើម្បីការពារគុណភាពស្វាយចន្ទីក្រោយការកែច្នៃ។",
+          "វិធីរក្សាទុកដើម្បីការពារគុណភាព និងភាពស្រស់។",
 
         group: "handling",
 
@@ -425,10 +425,10 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/cashew-packaging-guide/",
 
         description:
-          "Understand packaging choices that protect freshness, quality, and market readiness.",
+          "Packaging choices for protection and market readiness.",
 
         descriptionKm:
-          "ស្វែងយល់ពីជម្រើសវេចខ្ចប់ដែលជួយការពារភាពស្រស់ គុណភាព និងភាពរួចរាល់សម្រាប់ទីផ្សារ។",
+          "ជម្រើសវេចខ្ចប់សម្រាប់ការពារ និងត្រៀមចូលទីផ្សារ។",
 
         group: "handling",
 
@@ -451,10 +451,10 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/cashew-shelf-life-guide/",
 
         description:
-          "Learn the factors that influence cashew shelf life and long-term product quality.",
+          "Factors that affect long-term product quality.",
 
         descriptionKm:
-          "ស្វែងយល់ពីកត្តាដែលប៉ះពាល់ដល់អាយុកាលរក្សាទុក និងគុណភាពផលិតផលក្នុងរយៈពេលវែង។",
+          "កត្តាដែលប៉ះពាល់ដល់អាយុកាល និងគុណភាពផលិតផល។",
 
         group: "handling",
 
@@ -487,10 +487,10 @@ export const navigation: MenuItem[] = [
       "/km/knowledge/cashew-export-guide/",
 
     description:
-      "Commercial knowledge for buyers, processors, exporters, and industry stakeholders.",
+      "Market insight for buyers, exporters, and industry partners.",
 
     descriptionKm:
-      "ព័ត៌មានពាណិជ្ជកម្មសម្រាប់អ្នកទិញ អ្នកកែច្នៃ អ្នកនាំចេញ និងភាគីក្នុងឧស្សាហកម្ម។",
+      "ព័ត៌មានទីផ្សារសម្រាប់អ្នកទិញ អ្នកនាំចេញ និងដៃគូឧស្សាហកម្ម។",
 
     variant: "mega",
 
@@ -514,10 +514,10 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/cashew-export-guide/",
 
         description:
-          "Explore export requirements, documentation, and trade considerations for Cambodian cashews.",
+          "Export requirements, documents, and trade basics.",
 
         descriptionKm:
-          "ស្វែងយល់ពីតម្រូវការនាំចេញ ឯកសារ និងកត្តាពាណិជ្ជកម្មសម្រាប់ស្វាយចន្ទីកម្ពុជា។",
+          "តម្រូវការនាំចេញ ឯកសារ និងមូលដ្ឋានពាណិជ្ជកម្ម។",
 
         group: "trade",
 
@@ -541,10 +541,10 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/cashew-quality-standards/",
 
         description:
-          "Review quality standards that influence buyer acceptance and international trade.",
+          "Standards that influence buyer acceptance.",
 
         descriptionKm:
-          "ស្វែងយល់ពីស្តង់ដារគុណភាពដែលមានឥទ្ធិពលលើការទទួលយករបស់អ្នកទិញ និងពាណិជ្ជកម្មអន្តរជាតិ។",
+          "ស្តង់ដារគុណភាពដែលអ្នកទិញយកចិត្តទុកដាក់។",
 
         group: "standards",
 
@@ -567,10 +567,10 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/cashew-grading-standards/",
 
         description:
-          "Understand commercial grading used by processors, traders, exporters, and buyers.",
+          "Grading used across commercial cashew trade.",
 
         descriptionKm:
-          "ស្វែងយល់ពីការចាត់ថ្នាក់ពាណិជ្ជកម្មដែលប្រើដោយអ្នកកែច្នៃ អ្នកជួញដូរ អ្នកនាំចេញ និងអ្នកទិញ។",
+          "ការចាត់ថ្នាក់សម្រាប់ពាណិជ្ជកម្មស្វាយចន្ទី។",
 
         group: "standards",
 
@@ -593,10 +593,10 @@ export const navigation: MenuItem[] = [
           "/km/knowledge/cashew-packaging-guide/",
 
         description:
-          "Explore packaging requirements for wholesale, export, transport, and product protection.",
+          "Packaging for wholesale, export, and transport.",
 
         descriptionKm:
-          "ស្វែងយល់ពីតម្រូវការវេចខ្ចប់សម្រាប់លក់ដុំ នាំចេញ ដឹកជញ្ជូន និងការពារផលិតផល។",
+          "ការវេចខ្ចប់សម្រាប់លក់ដុំ នាំចេញ និងដឹកជញ្ជូន។",
 
         group: "trade",
 
@@ -616,10 +616,10 @@ export const navigation: MenuItem[] = [
         hrefKm: "/km/wholesale/",
 
         description:
-          "Discover B2B supply solutions for retailers, distributors, processors, and commercial buyers.",
+          "Supply solutions for retailers and distributors.",
 
         descriptionKm:
-          "ស្វែងយល់ពីដំណោះស្រាយផ្គត់ផ្គង់ B2B សម្រាប់អ្នកលក់រាយ អ្នកចែកចាយ អ្នកកែច្នៃ និងអ្នកទិញអាជីវកម្ម។",
+          "ដំណោះស្រាយផ្គត់ផ្គង់សម្រាប់អ្នកលក់ និងអ្នកចែកចាយ។",
 
         group: "commercial",
 
@@ -644,10 +644,10 @@ export const navigation: MenuItem[] = [
     hrefKm: "/km/products/",
 
     description:
-      "Explore Mato Cashew retail products and wholesale solutions.",
+      "Retail products and wholesale solutions.",
 
     descriptionKm:
-      "ស្វែងយល់ពីផលិតផលលក់រាយ និងដំណោះស្រាយលក់ដុំរបស់ចន្ទីមាតុភូមិ។",
+      "ផលិតផលលក់រាយ និងដំណោះស្រាយលក់ដុំ។",
 
     variant: "mega",
 
@@ -667,10 +667,10 @@ export const navigation: MenuItem[] = [
       hrefKm: "/km/products/",
 
       description:
-        "Explore Mato Cashew retail products, pack sizes, and packaging options.",
+        "Browse pack sizes and packaging options.",
 
       descriptionKm:
-        "ស្វែងយល់ពីផលិតផលលក់រាយ ទំហំវេចខ្ចប់ និងជម្រើសវេចខ្ចប់របស់ចន្ទីមាតុភូមិ។",
+        "មើលទំហំ និងជម្រើសវេចខ្ចប់។",
 
       visible: true,
       order: 1,
@@ -687,10 +687,10 @@ export const navigation: MenuItem[] = [
       hrefKm: "/km/wholesale/",
 
       description:
-        "Discover wholesale solutions for retailers, distributors, and business buyers.",
+        "Supply options for retailers and distributors.",
 
       descriptionKm:
-        "ស្វែងយល់ពីដំណោះស្រាយលក់ដុំសម្រាប់អ្នកលក់រាយ អ្នកចែកចាយ និងអតិថិជនអាជីវកម្ម។",
+        "ជម្រើសផ្គត់ផ្គង់សម្រាប់អ្នកលក់ និងអ្នកចែកចាយ។",
 
       visible: true,
       order: 2,
@@ -714,10 +714,10 @@ export const navigation: MenuItem[] = [
     hrefKm: "/km/about/",
 
     description:
-      "Learn about Mato Cashew, our Cambodian identity, and how to connect with us.",
+      "Discover Mato Cashew and connect with our team.",
 
     descriptionKm:
-      "ស្វែងយល់អំពីចន្ទីមាតុភូមិ អត្តសញ្ញាណកម្ពុជា និងការទំនាក់ទំនងជាមួយយើង។",
+      "ស្វែងយល់ពីចន្ទីមាតុភូមិ និងទាក់ទងក្រុមការងារ។",
 
     variant: "mega",
 
@@ -737,10 +737,10 @@ export const navigation: MenuItem[] = [
         hrefKm: "/km/about/",
 
         description:
-          "Learn about our story, Cambodian identity, values, and commitment to quality.",
+          "Our story, values, and Cambodian identity.",
 
         descriptionKm:
-          "ស្វែងយល់ពីប្រវត្តិ អត្តសញ្ញាណខ្មែរ គុណតម្លៃ និងការប្តេជ្ញាចិត្តរបស់ចន្ទីមាតុភូមិ។",
+          "រឿងរ៉ាវ គុណតម្លៃ និងអត្តសញ្ញាណខ្មែរ។",
 
         visible: true,
         order: 1,
@@ -757,10 +757,10 @@ export const navigation: MenuItem[] = [
         hrefKm: "/km/resources/",
 
         description:
-          "Access useful cashew resources, guides, and reference materials.",
+          "Practical guides and cashew references.",
 
         descriptionKm:
-          "ស្វែងរកធនធាន មគ្គុទ្ទេសក៍ និងឯកសារយោងដែលពាក់ព័ន្ធនឹងស្វាយចន្ទី។",
+          "មគ្គុទ្ទេសក៍ និងឯកសារយោងស្វាយចន្ទី។",
 
         visible: true,
         order: 2,
@@ -777,10 +777,10 @@ export const navigation: MenuItem[] = [
         hrefKm: "/km/gallery/",
 
         description:
-          "Explore images from our products, cashew activities, farms, and communities.",
+          "Products, farms, and community moments.",
 
         descriptionKm:
-          "ទស្សនារូបភាពផលិតផល សកម្មភាពស្វាយចន្ទី ចម្ការ និងសហគមន៍របស់យើង។",
+          "ផលិតផល ចម្ការ និងសកម្មភាពសហគមន៍។",
 
         visible: true,
         order: 3,
@@ -797,10 +797,10 @@ export const navigation: MenuItem[] = [
         hrefKm: "/km/contact/",
 
         description:
-          "Connect with Mato Cashew for product, partnership, wholesale, or general enquiries.",
+          "Product, wholesale, and partnership inquiries.",
 
         descriptionKm:
-          "ទាក់ទងចន្ទីមាតុភូមិសម្រាប់ផលិតផល ភាពជាដៃគូ លក់ដុំ ឬព័ត៌មានទូទៅ។",
+          "សាកសួរផលិតផល លក់ដុំ និងភាពជាដៃគូ។",
 
         visible: true,
         order: 4,
