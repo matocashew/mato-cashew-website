@@ -29,7 +29,15 @@ const currentLanguage = isKhmer
       height="15"
     />
 
-    <span>{currentLanguage.label}</span>
+    <span
+      class:list={[
+        "language-label",
+        currentLanguage.code === "km" &&
+          "language-label--km",
+      ]}
+    >
+      {currentLanguage.label}
+    </span>
 
     <span class="arrow">▼</span>
 
@@ -54,7 +62,9 @@ const currentLanguage = isKhmer
         height="18"
       />
 
-      <span>English</span>
+      <span class="language-label">
+        English
+      </span>
 
       {
         currentLanguage.code === "en" && (
@@ -81,7 +91,9 @@ const currentLanguage = isKhmer
         height="18"
       />
 
-      <span>ខ្មែរ</span>
+      <span class="language-label language-label--km">
+        ខ្មែរ
+      </span>
 
       {
         currentLanguage.code === "km" && (
@@ -94,3 +106,32 @@ const currentLanguage = isKhmer
   </div>
 
 </div>
+<style>
+  /*
+   * =========================================================
+   * E5N-R116-LANGUAGE-SWITCHER-KHMER-TYPOGRAPHY
+   *
+   * Language identity owns its typography.
+   *
+   * Khmer must use the site's Khmer font even while the
+   * surrounding page is English.
+   *
+   * This keeps the dropdown Khmer option visually identical
+   * to Khmer when it becomes the current language.
+   * =========================================================
+   */
+
+  .language-label--km {
+    font-family:
+      var(--font-kh);
+
+    font-weight:
+      600;
+
+    line-height:
+      1.45;
+
+    letter-spacing:
+      0;
+  }
+</style>
