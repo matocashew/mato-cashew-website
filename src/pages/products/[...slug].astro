@@ -40,7 +40,7 @@ const { product } = Astro.props;
 const { Content } = await render(product);
 
 const canonical =
-  `https://matocashew.com/products/${product.data.slug}/`;
+  `https://matocashew.com/products/${product.data.slug}`;
 
 const relatedProducts =
   await getRelatedProducts(
@@ -66,7 +66,7 @@ const relatedProducts =
     },
     {
       name: "Products",
-      url: "https://matocashew.com/products/"
+      url: "https://matocashew.com/products"
     },
     {
       name: product.data.title,

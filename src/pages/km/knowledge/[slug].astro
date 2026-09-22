@@ -133,11 +133,11 @@ const englishTranslation =
 
 const englishLanguagePath =
   englishTranslation
-    ? `/knowledge/${englishTranslation.slug}/`
-    : "/knowledge/";
+    ? `/knowledge/${englishTranslation.slug}`
+    : "/knowledge";
 
 const khmerLanguagePath =
-  `/km/knowledge/${currentSlug}/`;
+  `/km/knowledge/${currentSlug}`;
 
 /* =========================================================
    KHMER ARTICLES ONLY
@@ -152,11 +152,11 @@ const articles =
    ========================================================= */
 
 const canonical =
-  `https://matocashew.com/km/knowledge/${currentSlug}/`;
+  `https://matocashew.com/km/knowledge/${currentSlug}`;
 
 const englishAlternateUrl =
   englishTranslation
-    ? `https://matocashew.com/knowledge/${englishTranslation.slug}/`
+    ? `https://matocashew.com/knowledge/${englishTranslation.slug}`
     : undefined;
 
 const khmerAlternateUrl =
@@ -240,11 +240,11 @@ const next =
   breadcrumbs={[
     {
       name: "ទំព័រដើម",
-      url: "https://matocashew.com/km/"
+      url: "https://matocashew.com/km"
     },
     {
       name: "មជ្ឈមណ្ឌលចំណេះដឹង",
-      url: "https://matocashew.com/km/knowledge/"
+      url: "https://matocashew.com/km/knowledge"
     },
     {
       name: entry.data.title,

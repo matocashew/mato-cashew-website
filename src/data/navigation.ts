@@ -24,7 +24,7 @@ export const navigation: MenuItem[] = [
     label: "Home",
 
     href: "/",
-    hrefKm: "/km/",
+    hrefKm: "/km",
 
     variant: "link",
 
@@ -52,10 +52,10 @@ export const navigation: MenuItem[] = [
      * /km/cambodian-cashew/
      */
     href:
-      "/resources/why-cambodian-cashews/",
+      "/resources/why-cambodian-cashews",
 
     hrefKm:
-      "/km/resources/why-cambodian-cashews/",
+      "/km/resources/why-cambodian-cashews",
 
     description:
       "Explore Cambodia's cashew origin, cultivation, processing, and industry.",
@@ -79,10 +79,10 @@ export const navigation: MenuItem[] = [
         labelKm: "ហេតុអ្វីជ្រើសរើសស្វាយចន្ទីកម្ពុជា",
 
         href:
-          "/resources/why-cambodian-cashews/",
+          "/resources/why-cambodian-cashews",
 
         hrefKm:
-          "/km/resources/why-cambodian-cashews/",
+          "/km/resources/why-cambodian-cashews",
 
         description:
           "Why Cambodian cashews stand out.",
@@ -106,10 +106,10 @@ export const navigation: MenuItem[] = [
         labelKm: "ស្វាយចន្ទីជាអ្វី?",
 
         href:
-          "/knowledge/what-is-cashew/",
+          "/knowledge/what-is-cashew",
 
         hrefKm:
-          "/km/knowledge/what-is-cashew/",
+          "/km/knowledge/what-is-cashew",
 
         description:
           "Learn the fundamentals of the cashew plant and nut.",
@@ -132,10 +132,10 @@ export const navigation: MenuItem[] = [
         labelKm: "ដើមស្វាយចន្ទី",
 
         href:
-          "/knowledge/cashew-tree/",
+          "/knowledge/cashew-tree",
 
         hrefKm:
-          "/km/knowledge/cashew-tree/",
+          "/km/knowledge/cashew-tree",
 
         description:
           "Growth, cultivation, and tree characteristics.",
@@ -158,10 +158,10 @@ export const navigation: MenuItem[] = [
         labelKm: "ការកែច្នៃស្វាយចន្ទី",
 
         href:
-          "/knowledge/complete-guide-to-cashew-processing/",
+          "/knowledge/complete-guide-to-cashew-processing",
 
         hrefKm:
-          "/km/knowledge/complete-guide-to-cashew-processing/",
+          "/km/knowledge/complete-guide-to-cashew-processing",
 
         description:
           "From raw nut to finished kernel.",
@@ -184,10 +184,10 @@ export const navigation: MenuItem[] = [
         labelKm: "មគ្គុទ្ទេសក៍នាំចេញ",
 
         href:
-          "/knowledge/cashew-export-guide/",
+          "/knowledge/cashew-export-guide",
 
         hrefKm:
-          "/km/knowledge/cashew-export-guide/",
+          "/km/knowledge/cashew-export-guide",
 
         description:
           "Key export requirements and trade basics.",
@@ -214,8 +214,8 @@ export const navigation: MenuItem[] = [
     labelKey: "nav.knowledge",
     label: "Knowledge",
 
-    href: "/knowledge/",
-    hrefKm: "/km/knowledge/",
+    href: "/knowledge",
+    hrefKm: "/km/knowledge",
 
     description:
       "Practical guidance on quality, processing, storage, and trade.",
@@ -238,8 +238,8 @@ export const navigation: MenuItem[] = [
 
         labelKm: "មជ្ឈមណ្ឌលចំណេះដឹង",
 
-        href: "/knowledge/",
-        hrefKm: "/km/knowledge/",
+        href: "/knowledge",
+        hrefKm: "/km/knowledge",
 
         description:
           "Explore the Cambodian cashew knowledge library.",
@@ -263,10 +263,10 @@ export const navigation: MenuItem[] = [
         labelKm: "ស្តង់ដារគុណភាព",
 
         href:
-          "/knowledge/cashew-quality-standards/",
+          "/knowledge/cashew-quality-standards",
 
         hrefKm:
-          "/km/knowledge/cashew-quality-standards/",
+          "/km/knowledge/cashew-quality-standards",
 
         description:
           "Key requirements for premium kernel quality.",
@@ -289,10 +289,10 @@ export const navigation: MenuItem[] = [
         labelKm: "ស្តង់ដារចាត់ថ្នាក់",
 
         href:
-          "/knowledge/cashew-grading-standards/",
+          "/knowledge/cashew-grading-standards",
 
         hrefKm:
-          "/km/knowledge/cashew-grading-standards/",
+          "/km/knowledge/cashew-grading-standards",
 
         description:
           "How kernels are graded by size and appearance.",
@@ -315,10 +315,10 @@ export const navigation: MenuItem[] = [
         labelKm: "ថ្នាក់គ្រាប់ និងការប្រើប្រាស់",
 
         href:
-          "/knowledge/cashew-kernel-grades-uses/",
+          "/knowledge/cashew-kernel-grades-uses",
 
         hrefKm:
-          "/km/knowledge/cashew-kernel-grades-uses/",
+          "/km/knowledge/cashew-kernel-grades-uses",
 
         description:
           "Common grades and their best uses.",
@@ -341,10 +341,10 @@ export const navigation: MenuItem[] = [
         labelKm: "សុវត្ថិភាពម្ហូបអាហារ",
 
         href:
-          "/knowledge/cashew-food-safety/",
+          "/knowledge/cashew-food-safety",
 
         hrefKm:
-          "/km/knowledge/cashew-food-safety/",
+          "/km/knowledge/cashew-food-safety",
 
         description:
           "Essential practices for safe cashew handling.",
@@ -367,10 +367,10 @@ export const navigation: MenuItem[] = [
         labelKm: "ស្តង់ដារសំណើម",
 
         href:
-          "/knowledge/cashew-moisture-standards/",
+          "/knowledge/cashew-moisture-standards",
 
         hrefKm:
-          "/km/knowledge/cashew-moisture-standards/",
+          "/km/knowledge/cashew-moisture-standards",
 
         description:
           "Control moisture for freshness and shelf life.",
@@ -393,10 +393,10 @@ export const navigation: MenuItem[] = [
         labelKm: "មគ្គុទ្ទេសក៍រក្សាទុក",
 
         href:
-          "/knowledge/cashew-storage-guide/",
+          "/knowledge/cashew-storage-guide",
 
         hrefKm:
-          "/km/knowledge/cashew-storage-guide/",
+          "/km/knowledge/cashew-storage-guide",
 
         description:
           "Store cashews to protect quality and freshness.",
@@ -419,10 +419,10 @@ export const navigation: MenuItem[] = [
         labelKm: "មគ្គុទ្ទេសក៍វេចខ្ចប់",
 
         href:
-          "/knowledge/cashew-packaging-guide/",
+          "/knowledge/cashew-packaging-guide",
 
         hrefKm:
-          "/km/knowledge/cashew-packaging-guide/",
+          "/km/knowledge/cashew-packaging-guide",
 
         description:
           "Packaging choices for protection and market readiness.",
@@ -445,10 +445,10 @@ export const navigation: MenuItem[] = [
         labelKm: "អាយុកាលរក្សាទុក",
 
         href:
-          "/knowledge/cashew-shelf-life-guide/",
+          "/knowledge/cashew-shelf-life-guide",
 
         hrefKm:
-          "/km/knowledge/cashew-shelf-life-guide/",
+          "/km/knowledge/cashew-shelf-life-guide",
 
         description:
           "Factors that affect long-term product quality.",
@@ -481,10 +481,10 @@ export const navigation: MenuItem[] = [
      * market-industry landing page is created.
      */
     href:
-      "/knowledge/cashew-export-guide/",
+      "/knowledge/cashew-export-guide",
 
     hrefKm:
-      "/km/knowledge/cashew-export-guide/",
+      "/km/knowledge/cashew-export-guide",
 
     description:
       "Market insight for buyers, exporters, and industry partners.",
@@ -508,10 +508,10 @@ export const navigation: MenuItem[] = [
         labelKm: "ការនាំចេញ និងពាណិជ្ជកម្ម",
 
         href:
-          "/knowledge/cashew-export-guide/",
+          "/knowledge/cashew-export-guide",
 
         hrefKm:
-          "/km/knowledge/cashew-export-guide/",
+          "/km/knowledge/cashew-export-guide",
 
         description:
           "Export requirements, documents, and trade basics.",
@@ -535,10 +535,10 @@ export const navigation: MenuItem[] = [
         labelKm: "ស្តង់ដារគុណភាព",
 
         href:
-          "/knowledge/cashew-quality-standards/",
+          "/knowledge/cashew-quality-standards",
 
         hrefKm:
-          "/km/knowledge/cashew-quality-standards/",
+          "/km/knowledge/cashew-quality-standards",
 
         description:
           "Standards that influence buyer acceptance.",
@@ -561,10 +561,10 @@ export const navigation: MenuItem[] = [
         labelKm: "ការចាត់ថ្នាក់ពាណិជ្ជកម្ម",
 
         href:
-          "/knowledge/cashew-grading-standards/",
+          "/knowledge/cashew-grading-standards",
 
         hrefKm:
-          "/km/knowledge/cashew-grading-standards/",
+          "/km/knowledge/cashew-grading-standards",
 
         description:
           "Grading used across commercial cashew trade.",
@@ -587,10 +587,10 @@ export const navigation: MenuItem[] = [
         labelKm: "ការវេចខ្ចប់",
 
         href:
-          "/knowledge/cashew-packaging-guide/",
+          "/knowledge/cashew-packaging-guide",
 
         hrefKm:
-          "/km/knowledge/cashew-packaging-guide/",
+          "/km/knowledge/cashew-packaging-guide",
 
         description:
           "Packaging for wholesale, export, and transport.",
@@ -612,8 +612,8 @@ export const navigation: MenuItem[] = [
 
         labelKm: "លក់ដុំ / B2B",
 
-        href: "/wholesale/",
-        hrefKm: "/km/wholesale/",
+        href: "/wholesale",
+        hrefKm: "/km/wholesale",
 
         description:
           "Supply solutions for retailers and distributors.",
@@ -640,8 +640,8 @@ export const navigation: MenuItem[] = [
     labelKey: "nav.products",
     label: "Products",
 
-    href: "/products/",
-    hrefKm: "/km/products/",
+    href: "/products",
+    hrefKm: "/km/products",
 
     description:
       "Retail products and wholesale solutions.",
@@ -663,8 +663,8 @@ export const navigation: MenuItem[] = [
       label: "All Products",
       labelKm: "ផលិតផលទាំងអស់",
 
-      href: "/products/",
-      hrefKm: "/km/products/",
+      href: "/products",
+      hrefKm: "/km/products",
 
       description:
         "Browse pack sizes and packaging options.",
@@ -683,8 +683,8 @@ export const navigation: MenuItem[] = [
       label: "Wholesale / B2B",
       labelKm: "លក់ដុំ / B2B",
 
-      href: "/wholesale/",
-      hrefKm: "/km/wholesale/",
+      href: "/wholesale",
+      hrefKm: "/km/wholesale",
 
       description:
         "Supply options for retailers and distributors.",
@@ -710,8 +710,8 @@ export const navigation: MenuItem[] = [
     labelKey: "nav.about",
     label: "About",
 
-    href: "/about/",
-    hrefKm: "/km/about/",
+    href: "/about",
+    hrefKm: "/km/about",
 
     description:
       "Discover Mato Cashew and connect with our team.",
@@ -733,8 +733,8 @@ export const navigation: MenuItem[] = [
         label: "About Mato Cashew",
         labelKm: "អំពីចន្ទីមាតុភូមិ",
 
-        href: "/about/",
-        hrefKm: "/km/about/",
+        href: "/about",
+        hrefKm: "/km/about",
 
         description:
           "Our story, values, and Cambodian identity.",
@@ -753,8 +753,8 @@ export const navigation: MenuItem[] = [
         label: "Resources",
         labelKm: "ធនធាន",
 
-        href: "/resources/",
-        hrefKm: "/km/resources/",
+        href: "/resources",
+        hrefKm: "/km/resources",
 
         description:
           "Practical guides and cashew references.",
@@ -773,8 +773,8 @@ export const navigation: MenuItem[] = [
         label: "Gallery",
         labelKm: "វិចិត្រសាល",
 
-        href: "/gallery/",
-        hrefKm: "/km/gallery/",
+        href: "/gallery",
+        hrefKm: "/km/gallery",
 
         description:
           "Products, farms, and community moments.",
@@ -793,8 +793,8 @@ export const navigation: MenuItem[] = [
         label: "Contact",
         labelKm: "ទំនាក់ទំនង",
 
-        href: "/contact/",
-        hrefKm: "/km/contact/",
+        href: "/contact",
+        hrefKm: "/km/contact",
 
         description:
           "Product, wholesale, and partnership inquiries.",

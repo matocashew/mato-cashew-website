@@ -42,7 +42,7 @@ const {
 } = await render(resource);
 
 const canonical =
-  `https://matocashew.com/km/resources/${resource.data.slug}/`;
+  `https://matocashew.com/km/resources/${resource.data.slug}`;
 ---
 
 <ResourcePageSchema
@@ -60,11 +60,11 @@ const canonical =
   breadcrumbs={[
     {
       name: "ទំព័រដើម",
-      url: "https://matocashew.com/km/"
+      url: "https://matocashew.com/km"
     },
     {
       name: "ធនធាន",
-      url: "https://matocashew.com/km/resources/"
+      url: "https://matocashew.com/km/resources"
     },
     {
       name: resource.data.title,

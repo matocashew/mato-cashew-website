@@ -108,12 +108,12 @@ const khmerTranslation =
   );
 
 const englishLanguagePath =
-  `/knowledge/${currentSlug}/`;
+  `/knowledge/${currentSlug}`;
 
 const khmerLanguagePath =
   khmerTranslation
-    ? `/km/knowledge/${khmerTranslation.slug}/`
-    : "/km/knowledge/";
+    ? `/km/knowledge/${khmerTranslation.slug}`
+    : "/km/knowledge";
 
 
 /* =========================================================
@@ -121,14 +121,14 @@ const khmerLanguagePath =
    ========================================================= */
 
 const canonical =
-  `https://matocashew.com/knowledge/${currentSlug}/`;
+  `https://matocashew.com/knowledge/${currentSlug}`;
 
 const englishAlternateUrl =
   canonical;
 
 const khmerAlternateUrl =
   khmerTranslation
-    ? `https://matocashew.com/km/knowledge/${khmerTranslation.slug}/`
+    ? `https://matocashew.com/km/knowledge/${khmerTranslation.slug}`
     : undefined;
 
 
@@ -207,7 +207,7 @@ const next =
     },
     {
       name: "Knowledge Center",
-      url: "https://matocashew.com/knowledge/"
+      url: "https://matocashew.com/knowledge"
     },
     {
       name: entry.data.title,

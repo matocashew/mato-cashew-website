@@ -41,8 +41,8 @@ function getProductUrl(
   product: CollectionEntry<"products">
 ) {
   return isKhmer
-    ? `/km/products/${product.data.slug}/`
-    : `/products/${product.data.slug}/`;
+    ? `/km/products/${product.data.slug}`
+    : `/products/${product.data.slug}`;
 }
 
 

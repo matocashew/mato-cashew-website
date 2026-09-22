@@ -23,10 +23,10 @@ const language: Language =
    ========================================================= */
 
 const productsPath =
-  getLocalizedPath(language, "/products/");
+  getLocalizedPath(language, "/products");
 
 const aboutPath =
-  getLocalizedPath(language, "/about/");
+  getLocalizedPath(language, "/about");
 
 
 /* =========================================================
@@ -302,8 +302,8 @@ const productSlides = [
 
               const productHref =
                 language === "km"
-                  ? `/km/products/${slide.slug}/`
-                  : `/products/${slide.slug}/`;
+                  ? `/km/products/${slide.slug}`
+                  : `/products/${slide.slug}`;
 
               const alt =
                 language === "km"

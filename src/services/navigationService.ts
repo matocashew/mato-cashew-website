@@ -1,4 +1,4 @@
-﻿import { navigation } from "@data/navigation";
+import { navigation } from "@data/navigation";
 
 import type {
   MenuItem,
@@ -75,7 +75,7 @@ function deriveKhmerHref(
   }
 
   if (href === "/") {
-    return "/km/";
+    return "/km";
   }
 
   return `/km${href}`;

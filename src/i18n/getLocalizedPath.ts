@@ -10,8 +10,14 @@ export function getLocalizedPath(
       : `/${path}`;
 
   if (language === "en") {
-    return normalized;
+    return normalized === "/"
+      ? "/"
+      : normalized.replace(/\/+$/, "");
   }
 
-  return `/km${normalized}`;
+  if (normalized === "/") {
+    return "/km";
+  }
+
+  return `/km${normalized.replace(/\/+$/, "")}`;
 }

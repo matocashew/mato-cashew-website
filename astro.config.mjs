@@ -7,7 +7,11 @@ export default defineConfig({
 
   site: "https://matocashew.com",
 
-  trailingSlash: "always",
+  trailingSlash: "never",
+
+  build: {
+    format: "file",
+  },
 
   integrations: [
 
