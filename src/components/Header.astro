@@ -15,8 +15,27 @@ import type { NavigationLanguage }
   from "@models/navigation";
 
 
-const currentPath =
+/*
+ * Normalize Astro build paths.
+ *
+ * Development:
+ *   /km/products
+ *
+ * Static file build:
+ *   /km/products.html
+ *
+ * Both resolve to:
+ *   /km/products
+ */
+const buildPath =
   Astro.url.pathname;
+
+const currentPath =
+  buildPath === "/index.html"
+    ? "/"
+    : buildPath
+        .replace(/\.html$/, "")
+        .replace(/\/index$/, "/");
 
 const isKhmer =
   currentPath === "/km" ||
