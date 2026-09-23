@@ -115,9 +115,13 @@ const t = getCurrentLanguage(
 
     </div>
 
+  </div>
+  </div>
 
-    <!-- LIGHTBOX -->
-    <div
+</section>
+
+<!-- LIGHTBOX — outside company-story stacking context -->
+<div
       class="story-lightbox"
       data-story-lightbox
       aria-hidden="true"
@@ -139,33 +143,6 @@ const t = getCurrentLanguage(
         />
       </div>
     </div>
-
-  </div>
-  <div
-    class="story-lightbox"
-    data-story-lightbox
-    aria-hidden="true"
-  >
-    <button
-      type="button"
-      class="story-lightbox-close"
-      data-story-close
-      aria-label="Close image"
-    >
-      ×
-    </button>
-
-    <div class="story-lightbox-content">
-      <img
-        src=""
-        alt=""
-        data-story-lightbox-image
-      />
-    </div>
-  </div>
-  </div>
-
-</section>
 
 <script>
   function initStoryGallery() {
@@ -194,13 +171,13 @@ const t = getCurrentLanguage(
         gallery.querySelector("[data-story-open]");
 
       const lightbox =
-        gallery.querySelector("[data-story-lightbox]");
+        document.querySelector("[data-story-lightbox]");
 
       const lightboxImage =
-        gallery.querySelector("[data-story-lightbox-image]");
+        lightbox?.querySelector("[data-story-lightbox-image]");
 
       const closeButton =
-        gallery.querySelector("[data-story-close]");
+        lightbox?.querySelector("[data-story-close]");
 
       let lightboxTrigger: HTMLElement | null = null;
 
