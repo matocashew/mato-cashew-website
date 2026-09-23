@@ -93,6 +93,74 @@ const contactUrl =
 
   <div class="container">
 
+    <!-- Product Breadcrumb -->
+<nav class="product-breadcrumb" aria-label="Breadcrumb">
+
+  <a
+    href={isKhmer ? "/km" : "/"}
+    class="product-breadcrumb-home"
+  >
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.8"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m3 10 9-7 9 7" />
+      <path d="M5 9v12h14V9" />
+      <path d="M9 21v-7h6v7" />
+    </svg>
+
+    <span>{isKhmer ? "ទំព័រដើម" : "Home"}</span>
+  </a>
+
+  <svg
+    class="product-breadcrumb-chevron"
+    width="12"
+    height="12"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="m9 18 6-6-6-6" />
+  </svg>
+
+  <a href={isKhmer ? "/km/products" : "/products"}>
+    {isKhmer ? "ផលិតផល" : "Products"}
+  </a>
+
+  <svg
+    class="product-breadcrumb-chevron"
+    width="12"
+    height="12"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="m9 18 6-6-6-6" />
+  </svg>
+
+  <span
+    class="product-breadcrumb-current"
+    aria-current="page"
+  >
+    {productTitle}
+  </span>
+
+</nav>
     <div class="product-details-shell">
 
       <div class="product-details-grid">
