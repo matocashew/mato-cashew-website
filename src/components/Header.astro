@@ -296,6 +296,11 @@ const brandName =
                               (child) => (
                                 <a
                                   href={child.href}
+                                  data-astro-reload={
+                                    child.id === "knowledge-news-events"
+                                      ? true
+                                      : undefined
+                                  }
                                   class:list={[
                                     "mega-menu-link",
                                     child.featured &&

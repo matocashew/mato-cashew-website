@@ -86,7 +86,8 @@ const articles = await newsService.getAll("km");
     display: block;
     width: 100%;
     aspect-ratio: 16 / 9;
-    object-fit: cover;
+    object-fit: contain;
+    background: #fff;
   }
   .news-index__card-body { padding: 1.5rem; }
   .news-index__card h2 { font-size: 1.3rem; }
