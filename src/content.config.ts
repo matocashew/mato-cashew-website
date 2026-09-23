@@ -2,6 +2,7 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 import { knowledgeSchema } from "./content/schemas/knowledge";
+import { newsSchema } from "./content/schemas/news";
 
 
 /* =========================================================
@@ -19,6 +20,18 @@ const knowledge = defineCollection({
 
 });
 
+
+/* =========================================================
+   NEWS & EVENTS
+   ========================================================= */
+
+const news = defineCollection({
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "./src/content/news",
+  }),
+  schema: newsSchema,
+});
 
 /* =========================================================
    RESOURCES
@@ -226,6 +239,7 @@ const products = defineCollection({
 
 export const collections = {
 
+  news,
   resources,
 
   products,

@@ -461,6 +461,27 @@ export const navigation: MenuItem[] = [
         visible: true,
         order: 9,
       },
+      {
+        id: "knowledge-news-events",
+        icon: "book-open",
+
+        label: "News & Events",
+        labelKm: "ព័ត៌មាន និងព្រឹត្តិការណ៍",
+
+        href: "/knowledge/news",
+        hrefKm: "/km/knowledge/news",
+
+        description:
+          "Cashew industry news, workshops, and training.",
+
+        descriptionKm:
+          "ព័ត៌មានឧស្សាហកម្មស្វាយចន្ទី សិក្ខាសាលា និងការបណ្តុះបណ្តាល។",
+
+        group: "discover",
+
+        visible: true,
+        order: 10,
+      },
     ],
   },
 

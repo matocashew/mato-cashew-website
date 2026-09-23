@@ -1,0 +1,180 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import { render } from "astro:content";
+import { newsService } from "@services/newsService";
+
+export async function getStaticPaths() {
+  const articles = await newsService.getAll("en");
+
+  return articles.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+type NewsEntry = Awaited<
+  ReturnType<typeof newsService.getAll>
+>[number];
+
+interface Props {
+  entry: NewsEntry;
+}
+
+const { entry } = Astro.props as Props;
+const { Content } = await render(entry);
+
+const khmerArticles = await newsService.getAll("km");
+const khmerTranslation = khmerArticles.find(
+  (article) =>
+    article.data.translationKey === entry.data.translationKey
+);
+
+const slug = entry.slug;
+const canonical =
+  `https://matocashew.com/knowledge/news/${slug}`;
+
+const khmerLanguagePath = khmerTranslation
+  ? `/km/knowledge/news/${khmerTranslation.slug}`
+  : "/km/knowledge/news";
+---
+
+<PageLayout
+  title={`${entry.data.title} | Mato Cashew`}
+  description={entry.data.description}
+  canonical={canonical}
+  lang="en"
+  hasKhmerAlternate={Boolean(khmerTranslation)}
+  breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Knowledge Center", url: "/knowledge" },
+    { name: "News & Events", url: "/knowledge/news" },
+    {
+      name: entry.data.title,
+      url: `/knowledge/news/${slug}`,
+    },
+  ]}
+>
+  <article class="container news-article" lang="en">
+    <p class="news-article__category">
+      {entry.data.category}
+    </p>
+
+    <h1>{entry.data.title}</h1>
+
+    <p class="news-article__meta">
+      <time datetime={entry.data.publishedAt.toISOString()}>
+        {entry.data.publishedAt.toLocaleDateString(
+          "en-US",
+          {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            timeZone: "UTC",
+          }
+        )}
+      </time>
+      · Source: {entry.data.sourceName}
+    </p>
+
+    {
+      entry.data.heroImage && (
+        <img
+          class="news-article__image"
+          src={entry.data.heroImage}
+          alt=""
+        />
+      )
+    }
+
+    <div class="news-article__content">
+      <Content />
+    </div>
+
+    <div class="news-article__source">
+      <p>Original source: {entry.data.sourceName}</p>
+      <a
+        href={entry.data.sourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Read Original Article ↗
+      </a>
+    </div>
+
+    <nav class="news-article__navigation">
+      <a href="/knowledge/news">← All News & Events</a>
+      {
+        khmerTranslation && (
+          <a href={khmerLanguagePath}>
+            អានជាភាសាខ្មែរ →
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</PageLayout>
+
+<style>
+  .news-article {
+    max-width: 900px;
+    padding-block: 7rem 5rem;
+  }
+  .news-article__category {
+    color: #467548;
+    font-weight: 700;
+  }
+  .news-article h1 {
+    font-size: clamp(2rem, 3vw, 3rem);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    overflow-wrap: anywhere;
+    margin-block: 1rem 1.5rem;
+  }
+  .news-article__meta {
+    opacity: .75;
+    margin-bottom: 2rem;
+  }
+  .news-article__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+  }
+  .news-article__content {
+    line-height: 1.85;
+  }
+
+  .news-article__content :global(p) {
+    margin-block: 0 1.4rem;
+  }
+
+  .news-article__content :global(h2) {
+    font-size: clamp(1.45rem, 2vw, 1.9rem);
+    line-height: 1.35;
+    margin-block: 2.5rem 1rem;
+  }
+
+  .news-article__content :global(h3) {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    margin-block: 2rem .75rem;
+  }
+  .news-article__source {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    border: 1px solid #e2e8df;
+    border-radius: 12px;
+  }
+  .news-article__source a {
+    color: #326b37;
+    font-weight: 700;
+  }
+  .news-article__navigation {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+</style>
