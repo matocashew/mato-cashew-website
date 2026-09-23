@@ -8,12 +8,27 @@ import type { Language } from "../i18n/config";
    LANGUAGE
    ========================================================= */
 
-const t = getCurrentLanguage(
-  Astro.url.pathname
-);
+/*
+ * Normalize Astro static build paths before
+ * resolving the Hero language.
+ *
+ * Development: /km
+ * Static build: /km.html
+ */
+const buildPath = Astro.url.pathname;
+
+const currentPath =
+  buildPath === "/index.html"
+    ? "/"
+    : buildPath
+        .replace(/\.html$/, "")
+        .replace(/\/index$/, "/");
+
+const t = getCurrentLanguage(currentPath);
 
 const language: Language =
-  Astro.url.pathname.startsWith("/km")
+  currentPath === "/km" ||
+  currentPath.startsWith("/km/")
     ? "km"
     : "en";
 
