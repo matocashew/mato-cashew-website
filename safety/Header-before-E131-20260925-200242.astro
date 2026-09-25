@@ -148,7 +148,6 @@ const brandName =
                 class:list={[
                   "nav-item",
                   hasChildren && "has-submenu",
-                  `nav-id-${item.id}`,
                   item.variant &&
                     `nav-${item.variant}`,
                 ]}
@@ -4497,7 +4496,7 @@ clearPersistentMegaMenuOwner();
           const activeTab =
             panel.closest(".has-submenu")
               ?.querySelector<HTMLElement>(
-                ":scope > .nav-link-row"
+                ":scope > a, :scope > button, :scope > .nav-link"
               );
 
           const tabRect =

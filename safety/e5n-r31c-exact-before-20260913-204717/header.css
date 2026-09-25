@@ -1,4 +1,4 @@
-﻿/* =========================================================
+/* =========================================================
    MATO CASHEW â€” HEADER
    ========================================================= */
 
@@ -2861,7 +2861,9 @@ text-decoration: none !important;
 
   .trust-item__content.mega-menu-local-occluded,
 
-  .trust-item__icon.mega-menu-local-occluded {
+  .trust-item__icon.mega-menu-local-occluded,
+
+  .trust-bar__surface.mega-menu-local-occluded {
 
     /*
      * Layer 1:
@@ -2939,171 +2941,37 @@ text-decoration: none !important;
 }
 
 
-
-
 /* =========================================================
-   E5N-TRUSTBAR-OCCLUSION-R40B-START
+   E5N-TRUSTBAR-OCCLUSION-R6B-START
 
-   SHARED DYNAMIC MEGA SILHOUETTE
+   TRUST BAR SURFACE — DETERMINISTIC LOCAL CUTOUT
 
-   Contract:
-   - shared by every desktop Mega Menu
-   - Trust Bar remains normal outside Mega overlap
-   - Hero background remains visible beneath Mega glass
-   - transparent cutout extends slightly OUTSIDE the
-     Mega outline so the outline floats over the Hero image
-   - no menu-specific selectors
+   Root cause confirmed:
+   - Unified Mega Glass path is already correct.
+   - Trust Bar opaque surface paints behind lower Mega corners.
+   - Generic mask-composite is unreliable for this surface.
+
+   Keep generic mask system for:
+   - hero content
+   - stats
+   - trust item text/icons
+
+   Override ONLY .trust-bar__surface.
+   Geometry remains owned by Header.astro variables:
+     --menu-hole-left
+     --menu-hole-right
+     --menu-hole-top
+     --menu-hole-bottom
    ========================================================= */
 
 @media (min-width: 769px) {
 
   .trust-bar__surface.mega-menu-local-occluded {
 
-    --mega-trust-reveal:
-      var(--mega-outline-gap, 5px);
-
-    --mega-trust-left:
-      calc(
-        var(--menu-hole-left) -
-        var(--mega-trust-reveal)
-      );
-
-    --mega-trust-right:
-      calc(
-        var(--menu-hole-right) +
-        var(--mega-trust-reveal)
-      );
-
-    --mega-trust-bottom:
-      calc(
-        var(--menu-hole-bottom) +
-        var(--mega-trust-reveal)
-      );
-
-    --mega-trust-radius:
-      calc(
-        var(--menu-hole-radius, 30px) +
-        var(--mega-trust-reveal)
-      );
-
-    background:
-      transparent !important;
-
-    background-color:
-      transparent !important;
-
-    background-image:
-
-      /* above Mega overlap */
-      linear-gradient(
-        rgba(255, 253, 248, 0.97),
-        rgba(255, 253, 248, 0.97)
-      ),
-
-      /* below Mega + reveal halo */
-      linear-gradient(
-        rgba(255, 253, 248, 0.97),
-        rgba(255, 253, 248, 0.97)
-      ),
-
-      /* left of Mega + reveal halo */
-      linear-gradient(
-        rgba(255, 253, 248, 0.97),
-        rgba(255, 253, 248, 0.97)
-      ),
-
-      /* right of Mega + reveal halo */
-      linear-gradient(
-        rgba(255, 253, 248, 0.97),
-        rgba(255, 253, 248, 0.97)
-      ),
-
-      /* lower-left rounded restoration */
-      radial-gradient(
-        circle at 100% 0%,
-        transparent
-          0
-          calc(var(--mega-trust-radius) - 1px),
-        rgba(255, 253, 248, 0.97)
-          var(--mega-trust-radius)
-      ),
-
-      /* lower-right rounded restoration */
-      radial-gradient(
-        circle at 0% 0%,
-        transparent
-          0
-          calc(var(--mega-trust-radius) - 1px),
-        rgba(255, 253, 248, 0.97)
-          var(--mega-trust-radius)
-      )
-
-      !important;
-
-    background-repeat:
-      no-repeat !important;
-
-    background-position:
-
-      0 0,
-
-      0 100%,
-
-      0 var(--menu-hole-top),
-
-      100% var(--menu-hole-top),
-
-      var(--mega-trust-left)
-        calc(
-          var(--mega-trust-bottom) -
-          var(--mega-trust-radius)
-        ),
-
-      calc(
-        var(--mega-trust-right) -
-        var(--mega-trust-radius)
-      )
-        calc(
-          var(--mega-trust-bottom) -
-          var(--mega-trust-radius)
-        )
-
-      !important;
-
-    background-size:
-
-      100%
-        var(--menu-hole-top),
-
-      100%
-        calc(
-          100% -
-          var(--mega-trust-bottom)
-        ),
-
-      var(--mega-trust-left)
-        calc(
-          var(--mega-trust-bottom) -
-          var(--menu-hole-top)
-        ),
-
-      calc(
-        100% -
-        var(--mega-trust-right)
-      )
-        calc(
-          var(--mega-trust-bottom) -
-          var(--menu-hole-top)
-        ),
-
-      var(--mega-trust-radius)
-        var(--mega-trust-radius),
-
-      var(--mega-trust-radius)
-        var(--mega-trust-radius)
-
-      !important;
-
+    /*
+     * Disable the generic subtractive mask only
+     * for the Trust Bar background surface.
+     */
     -webkit-mask-image:
       none !important;
 
@@ -3115,13 +2983,191 @@ text-decoration: none !important;
 
     mask-composite:
       initial !important;
+
+
+    /*
+     * Remove the normal full-surface paint.
+     */
+    background:
+      transparent !important;
+
+    background-color:
+      transparent !important;
+
+
+    /*
+     * Repaint four regions surrounding the exact
+     * Mega Menu overlap rectangle.
+     *
+     * Region 1: top
+     * Region 2: bottom
+     * Region 3: left
+     * Region 4: right
+     */
+    background-image:
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      ),
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      ),
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      ),
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      )
+      !important;
+
+    background-repeat:
+      no-repeat !important;
+
+    background-position:
+      0 0,
+      0 100%,
+      0 var(--menu-hole-top),
+      100% var(--menu-hole-top)
+      !important;
+
+    background-size:
+      100%
+      var(--menu-hole-top),
+
+      100%
+      calc(
+        100% -
+        var(--menu-hole-bottom)
+      ),
+
+      var(--menu-hole-left)
+      calc(
+        var(--menu-hole-bottom) -
+        var(--menu-hole-top)
+      ),
+
+      calc(
+        100% -
+        var(--menu-hole-right)
+      )
+      calc(
+        var(--menu-hole-bottom) -
+        var(--menu-hole-top)
+      )
+      !important;
   }
 }
 
-/* E5N-TRUSTBAR-OCCLUSION-R40B-END */
+/* E5N-TRUSTBAR-OCCLUSION-R6B-END */
+/* =========================================================
+   E5N-TRUSTBAR-OCCLUSION-R26G-START
 
+   Rounded lower Mega cutout.
 
+   Geometry authority:
+     Header.astro -> --menu-hole-radius
 
+   Keeps R6B deterministic paint.
+   Adds two lower-corner repair layers.
+   No mask-composite dependency.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .trust-bar__surface.mega-menu-local-occluded {
+
+    background-image:
+      radial-gradient(
+        circle at 100% 0%,
+        transparent 0 calc(var(--menu-hole-radius, 18px) - 1px),
+        rgba(255, 253, 248, 0.97) var(--menu-hole-radius, 18px)
+      ),
+      radial-gradient(
+        circle at 0% 0%,
+        transparent 0 calc(var(--menu-hole-radius, 18px) - 1px),
+        rgba(255, 253, 248, 0.97) var(--menu-hole-radius, 18px)
+      ),
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      ),
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      ),
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      ),
+      linear-gradient(
+        rgba(255, 253, 248, 0.97),
+        rgba(255, 253, 248, 0.97)
+      )
+      !important;
+
+    background-repeat:
+      no-repeat !important;
+
+    background-position:
+      var(--menu-hole-left)
+        calc(
+          var(--menu-hole-bottom) -
+          var(--menu-hole-radius, 18px)
+        ),
+
+      calc(
+        var(--menu-hole-right) -
+        var(--menu-hole-radius, 18px)
+      )
+        calc(
+          var(--menu-hole-bottom) -
+          var(--menu-hole-radius, 18px)
+        ),
+
+      0 0,
+      0 100%,
+      0 var(--menu-hole-top),
+      100% var(--menu-hole-top)
+      !important;
+
+    background-size:
+      var(--menu-hole-radius, 18px)
+        var(--menu-hole-radius, 18px),
+
+      var(--menu-hole-radius, 18px)
+        var(--menu-hole-radius, 18px),
+
+      100%
+        var(--menu-hole-top),
+
+      100%
+        calc(
+          100% -
+          var(--menu-hole-bottom)
+        ),
+
+      var(--menu-hole-left)
+        calc(
+          var(--menu-hole-bottom) -
+          var(--menu-hole-top)
+        ),
+
+      calc(
+        100% -
+        var(--menu-hole-right)
+      )
+        calc(
+          var(--menu-hole-bottom) -
+          var(--menu-hole-top)
+        )
+      !important;
+  }
+}
+
+/* E5N-TRUSTBAR-OCCLUSION-R26G-END */
 
 /* =========================================================
    MATO NAVIGATION V2 â€” FINAL BALANCED GLASS V2
@@ -3170,16 +3216,15 @@ text-decoration: none !important;
       rgba(12, 68, 46, 0.05) !important;
 
     padding-bottom:
-      16px !important;
+      24px !important;
 
     isolation: isolate;
 
     padding:
-      14px 16px 16px !important;
+      18px 20px 20px !important;
   }
 
 
-  /* E5N-R84B-SHARED-COMPACT-MEGA-CONTENT */
   /* -------------------------------------------------------
      INTERNAL GLASS CARDS
      Do not depend on a huge nested blur.
@@ -3189,7 +3234,7 @@ text-decoration: none !important;
   .mega-menu-link,
   .mega-menu-link.featured {
     padding:
-      13px 18px !important;
+      19px 22px !important;
 
     background:
       linear-gradient(
@@ -3292,7 +3337,7 @@ text-decoration: none !important;
   html[lang="km"]
   .mega-menu-link {
     padding:
-      14px 18px !important;
+      20px 23px !important;
   }
 
   html[lang="km"]
@@ -3320,7 +3365,7 @@ text-decoration: none !important;
 
   .mega-menu-grid {
     gap:
-      8px !important;
+      12px !important;
   }
 
   .mega-menu-grid
@@ -12465,85 +12510,6 @@ html body:has(
 }
 
 /* E5N-MEGA-CONTENT-R4-END */
-/* =========================================================
-   E5N-R90-HEADER-OPTICAL-CLARITY
-
-   Premium optical clarity for desktop Header navigation.
-
-   Goals:
-   - improve legibility over translucent/glass surfaces
-   - preserve the existing font family and dimensions
-   - use subtle highlight/shadow instead of heavy boldness
-   - preserve active green navigation identity
-   - leave Mega Menu content and geometry untouched
-   ========================================================= */
-
-@media (min-width: 769px) {
-
-  /*
-   * Primary Header navigation text.
-   * Slightly stronger optical weight without changing size.
-   */
-  .nav-link-row > .nav-link {
-    color: #17251f !important;
-
-    font-weight: 650 !important;
-    letter-spacing: -0.008em;
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    text-rendering: optimizeLegibility;
-
-    /*
-     * E5N-R91-ADAPTIVE-HEADER-TEXT-CONTRAST
-     * Dual-edge optical separation for mixed glass backgrounds.
-     */
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.88),
-      0 -0.45px 0 rgba(255, 255, 255, 0.52),
-      0 0 1px rgba(255, 255, 255, 0.38),
-      0 0.65px 0.9px rgba(4, 31, 21, 0.34) !important;
-  }
-
-
-  /*
-   * Active / hover / keyboard-focus navigation.
-   * Keep Mato green while retaining the same optical clarity.
-   */
-  .nav-link-row > .nav-link:hover,
-  .nav-link-row > .nav-link.active,
-  .nav-link-row > .nav-link:focus-visible {
-    color: #075f3d !important;
-
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.92),
-      0 -0.45px 0 rgba(255, 255, 255, 0.56),
-      0 0 1px rgba(255, 255, 255, 0.42),
-      0 0.65px 1px rgba(3, 50, 31, 0.38) !important;
-  }
-
-
-  /*
-   * Icons should remain crisp beside the stronger labels.
-   */
-  .nav-link-row > .nav-link svg {
-    filter:
-      drop-shadow(0 1px 0 rgba(255, 255, 255, 0.48));
-  }
-
-
-  /*
-   * Khmer needs slightly less artificial tightening.
-   */
-  html[lang="km"] .nav-link-row > .nav-link {
-    font-weight: 650 !important;
-    letter-spacing: 0 !important;
-    text-rendering: optimizeLegibility;
-  }
-}
-
-/* E5N-R90-HEADER-OPTICAL-CLARITY-END */
 
 /* =========================================================
    E5N-MEGA-BOTTOM-CORNERS-R1-START
@@ -12632,7 +12598,7 @@ html body:has(
      --menu-hole-bottom
 
    Mega lower corner radius:
-     30px
+     18px
    ========================================================= */
 
 @media (min-width: 769px) {
@@ -12660,59 +12626,59 @@ html body:has(
     /*
      * Visible polygon with a rounded Mega Menu notch.
      *
-     * Quarter-circle approximation for r = 30px:
-     *   2.28px
-     *   8.79px
-     *   18.52px
-     *   30px
+     * Quarter-circle approximation for r = 18px:
+     *   1.37px
+     *   5.27px
+     *   11.11px
+     *   18px
      */
     -webkit-clip-path:
       polygon(
 
         /* outer top-left */
-        0 -2px,
+        0 0,
 
         /* enter Mega left side */
-        var(--menu-hole-left) -2px,
+        var(--menu-hole-left) 0,
 
         /* lower-left rounded contour */
         var(--menu-hole-left)
-          calc(var(--menu-hole-bottom) - 30px),
+          calc(var(--menu-hole-bottom) - 18px),
 
-        calc(var(--menu-hole-left) + 2.28px)
-          calc(var(--menu-hole-bottom) - 18.52px),
+        calc(var(--menu-hole-left) + 1.37px)
+          calc(var(--menu-hole-bottom) - 11.11px),
 
-        calc(var(--menu-hole-left) + 8.79px)
-          calc(var(--menu-hole-bottom) - 8.79px),
+        calc(var(--menu-hole-left) + 5.27px)
+          calc(var(--menu-hole-bottom) - 5.27px),
 
-        calc(var(--menu-hole-left) + 18.52px)
-          calc(var(--menu-hole-bottom) - 2.28px),
+        calc(var(--menu-hole-left) + 11.11px)
+          calc(var(--menu-hole-bottom) - 1.37px),
 
-        calc(var(--menu-hole-left) + 30px)
+        calc(var(--menu-hole-left) + 18px)
           var(--menu-hole-bottom),
 
         /* bottom edge of Mega silhouette */
-        calc(var(--menu-hole-right) - 30px)
+        calc(var(--menu-hole-right) - 18px)
           var(--menu-hole-bottom),
 
         /* lower-right rounded contour */
-        calc(var(--menu-hole-right) - 18.52px)
-          calc(var(--menu-hole-bottom) - 2.28px),
+        calc(var(--menu-hole-right) - 11.11px)
+          calc(var(--menu-hole-bottom) - 1.37px),
 
-        calc(var(--menu-hole-right) - 8.79px)
-          calc(var(--menu-hole-bottom) - 8.79px),
+        calc(var(--menu-hole-right) - 5.27px)
+          calc(var(--menu-hole-bottom) - 5.27px),
 
-        calc(var(--menu-hole-right) - 2.28px)
-          calc(var(--menu-hole-bottom) - 18.52px),
+        calc(var(--menu-hole-right) - 1.37px)
+          calc(var(--menu-hole-bottom) - 11.11px),
 
         var(--menu-hole-right)
-          calc(var(--menu-hole-bottom) - 30px),
+          calc(var(--menu-hole-bottom) - 18px),
 
         /* leave Mega right side */
-        var(--menu-hole-right) -2px,
+        var(--menu-hole-right) 0,
 
         /* outer box */
-        100% -2px,
+        100% 0,
         100% 100%,
         0 100%
       ) !important;
@@ -12720,149 +12686,45 @@ html body:has(
 
     clip-path:
       polygon(
-        0 -2px,
+        0 0,
 
-        var(--menu-hole-left) -2px,
+        var(--menu-hole-left) 0,
 
         var(--menu-hole-left)
-          calc(var(--menu-hole-bottom) - 30px),
+          calc(var(--menu-hole-bottom) - 18px),
 
-        calc(var(--menu-hole-left) + 2.28px)
-          calc(var(--menu-hole-bottom) - 18.52px),
+        calc(var(--menu-hole-left) + 1.37px)
+          calc(var(--menu-hole-bottom) - 11.11px),
 
-        calc(var(--menu-hole-left) + 8.79px)
-          calc(var(--menu-hole-bottom) - 8.79px),
+        calc(var(--menu-hole-left) + 5.27px)
+          calc(var(--menu-hole-bottom) - 5.27px),
 
-        calc(var(--menu-hole-left) + 18.52px)
-          calc(var(--menu-hole-bottom) - 2.28px),
+        calc(var(--menu-hole-left) + 11.11px)
+          calc(var(--menu-hole-bottom) - 1.37px),
 
-        calc(var(--menu-hole-left) + 30px)
+        calc(var(--menu-hole-left) + 18px)
           var(--menu-hole-bottom),
 
-        calc(var(--menu-hole-right) - 30px)
+        calc(var(--menu-hole-right) - 18px)
           var(--menu-hole-bottom),
 
-        calc(var(--menu-hole-right) - 18.52px)
-          calc(var(--menu-hole-bottom) - 2.28px),
+        calc(var(--menu-hole-right) - 11.11px)
+          calc(var(--menu-hole-bottom) - 1.37px),
 
-        calc(var(--menu-hole-right) - 8.79px)
-          calc(var(--menu-hole-bottom) - 8.79px),
+        calc(var(--menu-hole-right) - 5.27px)
+          calc(var(--menu-hole-bottom) - 5.27px),
 
-        calc(var(--menu-hole-right) - 2.28px)
-          calc(var(--menu-hole-bottom) - 18.52px),
+        calc(var(--menu-hole-right) - 1.37px)
+          calc(var(--menu-hole-bottom) - 11.11px),
 
         var(--menu-hole-right)
-          calc(var(--menu-hole-bottom) - 30px),
+          calc(var(--menu-hole-bottom) - 18px),
 
-        var(--menu-hole-right) -2px,
+        var(--menu-hole-right) 0,
 
-        100% -2px,
+        100% 0,
         100% 100%,
         0 100%
       ) !important;
   }
 }
-
-/*
- * =========================================================
- * E5N-R95-CLICK-SUPPRESSION-VISIBILITY-AUTHORITY
- *
- * Clicked desktop Mega trigger:
- *
- * While the pointer remains physically inside that same
- * top-level nav item, suppress every Mega visibility path,
- * including native :hover, :focus-within and JS handoff.
- *
- * Header.astro removes this class on the first real
- * mouseleave, allowing the next mouseenter to behave normally.
- *
- * Geometry / glass / outline are intentionally untouched.
- * =========================================================
- */
-
-@media (min-width: 769px) {
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega.mega-menu-click-suppressed
-  > .submenu-panel.mega-menu,
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega.mega-menu-click-suppressed:hover
-  > .submenu-panel.mega-menu,
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega.mega-menu-click-suppressed:focus-within
-  > .submenu-panel.mega-menu,
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega.mega-menu-click-suppressed.mega-menu-handoff-owner
-  > .submenu-panel.mega-menu {
-
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-
-    transform:
-      translateX(-50%)
-      translateY(-8px)
-      scale(0.985) !important;
-
-    transition: none !important;
-  }
-
-}
-
-/* E5N-R95-CLICK-SUPPRESSION-VISIBILITY-AUTHORITY-END */
-
-
-/* E163-FINAL-MEGA-MENU-840-START
-   =========================================================
-   MATO CASHEW
-   FINAL APPROVED DESKTOP MEGA MENU WIDTH
-
-   Approved visual baseline: 840px
-
-   Scope:
-   - desktop only >= 993px
-   - all nav-mega panels
-   - preserve current positioning
-   - preserve current interaction
-   - preserve Language Switcher
-   - preserve mobile/tablet behavior
-   ========================================================= */
-
-@media (min-width: 993px) {
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega
-  > .submenu-panel.mega-menu,
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega:hover
-  > .submenu-panel.mega-menu,
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega:focus-within
-  > .submenu-panel.mega-menu,
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega.mega-menu-handoff-owner
-  > .submenu-panel.mega-menu {
-
-    width: 840px !important;
-    max-width: 840px !important;
-
-  }
-
-}
-
-/* E163-FINAL-MEGA-MENU-840-END */
-

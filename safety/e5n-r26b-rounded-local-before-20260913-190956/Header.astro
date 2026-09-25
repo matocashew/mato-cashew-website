@@ -1,4 +1,4 @@
----
+﻿---
 import { getCurrentLanguage }
   from "../i18n/getCurrentLanguage";
 
@@ -15,27 +15,8 @@ import type { NavigationLanguage }
   from "@models/navigation";
 
 
-/*
- * Normalize Astro build paths.
- *
- * Development:
- *   /km/products
- *
- * Static file build:
- *   /km/products.html
- *
- * Both resolve to:
- *   /km/products
- */
-const buildPath =
-  Astro.url.pathname;
-
 const currentPath =
-  buildPath === "/index.html"
-    ? "/"
-    : buildPath
-        .replace(/\.html$/, "")
-        .replace(/\/index$/, "/");
+  Astro.url.pathname;
 
 const isKhmer =
   currentPath === "/km" ||
@@ -148,7 +129,6 @@ const brandName =
                 class:list={[
                   "nav-item",
                   hasChildren && "has-submenu",
-                  `nav-id-${item.id}`,
                   item.variant &&
                     `nav-${item.variant}`,
                 ]}
@@ -297,11 +277,6 @@ const brandName =
                               (child) => (
                                 <a
                                   href={child.href}
-                                  data-astro-reload={
-                                    child.id === "knowledge-news-events"
-                                      ? true
-                                      : undefined
-                                  }
                                   class:list={[
                                     "mega-menu-link",
                                     child.featured &&
@@ -2914,7 +2889,10 @@ let lastMegaPointerX =
   0;
 
 let lastMegaPointerY =
-  0;document.addEventListener(
+  0;
+
+
+document.addEventListener(
   "pointermove",
   (event) => {
 
@@ -2932,225 +2910,7 @@ let lastMegaPointerY =
       event.clientY;
 
 
-
-
-    /*
-     * =====================================================
-     * E5N-R99C-PHYSICAL-POINTER-UNLOCK
-     *
-     * CLICK
-     *   -> persistent lock
-     *
-     * ClientRouter DOM replacement
-     *   -> lock survives
-     *
-     * Pointer remains inside clicked trigger
-     *   -> lock remains
-     *
-     * First REAL pointermove outside clicked trigger
-     *   -> lock clears
-     *
-     * Later pointer entry
-     *   -> Mega opens normally
-     * =====================================================
-     */
-
-    const suppressedMegaKey =
-      getPersistentMegaSuppressionKey();
-
-    if (suppressedMegaKey) {
-
-      const suppressedMegaItem =
-        Array.from(
-          document.querySelectorAll<HTMLElement>(
-            ".nav-item.has-submenu.nav-mega"
-          )
-        ).find(
-          (item) =>
-            getMegaSuppressionKey(item) ===
-            suppressedMegaKey
-        );
-
-      /*
-       * ClientRouter can briefly be between Header
-       * generations. Preserve the key during that interval.
-       */
-      if (!suppressedMegaItem) {
-        return;
-      }
-
-      suppressedMegaItem.classList.add(
-        "mega-menu-click-suppressed"
-      );
-
-      const suppressedRect =
-        suppressedMegaItem
-          .getBoundingClientRect();
-
-      const pointerInsideSuppressedTrigger =
-        event.clientX >= suppressedRect.left &&
-        event.clientX <= suppressedRect.right &&
-        event.clientY >= suppressedRect.top &&
-        event.clientY <= suppressedRect.bottom;
-
-      const suppressionState =
-        readMegaSuppressionState();
-
-      const clickAnchorX =
-        suppressionState?.anchorX;
-
-      const clickAnchorY =
-        suppressionState?.anchorY;
-
-      /*
-       * A ClientRouter DOM replacement can change the new
-       * trigger rectangle without the user physically moving
-       * the pointer.
-       *
-       * Therefore rectangle exit alone is not sufficient.
-       * Require measurable physical displacement from the
-       * original click position as well.
-       */
-      const hasPhysicalClickAnchor =
-        typeof clickAnchorX === "number" &&
-        typeof clickAnchorY === "number";
-
-      const physicalDisplacement =
-        hasPhysicalClickAnchor
-          ? Math.hypot(
-              event.clientX - clickAnchorX,
-              event.clientY - clickAnchorY
-            )
-          : 0;
-
-      const hasRealPointerExit =
-        !pointerInsideSuppressedTrigger &&
-        hasPhysicalClickAnchor &&
-        physicalDisplacement >= 6;
-
-      if (!hasRealPointerExit) {
-
-        clearPersistentMegaMenuOwner();
-        clearMegaMenuOcclusion();
-
-        return;
-      }
-
-      /*
-       * Real physical movement has now carried the pointer
-       * outside the clicked trigger.
-       *
-       * Only this transition may return CLICK_LOCKED -> IDLE.
-       */
-      /*
-       * =====================================================
-       * E5N-R114-REAL-EXIT-ARMS-REENTRY
-       *
-       * IMPORTANT:
-       *
-       * A real exit does NOT unlock the Mega Menu.
-       *
-       * It only arms the next intentional entry into the
-       * SAME top-level trigger.
-       *
-       * Therefore moving downward after clicking an Active
-       * Menu cannot reopen the Mega Menu.
-       * =====================================================
-       */
-
-      const currentSuppressionState =
-        readMegaSuppressionState();
-
-      if (
-        currentSuppressionState &&
-        currentSuppressionState.key ===
-          suppressedMegaKey
-      ) {
-        writeMegaSuppressionState({
-          ...currentSuppressionState,
-          reentryArmed: true
-        });
-      }
-
-      suppressedMegaItem.classList.add(
-        "mega-menu-click-suppressed"
-      );
-
-      /*
-       * =====================================================
-       * E5N-R115-LOCKED-OWNER-ISOLATION
-       *
-       * The clicked trigger remains suppressed until its
-       * intentional same-trigger re-entry.
-       *
-       * However, that lock belongs ONLY to that trigger.
-       *
-       * If the pointer has physically moved onto another
-       * top-level Mega owner, do not let the old lock clear
-       * the new owner's persistent ownership / compositor.
-       *
-       * State model:
-       *
-       *   A clicked
-       *     -> A LOCKED
-       *
-       *   pointer leaves A
-       *     -> A REENTRY_ARMED
-       *
-       *   pointer enters B
-       *     -> A stays locked
-       *     -> B owns Mega normally
-       *
-       *   B -> C
-       *     -> normal Mega handoff
-       *
-       *   pointer returns to A
-       *     -> R114 unlocks A
-       *     -> A opens normally
-       *
-       * No geometry changes.
-       * No CSS changes.
-       * =====================================================
-       */
-
-      const pointerElement =
-        document.elementFromPoint(
-          event.clientX,
-          event.clientY
-        );
-
-      const pointerMegaOwner =
-        pointerElement?.closest<HTMLElement>(
-          ".nav-item.has-submenu.nav-mega"
-        ) ?? null;
-
-      const pointerIsOnDifferentMegaOwner =
-        pointerMegaOwner !== null &&
-        pointerMegaOwner !== suppressedMegaItem;
-
-      if (pointerIsOnDifferentMegaOwner) {
-        /*
-         * Preserve the incoming owner's normal pointerover
-         * handoff and unified-glass geometry.
-         *
-         * Do NOT clear persistentMegaMenuOwner.
-         * Do NOT clear Mega compositor.
-         */
-        return;
-      }
-
-      /*
-       * Pointer is outside the clicked trigger but has not
-       * entered another Mega owner.
-       *
-       * Keep the clicked trigger closed and clear only the
-       * old visual ownership as before.
-       */
-      clearPersistentMegaMenuOwner();
-      clearMegaMenuOcclusion();
-
-      return;
-    }if (
+    if (
       !persistentMegaMenuOwner
     ) {
       return;
@@ -3386,68 +3146,6 @@ desktopNavForHandoff?.addEventListener(
      *
      * without clearing Header / Glass between them.
      */
-    /*
-     * =====================================================
-     * E5N-R105B-POINTEROVER-SUPPRESSION-GUARD
-     *
-     * A clicked Mega trigger cannot reacquire ownership
-     * until physical pointer exit clears its persisted lock.
-     * =====================================================
-     */
-    if (
-      isPersistentlySuppressedMega(navItem)
-    ) {
-      const suppressionState =
-        readMegaSuppressionState();
-
-      /*
-       * Resolve the exact clickable top-level trigger.
-       *
-       * Entering the Mega panel / lower corridor / nav-item
-       * geometry is NOT considered a valid re-entry.
-       */
-      const reentryTrigger =
-        target.closest<HTMLAnchorElement>(
-          ".nav-item.has-submenu.nav-mega > .nav-link-row > a.nav-link"
-        );
-
-      const reentryOwner =
-        reentryTrigger?.closest<HTMLElement>(
-          ".nav-item.has-submenu.nav-mega"
-        ) ?? null;
-
-      const isRealTriggerReentry =
-        suppressionState?.reentryArmed === true &&
-        reentryOwner === navItem;
-
-      if (!isRealTriggerReentry) {
-        navItem.classList.add(
-          "mega-menu-click-suppressed"
-        );
-
-        clearPersistentMegaMenuOwner();
-        clearMegaMenuOcclusion();
-
-        return;
-      }
-
-      /*
-       * =====================================================
-       * E5N-R114-SAME-TRIGGER-REENTRY-UNLOCK
-       *
-       * CLICK_LOCKED
-       *   -> real physical exit
-       *   -> REENTRY_ARMED
-       *   -> pointer enters SAME trigger
-       *   -> unlock
-       *   -> normal Mega opening resumes
-       * =====================================================
-       */
-      clearPersistentMegaSuppression(
-        navItem
-      );
-    }
-
     activateMegaMenuOwner(
       navItem
     );
@@ -3467,25 +3165,6 @@ submenuItems.forEach(
       "focusin",
       () => {
 
-        /*
-         * =================================================
-         * E5N-R105B-FOCUSIN-SUPPRESSION-GUARD
-         *
-         * Focus restoration after ClientRouter navigation
-         * cannot reopen a still-suppressed Mega trigger.
-         * =================================================
-         */
-        if (
-          window.innerWidth > 768 &&
-          isPersistentlySuppressedMega(
-            handoffItem
-          )
-        ) {
-          clearPersistentMegaMenuOwner();
-          clearMegaMenuOcclusion();
-          return;
-        }
-
         activateMegaMenuOwner(
           handoffItem
         );
@@ -3498,322 +3177,11 @@ submenuItems.forEach(
 
 /* PHASE-5N23A-TRUE-HANDOFF-END */
 
-
-/*
- * E5N-R93B-CLICK-SUPPRESS-UNTIL-LEAVE
- *
- * Desktop Mega trigger clicked while pointer is still on it:
- * keep that trigger suppressed until its first real mouseleave.
- */
-/*
- * =========================================================
- * E5N-R97-PERSISTENT-CLICK-SUPPRESSION
- *
- * Suppression must survive Astro ClientRouter navigation.
- * Store a stable trigger key on documentElement rather than
- * retaining an HTMLElement belonging to the previous page.
- * =========================================================
- */
-
-/*
- * =========================================================
- * E5N-R107B-WINDOW-SUPPRESSION-STATE
- *
- * Window survives Astro ClientRouter navigation.
- * Keep only the transient Mega click lock here.
- * =========================================================
- */
-/*
- * =========================================================
- * E5N-R111-NAVIGATION-PERSISTENT-CLICK-LOCK
- *
- * Canonical transient desktop Mega click state.
- *
- * sessionStorage survives BOTH:
- *
- *   - Astro ClientRouter DOM swaps
- *   - full document navigations in the same browser tab
- *
- * This removes the historical assumption that Window itself
- * necessarily survives every top-level navigation.
- *
- * The state remains transient to this browser tab and is
- * released only by the existing real physical-exit authority.
- * =========================================================
- */
-
-const megaSuppressionStorageKey =
-  "mato:mega-click-lock:v1";
-
-type MegaSuppressionState = {
-  key: string;
-  anchorX: number;
-  anchorY: number;
-
-  /*
-   * E5N-R114-EXIT-ARMS-REENTRY-OPENS
-   *
-   * false:
-   *   click lock is active and pointer has not yet completed
-   *   a real exit from the clicked trigger.
-   *
-   * true:
-   *   a real exit has occurred. Keep Mega suppressed until
-   *   the pointer physically enters that SAME trigger again.
-   */
-  reentryArmed: boolean;
-};
-
-const readMegaSuppressionState =
-  (): MegaSuppressionState | null => {
-
-    try {
-
-      const raw =
-        window.sessionStorage.getItem(
-          megaSuppressionStorageKey
-        );
-
-      if (!raw) {
-        return null;
-      }
-
-      const parsed =
-        JSON.parse(raw) as
-          Partial<MegaSuppressionState>;
-
-      if (
-        typeof parsed.key !== "string" ||
-        parsed.key === "" ||
-        typeof parsed.anchorX !== "number" ||
-        typeof parsed.anchorY !== "number"
-      ) {
-        window.sessionStorage.removeItem(
-          megaSuppressionStorageKey
-        );
-
-        return null;
-      }
-
-      return {
-        key: parsed.key,
-        anchorX: parsed.anchorX,
-        anchorY: parsed.anchorY,
-        reentryArmed:
-          parsed.reentryArmed === true
-      };
-
-    } catch {
-
-      return null;
-    }
-  };
-
-const writeMegaSuppressionState = (
-  state: MegaSuppressionState
-) => {
-
-  try {
-
-    window.sessionStorage.setItem(
-      megaSuppressionStorageKey,
-      JSON.stringify(state)
-    );
-
-  } catch {
-    /*
-     * Storage can be unavailable under restrictive browser
-     * policies. Navigation itself must never be interrupted.
-     */
-  }
-};
-
-const removeMegaSuppressionState = () => {
-
-  try {
-
-    window.sessionStorage.removeItem(
-      megaSuppressionStorageKey
-    );
-
-  } catch {
-    /*
-     * No navigation side effects.
-     */
-  }
-};
-const getMegaSuppressionKey = (
-  navItem: HTMLElement
-): string => {
-
-  const trigger =
-    navItem.querySelector<HTMLAnchorElement>(
-      ":scope > .nav-link-row > a.nav-link"
-    );
-
-  if (!trigger) {
-    return "";
-  }
-
-  try {
-    const url =
-      new URL(
-        trigger.href,
-        window.location.href
-      );
-
-    return (
-      url.pathname.replace(/\/+$/, "") ||
-      "/"
-    );
-  } catch {
-    return trigger.getAttribute("href") ?? "";
-  }
-};
-
-const getPersistentMegaSuppressionKey =
-  (): string =>
-    readMegaSuppressionState()?.key ?? "";
-const setPersistentMegaSuppression = (
-  navItem: HTMLElement,
-  clientX: number,
-  clientY: number
-) => {
-
-  const key =
-    getMegaSuppressionKey(navItem);
-
-  if (!key) {
-    return;
-  }
-
-  writeMegaSuppressionState({
-    key,
-    anchorX: clientX,
-    anchorY: clientY,
-    reentryArmed: false
-  });
-
-  navItem.classList.add(
-    "mega-menu-click-suppressed"
-  );
-};
-const clearPersistentMegaSuppression = (
-  navItem?: HTMLElement
-) => {
-
-  /*
-   * =========================================================
-   * E5N-R109C-KEY-AWARE-SUPPRESSION-CLEAR
-   *
-   * A stale owner cannot clear a newer trigger's state.
-   * =========================================================
-   */
-
-  if (navItem) {
-
-    navItem.classList.remove(
-      "mega-menu-click-suppressed"
-    );
-
-    const navItemKey =
-      getMegaSuppressionKey(navItem);
-
-    const storedKey =
-      getPersistentMegaSuppressionKey();
-
-    if (
-      navItemKey === "" ||
-      storedKey === "" ||
-      storedKey !== navItemKey
-    ) {
-      return;
-    }
-  }
-
-  removeMegaSuppressionState();
-};
-const isPersistentlySuppressedMega = (
-  navItem: HTMLElement
-): boolean => {
-
-  const storedKey =
-    getPersistentMegaSuppressionKey();
-
-  return (
-    storedKey !== "" &&
-    storedKey ===
-      getMegaSuppressionKey(navItem)
-  );
-};
 submenuItems.forEach((navItem) => {
-      /*
-       * =====================================================
-       * E5N-R99C-PERSISTENT-REHYDRATION
-       *
-       * ClientRouter may replace Header DOM while the
-       * physical pointer remains stationary.
-       *
-       * Restore the persisted click lock unconditionally.
-       * Do not infer physical exit from CSS :hover state.
-       *
-       * Only the real document pointermove authority below
-       * may release this lock.
-       * =====================================================
-       */
-      if (
-        window.innerWidth > 768 &&
-        isPersistentlySuppressedMega(navItem)
-      ) {
-        navItem.classList.add(
-          "mega-menu-click-suppressed"
-        );
-
-        clearPersistentMegaMenuOwner();
-
-        /*
-         * =====================================================
-         * E5N-R113-DEFER-REHYDRATION-CLEAR
-         *
-         * initHeader() has not yet reached the lexical
-         * initialization of clearMegaMenuOcclusion().
-         *
-         * Keep the suppression class authoritative immediately,
-         * but defer compositor cleanup until the current
-         * initHeader() stack has completed.
-         *
-         * This removes the TDZ crash without changing:
-         * - click-lock state
-         * - ClientRouter behavior
-         * - Mega geometry
-         * - Glass geometry
-         * - pointer lifecycle
-         * =====================================================
-         */
-        queueMicrotask(() => {
-          clearMegaMenuOcclusion();
-        });
-      }
 
       navItem.addEventListener(
         "mouseenter",
         () => {
-          /*
-           * ClientRouter may have replaced the old Header while
-           * the physical pointer never moved. Restore the
-           * persistent suppression to this new DOM generation.
-           */
-          if (
-            window.innerWidth > 768 &&
-            isPersistentlySuppressedMega(navItem)
-          ) {
-            navItem.classList.add(
-              "mega-menu-click-suppressed"
-            );
-
-            return;
-          }
-
           transferMegaMenuOwner(navItem);
 
           applySubmenuOcclusion(
@@ -3823,84 +3191,19 @@ submenuItems.forEach((navItem) => {
       );
 
 
-
       navItem.addEventListener(
-        "click",
-        (event) => {
-          if (window.innerWidth <= 768) {
-            return;
-          }
-
-          const target =
-            event.target as HTMLElement | null;
-
-          if (
-            target?.closest(".submenu-panel")
-          ) {
-            return;
-          }
-
-          setPersistentMegaSuppression(
-            navItem,
-            event.clientX,
-            event.clientY
-          );
-
-          releaseSubmenuOcclusion(
-            navItem
-          );
-
-          clearMegaMenuOcclusion();
-
-          navItem.classList.remove(
-            "mega-menu-handoff-owner"
-          );
-        },
-        true
-      );
-navItem.addEventListener(
         "mouseleave",
         () => {
           releaseSubmenuOcclusion(
             navItem
-          );/*
-       * E5N-R99C-NO-DOM-MOUSELEAVE-UNLOCK
-       *
-       * ClientRouter can replace the old trigger without a
-       * real physical pointer exit.
-       *
-       * Suppression is therefore released only by the
-       * document-level physical pointermove authority.
-       */}
+          );
+        }
       );
 
 
       navItem.addEventListener(
         "focusin",
         () => {
-          /*
-           * =================================================
-           * E5N-R108D-SECONDARY-FOCUS-SUPPRESSION-GUARD
-           *
-           * Prevent this secondary focus authority from
-           * reacquiring a Mega trigger while its persistent
-           * click suppression is still active.
-           * =================================================
-           */
-          if (
-            window.innerWidth > 768 &&
-            isPersistentlySuppressedMega(navItem)
-          ) {
-            navItem.classList.add(
-              "mega-menu-click-suppressed"
-            );
-
-            clearPersistentMegaMenuOwner();
-            clearMegaMenuOcclusion();
-
-            return;
-          }
-
           transferMegaMenuOwner(navItem);
 
           applySubmenuOcclusion(
@@ -4001,16 +3304,7 @@ navItem.addEventListener(
      * Dedicated Trust Bar surface participates
      * in the same Mega Menu geometry.
      */
-    // E5N R28B:
-  // Hero trust cards have their own translucent background.
-  // Treat each card as a local occlusion paint owner so a card
-  // cannot repaint underneath the visible Mega Menu silhouette.
-  const getHeroTrustCards = () =>
-    Array.from(
-      document.querySelectorAll<HTMLElement>(".hero-trust-item")
-    );
-
-  const getTrustBarSurface = () =>
+    const getTrustBarSurface = () =>
       document.querySelector<HTMLElement>(
         ".trust-bar__surface"
       );
@@ -4033,19 +3327,6 @@ navItem.addEventListener(
       }
 
       megaMenuExitTeardownInFlight = true;
-
-      /*
-       * E117: Release the desktop menu offset on true close.
-       */
-      document
-        .querySelectorAll<HTMLElement>(
-          ".header .mega-menu"
-        )
-        .forEach((menu) => {
-          menu.style.removeProperty(
-            "transform"
-          );
-        });
 
       /*
        * E5N69-R2:
@@ -4397,7 +3678,7 @@ clearPersistentMegaMenuOwner();
 
       for (
         const element
-        of [heroForeground, heroTrust, ...getHomeStatContent(), ...getHeroTrustCards(), ...getTrustItemContent(), ...getTrustItemIcons(), getTrustBarSurface()]
+        of [heroForeground, heroTrust, ...getHomeStatContent(), ...getTrustItemContent(), ...getTrustItemIcons(), getTrustBarSurface()]
       ) {
         if (!element) continue;
 
@@ -4465,88 +3746,6 @@ clearPersistentMegaMenuOwner();
     const applyMegaMenuOcclusion = (
       panel: HTMLElement
     ) => {
-
-      /*
-       * E117: Keep the desktop Mega Menu clear of the brand.
-       * Position the real panel before measuring compositor geometry.
-       */
-      if (
-        window.innerWidth > 768 &&
-        panel.matches(".mega-menu")
-      ) {
-        const brand =
-          document.querySelector<HTMLElement>(
-            ".header .logo"
-          );
-
-        if (brand) {
-          const brandRect =
-            brand.getBoundingClientRect();
-
-          const currentRect =
-            panel.getBoundingClientRect();
-
-          const viewportPadding = 16;
-          const brandGap = 8;
-
-          /*
-           * Keep the active tab inside the connected menu.
-           * Left-side tabs retain the brand-safe position.
-           * Right-side tabs move the panel only as needed.
-           */
-          const activeTab =
-            panel.closest(".has-submenu")
-              ?.querySelector<HTMLElement>(
-                ":scope > .nav-link-row"
-              );
-
-          const tabRect =
-            activeTab?.getBoundingClientRect();
-
-          const tabInset = 24;
-
-          const preferredLeft = Math.max(
-            brandRect.right + brandGap,
-            tabRect
-              ? tabRect.right -
-                  currentRect.width +
-                  tabInset
-              : brandRect.right + brandGap
-          );
-
-          const targetLeft = Math.max(
-            viewportPadding,
-            Math.min(
-              preferredLeft,
-              window.innerWidth -
-                currentRect.width -
-                viewportPadding
-            )
-          );
-
-          const currentTransform =
-            new DOMMatrixReadOnly(
-              getComputedStyle(panel).transform
-            );
-
-          const correctedTranslateX =
-            currentTransform.m41 +
-            targetLeft -
-            currentRect.left;
-
-          if (
-            Math.abs(
-              targetLeft - currentRect.left
-            ) > 0.5
-          ) {
-            panel.style.setProperty(
-              "transform",
-              `translateX(${correctedTranslateX}px) translateY(0) scale(1)`,
-              "important"
-            );
-          }
-        }
-      }
 
       const panelRect =
         panel.getBoundingClientRect();
@@ -4723,12 +3922,6 @@ clearPersistentMegaMenuOwner();
            * Convert intersection into coordinates
            * local to this individual element.
            */
-          /*
-           * E52: Small safety margin prevents foreground
-           * glyphs from peeking around the Mega Menu edge.
-           * Keep the original responsive overlap geometry.
-           */
-          const occlusionBleed = 2;
           const holeLeft =
             Math.max(
               overlapLeft - rect.left,
@@ -4756,22 +3949,22 @@ clearPersistentMegaMenuOwner();
 
           element.style.setProperty(
             "--menu-hole-left",
-            `${Math.max(0, holeLeft - occlusionBleed)}px`
+            `${holeLeft}px`
           );
 
           element.style.setProperty(
             "--menu-hole-right",
-            `${Math.max(0, holeRight - occlusionBleed)}px`
+            `${holeRight}px`
           );
 
           element.style.setProperty(
             "--menu-hole-top",
-            `${Math.max(0, holeTop - occlusionBleed)}px`
+            `${holeTop}px`
           );
 
           element.style.setProperty(
             "--menu-hole-bottom",
-            `${Math.max(0, holeBottom - occlusionBleed)}px`
+            `${holeBottom}px`
           );
 
           element.classList.add(
@@ -5560,16 +4753,6 @@ clearPersistentMegaMenuOwner();
           const unifiedRadius =
             18;
 
-          /*
-           * Bottom corners need a stronger visual radius than
-           * the connected Tab shoulders.
-           *
-           * Keep TOP geometry at 18px.
-           * Use 30px ONLY for lower-left / lower-right.
-           */
-          const unifiedBottomRadius =
-            30;
-
 
           /*
            * -------------------------------------------------
@@ -5677,7 +4860,7 @@ clearPersistentMegaMenuOwner();
                * Right side.
                */
               `L ${unifiedWidth} ${
-                unifiedHeight - unifiedBottomRadius
+                unifiedHeight - unifiedRadius
               } `,
 
 
@@ -5685,21 +4868,21 @@ clearPersistentMegaMenuOwner();
                * Bottom-right.
                */
               `Q ${unifiedWidth} ${unifiedHeight} ${
-                unifiedWidth - unifiedBottomRadius
+                unifiedWidth - unifiedRadius
               } ${unifiedHeight} `,
 
 
               /*
                * Bottom.
                */
-              `L ${unifiedBottomRadius} ${unifiedHeight} `,
+              `L ${unifiedRadius} ${unifiedHeight} `,
 
 
               /*
                * Bottom-left.
                */
               `Q 0 ${unifiedHeight} 0 ${
-                unifiedHeight - unifiedBottomRadius
+                unifiedHeight - unifiedRadius
               } `,
 
 
@@ -6426,266 +5609,43 @@ clearPersistentMegaMenuOwner();
             unifiedSvgPathData
           ) {
 
+            unifiedOuterStrokePath.setAttribute(
+              "d",
+              unifiedSvgPathData
+            );
+
             /*
-             * E5N-R41-TRUE-OUTER-OFFSET-PATH
+             * PHASE-5N56H-OUTER-PERIMETER-GAP
              *
-             * Do NOT scale the inner path.
+             * Expand the companion path outside the
+             * primary perimeter instead of drawing a
+             * wider stroke directly on top of it.
              *
-             * Scaling makes the apparent corner size depend
-             * on Mega Menu width / height.
-             *
-             * Build an explicit outer silhouette instead:
-             *
-             * inner lower radius = 30px
-             * outer gap          = 5px
-             * outer lower radius = 35px
-             *
-             * This keeps every Mega Menu visually identical
-             * regardless of content-driven height.
+             * Result:
+             * primary line = original silhouette
+             * outer line   = approximately 5px outside
              */
             const outerGap =
               5;
 
+            const outerScaleX =
+              (unifiedWidth + outerGap * 2) /
+              unifiedWidth;
 
-            document.documentElement.style.setProperty(
-              "--mega-outline-gap",
-              `${outerGap}px`
-            );
-
-            const outerLeft =
-              -outerGap;
-
-            const outerRight =
-              unifiedWidth + outerGap;
-
-            const outerTop =
-              -outerGap;
-
-            const outerBottom =
-              unifiedHeight + outerGap;
-
-            const outerPanelTop =
-              panelLocalTop -
-              outerGap;
-
-            /*
-             * R46 — HYBRID OUTER OUTLINE
-             *
-             * Preserve the approved original 18px upper
-             * connected silhouette while keeping R41's
-             * true-offset lower perimeter.
-             *
-             * TOP:
-             *   use the same radius authority as unifiedPath.
-             *
-             * BOTTOM:
-             *   outerBottomRadius remains R41 true-offset.
-             */
-            const outerTopRadius =
-              unifiedRadius +
-              outerGap;
-
-            /* E73: Concave shoulder uses inward offset. */
-            const outerShoulderRadius =
-              unifiedRadius - outerGap;
-
-            /*
-             * E5N-R86-TRUE-PARALLEL-OUTLINE-RADII
-             *
-             * Keep the companion perimeter at one true geometric
-             * offset around the complete connected silhouette.
-             *
-             * top:    18 + 5 = 23px
-             * bottom: 30 + 5 = 35px
-             */
-
-            const outerBottomRadius =
-              unifiedBottomRadius +
-              outerGap;
-
-            const outerTabLeft =
-              tabLocalLeft - outerGap;
-
-            const outerTabRight =
-              tabLocalRight + outerGap;
-
-            const unifiedOuterPathData =
-              [
-                /*
-                 * Panel top-left.
-                 */
-                `M ${
-                  outerLeft + outerTopRadius
-                } ${outerPanelTop} `,
-
-                /*
-                 * Toward Tab left shoulder.
-                 */
-                `L ${
-                  outerTabLeft - outerShoulderRadius
-                } ${outerPanelTop} `,
-
-                /*
-                 * Rise into Tab.
-                 */
-                `Q ${
-                  outerTabLeft
-                } ${outerPanelTop} ${
-                  outerTabLeft
-                } ${
-                  outerPanelTop - outerShoulderRadius
-                } `,
-
-                /*
-                 * Tab left wall.
-                 */
-                `L ${
-                  outerTabLeft
-                } ${
-                  outerTop + outerTopRadius
-                } `,
-
-                /*
-                 * Tab top-left.
-                 */
-                `Q ${
-                  outerTabLeft
-                } ${outerTop} ${
-                  outerTabLeft + outerTopRadius
-                } ${outerTop} `,
-
-                /*
-                 * Tab top.
-                 */
-                `L ${
-                  outerTabRight - outerTopRadius
-                } ${outerTop} `,
-
-                /*
-                 * Tab top-right.
-                 */
-                `Q ${
-                  outerTabRight
-                } ${outerTop} ${
-                  outerTabRight
-                } ${
-                  outerTop + outerTopRadius
-                } `,
-
-                /*
-                 * Tab right wall.
-                 */
-                `L ${
-                  outerTabRight
-                } ${
-                  outerPanelTop - outerShoulderRadius
-                } `,
-
-                /*
-                 * Fall into panel.
-                 */
-                `Q ${
-                  outerTabRight
-                } ${outerPanelTop} ${
-                  outerTabRight + outerShoulderRadius
-                } ${outerPanelTop} `,
-
-                /*
-                 * Panel top-right.
-                 */
-                `L ${
-                  outerRight - outerTopRadius
-                } ${outerPanelTop} `,
-
-                `Q ${
-                  outerRight
-                } ${outerPanelTop} ${
-                  outerRight
-                } ${
-                  outerPanelTop + outerTopRadius
-                } `,
-
-                /*
-                 * Right side.
-                 */
-                `L ${
-                  outerRight
-                } ${
-                  outerBottom - outerBottomRadius
-                } `,
-
-                /*
-                 * Bottom-right.
-                 */
-                `Q ${
-                  outerRight
-                } ${
-                  outerBottom
-                } ${
-                  outerRight - outerBottomRadius
-                } ${
-                  outerBottom
-                } `,
-
-                /*
-                 * Bottom.
-                 */
-                `L ${
-                  outerLeft + outerBottomRadius
-                } ${
-                  outerBottom
-                } `,
-
-                /*
-                 * Bottom-left.
-                 */
-                `Q ${
-                  outerLeft
-                } ${
-                  outerBottom
-                } ${
-                  outerLeft
-                } ${
-                  outerBottom - outerBottomRadius
-                } `,
-
-                /*
-                 * Left side.
-                 */
-                `L ${
-                  outerLeft
-                } ${
-                  outerPanelTop + outerTopRadius
-                } `,
-
-                /*
-                 * Panel top-left.
-                 */
-                `Q ${
-                  outerLeft
-                } ${
-                  outerPanelTop
-                } ${
-                  outerLeft + outerTopRadius
-                } ${
-                  outerPanelTop
-                } `,
-
-                `Z`
-              ].join("");
+            const outerScaleY =
+              (unifiedHeight + outerGap * 2) /
+              unifiedHeight;
 
             unifiedOuterStrokePath.setAttribute(
-              "d",
-              unifiedOuterPathData
-            );
-
-            /*
-             * R41:
-             * outer path is already offset geometrically.
-             * Never scale it again.
-             */
-            unifiedOuterStrokePath.removeAttribute(
-              "transform"
+              "transform",
+              `matrix(
+                ${outerScaleX}
+                0
+                0
+                ${outerScaleY}
+                ${-outerGap}
+                ${-outerGap}
+              )`
             );
           }
 
@@ -6698,66 +5658,6 @@ clearPersistentMegaMenuOwner();
               "d",
               unifiedSvgPathData
             );
-
-            /*
-             * MATO-E77-BORDER-GAP-FILL
-             *
-             * Fill only the 5px area between the outer
-             * and inner connected SVG perimeters.
-             *
-             * evenodd removes the inner silhouette,
-             * preserving the menu content and glass.
-             */
-            if (unifiedOuterStrokePath) {
-
-              let borderGapFill =
-                unifiedStrokeSvg.querySelector<SVGPathElement>(
-                  "#mato-unified-mega-border-gap-fill"
-                );
-
-              if (!borderGapFill) {
-
-                borderGapFill =
-                  document.createElementNS(
-                    "http://www.w3.org/2000/svg",
-                    "path"
-                  );
-
-                borderGapFill.id =
-                  "mato-unified-mega-border-gap-fill";
-
-                borderGapFill.setAttribute(
-                  "fill-rule",
-                  "evenodd"
-                );
-
-                borderGapFill.setAttribute(
-                  "fill",
-                  "rgba(246, 244, 235, 0.92)"
-                );
-
-                borderGapFill.setAttribute(
-                  "stroke",
-                  "none"
-                );
-
-                unifiedStrokeSvg.insertBefore(
-                  borderGapFill,
-                  unifiedStrokeSvg.firstChild
-                );
-              }
-
-              borderGapFill.setAttribute(
-                "d",
-                (
-                  unifiedOuterStrokePath.getAttribute("d") ||
-                  ""
-                ) +
-                " " +
-                unifiedSvgPathData
-              );
-            }
-            /* MATO-E77-BORDER-GAP-FILL-END */
           }
 
           /* PHASE-5N56F-SVG-CONNECTED-STROKE-GEOMETRY-END */
@@ -7347,60 +6247,6 @@ clearPersistentMegaMenuOwner();
               @media (min-width: 769px) {
 
                 /*
-                 * MATO-SCROLLED-GLASS-E23-START
-                 *
-                 * Desktop-only optical treatment after
-                 * leaving the hero. Preserve hero glass,
-                 * connected geometry and navigation.
-                 */
-
-                body.mega-menu-unified-glass-active:has(.header.scrolled)
-                #mato-unified-mega-glass {
-                  background:
-                    linear-gradient(
-                      145deg,
-                      rgba(255,253,247,0.48) 0%,
-                      rgba(250,248,240,0.39) 48%,
-                      rgba(245,247,239,0.43) 100%
-                    ) !important;
-
-                  -webkit-backdrop-filter:
-                    blur(18px)
-                    saturate(108%)
-                    brightness(1.01) !important;
-
-                  backdrop-filter:
-                    blur(18px)
-                    saturate(108%)
-                    brightness(1.01) !important;
-
-                  filter:
-                    drop-shadow(
-                      0 16px 32px
-                      rgba(35,48,30,0.10)
-                    ) !important;
-                }
-
-                body.mega-menu-unified-glass-active
-                #mato-unified-mega-outer-stroke-path {
-                  opacity: 1 !important;
-                  stroke: rgba(168,133,72,0.45) !important;
-                  stroke-width: 1px !important;
-                  filter: none !important;
-                }
-
-                body.mega-menu-unified-glass-active
-                #mato-unified-mega-stroke-path {
-                  opacity: 1 !important;
-                  stroke: rgba(168,133,72,0.60) !important;
-                  stroke-width: 1.15px !important;
-                  filter: none !important;
-                }
-
-                /* MATO-SCROLLED-GLASS-E23-END */
-
-
-                /*
                  * Retire historical DIV outline.
                  * Geometry remains available, but it must
                  * not paint another contour.
@@ -7877,42 +6723,8 @@ clearPersistentMegaMenuOwner();
            * to prevent the solid Header surface from
            * leaking through the anti-aliased shoulder.
            */
-          /*
-           * R44:
-           * Header opening must reach the exact outer
-           * Mega perimeter.
-           *
-           * Keep this synchronized with:
-           *   outerGap = 5
-           *
-           * This removes the residual 1px Header surface
-           * between the cutout curve and outer outline.
-           */
           const seamSafety =
-            3;
-
-          /*
-           * E5N-R88-FINAL-HEADER-SEAM-SEAL
-           *
-           * Final 1px shoulder refinement after R87.
-           * Header paint extends one additional pixel toward
-           * the 5px outer companion perimeter.
-           *
-           * Glass, outline gap, radii and Mega dimensions
-           * remain unchanged.
-           */
-
-          /*
-           * E5N-R87-HEADER-OUTLINE-SEAM-SEAL
-           *
-           * Outer outline geometry remains at a true 5px offset.
-           *
-           * Header cutout stops 1px inside that outer perimeter,
-           * allowing the Header surface and anti-aliased outline
-           * to meet cleanly at both connected shoulders.
-           *
-           * Do not change outerGap, Glass geometry, or card size.
-           */
+            4;
 
 
           const smoothPanelLeft =
@@ -8240,7 +7052,7 @@ clearPersistentMegaMenuOwner();
 
       for (
         const element
-        of [heroForeground, heroTrust, ...getHomeStatContent(), ...getHeroTrustCards(), ...getTrustItemContent(), ...getTrustItemIcons(), getTrustBarSurface()]
+        of [heroForeground, heroTrust, ...getHomeStatContent(), ...getTrustItemContent(), ...getTrustItemIcons(), getTrustBarSurface()]
       ) {
 
         if (!element) continue;
@@ -8265,16 +7077,8 @@ clearPersistentMegaMenuOwner();
           panelRect.top -
           rect.top;
 
-        const foregroundReveal =
-          element.matches(
-            ".trust-item__content, .trust-item__icon"
-          )
-            ? 4
-            : 0;
-
         const bottom =
-          panelRect.bottom +
-          foregroundReveal -
+          panelRect.bottom -
           rect.top;
 
 
@@ -8345,10 +7149,6 @@ clearPersistentMegaMenuOwner();
             "--menu-hole-bottom"
           );
 
-          element.style.removeProperty(
-            "--menu-hole-radius"
-          );
-
           element.classList.remove(
             "mega-menu-local-occluded"
           );
@@ -8375,16 +7175,6 @@ clearPersistentMegaMenuOwner();
         element.style.setProperty(
           "--menu-hole-bottom",
           `${clampedBottom}px`
-        );
-
-        /*
-         * E5N R26D:
-         * Approved Unified Mega Glass lower-corner radius.
-         * Local occlusion paint consumes this geometry.
-         */
-        element.style.setProperty(
-          "--menu-hole-radius",
-          "30px"
         );
 
         element.classList.add(
@@ -8464,3 +7254,4 @@ document.body.classList.add(
     atomicHeaderRestoreAuthority
   );
 </script>
+

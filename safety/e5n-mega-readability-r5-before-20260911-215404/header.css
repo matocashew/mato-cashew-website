@@ -1,4 +1,4 @@
-﻿/* =========================================================
+/* =========================================================
    MATO CASHEW â€” HEADER
    ========================================================= */
 
@@ -2861,7 +2861,9 @@ text-decoration: none !important;
 
   .trust-item__content.mega-menu-local-occluded,
 
-  .trust-item__icon.mega-menu-local-occluded {
+  .trust-item__icon.mega-menu-local-occluded,
+
+  .trust-bar__surface.mega-menu-local-occluded {
 
     /*
      * Layer 1:
@@ -2937,192 +2939,6 @@ text-decoration: none !important;
       exclude;
   }
 }
-
-
-
-
-/* =========================================================
-   E5N-TRUSTBAR-OCCLUSION-R40B-START
-
-   SHARED DYNAMIC MEGA SILHOUETTE
-
-   Contract:
-   - shared by every desktop Mega Menu
-   - Trust Bar remains normal outside Mega overlap
-   - Hero background remains visible beneath Mega glass
-   - transparent cutout extends slightly OUTSIDE the
-     Mega outline so the outline floats over the Hero image
-   - no menu-specific selectors
-   ========================================================= */
-
-@media (min-width: 769px) {
-
-  .trust-bar__surface.mega-menu-local-occluded {
-
-    --mega-trust-reveal:
-      var(--mega-outline-gap, 5px);
-
-    --mega-trust-left:
-      calc(
-        var(--menu-hole-left) -
-        var(--mega-trust-reveal)
-      );
-
-    --mega-trust-right:
-      calc(
-        var(--menu-hole-right) +
-        var(--mega-trust-reveal)
-      );
-
-    --mega-trust-bottom:
-      calc(
-        var(--menu-hole-bottom) +
-        var(--mega-trust-reveal)
-      );
-
-    --mega-trust-radius:
-      calc(
-        var(--menu-hole-radius, 30px) +
-        var(--mega-trust-reveal)
-      );
-
-    background:
-      transparent !important;
-
-    background-color:
-      transparent !important;
-
-    background-image:
-
-      /* above Mega overlap */
-      linear-gradient(
-        rgba(255, 253, 248, 0.97),
-        rgba(255, 253, 248, 0.97)
-      ),
-
-      /* below Mega + reveal halo */
-      linear-gradient(
-        rgba(255, 253, 248, 0.97),
-        rgba(255, 253, 248, 0.97)
-      ),
-
-      /* left of Mega + reveal halo */
-      linear-gradient(
-        rgba(255, 253, 248, 0.97),
-        rgba(255, 253, 248, 0.97)
-      ),
-
-      /* right of Mega + reveal halo */
-      linear-gradient(
-        rgba(255, 253, 248, 0.97),
-        rgba(255, 253, 248, 0.97)
-      ),
-
-      /* lower-left rounded restoration */
-      radial-gradient(
-        circle at 100% 0%,
-        transparent
-          0
-          calc(var(--mega-trust-radius) - 1px),
-        rgba(255, 253, 248, 0.97)
-          var(--mega-trust-radius)
-      ),
-
-      /* lower-right rounded restoration */
-      radial-gradient(
-        circle at 0% 0%,
-        transparent
-          0
-          calc(var(--mega-trust-radius) - 1px),
-        rgba(255, 253, 248, 0.97)
-          var(--mega-trust-radius)
-      )
-
-      !important;
-
-    background-repeat:
-      no-repeat !important;
-
-    background-position:
-
-      0 0,
-
-      0 100%,
-
-      0 var(--menu-hole-top),
-
-      100% var(--menu-hole-top),
-
-      var(--mega-trust-left)
-        calc(
-          var(--mega-trust-bottom) -
-          var(--mega-trust-radius)
-        ),
-
-      calc(
-        var(--mega-trust-right) -
-        var(--mega-trust-radius)
-      )
-        calc(
-          var(--mega-trust-bottom) -
-          var(--mega-trust-radius)
-        )
-
-      !important;
-
-    background-size:
-
-      100%
-        var(--menu-hole-top),
-
-      100%
-        calc(
-          100% -
-          var(--mega-trust-bottom)
-        ),
-
-      var(--mega-trust-left)
-        calc(
-          var(--mega-trust-bottom) -
-          var(--menu-hole-top)
-        ),
-
-      calc(
-        100% -
-        var(--mega-trust-right)
-      )
-        calc(
-          var(--mega-trust-bottom) -
-          var(--menu-hole-top)
-        ),
-
-      var(--mega-trust-radius)
-        var(--mega-trust-radius),
-
-      var(--mega-trust-radius)
-        var(--mega-trust-radius)
-
-      !important;
-
-    -webkit-mask-image:
-      none !important;
-
-    mask-image:
-      none !important;
-
-    -webkit-mask-composite:
-      initial !important;
-
-    mask-composite:
-      initial !important;
-  }
-}
-
-/* E5N-TRUSTBAR-OCCLUSION-R40B-END */
-
-
-
-
 /* =========================================================
    MATO NAVIGATION V2 â€” FINAL BALANCED GLASS V2
    Clear text + stronger backdrop blur + light glass depth
@@ -3170,16 +2986,15 @@ text-decoration: none !important;
       rgba(12, 68, 46, 0.05) !important;
 
     padding-bottom:
-      16px !important;
+      24px !important;
 
     isolation: isolate;
 
     padding:
-      14px 16px 16px !important;
+      18px 20px 20px !important;
   }
 
 
-  /* E5N-R84B-SHARED-COMPACT-MEGA-CONTENT */
   /* -------------------------------------------------------
      INTERNAL GLASS CARDS
      Do not depend on a huge nested blur.
@@ -3189,7 +3004,7 @@ text-decoration: none !important;
   .mega-menu-link,
   .mega-menu-link.featured {
     padding:
-      13px 18px !important;
+      19px 22px !important;
 
     background:
       linear-gradient(
@@ -3292,7 +3107,7 @@ text-decoration: none !important;
   html[lang="km"]
   .mega-menu-link {
     padding:
-      14px 18px !important;
+      20px 23px !important;
   }
 
   html[lang="km"]
@@ -3320,7 +3135,7 @@ text-decoration: none !important;
 
   .mega-menu-grid {
     gap:
-      8px !important;
+      12px !important;
   }
 
   .mega-menu-grid
@@ -11817,84 +11632,22 @@ html body:has(
 /* E5N-HEADER-ACTIVE-GLASS-R4D-END */
 
 /* =========================================================
-   E5N-MEGA-READABILITY-R5-START
+   E5N-MEGA-READABILITY-R2-START
 
-   FINAL ADAPTIVE OPTICAL ISOLATION
+   PREMIUM MEGA MENU CONTENT LEGIBILITY
 
-   Goals:
-   - stable readability across bright/dark imagery
-   - preserve premium transparent glass
-   - neutralize local colour interference
-   - reduce text-shadow dependency
-   - keep geometry and interaction unchanged
-   - consolidate prior R2/R3/R4 readability layers
+   Purpose:
+   - preserve approved glass geometry
+   - preserve transparent glass character
+   - preserve backdrop blur
+   - improve content separation from changing backgrounds
+   - keep hover / active states visually dominant
+
+   No geometry changes.
+   No interaction changes.
    ========================================================= */
 
 @media (min-width: 769px) {
-
-  /*
-   * -------------------------------------------------------
-   * PRIMARY GLASS SURFACE
-   * -------------------------------------------------------
-   */
-
-  .mega-menu {
-    background:
-      linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.39) 0%,
-        rgba(251, 253, 248, 0.31) 50%,
-        rgba(245, 249, 243, 0.34) 100%
-      ) !important;
-
-    -webkit-backdrop-filter:
-      blur(25px)
-      saturate(103%)
-      brightness(1.045) !important;
-
-    backdrop-filter:
-      blur(25px)
-      saturate(103%)
-      brightness(1.045) !important;
-  }
-
-
-  /*
-   * -------------------------------------------------------
-   * CONTENT CARD OPTICAL ISOLATION
-   *
-   * Slightly stronger neutral surface than R4,
-   * but still transparent enough to preserve glass.
-   * -------------------------------------------------------
-   */
-
-  .mega-menu-link:not(:hover):not(:focus-visible):not(.active) {
-    background:
-      linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.47) 0%,
-        rgba(255, 255, 255, 0.35) 52%,
-        rgba(248, 250, 246, 0.40) 100%
-      ) !important;
-
-    border-color:
-      rgba(255, 255, 255, 0.72) !important;
-
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.70),
-      0 5px 16px rgba(18, 54, 36, 0.05) !important;
-
-    -webkit-backdrop-filter:
-      blur(17px)
-      saturate(100%)
-      brightness(1.04) !important;
-
-    backdrop-filter:
-      blur(17px)
-      saturate(100%)
-      brightness(1.04) !important;
-  }
-
 
   /*
    * -------------------------------------------------------
@@ -11904,90 +11657,525 @@ html body:has(
 
   .mega-menu-eyebrow {
     color:
-      #075b37 !important;
+      #17633f !important;
 
     font-weight:
       720 !important;
 
     text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.34) !important;
+      0 1px 0 rgba(255, 255, 255, 0.72),
+      0 0 12px rgba(255, 255, 255, 0.32) !important;
   }
 
 
   .mega-menu-description {
     color:
-      #143526 !important;
+      #263c32 !important;
 
     font-weight:
-      600 !important;
+      580 !important;
 
     text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.30) !important;
+      0 1px 0 rgba(255, 255, 255, 0.82),
+      0 0 14px rgba(255, 255, 255, 0.42) !important;
   }
 
 
   /*
    * -------------------------------------------------------
-   * CARD CONTENT
+   * CARD TITLE
    * -------------------------------------------------------
    */
 
   .mega-menu-link-title {
     color:
-      #0e3825 !important;
+      #173c2b !important;
 
     font-weight:
-      740 !important;
+      720 !important;
 
     text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.34) !important;
-  }
-
-
-  .mega-menu-link-description {
-    color:
-      #153727 !important;
-
-    font-weight:
-      600 !important;
-
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.30) !important;
+      0 1px 0 rgba(255, 255, 255, 0.88),
+      0 0 12px rgba(255, 255, 255, 0.38) !important;
   }
 
 
   /*
    * -------------------------------------------------------
-   * ICON GLASS
+   * CARD DESCRIPTION
+   * -------------------------------------------------------
+   */
+
+  .mega-menu-link-description {
+    color:
+      #294237 !important;
+
+    font-weight:
+      570 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.86),
+      0 0 14px rgba(255, 255, 255, 0.46) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * ICON
+   *
+   * Small local surface isolates the icon from arbitrary
+   * imagery without turning the whole card opaque.
    * -------------------------------------------------------
    */
 
   .mega-menu-link > .mega-menu-icon {
     background:
-      rgba(255, 255, 255, 0.50) !important;
+      rgba(255, 255, 255, 0.44) !important;
 
-    border-color:
-      rgba(255, 255, 255, 0.72) !important;
+    border:
+      1px solid rgba(255, 255, 255, 0.58) !important;
 
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.72),
-      0 3px 10px rgba(18, 55, 37, 0.055) !important;
+      0 4px 14px rgba(19, 61, 42, 0.08) !important;
 
     -webkit-backdrop-filter:
-      blur(14px)
-      saturate(100%) !important;
+      blur(8px)
+      saturate(118%) !important;
 
     backdrop-filter:
-      blur(14px)
-      saturate(100%) !important;
+      blur(8px)
+      saturate(118%) !important;
   }
 
 
   /*
    * -------------------------------------------------------
-   * HOVER / ACTIVE
+   * HOVER / FOCUS / ACTIVE
+   *
+   * Existing green interaction surface remains authoritative.
+   * Text becomes crisp white with controlled dark separation.
    * -------------------------------------------------------
    */
+
+  .mega-menu-link:hover
+  .mega-menu-link-title,
+
+  .mega-menu-link:focus-visible
+  .mega-menu-link-title,
+
+  .mega-menu-link.active
+  .mega-menu-link-title {
+    color:
+      #ffffff !important;
+
+    text-shadow:
+      0 1px 2px rgba(7, 40, 25, 0.24) !important;
+  }
+
+
+  .mega-menu-link:hover
+  .mega-menu-link-description,
+
+  .mega-menu-link:focus-visible
+  .mega-menu-link-description,
+
+  .mega-menu-link.active
+  .mega-menu-link-description {
+    color:
+      rgba(255, 255, 255, 0.96) !important;
+
+    text-shadow:
+      0 1px 2px rgba(7, 40, 25, 0.22) !important;
+  }
+
+
+  .mega-menu-link:hover
+  > .mega-menu-icon,
+
+  .mega-menu-link:focus-visible
+  > .mega-menu-icon,
+
+  .mega-menu-link.active
+  > .mega-menu-icon {
+    background:
+      rgba(255, 255, 255, 0.18) !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.34) !important;
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.26),
+      0 4px 14px rgba(8, 48, 29, 0.12) !important;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * KHMER OPTICAL WEIGHT
+   * -------------------------------------------------------
+   */
+
+  html[lang="km"]
+  .mega-menu-description {
+    font-weight:
+      560 !important;
+  }
+
+
+  html[lang="km"]
+  .mega-menu-link-title {
+    font-weight:
+      680 !important;
+  }
+
+
+  html[lang="km"]
+  .mega-menu-link-description {
+    font-weight:
+      550 !important;
+  }
+
+}
+
+/* E5N-MEGA-READABILITY-R2-END */
+
+/* =========================================================
+   E5N-MEGA-READABILITY-R3-START
+
+   ADAPTIVE GLASS CONTRAST LAYER
+
+   Preserve geometry and interaction.
+   Improve content readability across changing imagery.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .mega-menu {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.30) 0%,
+        rgba(255, 255, 255, 0.20) 48%,
+        rgba(247, 250, 244, 0.24) 100%
+      ) !important;
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(112%)
+      brightness(1.04) !important;
+
+    backdrop-filter:
+      blur(24px)
+      saturate(112%)
+      brightness(1.04) !important;
+  }
+
+
+  .mega-menu-link:not(:hover):not(:focus-visible):not(.active) {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.25),
+        rgba(255, 255, 255, 0.16)
+      ) !important;
+
+    -webkit-backdrop-filter:
+      blur(12px)
+      saturate(108%) !important;
+
+    backdrop-filter:
+      blur(12px)
+      saturate(108%) !important;
+  }
+
+
+  .mega-menu-eyebrow {
+    color: #0d5f3b !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.56) !important;
+  }
+
+
+  .mega-menu-description {
+    color: #18382a !important;
+    font-weight: 590 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.58) !important;
+  }
+
+
+  .mega-menu-link-title {
+    color: #123d29 !important;
+    font-weight: 730 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.66) !important;
+  }
+
+
+  .mega-menu-link-description {
+    color: #1d3b2d !important;
+    font-weight: 590 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.62) !important;
+  }
+
+
+  .mega-menu-link > .mega-menu-icon {
+    background:
+      rgba(255, 255, 255, 0.30) !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.46) !important;
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.54),
+      0 3px 10px rgba(18, 61, 41, 0.07) !important;
+
+    -webkit-backdrop-filter:
+      blur(10px)
+      saturate(108%) !important;
+
+    backdrop-filter:
+      blur(10px)
+      saturate(108%) !important;
+  }
+
+
+  .mega-menu-link:hover .mega-menu-link-title,
+  .mega-menu-link:focus-visible .mega-menu-link-title,
+  .mega-menu-link.active .mega-menu-link-title {
+    color: #ffffff !important;
+
+    text-shadow:
+      0 1px 1px rgba(4, 37, 22, 0.20) !important;
+  }
+
+
+  .mega-menu-link:hover .mega-menu-link-description,
+  .mega-menu-link:focus-visible .mega-menu-link-description,
+  .mega-menu-link.active .mega-menu-link-description {
+    color:
+      rgba(255, 255, 255, 0.97) !important;
+
+    text-shadow:
+      0 1px 1px rgba(4, 37, 22, 0.18) !important;
+  }
+
+
+  .mega-menu-link:hover > .mega-menu-icon,
+  .mega-menu-link:focus-visible > .mega-menu-icon,
+  .mega-menu-link.active > .mega-menu-icon {
+    background:
+      rgba(255, 255, 255, 0.16) !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.30) !important;
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      0 3px 10px rgba(5, 43, 25, 0.10) !important;
+  }
+
+
+  html[lang="km"] .mega-menu-description {
+    font-weight: 570 !important;
+  }
+
+  html[lang="km"] .mega-menu-link-title {
+    font-weight: 690 !important;
+  }
+
+  html[lang="km"] .mega-menu-link-description {
+    font-weight: 565 !important;
+  }
+
+}
+
+/* E5N-MEGA-READABILITY-R3-END */
+
+/* =========================================================
+   E5N-MEGA-READABILITY-R4-START
+
+   CONTENT PROTECTION GLASS
+
+   Goals:
+   - Preserve transparent premium glass
+   - Reduce local background colour interference
+   - Improve text consistency over bright/dark imagery
+   - Reduce dependence on text-shadow
+   - Preserve geometry, notch and interaction
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /* -------------------------------------------------------
+     PRIMARY MEGA GLASS
+
+     Slightly neutralize the image underneath without
+     destroying transparency.
+     ------------------------------------------------------- */
+
+  .mega-menu {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.36) 0%,
+        rgba(252, 253, 249, 0.27) 48%,
+        rgba(246, 249, 242, 0.31) 100%
+      ) !important;
+
+    -webkit-backdrop-filter:
+      blur(25px)
+      saturate(106%)
+      brightness(1.045) !important;
+
+    backdrop-filter:
+      blur(25px)
+      saturate(106%)
+      brightness(1.045) !important;
+  }
+
+
+  /* -------------------------------------------------------
+     CONTENT CARD PROTECTION
+
+     The card receives its own neutral optical layer.
+     Background remains visible but no longer controls
+     foreground readability.
+     ------------------------------------------------------- */
+
+  .mega-menu-link:not(:hover):not(:focus-visible):not(.active) {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.40) 0%,
+        rgba(255, 255, 255, 0.29) 52%,
+        rgba(248, 250, 245, 0.34) 100%
+      ) !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.68) !important;
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.62),
+      0 5px 18px rgba(20, 56, 38, 0.055) !important;
+
+    -webkit-backdrop-filter:
+      blur(16px)
+      saturate(102%)
+      brightness(1.035) !important;
+
+    backdrop-filter:
+      blur(16px)
+      saturate(102%)
+      brightness(1.035) !important;
+  }
+
+
+  /* -------------------------------------------------------
+     EYEBROW / SECTION LABEL
+     ------------------------------------------------------- */
+
+  .mega-menu-eyebrow {
+    color:
+      #075d38 !important;
+
+    font-weight:
+      720 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.40) !important;
+  }
+
+
+  /* -------------------------------------------------------
+     MENU INTRODUCTION
+     ------------------------------------------------------- */
+
+  .mega-menu-description {
+    color:
+      #173729 !important;
+
+    font-weight:
+      600 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.38) !important;
+  }
+
+
+  /* -------------------------------------------------------
+     CARD TITLE
+
+     Strong foreground anchor.
+     ------------------------------------------------------- */
+
+  .mega-menu-link-title {
+    color:
+      #103a27 !important;
+
+    font-weight:
+      740 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.44) !important;
+  }
+
+
+  /* -------------------------------------------------------
+     CARD DESCRIPTION
+     ------------------------------------------------------- */
+
+  .mega-menu-link-description {
+    color:
+      #18382a !important;
+
+    font-weight:
+      600 !important;
+
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.40) !important;
+  }
+
+
+  /* -------------------------------------------------------
+     ICON GLASS
+
+     Keep icon visually separated from changing imagery.
+     ------------------------------------------------------- */
+
+  .mega-menu-link > .mega-menu-icon {
+    background:
+      rgba(255, 255, 255, 0.48) !important;
+
+    border-color:
+      rgba(255, 255, 255, 0.72) !important;
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.70),
+      0 4px 12px rgba(17, 55, 36, 0.065) !important;
+
+    -webkit-backdrop-filter:
+      blur(14px)
+      saturate(102%) !important;
+
+    backdrop-filter:
+      blur(14px)
+      saturate(102%) !important;
+  }
+
+
+  /* -------------------------------------------------------
+     ACTIVE / HOVER CARDS
+
+     Keep existing premium green interaction while ensuring
+     white foreground remains crisp.
+     ------------------------------------------------------- */
 
   .mega-menu-link:hover .mega-menu-link-title,
   .mega-menu-link:focus-visible .mega-menu-link-title,
@@ -11996,7 +12184,7 @@ html body:has(
       #ffffff !important;
 
     text-shadow:
-      0 1px 1px rgba(4, 37, 22, 0.14) !important;
+      0 1px 1px rgba(4, 37, 22, 0.16) !important;
   }
 
 
@@ -12007,7 +12195,7 @@ html body:has(
       rgba(255, 255, 255, 0.98) !important;
 
     text-shadow:
-      0 1px 1px rgba(4, 37, 22, 0.12) !important;
+      0 1px 1px rgba(4, 37, 22, 0.14) !important;
   }
 
 
@@ -12022,15 +12210,16 @@ html body:has(
 
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.28),
-      0 3px 10px rgba(5, 43, 25, 0.08) !important;
+      0 4px 12px rgba(5, 43, 25, 0.09) !important;
   }
 
 
-  /*
-   * -------------------------------------------------------
-   * KHMER OPTICAL BALANCE
-   * -------------------------------------------------------
-   */
+  /* -------------------------------------------------------
+     KHMER TYPOGRAPHY
+
+     Preserve slightly softer Khmer weight while maintaining
+     the same contrast hierarchy.
+     ------------------------------------------------------- */
 
   html[lang="km"] .mega-menu-description {
     font-weight:
@@ -12049,820 +12238,4 @@ html body:has(
 
 }
 
-/* E5N-MEGA-READABILITY-R5-END */
-
-/* =========================================================
-   E5N-MEGA-READABILITY-R5A-START
-
-   INTRO OPTICAL ISOLATION
-
-   Purpose:
-   - improve mega-menu eyebrow + description readability
-   - isolate intro text from unpredictable hero imagery
-   - preserve premium transparent glass appearance
-   - avoid creating a visible nested card
-   - leave card geometry and interaction untouched
-   ========================================================= */
-
-@media (min-width: 769px) {
-
-  .mega-menu-intro {
-    position: relative;
-    isolation: isolate;
-  }
-
-
-  .mega-menu-intro::before {
-    content: "";
-    position: absolute;
-
-    inset:
-      -10px
-      -14px
-      -9px
-      -14px;
-
-    z-index: -1;
-
-    pointer-events: none;
-
-    border-radius: 18px;
-
-    background:
-      linear-gradient(
-        100deg,
-        rgba(255, 255, 255, 0.34) 0%,
-        rgba(255, 255, 255, 0.22) 56%,
-        rgba(255, 255, 255, 0.08) 100%
-      );
-
-    -webkit-backdrop-filter:
-      blur(10px)
-      saturate(96%)
-      brightness(1.025);
-
-    backdrop-filter:
-      blur(10px)
-      saturate(96%)
-      brightness(1.025);
-
-    -webkit-mask-image:
-      linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.92) 0%,
-        rgba(0, 0, 0, 0.72) 62%,
-        transparent 100%
-      );
-
-    mask-image:
-      linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.92) 0%,
-        rgba(0, 0, 0, 0.72) 62%,
-        transparent 100%
-      );
-  }
-
-
-  .mega-menu-eyebrow,
-  .mega-menu-description {
-    position: relative;
-    z-index: 1;
-  }
-
-
-  .mega-menu-eyebrow {
-    color:
-      #075634 !important;
-
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.42) !important;
-  }
-
-
-  .mega-menu-description {
-    color:
-      #123526 !important;
-
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.36) !important;
-  }
-
-
-  html[lang="km"] .mega-menu-description {
-    font-weight:
-      580 !important;
-  }
-
-}
-
-/* E5N-MEGA-READABILITY-R5A-END */
-
-/* =========================================================
-   E5N-MEGA-READABILITY-R5B-START
-
-   INTRO OPTICAL REFINEMENT
-
-   Purpose:
-   - retain R5A readability improvement
-   - remove visible nested-card impression
-   - make intro protection read as luminous haze
-   - preserve text contrast over unpredictable imagery
-   - leave mega-menu geometry and interaction untouched
-   ========================================================= */
-
-@media (min-width: 769px) {
-
-  /*
-   * Refine R5A illumination.
-   *
-   * Wider horizontal spread + softer opacity prevents
-   * the layer from reading as a separate mini-card.
-   */
-
-  .mega-menu-intro::before {
-    inset:
-      -8px
-      -24px
-      -7px
-      -18px;
-
-    border-radius:
-      16px;
-
-    background:
-      linear-gradient(
-        100deg,
-        rgba(255, 255, 255, 0.25) 0%,
-        rgba(255, 255, 255, 0.16) 42%,
-        rgba(255, 255, 255, 0.065) 70%,
-        rgba(255, 255, 255, 0) 100%
-      );
-
-    -webkit-backdrop-filter:
-      blur(7px)
-      saturate(98%)
-      brightness(1.018);
-
-    backdrop-filter:
-      blur(7px)
-      saturate(98%)
-      brightness(1.018);
-
-    /*
-     * Earlier fade removes the perception of a
-     * rectangular secondary surface.
-     */
-
-    -webkit-mask-image:
-      linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.88) 0%,
-        rgba(0, 0, 0, 0.68) 40%,
-        rgba(0, 0, 0, 0.30) 67%,
-        transparent 88%
-      );
-
-    mask-image:
-      linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.88) 0%,
-        rgba(0, 0, 0, 0.68) 40%,
-        rgba(0, 0, 0, 0.30) 67%,
-        transparent 88%
-      );
-  }
-
-
-  /*
-   * Preserve R5A typography exactly.
-   * No additional weight or contrast escalation.
-   */
-
-  .mega-menu-eyebrow {
-    color:
-      #075634 !important;
-
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.42) !important;
-  }
-
-
-  .mega-menu-description {
-    color:
-      #123526 !important;
-
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.36) !important;
-  }
-
-
-  html[lang="km"] .mega-menu-description {
-    font-weight:
-      580 !important;
-  }
-
-}
-
-/* E5N-MEGA-READABILITY-R5B-END */
-
-/* =========================================================
-   E5N-MEGA-READABILITY-R5C-START
-
-   INTRO EDGE DISSOLVE POLISH
-
-   Purpose:
-   - preserve R5B readability
-   - dissolve remaining rectangular intro boundaries
-   - retain transparent premium glass character
-   - no geometry or interaction changes
-   ========================================================= */
-
-@media (min-width: 769px) {
-
-  .mega-menu-intro::before {
-
-    /*
-     * Extend illumination beyond the text zone so its
-     * physical edge disappears before becoming visible.
-     */
-
-    inset:
-      -10px
-      -34px
-      -9px
-      -26px;
-
-    border-radius:
-      22px;
-
-    background:
-      radial-gradient(
-        ellipse 78% 115% at 24% 50%,
-        rgba(255, 255, 255, 0.23) 0%,
-        rgba(255, 255, 255, 0.16) 42%,
-        rgba(255, 255, 255, 0.07) 68%,
-        rgba(255, 255, 255, 0) 100%
-      );
-
-    -webkit-backdrop-filter:
-      blur(7px)
-      saturate(98%)
-      brightness(1.018);
-
-    backdrop-filter:
-      blur(7px)
-      saturate(98%)
-      brightness(1.018);
-
-    /*
-     * Two-dimensional mask:
-     * horizontal fade removes left/right boundaries;
-     * vertical fade softens top/bottom boundaries.
-     */
-
-    -webkit-mask-image:
-      radial-gradient(
-        ellipse 82% 118% at 30% 50%,
-        rgba(0, 0, 0, 0.94) 0%,
-        rgba(0, 0, 0, 0.86) 42%,
-        rgba(0, 0, 0, 0.54) 67%,
-        rgba(0, 0, 0, 0.18) 84%,
-        transparent 100%
-      );
-
-    mask-image:
-      radial-gradient(
-        ellipse 82% 118% at 30% 50%,
-        rgba(0, 0, 0, 0.94) 0%,
-        rgba(0, 0, 0, 0.86) 42%,
-        rgba(0, 0, 0, 0.54) 67%,
-        rgba(0, 0, 0, 0.18) 84%,
-        transparent 100%
-      );
-  }
-
-}
-
-/* E5N-MEGA-READABILITY-R5C-END */
-
-/* =========================================================
-   E5N-MEGA-CONTENT-R4-START
-
-   FINAL OPTICAL TYPOGRAPHY CALIBRATION
-
-   Purpose:
-   - sharpen mega-menu content hierarchy
-   - improve text/background separation
-   - preserve premium transparent glass
-   - calibrate Latin and Khmer independently
-   - preserve current geometry and interaction
-   ========================================================= */
-
-@media (min-width: 769px) {
-
-  /* INTRO */
-
-  .mega-menu-eyebrow {
-    font-weight: 720 !important;
-    letter-spacing: -0.008em;
-    line-height: 1.22;
-
-    color: #075634 !important;
-
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.48),
-      0 0 12px rgba(255, 255, 255, 0.10) !important;
-  }
-
-
-  .mega-menu-description {
-    font-weight: 590 !important;
-    line-height: 1.46;
-    letter-spacing: -0.004em;
-
-    color: #123526 !important;
-
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.42) !important;
-  }
-
-
-  /* CARD TITLE */
-
-  .mega-menu-card h3,
-  .mega-menu-card-title {
-    font-weight: 720 !important;
-    line-height: 1.22 !important;
-    letter-spacing: -0.012em;
-
-    color: #0b4932 !important;
-
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.46),
-      0 0 10px rgba(255, 255, 255, 0.08) !important;
-  }
-
-
-  /* CARD DESCRIPTION */
-
-  .mega-menu-card p,
-  .mega-menu-card-description {
-    font-weight: 570 !important;
-    line-height: 1.42 !important;
-    letter-spacing: -0.003em;
-
-    color: #163b2c !important;
-
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.38) !important;
-  }
-
-
-  /* ICON */
-
-  .mega-menu-card svg {
-    color: #08764f;
-
-    filter:
-      drop-shadow(
-        0 1px 0 rgba(255, 255, 255, 0.34)
-      );
-  }
-
-
-  /* KHMER */
-
-  html[lang="km"] .mega-menu-eyebrow {
-    font-weight: 650 !important;
-    line-height: 1.48 !important;
-    letter-spacing: 0 !important;
-  }
-
-
-  html[lang="km"] .mega-menu-description {
-    font-weight: 560 !important;
-    line-height: 1.62 !important;
-    letter-spacing: 0 !important;
-  }
-
-
-  html[lang="km"] .mega-menu-card h3,
-  html[lang="km"] .mega-menu-card-title {
-    font-weight: 650 !important;
-    line-height: 1.48 !important;
-    letter-spacing: 0 !important;
-  }
-
-
-  html[lang="km"] .mega-menu-card p,
-  html[lang="km"] .mega-menu-card-description {
-    font-weight: 540 !important;
-    line-height: 1.58 !important;
-    letter-spacing: 0 !important;
-  }
-
-}
-
-/* E5N-MEGA-CONTENT-R4-END */
-/* =========================================================
-   E5N-R90-HEADER-OPTICAL-CLARITY
-
-   Premium optical clarity for desktop Header navigation.
-
-   Goals:
-   - improve legibility over translucent/glass surfaces
-   - preserve the existing font family and dimensions
-   - use subtle highlight/shadow instead of heavy boldness
-   - preserve active green navigation identity
-   - leave Mega Menu content and geometry untouched
-   ========================================================= */
-
-@media (min-width: 769px) {
-
-  /*
-   * Primary Header navigation text.
-   * Slightly stronger optical weight without changing size.
-   */
-  .nav-link-row > .nav-link {
-    color: #17251f !important;
-
-    font-weight: 650 !important;
-    letter-spacing: -0.008em;
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    text-rendering: optimizeLegibility;
-
-    /*
-     * E5N-R91-ADAPTIVE-HEADER-TEXT-CONTRAST
-     * Dual-edge optical separation for mixed glass backgrounds.
-     */
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.88),
-      0 -0.45px 0 rgba(255, 255, 255, 0.52),
-      0 0 1px rgba(255, 255, 255, 0.38),
-      0 0.65px 0.9px rgba(4, 31, 21, 0.34) !important;
-  }
-
-
-  /*
-   * Active / hover / keyboard-focus navigation.
-   * Keep Mato green while retaining the same optical clarity.
-   */
-  .nav-link-row > .nav-link:hover,
-  .nav-link-row > .nav-link.active,
-  .nav-link-row > .nav-link:focus-visible {
-    color: #075f3d !important;
-
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.92),
-      0 -0.45px 0 rgba(255, 255, 255, 0.56),
-      0 0 1px rgba(255, 255, 255, 0.42),
-      0 0.65px 1px rgba(3, 50, 31, 0.38) !important;
-  }
-
-
-  /*
-   * Icons should remain crisp beside the stronger labels.
-   */
-  .nav-link-row > .nav-link svg {
-    filter:
-      drop-shadow(0 1px 0 rgba(255, 255, 255, 0.48));
-  }
-
-
-  /*
-   * Khmer needs slightly less artificial tightening.
-   */
-  html[lang="km"] .nav-link-row > .nav-link {
-    font-weight: 650 !important;
-    letter-spacing: 0 !important;
-    text-rendering: optimizeLegibility;
-  }
-}
-
-/* E5N-R90-HEADER-OPTICAL-CLARITY-END */
-
-/* =========================================================
-   E5N-MEGA-BOTTOM-CORNERS-R1-START
-
-   Precision fix:
-   restore premium rounded lower corners without touching
-   top notch geometry, menu handoff, glass recipe or cards.
-   ========================================================= */
-
-@media (min-width: 769px) {
-
-  .submenu-panel.mega-menu {
-    border-bottom-left-radius:
-      24px !important;
-
-    border-bottom-right-radius:
-      24px !important;
-  }
-
-
-  .submenu-panel.mega-menu > .mega-menu-inner {
-    border-bottom-left-radius:
-      22px !important;
-
-    border-bottom-right-radius:
-      22px !important;
-  }
-
-}
-
-/* E5N-MEGA-BOTTOM-CORNERS-R1-END */
-
-/* =========================================================
-   E5N-MEGA-BOTTOM-CORNERS-R2-START
-
-   Permanent inner clipping fix.
-   Prevents inner glass/background from painting outside
-   approved rounded lower corners.
-
-   Top notch geometry remains untouched.
-   ========================================================= */
-
-@media (min-width: 769px) {
-
-  .submenu-panel.mega-menu > .mega-menu-inner {
-    overflow:
-      hidden !important;
-
-    border-bottom-left-radius:
-      22px !important;
-
-    border-bottom-right-radius:
-      22px !important;
-  }
-
-}
-
-/* E5N-MEGA-BOTTOM-CORNERS-R2-END */
-
-/* =========================================================
-   E5N-HERO-TRUST-OCCLUSION-R29
-
-   Hero trust cards now participate in the existing local
-   Mega Menu cutout system.
-
-   IMPORTANT:
-   - Do NOT hide the whole card.
-   - Preserve the portion outside the Mega Menu.
-   - Geometry remains owned by Header.astro.
-   ========================================================= */
-
-/* =========================================================
-   E5N-R31-ROUNDED-HERO-TRUST-CLIP
-
-   DIRECT GEOMETRY FIX
-
-   The generic local mask subtracts a rectangular Mega Menu
-   hole. That rectangular edge is the visible vertical defect
-   at the Hero Trust cards.
-
-   Hero Trust therefore uses its own rounded top-notch clip.
-
-   Geometry remains owned by Header.astro:
-     --menu-hole-left
-     --menu-hole-right
-     --menu-hole-bottom
-
-   Mega lower corner radius:
-     30px
-   ========================================================= */
-
-@media (min-width: 769px) {
-
-  .hero-content.mega-menu-local-occluded,
-  .hero-trust.mega-menu-local-occluded {
-
-    /*
-     * Disable the generic rectangular subtractive mask
-     * only for the Hero Trust group.
-     */
-    -webkit-mask-image:
-      none !important;
-
-    mask-image:
-      none !important;
-
-    -webkit-mask-composite:
-      initial !important;
-
-    mask-composite:
-      initial !important;
-
-
-    /*
-     * Visible polygon with a rounded Mega Menu notch.
-     *
-     * Quarter-circle approximation for r = 30px:
-     *   2.28px
-     *   8.79px
-     *   18.52px
-     *   30px
-     */
-    -webkit-clip-path:
-      polygon(
-
-        /* outer top-left */
-        0 -2px,
-
-        /* enter Mega left side */
-        var(--menu-hole-left) -2px,
-
-        /* lower-left rounded contour */
-        var(--menu-hole-left)
-          calc(var(--menu-hole-bottom) - 30px),
-
-        calc(var(--menu-hole-left) + 2.28px)
-          calc(var(--menu-hole-bottom) - 18.52px),
-
-        calc(var(--menu-hole-left) + 8.79px)
-          calc(var(--menu-hole-bottom) - 8.79px),
-
-        calc(var(--menu-hole-left) + 18.52px)
-          calc(var(--menu-hole-bottom) - 2.28px),
-
-        calc(var(--menu-hole-left) + 30px)
-          var(--menu-hole-bottom),
-
-        /* bottom edge of Mega silhouette */
-        calc(var(--menu-hole-right) - 30px)
-          var(--menu-hole-bottom),
-
-        /* lower-right rounded contour */
-        calc(var(--menu-hole-right) - 18.52px)
-          calc(var(--menu-hole-bottom) - 2.28px),
-
-        calc(var(--menu-hole-right) - 8.79px)
-          calc(var(--menu-hole-bottom) - 8.79px),
-
-        calc(var(--menu-hole-right) - 2.28px)
-          calc(var(--menu-hole-bottom) - 18.52px),
-
-        var(--menu-hole-right)
-          calc(var(--menu-hole-bottom) - 30px),
-
-        /* leave Mega right side */
-        var(--menu-hole-right) -2px,
-
-        /* outer box */
-        100% -2px,
-        100% 100%,
-        0 100%
-      ) !important;
-
-
-    clip-path:
-      polygon(
-        0 -2px,
-
-        var(--menu-hole-left) -2px,
-
-        var(--menu-hole-left)
-          calc(var(--menu-hole-bottom) - 30px),
-
-        calc(var(--menu-hole-left) + 2.28px)
-          calc(var(--menu-hole-bottom) - 18.52px),
-
-        calc(var(--menu-hole-left) + 8.79px)
-          calc(var(--menu-hole-bottom) - 8.79px),
-
-        calc(var(--menu-hole-left) + 18.52px)
-          calc(var(--menu-hole-bottom) - 2.28px),
-
-        calc(var(--menu-hole-left) + 30px)
-          var(--menu-hole-bottom),
-
-        calc(var(--menu-hole-right) - 30px)
-          var(--menu-hole-bottom),
-
-        calc(var(--menu-hole-right) - 18.52px)
-          calc(var(--menu-hole-bottom) - 2.28px),
-
-        calc(var(--menu-hole-right) - 8.79px)
-          calc(var(--menu-hole-bottom) - 8.79px),
-
-        calc(var(--menu-hole-right) - 2.28px)
-          calc(var(--menu-hole-bottom) - 18.52px),
-
-        var(--menu-hole-right)
-          calc(var(--menu-hole-bottom) - 30px),
-
-        var(--menu-hole-right) -2px,
-
-        100% -2px,
-        100% 100%,
-        0 100%
-      ) !important;
-  }
-}
-
-/*
- * =========================================================
- * E5N-R95-CLICK-SUPPRESSION-VISIBILITY-AUTHORITY
- *
- * Clicked desktop Mega trigger:
- *
- * While the pointer remains physically inside that same
- * top-level nav item, suppress every Mega visibility path,
- * including native :hover, :focus-within and JS handoff.
- *
- * Header.astro removes this class on the first real
- * mouseleave, allowing the next mouseenter to behave normally.
- *
- * Geometry / glass / outline are intentionally untouched.
- * =========================================================
- */
-
-@media (min-width: 769px) {
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega.mega-menu-click-suppressed
-  > .submenu-panel.mega-menu,
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega.mega-menu-click-suppressed:hover
-  > .submenu-panel.mega-menu,
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega.mega-menu-click-suppressed:focus-within
-  > .submenu-panel.mega-menu,
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega.mega-menu-click-suppressed.mega-menu-handoff-owner
-  > .submenu-panel.mega-menu {
-
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-
-    transform:
-      translateX(-50%)
-      translateY(-8px)
-      scale(0.985) !important;
-
-    transition: none !important;
-  }
-
-}
-
-/* E5N-R95-CLICK-SUPPRESSION-VISIBILITY-AUTHORITY-END */
-
-
-/* E163-FINAL-MEGA-MENU-840-START
-   =========================================================
-   MATO CASHEW
-   FINAL APPROVED DESKTOP MEGA MENU WIDTH
-
-   Approved visual baseline: 840px
-
-   Scope:
-   - desktop only >= 993px
-   - all nav-mega panels
-   - preserve current positioning
-   - preserve current interaction
-   - preserve Language Switcher
-   - preserve mobile/tablet behavior
-   ========================================================= */
-
-@media (min-width: 993px) {
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega
-  > .submenu-panel.mega-menu,
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega:hover
-  > .submenu-panel.mega-menu,
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega:focus-within
-  > .submenu-panel.mega-menu,
-
-  html body .header
-  #main-menu
-  > .nav-item.has-submenu.nav-mega.mega-menu-handoff-owner
-  > .submenu-panel.mega-menu {
-
-    width: 840px !important;
-    max-width: 840px !important;
-
-  }
-
-}
-
-/* E163-FINAL-MEGA-MENU-840-END */
-
+/* E5N-MEGA-READABILITY-R4-END */

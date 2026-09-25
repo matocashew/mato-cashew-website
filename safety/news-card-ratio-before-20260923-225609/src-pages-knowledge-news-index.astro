@@ -1,0 +1,97 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import { newsService } from "@services/newsService";
+
+const articles = await newsService.getAll("en");
+---
+
+<PageLayout
+  title="News & Events | Mato Cashew"
+  description="Latest Cambodian cashew industry news, workshops, training, and events."
+  canonical="https://matocashew.com/knowledge/news"
+  lang="en"
+  hasKhmerAlternate={true}
+  breadcrumbs={[
+    { name: "Home", url: "/" },
+    { name: "Knowledge Center", url: "/knowledge" },
+    { name: "News & Events", url: "/knowledge/news" },
+  ]}
+>
+  <main class="container news-index" lang="en">
+    <header class="news-index__header">
+      <p class="news-index__eyebrow">Knowledge Center</p>
+      <h1>News & Events</h1>
+      <p>
+        Explore Cambodian cashew industry news,
+        workshops, training, and events.
+      </p>
+    </header>
+
+    {
+      articles.length === 0 ? (
+        <p class="news-index__empty">
+          News and events will be available soon.
+        </p>
+      ) : (
+        <div class="news-index__grid">
+          {articles.map((article) => (
+            <article class="news-index__card">
+              {article.data.heroImage && (
+                <img
+                  src={article.data.heroImage}
+                  alt=""
+                  loading="lazy"
+                />
+              )}
+              <div class="news-index__card-body">
+                <p class="news-index__category">
+                  {article.data.category}
+                </p>
+                <h2>
+                  <a href={`/knowledge/news/${article.slug}`}>
+                    {article.data.title}
+                  </a>
+                </h2>
+                <p>{article.data.excerpt}</p>
+                <p class="news-index__source">
+                  Source: {article.data.sourceName}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      )
+    }
+  </main>
+</PageLayout>
+
+<style>
+  .news-index { padding-block: 7rem 5rem; }
+  .news-index__header { max-width: 760px; margin-bottom: 2.5rem; }
+  .news-index__eyebrow,
+  .news-index__category { color: #467548; font-weight: 700; }
+  .news-index__header h1 { margin-block: .5rem 1rem; }
+  .news-index__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 1.5rem;
+  }
+  .news-index__card {
+    overflow: hidden;
+    border: 1px solid #e2e8df;
+    border-radius: 16px;
+    background: #fff;
+  }
+  .news-index__card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    background: #fff;
+  }
+  .news-index__card-body { padding: 1.5rem; }
+  .news-index__card h2 { font-size: 1.3rem; }
+  .news-index__card h2 a { color: inherit; }
+  .news-index__source { font-size: .9rem; opacity: .75; }
+  .news-index__empty { padding-block: 2rem; }
+</style>

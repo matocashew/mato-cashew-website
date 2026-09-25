@@ -148,7 +148,6 @@ const brandName =
                 class:list={[
                   "nav-item",
                   hasChildren && "has-submenu",
-                  `nav-id-${item.id}`,
                   item.variant &&
                     `nav-${item.variant}`,
                 ]}
@@ -297,11 +296,6 @@ const brandName =
                               (child) => (
                                 <a
                                   href={child.href}
-                                  data-astro-reload={
-                                    child.id === "knowledge-news-events"
-                                      ? true
-                                      : undefined
-                                  }
                                   class:list={[
                                     "mega-menu-link",
                                     child.featured &&
@@ -4035,19 +4029,6 @@ navItem.addEventListener(
       megaMenuExitTeardownInFlight = true;
 
       /*
-       * E117: Release the desktop menu offset on true close.
-       */
-      document
-        .querySelectorAll<HTMLElement>(
-          ".header .mega-menu"
-        )
-        .forEach((menu) => {
-          menu.style.removeProperty(
-            "transform"
-          );
-        });
-
-      /*
        * E5N69-R2:
        * accepted true clear ends geometry ownership.
        */
@@ -4466,88 +4447,6 @@ clearPersistentMegaMenuOwner();
       panel: HTMLElement
     ) => {
 
-      /*
-       * E117: Keep the desktop Mega Menu clear of the brand.
-       * Position the real panel before measuring compositor geometry.
-       */
-      if (
-        window.innerWidth > 768 &&
-        panel.matches(".mega-menu")
-      ) {
-        const brand =
-          document.querySelector<HTMLElement>(
-            ".header .logo"
-          );
-
-        if (brand) {
-          const brandRect =
-            brand.getBoundingClientRect();
-
-          const currentRect =
-            panel.getBoundingClientRect();
-
-          const viewportPadding = 16;
-          const brandGap = 8;
-
-          /*
-           * Keep the active tab inside the connected menu.
-           * Left-side tabs retain the brand-safe position.
-           * Right-side tabs move the panel only as needed.
-           */
-          const activeTab =
-            panel.closest(".has-submenu")
-              ?.querySelector<HTMLElement>(
-                ":scope > .nav-link-row"
-              );
-
-          const tabRect =
-            activeTab?.getBoundingClientRect();
-
-          const tabInset = 24;
-
-          const preferredLeft = Math.max(
-            brandRect.right + brandGap,
-            tabRect
-              ? tabRect.right -
-                  currentRect.width +
-                  tabInset
-              : brandRect.right + brandGap
-          );
-
-          const targetLeft = Math.max(
-            viewportPadding,
-            Math.min(
-              preferredLeft,
-              window.innerWidth -
-                currentRect.width -
-                viewportPadding
-            )
-          );
-
-          const currentTransform =
-            new DOMMatrixReadOnly(
-              getComputedStyle(panel).transform
-            );
-
-          const correctedTranslateX =
-            currentTransform.m41 +
-            targetLeft -
-            currentRect.left;
-
-          if (
-            Math.abs(
-              targetLeft - currentRect.left
-            ) > 0.5
-          ) {
-            panel.style.setProperty(
-              "transform",
-              `translateX(${correctedTranslateX}px) translateY(0) scale(1)`,
-              "important"
-            );
-          }
-        }
-      }
-
       const panelRect =
         panel.getBoundingClientRect();
       /* PHASE-5M-GLOBAL-OCCLUSION-APPLY-START */
@@ -4723,12 +4622,6 @@ clearPersistentMegaMenuOwner();
            * Convert intersection into coordinates
            * local to this individual element.
            */
-          /*
-           * E52: Small safety margin prevents foreground
-           * glyphs from peeking around the Mega Menu edge.
-           * Keep the original responsive overlap geometry.
-           */
-          const occlusionBleed = 2;
           const holeLeft =
             Math.max(
               overlapLeft - rect.left,
@@ -4756,22 +4649,22 @@ clearPersistentMegaMenuOwner();
 
           element.style.setProperty(
             "--menu-hole-left",
-            `${Math.max(0, holeLeft - occlusionBleed)}px`
+            `${holeLeft}px`
           );
 
           element.style.setProperty(
             "--menu-hole-right",
-            `${Math.max(0, holeRight - occlusionBleed)}px`
+            `${holeRight}px`
           );
 
           element.style.setProperty(
             "--menu-hole-top",
-            `${Math.max(0, holeTop - occlusionBleed)}px`
+            `${holeTop}px`
           );
 
           element.style.setProperty(
             "--menu-hole-bottom",
-            `${Math.max(0, holeBottom - occlusionBleed)}px`
+            `${holeBottom}px`
           );
 
           element.classList.add(
@@ -6485,10 +6378,6 @@ clearPersistentMegaMenuOwner();
               unifiedRadius +
               outerGap;
 
-            /* E73: Concave shoulder uses inward offset. */
-            const outerShoulderRadius =
-              unifiedRadius - outerGap;
-
             /*
              * E5N-R86-TRUE-PARALLEL-OUTLINE-RADII
              *
@@ -6522,7 +6411,7 @@ clearPersistentMegaMenuOwner();
                  * Toward Tab left shoulder.
                  */
                 `L ${
-                  outerTabLeft - outerShoulderRadius
+                  outerTabLeft - outerTopRadius
                 } ${outerPanelTop} `,
 
                 /*
@@ -6533,7 +6422,7 @@ clearPersistentMegaMenuOwner();
                 } ${outerPanelTop} ${
                   outerTabLeft
                 } ${
-                  outerPanelTop - outerShoulderRadius
+                  outerPanelTop - outerTopRadius
                 } `,
 
                 /*
@@ -6578,7 +6467,7 @@ clearPersistentMegaMenuOwner();
                 `L ${
                   outerTabRight
                 } ${
-                  outerPanelTop - outerShoulderRadius
+                  outerPanelTop - outerTopRadius
                 } `,
 
                 /*
@@ -6587,7 +6476,7 @@ clearPersistentMegaMenuOwner();
                 `Q ${
                   outerTabRight
                 } ${outerPanelTop} ${
-                  outerTabRight + outerShoulderRadius
+                  outerTabRight + outerTopRadius
                 } ${outerPanelTop} `,
 
                 /*
@@ -6698,66 +6587,6 @@ clearPersistentMegaMenuOwner();
               "d",
               unifiedSvgPathData
             );
-
-            /*
-             * MATO-E77-BORDER-GAP-FILL
-             *
-             * Fill only the 5px area between the outer
-             * and inner connected SVG perimeters.
-             *
-             * evenodd removes the inner silhouette,
-             * preserving the menu content and glass.
-             */
-            if (unifiedOuterStrokePath) {
-
-              let borderGapFill =
-                unifiedStrokeSvg.querySelector<SVGPathElement>(
-                  "#mato-unified-mega-border-gap-fill"
-                );
-
-              if (!borderGapFill) {
-
-                borderGapFill =
-                  document.createElementNS(
-                    "http://www.w3.org/2000/svg",
-                    "path"
-                  );
-
-                borderGapFill.id =
-                  "mato-unified-mega-border-gap-fill";
-
-                borderGapFill.setAttribute(
-                  "fill-rule",
-                  "evenodd"
-                );
-
-                borderGapFill.setAttribute(
-                  "fill",
-                  "rgba(246, 244, 235, 0.92)"
-                );
-
-                borderGapFill.setAttribute(
-                  "stroke",
-                  "none"
-                );
-
-                unifiedStrokeSvg.insertBefore(
-                  borderGapFill,
-                  unifiedStrokeSvg.firstChild
-                );
-              }
-
-              borderGapFill.setAttribute(
-                "d",
-                (
-                  unifiedOuterStrokePath.getAttribute("d") ||
-                  ""
-                ) +
-                " " +
-                unifiedSvgPathData
-              );
-            }
-            /* MATO-E77-BORDER-GAP-FILL-END */
           }
 
           /* PHASE-5N56F-SVG-CONNECTED-STROKE-GEOMETRY-END */
@@ -7345,60 +7174,6 @@ clearPersistentMegaMenuOwner();
 
             svgStrokeAuthority.textContent = `
               @media (min-width: 769px) {
-
-                /*
-                 * MATO-SCROLLED-GLASS-E23-START
-                 *
-                 * Desktop-only optical treatment after
-                 * leaving the hero. Preserve hero glass,
-                 * connected geometry and navigation.
-                 */
-
-                body.mega-menu-unified-glass-active:has(.header.scrolled)
-                #mato-unified-mega-glass {
-                  background:
-                    linear-gradient(
-                      145deg,
-                      rgba(255,253,247,0.48) 0%,
-                      rgba(250,248,240,0.39) 48%,
-                      rgba(245,247,239,0.43) 100%
-                    ) !important;
-
-                  -webkit-backdrop-filter:
-                    blur(18px)
-                    saturate(108%)
-                    brightness(1.01) !important;
-
-                  backdrop-filter:
-                    blur(18px)
-                    saturate(108%)
-                    brightness(1.01) !important;
-
-                  filter:
-                    drop-shadow(
-                      0 16px 32px
-                      rgba(35,48,30,0.10)
-                    ) !important;
-                }
-
-                body.mega-menu-unified-glass-active
-                #mato-unified-mega-outer-stroke-path {
-                  opacity: 1 !important;
-                  stroke: rgba(168,133,72,0.45) !important;
-                  stroke-width: 1px !important;
-                  filter: none !important;
-                }
-
-                body.mega-menu-unified-glass-active
-                #mato-unified-mega-stroke-path {
-                  opacity: 1 !important;
-                  stroke: rgba(168,133,72,0.60) !important;
-                  stroke-width: 1.15px !important;
-                  filter: none !important;
-                }
-
-                /* MATO-SCROLLED-GLASS-E23-END */
-
 
                 /*
                  * Retire historical DIV outline.
