@@ -8341,6 +8341,7 @@ html body.mega-menu-unified-glass-active
 
 /* PHASE-5N26A-OWNER-CONTENT-END */
 
+/* E174-PERSISTENT-OWNER-PAINT-GUARD */
 /* PHASE-5N35A-INSTANT-NAV-VISUAL-EXIT-START */
 
 /*
@@ -8514,7 +8515,7 @@ html body.mega-menu-unified-glass-active
    * -------------------------------------------------------
    */
 
-  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover)):not(:has(.header .nav-item.mega-menu-handoff-owner:not(.mega-menu-blank-gap-hidden)))
   .header {
 
     background:
@@ -8540,7 +8541,7 @@ html body.mega-menu-unified-glass-active
   }
 
 
-  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover)):not(:has(.header .nav-item.mega-menu-handoff-owner:not(.mega-menu-blank-gap-hidden)))
   .header::before {
 
     content:
@@ -8587,13 +8588,13 @@ html body.mega-menu-unified-glass-active
   }
 
 
-  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover)):not(:has(.header .nav-item.mega-menu-handoff-owner:not(.mega-menu-blank-gap-hidden)))
   #mato-unified-mega-glass,
 
-  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover)):not(:has(.header .nav-item.mega-menu-handoff-owner:not(.mega-menu-blank-gap-hidden)))
   #mato-unified-mega-outline,
 
-  html body:has(.header:hover):not(:has(.header .nav-menu:hover))
+  html body:has(.header:hover):not(:has(.header .nav-menu:hover)):not(:has(.header .nav-item.mega-menu-handoff-owner:not(.mega-menu-blank-gap-hidden)))
   #mega-menu-tab-glass-layer {
 
     opacity:

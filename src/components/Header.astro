@@ -1,4 +1,4 @@
----
+﻿---
 import { getCurrentLanguage }
   from "../i18n/getCurrentLanguage";
 
@@ -2314,7 +2314,7 @@ const pointerInsideMegaMenuSystem = (
     if (
       pointInsideRect(
         item.getBoundingClientRect(),
-        1
+        0
       )
     ) {
       return true;
@@ -2398,61 +2398,25 @@ const pointerInsideMegaMenuSystem = (
 
   /*
    * ======================================================
-   * 3. VERTICAL CORRIDOR ABOVE CURRENT OWNER TAB ONLY
+   * E175-STRICT-UPPER-TAB-EXIT
+   *
+   * Pointer above the physical top edge of the active
+   * Menu Tab is a TRUE exit.
+   *
+   * We intentionally do NOT preserve the historical
+   * upper Header vertical corridor.
+   *
+   * Preserved:
+   * - real Menu Tab
+   * - adjacent Menu handoff
+   * - Tab -> Mega panel movement
+   * - real Mega panel
+   * - Language / About special handling
+   *
+   * No geometry change.
+   * No Mega width change.
    * ======================================================
-   *
-   * Phase 5N24 fixed upward movement, but its original
-   * corridor was too broad.
-   *
-   * Keep the owner alive only directly above the ACTIVE
-   * owner Tab — not across the full navigation width.
    */
-  if (
-    persistentMegaMenuOwner &&
-    header
-  ) {
-
-    const ownerTab =
-      persistentMegaMenuOwner
-        .querySelector<HTMLElement>(
-          ":scope > .nav-link-row"
-        );
-
-
-    if (ownerTab) {
-
-      const tabRect =
-        ownerTab.getBoundingClientRect();
-
-      const headerRect =
-        header.getBoundingClientRect();
-
-
-      const corridorPaddingX =
-        8;
-
-
-      const insideOwnerVerticalCorridor =
-        clientX >=
-          tabRect.left -
-          corridorPaddingX &&
-        clientX <=
-          tabRect.right +
-          corridorPaddingX &&
-        clientY >=
-          headerRect.top &&
-        clientY <=
-          tabRect.bottom;
-
-
-      if (
-        insideOwnerVerticalCorridor
-      ) {
-        return true;
-      }
-    }
-  }
-
 
   /*
    * ======================================================
@@ -5570,6 +5534,27 @@ clearPersistentMegaMenuOwner();
           const unifiedBottomRadius =
             30;
 
+          /*
+           * =================================================
+           * E177-R1-DYNAMIC-RIGHT-SHOULDER-CLAMP
+           *
+           * Prevent the Tab's right shoulder from crossing
+           * the panel's top-right corner authority.
+           *
+           * Geometry-driven: works for English, Khmer and
+           * other Menu widths without language hard-coding.
+           * =================================================
+           */
+
+          const unifiedRightShoulderEnd =
+            Math.min(
+              tabLocalRight +
+                unifiedRadius,
+              unifiedWidth -
+                unifiedRadius
+            );
+
+
 
           /*
            * -------------------------------------------------
@@ -5655,7 +5640,7 @@ clearPersistentMegaMenuOwner();
                * Fall smoothly into panel top.
                */
               `Q ${tabLocalRight} ${panelLocalTop} ${
-                tabLocalRight + unifiedRadius
+                unifiedRightShoulderEnd
               } ${panelLocalTop} `,
 
 
@@ -6509,6 +6494,21 @@ clearPersistentMegaMenuOwner();
             const outerTabRight =
               tabLocalRight + outerGap;
 
+            /*
+             * E177-R1:
+             * Apply the same monotonic shoulder rule to the
+             * companion outer perimeter.
+             */
+
+            const outerRightShoulderEnd =
+              Math.min(
+                outerTabRight +
+                  outerShoulderRadius,
+                outerRight -
+                  outerTopRadius
+              );
+
+
             const unifiedOuterPathData =
               [
                 /*
@@ -6587,7 +6587,7 @@ clearPersistentMegaMenuOwner();
                 `Q ${
                   outerTabRight
                 } ${outerPanelTop} ${
-                  outerTabRight + outerShoulderRadius
+                  outerRightShoulderEnd
                 } ${outerPanelTop} `,
 
                 /*
