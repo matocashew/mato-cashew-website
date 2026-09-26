@@ -22,7 +22,7 @@
             rgba(250, 246, 235, 0.34) 62%,
             rgba(250, 246, 235, 0.08) 100%
         ),
-        url("/images/hero/hero-bg-premium-desktop.png");
+        url("/images/hero/hero-bg-premium-desktop.webp");
 
     background-position: center center;
     background-size: cover;
@@ -288,7 +288,7 @@
                 rgba(250, 246, 235, 0.58) 72%,
                 rgba(250, 246, 235, 0.38) 100%
             ),
-            url("/images/hero/hero-bg-premium-mobile.png");
+            url("/images/hero/hero-bg-premium-mobile.webp");
 
         background-position: center top;
         background-size: cover;
@@ -357,7 +357,7 @@
                 rgba(250,246,235,.88),
                 rgba(250,246,235,.70)
             ),
-            url("/images/hero/hero-bg-premium-mobile.png");
+            url("/images/hero/hero-bg-premium-mobile.webp");
 
         background-position: 58% top;
         background-size: cover;
@@ -2066,7 +2066,7 @@ html[lang="km"] .hero-description,
     pointer-events: none;
 
     background:
-      url("/images/hero/hero-bg-premium-desktop.png")
+      url("/images/hero/hero-bg-premium-desktop.webp")
       center top / 100% auto
       no-repeat;
 
