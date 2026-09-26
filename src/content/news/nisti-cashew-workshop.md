@@ -14,7 +14,7 @@ publishedAt: 2026-09-23
 eventDate: 2026-09-18
 sourceName: "Cambodia Cashew Association (CAC)"
 sourceUrl: "https://cac-camcashew.org/news/nisti-hosts-workshop-to-improve-cambodia-s-cashew"
-heroImage: "/images/news/nisti-cashew-workshop.png"
+heroImage: "/images/news/nisti-cashew-workshop.webp"
 draft: false
 featured: false
 seo:

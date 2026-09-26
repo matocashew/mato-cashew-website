@@ -15,7 +15,7 @@ publishedAt: 2026-09-23
 eventDate: 2026-09-21
 sourceName: "Royal Embassy of Cambodia to the Republic of Bulgaria / AKP"
 sourceUrl: "https://web.facebook.com/100069248764629/posts/1423013356683610/?mibextid=wwXIfr&rdid=3TYeI2agrwX505YG&_rdc=1&_rdr"
-heroImage: "/images/news/cambodian-cashew-bulgaria-eu-market.png"
+heroImage: "/images/news/cambodian-cashew-bulgaria-eu-market.webp"
 draft: false
 featured: false
 seo:
