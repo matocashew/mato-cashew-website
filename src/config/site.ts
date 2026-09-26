@@ -21,7 +21,7 @@ export const site: SiteConfig = {
     description:
       "Premium Cambodian cashew kernels for retail, wholesale, distribution, and business customers.",
     url: "https://matocashew.com",
-    logo: "/images/logo/logo.png",
+    logo: "/images/logo/logo.webp",
     locale: "en",
   },
 
