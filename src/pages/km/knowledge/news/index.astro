@@ -39,7 +39,7 @@ const articles = await newsService.getAll("km");
               {article.data.heroImage && (
                 <img
                   src={article.data.heroImage}
-                  alt=""
+                  alt={article.data.title}
                   loading="lazy"
                 />
               )}
