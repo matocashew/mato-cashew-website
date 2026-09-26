@@ -17,10 +17,10 @@ weight: "250g"
 packaging: "Can"
 packagingKm: "កំប៉ុង"
 
-image: "/images/products/can-250g.png"
+image: "/images/products/can-250g.webp"
 
 gallery:
-  - "/images/products/can-250g.png"
+  - "/images/products/can-250g.webp"
 
 featured: false
 

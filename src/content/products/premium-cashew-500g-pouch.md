@@ -17,10 +17,10 @@ weight: "500g"
 packaging: "Pouch"
 packagingKm: "ថង់វិចខ្ចប់"
 
-image: "/images/products/package-500g.png"
+image: "/images/products/package-500g.webp"
 
 gallery:
-  - "/images/products/package-500g.png"
+  - "/images/products/package-500g.webp"
 
 featured: true
 

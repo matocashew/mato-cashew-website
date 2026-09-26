@@ -17,10 +17,10 @@ weight: "250g"
 packaging: "Pouch"
 packagingKm: "ថង់វិចខ្ចប់"
 
-image: "/images/products/package-250g.png"
+image: "/images/products/package-250g.webp"
 
 gallery:
-  - "/images/products/package-250g.png"
+  - "/images/products/package-250g.webp"
 
 featured: true
 

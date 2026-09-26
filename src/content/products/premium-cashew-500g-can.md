@@ -17,10 +17,10 @@ weight: "500g"
 packaging: "Can"
 packagingKm: "កំប៉ុង"
 
-image: "/images/products/can-500g.png"
+image: "/images/products/can-500g.webp"
 
 gallery:
-  - "/images/products/can-500g.png"
+  - "/images/products/can-500g.webp"
 
 featured: false
 

@@ -17,10 +17,10 @@ weight: "1000g"
 packaging: "Can"
 packagingKm: "កំប៉ុង"
 
-image: "/images/products/can-1000g.png"
+image: "/images/products/can-1000g.webp"
 
 gallery:
-  - "/images/products/can-1000g.png"
+  - "/images/products/can-1000g.webp"
 
 featured: false
 

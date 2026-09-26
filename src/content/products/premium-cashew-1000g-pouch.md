@@ -17,10 +17,10 @@ weight: "1000g"
 packaging: "Pouch"
 packagingKm: "ថង់វិចខ្ចប់"
 
-image: "/images/products/package-1000g.png"
+image: "/images/products/package-1000g.webp"
 
 gallery:
-  - "/images/products/package-1000g.png"
+  - "/images/products/package-1000g.webp"
 
 featured: true
 
