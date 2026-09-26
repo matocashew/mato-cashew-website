@@ -1,4 +1,4 @@
-﻿---
+---
 import { getCurrentLanguage }
   from "../i18n/getCurrentLanguage";
 
@@ -1243,16 +1243,6 @@ const cancelMegaMenuHandoff = () => {
 };
 
 
-const getActiveDesktopSubmenu = () =>
-  Array.from(
-    submenuItems
-  ).find(
-    (item) =>
-      submenuShouldRemainOpen(
-        item
-      )
-  ) ?? null;
-
 
 let persistentMegaMenuOwner:
   HTMLElement | null =
@@ -1719,206 +1709,6 @@ const cancelAboutLanguageBlankGapClose = () => {
 
 /*
  * =========================================================
- * PHASE-E5N19-HOVER-INTENT-DWELL
- *
- * 120ms was short enough to treat natural slow pointer
- * movement as a settled blank-gap exit.
- *
- * Use a short hover-intent dwell instead:
- *
- * - continuous movement keeps restarting the timer
- * - a real settled pointer still closes About
- * - no Header / Hero / Mega geometry changes
- * =========================================================
- */
-const aboutLanguageBlankGapDwellMs =
-  320;
-
-const scheduleAboutLanguageBlankGapClose = (
-  clientX: number,
-  clientY: number
-) => {
-
-  aboutLanguageBlankGapPointerX =
-    clientX;
-
-  aboutLanguageBlankGapPointerY =
-    clientY;
-
-
-  /*
-   * One timer only.
-   *
-   * Repeated pointermove events inside the same physical gap
-   * update coordinates without creating additional timers.
-   */
-  /*
-   * =====================================================
-   * PHASE-E5N9-TRUE-ABOUT-LANGUAGE-DWELL
-   *
-   * A dwell means the pointer has actually stopped.
-   * Restart the 120ms timer on every pointer movement
-   * inside the About -> Language blank gap.
-   *
-   * Moving pointer = preserve compositor state.
-   * Settled pointer = existing 120ms close.
-   *
-   * No visual geometry changes.
-   * =====================================================
-   */
-  if (
-    aboutLanguageBlankGapCloseTimer !== null
-  ) {
-
-    window.clearTimeout(
-      aboutLanguageBlankGapCloseTimer
-    );
-
-    aboutLanguageBlankGapCloseTimer =
-      null;
-  }
-
-
-  aboutLanguageBlankGapCloseTimer =
-    window.setTimeout(
-      () => {
-
-        aboutLanguageBlankGapCloseTimer =
-          null;
-
-
-        if (
-          !persistentMegaMenuOwner
-        ) {
-          return;
-        }
-
-
-        const nav =
-          document.querySelector<HTMLElement>(
-            ".nav-menu"
-          );
-
-        const header =
-          document.querySelector<HTMLElement>(
-            ".header"
-          );
-
-        const languageSwitcher =
-          document.querySelector<HTMLElement>(
-            ".language-switcher"
-          );
-
-
-        if (
-          !nav ||
-          !header ||
-          !languageSwitcher
-        ) {
-          return;
-        }
-
-
-        const topLevelItems =
-          Array.from(
-            nav.querySelectorAll<HTMLElement>(
-              ":scope > .nav-item"
-            )
-          );
-
-
-        if (
-          topLevelItems.length === 0
-        ) {
-          return;
-        }
-
-
-        const finalNavItem =
-          topLevelItems[
-            topLevelItems.length - 1
-          ];
-
-
-        /*
-         * Only About/final-item ownership participates in
-         * this specialized close behavior.
-         */
-        if (
-          persistentMegaMenuOwner !==
-          finalNavItem
-        ) {
-          return;
-        }
-
-
-        const aboutRect =
-          finalNavItem.getBoundingClientRect();
-
-        const languageRect =
-          languageSwitcher.getBoundingClientRect();
-
-        const headerRect =
-          header.getBoundingClientRect();
-
-
-        const stillInsideBlankGap =
-          aboutLanguageBlankGapPointerY >=
-            headerRect.top &&
-          aboutLanguageBlankGapPointerY <=
-            headerRect.bottom &&
-          aboutLanguageBlankGapPointerX >
-            aboutRect.right &&
-          aboutLanguageBlankGapPointerX <
-            languageRect.left;
-
-
-        /*
-         * Pointer moved elsewhere during dwell.
-         * Do not close.
-         */
-        if (!stillInsideBlankGap) {
-          return;
-        }
-
-
-        /*
-         * Definitive settled blank-gap exit.
-         *
-         * Clear only once after geometry has stabilized.
-         */
-        /*
-         * =====================================================
-         * PHASE-E5N13-PAINT-SHIELD-BEFORE-TEARDOWN
-         *
-         * Paint the opaque Header shield before dismantling
-         * the unified Mega Menu compositor.
-         *
-         * This prevents Hero pixels from becoming visible
-         * during the compositor teardown frame.
-         * =====================================================
-         */
-        showAboutLanguageHeaderExitShield();
-
-        window.requestAnimationFrame(
-          () => {
-
-            cancelMegaMenuHandoff();
-
-            clearMegaMenuOcclusion();
-
-            releaseAboutLanguageHeaderExitShield();
-
-          }
-        );
-
-      },
-      aboutLanguageBlankGapDwellMs
-    );
-};
-
-/*
- * =========================================================
  * E5N17-R2 - PURE ABOUT/LANGUAGE BLANK-GAP GEOMETRY
  *
  * Detect only the real Header blank space between
@@ -2266,10 +2056,6 @@ const pointerInsideMegaMenuSystem = (
       ".nav-menu"
     );
 
-  const header =
-    document.querySelector<HTMLElement>(
-      ".header"
-    );
 
 
   const pointInsideRect = (
@@ -2869,16 +2655,18 @@ atomicExitHeader?.addEventListener(
  *   after the short guard, the pointer coordinates are tested
  *   again against REAL geometry.
  *
- * We intentionally DO NOT call getActiveDesktopSubmenu()
- * here because CSS :hover / :focus-within can briefly remain
- * stale after the pointer has physically left the system.
+ * CSS :hover / :focus-within can briefly remain stale after
+ * the pointer has physically left the system, so final exit
+ * is decided from the real pointer geometry below.
  */
 
 let lastMegaPointerX =
   0;
 
 let lastMegaPointerY =
-  0;document.addEventListener(
+  0;
+
+document.addEventListener(
   "pointermove",
   (event) => {
 
