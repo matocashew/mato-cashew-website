@@ -1,4 +1,4 @@
-import { z } from "astro:content";
+import { z } from "astro/zod";
 
 export const newsSchema = z.object({
   title: z.string(),
@@ -15,7 +15,7 @@ export const newsSchema = z.object({
   eventDate: z.date().optional(),
 
   sourceName: z.string(),
-  sourceUrl: z.string().url(),
+  sourceUrl: z.url(),
 
   heroImage: z.string().optional(),
 
