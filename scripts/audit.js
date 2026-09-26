@@ -40,11 +40,15 @@ const checks = [
   },
   {
     name: "SEO Audit",
-    implemented: false
+    script: "scripts/seo-audit.js",
+    args: [],
+    implemented: true
   },
   {
     name: "Image Audit",
-    implemented: false
+    script: "scripts/image-audit.js",
+    args: [],
+    implemented: true
   },
   {
     name: "Unused Files Audit",
