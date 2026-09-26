@@ -174,7 +174,7 @@
    */
 
   --scenic-background-image:
-    url("/images/about/about-hero-desktop-v3.png");
+    url("/images/about/about-hero-desktop-v3.webp");
 
   --scenic-background-size:
     var(--mc-scenic-desktop-reference-width) auto;
