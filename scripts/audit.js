@@ -52,7 +52,9 @@ const checks = [
   },
   {
     name: "Unused Files Audit",
-    implemented: false
+    script: "scripts/unused-files.js",
+    args: [],
+    implemented: true
   }
 ];
 
