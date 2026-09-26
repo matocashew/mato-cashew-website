@@ -290,11 +290,13 @@ const localizedKeywords =
   <!-- Google Analytics -->
 
   <script
+    is:inline
     async
     src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analytics.googleAnalytics}`}
   ></script>
 
   <script
+    is:inline
     define:vars={{
       gaId: SITE.analytics.googleAnalytics
     }}
