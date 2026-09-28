@@ -286,6 +286,46 @@ export function initContactForm() {
   form.dataset.contactInitialized =
     "true";
 
+  /*
+   * Preserve product context from Request a Quote.
+   */
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const product =
+    params.get("product")?.trim() ?? "";
+
+  const inquiry =
+    params.get("inquiry")?.trim() ?? "";
+
+  const inquirySelect =
+    document.getElementById(
+      "inquiry"
+    ) as HTMLSelectElement | null;
+
+  const messageField =
+    document.getElementById(
+      "message"
+    ) as HTMLTextAreaElement | null;
+
+  if (
+    inquirySelect &&
+    inquiry === "Wholesale Inquiry" &&
+    Array.from(inquirySelect.options).some(
+      (option) => option.value === inquiry
+    )
+  ) {
+    inquirySelect.value = inquiry;
+  }
+
+  if (
+    product &&
+    messageField &&
+    !messageField.value.trim()
+  ) {
+    messageField.value = product;
+  }
+
 const submitBtn =
     document.getElementById(
       "submitBtn"

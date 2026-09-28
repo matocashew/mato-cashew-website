@@ -87,6 +87,9 @@ const contactUrl =
   isKhmer
     ? "/km/contact"
     : "/contact";
+
+const quoteUrl =
+  `${contactUrl}?product=${encodeURIComponent(productTitle)}&inquiry=${encodeURIComponent("Wholesale Inquiry")}`;
 ---
 
 <section class="product-details">
@@ -353,7 +356,7 @@ const contactUrl =
           <div class="product-actions">
 
             <a
-              href={contactUrl}
+              href={quoteUrl}
               class="btn btn-primary product-primary-action"
             >
               {labels.quote}
