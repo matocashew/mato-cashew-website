@@ -16,6 +16,11 @@ const contactPath =
 
 const wholesalePath =
   getLocalizedPath(language, "/wholesale");
+
+const inquiryContactPath =
+  `${contactPath}?inquiry=${encodeURIComponent(
+    "Wholesale Inquiry"
+  )}`;
 ---
 
 <section class="products-cta">
@@ -49,7 +54,7 @@ const wholesalePath =
       <div class="cta-buttons">
 
         <a
-          href={contactPath}
+          href={inquiryContactPath}
           class="btn btn-primary"
         >
           {t.products.cta.primaryButton}
