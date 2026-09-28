@@ -1,4 +1,5 @@
 ---
+import { getKnowledgeImageDimensions } from "@utils/knowledgeImageDimensions";
 import type { Language } from "../../i18n/config";
 
 import {
@@ -33,6 +34,9 @@ const articlePath =
   lang === "km"
     ? `/km/knowledge/${slug}`
     : `/knowledge/${slug}`;
+const imageDimensions =
+  getKnowledgeImageDimensions(image);
+
 ---
 
 <a
@@ -48,6 +52,8 @@ const articlePath =
 
     <img
       src={image}
+    width={imageDimensions?.width}
+    height={imageDimensions?.height}
       alt={title}
       loading="lazy"
     />
