@@ -5,9 +5,10 @@ import DynamicProductCard from "./DynamicProductCard.astro";
 
 interface Props {
   products: CollectionEntry<"products">[];
+  language: "en" | "km";
 }
 
-const { products }: Props = Astro.props;
+const { products, language }: Props = Astro.props;
 ---
 
 {
@@ -17,6 +18,7 @@ const { products }: Props = Astro.props;
         {products.map((product) => (
           <DynamicProductCard
             product={product}
+            language={language}
           />
         ))}
       </div>

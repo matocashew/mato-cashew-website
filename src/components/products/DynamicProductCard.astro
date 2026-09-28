@@ -3,17 +3,17 @@ import type { CollectionEntry } from "astro:content";
 
 interface Props {
   product: CollectionEntry<"products">;
+  language: "en" | "km";
 }
 
-const { product } = Astro.props;
+const { product, language }: Props = Astro.props;
 
 
 /* =========================================================
    LANGUAGE
    ========================================================= */
 
-const isKhmer =
-  Astro.url.pathname.startsWith("/km/");
+const isKhmer = language === "km";
 
 
 /* =========================================================

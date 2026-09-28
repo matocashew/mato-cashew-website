@@ -12,9 +12,10 @@ import ProductsCTA from "../products/ProductsCTA.astro";
 
 interface Props {
   products: CollectionEntry<"products">[];
+  language: "en" | "km";
 }
 
-const { products } = Astro.props;
+const { products, language }: Props = Astro.props;
 ---
 
 <ProductsHero />
@@ -31,6 +32,7 @@ const { products } = Astro.props;
 
     <ProductGrid
       products={products}
+      language={language}
     />
 
   </div>
