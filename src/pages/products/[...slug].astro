@@ -6,6 +6,7 @@ import "../../styles/product-detail.css";
 import "../../styles/related-products.css";
 
 import PageLayout from "../../layouts/PageLayout.astro";
+import ProductSchema from "../../components/seo/ProductSchema.astro";
 
 import ProductDetails from "../../components/products/ProductDetails.astro";
 import ProductSpecificationsList from "../../components/products/ProductSpecificationsList.astro";
@@ -99,6 +100,14 @@ const relatedProducts =
 
   <RelatedProducts
     products={relatedProducts}
+  />
+
+  <ProductSchema
+    name={product.data.title}
+    description={product.data.description}
+    image={product.data.image}
+    sku={product.data.sku}
+    canonical={canonical}
   />
 
 </PageLayout>

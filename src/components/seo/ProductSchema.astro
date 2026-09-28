@@ -1,0 +1,42 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  image: string;
+  sku: string;
+  canonical: string;
+}
+
+const {
+  name,
+  description,
+  image,
+  sku,
+  canonical,
+} = Astro.props;
+
+const productImage =
+  image.startsWith("http")
+    ? image
+    : `https://matocashew.com${image}`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name,
+  description,
+  image: [productImage],
+  sku,
+  brand: {
+    "@type": "Brand",
+    name: "Mato Cashew",
+  },
+  url: canonical,
+};
+---
+
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>
