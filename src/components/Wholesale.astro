@@ -17,6 +17,11 @@ const language: Language =
 
 const contactPath =
   getLocalizedPath(language, "/contact");
+
+const wholesaleContactPath =
+  `${contactPath}?inquiry=${encodeURIComponent(
+    "Wholesale Inquiry"
+  )}`;
 ---
 
 <section id="wholesale" class="wholesale">
@@ -61,7 +66,7 @@ const contactPath =
         </ul>
 
         <a
-          href={contactPath}
+          href={wholesaleContactPath}
           class="btn btn-primary wholesale-cta"
         >
           {t.wholesaleHome.cta}
