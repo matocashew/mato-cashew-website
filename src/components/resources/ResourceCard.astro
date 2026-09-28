@@ -1,17 +1,29 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { getLocalizedPath } from "../../i18n/getLocalizedPath";
 
 interface Props {
   resource: CollectionEntry<"resources">;
 }
 
 const { resource } = Astro.props;
+
+const language = Astro.url.pathname === "/km" ||
+  Astro.url.pathname.startsWith("/km/")
+    ? "km"
+    : "en";
+
+const resourcePath =
+  getLocalizedPath(
+    language,
+    `/resources/${resource.data.slug}`
+  );
 ---
 
 <article class="resource-card">
 
   <a
-    href={`/resources/${resource.data.slug}`}
+    href={resourcePath}
     class="resource-card__link"
   >
 
