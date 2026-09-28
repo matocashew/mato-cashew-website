@@ -1,13 +1,16 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import type { Language } from "../../i18n/config";
 import ResourceCard from "./ResourceCard.astro";
 
 interface Props {
   resources?: CollectionEntry<"resources">[];
+  language?: Language;
 }
 
 const {
-  resources = []
+  resources = [],
+  language = "en"
 } = Astro.props;
 ---
 
@@ -23,6 +26,7 @@ const {
 
             <ResourceCard
               resource={resource}
+              language={language}
             />
 
           ))

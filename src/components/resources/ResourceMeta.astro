@@ -1,10 +1,13 @@
 ---
+import type { Language } from "../../i18n/config";
+
 interface Props {
   category: string;
   author: string;
   publishDate: Date;
   readingTime?: number;
   tags?: string[];
+  lang?: Language;
 }
 
 const {
@@ -12,8 +15,30 @@ const {
   author,
   publishDate,
   readingTime,
-  tags = []
+  tags = [],
+  lang = "en"
 } = Astro.props;
+
+const locale = lang === "km" ? "km-KH" : "en-US";
+
+const labels = lang === "km"
+  ? {
+      category: "ប្រភេទ",
+      author: "អ្នកនិពន្ធ",
+      published: "ចេញផ្សាយ",
+      readingTime: "រយៈពេលអាន",
+      minute: "នាទី"
+    }
+  : {
+      category: "Category",
+      author: "Author",
+      published: "Published",
+      readingTime: "Reading Time",
+      minute: "min"
+    };
+
+const formattedDate =
+  publishDate.toLocaleDateString(locale);
 ---
 
 <div class="resource-meta">
@@ -21,25 +46,25 @@ const {
   <div class="resource-meta__info">
 
     <span>
-      <strong>Category:</strong>
+      <strong>{labels.category}:</strong>
       {category}
     </span>
 
     <span>
-      <strong>Author:</strong>
+      <strong>{labels.author}:</strong>
       {author}
     </span>
 
     <span>
-      <strong>Published:</strong>
-      {publishDate.toLocaleDateString("en-US")}
+      <strong>{labels.published}:</strong>
+      {formattedDate}
     </span>
 
     {
       readingTime && (
         <span>
-          <strong>Reading Time:</strong>
-          {readingTime} min
+          <strong>{labels.readingTime}:</strong>
+          {readingTime} {labels.minute}
         </span>
       )
     }

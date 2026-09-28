@@ -1,17 +1,17 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import type { Language } from "../../i18n/config";
 import { getLocalizedPath } from "../../i18n/getLocalizedPath";
 
 interface Props {
   resource: CollectionEntry<"resources">;
+  language?: Language;
 }
 
-const { resource } = Astro.props;
-
-const language = Astro.url.pathname === "/km" ||
-  Astro.url.pathname.startsWith("/km/")
-    ? "km"
-    : "en";
+const {
+  resource,
+  language = "en"
+} = Astro.props;
 
 const resourcePath =
   getLocalizedPath(
@@ -52,7 +52,9 @@ const resourcePath =
     <div class="resource-card__footer">
 
       <small>
-        {resource.data.publishDate.toLocaleDateString("en-US")}
+        {resource.data.publishDate.toLocaleDateString(
+          language === "km" ? "km-KH" : "en-US"
+        )}
       </small>
 
     </div>
