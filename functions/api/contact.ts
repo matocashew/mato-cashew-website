@@ -14,8 +14,16 @@ import type {
   ContactFormData
 } from "./types";
 
+interface ContactFunctionContext {
+  env: {
+    TURNSTILE_SECRET_KEY?: string;
+    RESEND_API_KEY?: string;
+  };
+  request: Request;
+}
+
 export const onRequestPost =
-  async (context: any) => {
+  async (context: ContactFunctionContext) => {
 
     try {
 
