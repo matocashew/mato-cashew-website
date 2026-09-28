@@ -5,10 +5,11 @@ import KnowledgeArticleCard from "../knowledge/KnowledgeArticleCard.astro";
 import { knowledgeService } from "../../services/knowledgeService";
 import { getKnowledgeTranslations } from "../../i18n/knowledge";
 
-const lang =
-  Astro.url.pathname.startsWith("/km/")
-    ? "km"
-    : "en";
+interface Props {
+  language: "en" | "km";
+}
+
+const { language: lang } = Astro.props as Props;
 
 const t = getKnowledgeTranslations(lang);
 
