@@ -1,6 +1,9 @@
 ---
 import "../../styles/home-wholesale-cta.css";
 
+import { getLocalizedPath } from "../../i18n/getLocalizedPath";
+import type { Language } from "../../i18n/config";
+
 interface Props {
   content: {
     tag: string;
@@ -20,6 +23,14 @@ interface Props {
 }
 
 const { content } = Astro.props;
+
+const language: Language =
+  Astro.url.pathname.startsWith("/km")
+    ? "km"
+    : "en";
+
+const contactPath =
+  getLocalizedPath(language, "/contact");
 ---
 
 <section class="home-business">
@@ -119,7 +130,7 @@ const { content } = Astro.props;
         </li>
       </ul>
 
-      <a href="/contact" class="home-business__cta">
+      <a href={contactPath} class="home-business__cta">
         {content.cta}
         <span aria-hidden="true">→</span>
       </a>
