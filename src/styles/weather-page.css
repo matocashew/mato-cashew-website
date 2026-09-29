@@ -591,3 +591,49 @@ html[lang="km"] .weather-advisory p {
 .weather-advisory__status {
   color: #8a3f31;
 }
+/* ---------------------------------------------------------
+   A47-WEATHER-SOURCE-STYLES
+   Source attribution + free farmer-support statement.
+   Isolated from dashboard/advisory/Header geometry.
+   --------------------------------------------------------- */
+
+.weather-source {
+  margin-top: 22px;
+  padding: 16px 18px;
+  border: 1px solid rgba(15, 118, 110, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.weather-source__provider,
+.weather-source__purpose {
+  margin: 0;
+}
+
+.weather-source__provider {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: baseline;
+  font-size: 0.86rem;
+  font-weight: 650;
+}
+
+.weather-source__provider a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.weather-source__purpose {
+  margin-top: 5px;
+  max-width: 78ch;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  opacity: 0.74;
+}
+
+html[lang="km"] .weather-source__purpose {
+  line-height: 1.75;
+}

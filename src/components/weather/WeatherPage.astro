@@ -423,6 +423,36 @@ const weatherConfig = {
 
     </section>
 
+    <!-- A47-WEATHER-SOURCE-ATTRIBUTION -->
+    <aside
+      class="weather-source"
+      aria-label={language === "km"
+        ? "ប្រភពទិន្នន័យអាកាសធាតុ"
+        : "Weather data source"}
+    >
+      <p class="weather-source__provider">
+        <span>
+          {language === "km"
+            ? "ប្រភពទិន្នន័យអាកាសធាតុ៖"
+            : "Weather data:"}
+        </span>
+
+        <a
+          href="https://open-meteo.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open-Meteo
+        </a>
+      </p>
+
+      <p class="weather-source__purpose">
+        {language === "km"
+          ? "ព័ត៌មានអាកាសធាតុនេះត្រូវបាន ចន្ទីមាតុភូមិ ផ្តល់ជូនដោយឥតគិតថ្លៃ ដើម្បីជួយកសិករស្វាយចន្ទីកម្ពុជាក្នុងការរៀបចំផែនការកសិកម្ម និងការងារក្រោយប្រមូលផល។"
+          : "This free weather information is provided by Mato Cashew to support Cambodian cashew farmers with farm planning and post-harvest activities."}
+      </p>
+    </aside>
+
     <script
       type="application/json"
       is:inline
