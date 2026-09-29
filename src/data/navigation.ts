@@ -1,4 +1,4 @@
-import type { MenuItem } from "@models/navigation";
+﻿import type { MenuItem } from "@models/navigation";
 
 /**
  * Mato Cashew Navigation V2
@@ -481,6 +481,18 @@ export const navigation: MenuItem[] = [
 
         visible: true,
         order: 10,
+      },
+      {
+        id: "knowledge-weather",
+        label: "Cashew Weather",
+        labelKm: "អាកាសធាតុចន្ទី",
+        href: "/weather",
+        hrefKm: "/km/weather",
+        description:
+          "Live weather and 7-day planning guidance for cashew activities.",
+        descriptionKm:
+          "អាកាសធាតុបច្ចុប្បន្ន និងការណែនាំផែនការ ៧ ថ្ងៃសម្រាប់សកម្មភាពចន្ទី។",
+        icon: "cloud-sun",
       },
     ],
   },

@@ -1,0 +1,29 @@
+﻿---
+import "../../styles/page.css";
+
+import PageLayout from "../../layouts/PageLayout.astro";
+import WeatherPage from "../../components/weather/WeatherPage.astro";
+---
+
+<PageLayout
+  lang="km"
+  title="អាកាសធាតុសម្រាប់ចន្ទី | Mato Cashew"
+  description="ពិនិត្យព័ត៌មានអាកាសធាតុ ការព្យាករណ៍ 7 ថ្ងៃ និងការណែនាំទូទៅសម្រាប់រៀបចំការងារចម្ការ និងការហាលគ្រាប់ចន្ទី។"
+  canonical="https://matocashew.com/km/weather"
+  englishAlternateUrl="https://matocashew.com/weather"
+  khmerAlternateUrl="https://matocashew.com/km/weather"
+  breadcrumbs={[
+    {
+      name: "ទំព័រដើម",
+      url: "https://matocashew.com/km"
+    },
+    {
+      name: "អាកាសធាតុសម្រាប់ចន្ទី",
+      url: "https://matocashew.com/km/weather"
+    }
+  ]}
+>
+
+  <WeatherPage language="km" />
+
+</PageLayout>

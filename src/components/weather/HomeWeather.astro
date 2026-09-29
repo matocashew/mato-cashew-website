@@ -1,0 +1,242 @@
+---
+import "../../styles/weather.css";
+import { defaultWeatherLocation } from "../../config/weather-locations";
+
+interface Props {
+  language: "en" | "km";
+}
+
+const { language } = Astro.props as Props;
+
+const isKhmer = language === "km";
+const weatherPath = isKhmer ? "/km/weather" : "/weather";
+
+const content = isKhmer
+  ? {
+      eyebrow: "អាកាសធាតុសម្រាប់ចន្ទី",
+      title: "រៀបចំការងារចន្ទីដោយយល់ពីអាកាសធាតុ",
+      description:
+        "ពិនិត្យស្ថានភាពអាកាសធាតុបច្ចុប្បន្ន និងការណែនាំសម្រាប់រៀបចំការងារចន្ទី ការហាល និងសកម្មភាពក្រៅទីតាំង។",
+      location: defaultWeatherLocation.nameKm,
+      condition: "កំពុងទាញទិន្នន័យ...",
+      feelsLike: "កំពុងពិនិត្យសីតុណ្ហភាព",
+      rain: "ឱកាសភ្លៀង",
+      humidity: "សំណើម",
+      wind: "ល្បឿនខ្យល់",
+      advisoryLabel: "ការណែនាំសម្រាប់ចន្ទី",
+      advisory:
+        "កំពុងពិនិត្យស្ថានភាពអាកាសធាតុ ដើម្បីផ្តល់ការណែនាំសមស្របសម្រាប់ការងារចន្ទី។",
+      loading: "កំពុងទាញទិន្នន័យ",
+      live: "អាកាសធាតុផ្ទាល់",
+      unavailable: "មិនអាចទាញទិន្នន័យផ្ទាល់បាន",
+      cta: "មើលអាកាសធាតុ 7 ថ្ងៃ",
+    }
+  : {
+      eyebrow: "Cashew Weather",
+      title: "Plan cashew work with the weather in mind",
+      description:
+        "Review current weather conditions and practical guidance for planning cashew work, outdoor drying and field activities.",
+      location: defaultWeatherLocation.nameEn,
+      condition: "Loading weather...",
+      feelsLike: "Checking apparent temperature",
+      rain: "Rain chance",
+      humidity: "Humidity",
+      wind: "Wind",
+      advisoryLabel: "Cashew Advisory",
+      advisory:
+        "Checking current weather conditions to provide practical guidance for cashew activities.",
+      loading: "Loading weather",
+      live: "Live weather",
+      unavailable: "Live weather unavailable",
+      cta: "View 7-day weather",
+    };
+
+const config = {
+  language,
+  location: {
+    id: defaultWeatherLocation.id,
+    nameEn: defaultWeatherLocation.nameEn,
+    nameKm: defaultWeatherLocation.nameKm,
+    latitude: defaultWeatherLocation.latitude,
+    longitude: defaultWeatherLocation.longitude,
+  },
+  labels: {
+    live: content.live,
+    unavailable: content.unavailable,
+  },
+};
+---
+
+<section
+  class="home-weather"
+  aria-labelledby="home-weather-title"
+  data-home-weather
+>
+  <div class="container">
+    <div class="home-weather__shell">
+
+      <div class="home-weather__intro">
+        <span class="home-weather__eyebrow">
+          <span
+            class="home-weather__eyebrow-icon"
+            aria-hidden="true"
+          >
+            ☀
+          </span>
+
+          {content.eyebrow}
+        </span>
+
+        <h2 id="home-weather-title">
+          {content.title}
+        </h2>
+
+        <p class="home-weather__description">
+          {content.description}
+        </p>
+
+        <span
+          class="home-weather__demo"
+          data-home-weather-status
+        >
+          {content.loading}
+        </span>
+      </div>
+
+      <div class="home-weather__card">
+
+        <div class="home-weather__current">
+
+          <div class="home-weather__location">
+            <span
+              class="home-weather__pin"
+              aria-hidden="true"
+            >
+              ●
+            </span>
+
+            <span data-home-weather-location>
+              {content.location}
+            </span>
+          </div>
+
+          <div class="home-weather__condition">
+
+            <div
+              class="home-weather__weather-icon"
+              data-home-weather-icon
+              aria-hidden="true"
+            >
+              <span class="home-weather__sun"></span>
+              <span class="home-weather__cloud"></span>
+            </div>
+
+            <div>
+              <strong
+                class="home-weather__temperature"
+                data-home-weather-temperature
+              >
+                --°C
+              </strong>
+
+              <p
+                class="home-weather__condition-text"
+                data-home-weather-condition
+              >
+                {content.condition}
+              </p>
+
+              <p
+                class="home-weather__feels"
+                data-home-weather-feels
+              >
+                {content.feelsLike}
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <dl class="home-weather__metrics">
+
+          <div class="home-weather__metric">
+            <dt>
+              <span aria-hidden="true">☂</span>
+              {content.rain}
+            </dt>
+
+            <dd data-home-weather-rain>
+              --%
+            </dd>
+          </div>
+
+          <div class="home-weather__metric">
+            <dt>
+              <span aria-hidden="true">◉</span>
+              {content.humidity}
+            </dt>
+
+            <dd data-home-weather-humidity>
+              --%
+            </dd>
+          </div>
+
+          <div class="home-weather__metric">
+            <dt>
+              <span aria-hidden="true">↝</span>
+              {content.wind}
+            </dt>
+
+            <dd data-home-weather-wind>
+              -- km/h
+            </dd>
+          </div>
+
+        </dl>
+
+        <div class="home-weather__advisory">
+
+          <div
+            class="home-weather__advisory-icon"
+            aria-hidden="true"
+          >
+            ♧
+          </div>
+
+          <div>
+            <strong data-home-weather-advisory-title>
+              {content.advisoryLabel}
+            </strong>
+
+            <p data-home-weather-advisory-text>
+              {content.advisory}
+            </p>
+          </div>
+
+        </div>
+
+        <a
+          class="home-weather__future-link"
+          href={weatherPath}
+        >
+          {content.cta}
+          <span aria-hidden="true">→</span>
+        </a>
+
+      </div>
+
+    </div>
+
+    <script
+      type="application/json"
+      is:inline
+      data-home-weather-config
+      set:html={JSON.stringify(config)}
+    ></script>
+  </div>
+</section>
+
+<script>
+  import "../../scripts/home-weather";
+</script>

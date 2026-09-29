@@ -1,0 +1,438 @@
+---
+import "../../styles/weather-page.css";
+
+import {
+  defaultWeatherLocation,
+  weatherLocations,
+} from "../../config/weather-locations";
+
+interface Props {
+  language: "en" | "km";
+}
+
+const { language } = Astro.props as Props;
+const isKhmer = language === "km";
+
+const copy = isKhmer
+  ? {
+      eyebrow: "អាកាសធាតុសម្រាប់ចន្ទី",
+      title: "ផែនការអាកាសធាតុសម្រាប់ការងារចន្ទី",
+      description:
+        "មើលលក្ខខណ្ឌអាកាសធាតុ ការព្យាករណ៍ និងការណែនាំទូទៅ ដើម្បីជួយរៀបចំការងារចម្ការ និងការហាលគ្រាប់ចន្ទី។",
+
+      demo: "ទិន្នន័យសាកល្បង",
+      live: "ទិន្នន័យផ្ទាល់",
+      loading: "កំពុងធ្វើបច្ចុប្បន្នភាព...",
+      unavailable:
+        "មិនអាចធ្វើបច្ចុប្បន្នភាពទិន្នន័យផ្ទាល់បាន · កំពុងបង្ហាញទិន្នន័យសាកល្បង",
+
+      locationLabel: "ទីតាំង",
+      locationHint: "ជ្រើសរើសខេត្ត",
+
+      current: "អាកាសធាតុបច្ចុប្បន្ន",
+      feelsPrefix: "សីតុណ្ហភាពគិតតាមអារម្មណ៍",
+      rain: "ឱកាសភ្លៀង",
+      humidity: "សំណើម",
+      wind: "ល្បឿនខ្យល់",
+
+      forecastTitle: "ការព្យាករណ៍ 7 ថ្ងៃ",
+      forecastText:
+        "ការព្យាករណ៍អាកាសធាតុសម្រាប់ជួយរៀបចំការងារចម្ការ និងការហាលគ្រាប់ចន្ទី។",
+
+      advisoryTitle: "ការណែនាំសម្រាប់ចន្ទី",
+      advisoryText:
+        "ពិនិត្យការព្យាករណ៍ភ្លៀង និងសំណើមមុនរៀបចំការហាលគ្រាប់ចន្ទី ឬការងារក្រៅទីតាំង។ ការណែនាំនេះជាព័ត៌មានទូទៅ មិនមែនជាការធានាលក្ខខណ្ឌអាកាសធាតុទេ។",
+
+      updatedPrefix: "បានធ្វើបច្ចុប្បន្នភាព",
+
+      today: "ថ្ងៃនេះ",
+      tomorrow: "ស្អែក",
+
+      conditions: {
+        clear: "មេឃស្រឡះ",
+        "mainly-clear": "មេឃស្រឡះភាគច្រើន",
+        "partly-cloudy": "មានពពកខ្លះ",
+        overcast: "មេឃមានពពកច្រើន",
+        fog: "មានអ័ព្ទ",
+        drizzle: "ភ្លៀងរលឹម",
+        rain: "មានភ្លៀង",
+        showers: "ភ្លៀងមួយរយៈៗ",
+        thunderstorm: "ភ្លៀងផ្គររន្ទះ",
+        unknown: "អាកាសធាតុប្រែប្រួល",
+      },
+    }
+  : {
+      eyebrow: "Cashew Weather",
+      title: "Weather planning for cashew activities",
+      description:
+        "Review weather conditions, forecasts and practical guidance to help plan field work and outdoor cashew drying.",
+
+      demo: "Demo data",
+      live: "Live weather",
+      loading: "Updating weather...",
+      unavailable:
+        "Live weather unavailable · Showing demo data",
+
+      locationLabel: "Location",
+      locationHint: "Select province",
+
+      current: "Current conditions",
+      feelsPrefix: "Feels like",
+      rain: "Rain chance",
+      humidity: "Humidity",
+      wind: "Wind",
+
+      forecastTitle: "7-day forecast",
+      forecastText:
+        "Weather outlook to help plan field activities and outdoor cashew drying.",
+
+      advisoryTitle: "Cashew Advisory",
+      advisoryText:
+        "Review rainfall and humidity forecasts before planning outdoor drying or field activities. This guidance is general information and does not guarantee weather conditions.",
+
+      updatedPrefix: "Updated",
+
+      today: "Today",
+      tomorrow: "Tomorrow",
+
+      conditions: {
+        clear: "Clear sky",
+        "mainly-clear": "Mainly clear",
+        "partly-cloudy": "Partly cloudy",
+        overcast: "Overcast",
+        fog: "Fog",
+        drizzle: "Drizzle",
+        rain: "Rain",
+        showers: "Rain showers",
+        thunderstorm: "Thunderstorm",
+        unknown: "Variable weather",
+      },
+    };
+
+const fallbackForecast = [
+  { icon: "sun", high: 32, low: 24, rain: 20 },
+  { icon: "cloud", high: 31, low: 24, rain: 35 },
+  { icon: "rain", high: 30, low: 23, rain: 55 },
+  { icon: "cloud", high: 31, low: 23, rain: 40 },
+  { icon: "sun", high: 33, low: 24, rain: 20 },
+  { icon: "sun", high: 33, low: 25, rain: 15 },
+  { icon: "cloud", high: 32, low: 24, rain: 30 },
+];
+
+const fallbackDays = isKhmer
+  ? [
+      "ថ្ងៃនេះ",
+      "ស្អែក",
+      "ពុធ",
+      "ព្រហស្បតិ៍",
+      "សុក្រ",
+      "សៅរ៍",
+      "អាទិត្យ",
+    ]
+  : [
+      "Today",
+      "Tomorrow",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun",
+    ];
+
+const defaultLocationName =
+  isKhmer
+    ? defaultWeatherLocation.nameKm
+    : defaultWeatherLocation.nameEn;
+
+const weatherConfig = {
+  language,
+  copy,
+  locations: weatherLocations,
+};
+---
+
+<section
+  class="weather-page"
+  data-weather-page
+  data-language={language}
+>
+  <div class="container">
+
+    <header class="weather-page__hero">
+
+      <div class="weather-page__hero-copy">
+
+        <span class="weather-page__eyebrow">
+          <span aria-hidden="true">☀</span>
+          {copy.eyebrow}
+        </span>
+
+        <h1>{copy.title}</h1>
+
+        <p>{copy.description}</p>
+
+        <span
+          class="weather-page__demo"
+          data-weather-hero-status
+        >
+          {copy.demo}
+        </span>
+
+      </div>
+
+      <div class="weather-page__location">
+
+        <label for="weather-location">
+          {copy.locationLabel}
+        </label>
+
+        <div class="weather-page__select-wrap">
+
+          <select
+            id="weather-location"
+            aria-describedby="weather-location-note"
+            data-weather-location
+          >
+            {
+              weatherLocations.map((location) => (
+                <option
+                  value={location.id}
+                  selected={
+                    location.id ===
+                    defaultWeatherLocation.id
+                  }
+                >
+                  {
+                    isKhmer
+                      ? location.nameKm
+                      : location.nameEn
+                  }
+                </option>
+              ))
+            }
+          </select>
+
+        </div>
+
+        <span id="weather-location-note">
+          {copy.locationHint}
+        </span>
+
+      </div>
+
+    </header>
+
+    <div class="weather-page__dashboard">
+
+      <article class="weather-current">
+
+        <div class="weather-current__top">
+
+          <div>
+            <span class="weather-card-label">
+              {copy.current}
+            </span>
+
+            <h2 data-weather-current-location>
+              {defaultLocationName}
+            </h2>
+          </div>
+
+          <span
+            class="weather-live-badge"
+            data-weather-status
+          >
+            {copy.demo}
+          </span>
+
+        </div>
+
+        <div class="weather-current__main">
+
+          <div
+            class="weather-current__icon"
+            data-weather-current-icon
+            aria-hidden="true"
+          >
+            <span class="weather-current__sun"></span>
+            <span class="weather-current__cloud"></span>
+          </div>
+
+          <div>
+
+            <strong
+              class="weather-current__temperature"
+              data-weather-temperature
+            >
+              32°C
+            </strong>
+
+            <p
+              class="weather-current__condition"
+              data-weather-condition
+            >
+              {copy.conditions["partly-cloudy"]}
+            </p>
+
+            <p
+              class="weather-current__feels"
+              data-weather-feels
+            >
+              {copy.feelsPrefix} 34°C
+            </p>
+
+          </div>
+
+        </div>
+
+        <dl class="weather-current__metrics">
+
+          <div>
+            <dt>{copy.rain}</dt>
+            <dd data-weather-rain>20%</dd>
+          </div>
+
+          <div>
+            <dt>{copy.humidity}</dt>
+            <dd data-weather-humidity>68%</dd>
+          </div>
+
+          <div>
+            <dt>{copy.wind}</dt>
+            <dd data-weather-wind>9 km/h</dd>
+          </div>
+
+        </dl>
+
+        <p
+          class="weather-current__updated"
+          data-weather-updated
+        >
+          {copy.demo} · {
+            isKhmer
+              ? "មិនមែនអាកាសធាតុផ្ទាល់"
+              : "Not live weather"
+          }
+        </p>
+
+      </article>
+
+      <aside class="weather-advisory" data-weather-advisory>
+
+        <span
+          class="weather-advisory__icon"
+          aria-hidden="true"
+        >
+          ♧
+        </span>
+
+        <div>
+          <span class="weather-card-label">
+            {copy.eyebrow}
+          </span>
+
+          <div
+  class="weather-advisory__status"
+  data-weather-advisory-status
+>
+  {language === "km" ? "ការណែនាំ" : "Advisory"}
+</div>
+<h2 data-weather-advisory-title>{copy.advisoryTitle}</h2>
+
+          <p data-weather-advisory-text>{copy.advisoryText}</p>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <section
+      class="weather-forecast"
+      aria-labelledby="weather-forecast-title"
+    >
+
+      <div class="weather-forecast__heading">
+
+        <div>
+          <span
+            class="weather-card-label"
+            data-weather-forecast-location
+          >
+            {defaultLocationName}
+          </span>
+
+          <h2 id="weather-forecast-title">
+            {copy.forecastTitle}
+          </h2>
+        </div>
+
+        <p>{copy.forecastText}</p>
+
+      </div>
+
+      <div
+        class="weather-forecast__grid"
+        data-weather-forecast
+      >
+        {
+          fallbackForecast.map((day, index) => (
+            <article
+              class="weather-day"
+              data-weather-day
+            >
+
+              <strong
+                class="weather-day__name"
+                data-weather-day-name
+              >
+                {fallbackDays[index]}
+              </strong>
+
+              <div
+                class:list={[
+                  "weather-day__icon",
+                  `weather-day__icon--${day.icon}`,
+                ]}
+                data-weather-day-icon
+                aria-hidden="true"
+              >
+                <span></span>
+              </div>
+
+              <div class="weather-day__temperature">
+                <strong data-weather-high>
+                  {day.high}°
+                </strong>
+
+                <span data-weather-low>
+                  {day.low}°
+                </span>
+              </div>
+
+              <span
+                class="weather-day__rain"
+                data-weather-day-rain
+              >
+                ☂ {day.rain}%
+              </span>
+
+            </article>
+          ))
+        }
+      </div>
+
+    </section>
+
+    <script
+      type="application/json"
+      is:inline
+      data-weather-config
+      set:html={JSON.stringify(weatherConfig)}
+    ></script>
+
+  </div>
+</section>
+
+<script>
+  import "../../scripts/weather-page";
+</script>

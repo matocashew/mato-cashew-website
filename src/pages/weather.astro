@@ -1,0 +1,28 @@
+﻿---
+import "../styles/page.css";
+
+import PageLayout from "../layouts/PageLayout.astro";
+import WeatherPage from "../components/weather/WeatherPage.astro";
+---
+
+<PageLayout
+  title="Cashew Weather | Mato Cashew"
+  description="Review cashew-focused weather information, a seven-day forecast, and practical weather guidance for planning field and drying activities."
+  canonical="https://matocashew.com/weather"
+  englishAlternateUrl="https://matocashew.com/weather"
+  khmerAlternateUrl="https://matocashew.com/km/weather"
+  breadcrumbs={[
+    {
+      name: "Home",
+      url: "https://matocashew.com/"
+    },
+    {
+      name: "Cashew Weather",
+      url: "https://matocashew.com/weather"
+    }
+  ]}
+>
+
+  <WeatherPage language="en" />
+
+</PageLayout>
