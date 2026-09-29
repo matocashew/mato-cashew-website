@@ -31,6 +31,11 @@ const language: Language =
 
 const contactPath =
   getLocalizedPath(language, "/contact");
+
+const wholesaleInquiryPath =
+  `${contactPath}?inquiry=${encodeURIComponent(
+    "Wholesale Inquiry"
+  )}`;
 ---
 
 <section class="home-business">
@@ -130,7 +135,7 @@ const contactPath =
         </li>
       </ul>
 
-      <a href={contactPath} class="home-business__cta">
+      <a href={wholesaleInquiryPath} class="home-business__cta">
         {content.cta}
         <span aria-hidden="true">→</span>
       </a>
