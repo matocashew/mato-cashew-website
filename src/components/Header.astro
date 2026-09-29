@@ -8191,7 +8191,78 @@ document.body.classList.add(
   document.addEventListener(
     "astro:before-swap",
     () => {
+      /*
+       * A46-P5R
+       * ClientRouter keeps the document alive between routes.
+       * Remove only transient Mega Menu runtime state before
+       * the outgoing page is replaced.
+       */
+
       megaDocumentPointerController?.abort();
+      megaDocumentPointerController = null;
+
+      document.body.classList.remove(
+        "mega-menu-occlusion-active",
+        "mega-menu-page-blur-active",
+        "mega-menu-tab-glass-active",
+        "mega-menu-unified-glass-active"
+      );
+
+      [
+        "--mega-menu-blur-left",
+        "--mega-menu-blur-top",
+        "--mega-menu-blur-width",
+        "--mega-menu-blur-height"
+      ].forEach((property) => {
+        document.body.style.removeProperty(property);
+      });
+
+      document
+        .querySelectorAll<HTMLElement>(
+          ".mega-menu-local-occluded, .mega-menu-global-occluded"
+        )
+        .forEach((element) => {
+          element.classList.remove(
+            "mega-menu-local-occluded",
+            "mega-menu-global-occluded"
+          );
+
+          [
+            "--menu-hole-left",
+            "--menu-hole-right",
+            "--menu-hole-top",
+            "--menu-hole-bottom",
+            "--menu-hole-radius"
+          ].forEach((property) => {
+            element.style.removeProperty(property);
+          });
+        });
+
+      document
+        .querySelectorAll<HTMLElement>(
+          ".mega-menu-handoff-owner, .mega-menu-click-suppressed"
+        )
+        .forEach((element) => {
+          element.classList.remove(
+            "mega-menu-handoff-owner",
+            "mega-menu-click-suppressed"
+          );
+        });
+
+      const headerElement =
+        document.querySelector<HTMLElement>(".header");
+
+      headerElement?.style.removeProperty(
+        "--mato-header-surface-clip"
+      );
+
+      document
+        .querySelector("#mato-unified-mega-glass")
+        ?.remove();
+
+      document
+        .querySelector("#mato-unified-mega-outline")
+        ?.remove();
     }
   );
 
@@ -8206,7 +8277,7 @@ document.body.classList.add(
   import { initLanguageSwitcher }
     from "../scripts/language-switcher.ts";
 
-  document.addEventListener(
+    document.addEventListener(
     "astro:page-load",
     initLanguageSwitcher
   );
