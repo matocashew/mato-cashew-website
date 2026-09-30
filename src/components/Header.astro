@@ -3744,8 +3744,62 @@ navItem.addEventListener(
       link.addEventListener(
         "click",
         () => {
+          /*
+           * =====================================================
+           * R7 - MEGA MENU LINK NAVIGATION CLEANUP
+           *
+           * Clear transient Mega Menu interaction state before
+           * ClientRouter replaces the current page.
+           *
+           * Mega Menu geometry remains unchanged.
+           * =====================================================
+           */
+
+          const megaOwner =
+            link.closest<HTMLElement>(
+              ".nav-item.has-submenu.nav-mega"
+            );
+
+          if (megaOwner) {
+            /*
+             * R7D
+             *
+             * Preserve persistent click suppression.
+             *
+             * After navigation, the clicked Mega Menu must remain
+             * closed while the physical pointer is still over the
+             * active trigger. The existing document pointermove
+             * lifecycle will unlock it only after a real pointer
+             * exit, allowing the next hover entry to open it again.
+             */
+
+            megaOwner.classList.remove(
+              "mega-menu-handoff-owner"
+            );
+
+            megaOwner.classList.add(
+              "mega-menu-click-suppressed"
+            );
+
+            clearPersistentMegaMenuOwner();
+          }
+
+          const activeElement =
+            document.activeElement;
+
+          if (
+            activeElement instanceof HTMLElement &&
+            activeElement.closest(
+              ".nav-item.has-submenu.nav-mega"
+            )
+          ) {
+            activeElement.blur();
+          }
+
           navMenu?.classList.remove("open");
+
           clearMegaMenuOcclusion();
+
           if (menuToggle) {
             menuToggle.textContent = "☰";
 
