@@ -8377,6 +8377,42 @@ document.body.classList.add(
       document
         .querySelector("#mato-unified-mega-outline")
         ?.remove();
+
+      /*
+       * =====================================================
+       * R11-CLIENTROUTER-RUNTIME-AUTHORITY-RESET
+       *
+       * ClientRouter preserves the document between routes.
+       *
+       * These Mega Menu style authorities are created by
+       * initHeader() and intentionally appended at the end of
+       * <head> so they own the final Mega Menu cascade.
+       *
+       * Remove only these recreatable authorities before the
+       * route swap. astro:page-load -> initHeader() will then
+       * recreate and append them against the incoming page's
+       * stylesheet order.
+       *
+       * Do NOT remove:
+       *   #mato-atomic-header-restore-authority
+       *
+       * That authority belongs to the outer Header script and
+       * is not created by initHeader().
+       * =====================================================
+       */
+
+      [
+        "#mato-mega-menu-runtime-authority",
+        "#mato-unified-mega-glass-authority",
+        "#mato-unified-mega-outline-authority",
+        "#mato-connected-outline-ownership-authority",
+        "#mato-mega-menu-premium-edge-authority",
+        "#mato-svg-connected-stroke-authority"
+      ].forEach((selector) => {
+        document
+          .querySelector(selector)
+          ?.remove();
+      });
     }
   );
 
