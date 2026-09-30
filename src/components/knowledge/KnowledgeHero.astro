@@ -34,7 +34,14 @@ const imageDimensions =
     width={imageDimensions?.width}
     height={imageDimensions?.height}
     alt={title}
-    class="knowledge-hero-image"
+    class:list={[
+      "knowledge-hero-image",
+      {
+        "knowledge-hero-image--full":
+          heroImage ===
+          "/images/knowledge/cashew-steaming-drying-moisture-management.webp",
+      },
+    ]}
     loading="eager"
     fetchpriority="high"
     decoding="async"

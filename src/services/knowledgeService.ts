@@ -126,7 +126,13 @@ export const knowledgeService = {
     const entries =
       await getEntries(language);
 
-    return entries.map(toKnowledge);
+    return entries
+      .map(toKnowledge)
+      .sort(
+        (a, b) =>
+          b.publishedAt.getTime() -
+          a.publishedAt.getTime()
+      );
   },
 
 

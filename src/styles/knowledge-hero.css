@@ -13,3 +13,14 @@
   margin-bottom: 2rem;
 
 }
+
+/*
+ * Full-image treatment for process diagrams / infographics.
+ * Standard Knowledge hero images continue to use cover.
+ */
+.knowledge-hero-image--full {
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+}
