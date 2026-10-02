@@ -413,3 +413,21 @@ html[lang="km"] .home-business__features li {
         height: 16px;
     }
 }
+
+/* =========================================================
+   A48-R6 — WEATHER VIEWING PLANE
+   WHOLESALE CTA SECTION SHELL
+   ========================================================= */
+
+.home-wholesale-cta {
+  background: transparent;
+}
+
+/* =========================================================
+   A48-R10D — BUSINESS ACTUAL SECTION SHELL
+   Weather viewing plane selector repair
+   ========================================================= */
+
+.home-business {
+  background: transparent;
+}

@@ -190,3 +190,18 @@
     }
 
 }
+/* R60D - PAGE HERO FOREGROUND START */
+/*
+   Keep PageHero content above the shared atmospheric background.
+   Verified by browser live test R60C.
+   Hero background itself remains untouched.
+*/
+.page-hero > .container {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+    opacity: 1;
+    filter: none;
+}
+/* R60D - PAGE HERO FOREGROUND END */
+

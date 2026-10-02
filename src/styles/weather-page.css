@@ -637,3 +637,15 @@ html[lang="km"] .weather-advisory p {
 html[lang="km"] .weather-source__purpose {
   line-height: 1.75;
 }
+
+/* =========================================================
+   R64E - WEATHER CONTENT FOREGROUND
+   Keep Weather Page content above the shared atmosphere.
+   Do not modify the shared sky / mist / cloud background.
+   ========================================================= */
+
+.weather-page > .container {
+  position: relative;
+  z-index: 2;
+}
+

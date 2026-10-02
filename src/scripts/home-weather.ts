@@ -1,5 +1,6 @@
-import { getCashewAdvisory } from "../lib/weather/cashew-advisory";
+﻿import { getCashewAdvisory } from "../lib/weather/cashew-advisory";
 import { fetchWeather } from "../lib/weather/open-meteo";
+import { getVisitorLocation } from "../lib/location/visitor-location";
 
 import type {
   MatoWeatherData,
@@ -218,14 +219,49 @@ async function loadHomeWeather(
   signal: AbortSignal,
 ): Promise<void> {
   try {
-    const data = await fetchWeather(
-      config.location.latitude,
-      config.location.longitude,
-    );
+    const visitorLocation =
+      await getVisitorLocation();
+
+    if (
+      signal.aborted ||
+      !visitorLocation
+    ) {
+      throw new Error(
+        "Visitor location is unavailable.",
+      );
+    }
+
+    const data =
+      await fetchWeather(
+        visitorLocation.latitude,
+        visitorLocation.longitude,
+        visitorLocation.timezone ?? "auto",
+      );
 
     if (signal.aborted) {
       return;
     }
+
+    /*
+     * Global Weather owns the scenic atmosphere.
+     * Home Weather renders card data only.
+     */
+
+    const visitorName =
+      visitorLocation.city ??
+      visitorLocation.region ??
+      visitorLocation.country ??
+      (
+        config.language === "km"
+          ? "ទីតាំងបច្ចុប្បន្ន"
+          : "Current location"
+      );
+
+    config.location.nameEn =
+      visitorName;
+
+    config.location.nameKm =
+      visitorName;
 
     renderHomeWeather(
       root,
@@ -316,3 +352,5 @@ document.addEventListener(
 );
 
 initHomeWeather();
+
+

@@ -1,5 +1,7 @@
----
+﻿---
 import { ClientRouter } from "astro:transitions";
+
+import WeatherAtmosphere from "../components/weather/WeatherAtmosphere.astro";
 
 import OrganizationSchema from "../components/seo/OrganizationSchema.astro";
 import WebsiteSchema from "../components/seo/WebsiteSchema.astro";
@@ -10,6 +12,19 @@ import HreflangLinks from "../components/seo/HreflangLinks.astro";
 import { SITE } from "../config/site";
 
 import "../styles/global.css";
+import "../styles/weather-atmosphere.css";
+
+/*
+ * R50
+ * Global Scenic Hero design-system owner.
+ *
+ * Home / About / Products must receive the same
+ * Scenic Hero contract on:
+ * - initial page load
+ * - Ctrl + F5
+ * - Astro ClientRouter navigation
+ */
+import "../styles/scenic-hero-system.css";
 import "../styles/header.css";
 import "../styles/footer.css";
 import "../styles/section-title.css";
@@ -74,6 +89,7 @@ const localizedKeywords =
   lang === "km"
     ? "គ្រាប់ស្វាយចន្ទីកម្ពុជា, ផលិតផលគ្រាប់ស្វាយចន្ទី, លក់រាយគ្រាប់ស្វាយចន្ទី, លក់ដុំគ្រាប់ស្វាយចន្ទី, ចន្ទីមាតុភូមិ, Mato Cashew"
     : "Cambodian Cashew, Cashew Kernels, Cashew Products, Retail Cashew, Wholesale Cashew, Mato Cashew";
+
 ---
 
 <!DOCTYPE html>
@@ -322,12 +338,49 @@ const localizedKeywords =
     <!-- Astro Client-side Navigation -->
     <ClientRouter />
 
+
+  <!-- =====================================================
+       A48-R22 - CLIENTROUTER WEATHER OWNERSHIP
+
+       Permanent global geometry authority for the
+       decorative WeatherAtmosphere layer.
+
+       Client-side navigation must not collapse the
+       atmosphere element back into normal document flow.
+
+       No Home Hero / Trust / Scenic geometry changes.
+       ===================================================== -->
+
+  <style is:global>
+    .weather-atmosphere {
+      position: fixed;
+      inset: 0;
+
+      width: 100vw;
+      height: 100vh;
+
+      z-index: 0;
+
+      overflow: hidden;
+      pointer-events: none;
+
+      opacity: 1;
+      isolation: isolate;
+    }
+  </style>
 </head>
 
 <body>
 
+  <WeatherAtmosphere />
+
   <slot />
 
+  <!-- R71F6Q3K - Global visitor weather client controller -->
+  <script>
+    import "../scripts/global-weather";
+  </script>
 </body>
 
 </html>
+

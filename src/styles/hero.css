@@ -2040,7 +2040,7 @@ html[lang="km"] .hero-description,
         rgba(249, 245, 234, 0.08) 0%,
         rgba(249, 245, 234, 0.24) 38%,
         rgba(249, 246, 238, 0.64) 72%,
-        #ffffff 100%
+        #f8f3ea 100%
       );
   }
   /*
@@ -2091,7 +2091,7 @@ html[lang="km"] .hero-description,
         rgba(249, 246, 238, 0.10) 28%,
         rgba(249, 246, 238, 0.42) 56%,
         rgba(249, 246, 238, 0.76) 78%,
-        #ffffff 100%
+        #f8f3ea 100%
       );
   }
 
@@ -2109,16 +2109,6 @@ html[lang="km"] .hero-description,
   }
 
 
-  .home-scenic-canvas
-  > .home-stats {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.18) 0%,
-        rgba(255, 255, 255, 0.72) 72%,
-        #ffffff 100%
-      ) !important;
-  }
 
 }
 
@@ -3892,3 +3882,588 @@ html[lang="km"] .hero-description,
   }
 
 }
+
+/* =========================================================
+   A48-R16-V2 - STRUCTURAL FLOATING HOME HERO
+
+   Purpose:
+   Convert the complete Home Hero visual composition into
+   one premium floating surface.
+
+   The shell owns:
+   - Scenic base
+   - Botanical branch
+   - Upper-right motion leaf
+   - Wind foreground layers
+   - Hero content
+   - Product slider
+
+   Trust Bar remains outside the shell.
+
+   Existing internal Hero geometry remains unchanged.
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   DESKTOP
+   --------------------------------------------------------- */
+
+@media (min-width: 993px) {
+
+    /*
+     * Floating shell geometry.
+     *
+     * Keep the internal Hero at its approved dimensions.
+     * The shell creates only the outer visual architecture.
+     */
+    .home-scenic-canvas
+    > .home-hero-floating-shell {
+
+        position: relative;
+
+        width:
+            calc(100% - clamp(28px, 3vw, 56px));
+
+        max-width:
+            1880px;
+
+        height:
+            var(--mc-hero-desktop-height);
+
+        min-height:
+            var(--mc-hero-desktop-height);
+
+        margin:
+            18px auto 0;
+
+        border-radius:
+            34px;
+
+        overflow:
+            hidden;
+
+        isolation:
+            isolate;
+
+        background:
+            #f4ead0;
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.58);
+
+        box-shadow:
+            0 24px 60px rgba(25, 69, 48, 0.12),
+            0 8px 24px rgba(25, 69, 48, 0.07),
+            inset 0 1px 0 rgba(255, 255, 255, 0.50);
+
+        z-index:
+            1;
+    }
+
+
+    /*
+     * The Hero itself fills the floating shell.
+     *
+     * No geometry change.
+     */
+    .home-hero-floating-shell
+    > .hero {
+
+        position:
+            relative;
+
+        width:
+            100%;
+
+        height:
+            var(--mc-hero-desktop-height);
+
+        min-height:
+            var(--mc-hero-desktop-height);
+
+        z-index:
+            5;
+    }
+
+
+    /*
+     * Move scenic base ownership visually into the shell.
+     *
+     * Existing absolute positioning remains intact.
+     */
+    .home-hero-floating-shell
+    > .hero-v2-layer {
+
+        position:
+            absolute;
+    }
+
+
+    /*
+     * Scenic base must fill the complete floating surface.
+     */
+    .home-hero-floating-shell
+    > .hero-v2-layer--base {
+
+        inset:
+            0;
+
+        width:
+            100%;
+
+        height:
+            100%;
+
+        z-index:
+            0;
+    }
+
+
+    /*
+     * Branch remains above scenic base
+     * and below primary Hero content.
+     */
+    .home-hero-floating-shell
+    > .hero-v2-layer--branch {
+
+        z-index:
+            2;
+    }
+
+
+    /*
+     * Preserve decorative motion assets.
+     */
+    .home-hero-floating-shell
+    > .hero-motion-leaf,
+    .home-hero-floating-shell
+    > .hero-wind-layer {
+
+        pointer-events:
+            none;
+    }
+
+
+    /*
+     * Keep Trust Bar outside and visually floating
+     * over the transition below the Hero.
+     */
+    .home-scenic-canvas
+    > .trust-bar {
+
+        position:
+            relative;
+
+        z-index:
+            10;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   WIDE DESKTOP BACKGROUND REFERENCE
+   --------------------------------------------------------- */
+
+@media (min-width: 993px) and (max-width: 1920px) {
+
+    .home-hero-floating-shell
+    > .hero-v2-layer--base {
+
+        background-size:
+            var(--mc-scenic-desktop-reference-width)
+            auto;
+
+        background-position:
+            center top;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   TABLET / MOBILE
+   Preserve current approved behavior.
+   Floating structural styling is disabled.
+   --------------------------------------------------------- */
+
+@media (max-width: 992px) {
+
+    .home-hero-floating-shell {
+
+        display:
+            contents;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+   Structural shell introduces no new motion.
+   --------------------------------------------------------- */
+
+@media (
+    min-width: 993px
+) and (
+    prefers-reduced-motion: reduce
+) {
+
+    .home-hero-floating-shell {
+        scroll-behavior:
+            auto;
+    }
+}
+
+/* =========================================================
+   A48-R16-V3 - UNIFIED HERO CARD WIDTH
+
+   Purpose:
+   Align the Home Hero and Trust Bar to one shared desktop
+   content grid.
+
+   This is geometry only:
+   - No Hero content changes
+   - No scenic composition changes
+   - No product slider changes
+   - No animation changes
+   - No mobile/tablet changes
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+    /*
+     * Shared Home card width.
+     *
+     * Both Hero and Trust Bar use exactly the same
+     * horizontal geometry.
+     */
+    .home-scenic-canvas {
+        --mc-home-card-max-width: 1440px;
+        --mc-home-card-gutter: clamp(24px, 4vw, 64px);
+    }
+
+
+    /*
+     * HERO CARD
+     */
+    .home-scenic-canvas
+    > .home-hero-floating-shell {
+
+        width:
+            min(
+                calc(100% - (2 * var(--mc-home-card-gutter))),
+                var(--mc-home-card-max-width)
+            );
+
+        max-width:
+            var(--mc-home-card-max-width);
+
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
+
+        border-radius:
+            30px;
+    }
+
+
+    /*
+     * TRUST BAR CARD
+     *
+     * Match Hero left edge, right edge and maximum width.
+     */
+    .home-scenic-canvas
+    > .trust-bar {
+
+        width:
+            min(
+                calc(100% - (2 * var(--mc-home-card-gutter))),
+                var(--mc-home-card-max-width)
+            );
+
+        max-width:
+            var(--mc-home-card-max-width);
+
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
+    }
+
+
+    /*
+     * Prevent inner Trust Bar geometry from becoming
+     * narrower than its new shared outer card.
+     */
+    .home-scenic-canvas
+    > .trust-bar
+    > .trust-bar__inner {
+
+        width:
+            100%;
+
+        max-width:
+            none;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   LARGE DESKTOP
+
+   Give the composition breathing room without allowing
+   either card to exceed the shared 1440px design grid.
+   --------------------------------------------------------- */
+
+@media (min-width: 1600px) {
+
+    .home-scenic-canvas {
+        --mc-home-card-gutter: 48px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   TABLET / MOBILE
+
+   Preserve the current approved responsive system.
+   --------------------------------------------------------- */
+
+@media (max-width: 992px) {
+
+    .home-scenic-canvas
+    > .trust-bar {
+
+        width:
+            auto;
+
+        max-width:
+            none;
+    }
+}
+
+/* =========================================================
+   A48-R16-V4 - GLOBAL CONTAINER ALIGNMENT
+
+   Hero + Trust Bar now follow the exact same desktop
+   width system as the site's global .container.
+
+   Reference:
+   --container-width: 1200px;
+
+   .container {
+       width: min(
+           calc(100% - 40px),
+           var(--container-width)
+       );
+
+       margin-inline: auto;
+   }
+
+   Result:
+   Hero = Trust Bar = Why Choose Mato Cashew
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+    /*
+     * HERO
+     *
+     * Override the temporary 1440px V3 geometry and
+     * inherit the permanent global container width.
+     */
+    .home-scenic-canvas
+    > .home-hero-floating-shell {
+
+        width:
+            min(
+                calc(100% - 40px),
+                var(--container-width)
+            );
+
+        max-width:
+            var(--container-width);
+
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
+    }
+
+
+    /*
+     * TRUST BAR
+     *
+     * Use exactly the same geometry as Hero and
+     * Why Choose Mato Cashew.
+     */
+    .home-scenic-canvas
+    > .trust-bar {
+
+        width:
+            min(
+                calc(100% - 40px),
+                var(--container-width)
+            );
+
+        max-width:
+            var(--container-width);
+
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
+    }
+
+
+    /*
+     * Allow the Trust Bar inner layout to occupy
+     * the complete shared 1200px card.
+     */
+    .home-scenic-canvas
+    > .trust-bar
+    > .trust-bar__inner {
+
+        width:
+            100%;
+
+        max-width:
+            none;
+    }
+}
+
+/* =========================================================
+   A48-R16-V5 - EXACT TRUST BAR ALIGNMENT
+
+   Root cause:
+   TrustBar.astro owns legacy desktop horizontal padding:
+
+       .trust-bar {
+           padding: 0 24px;
+       }
+
+   V4 already gives .trust-bar the exact same outer width
+   as the Hero/global container.
+
+   Therefore the 24px left + 24px right padding makes the
+   visible Trust Bar surface appear 48px narrower.
+
+   Desktop fix:
+   Remove outer Trust Bar horizontal padding.
+
+   Result:
+   Hero visual edge = Trust Bar visual edge
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+    .home-scenic-canvas
+    > .trust-bar {
+
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+
+    /*
+     * Inner layout fills the complete shared container.
+     * Keep its own internal content padding untouched.
+     */
+    .home-scenic-canvas
+    > .trust-bar
+    > .trust-bar__inner {
+
+        width: 100%;
+        max-width: none;
+    }
+}
+
+/* =========================================================
+   A48-R16-V7 - HEADER HERO BREATHING SPACE
+
+   Give the floating Home Hero visible separation from
+   the Header.
+
+   Desktop only.
+
+   This preserves:
+   - 1200px Hero width
+   - 1200px Trust Bar width
+   - Hero composition
+   - Trust Bar geometry
+   - responsive layouts
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+    .home-scenic-canvas
+    > .home-hero-floating-shell {
+
+        margin-top: 20px;
+    }
+}
+
+/* =========================================================
+   A48-R16-V8 - FIXED HEADER OFFSET
+
+   Browser-measured geometry:
+
+   Fixed Header height = 80px
+   Desired visible gap = 20px
+
+   Hero document top:
+       80px + 20px = 100px
+
+   This overrides V7's temporary 20px margin.
+
+   Width and Trust Bar geometry remain unchanged.
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+    .home-scenic-canvas
+    > .home-hero-floating-shell {
+
+        margin-top: 100px;
+    }
+}
+
+/* =========================================================
+   A48-R18 - HOME HERO VERTICAL BALANCE
+
+   Purpose:
+   Rebalance the reduced 690px floating Home Hero.
+
+   The legacy desktop Hero reserved 88px at the top for the
+   previous fixed-header composition. The floating Hero now
+   has its own outer spacing, so that large internal offset
+   creates unnecessary empty space above the content.
+
+   Keep:
+   - 690px master Hero height
+   - 1200px floating card width
+   - current product position
+   - current Trust Bar geometry
+   - current mobile/tablet behavior
+
+   Change:
+   - Desktop floating Home Hero internal top padding:
+     88px -> 24px
+
+   Content remains naturally centered by the existing
+   Hero Grid / align-self system.
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+    .home-hero-floating-shell
+    > .hero {
+        padding-top: 24px;
+    }
+
+}
+

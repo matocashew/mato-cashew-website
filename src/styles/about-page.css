@@ -3256,3 +3256,35 @@ body.story-lightbox-open {
 }
 
 /* PHASE-5G-OUR-STORY-END */
+
+/* =========================================================
+   R44H16-ABOUT-STORY-SPACING-BEGIN
+
+   ABOUT PAGE CONTENT TRANSITION
+
+   Purpose:
+   - add breathing room after Trust Bar
+   - separate Trust Bar visually from Our Story
+   - preserve Hero / Trust geometry
+   - preserve Weather Atmosphere
+   - do not affect Home Page
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  /*
+   * The scenic Hero/Trust system ends immediately before
+   * the About page content.
+   *
+   * Add spacing to the first About content section rather
+   * than moving the Trust Bar itself.
+   */
+  .about-page .about-story,
+  .about-page [data-about-story],
+  .about-page .about-section--story {
+    margin-top: 48px !important;
+  }
+
+}
+
+/* R44H16-ABOUT-STORY-SPACING-END */

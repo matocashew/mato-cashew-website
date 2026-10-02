@@ -646,3 +646,98 @@ html[lang="km"] .home-process-step p {
     }
 
 }
+/* =========================================================
+   A48-R5 — HOME WEATHER GLASS PILOT
+   PROCESS
+   ========================================================= */
+
+.home-process {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.home-process-step {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.74),
+      rgba(251, 250, 246, 0.56)
+    );
+
+  border-color: rgba(255, 255, 255, 0.56);
+
+  -webkit-backdrop-filter:
+    blur(15px)
+    saturate(116%);
+
+  backdrop-filter:
+    blur(15px)
+    saturate(116%);
+
+  box-shadow:
+    0 14px 36px rgba(22, 58, 43, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.68);
+}
+
+/* =========================================================
+   A48-R6 — WEATHER VIEWING PLANE
+   PROCESS SECTION SHELL
+   ========================================================= */
+
+.home-process {
+  background: transparent;
+}
+
+/* =========================================================
+   A48-R15 - HOME PROCESS UNIFIED CARD
+   Desktop / tablet visual consolidation
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+    /*
+       The process flow itself is the single visual card.
+       Individual steps remain transparent.
+    */
+    .home-process-step {
+        background: none;
+        border: 0;
+        border-radius: 0;
+
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+
+        box-shadow: none;
+    }
+
+    /*
+       Remove legacy arrows.
+       The ordered layout already communicates progression.
+    */
+    .home-process-arrow {
+        display: none;
+    }
+
+    /*
+       Keep only a subtle divider between process steps.
+    */
+    .home-process-step::after {
+        content: "";
+
+        position: absolute;
+
+        top: 24px;
+        right: 0;
+        bottom: 24px;
+
+        width: 1px;
+        height: auto;
+
+        background: rgba(18, 85, 58, 0.08);
+
+        pointer-events: none;
+    }
+
+    .home-process-step:last-child::after {
+        display: none;
+    }
+}

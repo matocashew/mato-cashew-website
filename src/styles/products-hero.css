@@ -538,3 +538,64 @@ html[lang="km"] .products-hero__button {
   font-size: 11px;
   line-height: 1.6;
 }
+/* =========================================================
+   R52-PRODUCTS-IMAGE-COMPOSITION-BEGIN
+
+   PRODUCTS HERO — DESKTOP IMAGE COMPOSITION
+
+   Purpose:
+   - preserve the approved 1200 x 690 Hero geometry
+   - preserve the approved 14px Hero -> Trust gap
+   - preserve the approved 1200 x 108 Trust Bar
+   - show the complete right-side product package
+   - remove the old 108% / 110% image enlargement
+   - affect Products desktop Hero only
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  .scenic-hero-shell--products
+  > .products-hero
+  > .products-hero__media {
+    position: absolute !important;
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    overflow: hidden !important;
+
+    border-radius: inherit;
+  }
+
+
+  .scenic-hero-shell--products
+  > .products-hero
+  > .products-hero__media
+  > .products-hero__image {
+    position: absolute !important;
+
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    max-width: none !important;
+
+    object-fit: cover !important;
+
+    /*
+     * Preserve the complete right-side product composition.
+     * The original source image is wider than the Hero frame,
+     * so anchor the crop to the right edge.
+     */
+    object-position: 100% 50% !important;
+
+    transform: none !important;
+
+    display: block !important;
+  }
+
+}
+
+/* R52-PRODUCTS-IMAGE-COMPOSITION-END */

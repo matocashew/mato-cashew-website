@@ -1,4 +1,4 @@
----
+﻿---
 import PageLayout from "@layouts/PageLayout.astro";
 import { newsService } from "@services/newsService";
 
@@ -66,7 +66,19 @@ const articles = await newsService.getAll("en");
 </PageLayout>
 
 <style>
-  .news-index { padding-block: 7rem 5rem; }
+  /* =========================================================
+     R65E - NEWS INDEX FOREGROUND FIX
+     Keep News & Events above the scenic atmosphere.
+     Do not modify weather-atmosphere / mist / fog / clouds.
+     ========================================================= */
+  .news-index {
+    padding-block: 7rem 5rem;
+    position: relative;
+    z-index: 2;
+    opacity: 1;
+    filter: none;
+    isolation: isolate;
+  }
   .news-index__header { max-width: 760px; margin-bottom: 2.5rem; }
   .news-index__eyebrow,
   .news-index__category { color: #467548; font-weight: 700; }

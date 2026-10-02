@@ -812,3 +812,17 @@ html[lang="km"]
     font-size: 0.86rem;
   }
 }
+
+/* =========================================================
+   MATO R70C - CONTACT FOREGROUND LAYER
+   Keep Contact content above shared scenic atmosphere.
+   Do not modify the shared weather background.
+   ========================================================= */
+
+.contact-grid {
+    position: relative;
+    z-index: 2;
+    opacity: 1;
+    filter: none;
+}
+

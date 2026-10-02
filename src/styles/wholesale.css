@@ -258,3 +258,36 @@ html[lang="km"] .wholesale .btn {
     }
 
 }
+/* =========================================================
+   R67G - WHOLESALE SCENIC FOREGROUND CONTRACT
+
+   Architecture:
+   atmosphere = z-index 0
+   wholesale surface = transparent
+   wholesale content = z-index 2
+
+   IMPORTANT:
+   Do not modify .weather-atmosphere here.
+   Keep existing sky / mist / fog / clouds visible.
+   ========================================================= */
+
+.wholesale {
+  position: relative;
+  z-index: auto;
+  isolation: auto;
+
+  background: transparent !important;
+  background-color: transparent !important;
+
+  opacity: 1;
+  filter: none;
+}
+
+.wholesale > .container {
+  position: relative;
+  z-index: 2;
+
+  opacity: 1;
+  filter: none;
+}
+

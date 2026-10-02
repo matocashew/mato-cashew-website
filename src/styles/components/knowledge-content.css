@@ -377,3 +377,23 @@ html[lang="km"] .knowledge-content h3 {
     border-radius: 14px;
   }
 }
+
+/* ==========================================================
+   R60B - KNOWLEDGE ARTICLE FOREGROUND
+
+   Keeps Knowledge Center article content above atmospheric
+   visual layers while preserving the existing page design.
+   ========================================================== */
+
+.knowledge-content {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+    opacity: 1;
+    filter: none;
+}
+
+.knowledge-content * {
+    opacity: 1;
+}
+

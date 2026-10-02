@@ -635,3 +635,12 @@ html[lang="km"] .testimonial-customer span {
         object-position: 57% center;
     }
 }
+
+/* =========================================================
+   A48-R6 — WEATHER VIEWING PLANE
+   TESTIMONIALS SECTION SHELL
+   ========================================================= */
+
+.home-testimonials {
+  background: transparent;
+}

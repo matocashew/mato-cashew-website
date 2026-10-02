@@ -1,0 +1,40 @@
+﻿/*
+ * MATO CASHEW
+ * A48-R15-F1
+ *
+ * Permanent fix for the horizontal compositing seam between
+ * the Home scenic area and the Knowledge section.
+ *
+ * Diagnostic result:
+ * - layout geometry was correct
+ * - weather sky was not the cause
+ * - clouds were not the cause
+ * - removing the scenic base background weakened the seam
+ * - removing scenic ::after together with the base background
+ *   removed the seam
+ *
+ * Keep the original weather sky and cloud layers unchanged.
+ */
+
+/* =========================================================
+   A48-R19 — SCENIC AUTHORITY REPAIR
+
+   WeatherAtmosphere is the environmental background owner.
+
+   Keep the Home scenic canvas transparent so the global
+   weather sky and cloud layers remain visible through the
+   complete scenic composition.
+
+   IMPORTANT:
+   Do not disable .home-scenic-canvas::after here.
+   weather-atmosphere.css owns the final lightweight veil.
+
+   No geometry changes.
+   No Hero / Trust changes.
+   No weather animation changes.
+   ========================================================= */
+
+.home-scenic-canvas {
+  background: transparent;
+}
+

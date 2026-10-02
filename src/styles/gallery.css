@@ -98,3 +98,26 @@
     }
 
 }
+/* =========================================================
+   R68C - GALLERY SCENIC BACKGROUND CONTRACT
+
+   Gallery content remains in the foreground.
+   Existing global sky / mist / fog / clouds remain visible.
+
+   IMPORTANT:
+   - Do not modify .weather-atmosphere here.
+   - Do not raise the whole .gallery above the atmosphere.
+   - Only Gallery content is raised.
+   ========================================================= */
+
+.gallery {
+  background: transparent;
+}
+
+.gallery > .container {
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  filter: none;
+}
+

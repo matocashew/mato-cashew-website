@@ -24,3 +24,36 @@
   object-fit: contain;
   object-position: center;
 }
+
+/* =========================================================
+   R62E - KNOWLEDGE DETAIL FOREGROUND
+   Keep Knowledge article content above shared scenic layer.
+   Shared by English and Khmer Knowledge detail pages.
+   ========================================================= */
+
+.knowledge-article-page {
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  filter: none;
+}
+
+.knowledge-article-page .knowledge-hero {
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  filter: none;
+}
+
+.knowledge-article-page .knowledge-hero-image {
+  opacity: 1;
+  filter: none;
+}
+
+.knowledge-article-page .knowledge-meta {
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  filter: none;
+}
+

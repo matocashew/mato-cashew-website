@@ -1,4 +1,4 @@
-/* =========================================================
+﻿/* =========================================================
    MATO CASHEW — ABOUT HERO
    Desktop-first premium layout
    ========================================================= */
@@ -1103,3 +1103,946 @@ html[lang="km"] .about-hero__description {
     }
 
 }
+
+/* A48-R44H2-START */
+
+/*
+ * About Hero — Home-master floating geometry
+ *
+ * ScenicHeroShell remains the structural/weather owner.
+ * This block only changes the About hero presentation.
+ */
+
+.scenic-hero-shell--about .about-hero{
+  position: relative;
+
+  width:
+    min(
+      calc(100% - 48px),
+      1200px
+    );
+
+  min-height: 650px;
+
+  margin:
+    20px auto 0;
+
+  border-radius: 28px;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  box-shadow:
+    0 20px 54px
+      rgba(32, 54, 42, 0.12);
+
+  background:
+    rgba(248, 243, 234, 0.22);
+}
+
+
+/* -------------------------------------------------------
+   HERO IMAGE
+   ------------------------------------------------------- */
+
+.scenic-hero-shell--about
+.about-hero__media{
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  border-radius: inherit;
+
+  z-index: 0;
+}
+
+.scenic-hero-shell--about
+.about-hero__media img{
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  border-radius: inherit;
+}
+
+
+/* -------------------------------------------------------
+   HERO SHADE
+   ------------------------------------------------------- */
+
+.scenic-hero-shell--about
+.about-hero__shade{
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(248, 243, 234, 0.97) 0%,
+      rgba(248, 243, 234, 0.90) 24%,
+      rgba(248, 243, 234, 0.62) 45%,
+      rgba(248, 243, 234, 0.18) 67%,
+      rgba(248, 243, 234, 0.02) 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/* -------------------------------------------------------
+   CONTENT
+   ------------------------------------------------------- */
+
+.scenic-hero-shell--about
+.about-hero__container{
+  position: relative;
+
+  z-index: 2;
+
+  min-height: 650px;
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  padding:
+    64px
+    clamp(32px, 5vw, 72px);
+}
+
+.scenic-hero-shell--about
+.about-hero__content{
+  width: min(100%, 590px);
+}
+
+
+/* -------------------------------------------------------
+   TRUST BAR
+   Match Home floating relationship
+   ------------------------------------------------------- */
+
+.scenic-hero-shell--about
+> .trust-bar{
+  position: relative;
+
+  z-index: 10;
+
+  width:
+    min(
+      calc(100% - 96px),
+      1120px
+    );
+
+  margin:
+    -16px auto 0;
+}
+
+
+/* -------------------------------------------------------
+   TABLET
+   ------------------------------------------------------- */
+
+@media (max-width: 1024px){
+
+  .scenic-hero-shell--about
+  .about-hero{
+    width:
+      calc(100% - 32px);
+
+    min-height: 610px;
+
+    margin-top: 16px;
+
+    border-radius: 24px;
+  }
+
+  .scenic-hero-shell--about
+  .about-hero__container{
+    min-height: 610px;
+
+    padding:
+      56px
+      36px;
+  }
+
+  .scenic-hero-shell--about
+  > .trust-bar{
+    width:
+      calc(100% - 56px);
+  }
+}
+
+
+/* -------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------- */
+
+@media (max-width: 768px){
+
+  .scenic-hero-shell--about
+  .about-hero{
+    width:
+      calc(100% - 24px);
+
+    min-height: 590px;
+
+    margin-top: 12px;
+
+    border-radius: 20px;
+  }
+
+  .scenic-hero-shell--about
+  .about-hero__container{
+    min-height: 590px;
+
+    align-items: flex-end;
+
+    padding:
+      40px
+      24px
+      48px;
+  }
+
+  .scenic-hero-shell--about
+  .about-hero__content{
+    width: 100%;
+  }
+
+  .scenic-hero-shell--about
+  .about-hero__shade{
+    background:
+      linear-gradient(
+        180deg,
+        rgba(248, 243, 234, 0.06) 0%,
+        rgba(248, 243, 234, 0.18) 35%,
+        rgba(248, 243, 234, 0.88) 69%,
+        rgba(248, 243, 234, 0.97) 100%
+      );
+  }
+
+  .scenic-hero-shell--about
+  > .trust-bar{
+    width:
+      calc(100% - 32px);
+
+    margin-top: -12px;
+  }
+}
+
+
+/* -------------------------------------------------------
+   SMALL MOBILE
+   ------------------------------------------------------- */
+
+@media (max-width: 480px){
+
+  .scenic-hero-shell--about
+  .about-hero{
+    width:
+      calc(100% - 16px);
+
+    border-radius: 18px;
+  }
+
+  .scenic-hero-shell--about
+  .about-hero__container{
+    padding:
+      34px
+      20px
+      42px;
+  }
+
+  .scenic-hero-shell--about
+  > .trust-bar{
+    width:
+      calc(100% - 24px);
+  }
+}
+
+/* A48-R44H2-END */
+
+/* A48-R44H4-START */
+
+/*
+ * ABOUT HERO — HOME MASTER GEOMETRY
+ *
+ * Desktop reference measured directly from Home:
+ *
+ * Hero:
+ *   width  = 1200px
+ *   height = 690px
+ *
+ * Trust:
+ *   width  = 1200px
+ *   height = 108px
+ *
+ * Hero -> Trust visible gap = 14px
+ */
+
+
+/* =======================================================
+   DESKTOP
+   ======================================================= */
+
+@media (min-width: 1025px){
+
+  /*
+   * Match Home scenic starting geometry.
+   */
+
+  .scenic-hero-shell--about{
+    padding-top: 100px;
+  }
+
+
+  /*
+   * ABOUT HERO
+   *
+   * Home:
+   * 1200px wide
+   * 690px high
+   */
+
+  .scenic-hero-shell--about
+  .about-hero{
+    box-sizing: border-box;
+
+    width: 1200px;
+    max-width: calc(100% - 48px);
+
+    height: 690px;
+    min-height: 690px;
+
+    margin:
+      0 auto;
+
+    overflow: hidden;
+  }
+
+
+  /*
+   * Keep internal media exactly inside
+   * the 1200 x 690 hero frame.
+   */
+
+  .scenic-hero-shell--about
+  .about-hero__media{
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+  }
+
+
+  .scenic-hero-shell--about
+  .about-hero__media img{
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+  }
+
+
+  /*
+   * Content uses hero's exact height.
+   */
+
+  .scenic-hero-shell--about
+  .about-hero__container{
+    box-sizing: border-box;
+
+    width: 100%;
+
+    height: 690px;
+    min-height: 690px;
+  }
+
+
+  /*
+   * TRUST BAR
+   *
+   * IMPORTANT:
+   *
+   * Home Trust Bar is NOT narrower than Hero.
+   * It is exactly 1200px and aligned to both
+   * Hero edges.
+   */
+
+  .scenic-hero-shell--about
+  > .trust-bar{
+    box-sizing: border-box;
+
+    width: 1200px;
+    max-width: calc(100% - 48px);
+
+    height: 108px;
+    min-height: 108px;
+
+    margin:
+      14px auto 0;
+
+    transform: none;
+  }
+
+}
+
+
+/* =======================================================
+   RESPONSIVE SAFETY
+   ======================================================= */
+
+/*
+ * Below Home desktop breakpoint we stop forcing
+ * the measured 1200 x 690 desktop dimensions.
+ *
+ * Existing responsive About rules continue to own
+ * tablet/mobile behaviour.
+ */
+
+@media (max-width: 1024px){
+
+  .scenic-hero-shell--about{
+    padding-top: initial;
+  }
+
+}
+
+
+/* A48-R44H4-END */
+
+
+/* =========================================================
+   R44H10-ABOUT-FINAL-BEGIN
+
+   ABOUT HERO — HOME MASTER GEOMETRY CONTRACT
+
+   Desktop target:
+   Hero       1200 x 690
+   Trust Bar  1200 x 108
+
+   Preserve:
+   - global Weather Atmosphere
+   - About original artwork
+   - full right-side Mato sign
+   - About content
+   - Home Page untouched
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  /* -------------------------------------------------------
+     1. ABOUT SCENIC SHELL
+
+     Transparent owner so the global weather atmosphere
+     remains visible around the floating About Hero.
+     ------------------------------------------------------- */
+
+  .scenic-hero-shell--about {
+    position: relative;
+
+    width: 100%;
+
+    background:
+      transparent !important;
+
+    isolation:
+      isolate;
+  }
+
+
+  /* -------------------------------------------------------
+     2. ABOUT SCENIC BACKGROUND
+
+     Keep the existing scenic background layer available,
+     but it must never become an opaque page canvas.
+     ------------------------------------------------------- */
+
+  .scenic-hero-shell--about
+  > .scenic-hero-shell__background {
+    position:
+      absolute;
+
+    z-index:
+      0;
+
+    pointer-events:
+      none;
+  }
+
+
+  /* -------------------------------------------------------
+     3. ABOUT HERO GEOMETRY
+
+     Mirror the confirmed Home master:
+     left  = centered
+     width = 1200px
+     height = 690px
+     ------------------------------------------------------- */
+
+  .scenic-hero-shell--about
+  > .about-hero {
+    position:
+      relative;
+
+    z-index:
+      2;
+
+    width:
+      min(1200px, calc(100% - 48px)) !important;
+
+    height:
+      690px !important;
+
+    min-height:
+      690px !important;
+
+    max-height:
+      690px !important;
+
+    margin-left:
+      auto !important;
+
+    margin-right:
+      auto !important;
+
+    overflow:
+      hidden;
+
+    border-radius:
+      26px;
+
+    background:
+      transparent !important;
+  }
+
+
+  /* -------------------------------------------------------
+     4. ABOUT HERO MEDIA FRAME
+
+     The media owns exactly the same frame as About Hero.
+     ------------------------------------------------------- */
+
+  .scenic-hero-shell--about
+  .about-hero__media {
+    position:
+      absolute !important;
+
+    inset:
+      0 !important;
+
+    width:
+      100% !important;
+
+    height:
+      100% !important;
+
+    margin:
+      0 !important;
+
+    overflow:
+      hidden;
+
+    border-radius:
+      inherit;
+  }
+
+
+  /* -------------------------------------------------------
+     5. ABOUT HERO IMAGE
+
+     Preserve the approved R44H9B visual composition.
+
+     object-fit cover keeps the Hero filled.
+     100% horizontal focus preserves the important
+     right-side Mato sign / cashew composition.
+     ------------------------------------------------------- */
+
+  .scenic-hero-shell--about
+  .about-hero__media
+  > img {
+    display:
+      block !important;
+
+    width:
+      100% !important;
+
+    height:
+      100% !important;
+
+    max-width:
+      none !important;
+
+    object-fit:
+      cover !important;
+
+    object-position:
+      100% 50% !important;
+  }
+
+
+  /* -------------------------------------------------------
+     6. ABOUT SHADE
+
+     Preserve readability without replacing the photograph.
+     ------------------------------------------------------- */
+
+  .scenic-hero-shell--about
+  .about-hero__shade {
+    position:
+      absolute;
+
+    inset:
+      0;
+
+    z-index:
+      1;
+
+    pointer-events:
+      none;
+
+    background-color:
+      transparent !important;
+  }
+
+
+  /* -------------------------------------------------------
+     7. ABOUT CONTENT
+
+     Keep text/buttons above image and shade.
+     ------------------------------------------------------- */
+
+  .scenic-hero-shell--about
+  .about-hero__container {
+    position:
+      relative;
+
+    z-index:
+      3;
+  }
+
+
+  /* -------------------------------------------------------
+     8. TRUST BAR — HOME MASTER WIDTH / HEIGHT
+
+     Confirmed Home master:
+     width  = 1200px
+     height = 108px
+     ------------------------------------------------------- */
+
+  .scenic-hero-shell--about
+  > .trust-bar {
+    position:
+      relative;
+
+    z-index:
+      4;
+
+    width:
+      min(1200px, calc(100% - 48px)) !important;
+
+    height:
+      108px !important;
+
+    min-height:
+      108px !important;
+
+    margin-left:
+      auto !important;
+
+    margin-right:
+      auto !important;
+  }
+
+
+  .scenic-hero-shell--about
+  > .trust-bar
+  > .trust-bar__inner {
+    width:
+      100% !important;
+
+    height:
+      108px !important;
+
+    min-height:
+      108px !important;
+  }
+
+
+  /* -------------------------------------------------------
+     9. TRUST SURFACE
+
+     Keep current translucent surface so Weather Atmosphere
+     remains visually connected with the Hero environment.
+     ------------------------------------------------------- */
+
+  .scenic-hero-shell--about
+  > .trust-bar
+  > .trust-bar__inner
+  > .trust-bar__surface {
+    height:
+      100%;
+
+    background-color:
+      rgba(251, 250, 246, 0.82) !important;
+
+    backdrop-filter:
+      blur(14px)
+      saturate(1.05);
+
+    -webkit-backdrop-filter:
+      blur(14px)
+      saturate(1.05);
+  }
+
+}
+
+/* R44H10-ABOUT-FINAL-END */
+
+/* =========================================================
+   R44H14-ABOUT-IMAGE-OWNER-BEGIN
+
+   ABOUT DESKTOP HERO IMAGE OWNERSHIP
+
+   Purpose:
+   - restore the real AboutHero <picture> as the Hero image
+   - preserve Home-master 1200 x 690 geometry
+   - preserve the approved right-side Mato composition
+   - keep Weather Atmosphere visible outside the Hero
+   - do not affect Home Page
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  /*
+   * scenic-hero-system.css hides this media on desktop.
+   * R44H14 restores it because the floating Hero card must
+   * own its photograph directly.
+   */
+  .scenic-hero-shell--about
+  > .about-hero
+  > .about-hero__media {
+    visibility: visible !important;
+
+    position: absolute !important;
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    margin: 0 !important;
+
+    overflow: hidden;
+
+    border-radius: inherit;
+
+    z-index: 0;
+  }
+
+
+  /*
+   * Fill the approved 1200 x 690 Hero frame.
+   *
+   * Horizontal focus stays on the far right so the Mato
+   * sign / cashew composition remains visible.
+   */
+  .scenic-hero-shell--about
+  > .about-hero
+  > .about-hero__media
+  > img {
+    display: block !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    max-width: none !important;
+
+    object-fit: cover !important;
+    object-position: 100% 50% !important;
+
+    transform: none !important;
+  }
+
+
+  /*
+   * Keep the existing shade and content above the image.
+   */
+  .scenic-hero-shell--about
+  > .about-hero
+  > .about-hero__shade {
+    z-index: 1;
+  }
+
+  .scenic-hero-shell--about
+  > .about-hero
+  > .about-hero__container {
+    position: relative;
+    z-index: 3;
+  }
+
+}
+
+/* R44H14-ABOUT-IMAGE-OWNER-END */
+
+/* =========================================================
+   R44H15-ABOUT-SINGLE-IMAGE-OWNER-BEGIN
+
+   ABOUT DESKTOP — SINGLE PHOTOGRAPH OWNER
+
+   Contract:
+   - Weather Atmosphere owns environment outside Hero
+   - AboutHero <picture> owns photograph inside Hero
+   - Scenic background must NOT duplicate About photograph
+   - Hero geometry remains 1200 x 690
+   - Trust Bar geometry remains unchanged
+   - Home Page untouched
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  /*
+   * Disable ONLY the duplicated About scenic photograph.
+   *
+   * Keep the element itself in the DOM because the shared
+   * scenic architecture may still depend on its geometry /
+   * stacking context.
+   */
+  .scenic-hero-shell--about
+  > .scenic-hero-shell__background {
+    background-image: none !important;
+
+    opacity: 0 !important;
+
+    filter: none !important;
+
+    pointer-events: none !important;
+  }
+
+
+  /*
+   * The real AboutHero picture is now the one and only
+   * photographic owner inside the floating Hero card.
+   */
+  .scenic-hero-shell--about
+  > .about-hero
+  > .about-hero__media {
+    visibility: visible !important;
+
+    opacity: 1 !important;
+
+    position: absolute !important;
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    overflow: hidden !important;
+
+    border-radius: inherit;
+
+    z-index: 0;
+  }
+
+
+  .scenic-hero-shell--about
+  > .about-hero
+  > .about-hero__media
+  > img {
+    display: block !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    max-width: none !important;
+
+    object-fit: cover !important;
+    object-position: 100% 50% !important;
+
+    transform: none !important;
+  }
+
+
+  /*
+   * Preserve established Hero layering.
+   */
+  .scenic-hero-shell--about
+  > .about-hero
+  > .about-hero__shade {
+    z-index: 1;
+  }
+
+  .scenic-hero-shell--about
+  > .about-hero
+  > .about-hero__container {
+    position: relative;
+    z-index: 3;
+  }
+
+}
+
+/* R44H15-ABOUT-SINGLE-IMAGE-OWNER-END */
+
+/* =========================================================
+   R44H19-ABOUT-TRUST-SPACING-BEGIN
+
+   ABOUT / HOME MASTER GEOMETRY CONTRACT
+
+   Desktop contract:
+   Hero:
+     width  = 1200px
+     height = 690px
+
+   Trust Bar:
+     width  = 1200px
+     height = 108px
+
+   Relationship:
+     Hero -> Trust Bar = 14px
+     Trust -> next About section = 30px
+
+   Important:
+   - geometry only
+   - does not modify About Hero image
+   - does not modify Weather Atmosphere
+   - does not modify Home Page
+   - stable after Astro client navigation
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  .scenic-hero-shell--about
+  > .trust-bar {
+
+    box-sizing: border-box !important;
+
+    width: 1200px !important;
+    max-width: calc(100% - 48px) !important;
+
+    height: 108px !important;
+    min-height: 108px !important;
+
+    margin-top: 14px !important;
+    margin-right: auto !important;
+    margin-bottom: 30px !important;
+    margin-left: auto !important;
+
+    transform: none !important;
+  }
+
+}
+
+/* R44H19-ABOUT-TRUST-SPACING-END */

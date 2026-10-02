@@ -1,4 +1,4 @@
----
+﻿---
 import Header from "../Header.astro";
 import Hero from "../Hero.astro";
 import TrustBar from "../TrustBar.astro";
@@ -27,6 +27,9 @@ const t = getCurrentLanguage(language === "km" ? "/km" : "/");
 <main>
 
   <div class="home-scenic-canvas">
+
+    <!-- A48-R16-V2 - Structural Floating Home Hero -->
+    <div class="home-hero-floating-shell">
 
     <!-- B7.14B ? NEW HERO VISUAL STACK -->
     <div
@@ -69,6 +72,8 @@ const t = getCurrentLanguage(language === "km" ? "/km" : "/");
 
     <Hero />
 
+    </div>
+
   <TrustBar />
 
   <Products />
@@ -91,3 +96,4 @@ const t = getCurrentLanguage(language === "km" ? "/km" : "/");
 </main>
 
 <Footer />
+

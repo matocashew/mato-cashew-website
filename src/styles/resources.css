@@ -208,3 +208,28 @@
 }
 
 }
+/* =========================================================
+   R69C - RESOURCES SCENIC FOREGROUND
+
+   Keep the existing Mato Cashew scenic sky / mist / clouds
+   visible behind the Resources page.
+
+   Raise only Resources content above the atmosphere.
+
+   IMPORTANT:
+   - Do not modify .weather-atmosphere here.
+   - Do not modify mist / fog / clouds.
+   - Resource cards keep their own white backgrounds.
+   ========================================================= */
+
+.resources {
+  background: transparent;
+}
+
+.resources > .container {
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  filter: none;
+}
+

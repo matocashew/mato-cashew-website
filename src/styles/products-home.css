@@ -535,3 +535,21 @@ html[lang="km"] .products-showcase-tag {
         line-height: 1.5 !important;
     }
 }
+
+/* =========================================================
+   A48-R6 — WEATHER VIEWING PLANE
+   PRODUCTS SECTION SHELL
+   ========================================================= */
+
+.home-products {
+  background: transparent;
+}
+
+/* =========================================================
+   A48-R10D — PRODUCTS ACTUAL SECTION SHELL
+   Weather viewing plane selector repair
+   ========================================================= */
+
+.products.products-showcase {
+  background: transparent;
+}

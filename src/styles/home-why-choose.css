@@ -660,3 +660,43 @@ html[lang="km"] .home-why-choose-benefits li {
         font-size: 6.5px;
     }
 }
+/* =========================================================
+   A48-R5 — HOME WEATHER GLASS PILOT
+   WHY CHOOSE US
+   ========================================================= */
+
+.home-why-choose {
+  background: rgba(255, 255, 255, 0.20);
+}
+
+.home-why-choose-card {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.76),
+      rgba(248, 243, 232, 0.58)
+    );
+
+  border-color: rgba(255, 255, 255, 0.58);
+
+  -webkit-backdrop-filter:
+    blur(16px)
+    saturate(118%);
+
+  backdrop-filter:
+    blur(16px)
+    saturate(118%);
+
+  box-shadow:
+    0 18px 45px rgba(22, 58, 43, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+/* =========================================================
+   A48-R6 — WEATHER VIEWING PLANE
+   WHY CHOOSE SECTION SHELL
+   ========================================================= */
+
+.home-why-choose {
+  background: transparent;
+}

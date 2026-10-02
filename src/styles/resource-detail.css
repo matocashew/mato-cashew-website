@@ -298,3 +298,47 @@
 }
 
 }
+/* =========================================================
+   R59I-RESOURCE-TEXT-CLARITY-BEGIN
+
+   RESOURCE / LONG-FORM ARTICLE TEXT CLARITY
+
+   Purpose:
+   - keep Mato global muted text token unchanged
+   - make long-form article copy easier to read
+   - remove the visually faded appearance of article text
+   - preserve headings, links, cards, metadata and other pages
+   ========================================================= */
+
+.resource-content {
+    color: var(--text);
+}
+
+.resource-content p,
+.resource-content li {
+    color: var(--text);
+}
+
+/* R59I-RESOURCE-TEXT-CLARITY-END */
+
+/* ==========================================================
+   R60B - RESOURCE ARTICLE FOREGROUND
+
+   Keeps resource article text above atmospheric/background
+   visual layers without changing the Page Hero background.
+   ========================================================== */
+
+.resource-meta,
+.resource-content {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+    opacity: 1;
+    filter: none;
+}
+
+.resource-meta *,
+.resource-content * {
+    opacity: 1;
+}
+

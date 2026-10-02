@@ -1,4 +1,4 @@
-/* =========================================================
+﻿/* =========================================================
    HOME — BRAND STATISTICS
    ========================================================= */
 
@@ -317,4 +317,74 @@ html[lang="km"] .home-stat-label small {
         width: 22px;
         height: 22px;
     }
+}
+/* =========================================================
+   A48-R5 — HOME WEATHER GLASS PILOT
+   STATS
+   ========================================================= */
+
+.home-stats {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.home-stats-bar {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.76),
+      rgba(242, 247, 243, 0.58)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.58);
+
+  -webkit-backdrop-filter:
+    blur(16px)
+    saturate(118%);
+
+  backdrop-filter:
+    blur(16px)
+    saturate(118%);
+
+  box-shadow:
+    0 16px 40px rgba(22, 58, 43, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.70);
+}
+
+/* =========================================================
+   A48-R6 — WEATHER VIEWING PLANE
+   STATS SECTION SHELL
+   ========================================================= */
+
+.home-stats {
+  background: transparent;
+}
+
+/* =========================================================
+   A48-R13 — HOME STATS GLASS CONTRAST
+
+   The statistics bar is now a light translucent glass
+   surface, so the original white typography no longer has
+   enough contrast.
+
+   Preserve:
+   - glass surface
+   - weather visibility
+   - gold/lime icon treatment
+   - existing layout and responsive rules
+   ========================================================= */
+
+.home-stats .home-stat-value {
+  color: #123c2d;
+}
+
+.home-stats .home-stat-label {
+  color: #234c3d;
+}
+
+.home-stats .home-stat-label small {
+  color: rgba(35, 76, 61, 0.68);
+}
+
+.home-stats .home-stat-item:not(:last-child)::after {
+  background: rgba(18, 60, 45, 0.12);
 }

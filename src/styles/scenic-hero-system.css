@@ -306,3 +306,42 @@
 }
 
 /* PHASE-5I-STACKING-END */
+
+/* =========================================================
+   R52-PRODUCTS-HOME-MASTER-POSITION-BEGIN
+
+   PRODUCTS -> HOME MASTER VERTICAL POSITION
+
+   R51 verified at viewport 1870:
+   Products Hero:
+     width  = 1200
+     height = 690
+     left   = 335
+
+   Products Trust:
+     width  = 1200
+     height = 108
+     gap    = 14
+
+   Those dimensions already match Home.
+
+   Remaining difference:
+     Products Hero top = 0
+     Home Hero top     = 100
+
+   Therefore this rule adds ONLY the missing desktop
+   100px top space to the Products scenic shell.
+
+   Home and About are intentionally untouched.
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  .scenic-hero-shell--products {
+    padding-top: 100px !important;
+    box-sizing: border-box;
+  }
+
+}
+
+/* R52-PRODUCTS-HOME-MASTER-POSITION-END */

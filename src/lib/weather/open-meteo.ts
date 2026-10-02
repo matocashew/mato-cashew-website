@@ -81,6 +81,7 @@ export function mapWeatherCode(
 export async function fetchWeather(
   latitude: number,
   longitude: number,
+  timezone = "Asia/Phnom_Penh",
 ): Promise<MatoWeatherData> {
 
   const params = new URLSearchParams({
@@ -103,7 +104,7 @@ export async function fetchWeather(
       "precipitation_probability_max",
     ].join(","),
 
-    timezone: "Asia/Phnom_Penh",
+    timezone,
     forecast_days: "7",
   });
 

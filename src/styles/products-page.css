@@ -1888,3 +1888,205 @@ html[lang="km"]
     padding: 16px 0 80px;
 
 }
+/* =========================================================
+   R54-PRODUCTS-LOWER-BACKGROUND-BEGIN
+
+   PRODUCTS PAGE — LOWER BACKGROUND CONTRACT
+
+   Product Intro and Product Grid remain transparent so
+   the page has one continuous scenic/background owner.
+
+   IMPORTANT:
+   - does not modify Products Hero
+   - does not modify Trust Bar
+   - does not modify Hero geometry
+   ========================================================= */
+
+.product-intro,
+.products-page-grid {
+    background: transparent !important;
+    background-image: none !important;
+}
+
+/* R54-PRODUCTS-LOWER-BACKGROUND-END */
+
+/* =========================================================
+   R55D-PRODUCTS-FOREGROUND-BEGIN
+
+   PRODUCTS PAGE — FOREGROUND CONTENT CONTRACT
+
+   R55C live test confirmed that Products lower-page content
+   must receive explicit foreground paint authority.
+
+   Architecture follows the established Home/About pattern:
+
+   Weather Atmosphere = environmental background
+   Page sections      = foreground
+   Section content    = foreground content
+
+   IMPORTANT:
+   - no Hero geometry changes
+   - no Trust Bar changes
+   - no Products Hero image changes
+   - no Weather Atmosphere changes
+   - no content color changes
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   PRODUCTS LOWER SECTIONS
+
+   Keep real Products content above the global atmospheric
+   environment while preserving transparent section surfaces.
+   --------------------------------------------------------- */
+
+.product-intro,
+.product-stats,
+.products-page-grid {
+    position: relative !important;
+    z-index: 20 !important;
+}
+
+
+/* ---------------------------------------------------------
+   PRODUCTS CONTENT DESCENDANTS
+
+   Give actual text, badges, cards and controls explicit
+   foreground paint authority.
+
+   This is the permanent equivalent of the successful
+   R55C browser test.
+   --------------------------------------------------------- */
+
+.product-intro > *,
+.product-stats > *,
+.products-page-grid > * {
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+
+/* ---------------------------------------------------------
+   Preserve single environmental background ownership.
+
+   These sections must not create another page canvas.
+   --------------------------------------------------------- */
+
+.product-intro,
+.products-page-grid {
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+
+/* R55D-PRODUCTS-FOREGROUND-END */
+
+/* ==========================================================
+   R57 - PRODUCT GRID LIFT
+   Products Page only
+
+   Purpose:
+   Move the product-card grid upward after removal of the
+   duplicate ProductStats bar.
+
+   Do NOT modify:
+   - Scenic Hero
+   - Trust Bar
+   - Cambodian Cashew Products content
+   - Intro badges
+   - Scenic background
+========================================================== */
+
+@media (min-width: 1024px) {
+
+    .products-page-grid {
+        position: relative;
+        z-index: 3;
+
+        /*
+         * Pull the product-card region upward while keeping
+         * the cards in normal document flow.
+         */
+        margin-top: -120px;
+
+        /*
+         * Preserve lower-page flow by compensating for
+         * the negative top margin.
+         */
+        padding-top: 16px;
+    }
+
+}
+
+/* ==========================================================
+   R58 - PRODUCTS LOWER TRANSPARENT
+   Products Page only
+
+   Goal:
+   Allow the shared Mato Cashew scenic atmosphere
+   (sky / clouds / page background) to remain visible behind:
+
+   - Packaging Information
+   - Product Information
+   - General Product Information
+
+   Card surfaces are intentionally NOT changed.
+========================================================== */
+
+
+/* ----------------------------------------------------------
+   Packaging Information
+---------------------------------------------------------- */
+
+.packaging-options {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+
+/* Remove section-level decorative paint if present */
+
+.packaging-options::before,
+.packaging-options::after {
+    background: transparent !important;
+    background-image: none !important;
+}
+
+
+/* ----------------------------------------------------------
+   Product Information / Specifications
+---------------------------------------------------------- */
+
+.product-specifications {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+.product-specifications::before,
+.product-specifications::after {
+    background: transparent !important;
+    background-image: none !important;
+}
+
+
+/* ----------------------------------------------------------
+   Keep lower Products sections above scenic atmosphere
+---------------------------------------------------------- */
+
+.packaging-options,
+.product-specifications {
+    position: relative;
+    z-index: 2;
+}
+
+
+/*
+ * IMPORTANT:
+ *
+ * Do NOT make individual cards transparent.
+ * Their white surfaces provide readability over the
+ * shared scenic background.
+ */
+

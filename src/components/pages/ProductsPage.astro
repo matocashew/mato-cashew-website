@@ -1,9 +1,10 @@
----
+﻿---
 import type { CollectionEntry } from "astro:content";
 
 import ProductsHero from "../products/ProductsHero.astro";
+import TrustBar from "../TrustBar.astro";
+import ScenicHeroShell from "../layout/ScenicHeroShell.astro";
 import ProductIntro from "../products/ProductIntro.astro";
-import ProductStats from "../products/ProductStats.astro";
 import ProductGrid from "../products/ProductGrid.astro";
 import PackagingOptions from "../products/PackagingOptions.astro";
 import ProductSpecifications from "../products/ProductSpecifications.astro";
@@ -18,11 +19,13 @@ interface Props {
 const { products, language }: Props = Astro.props;
 ---
 
-<ProductsHero />
+<ScenicHeroShell variant="products">
+  <ProductsHero />
+  <TrustBar />
+</ScenicHeroShell>
 
 <ProductIntro />
 
-<ProductStats />
 
 <section
   id="products"
@@ -45,3 +48,4 @@ const { products, language }: Props = Astro.props;
 <ProductFAQ />
 
 <ProductsCTA />
+

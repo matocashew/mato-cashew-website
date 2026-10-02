@@ -1,4 +1,4 @@
----
+﻿---
 import {
   getKnowledgeTranslations,
 } from "../../i18n/knowledge";
@@ -206,3 +206,39 @@ const tags = [
 </script>
 
 </PageLayout>
+
+<style is:global>
+/* =========================================================
+   MATO-R61F-KNOWLEDGE-FOREGROUND
+   Keep Knowledge content above atmospheric visual layers.
+   Background / sky / clouds remain untouched.
+   ========================================================= */
+
+.knowledge-index-hero__inner,
+.knowledge-toolbar,
+.knowledge-stats,
+.knowledge-categories,
+.knowledge-tags-filter,
+.featured-knowledge-card,
+.knowledge-latest-section {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+    opacity: 1;
+    filter: none;
+}
+
+/*
+ * Featured Article heading is outside
+ * .featured-knowledge-card, so it needs its own
+ * foreground stacking context.
+ */
+.section-title {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+    opacity: 1;
+    filter: none;
+}
+</style>
+

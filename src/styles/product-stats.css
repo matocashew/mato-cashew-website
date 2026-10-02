@@ -277,3 +277,20 @@ html[lang="km"] .product-stat-content span {
     }
 
 }
+/* =========================================================
+   R54-PRODUCTS-LOWER-BACKGROUND-BEGIN
+
+   PRODUCTS PAGE — LOWER SCENIC CONTINUITY
+
+   ProductStats must not own a second beige canvas.
+   The Products page scenic/body background remains
+   the single background owner below the Trust Bar.
+
+   Hero and Trust Bar are intentionally untouched.
+   ========================================================= */
+
+.product-stats {
+    background: transparent !important;
+}
+
+/* R54-PRODUCTS-LOWER-BACKGROUND-END */

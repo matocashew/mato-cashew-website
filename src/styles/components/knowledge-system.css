@@ -331,3 +331,18 @@ html[lang="km"]
   }
 
 }
+
+/* =========================================================
+   R63C3 - KHMER KNOWLEDGE CENTER FOREGROUND
+   Keep Khmer Knowledge Center above the scenic atmosphere.
+   English Knowledge Center remains unchanged.
+   ========================================================= */
+
+html[lang="km"] .knowledge-index-page {
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  filter: none;
+  isolation: isolate;
+}
+

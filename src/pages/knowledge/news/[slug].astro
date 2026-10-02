@@ -1,4 +1,4 @@
----
+﻿---
 import PageLayout from "@layouts/PageLayout.astro";
 import { render } from "astro:content";
 import { newsService } from "@services/newsService";
@@ -176,5 +176,19 @@ const khmerLanguagePath = khmerTranslation
     justify-content: space-between;
     gap: 1rem;
     margin-top: 2rem;
+  }
+
+  /* =========================================================
+     R66C - NEWS ARTICLE FOREGROUND
+     Keep News Detail content above the global atmosphere.
+     Do not modify weather-atmosphere / mist / fog / clouds.
+     ========================================================= */
+
+  .news-article {
+    position: relative;
+    z-index: 2;
+    opacity: 1;
+    filter: none;
+    isolation: isolate;
   }
 </style>

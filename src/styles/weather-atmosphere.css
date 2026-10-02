@@ -1,0 +1,2297 @@
+﻿/* =========================================================
+   A48 — MATO CASHEW WEATHER ATMOSPHERE
+   SVG CLOUD RENDERER
+
+   Decorative only.
+   Never captures pointer interaction.
+   ========================================================= */
+
+.weather-atmosphere {
+  --weather-cloud-duration: 72s;
+  --weather-cloud-opacity: 0.72;
+  --weather-rain-opacity: 0;
+  --weather-sky-opacity: 0.42;
+
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  opacity: 1;
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   SKY
+   ========================================================= */
+
+.weather-atmosphere__sky {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: var(--weather-sky-opacity);
+
+  background:
+    radial-gradient(
+      circle at 82% 8%,
+      rgba(255, 225, 145, 0.30) 0%,
+      rgba(255, 236, 190, 0.12) 19%,
+      transparent 38%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(119, 190, 226, 0.24) 0%,
+      rgba(190, 220, 230, 0.12) 42%,
+      transparent 78%
+    );
+}
+
+
+/* =========================================================
+   SVG CLOUDS
+   ========================================================= */
+
+.weather-atmosphere__cloud {
+  position: absolute;
+
+  pointer-events: none;
+
+  opacity:
+    var(--weather-cloud-opacity);
+
+  will-change:
+    transform;
+
+  /*
+   * Soft shadow defines the cloud without creating fog.
+   */
+  filter:
+    drop-shadow(
+      0 18px 22px
+      rgba(82, 109, 120, 0.16)
+    );
+}
+
+
+.weather-atmosphere__cloud-svg {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  overflow: visible;
+}
+
+
+/* ---------------------------------------------------------
+   Large upper cloud
+   --------------------------------------------------------- */
+
+.weather-atmosphere__cloud--back {
+  top: 7%;
+  left: -8%;
+
+  width: clamp(
+    520px,
+    43vw,
+    780px
+  );
+
+  animation:
+    mato-weather-svg-cloud-back
+    var(--weather-cloud-duration)
+    ease-in-out
+    infinite alternate;
+}
+
+
+/* ---------------------------------------------------------
+   Smaller distant cloud
+   --------------------------------------------------------- */
+
+.weather-atmosphere__cloud--front {
+  top: 30%;
+  right: -5%;
+
+  width: clamp(
+    430px,
+    35vw,
+    650px
+  );
+
+  opacity:
+    calc(
+      var(--weather-cloud-opacity) * 0.70
+    );
+
+  filter:
+    drop-shadow(
+      0 14px 18px
+      rgba(82, 109, 120, 0.12)
+    );
+
+  animation:
+    mato-weather-svg-cloud-front
+    calc(
+      var(--weather-cloud-duration) * 1.20
+    )
+    ease-in-out
+    infinite alternate;
+}
+
+
+/* =========================================================
+   RAIN
+   ========================================================= */
+
+.weather-atmosphere__rain {
+  position: absolute;
+
+  inset:
+    -20%
+    -10%;
+
+  pointer-events: none;
+
+  opacity:
+    var(--weather-rain-opacity);
+
+  background-image:
+    repeating-linear-gradient(
+      108deg,
+      transparent 0 18px,
+      rgba(65, 105, 128, 0.38) 19px,
+      rgba(65, 105, 128, 0.38) 20px,
+      transparent 21px 38px
+    );
+
+  background-size:
+    240px
+    240px;
+
+  animation:
+    mato-weather-rain
+    1.25s
+    linear
+    infinite;
+}
+
+
+/* =========================================================
+   VEIL
+   ========================================================= */
+
+.weather-atmosphere__veil {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.01),
+      transparent 50%,
+      rgba(248, 243, 234, 0.025)
+    );
+}
+
+
+/* =========================================================
+   WEATHER STATES
+   ========================================================= */
+
+.weather-atmosphere[data-weather-kind="clear"] {
+  --weather-cloud-opacity: 0.16;
+  --weather-rain-opacity: 0;
+  --weather-sky-opacity: 0.52;
+}
+
+
+.weather-atmosphere[data-weather-kind="cloudy"] {
+  --weather-cloud-opacity: 0.72;
+  --weather-rain-opacity: 0;
+  --weather-sky-opacity: 0.34;
+}
+
+
+.weather-atmosphere[data-weather-kind="rain"] {
+  --weather-cloud-opacity: 0.82;
+  --weather-rain-opacity: 0.38;
+  --weather-sky-opacity: 0.22;
+}
+
+
+.weather-atmosphere[data-weather-kind="storm"] {
+  --weather-cloud-opacity: 0.88;
+  --weather-rain-opacity: 0.48;
+  --weather-sky-opacity: 0.15;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(54, 78, 92, 0.14),
+      rgba(112, 133, 141, 0.07) 55%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   WIND
+   ========================================================= */
+
+.weather-atmosphere[data-weather-wind="calm"] {
+  --weather-cloud-duration: 120s;
+}
+
+
+.weather-atmosphere[data-weather-wind="breezy"] {
+  --weather-cloud-duration: 72s;
+}
+
+
+.weather-atmosphere[data-weather-wind="windy"] {
+  --weather-cloud-duration: 38s;
+}
+
+
+/* =========================================================
+   NIGHT
+   ========================================================= */
+
+.weather-atmosphere[data-weather-day="false"] {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(19, 45, 70, 0.18),
+      rgba(49, 72, 89, 0.08) 55%,
+      transparent
+    );
+}
+
+
+.weather-atmosphere[data-weather-day="false"]
+.weather-atmosphere__sky {
+  filter:
+    brightness(0.68)
+    saturate(0.72);
+}
+
+
+.weather-atmosphere[data-weather-day="false"]
+.weather-atmosphere__cloud {
+  filter:
+    brightness(0.80)
+    saturate(0.70)
+    drop-shadow(
+      0 18px 22px
+      rgba(18, 35, 47, 0.20)
+    );
+}
+
+
+/* =========================================================
+   MOTION
+   ========================================================= */
+
+@keyframes mato-weather-svg-cloud-back {
+  from {
+    transform:
+      translate3d(
+        -4vw,
+        0,
+        0
+      );
+  }
+
+  to {
+    transform:
+      translate3d(
+        18vw,
+        2vh,
+        0
+      );
+  }
+}
+
+
+@keyframes mato-weather-svg-cloud-front {
+  from {
+    transform:
+      translate3d(
+        5vw,
+        0,
+        0
+      );
+  }
+
+  to {
+    transform:
+      translate3d(
+        -16vw,
+        -1vh,
+        0
+      );
+  }
+}
+
+
+@keyframes mato-weather-rain {
+  from {
+    background-position:
+      0
+      -240px;
+  }
+
+  to {
+    background-position:
+      -42px
+      240px;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .weather-atmosphere__cloud,
+  .weather-atmosphere__rain {
+    animation:
+      none
+      !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 720px) {
+  .weather-atmosphere__cloud--back {
+    top: 10%;
+    left: -32%;
+
+    width: 560px;
+  }
+
+  .weather-atmosphere__cloud--front {
+    top: 35%;
+    right: -38%;
+
+    width: 480px;
+  }
+}
+
+
+/* =========================================================
+   A48-R11B — DYNAMIC WEATHER SKY CANVAS
+
+   Uses the existing weather-atmosphere__sky layer.
+
+   Layer order:
+   SKY -> CLOUDS / RAIN / VEIL -> WEBSITE CONTENT
+
+   Purpose:
+   Give the white / grey weather forms enough environmental
+   contrast to remain visible through transparent / glass
+   content sections.
+
+   Decorative only.
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Base / fallback sky
+   --------------------------------------------------------- */
+
+.weather-atmosphere__sky {
+  background:
+    radial-gradient(
+      circle at 82% 9%,
+      rgba(255, 231, 166, 0.52) 0%,
+      rgba(255, 239, 199, 0.24) 18%,
+      transparent 39%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(151, 207, 231, 0.88) 0%,
+      rgba(190, 222, 232, 0.78) 34%,
+      rgba(224, 232, 220, 0.68) 68%,
+      rgba(239, 228, 201, 0.60) 100%
+    );
+
+  opacity: 1;
+
+  transition:
+    background 900ms ease,
+    filter 900ms ease,
+    opacity 900ms ease;
+}
+
+
+/* ---------------------------------------------------------
+   CLEAR
+
+   Brighter Cambodian daytime sky.
+   Clouds remain deliberately light.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-kind="clear"]
+.weather-atmosphere__sky {
+  background:
+    radial-gradient(
+      circle at 82% 8%,
+      rgba(255, 224, 133, 0.66) 0%,
+      rgba(255, 239, 190, 0.30) 20%,
+      transparent 40%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(119, 194, 230, 0.92) 0%,
+      rgba(169, 215, 232, 0.84) 38%,
+      rgba(215, 232, 224, 0.72) 72%,
+      rgba(242, 232, 205, 0.62) 100%
+    );
+
+  opacity: 1;
+}
+
+
+/* ---------------------------------------------------------
+   CLOUDY
+
+   Slightly cooler blue-grey canvas.
+   Designed specifically to make SVG cloud silhouettes
+   readable without turning the page dark.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-kind="cloudy"]
+.weather-atmosphere__sky {
+  background:
+    radial-gradient(
+      ellipse at 78% 10%,
+      rgba(242, 231, 196, 0.38) 0%,
+      rgba(224, 226, 210, 0.18) 23%,
+      transparent 43%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(132, 178, 198, 0.88) 0%,
+      rgba(164, 195, 205, 0.84) 34%,
+      rgba(198, 211, 207, 0.78) 68%,
+      rgba(228, 221, 199, 0.70) 100%
+    );
+
+  opacity: 1;
+}
+
+
+/* ---------------------------------------------------------
+   RAIN
+
+   Deeper slate-blue environment.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-kind="rain"]
+.weather-atmosphere__sky {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(91, 132, 151, 0.92) 0%,
+      rgba(121, 153, 165, 0.88) 38%,
+      rgba(158, 174, 174, 0.82) 70%,
+      rgba(198, 193, 177, 0.74) 100%
+    );
+
+  opacity: 1;
+}
+
+
+/* ---------------------------------------------------------
+   STORM
+
+   Strongest environmental contrast.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-kind="storm"]
+.weather-atmosphere__sky {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(61, 91, 108, 0.94) 0%,
+      rgba(82, 111, 123, 0.92) 38%,
+      rgba(116, 134, 136, 0.86) 70%,
+      rgba(160, 156, 145, 0.78) 100%
+    );
+
+  opacity: 1;
+}
+
+
+/* ---------------------------------------------------------
+   NIGHT
+
+   Night remains controlled by the existing data-weather-day
+   contract, but receives a dedicated sky canvas.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-day="false"]
+.weather-atmosphere__sky {
+  background:
+    radial-gradient(
+      circle at 78% 12%,
+      rgba(210, 221, 225, 0.16) 0%,
+      transparent 24%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(25, 52, 74, 0.96) 0%,
+      rgba(43, 69, 86, 0.94) 42%,
+      rgba(75, 91, 96, 0.88) 72%,
+      rgba(112, 108, 98, 0.82) 100%
+    );
+
+  opacity: 1;
+
+  filter:
+    saturate(0.82)
+    brightness(0.86);
+}
+
+
+/* =========================================================
+   A48-R12A — FOREGROUND LAYER CONTRACT
+
+   Runtime architecture confirmed by R11E:
+
+   WEATHER
+     global fixed atmospheric background
+
+   HOME SCENIC CANVAS
+     Hero -> Trust -> Products -> Why Choose -> Process -> Stats
+
+   MAIN OUTSIDE SCENIC
+     Knowledge -> Weather -> Testimonials -> Business
+
+   FOOTER
+     direct BODY child
+
+   Contract:
+     weather remains background-only;
+     readable page content always paints above it.
+
+   This does NOT make sections opaque.
+   Transparent / glass surfaces can still reveal weather.
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Global weather background authority
+   --------------------------------------------------------- */
+
+.weather-atmosphere {
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   Existing scenic composition
+
+   Preserve its own isolated scene.
+   Do not alter Hero / Trust geometry.
+   --------------------------------------------------------- */
+
+.home-scenic-canvas {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ---------------------------------------------------------
+   Sections OUTSIDE home-scenic-canvas
+
+   R11E confirmed these are direct MAIN children.
+
+   Give them explicit foreground paint authority while
+   preserving transparent / glass backgrounds.
+   --------------------------------------------------------- */
+
+.home-knowledge,
+.home-weather,
+.home-testimonials,
+.home-business {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ---------------------------------------------------------
+   Protected footer
+
+   Footer is a BODY child, not a MAIN child.
+
+   Its existing green background remains authoritative and
+   weather must never paint above it.
+   --------------------------------------------------------- */
+
+footer,
+.footer,
+.site-footer {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ---------------------------------------------------------
+   Content descendants
+
+   Keep actual text/cards/controls in the foreground even
+   when a section surface uses transparency/backdrop blur.
+   --------------------------------------------------------- */
+
+.home-knowledge > *,
+.home-weather > *,
+.home-testimonials > *,
+.home-business > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* =========================================================
+   A48-R12B — TARGETED GLASS SURFACE TUNING
+
+   R12B-D1 confirmed three remaining visual blockers:
+
+   1. Why Choose:
+      glass card is too opaque.
+
+   2. Our Process:
+      .home-process-flow has a fully opaque background.
+
+   3. Cashew Weather:
+      section owns a fully opaque white/green gradient and
+      the main weather card is nearly opaque.
+
+   Goal:
+      reveal the global Weather Atmosphere through these
+      surfaces while keeping text/cards readable.
+
+   IMPORTANT:
+      no global z-index changes
+      no WeatherAtmosphere changes
+      no cloud changes
+      no layout geometry changes
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. WHY CHOOSE MATO CASHEW
+
+   Preserve the large premium glass card but allow more of
+   the atmospheric sky/cloud layer to show through it.
+   --------------------------------------------------------- */
+
+.home-why-choose-card {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.50),
+      rgba(248, 243, 232, 0.30)
+    );
+
+  -webkit-backdrop-filter:
+    blur(12px)
+    saturate(1.12);
+
+  backdrop-filter:
+    blur(12px)
+    saturate(1.12);
+}
+
+
+/* ---------------------------------------------------------
+   2. OUR PROCESS
+
+   D1 found the flow wrapper itself was opaque:
+     rgb(251, 250, 246)
+
+   Convert only that large wrapper into a light glass
+   surface. Individual process cards retain their existing
+   glass treatment.
+   --------------------------------------------------------- */
+
+.home-process-flow {
+  background:
+    rgba(251, 250, 246, 0.22);
+
+  -webkit-backdrop-filter:
+    blur(8px)
+    saturate(1.08);
+
+  backdrop-filter:
+    blur(8px)
+    saturate(1.08);
+}
+
+
+/* ---------------------------------------------------------
+   3. CASHEW WEATHER — SECTION
+
+   Remove the opaque white section canvas.
+
+   Keep a very light atmospheric tint so the section still
+   has visual identity without hiding the global sky.
+   --------------------------------------------------------- */
+
+.home-weather {
+  background:
+    radial-gradient(
+      circle at 8% 12%,
+      rgba(240, 180, 64, 0.10),
+      transparent 34%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(248, 251, 248, 0.16) 0%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+}
+
+
+/* ---------------------------------------------------------
+   CASHEW WEATHER — MAIN CARD
+
+   Existing value was approximately white / 0.96.
+   Convert it to readable premium glass.
+   --------------------------------------------------------- */
+
+.home-weather__card {
+  background:
+    rgba(255, 255, 255, 0.58);
+
+  -webkit-backdrop-filter:
+    blur(14px)
+    saturate(1.12);
+
+  backdrop-filter:
+    blur(14px)
+    saturate(1.12);
+}
+
+
+/* ---------------------------------------------------------
+   CASHEW WEATHER — METRICS
+
+   Soften the three opaque metric boxes without making the
+   numerical information difficult to read.
+   --------------------------------------------------------- */
+
+.home-weather__metric {
+  background:
+    rgba(246, 249, 247, 0.62);
+
+  -webkit-backdrop-filter:
+    blur(7px);
+
+  backdrop-filter:
+    blur(7px);
+}
+
+
+/* ---------------------------------------------------------
+   CASHEW WEATHER — ADVISORY
+
+   Preserve its green semantic identity while allowing a
+   small amount of atmosphere through.
+   --------------------------------------------------------- */
+
+.home-weather__advisory {
+  background:
+    rgba(224, 241, 231, 0.42);
+
+  -webkit-backdrop-filter:
+    blur(8px);
+
+  backdrop-filter:
+    blur(8px);
+}
+
+
+/* =========================================================
+   A48-R12C — SCENIC CANVAS WHITE-VEIL FIX
+
+   R12C-D1 runtime diagnostic confirmed:
+
+   .home-scenic-canvas
+     previously faded to solid white at 100%.
+
+   .home-scenic-canvas::after
+     also independently faded to solid white.
+
+   Together these produced a double white veil over the
+   Weather Atmosphere around Why Choose / Our Process.
+
+   R12C keeps only a light neutral atmospheric wash.
+
+   No geometry changes.
+   No stacking changes.
+   No weather animation changes.
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Scenic base wash
+
+   Preserve a small warm tint for Mato Cashew branding,
+   but never transition into an opaque white canvas.
+   --------------------------------------------------------- */
+
+.home-scenic-canvas {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(249, 245, 234, 0.08) 0%,
+      rgba(249, 245, 234, 0.10) 35%,
+      rgba(249, 246, 238, 0.12) 68%,
+      rgba(249, 246, 238, 0.14) 100%
+    );
+}
+
+
+/* ---------------------------------------------------------
+   Scenic atmospheric veil
+
+   Keep this layer extremely light.
+
+   Most importantly:
+   NO solid-white endpoint.
+   --------------------------------------------------------- */
+
+
+/* R24 CLEANUP:
+   Legacy .home-scenic-canvas::after owner removed.
+   Final weather-atmosphere owner is authoritative.
+*/
+
+
+
+/* ---------------------------------------------------------
+   Keep the three scenic content zones transparent.
+
+   The global Weather Atmosphere provides the environmental
+   background; these sections provide foreground content.
+   --------------------------------------------------------- */
+
+.products-showcase,
+.home-why-choose,
+.home-process {
+  background-color: transparent;
+}
+
+
+/* =========================================================
+   A48-R12D — CASHEW WEATHER OUTER SURFACE FIX
+
+   Final Home-page atmosphere continuity adjustment.
+
+   The Weather card remains foreground glass.
+
+   Only the full-width Cashew Weather SECTION surface is
+   removed so the shared Weather Atmosphere remains visible
+   behind the section.
+
+   No layout changes.
+   No stacking changes.
+   No card geometry changes.
+   No weather animation changes.
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   CASHEW WEATHER OUTER CANVAS
+
+   R12B softened this surface.
+   R12D removes it completely because even the translucent
+   full-section wash visibly interrupts the continuous sky.
+   --------------------------------------------------------- */
+
+.home-weather {
+  background: transparent;
+  background-color: transparent;
+  background-image: none;
+}
+
+
+/* ---------------------------------------------------------
+   Ensure pseudo-surfaces cannot recreate a full-width veil.
+   --------------------------------------------------------- */
+
+.home-weather::before,
+.home-weather::after {
+  background: transparent;
+  background-color: transparent;
+  background-image: none;
+}
+
+
+/* ---------------------------------------------------------
+   Preserve foreground content above the atmosphere.
+   --------------------------------------------------------- */
+
+.home-weather > .container {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* =========================================================
+   A48-R20 - HOME SCENIC WEATHER SURFACE
+
+   Permanent geometry contract:
+
+   Global WeatherAtmosphere remains viewport-fixed.
+
+   Home Scenic Canvas owns its own full-height atmospheric
+   continuation so the Home composition remains visually
+   continuous across:
+
+   Hero
+   Trust Bar
+   Products
+   Why Choose
+   Process
+   Stats
+
+   This surface follows the real Home Scenic Canvas height.
+   No viewport-height or pixel-height dependency.
+   ========================================================= */
+
+.home-scenic-canvas {
+  position: relative;
+
+  isolation: isolate;
+
+  /*
+   * Keep the existing very light scenic veil while allowing
+   * the atmospheric sky to remain visible underneath.
+   */
+  background:
+    linear-gradient(
+      180deg,
+      rgba(249, 245, 234, 0.08) 0%,
+      rgba(249, 245, 234, 0.10) 35%,
+      rgba(249, 246, 238, 0.12) 68%,
+      rgba(249, 246, 238, 0.14) 100%
+    );
+}
+
+
+/*
+ * Full-height Home sky.
+ *
+ * Absolute geometry is intentionally owned by
+ * .home-scenic-canvas, therefore inset: 0 always follows
+ * the actual scenic content height instead of 100vh.
+ */
+
+.home-scenic-canvas::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -2;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 78% 10%,
+      rgba(242, 231, 196, 0.38) 0%,
+      rgba(224, 226, 210, 0.18) 23%,
+      transparent 43%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(132, 178, 198, 0.88) 0%,
+      rgba(164, 195, 205, 0.84) 34%,
+      rgba(198, 211, 207, 0.78) 68%,
+      rgba(228, 221, 199, 0.70) 100%
+    );
+
+  opacity: 1;
+}
+
+
+/*
+ * Soft atmospheric continuation.
+ *
+ * This prevents the lower Home sections from looking like
+ * a separate flat page while keeping cards readable.
+ */
+
+
+/* R24 CLEANUP:
+   Legacy .home-scenic-canvas::after owner removed.
+   Final weather-atmosphere owner is authoritative.
+*/
+
+
+
+/*
+ * All real Home content remains above the atmospheric
+ * continuation.
+ */
+
+.home-scenic-canvas > * {
+  position: relative;
+}
+
+
+/*
+ * Preserve explicit stacking contracts already established
+ * for important Home surfaces.
+ */
+
+.home-scenic-canvas > .home-hero-floating-shell {
+  z-index: 1;
+}
+
+.home-scenic-canvas > .trust-bar {
+  z-index: 10;
+}
+
+
+/* =========================================================
+   A48-R17 - HOME SCENIC SEAM FINAL
+
+   Permanent paint-ownership correction.
+
+   The Weather Atmosphere owns the environmental background.
+   The Home Scenic Canvas owns layout / stacking / geometry,
+   but must not add a second full-height background tint.
+
+   Removing that duplicate canvas paint prevents the visible
+   horizontal seam at the Scenic -> Knowledge boundary.
+
+   Keep ::after unchanged.
+   ========================================================= */
+
+.home-scenic-canvas {
+    background:
+        transparent !important;
+
+    background-color:
+        transparent !important;
+
+    background-image:
+        none !important;
+}
+
+
+
+/* =========================================================
+   A48-R21 - FINAL SCENIC OWNERSHIP CONTRACT
+
+   Permanent Home-page paint architecture.
+
+   Global WeatherAtmosphere:
+     viewport-fixed dynamic weather renderer.
+
+   Home Scenic Canvas:
+     owns the full-height Home atmospheric continuation across:
+
+       Hero
+       Trust Bar
+       Products
+       Why Choose
+       Process
+       Stats
+
+   Important:
+     - follows real scenic content height
+     - no 100vh dependency
+     - no JavaScript height synchronization
+     - preserves Hero / Trust geometry
+     - preserves R17 white-seam correction
+     - preserves weather animation
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Scenic stacking context
+
+   The canvas itself must remain transparent.
+   Atmospheric paint belongs to ::before / ::after.
+   --------------------------------------------------------- */
+
+.home-scenic-canvas {
+  position: relative;
+
+  z-index: 1;
+
+  isolation: isolate;
+
+  background:
+    transparent !important;
+
+  background-color:
+    transparent !important;
+
+  background-image:
+    none !important;
+}
+
+
+/* ---------------------------------------------------------
+   Full-height scenic sky
+
+   Because this pseudo-element is absolute with inset: 0,
+   its height is automatically the actual height of
+   .home-scenic-canvas rather than the viewport height.
+   --------------------------------------------------------- */
+
+.home-scenic-canvas::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -2;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 78% 10%,
+      rgba(242, 231, 196, 0.38) 0%,
+      rgba(224, 226, 210, 0.18) 23%,
+      transparent 43%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(132, 178, 198, 0.88) 0%,
+      rgba(164, 195, 205, 0.84) 34%,
+      rgba(198, 211, 207, 0.78) 68%,
+      rgba(228, 221, 199, 0.70) 100%
+    );
+
+  opacity: 1;
+}
+
+
+/* ---------------------------------------------------------
+   Very light atmospheric veil
+
+   No solid-white endpoint.
+   This preserves the R17 seam correction.
+   --------------------------------------------------------- */
+
+.home-scenic-canvas::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -1;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.01) 0%,
+      transparent 50%,
+      rgba(248, 243, 234, 0.025) 100%
+    );
+}
+
+
+/* ---------------------------------------------------------
+   Scenic foreground content
+   --------------------------------------------------------- */
+
+.home-scenic-canvas > * {
+  position: relative;
+}
+
+
+/* ---------------------------------------------------------
+   Preserve explicit Home stacking
+   --------------------------------------------------------- */
+
+.home-scenic-canvas >
+.home-hero-floating-shell {
+  z-index: 1;
+}
+
+.home-scenic-canvas >
+.trust-bar {
+  z-index: 10;
+}
+
+
+/* ---------------------------------------------------------
+   Scenic content surfaces stay transparent
+   --------------------------------------------------------- */
+
+.home-scenic-canvas >
+.products-showcase,
+
+.home-scenic-canvas >
+.home-why-choose,
+
+.home-scenic-canvas >
+.home-process,
+
+.home-scenic-canvas >
+.home-stats {
+  background-color:
+    transparent;
+}
+
+
+/* ---------------------------------------------------------
+   Outside-scenic Home sections
+
+   These remain foreground layers above the global weather
+   atmosphere without extending the Scenic Canvas.
+   --------------------------------------------------------- */
+
+.home-knowledge,
+.home-weather,
+.home-testimonials,
+.home-business {
+  position: relative;
+
+  z-index: 1;
+}
+
+
+
+
+/* =========================================================
+   A48-R35 — SINGLE WEATHER BACKGROUND OWNER
+
+   Runtime R35 diagnostic confirmed:
+
+   .weather-atmosphere
+     is the single environmental sky / weather owner.
+
+   .home-scenic-canvas
+     owns Home layout and stacking only.
+
+   The previous Scenic ::before layer duplicated the sky
+   background and ended at the Scenic -> Knowledge boundary,
+   producing the visible horizontal white seam.
+
+   Therefore:
+   - Scenic canvas stays transparent.
+   - Scenic ::before no longer paints a second sky.
+   - Scenic ::after keeps the existing subtle visual veil.
+   - No section geometry is changed.
+   ========================================================= */
+
+.home-scenic-canvas {
+  background:
+    transparent !important;
+
+  background-color:
+    transparent !important;
+
+  background-image:
+    none !important;
+}
+
+
+/* ---------------------------------------------------------
+   Disable duplicate Scenic sky owner
+   --------------------------------------------------------- */
+
+.home-scenic-canvas::before {
+  background:
+    transparent !important;
+
+  background-color:
+    transparent !important;
+
+  background-image:
+    none !important;
+}
+
+
+/* ---------------------------------------------------------
+   Preserve subtle Scenic veil
+
+   This is intentionally extremely light and must never
+   become an opaque page background.
+   --------------------------------------------------------- */
+
+.home-scenic-canvas::after {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.01) 0%,
+      transparent 50%,
+      rgba(248, 243, 234, 0.025) 100%
+    ) !important;
+}
+
+
+
+/* =========================================================
+   A48-R39 — DYNAMIC TIME-OF-DAY SKY PALETTE
+
+   Architecture:
+   - weather-atmosphere remains the single sky owner.
+   - weather kind continues controlling clouds / rain / storm.
+   - weather phase only adjusts the environmental sky palette.
+   - no Home section geometry is changed.
+   - R35 Scenic transparency protection remains untouched.
+
+   Phase contract:
+   morning
+   day
+   evening
+   night
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   MORNING
+
+   Soft warm sunrise atmosphere.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-phase="morning"]
+.weather-atmosphere__sky {
+  background:
+    radial-gradient(
+      ellipse at 78% 14%,
+      rgba(255, 224, 174, 0.58) 0%,
+      rgba(247, 207, 164, 0.30) 24%,
+      transparent 47%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(139, 188, 211, 0.94) 0%,
+      rgba(177, 207, 216, 0.90) 38%,
+      rgba(220, 216, 196, 0.84) 72%,
+      rgba(241, 220, 187, 0.78) 100%
+    );
+
+  opacity: 1;
+}
+
+
+/* ---------------------------------------------------------
+   DAY
+
+   Natural Cambodian daytime sky.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-phase="day"]
+.weather-atmosphere__sky {
+  background:
+    radial-gradient(
+      circle at 82% 9%,
+      rgba(246, 235, 198, 0.34) 0%,
+      rgba(230, 232, 215, 0.15) 23%,
+      transparent 44%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(119, 181, 211, 0.94) 0%,
+      rgba(158, 202, 219, 0.90) 38%,
+      rgba(199, 216, 211, 0.84) 70%,
+      rgba(230, 222, 198, 0.76) 100%
+    );
+
+  opacity: 1;
+}
+
+
+/* ---------------------------------------------------------
+   EVENING
+
+   Warm sunset atmosphere.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-phase="evening"]
+.weather-atmosphere__sky {
+  background:
+    radial-gradient(
+      ellipse at 78% 18%,
+      rgba(255, 190, 119, 0.58) 0%,
+      rgba(229, 151, 121, 0.30) 25%,
+      transparent 48%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(101, 142, 174, 0.94) 0%,
+      rgba(150, 164, 181, 0.90) 34%,
+      rgba(207, 176, 158, 0.86) 68%,
+      rgba(231, 187, 142, 0.80) 100%
+    );
+
+  opacity: 1;
+}
+
+
+/* ---------------------------------------------------------
+   NIGHT
+
+   Deep but readable night atmosphere.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-phase="night"]
+.weather-atmosphere__sky {
+  background:
+    radial-gradient(
+      circle at 78% 12%,
+      rgba(211, 222, 229, 0.16) 0%,
+      rgba(172, 192, 207, 0.06) 15%,
+      transparent 27%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(22, 46, 68, 0.98) 0%,
+      rgba(37, 62, 82, 0.96) 40%,
+      rgba(64, 82, 91, 0.92) 72%,
+      rgba(101, 105, 98, 0.86) 100%
+    );
+
+  opacity: 1;
+}
+
+
+/* =========================================================
+   WEATHER + PHASE MODIFIERS
+
+   Time controls the base palette.
+   Real weather modifies that palette.
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   CLOUDY
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-kind="cloudy"]
+[data-weather-phase] {
+  --r39-weather-dim: 1;
+}
+
+.weather-atmosphere[data-weather-kind="cloudy"]
+.weather-atmosphere__sky {
+  filter:
+    saturate(0.82)
+    brightness(0.92);
+}
+
+
+/* ---------------------------------------------------------
+   RAIN
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-kind="rain"]
+.weather-atmosphere__sky {
+  filter:
+    saturate(0.68)
+    brightness(0.80);
+}
+
+
+/* ---------------------------------------------------------
+   STORM
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-kind="storm"]
+.weather-atmosphere__sky {
+  filter:
+    saturate(0.58)
+    brightness(0.68);
+}
+
+
+/* ---------------------------------------------------------
+   CLEAR
+
+   Preserve full phase colour.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-kind="clear"]
+.weather-atmosphere__sky {
+  filter:
+    none;
+}
+
+
+/* ---------------------------------------------------------
+   SMOOTH ENVIRONMENTAL TRANSITION
+   --------------------------------------------------------- */
+
+.weather-atmosphere__sky {
+  transition:
+    background 1.6s ease,
+    filter 1.2s ease,
+    opacity 1.2s ease;
+}
+
+
+/* =========================================================
+   END A48-R39
+   ========================================================= */
+
+
+/* =========================================================
+   A48-R40 — WEATHER VISUAL REFINEMENT
+
+   Purpose:
+   Refine the already-established R39 time-of-day sky
+   using the live weather state.
+
+   Architecture protection:
+   - R35 remains the single scenic background architecture
+   - R39 remains the time-of-day sky palette
+   - R40 only refines weather intensity
+   - no layout / geometry / footer ownership
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   CLEAR
+
+   Keep R39 sky almost untouched.
+   Only reduce cloud presence.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-kind="clear"] {
+  --weather-cloud-opacity: 0.12;
+  --weather-rain-opacity: 0;
+  --weather-sky-opacity: 1;
+}
+
+.weather-atmosphere[data-weather-kind="clear"]
+.weather-atmosphere__cloud--front {
+  opacity:
+    calc(
+      var(--weather-cloud-opacity) * 0.72
+    );
+}
+
+.weather-atmosphere[data-weather-kind="clear"]
+.weather-atmosphere__cloud--back {
+  opacity:
+    var(--weather-cloud-opacity);
+}
+
+
+/* ---------------------------------------------------------
+   CLOUDY
+
+   Preserve time-phase colour but soften and mute the sky.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-kind="cloudy"] {
+  --weather-cloud-opacity: 0.68;
+  --weather-rain-opacity: 0;
+  --weather-sky-opacity: 1;
+}
+
+.weather-atmosphere[data-weather-kind="cloudy"]
+.weather-atmosphere__sky {
+  filter:
+    saturate(0.82)
+    brightness(0.94);
+}
+
+.weather-atmosphere[data-weather-kind="cloudy"]
+.weather-atmosphere__cloud--front {
+  opacity:
+    calc(
+      var(--weather-cloud-opacity) * 0.82
+    );
+}
+
+.weather-atmosphere[data-weather-kind="cloudy"]
+.weather-atmosphere__cloud--back {
+  opacity:
+    var(--weather-cloud-opacity);
+}
+
+
+/* ---------------------------------------------------------
+   RAIN
+
+   Darker than cloudy while retaining the current
+   morning/day/evening/night palette underneath.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-kind="rain"] {
+  --weather-cloud-opacity: 0.82;
+  --weather-rain-opacity: 0.36;
+  --weather-sky-opacity: 1;
+}
+
+.weather-atmosphere[data-weather-kind="rain"]
+.weather-atmosphere__sky {
+  filter:
+    saturate(0.70)
+    brightness(0.80);
+}
+
+.weather-atmosphere[data-weather-kind="rain"]
+.weather-atmosphere__cloud--front {
+  opacity:
+    calc(
+      var(--weather-cloud-opacity) * 0.88
+    );
+}
+
+.weather-atmosphere[data-weather-kind="rain"]
+.weather-atmosphere__cloud--back {
+  opacity:
+    var(--weather-cloud-opacity);
+}
+
+
+/* ---------------------------------------------------------
+   STORM
+
+   Strongest weather treatment.
+   Still does not replace the R39 sky background.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-kind="storm"] {
+  --weather-cloud-opacity: 0.90;
+  --weather-rain-opacity: 0.50;
+  --weather-sky-opacity: 1;
+}
+
+.weather-atmosphere[data-weather-kind="storm"]
+.weather-atmosphere__sky {
+  filter:
+    saturate(0.58)
+    brightness(0.68);
+}
+
+.weather-atmosphere[data-weather-kind="storm"]
+.weather-atmosphere__cloud--front {
+  opacity:
+    calc(
+      var(--weather-cloud-opacity) * 0.92
+    );
+}
+
+.weather-atmosphere[data-weather-kind="storm"]
+.weather-atmosphere__cloud--back {
+  opacity:
+    var(--weather-cloud-opacity);
+}
+
+
+/* ---------------------------------------------------------
+   WIND
+
+   Keep existing animation architecture.
+   Only tune the duration according to live wind state.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-wind="calm"] {
+  --weather-cloud-duration: 120s;
+}
+
+.weather-atmosphere[data-weather-wind="breezy"] {
+  --weather-cloud-duration: 72s;
+}
+
+.weather-atmosphere[data-weather-wind="windy"] {
+  --weather-cloud-duration: 38s;
+}
+
+
+/* ---------------------------------------------------------
+   NIGHT WEATHER BALANCE
+
+   Prevent rain/storm filters from making the existing
+   R39 night palette excessively dark.
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-phase="night"]
+[data-weather-kind="rain"] {
+  --weather-rain-opacity: 0.32;
+}
+
+
+/*
+   The selector above intentionally does not own the sky.
+   Night colour remains controlled by R39.
+*/
+
+
+/* ---------------------------------------------------------
+   Accessibility
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .weather-atmosphere__cloud,
+  .weather-atmosphere__rain {
+    animation:
+      none
+      !important;
+  }
+}
+
+
+/* =========================================================
+   END A48-R40
+   ========================================================= */
+
+/* =========================================================
+   A48-R43B — ABOUT WEATHER PAINT BRIDGE
+
+   Purpose:
+   Extend the existing global WeatherAtmosphere visual
+   architecture to the About scenic shell without creating
+   a second environmental background owner.
+
+   Ownership contract:
+   - .weather-atmosphere = environmental sky/weather owner.
+   - .scenic-hero-shell--about = About scenic image owner.
+   - .about-hero = Hero content/overlay geometry owner.
+   - .trust-bar = existing Trust geometry owner.
+
+   This patch intentionally changes paint/stacking only.
+
+   NO:
+   - height changes
+   - margin changes
+   - padding changes
+   - transform changes
+   - Hero image replacement
+   - Trust Bar geometry changes
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+  /*
+   * Establish a local stacking context for About scenic
+   * content while keeping the shell itself transparent.
+   *
+   * The shell's dedicated scenic background child remains
+   * untouched and continues owning the About photograph.
+   */
+  .scenic-hero-shell--about {
+    position: relative;
+
+    isolation: isolate;
+
+    background-color:
+      transparent;
+  }
+
+
+  /*
+   * Preserve the existing scenic background layer.
+   *
+   * Explicit stacking only; no geometry or image changes.
+   */
+  .scenic-hero-shell--about
+  > .scenic-hero-shell__background {
+    position: absolute;
+
+    z-index: 0;
+  }
+
+
+  /*
+   * Keep About Hero content above the scenic background.
+   * Existing geometry remains authoritative.
+   */
+  .scenic-hero-shell--about
+  > .about-hero {
+    position: relative;
+
+    z-index: 2;
+
+    background-color:
+      transparent;
+  }
+
+
+  /*
+   * Trust Bar keeps its established About scenic priority.
+   */
+  .scenic-hero-shell--about
+  > .trust-bar {
+    position: relative;
+
+    z-index: 4;
+  }
+
+}
+
+/* A48-R43B-END */
+
+
+/* =========================================================
+   A48-R44D — ABOUT MASTER ENVIRONMENT
+   Phase 1
+
+   HOME PAGE = MASTER VISUAL STANDARD
+
+   Goal:
+   Allow the existing global WeatherAtmosphere to become
+   visible through the large About page sections.
+
+   Keep opaque/readability ownership on:
+   - cards
+   - images
+   - buttons
+   - content surfaces
+
+   Do NOT change:
+   - section geometry
+   - heights
+   - margins
+   - padding
+   - transforms
+   - About Hero image
+   - Trust Bar geometry
+   - Footer
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   ABOUT PAGE — LARGE ENVIRONMENTAL SURFACES
+
+   These are page-level sections, not readability cards.
+   Their environmental paint is delegated to the existing
+   global WeatherAtmosphere, matching the Home architecture.
+   --------------------------------------------------------- */
+
+.company-story,
+.mission-vision,
+.core-values,
+.our-process,
+.quality-standards,
+.why-choose {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   ABOUT CTA
+
+   Keep its content composition but remove only a page-level
+   solid background if one exists.
+
+   Child buttons/cards remain untouched.
+   --------------------------------------------------------- */
+
+.about-cta {
+  background-color: transparent !important;
+}
+
+
+/* ---------------------------------------------------------
+   ABOUT PAGE STACKING
+
+   Sections stay above WeatherAtmosphere while their empty
+   environmental areas remain transparent.
+   --------------------------------------------------------- */
+
+.company-story,
+.mission-vision,
+.core-values,
+.our-process,
+.quality-standards,
+.why-choose,
+.about-cta {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ---------------------------------------------------------
+   IMPORTANT
+
+   Do not make cards transparent here.
+
+   Examples intentionally NOT modified:
+   .mv-card
+   .value-card
+   .process-card
+   .choose-card
+   .quality-image
+   .story-main-image
+
+   These remain readability/content owners.
+   --------------------------------------------------------- */
+
+
+/* A48-R44D-END */
+
+
+/* =========================================================
+   A48-R44F — ABOUT HERO WEATHER BLEND
+
+   HOME = MASTER VISUAL STANDARD
+
+   Layer contract:
+   1. Global WeatherAtmosphere = environment
+   2. About scenic image       = photographic layer
+   3. About shade              = readability / weather blend
+   4. About content            = foreground
+   5. Trust Bar                = translucent foreground surface
+
+   Geometry is intentionally untouched.
+   ========================================================= */
+
+@media (min-width: 993px) {
+
+  /* -------------------------------------------------------
+     HERO SCENIC IMAGE
+
+     Keep the About photograph, but stop treating it as a
+     completely opaque environmental replacement.
+
+     Weather remains visible through the scenic image.
+     ------------------------------------------------------- */
+
+  .scenic-hero-shell--about
+  > .scenic-hero-shell__background {
+    opacity: 0.84;
+  }
+
+
+  /* -------------------------------------------------------
+     ABOUT SHADE
+
+     The original cream shade remains for readability,
+     but becomes a softer translucent veil so that the
+     global atmosphere can influence the Hero.
+     ------------------------------------------------------- */
+
+  .scenic-hero-shell--about
+  .about-hero__shade {
+    opacity: 0.72;
+    background-color: transparent !important;
+  }
+
+
+  /* -------------------------------------------------------
+     TRUST BAR
+
+     Keep the exact existing dimensions and position.
+
+     Only the visual surface becomes translucent so the
+     atmosphere/scenic environment can continue behind it.
+     ------------------------------------------------------- */
+
+  .scenic-hero-shell--about
+  > .trust-bar
+  > .trust-bar__inner
+  > .trust-bar__surface {
+    background-color:
+      rgba(251, 250, 246, 0.82) !important;
+
+    backdrop-filter:
+      blur(14px)
+      saturate(1.05);
+
+    -webkit-backdrop-filter:
+      blur(14px)
+      saturate(1.05);
+  }
+
+
+  /* -------------------------------------------------------
+     LIVE WEATHER RESPONSE
+
+     Do not create a second weather engine.
+
+     These selectors only tune the About photographic layer
+     according to the state already owned by
+     .weather-atmosphere.
+     ------------------------------------------------------- */
+
+  body:has(
+    .weather-atmosphere[data-weather-kind="cloudy"]
+  )
+  .scenic-hero-shell--about
+  > .scenic-hero-shell__background {
+    opacity: 0.78;
+    filter:
+      saturate(0.92)
+      brightness(0.96);
+  }
+
+  body:has(
+    .weather-atmosphere[data-weather-kind="rain"]
+  )
+  .scenic-hero-shell--about
+  > .scenic-hero-shell__background {
+    opacity: 0.72;
+    filter:
+      saturate(0.82)
+      brightness(0.90);
+  }
+
+  body:has(
+    .weather-atmosphere[data-weather-kind="storm"]
+  )
+  .scenic-hero-shell--about
+  > .scenic-hero-shell__background {
+    opacity: 0.66;
+    filter:
+      saturate(0.72)
+      brightness(0.82);
+  }
+
+
+  /* -------------------------------------------------------
+     TIME-OF-DAY RESPONSE
+
+     R39 remains the sky owner.
+     These rules only harmonize the About photograph with
+     Morning / Day / Evening / Night.
+     ------------------------------------------------------- */
+
+  body:has(
+    .weather-atmosphere[data-weather-phase="morning"]
+  )
+  .scenic-hero-shell--about
+  > .scenic-hero-shell__background {
+    filter:
+      saturate(0.96)
+      brightness(1.02);
+  }
+
+  body:has(
+    .weather-atmosphere[data-weather-phase="evening"]
+  )
+  .scenic-hero-shell--about
+  > .scenic-hero-shell__background {
+    filter:
+      saturate(0.92)
+      brightness(0.90);
+  }
+
+  body:has(
+    .weather-atmosphere[data-weather-phase="night"]
+  )
+  .scenic-hero-shell--about
+  > .scenic-hero-shell__background {
+    opacity: 0.68;
+
+    filter:
+      saturate(0.72)
+      brightness(0.64);
+  }
+
+}
+
+/* A48-R44F-END */
+
+/* === MATO R71E2 SCENIC START === */
+
+/*
+ * MATO CASHEW
+ * Permanent scenic background authority.
+ *
+ * Desktop geometry:
+ *
+ *   width  = browser viewport width
+ *   height = browser viewport height
+ *            minus actual fixed Header bottom
+ *
+ * JavaScript writes:
+ *
+ *   --mato-scenic-top
+ *   --mato-scenic-height
+ *
+ * This layer does NOT own:
+ *
+ *   cloud
+ *   rain
+ *   mist
+ *   weather kind
+ *   weather phase
+ *
+ * Those remain under the existing live-weather engine.
+ */
+
+.weather-atmosphere {
+
+  --mato-scenic-top: 0px;
+
+  --mato-scenic-height:
+    100vh;
+}
+
+
+/*
+ * Scenic canvas itself.
+ *
+ * R71C4 browser testing confirmed that
+ * 100% 100% is the required fit:
+ *
+ * full monitor width
+ * x
+ * visible monitor height below Header.
+ *
+ * Therefore the complete scenic asset remains visible
+ * without cover-cropping.
+ */
+
+.weather-atmosphere__sky {
+
+  position: fixed;
+
+  top:
+    var(
+      --mato-scenic-top,
+      0px
+    );
+
+  left: 0;
+
+  width: 100vw;
+
+  height:
+    var(
+      --mato-scenic-height,
+      100vh
+    );
+
+  box-sizing:
+    border-box;
+
+  background-repeat:
+    no-repeat !important;
+
+  background-size:
+    100% 100% !important;
+
+  background-position:
+    0 0 !important;
+}
+
+
+/* ---------------------------------------------------------
+   MORNING
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-phase="morning"]
+.weather-atmosphere__sky {
+
+  background-image:
+    url("/images/atmosphere/cashew-morning.webp") !important;
+}
+
+
+/* ---------------------------------------------------------
+   DAY
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-phase="day"]
+.weather-atmosphere__sky {
+
+  background-image:
+    url("/images/atmosphere/cashew-day.webp") !important;
+}
+
+
+/* ---------------------------------------------------------
+   EVENING
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-phase="evening"]
+.weather-atmosphere__sky {
+
+  background-image:
+    url("/images/atmosphere/cashew-evening.webp") !important;
+}
+
+
+/* ---------------------------------------------------------
+   NIGHT
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-phase="night"]
+.weather-atmosphere__sky {
+
+  background-image:
+    url("/images/atmosphere/cashew-night.webp") !important;
+}
+
+
+/*
+ * Keep existing weather-state filters alive.
+ *
+ * We intentionally do NOT override:
+ *
+ * filter
+ * opacity
+ * cloud opacity
+ * rain opacity
+ * mist
+ *
+ * Existing cloudy/rain/storm rules therefore continue
+ * modifying the selected scenic phase naturally.
+ */
+
+
+/* ---------------------------------------------------------
+   MOBILE SAFETY
+   ---------------------------------------------------------
+ *
+ * R71C4 was approved for Desktop Monitor.
+ *
+ * Do not force Desktop Header subtraction onto the existing
+ * mobile Hero/Header geometry.
+ */
+
+@media (max-width: 768px) {
+
+  .weather-atmosphere {
+
+    --mato-scenic-top:
+      0px;
+
+    --mato-scenic-height:
+      100vh;
+  }
+
+  .weather-atmosphere__sky {
+
+    top: 0;
+
+    height: 100vh;
+  }
+}
+
+/* === MATO R71E2 SCENIC END === */
+

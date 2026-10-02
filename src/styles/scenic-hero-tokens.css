@@ -1,9 +1,9 @@
-/* =========================================================
+﻿/* =========================================================
    MATO CASHEW - SCENIC HERO DESIGN CONTRACT
    ========================================================= */
 
 :root {
-  --mc-hero-desktop-height: 729px;
+  --mc-hero-desktop-height: 690px;
 
   --mc-trust-margin-top: 24px;
   --mc-trust-margin-bottom: 30px;
@@ -11,3 +11,127 @@
 
   --mc-scenic-desktop-reference-width: 1920px;
 }
+
+/* =========================================================
+   R49-PRODUCTS-HOME-MASTER-GEOMETRY-BEGIN
+
+   PRODUCTS DESKTOP GEOMETRY CONTRACT
+
+   Home Master:
+   Hero      = 1200 x 690
+   Gap       = 14
+   Trust Bar = 1200 x 108
+
+   Scope:
+   Products only.
+
+   Important:
+   - does NOT change Home
+   - does NOT change About
+   - does NOT change Products image crop/focus yet
+   - does NOT change Weather Atmosphere
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  /*
+   * Products scenic shell.
+   *
+   * Keep it full viewport width so Weather Atmosphere /
+   * scenic background can remain visible outside the
+   * floating Hero card.
+   */
+  .scenic-hero-shell--products {
+    position: relative;
+
+    width: 100%;
+
+    --scenic-hero-width: 1200px;
+    --scenic-hero-height: 690px;
+
+    --scenic-trust-width: 1200px;
+    --scenic-trust-height: 108px;
+
+    --scenic-trust-margin-top: 14px;
+  }
+
+
+  /*
+   * PRODUCTS HERO
+   * Exact Home-master geometry.
+   */
+  .scenic-hero-shell--products
+  > .products-hero {
+    position: relative;
+
+    box-sizing: border-box;
+
+    width: 1200px !important;
+    max-width: calc(100% - 48px) !important;
+
+    height: 690px !important;
+    min-height: 690px !important;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    overflow: hidden;
+
+    border-radius: var(
+      --scenic-hero-radius,
+      24px
+    );
+  }
+
+
+  /*
+   * Media must follow the Hero frame.
+   *
+   * R49 controls geometry only.
+   * Image crop/focus remains owned by ProductsHero.
+   */
+  .scenic-hero-shell--products
+  > .products-hero
+  > .products-hero__media {
+    position: absolute !important;
+
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    margin: 0 !important;
+
+    overflow: hidden;
+
+    border-radius: inherit;
+  }
+
+
+  /*
+   * PRODUCTS TRUST BAR
+   * Exact Home-master geometry.
+   */
+  .scenic-hero-shell--products
+  > .trust-bar {
+    position: relative;
+
+    box-sizing: border-box;
+
+    width: 1200px !important;
+    max-width: calc(100% - 48px) !important;
+
+    height: 108px !important;
+    min-height: 108px !important;
+
+    margin-top: 14px !important;
+    margin-right: auto !important;
+    margin-bottom: 0 !important;
+    margin-left: auto !important;
+
+    transform: none !important;
+  }
+
+}
+
+/* R49-PRODUCTS-HOME-MASTER-GEOMETRY-END */

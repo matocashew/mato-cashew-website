@@ -1,16 +1,6 @@
-.home-weather {
+﻿.home-weather {
   padding: 88px 0;
-  background:
-    radial-gradient(
-      circle at 8% 12%,
-      rgba(240, 180, 64, 0.12),
-      transparent 34%
-    ),
-    linear-gradient(
-      180deg,
-      #f8fbf8 0%,
-      #ffffff 100%
-    );
+  background: transparent;
 }
 
 .home-weather__shell {
