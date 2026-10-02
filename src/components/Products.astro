@@ -1,7 +1,7 @@
----
+﻿---
 import ProductGrid from "./products/ProductGrid.astro";
 
-import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
+import { getLanguage } from "../i18n/getLanguage";
 import { getLocalizedPath } from "../i18n/getLocalizedPath";
 
 import type { Language } from "../i18n/config";
@@ -12,14 +12,12 @@ import { getFeaturedProducts } from "../services/productService";
 import "../styles/products-home.css";
 
 
-const t = getCurrentLanguage(
-  Astro.url.pathname
-);
-
 const language: Language =
   Astro.url.pathname.startsWith("/km")
     ? "km"
     : "en";
+
+const t = getLanguage(language);
 
 const productsPath =
   getLocalizedPath(
@@ -83,14 +81,6 @@ const featuredProducts = (
           products={featuredProducts}
           language={language}
         />
-
-        <a
-          href={productsPath}
-          class="products-showcase-arrow"
-          aria-label={t.productsHome.viewAll}
-        >
-          →
-        </a>
 
       </div>
 

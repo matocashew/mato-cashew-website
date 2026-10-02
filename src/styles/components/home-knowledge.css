@@ -1,4 +1,4 @@
-/* =========================================================
+﻿/* =========================================================
    HOME KNOWLEDGE
    ========================================================= */
 
@@ -126,3 +126,165 @@
 .home-knowledge {
   background: transparent;
 }
+
+/* =========================================================
+   R71F6Q8P4F
+   CASHEW KNOWLEDGE - APPROVED OUTER GLASS CARD
+   ========================================================= */
+
+.home-knowledge {
+  position: relative;
+  z-index: 2;
+
+  width: min(1200px, calc(100% - 40px));
+  max-width: 1200px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  box-sizing: border-box;
+
+  padding: 42px 30px 30px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.30),
+      rgba(255, 255, 255, 0.16)
+    );
+
+  -webkit-backdrop-filter:
+    blur(18px) saturate(1.18);
+
+  backdrop-filter:
+    blur(18px) saturate(1.18);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.72);
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 22px 55px rgba(5, 25, 20, 0.22);
+
+  overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   KNOWLEDGE HEADER
+   --------------------------------------------------------- */
+
+.home-knowledge .home-knowledge-header {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ---------------------------------------------------------
+   KNOWLEDGE EYEBROW / TAG
+   --------------------------------------------------------- */
+
+.home-knowledge .eyebrow,
+.home-knowledge .section-eyebrow,
+.home-knowledge .section-label {
+  color: rgb(126, 224, 180);
+  font-weight: 800;
+  opacity: 1;
+}
+
+
+/* ---------------------------------------------------------
+   KNOWLEDGE MAIN HEADING
+   --------------------------------------------------------- */
+
+.home-knowledge .home-knowledge-header h1,
+.home-knowledge .home-knowledge-header h2 {
+  color: rgba(255, 255, 255, 0.98);
+  font-weight: 700;
+  opacity: 1;
+
+  text-shadow:
+    0 2px 5px rgba(0, 25, 20, 0.38);
+}
+
+
+/* ---------------------------------------------------------
+   KNOWLEDGE DESCRIPTION
+   --------------------------------------------------------- */
+
+.home-knowledge .home-knowledge-description {
+  position: relative;
+  z-index: 2;
+
+  color: rgba(255, 255, 255, 0.88);
+  opacity: 1;
+
+  text-shadow:
+    0 1px 3px rgba(0, 25, 20, 0.30);
+}
+
+
+/* ---------------------------------------------------------
+   ARTICLE GRID
+   --------------------------------------------------------- */
+
+.home-knowledge .home-knowledge-grid {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ---------------------------------------------------------
+   IMPORTANT:
+   ARTICLE CARDS MUST REMAIN SOLID.
+   THEY ARE NOT PART OF THE GLASS EFFECT.
+   --------------------------------------------------------- */
+
+.home-knowledge .knowledge-article-card {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+
+/* ---------------------------------------------------------
+   RESPONSIVE SAFETY
+   --------------------------------------------------------- */
+
+@media (max-width: 1240px) {
+  .home-knowledge {
+    width: calc(100% - 40px);
+  }
+}
+
+@media (max-width: 767px) {
+  .home-knowledge {
+    width: calc(100% - 24px);
+    padding: 32px 18px 22px;
+    border-radius: 20px;
+  }
+}
+
+/* =========================================================
+   END R71F6Q8P4F
+   ========================================================= */
+
+
+/* =========================================================
+   R71F6Q8P8F - KNOWLEDGE SECTION TAG CLARITY
+   Approved browser test: R71F6Q8P5T
+
+   IMPORTANT:
+   Scoped ONLY to Cashew Knowledge section.
+   Does NOT modify global .section-tag.
+   ========================================================= */
+
+.home-knowledge .section-tag {
+  color: rgb(113, 238, 181);
+  font-weight: 900;
+  opacity: 1;
+  text-shadow: 0 1px 2px rgba(0, 35, 25, 0.42);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+

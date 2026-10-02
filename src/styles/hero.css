@@ -4467,3 +4467,586 @@ html[lang="km"] .hero-description,
 
 }
 
+
+
+/*
+ * ============================================================
+ * MATO CASHEW - R71F6Q5B
+ * HOME HERO GLASS PROTOTYPE
+ * ============================================================
+ *
+ * Goal:
+ * - Remove the visual ownership of the old Hero background.
+ * - Allow the global scenic/weather background to show through.
+ * - Preserve Hero content, product artwork and interactions.
+ * - Introduce a controlled frosted-glass surface.
+ *
+ * This is intentionally isolated at the end of hero.css.
+ * Existing Hero architecture is not deleted.
+ * ============================================================
+ */
+
+
+/*
+ * ------------------------------------------------------------
+ * 1. HERO OUTER SURFACE
+ * ------------------------------------------------------------
+ *
+ * The Home Hero itself becomes the glass surface.
+ */
+
+.home-scenic-canvas > .hero,
+.home-scenic-canvas .hero {
+
+  background:
+    linear-gradient(
+      118deg,
+      rgba(255, 255, 255, 0.42) 0%,
+      rgba(255, 255, 255, 0.28) 42%,
+      rgba(255, 255, 255, 0.18) 72%,
+      rgba(255, 255, 255, 0.24) 100%
+    ) !important;
+
+  background-image:
+    none !important;
+
+  -webkit-backdrop-filter:
+    blur(10px)
+    saturate(118%);
+
+  backdrop-filter:
+    blur(10px)
+    saturate(118%);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.50);
+
+  box-shadow:
+    0 20px 55px
+      rgba(3, 30, 20, 0.16),
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.52);
+
+  overflow:
+    hidden;
+}
+
+
+/*
+ * ------------------------------------------------------------
+ * 2. DISABLE OLD HERO BACKGROUND VISUAL LAYERS
+ * ------------------------------------------------------------
+ *
+ * Some historical Hero rules still own premium desktop/mobile
+ * background images.
+ *
+ * Do not delete those rules yet.
+ * Suppress only their visual image ownership in this prototype.
+ */
+
+.home-scenic-canvas > .hero::before,
+.home-scenic-canvas .hero::before {
+
+  background-image:
+    none !important;
+}
+
+
+/*
+ * ------------------------------------------------------------
+ * 3. GLASS LIGHT LAYER
+ * ------------------------------------------------------------
+ *
+ * Very light internal reflection so the panel reads as glass
+ * rather than as a flat transparent rectangle.
+ */
+
+.home-scenic-canvas > .hero::after,
+.home-scenic-canvas .hero::after {
+
+  content: "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  pointer-events:
+    none;
+
+  border-radius:
+    inherit;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(255, 255, 255, 0.04) 38%,
+      rgba(255, 255, 255, 0.00) 62%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+
+  z-index:
+    0;
+}
+
+
+/*
+ * ------------------------------------------------------------
+ * 4. KEEP HERO CONTENT ABOVE GLASS
+ * ------------------------------------------------------------
+ */
+
+.home-scenic-canvas > .hero > *,
+.home-scenic-canvas .hero > * {
+
+  position:
+    relative;
+
+  z-index:
+    1;
+}
+
+
+/*
+ * ------------------------------------------------------------
+ * 5. TEXT LEGIBILITY
+ * ------------------------------------------------------------
+ *
+ * Keep the existing brand palette.
+ * Only strengthen readability against variable scenic imagery.
+ */
+
+.home-scenic-canvas .hero h1,
+.home-scenic-canvas .hero h2 {
+
+  text-shadow:
+    0 1px 1px
+      rgba(255, 255, 255, 0.22);
+}
+
+.home-scenic-canvas .hero p {
+
+  text-shadow:
+    0 1px 1px
+      rgba(255, 255, 255, 0.16);
+}
+
+
+/*
+ * ------------------------------------------------------------
+ * 6. MOBILE
+ * ------------------------------------------------------------
+ */
+
+@media (max-width: 767px) {
+
+  .home-scenic-canvas > .hero,
+  .home-scenic-canvas .hero {
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.48) 0%,
+        rgba(255, 255, 255, 0.30) 58%,
+        rgba(255, 255, 255, 0.22) 100%
+      ) !important;
+
+    background-image:
+      none !important;
+
+    -webkit-backdrop-filter:
+      blur(9px)
+      saturate(116%);
+
+    backdrop-filter:
+      blur(9px)
+      saturate(116%);
+  }
+}
+
+
+/*
+ * ============================================================
+ * END R71F6Q5B
+ * ============================================================
+ */
+
+
+/*
+ * ============================================================
+ * MATO CASHEW - R71F6Q5B5
+ * TRUE WEATHER GLASS HERO
+ * ============================================================
+ *
+ * Desktop only.
+ *
+ * Goal:
+ * - Remove Hero V2 scenic image ownership.
+ * - Allow Weather Atmosphere to remain the single scenic owner.
+ * - Make the floating Hero shell transparent.
+ * - Preserve Hero content, product slider and geometry.
+ * - Preserve existing Hero glass / backdrop-filter.
+ *
+ * No mobile/tablet changes.
+ * ============================================================
+ */
+
+@media (min-width: 993px) {
+
+    /*
+     * The global Weather Atmosphere now owns the scenery.
+     *
+     * These two legacy V2 layers must not paint inside
+     * the floating Hero card.
+     */
+
+    .home-hero-floating-shell
+    > .hero-v2-layer--base,
+
+    .home-hero-floating-shell
+    > .hero-v2-layer--branch {
+
+        display:
+            none !important;
+    }
+
+
+    /*
+     * Remove the opaque shell paint.
+     *
+     * The Hero itself keeps its existing glass surface,
+     * border, radius, blur and content stacking.
+     */
+
+    .home-scenic-canvas
+    > .home-hero-floating-shell {
+
+        background:
+            transparent !important;
+
+        background-color:
+            transparent !important;
+    }
+
+
+    /*
+     * Defensive transparency:
+     *
+     * Do not allow the Hero element itself to reintroduce
+     * an opaque scenic/background image.
+     */
+
+    .home-hero-floating-shell
+    > .hero {
+
+        background-image:
+            none !important;
+
+        background-color:
+            transparent !important;
+    }
+}
+
+
+
+/*
+ * ============================================================
+ * MATO CASHEW - R71F6Q5B6
+ * PRODUCT SLIDER GLOW REMOVAL
+ * ============================================================
+ *
+ * Removes the decorative radial glow behind the Hero product.
+ *
+ * Keeps:
+ * - Hero glass backdrop blur
+ * - Global scenic/weather background
+ * - Product slider
+ * - Product images
+ * - Slider controls
+ * - Hero content and geometry
+ *
+ * Desktop only.
+ * ============================================================
+ */
+
+@media (min-width: 993px) {
+
+    .home-hero-floating-shell
+    .hero-image::before {
+
+        content:
+            none !important;
+
+        display:
+            none !important;
+
+        background:
+            none !important;
+
+        box-shadow:
+            none !important;
+
+        filter:
+            none !important;
+    }
+}
+
+
+/*
+ * ============================================================
+ * MATO CASHEW - R71F6Q5B16P
+ * FINAL HERO CONTENT CLARITY + STABLE CTA STATES
+ * ============================================================
+ *
+ * Purpose:
+ * - Keep Hero content readable over changing scenic backgrounds.
+ * - Do not create a second card inside the Hero glass.
+ * - Preserve the existing Hero glass architecture.
+ * - Preserve the B6 product-glow removal.
+ * - Keep CTA colors visually stable during hover/focus.
+ *
+ * Desktop only.
+ * ============================================================
+ */
+
+@media (min-width: 993px) {
+
+    /*
+     * --------------------------------------------------------
+     * 1. HERO TEXT
+     * --------------------------------------------------------
+     *
+     * Use high-contrast light typography directly on the
+     * existing glass. No local panel/card is introduced.
+     */
+
+    .home-hero-floating-shell .hero-content h1,
+    .home-hero-floating-shell .hero-content h2 {
+        color:
+            rgba(255, 255, 255, 0.98) !important;
+
+        opacity:
+            1 !important;
+
+        text-shadow:
+            0 2px 5px rgba(0, 0, 0, 0.30),
+            0 1px 2px rgba(0, 0, 0, 0.28) !important;
+    }
+
+
+    .home-hero-floating-shell .hero-content p {
+        color:
+            rgba(255, 255, 255, 0.96) !important;
+
+        opacity:
+            1 !important;
+
+        text-shadow:
+            0 1px 3px rgba(0, 0, 0, 0.38),
+            0 1px 1px rgba(0, 0, 0, 0.24) !important;
+    }
+
+
+    /*
+     * Premium eyebrow remains brand green but receives a
+     * subtle light lift for variable scenic backgrounds.
+     */
+
+    .home-hero-floating-shell .hero-eyebrow,
+    .home-hero-floating-shell .hero-kicker {
+        opacity:
+            1 !important;
+
+        text-shadow:
+            0 1px 2px rgba(255, 255, 255, 0.34);
+    }
+
+
+    /*
+     * --------------------------------------------------------
+     * 2. PRIMARY CTA
+     * Explore Our Products
+     * --------------------------------------------------------
+     */
+
+    .home-hero-floating-shell
+    .hero-primary-btn,
+
+    .home-hero-floating-shell
+    .hero-primary-btn:hover,
+
+    .home-hero-floating-shell
+    .hero-primary-btn:focus,
+
+    .home-hero-floating-shell
+    .hero-primary-btn:focus-visible,
+
+    .home-hero-floating-shell
+    .hero-primary-btn:active {
+
+        color:
+            rgb(255, 255, 255) !important;
+
+        background:
+            rgb(13, 92, 58) !important;
+
+        border-color:
+            rgb(13, 92, 58) !important;
+
+        box-shadow:
+            0 10px 28px
+            rgba(15, 103, 63, 0.18) !important;
+    }
+
+
+    /*
+     * --------------------------------------------------------
+     * 3. SECONDARY CTA
+     * Learn Our Story
+     * --------------------------------------------------------
+     */
+
+    .home-hero-floating-shell
+    .hero-secondary-btn,
+
+    .home-hero-floating-shell
+    .hero-secondary-btn:hover,
+
+    .home-hero-floating-shell
+    .hero-secondary-btn:focus,
+
+    .home-hero-floating-shell
+    .hero-secondary-btn:focus-visible,
+
+    .home-hero-floating-shell
+    .hero-secondary-btn:active {
+
+        color:
+            rgb(7, 63, 47) !important;
+
+        background:
+            rgba(250, 252, 248, 0.88) !important;
+
+        border-color:
+            rgb(13, 92, 58) !important;
+
+        box-shadow:
+            none !important;
+    }
+
+
+    /*
+     * Keep hover motion subtle without changing visual identity.
+     */
+
+    .home-hero-floating-shell
+    .hero-primary-btn:hover,
+
+    .home-hero-floating-shell
+    .hero-secondary-btn:hover {
+
+        transform:
+            translateY(-1px);
+    }
+}
+
+
+/*
+ * ============================================================
+ * END R71F6Q5B16P
+ * ============================================================
+ */
+
+/*
+ * ============================================================
+ * MATO CASHEW - R71F6Q5B18P
+ * PREMIUM HERO TAG CLARITY
+ * ============================================================
+ *
+ * Keeps the Hero eyebrow readable over changing scenic
+ * backgrounds without adding another card or overlay.
+ *
+ * Browser-tested as R71F6Q5B18T.
+ * ============================================================
+ */
+
+@media (min-width: 993px) {
+
+    .home-hero-floating-shell .hero-tag {
+
+        color:
+            rgb(46, 160, 105) !important;
+
+        opacity:
+            1 !important;
+
+        text-shadow:
+            0 1px 1px rgba(0, 0, 0, 0.42),
+            0 0 5px rgba(255, 255, 255, 0.22) !important;
+    }
+
+
+    .home-hero-floating-shell .hero-tag::before {
+
+        background:
+            rgb(46, 160, 105) !important;
+
+        background-color:
+            rgb(46, 160, 105) !important;
+
+        box-shadow:
+            0 1px 1px rgba(0, 0, 0, 0.30),
+            0 0 4px rgba(255, 255, 255, 0.20) !important;
+
+        opacity:
+            1 !important;
+    }
+}
+
+
+/*
+ * ============================================================
+ * END R71F6Q5B18P
+ * ============================================================
+ */
+
+/* =========================================================
+   R71F6Q5B20P
+   HERO SECONDARY CTA — APPROVED HOVER STATE
+   ---------------------------------------------------------
+   Normal:
+   - Premium light / glass appearance
+   - Dark Mato green text
+
+   Hover / keyboard focus:
+   - Mato green background
+   - White text
+
+   Scoped to Home Hero only.
+   ========================================================= */
+
+.home-hero-floating-shell .hero-secondary-btn:hover,
+.home-hero-floating-shell .hero-secondary-btn:focus-visible {
+    color: rgb(255, 255, 255) !important;
+    background: rgb(13, 92, 58) !important;
+    border-color: rgb(13, 92, 58) !important;
+
+    box-shadow:
+        0 10px 28px rgba(15, 103, 63, 0.22) !important;
+
+    transform: translateY(-1px);
+}
+
+/*
+ * Preserve the approved normal state after mouse leaves.
+ */
+.home-hero-floating-shell .hero-secondary-btn:not(:hover):not(:focus-visible) {
+    color: rgb(7, 63, 47) !important;
+    background: rgba(250, 252, 248, 0.88) !important;
+    border-color: rgb(13, 92, 58) !important;
+}
+
+/* R71F6Q5B20P END */

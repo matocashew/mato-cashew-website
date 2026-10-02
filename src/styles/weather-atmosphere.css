@@ -4247,3 +4247,73 @@ footer,
 
 /* === MATO R71F6Q4N3 GENTLE BREEZE CLOUD SPEED END === */
 
+
+/* =========================================================
+   R71F6Q9P15F - WEATHER LABEL AND LIVE WEATHER CLARITY
+   Approved visual direction
+   Scope:
+     1. CASHEW WEATHER label
+     2. Live weather control
+
+   DO NOT MODIFY:
+     - Outer Glass
+     - 1200px width
+     - Glass spacing
+     - Grid
+     - Right Weather Card
+     - Weather data
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   CASHEW WEATHER
+   --------------------------------------------------------- */
+
+.home-weather .section-tag,
+.weather-atmosphere .section-tag,
+.weather-section .section-tag {
+  color: rgb(0, 105, 67) !important;
+  opacity: 1 !important;
+  font-weight: 900 !important;
+
+  text-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.22),
+    0 1px 2px rgba(0, 35, 25, 0.28) !important;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+
+/* ---------------------------------------------------------
+   LIVE WEATHER
+   Improve contrast without changing its position
+   --------------------------------------------------------- */
+
+.home-weather a[href*="weather"],
+.weather-atmosphere a[href*="weather"],
+.weather-section a[href*="weather"] {
+  color: rgb(0, 105, 67) !important;
+  opacity: 1 !important;
+  font-weight: 800 !important;
+
+  text-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.30) !important;
+}
+
+
+/* ---------------------------------------------------------
+   If Live Weather uses a button class instead of an anchor
+   --------------------------------------------------------- */
+
+.home-weather .weather-link,
+.home-weather .live-weather,
+.weather-atmosphere .weather-link,
+.weather-atmosphere .live-weather,
+.weather-section .weather-link,
+.weather-section .live-weather {
+  color: rgb(0, 105, 67) !important;
+  opacity: 1 !important;
+  font-weight: 800 !important;
+}
+

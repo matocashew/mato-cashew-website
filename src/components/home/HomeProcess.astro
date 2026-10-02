@@ -1,10 +1,13 @@
----
-import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+﻿---
+import { getLanguage } from "../../i18n/getLanguage";
 import "../../styles/home-process.css";
 
-const t = getCurrentLanguage(
-  Astro.url.pathname
-);
+const language =
+  Astro.url.pathname.startsWith("/km")
+    ? "km"
+    : "en";
+
+const t = getLanguage(language);
 
 const content = t.processHome;
 ---
