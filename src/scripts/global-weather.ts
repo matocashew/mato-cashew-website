@@ -14,6 +14,57 @@ import {
 let requestId = 0;
 
 
+/*
+ * R71F6Q4P5D
+ * ---------------------------------------------------------
+ * ClientRouter atmosphere continuity.
+ *
+ * During Astro client navigation the destination page
+ * receives a new WeatherAtmosphere element. Preserve the
+ * last confirmed live state so that new element does not
+ * briefly display its static fallback background.
+ */
+
+type PersistedAtmosphereState = {
+  kind: string;
+  wind: string;
+  day: string;
+  phase: string;
+};
+
+
+let persistedAtmosphereState:
+  PersistedAtmosphereState | null =
+    null;
+
+
+function applyPersistedAtmosphereState():
+  void {
+
+  const atmosphere =
+    getAtmosphereElement();
+
+  if (
+    !atmosphere ||
+    !persistedAtmosphereState
+  ) {
+    return;
+  }
+
+  atmosphere.dataset.weatherKind =
+    persistedAtmosphereState.kind;
+
+  atmosphere.dataset.weatherWind =
+    persistedAtmosphereState.wind;
+
+  atmosphere.dataset.weatherDay =
+    persistedAtmosphereState.day;
+
+  atmosphere.dataset.weatherPhase =
+    persistedAtmosphereState.phase;
+}
+
+
 function getAtmosphereElement():
   HTMLElement | null {
 
@@ -205,6 +256,28 @@ async function refreshGlobalWeather():
     atmosphere.dataset.weatherPhase =
       weatherPhase;
 
+
+    /*
+     * Keep only the fully resolved state.
+     *
+     * This is reused during the next client-side route swap
+     * while the fresh location/weather request runs.
+     */
+
+    persistedAtmosphereState = {
+      kind:
+        atmosphere.dataset.weatherKind ?? "",
+
+      wind:
+        atmosphere.dataset.weatherWind ?? "",
+
+      day:
+        atmosphere.dataset.weatherDay ?? "",
+
+      phase:
+        weatherPhase
+    };
+
     atmosphere.dispatchEvent(
       new CustomEvent(
         "mato:weather-change",
@@ -320,9 +393,36 @@ if (
    * refresh the atmosphere for the newly rendered page.
    */
 
+  /*
+   * Astro has now installed the destination DOM.
+   *
+   * Restore the last confirmed atmosphere state immediately
+   * rather than exposing the destination element's fallback
+   * weather state while network refresh is still pending.
+   */
+
+  document.addEventListener(
+    "astro:after-swap",
+    () => {
+
+      applyPersistedAtmosphereState();
+    }
+  );
+
+
   document.addEventListener(
     "astro:page-load",
     () => {
+
+      /*
+       * Defensive second application.
+       */
+
+      applyPersistedAtmosphereState();
+
+      /*
+       * Existing live weather refresh remains active.
+       */
 
       void refreshGlobalWeather();
     }

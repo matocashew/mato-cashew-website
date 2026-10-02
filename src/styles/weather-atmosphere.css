@@ -2295,3 +2295,1955 @@ footer,
 
 /* === MATO R71E2 SCENIC END === */
 
+
+/* =========================================================
+   MATO R71F6Q4B OPEN-SKY CLOUD CORRIDOR
+   =========================================================
+
+   PURPOSE
+
+   Keep the existing SVG weather clouds inside the open
+   scenic sky instead of allowing them to cover the cashew
+   branches on the left and right sides.
+
+   Existing SVG artwork is preserved.
+   Existing live-weather opacity is preserved.
+   Existing weather-kind system is preserved.
+
+   This block owns only:
+
+   - cloud position
+   - cloud dimensions
+   - clipping corridor
+   - gentle local drift
+
+   ========================================================= */
+
+
+/*
+ * The atmosphere becomes the clipping owner.
+ *
+ * The scenic background itself remains full-screen.
+ */
+
+.weather-atmosphere {
+
+  overflow:
+    hidden;
+}
+
+
+/* ---------------------------------------------------------
+   COMMON CLOUD SAFETY
+   --------------------------------------------------------- */
+
+.weather-atmosphere__cloud {
+
+  position:
+    fixed !important;
+
+  pointer-events:
+    none;
+
+  will-change:
+    transform;
+
+  /*
+   * Keep the clouds in the upper open-sky region.
+   *
+   * Do not allow a large full-screen cloud silhouette.
+   */
+
+  max-height:
+    22vh;
+}
+
+
+/* ---------------------------------------------------------
+   BACK CLOUD
+   ---------------------------------------------------------
+ *
+ * Larger cloud.
+ *
+ * Positioned in the upper-middle sky.
+ * It does not begin at the left cashew-tree edge.
+ */
+
+.weather-atmosphere__cloud--back {
+
+  top:
+    calc(
+      var(--mato-scenic-top, 80px)
+      + 4.5vh
+    ) !important;
+
+  left:
+    24vw !important;
+
+  width:
+    31vw !important;
+
+  height:
+    auto !important;
+
+  right:
+    auto !important;
+
+  bottom:
+    auto !important;
+
+  opacity:
+    calc(
+      var(--weather-cloud-opacity, 0.72)
+      * 0.78
+    ) !important;
+
+  animation:
+    mato-r71f6q4b-cloud-back
+    34s
+    ease-in-out
+    infinite
+    alternate !important;
+}
+
+
+/* ---------------------------------------------------------
+   FRONT / DISTANT CLOUD
+   ---------------------------------------------------------
+ *
+ * Smaller cloud.
+ *
+ * Positioned farther toward the right-middle sky while
+ * remaining safely away from the right cashew branch.
+ */
+
+.weather-atmosphere__cloud--front {
+
+  top:
+    calc(
+      var(--mato-scenic-top, 80px)
+      + 14vh
+    ) !important;
+
+  left:
+    59vw !important;
+
+  width:
+    21vw !important;
+
+  height:
+    auto !important;
+
+  right:
+    auto !important;
+
+  bottom:
+    auto !important;
+
+  opacity:
+    calc(
+      var(--weather-cloud-opacity, 0.72)
+      * 0.58
+    ) !important;
+
+  animation:
+    mato-r71f6q4b-cloud-front
+    42s
+    ease-in-out
+    infinite
+    alternate !important;
+}
+
+
+/* ---------------------------------------------------------
+   NATURAL WIND DRIFT
+   ---------------------------------------------------------
+ *
+ * Deliberately small movement.
+ *
+ * The clouds breathe/drift around their assigned sky
+ * positions instead of travelling across the whole screen.
+ */
+
+@keyframes mato-r71f6q4b-cloud-back {
+
+  0% {
+
+    transform:
+      translate3d(
+        -10px,
+        0,
+        0
+      );
+  }
+
+  35% {
+
+    transform:
+      translate3d(
+        2px,
+        -2px,
+        0
+      );
+  }
+
+  70% {
+
+    transform:
+      translate3d(
+        12px,
+        1px,
+        0
+      );
+  }
+
+  100% {
+
+    transform:
+      translate3d(
+        20px,
+        -1px,
+        0
+      );
+  }
+}
+
+
+@keyframes mato-r71f6q4b-cloud-front {
+
+  0% {
+
+    transform:
+      translate3d(
+        8px,
+        0,
+        0
+      );
+  }
+
+  40% {
+
+    transform:
+      translate3d(
+        -1px,
+        1px,
+        0
+      );
+  }
+
+  75% {
+
+    transform:
+      translate3d(
+        -10px,
+        -1px,
+        0
+      );
+  }
+
+  100% {
+
+    transform:
+      translate3d(
+        -17px,
+        1px,
+        0
+      );
+  }
+}
+
+
+/* ---------------------------------------------------------
+   CLOUD SVG FIT
+   ---------------------------------------------------------
+ *
+ * Keep the complete SVG cloud visible inside the new
+ * dimensions without stretching it.
+ */
+
+.weather-atmosphere__cloud-svg {
+
+  display:
+    block;
+
+  width:
+    100% !important;
+
+  height:
+    auto !important;
+
+  overflow:
+    visible;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   ---------------------------------------------------------
+ *
+ * Mobile scenic geometry is different.
+ * Use smaller and more conservative clouds.
+ */
+
+@media (max-width: 768px) {
+
+  .weather-atmosphere__cloud--back {
+
+    top:
+      12vh !important;
+
+    left:
+      18vw !important;
+
+    width:
+      46vw !important;
+  }
+
+
+  .weather-atmosphere__cloud--front {
+
+    top:
+      23vh !important;
+
+    left:
+      57vw !important;
+
+    width:
+      31vw !important;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   ACCESSIBILITY
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .weather-atmosphere__cloud--back,
+  .weather-atmosphere__cloud--front {
+
+    animation:
+      none !important;
+  }
+}
+
+
+/* === MATO R71F6Q4B OPEN-SKY CLOUD CORRIDOR END === */
+
+
+/* =========================================================
+   MATO R71F6Q4C THREE CLOUD TUNING
+   =========================================================
+   Final owner over R71F6Q4B.
+
+   - 3 clouds
+   - slightly smaller scale
+   - faster gentle drift
+   - open-sky placement preserved
+   - cashew-tree zones avoided
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   CLOUD 1 — BACK / LEFT-MIDDLE OPEN SKY
+   --------------------------------------------------------- */
+
+.weather-atmosphere__cloud--back {
+
+  top:
+    calc(
+      var(--mato-scenic-top, 80px)
+      + 5.5vh
+    ) !important;
+
+  left:
+    27vw !important;
+
+  width:
+    25vw !important;
+
+  max-width:
+    480px;
+
+  animation:
+    mato-r71f6q4c-cloud-one
+    24s
+    ease-in-out
+    infinite
+    alternate !important;
+}
+
+
+/* ---------------------------------------------------------
+   CLOUD 2 — FRONT / RIGHT-MIDDLE OPEN SKY
+   --------------------------------------------------------- */
+
+.weather-atmosphere__cloud--front {
+
+  top:
+    calc(
+      var(--mato-scenic-top, 80px)
+      + 15vh
+    ) !important;
+
+  left:
+    61vw !important;
+
+  width:
+    17vw !important;
+
+  max-width:
+    330px;
+
+  animation:
+    mato-r71f6q4c-cloud-two
+    29s
+    ease-in-out
+    infinite
+    alternate !important;
+}
+
+
+/* ---------------------------------------------------------
+   CLOUD 3 — SMALL DISTANT CENTRAL CLOUD
+   --------------------------------------------------------- */
+
+.weather-atmosphere__cloud--third {
+
+  position:
+    fixed !important;
+
+  top:
+    calc(
+      var(--mato-scenic-top, 80px)
+      + 27vh
+    ) !important;
+
+  left:
+    47vw !important;
+
+  right:
+    auto !important;
+
+  bottom:
+    auto !important;
+
+  width:
+    14vw !important;
+
+  max-width:
+    270px;
+
+  height:
+    auto !important;
+
+  opacity:
+    calc(
+      var(--weather-cloud-opacity, 0.72)
+      * 0.48
+    ) !important;
+
+  pointer-events:
+    none;
+
+  will-change:
+    transform;
+
+  animation:
+    mato-r71f6q4c-cloud-three
+    26s
+    ease-in-out
+    infinite
+    alternate !important;
+}
+
+
+/* ---------------------------------------------------------
+   CLOUD 1 DRIFT
+   --------------------------------------------------------- */
+
+@keyframes mato-r71f6q4c-cloud-one {
+
+  0% {
+    transform:
+      translate3d(-8px, 0, 0);
+  }
+
+  35% {
+    transform:
+      translate3d(3px, -2px, 0);
+  }
+
+  70% {
+    transform:
+      translate3d(14px, 1px, 0);
+  }
+
+  100% {
+    transform:
+      translate3d(24px, -1px, 0);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   CLOUD 2 DRIFT
+   --------------------------------------------------------- */
+
+@keyframes mato-r71f6q4c-cloud-two {
+
+  0% {
+    transform:
+      translate3d(10px, 0, 0);
+  }
+
+  35% {
+    transform:
+      translate3d(2px, 1px, 0);
+  }
+
+  70% {
+    transform:
+      translate3d(-10px, -1px, 0);
+  }
+
+  100% {
+    transform:
+      translate3d(-22px, 1px, 0);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   CLOUD 3 DRIFT
+   --------------------------------------------------------- */
+
+@keyframes mato-r71f6q4c-cloud-three {
+
+  0% {
+    transform:
+      translate3d(-12px, 0, 0);
+  }
+
+  30% {
+    transform:
+      translate3d(-2px, -1px, 0);
+  }
+
+  65% {
+    transform:
+      translate3d(11px, 1px, 0);
+  }
+
+  100% {
+    transform:
+      translate3d(23px, -1px, 0);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  .weather-atmosphere__cloud--back {
+
+    left:
+      23vw !important;
+
+    width:
+      35vw !important;
+  }
+
+
+  .weather-atmosphere__cloud--front {
+
+    left:
+      62vw !important;
+
+    width:
+      25vw !important;
+  }
+
+
+  .weather-atmosphere__cloud--third {
+
+    top:
+      30vh !important;
+
+    left:
+      43vw !important;
+
+    width:
+      22vw !important;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .weather-atmosphere__cloud--back,
+  .weather-atmosphere__cloud--front,
+  .weather-atmosphere__cloud--third {
+
+    animation:
+      none !important;
+  }
+}
+
+
+/* === MATO R71F6Q4C THREE CLOUD TUNING END === */
+
+
+/* =========================================================
+   MATO R71F6Q4D OPEN SKY TRAVEL
+   =========================================================
+
+   Desktop final movement owner.
+
+   Goal:
+   - preserve current three cloud sizes
+   - preserve current vertical positions
+   - move clouds through central open sky
+   - approach left/right red-line boundaries
+   - avoid permanent placement over cashew trees
+   - maintain three independent natural speeds
+
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   CLOUD 1
+   Large upper cloud.
+
+   Current base:
+   left = 27vw
+
+   Travel:
+   approximately 15vw -> 59vw
+   --------------------------------------------------------- */
+
+@keyframes mato-r71f6q4d-cloud-one {
+
+  0% {
+    transform:
+      translate3d(-12vw, 0, 0);
+  }
+
+  25% {
+    transform:
+      translate3d(-2vw, -2px, 0);
+  }
+
+  50% {
+    transform:
+      translate3d(10vw, 1px, 0);
+  }
+
+  75% {
+    transform:
+      translate3d(22vw, -2px, 0);
+  }
+
+  100% {
+    transform:
+      translate3d(32vw, 0, 0);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   CLOUD 2
+   Smaller upper-right cloud.
+
+   Current base:
+   left = 61vw
+
+   Travel:
+   approximately 17vw -> 83vw
+   --------------------------------------------------------- */
+
+@keyframes mato-r71f6q4d-cloud-two {
+
+  0% {
+    transform:
+      translate3d(22vw, 0, 0);
+  }
+
+  25% {
+    transform:
+      translate3d(8vw, 1px, 0);
+  }
+
+  50% {
+    transform:
+      translate3d(-8vw, -1px, 0);
+  }
+
+  75% {
+    transform:
+      translate3d(-27vw, 1px, 0);
+  }
+
+  100% {
+    transform:
+      translate3d(-44vw, 0, 0);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   CLOUD 3
+   Small distant lower cloud.
+
+   Current base:
+   left = 47vw
+
+   Travel:
+   approximately 16vw -> 81vw
+   --------------------------------------------------------- */
+
+@keyframes mato-r71f6q4d-cloud-three {
+
+  0% {
+    transform:
+      translate3d(-31vw, 0, 0);
+  }
+
+  25% {
+    transform:
+      translate3d(-15vw, -1px, 0);
+  }
+
+  50% {
+    transform:
+      translate3d(1vw, 1px, 0);
+  }
+
+  75% {
+    transform:
+      translate3d(18vw, -1px, 0);
+  }
+
+  100% {
+    transform:
+      translate3d(34vw, 0, 0);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   DESKTOP ONLY
+   --------------------------------------------------------- */
+
+@media (min-width: 769px) {
+
+  .weather-atmosphere__cloud--back {
+
+    animation:
+      mato-r71f6q4d-cloud-one
+      34s
+      ease-in-out
+      infinite
+      alternate !important;
+  }
+
+
+  .weather-atmosphere__cloud--front {
+
+    animation:
+      mato-r71f6q4d-cloud-two
+      39s
+      ease-in-out
+      infinite
+      alternate !important;
+  }
+
+
+  .weather-atmosphere__cloud--third {
+
+    animation:
+      mato-r71f6q4d-cloud-three
+      36s
+      ease-in-out
+      infinite
+      alternate !important;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   ACCESSIBILITY
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .weather-atmosphere__cloud--back,
+  .weather-atmosphere__cloud--front,
+  .weather-atmosphere__cloud--third {
+
+    animation:
+      none !important;
+  }
+}
+
+
+/* === MATO R71F6Q4D OPEN SKY TRAVEL END === */
+
+
+/* =========================================================
+   MATO R71F6Q4E CLOUD MOTION TUNING
+   =========================================================
+
+   Final tuning over R71F6Q4D.
+
+   Changes:
+   - slower natural movement
+   - preserve approved horizontal travel
+   - raise Cloud 3 away from mountain ridge
+
+   No cloud size changes.
+   No scenic background changes.
+   No weather-engine changes.
+
+   ========================================================= */
+
+
+@media (min-width: 769px) {
+
+  /* -------------------------------------------------------
+     CLOUD 1
+     34s -> 48s
+     ------------------------------------------------------- */
+
+  .weather-atmosphere__cloud--back {
+
+    animation:
+      mato-r71f6q4d-cloud-one
+      48s
+      ease-in-out
+      infinite
+      alternate !important;
+  }
+
+
+  /* -------------------------------------------------------
+     CLOUD 2
+     39s -> 54s
+     ------------------------------------------------------- */
+
+  .weather-atmosphere__cloud--front {
+
+    animation:
+      mato-r71f6q4d-cloud-two
+      54s
+      ease-in-out
+      infinite
+      alternate !important;
+  }
+
+
+  /* -------------------------------------------------------
+     CLOUD 3
+
+     Old:
+       scenic top + 27vh
+
+     New:
+       scenic top + 22vh
+
+     This raises the distant cloud away from
+     the mountain ridge while preserving its
+     current horizontal movement and size.
+
+     36s -> 51s
+     ------------------------------------------------------- */
+
+  .weather-atmosphere__cloud--third {
+
+    top:
+      calc(
+        var(--mato-scenic-top, 80px)
+        + 22vh
+      ) !important;
+
+    animation:
+      mato-r71f6q4d-cloud-three
+      51s
+      ease-in-out
+      infinite
+      alternate !important;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   ACCESSIBILITY
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .weather-atmosphere__cloud--back,
+  .weather-atmosphere__cloud--front,
+  .weather-atmosphere__cloud--third {
+
+    animation:
+      none !important;
+  }
+}
+
+
+/* === MATO R71F6Q4E CLOUD MOTION TUNING END === */
+
+
+/* =========================================================
+   MATO R71F6Q4F SAFE CLOUD CORRIDOR
+   =========================================================
+
+   Goals:
+
+   1. Slow all three clouds further.
+   2. Keep moving clouds inside the open-sky corridor.
+   3. Prevent clouds from entering the cashew-tree edges.
+   4. Preserve approved cloud sizes.
+   5. Preserve Cloud 3 raised vertical position.
+
+   ========================================================= */
+
+
+@media (min-width: 769px) {
+
+
+  /* -------------------------------------------------------
+     CLOUD 1
+     Large upper cloud.
+
+     Travel:
+       29vw -> 47vw
+
+     This keeps the large cloud away from
+     the left and right orchard edges.
+     ------------------------------------------------------- */
+
+  .weather-atmosphere__cloud--back {
+
+    animation:
+      mato-r71f6q4f-cloud-one
+      62s
+      ease-in-out
+      infinite
+      alternate !important;
+  }
+
+
+  @keyframes mato-r71f6q4f-cloud-one {
+
+    0% {
+      left: 29vw;
+    }
+
+    100% {
+      left: 47vw;
+    }
+  }
+
+
+
+  /* -------------------------------------------------------
+     CLOUD 2
+     Right / middle cloud.
+
+     IMPORTANT:
+     Stop before the right cashew canopy.
+
+     Travel:
+       57vw -> 72vw
+     ------------------------------------------------------- */
+
+  .weather-atmosphere__cloud--front {
+
+    animation:
+      mato-r71f6q4f-cloud-two
+      70s
+      ease-in-out
+      infinite
+      alternate !important;
+  }
+
+
+  @keyframes mato-r71f6q4f-cloud-two {
+
+    0% {
+      left: 57vw;
+    }
+
+    100% {
+      left: 72vw;
+    }
+  }
+
+
+
+  /* -------------------------------------------------------
+     CLOUD 3
+     Smaller lower cloud.
+
+     Keep the raised position from R71F6Q4E.
+
+     Travel:
+       31vw -> 51vw
+     ------------------------------------------------------- */
+
+  .weather-atmosphere__cloud--third {
+
+    top:
+      calc(
+        var(--mato-scenic-top, 80px)
+        + 22vh
+      ) !important;
+
+    animation:
+      mato-r71f6q4f-cloud-three
+      66s
+      ease-in-out
+      infinite
+      alternate !important;
+  }
+
+
+  @keyframes mato-r71f6q4f-cloud-three {
+
+    0% {
+      left: 31vw;
+    }
+
+    100% {
+      left: 51vw;
+    }
+  }
+
+}
+
+
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .weather-atmosphere__cloud--back,
+  .weather-atmosphere__cloud--front,
+  .weather-atmosphere__cloud--third {
+
+    animation:
+      none !important;
+  }
+}
+
+
+/* === MATO R71F6Q4F SAFE CLOUD CORRIDOR END === */
+
+
+/* =========================================================
+   MATO R71F6Q4G NATURAL CLOUD SPEED
+   =========================================================
+
+   Natural gentle wind motion.
+
+   IMPORTANT:
+   - cloud positions unchanged
+   - cloud sizes unchanged
+   - safe orchard boundaries unchanged
+   - Cloud 3 vertical position unchanged
+
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .weather-atmosphere__cloud--back {
+
+    animation-duration:
+      46s !important;
+
+    animation-timing-function:
+      ease-in-out !important;
+  }
+
+
+  .weather-atmosphere__cloud--front {
+
+    animation-duration:
+      52s !important;
+
+    animation-timing-function:
+      ease-in-out !important;
+  }
+
+
+  .weather-atmosphere__cloud--third {
+
+    animation-duration:
+      49s !important;
+
+    animation-timing-function:
+      ease-in-out !important;
+  }
+
+}
+
+
+/* === MATO R71F6Q4G NATURAL CLOUD SPEED END === */
+
+
+/* =========================================================
+   MATO R71F6Q4H NATURAL CLOUD SPEED MEDIUM
+
+   Cloud 1: 36s
+   Cloud 2: 41s
+   Cloud 3: 38s
+
+   Geometry and safe corridor remain unchanged.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .weather-atmosphere__cloud--back {
+    animation-duration:
+      36s !important;
+
+    animation-timing-function:
+      ease-in-out !important;
+  }
+
+
+  .weather-atmosphere__cloud--front {
+    animation-duration:
+      41s !important;
+
+    animation-timing-function:
+      ease-in-out !important;
+  }
+
+
+  .weather-atmosphere__cloud--third {
+    animation-duration:
+      38s !important;
+
+    animation-timing-function:
+      ease-in-out !important;
+  }
+
+}
+
+
+/* === MATO R71F6Q4H NATURAL CLOUD SPEED MEDIUM END === */
+
+
+/* =========================================================
+   MATO R71F6Q4I NATURAL CLOUD SPEED
+
+   Slightly faster natural drifting.
+
+   Cloud 1 = 29s
+   Cloud 2 = 33s
+   Cloud 3 = 31s
+
+   IMPORTANT:
+   - positions unchanged
+   - sizes unchanged
+   - safe orchard corridor unchanged
+   - Cloud 3 height unchanged
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .weather-atmosphere__cloud--back {
+
+    animation-duration:
+      29s !important;
+
+    animation-timing-function:
+      ease-in-out !important;
+  }
+
+
+  .weather-atmosphere__cloud--front {
+
+    animation-duration:
+      33s !important;
+
+    animation-timing-function:
+      ease-in-out !important;
+  }
+
+
+  .weather-atmosphere__cloud--third {
+
+    animation-duration:
+      31s !important;
+
+    animation-timing-function:
+      ease-in-out !important;
+  }
+
+}
+
+
+/* === MATO R71F6Q4I NATURAL CLOUD SPEED END === */
+
+
+/* =========================================================
+   MATO R71F6Q4J EXPANDED CLOUD TRAVEL
+
+   Purpose:
+   Allow the three moving clouds to travel much farther
+   across the open sky toward the approved left/right
+   visual boundaries.
+
+   SPEED REMAINS:
+     Cloud 1 = 29s
+     Cloud 2 = 33s
+     Cloud 3 = 31s
+
+   ========================================================= */
+
+
+@media (min-width: 769px) {
+
+
+  /* -------------------------------------------------------
+     CLOUD 1 — LARGE UPPER CLOUD
+
+     Previous:
+       29vw -> 47vw
+
+     New:
+       15vw -> 48vw
+     ------------------------------------------------------- */
+
+  @keyframes mato-r71f6q4f-cloud-one {
+
+    0% {
+      left: 15vw;
+    }
+
+    100% {
+      left: 48vw;
+    }
+  }
+
+
+
+  /* -------------------------------------------------------
+     CLOUD 2 — RIGHT CLOUD
+
+     Previous:
+       57vw -> 72vw
+
+     New:
+       55vw -> 84vw
+
+     This brings the cloud substantially closer to the
+     right red boundary without intentionally pushing
+     the whole cloud into the cashew canopy.
+     ------------------------------------------------------- */
+
+  @keyframes mato-r71f6q4f-cloud-two {
+
+    0% {
+      left: 55vw;
+    }
+
+    100% {
+      left: 84vw;
+    }
+  }
+
+
+
+  /* -------------------------------------------------------
+     CLOUD 3 — SMALLER CLOUD
+
+     Previous:
+       31vw -> 51vw
+
+     New:
+       18vw -> 55vw
+
+     Vertical position remains unchanged.
+     ------------------------------------------------------- */
+
+  @keyframes mato-r71f6q4f-cloud-three {
+
+    0% {
+      left: 18vw;
+    }
+
+    100% {
+      left: 55vw;
+    }
+  }
+
+}
+
+
+/* === MATO R71F6Q4J EXPANDED CLOUD TRAVEL END === */
+
+
+/* =========================================================
+   MATO R71F6Q4L TRANSLATE3D CLOUD MOTION
+   =========================================================
+
+   Final desktop cloud-motion owner.
+
+   Root-cause fix:
+   - do not animate LEFT
+   - keep LEFT only as static anchor
+   - animate GPU-friendly TRANSLATE3D
+   - use unique keyframe names
+   - avoid collision with R71F6Q4F / R71F6Q4J
+   - preserve approved cloud size and vertical placement
+
+   ========================================================= */
+
+
+@media (min-width: 769px) {
+
+  /* -------------------------------------------------------
+     CLOUD 1
+     Large upper cloud
+
+     Static anchor: 29vw
+     Visual travel: approximately 15vw -> 48vw
+     ------------------------------------------------------- */
+
+  .weather-atmosphere__cloud--back {
+
+    left:
+      29vw !important;
+
+    animation:
+      mato-r71f6q4l-cloud-one
+      29s
+      ease-in-out
+      infinite
+      alternate
+      both !important;
+
+    will-change:
+      transform;
+  }
+
+
+  /* -------------------------------------------------------
+     CLOUD 2
+     Right / middle cloud
+
+     Static anchor: 57vw
+     Visual travel: approximately 55vw -> 84vw
+     ------------------------------------------------------- */
+
+  .weather-atmosphere__cloud--front {
+
+    left:
+      57vw !important;
+
+    animation:
+      mato-r71f6q4l-cloud-two
+      33s
+      ease-in-out
+      infinite
+      alternate
+      both !important;
+
+    will-change:
+      transform;
+  }
+
+
+  /* -------------------------------------------------------
+     CLOUD 3
+     Small distant cloud
+
+     Keep raised position above mountain.
+     Static anchor: 31vw
+     Visual travel: approximately 18vw -> 55vw
+     ------------------------------------------------------- */
+
+  .weather-atmosphere__cloud--third {
+
+    top:
+      calc(
+        var(--mato-scenic-top, 80px)
+        + 22vh
+      ) !important;
+
+    left:
+      31vw !important;
+
+    animation:
+      mato-r71f6q4l-cloud-three
+      31s
+      ease-in-out
+      infinite
+      alternate
+      both !important;
+
+    will-change:
+      transform;
+  }
+
+
+  /* -------------------------------------------------------
+     CLOUD 1 MOTION
+
+     Anchor = 29vw
+     -14vw -> +19vw
+     ------------------------------------------------------- */
+
+  @keyframes mato-r71f6q4l-cloud-one {
+
+    0% {
+      transform:
+        translate3d(-14vw, 0, 0);
+    }
+
+    25% {
+      transform:
+        translate3d(-6vw, -1px, 0);
+    }
+
+    50% {
+      transform:
+        translate3d(3vw, 1px, 0);
+    }
+
+    75% {
+      transform:
+        translate3d(11vw, -1px, 0);
+    }
+
+    100% {
+      transform:
+        translate3d(19vw, 0, 0);
+    }
+  }
+
+
+  /* -------------------------------------------------------
+     CLOUD 2 MOTION
+
+     Anchor = 57vw
+     -2vw -> +27vw
+     ------------------------------------------------------- */
+
+  @keyframes mato-r71f6q4l-cloud-two {
+
+    0% {
+      transform:
+        translate3d(-2vw, 0, 0);
+    }
+
+    25% {
+      transform:
+        translate3d(5vw, 1px, 0);
+    }
+
+    50% {
+      transform:
+        translate3d(13vw, -1px, 0);
+    }
+
+    75% {
+      transform:
+        translate3d(20vw, 1px, 0);
+    }
+
+    100% {
+      transform:
+        translate3d(27vw, 0, 0);
+    }
+  }
+
+
+  /* -------------------------------------------------------
+     CLOUD 3 MOTION
+
+     Anchor = 31vw
+     -13vw -> +24vw
+     ------------------------------------------------------- */
+
+  @keyframes mato-r71f6q4l-cloud-three {
+
+    0% {
+      transform:
+        translate3d(-13vw, 0, 0);
+    }
+
+    25% {
+      transform:
+        translate3d(-4vw, -1px, 0);
+    }
+
+    50% {
+      transform:
+        translate3d(5vw, 1px, 0);
+    }
+
+    75% {
+      transform:
+        translate3d(15vw, -1px, 0);
+    }
+
+    100% {
+      transform:
+        translate3d(24vw, 0, 0);
+    }
+  }
+}
+
+
+/* ---------------------------------------------------------
+   ACCESSIBILITY
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .weather-atmosphere__cloud--back,
+  .weather-atmosphere__cloud--front,
+  .weather-atmosphere__cloud--third {
+
+    animation:
+      none !important;
+
+    transform:
+      none !important;
+  }
+}
+
+
+/* === MATO R71F6Q4L TRANSLATE3D CLOUD MOTION END === */
+
+
+/* =========================================================
+   MATO R71F6Q4M NATURAL SAFE CLOUD MOTION
+   =========================================================
+
+   Fine tuning over R71F6Q4L.
+
+   Goals:
+   - preserve working translate3d motion
+   - slow movement moderately
+   - prevent right-side orchard overlap
+   - preserve approved cloud sizes
+   - preserve vertical positions
+   - preserve Cloud 3 raised position
+
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /* -------------------------------------------------------
+     CLOUD 1
+     Large upper cloud
+     ------------------------------------------------------- */
+
+  .weather-atmosphere__cloud--back {
+
+    left:
+      29vw !important;
+
+    animation:
+      mato-r71f6q4m-cloud-one
+      38s
+      ease-in-out
+      infinite
+      alternate
+      both !important;
+  }
+
+
+  /* -------------------------------------------------------
+     CLOUD 2
+     Right cloud
+
+     Important:
+     reduce right endpoint so cloud stops before
+     the right cashew-tree canopy.
+     ------------------------------------------------------- */
+
+  .weather-atmosphere__cloud--front {
+
+    left:
+      57vw !important;
+
+    animation:
+      mato-r71f6q4m-cloud-two
+      43s
+      ease-in-out
+      infinite
+      alternate
+      both !important;
+  }
+
+
+  /* -------------------------------------------------------
+     CLOUD 3
+     Small distant cloud
+     ------------------------------------------------------- */
+
+  .weather-atmosphere__cloud--third {
+
+    top:
+      calc(
+        var(--mato-scenic-top, 80px)
+        + 22vh
+      ) !important;
+
+    left:
+      31vw !important;
+
+    animation:
+      mato-r71f6q4m-cloud-three
+      40s
+      ease-in-out
+      infinite
+      alternate
+      both !important;
+  }
+
+
+  /* -------------------------------------------------------
+     CLOUD 1
+
+     Approximately:
+       17vw -> 46vw
+
+     Keeps large cloud inside open sky.
+     ------------------------------------------------------- */
+
+  @keyframes mato-r71f6q4m-cloud-one {
+
+    0% {
+      transform:
+        translate3d(-12vw, 0, 0);
+    }
+
+    25% {
+      transform:
+        translate3d(-5vw, -1px, 0);
+    }
+
+    50% {
+      transform:
+        translate3d(2vw, 1px, 0);
+    }
+
+    75% {
+      transform:
+        translate3d(10vw, -1px, 0);
+    }
+
+    100% {
+      transform:
+        translate3d(17vw, 0, 0);
+    }
+  }
+
+
+  /* -------------------------------------------------------
+     CLOUD 2
+
+     Anchor = 57vw
+
+     Approximately:
+       55vw -> 75vw
+
+     Previous R71F6Q4L could travel to about 84vw.
+     That allowed the cloud to enter the right orchard.
+
+     New maximum = 75vw.
+     ------------------------------------------------------- */
+
+  @keyframes mato-r71f6q4m-cloud-two {
+
+    0% {
+      transform:
+        translate3d(-2vw, 0, 0);
+    }
+
+    25% {
+      transform:
+        translate3d(3vw, 1px, 0);
+    }
+
+    50% {
+      transform:
+        translate3d(8vw, -1px, 0);
+    }
+
+    75% {
+      transform:
+        translate3d(13vw, 1px, 0);
+    }
+
+    100% {
+      transform:
+        translate3d(18vw, 0, 0);
+    }
+  }
+
+
+  /* -------------------------------------------------------
+     CLOUD 3
+
+     Approximately:
+       20vw -> 53vw
+
+     Keep distant cloud inside central open sky.
+     ------------------------------------------------------- */
+
+  @keyframes mato-r71f6q4m-cloud-three {
+
+    0% {
+      transform:
+        translate3d(-11vw, 0, 0);
+    }
+
+    25% {
+      transform:
+        translate3d(-3vw, -1px, 0);
+    }
+
+    50% {
+      transform:
+        translate3d(5vw, 1px, 0);
+    }
+
+    75% {
+      transform:
+        translate3d(14vw, -1px, 0);
+    }
+
+    100% {
+      transform:
+        translate3d(22vw, 0, 0);
+    }
+  }
+}
+
+
+/* ---------------------------------------------------------
+   ACCESSIBILITY
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .weather-atmosphere__cloud--back,
+  .weather-atmosphere__cloud--front,
+  .weather-atmosphere__cloud--third {
+
+    animation:
+      none !important;
+
+    transform:
+      none !important;
+  }
+}
+
+
+/* === MATO R71F6Q4M NATURAL SAFE CLOUD MOTION END === */
+
+
+/* =========================================================
+   MATO R71F6Q4N CLOUD SPEED FINE TUNING
+   =========================================================
+
+   SPEED ONLY.
+
+   R71F6Q4M position and travel corridor remain unchanged.
+
+   Previous:
+   Cloud 1 = 38s
+   Cloud 2 = 43s
+   Cloud 3 = 40s
+
+   New:
+   Cloud 1 = 43s
+   Cloud 2 = 48s
+   Cloud 3 = 45s
+
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .weather-atmosphere__cloud--back {
+
+    animation-duration:
+      43s !important;
+  }
+
+
+  .weather-atmosphere__cloud--front {
+
+    animation-duration:
+      48s !important;
+  }
+
+
+  .weather-atmosphere__cloud--third {
+
+    animation-duration:
+      45s !important;
+  }
+}
+
+
+/* === MATO R71F6Q4N CLOUD SPEED FINE TUNING END === */
+
+
+/* =========================================================
+   MATO R71F6Q4N1 FINAL CLOUD SPEED MICRO-TUNING
+   =========================================================
+
+   SPEED ONLY.
+
+   Position unchanged.
+   Size unchanged.
+   Travel corridor unchanged.
+   Vertical placement unchanged.
+
+   Previous:
+   Cloud 1 = 43s
+   Cloud 2 = 48s
+   Cloud 3 = 45s
+
+   New:
+   Cloud 1 = 46s
+   Cloud 2 = 51s
+   Cloud 3 = 48s
+
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .weather-atmosphere__cloud--back {
+    animation-duration:
+      46s !important;
+  }
+
+  .weather-atmosphere__cloud--front {
+    animation-duration:
+      51s !important;
+  }
+
+  .weather-atmosphere__cloud--third {
+    animation-duration:
+      48s !important;
+  }
+}
+
+
+/* === MATO R71F6Q4N1 FINAL CLOUD SPEED MICRO-TUNING END === */
+
+
+/* =========================================================
+   MATO R71F6Q4N2 CONSTANT LINEAR CLOUD MOTION
+   =========================================================
+
+   TIMING FUNCTION ONLY.
+
+   Keep:
+   Cloud 1 = 46s
+   Cloud 2 = 51s
+   Cloud 3 = 48s
+
+   Keep all approved:
+   - positions
+   - cloud sizes
+   - travel corridors
+   - vertical placement
+   - translate3d keyframes
+
+   Change:
+   ease-in-out -> linear
+
+   Result:
+   constant horizontal travel speed.
+
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .weather-atmosphere__cloud--back,
+  .weather-atmosphere__cloud--front,
+  .weather-atmosphere__cloud--third {
+
+    animation-timing-function:
+      linear !important;
+  }
+}
+
+
+/* === MATO R71F6Q4N2 CONSTANT LINEAR CLOUD MOTION END === */
+
+
+/* =========================================================
+   MATO R71F6Q4N3 GENTLE BREEZE CLOUD SPEED
+   =========================================================
+
+   DURATION ONLY.
+
+   Previous:
+   Cloud 1 = 46s
+   Cloud 2 = 51s
+   Cloud 3 = 48s
+
+   New:
+   Cloud 1 = 52s
+   Cloud 2 = 57s
+   Cloud 3 = 54s
+
+   Linear timing remains active.
+
+   Position unchanged.
+   Size unchanged.
+   Travel unchanged.
+   Vertical placement unchanged.
+
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .weather-atmosphere__cloud--back {
+
+    animation-duration:
+      52s !important;
+  }
+
+
+  .weather-atmosphere__cloud--front {
+
+    animation-duration:
+      57s !important;
+  }
+
+
+  .weather-atmosphere__cloud--third {
+
+    animation-duration:
+      54s !important;
+  }
+}
+
+
+/* === MATO R71F6Q4N3 GENTLE BREEZE CLOUD SPEED END === */
+
