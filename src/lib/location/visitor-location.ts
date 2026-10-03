@@ -1,4 +1,6 @@
-﻿export interface VisitorLocation {
+﻿import { weatherLocations } from "../../config/weather-locations";
+
+export interface VisitorLocation {
   latitude: number;
   longitude: number;
 
@@ -121,6 +123,98 @@ async function getCloudflareLocation():
   }
 }
 
+/*
+ * R72F1Q7F - LOCAL WEATHER LOCATION NAME
+ *
+ * Browser geolocation supplies latitude/longitude but not a city.
+ * Resolve a display name from the existing Mato Cashew
+ * weatherLocations configuration.
+ *
+ * IMPORTANT:
+ * - Original browser GPS coordinates remain unchanged.
+ * - The resolved location is DISPLAY metadata only.
+ * - Production Cloudflare Edge behavior remains unchanged.
+ */
+
+function getDistanceKm(
+  latitude1: number,
+  longitude1: number,
+  latitude2: number,
+  longitude2: number
+): number {
+
+  const earthRadiusKm = 6371;
+
+  const latitudeDelta =
+    (latitude2 - latitude1) *
+    Math.PI / 180;
+
+  const longitudeDelta =
+    (longitude2 - longitude1) *
+    Math.PI / 180;
+
+  const value =
+    Math.sin(latitudeDelta / 2) ** 2 +
+    Math.cos(latitude1 * Math.PI / 180) *
+    Math.cos(latitude2 * Math.PI / 180) *
+    Math.sin(longitudeDelta / 2) ** 2;
+
+  return (
+    earthRadiusKm *
+    2 *
+    Math.atan2(
+      Math.sqrt(value),
+      Math.sqrt(1 - value)
+    )
+  );
+}
+
+function resolveBrowserLocationName(
+  latitude: number,
+  longitude: number
+): string | null {
+
+  if (weatherLocations.length === 0) {
+    return null;
+  }
+
+  let nearestLocation =
+    weatherLocations[0];
+
+  let nearestDistance =
+    getDistanceKm(
+      latitude,
+      longitude,
+      nearestLocation.latitude,
+      nearestLocation.longitude
+    );
+
+  for (
+    let index = 1;
+    index < weatherLocations.length;
+    index++
+  ) {
+
+    const location =
+      weatherLocations[index];
+
+    const distance =
+      getDistanceKm(
+        latitude,
+        longitude,
+        location.latitude,
+        location.longitude
+      );
+
+    if (distance < nearestDistance) {
+      nearestLocation = location;
+      nearestDistance = distance;
+    }
+  }
+
+  return nearestLocation.nameEn;
+}
+
 function getBrowserLocation():
   Promise<VisitorLocation | null> {
 
@@ -154,9 +248,19 @@ function getBrowserLocation():
           return;
         }
 
+        const resolvedLocationName =
+          resolveBrowserLocationName(
+            latitude,
+            longitude
+          );
+
         resolve({
           latitude,
           longitude,
+
+          city:
+            resolvedLocationName,
+
           accuracy:
             Number.isFinite(accuracy)
               ? accuracy
@@ -198,8 +302,29 @@ export async function getVisitorLocation():
    * - suitable for weather atmosphere
    */
 
+  /*
+   * R72F1Q9F1 - SKIP CLOUDFLARE API ON LOCALHOST
+   *
+   * Astro local development does not expose the production
+   * /api/visitor-location Cloudflare endpoint.
+   *
+   * Local development therefore skips the Edge request and
+   * continues to the existing Browser Geolocation fallback.
+   *
+   * Production behavior remains Cloudflare-first.
+   */
+
+  const isLocalDevelopment =
+    typeof window !== "undefined" &&
+    (
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1"
+    );
+
   const edgeLocation =
-    await getCloudflareLocation();
+    isLocalDevelopment
+      ? null
+      : await getCloudflareLocation();
 
   if (edgeLocation) {
 
@@ -246,3 +371,4 @@ export async function getVisitorLocation():
 
   return null;
 }
+

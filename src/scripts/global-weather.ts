@@ -205,7 +205,7 @@ async function refreshGlobalWeather():
           "en-US",
           {
             timeZone:
-              location.timezone ?? "UTC",
+              weather.timezone ?? location.timezone ?? "UTC",
 
             hour:
               "2-digit",
@@ -457,3 +457,4 @@ if (
 
   };
 }
+
