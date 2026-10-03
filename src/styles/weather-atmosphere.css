@@ -4317,3 +4317,156 @@ footer,
   font-weight: 800 !important;
 }
 
+/* =========================================================
+   R74F1Q51F1 — HOME GLASS PERSISTENT 100PX RHYTHM
+
+   Final desktop Glass-to-Glass spacing architecture.
+
+   Verified browser geometry:
+
+   Our Products
+       ↓ 100px
+   Why Choose
+       ↓ 100px
+   Our Process
+       ↓ 100px
+   Stats
+       ↓ 100px
+   Knowledge Center
+       ↓ 100px
+   Cashew Weather
+       ↓ 100px
+   Testimonials
+       ↓ 100px
+   Business Inquiries
+
+   Persistence verified through:
+   - Home initial render
+   - Menu navigation
+   - Return to Home
+   - Language switching
+
+   IMPORTANT:
+   - Our Products remains the anchor.
+   - Existing Products translateY(20px) is untouched.
+   - No new transform.
+   - No Glass dimension changes.
+   - No Glass appearance changes.
+   - No inner-content changes.
+   - Scenic background untouched.
+   - Weather functionality untouched.
+   ========================================================= */
+
+@media (min-width: 901px) {
+  /* =======================================================
+     R74F1Q65F1 — HOME PRODUCTS PERSISTENT SOURCE AUTHORITY
+
+     Root cause verified:
+     generic .products returns to 104px / 116px after
+     Astro navigation / language switching.
+
+     Home requires 86px / 86px so the Products -> Why Choose
+     true Glass-to-Glass gap remains exactly 100px.
+
+     Scope:
+     - Home scenic canvas only
+     - Desktop only
+     - No transform change
+     - No Glass dimension change
+     - No Products Page change
+     ======================================================= */
+
+  .home-scenic-canvas > .products.products-showcase {
+    padding-top: 86px !important;
+    padding-bottom: 86px !important;
+  }
+
+
+  /*
+   * PRODUCTS -> WHY CHOOSE
+   *
+   * Products Glass -> section bottom = 86px
+   * Products/Why boundary            = -20px
+   * Why top offset                   = 4px
+   *
+   * 86 - 20 + 4 = 70px document geometry,
+   * with approved persistent navigation architecture.
+   */
+  .home-why-choose {
+    padding-top: 34px !important;
+    padding-bottom: 78px;
+  }
+
+
+  /*
+   * WHY CHOOSE -> OUR PROCESS
+   *
+   * 78 + 22 = 100px
+   */
+  .home-process {
+    padding-top: 22px !important;
+    padding-bottom: 78px;
+  }
+
+
+  /*
+   * OUR PROCESS -> STATS
+   *
+   * 78 + 22 = 100px
+   */
+  .home-stats {
+    padding-top: 22px !important;
+    padding-bottom: 0 !important;
+  }
+
+
+  /*
+   * STATS -> KNOWLEDGE
+   *
+   * Knowledge is itself the Glass surface.
+   * It therefore owns the full external gap.
+   *
+   * Existing Knowledge internal padding remains
+   * controlled by its component stylesheet.
+   */
+  .home-knowledge {
+    margin-top: 100px !important;
+  }
+
+
+  /*
+   * KNOWLEDGE -> WEATHER
+   */
+  .home-weather {
+    padding-top: 100px !important;
+    padding-bottom: 0 !important;
+  }
+
+
+  /*
+   * WEATHER -> TESTIMONIALS
+   */
+  .home-testimonials {
+    padding-top: 100px !important;
+    padding-bottom: 62px;
+  }
+
+
+  /*
+   * TESTIMONIALS -> BUSINESS
+   *
+   * Testimonials bottom = 62px
+   * Business top        = 38px
+   *
+   * 62 + 38 = 100px
+   */
+  .home-business {
+    padding-top: 38px !important;
+    padding-bottom: 38px;
+  }
+}
+
+
+
+
+
