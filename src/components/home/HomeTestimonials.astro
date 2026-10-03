@@ -1,8 +1,14 @@
 ---
-import { getCurrentLanguage } from "../../i18n/getCurrentLanguage";
+import { getLanguage } from "../../i18n/getLanguage";
 import "../../styles/home-testimonials.css";
+import type { Language } from "../../i18n/config";
 
-const t = getCurrentLanguage(Astro.url.pathname);
+interface Props {
+  language: Language;
+}
+
+const { language } = Astro.props as Props;
+const t = getLanguage(language);
 const content = t.testimonialsHome;
 
 /*

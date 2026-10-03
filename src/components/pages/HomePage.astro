@@ -1,4 +1,4 @@
-﻿---
+---
 import Header from "../Header.astro";
 import Hero from "../Hero.astro";
 import TrustBar from "../TrustBar.astro";
@@ -78,18 +78,18 @@ const t = getCurrentLanguage(language === "km" ? "/km" : "/");
 
   <Products />
 
-  <HomeWhyChooseUs />
+  <HomeWhyChooseUs language={language} />
 
-  <HomeProcess />
+  <HomeProcess language={language} />
 
-  <HomeStats />
+  <HomeStats language={language} />
   </div>
 
   <HomeKnowledge language={language} />
 
   <HomeWeather language={language} />
 
-  <HomeTestimonials />
+  <HomeTestimonials language={language} />
   
   <HomeWholesaleCTA content={t.wholesaleHome} />
 
