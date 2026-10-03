@@ -2,9 +2,22 @@
 import { getCurrentLanguage } from "../i18n/getCurrentLanguage";
 import { SITE } from "../config/site";
 
-const t = getCurrentLanguage(Astro.url.pathname);
 
-const isKhmer = Astro.url.pathname.startsWith("/km");
+
+interface Props {
+  language?: "en" | "km";
+}
+
+const { language } = Astro.props as Props;
+
+const isKhmer =
+  language !== undefined
+    ? language === "km"
+    : Astro.url.pathname.startsWith("/km");
+
+const t = getCurrentLanguage(
+  isKhmer ? "/km" : "/"
+);
 
 const brandName = isKhmer
   ? SITE.brand.khmer
