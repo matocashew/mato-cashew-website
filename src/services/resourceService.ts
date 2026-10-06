@@ -1,15 +1,29 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 
+export type ResourceLanguage =
+  "en" | "km";
+
 /**
  * Get all published resources.
+ *
+ * When language is supplied, return only resources belonging
+ * to that language. Existing callers without a language keep
+ * the current all-resource behavior during migration.
  */
-export async function getResources(): Promise<
+export async function getResources(
+  language?: ResourceLanguage
+): Promise<
   CollectionEntry<"resources">[]
 > {
 
   return await getCollection(
     "resources",
-    ({ data }) => !data.draft
+    ({ data }) =>
+      !data.draft &&
+      (
+        !language ||
+        data.language === language
+      )
   );
 
 }

@@ -342,3 +342,279 @@
     opacity: 1;
 }
 
+
+/* ==========================================================
+   R75-RESOURCE-ADAPTIVE-READABILITY-BEGIN
+
+   RESOURCE DETAIL READABILITY
+
+   Purpose:
+   - improve article readability over scenic atmosphere
+   - preserve the scenic background
+   - preserve weather/background behavior
+   - preserve PageHero global styling
+   - affect resource-detail pages only
+   ========================================================== */
+
+
+/*
+ * ----------------------------------------------------------
+ * Article reading surface
+ * ----------------------------------------------------------
+ *
+ * A translucent reading layer improves contrast while still
+ * allowing the Mato scenic atmosphere to remain visible.
+ */
+
+.resource-content {
+    position: relative;
+    z-index: 2;
+
+    padding:
+        clamp(28px, 4vw, 52px)
+        clamp(24px, 4vw, 56px);
+
+    border-radius: 28px;
+
+    background:
+        rgba(255, 255, 255, 0.82);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.58);
+
+    box-shadow:
+        0 18px 55px
+        rgba(20, 52, 38, 0.10);
+
+    -webkit-backdrop-filter:
+        blur(7px);
+
+    backdrop-filter:
+        blur(7px);
+}
+
+
+/*
+ * ----------------------------------------------------------
+ * Article typography
+ * ----------------------------------------------------------
+ */
+
+.resource-content h1,
+.resource-content h2,
+.resource-content h3,
+.resource-content h4 {
+    color: #123f2d;
+
+    text-shadow:
+        0 1px 1px
+        rgba(255, 255, 255, 0.32);
+}
+
+
+.resource-content p,
+.resource-content li {
+    color: #243b31;
+}
+
+
+/*
+ * ----------------------------------------------------------
+ * Resource metadata
+ * ----------------------------------------------------------
+ */
+
+.resource-meta {
+    position: relative;
+    z-index: 2;
+
+    padding:
+        20px 24px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.72);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.48);
+
+    -webkit-backdrop-filter:
+        blur(6px);
+
+    backdrop-filter:
+        blur(6px);
+}
+
+
+.resource-meta__info {
+    color: #31473d;
+}
+
+
+.resource-meta__info strong {
+    color: #123f2d;
+}
+
+
+/*
+ * ----------------------------------------------------------
+ * Night / evening resilience
+ * ----------------------------------------------------------
+ *
+ * We intentionally do not modify WeatherAtmosphere.
+ * The translucent reading surfaces provide stable contrast
+ * when the scenic background becomes darker.
+ */
+
+
+/*
+ * ----------------------------------------------------------
+ * Mobile
+ * ----------------------------------------------------------
+ */
+
+@media (max-width: 768px) {
+
+    .resource-content {
+        padding:
+            26px
+            20px;
+
+        border-radius: 22px;
+    }
+
+    .resource-meta {
+        padding:
+            18px 20px;
+
+        border-radius: 18px;
+    }
+}
+
+
+/* R75-RESOURCE-ADAPTIVE-READABILITY-END */
+
+/* ==========================================================
+   R76-RESOURCE-HERO-ADAPTIVE-READABILITY-BEGIN
+
+   RESOURCE DETAIL HERO READABILITY
+
+   Purpose:
+   - keep PageHero readable over dynamic scenic backgrounds
+   - preserve Mato scenic imagery
+   - preserve weather/background behavior
+   - preserve PageHero position and dimensions
+   - affect Resource Detail pages only
+   ========================================================== */
+
+
+/*
+ * ----------------------------------------------------------
+ * Base resource Hero foreground
+ * ----------------------------------------------------------
+ *
+ * Keep the existing Mato green identity during normal
+ * daylight while adding a very small contrast safeguard.
+ */
+
+.page-hero h1 {
+    text-shadow:
+        0 1px 2px
+        rgba(255, 255, 255, 0.34);
+}
+
+.page-hero p {
+    text-shadow:
+        0 1px 2px
+        rgba(255, 255, 255, 0.28);
+}
+
+
+/*
+ * ----------------------------------------------------------
+ * Evening
+ * ----------------------------------------------------------
+ *
+ * As the scenic atmosphere darkens, move the foreground
+ * toward a warm light tone instead of changing the scenery.
+ */
+
+body:has(
+    .weather-atmosphere[data-weather-phase="evening"]
+)
+.page-hero h1 {
+    color:
+        #fff8e8;
+
+    text-shadow:
+        0 2px 5px
+        rgba(18, 42, 32, 0.72),
+        0 1px 2px
+        rgba(18, 42, 32, 0.58);
+}
+
+
+body:has(
+    .weather-atmosphere[data-weather-phase="evening"]
+)
+.page-hero p {
+    color:
+        rgba(255, 250, 239, 0.96);
+
+    text-shadow:
+        0 2px 4px
+        rgba(18, 42, 32, 0.72);
+}
+
+
+/*
+ * ----------------------------------------------------------
+ * Night
+ * ----------------------------------------------------------
+ *
+ * Night scenery remains untouched.
+ * Only Hero foreground contrast is strengthened.
+ */
+
+body:has(
+    .weather-atmosphere[data-weather-phase="night"]
+)
+.page-hero h1 {
+    color:
+        #fffdf5;
+
+    text-shadow:
+        0 2px 6px
+        rgba(5, 24, 18, 0.88),
+        0 1px 2px
+        rgba(5, 24, 18, 0.72);
+}
+
+
+body:has(
+    .weather-atmosphere[data-weather-phase="night"]
+)
+.page-hero p {
+    color:
+        rgba(255, 255, 255, 0.96);
+
+    text-shadow:
+        0 2px 5px
+        rgba(5, 24, 18, 0.86),
+        0 1px 2px
+        rgba(5, 24, 18, 0.68);
+}
+
+
+/*
+ * ----------------------------------------------------------
+ * No Hero surface/card is added intentionally.
+ * ----------------------------------------------------------
+ *
+ * The scenic atmosphere remains fully visible behind the
+ * PageHero. We improve typography contrast only.
+ */
+
+
+/* R76-RESOURCE-HERO-ADAPTIVE-READABILITY-END */

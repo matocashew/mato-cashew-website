@@ -1,4 +1,4 @@
-﻿import {
+import {
   getVisitorLocation
 } from "../lib/location/visitor-location";
 
@@ -116,9 +116,70 @@ async function refreshGlobalWeather():
 
 
     if (
-      !location ||
       currentRequest !== requestId
     ) {
+      return;
+    }
+
+    /*
+     * R74F5Q7F1
+     *
+     * Local development has no Cloudflare Edge location.
+     * If browser geolocation is unavailable, preserve only
+     * the scenic time-of-day phase using the browser clock.
+     *
+     * Production location/weather behavior is unchanged.
+     */
+    if (!location) {
+      const isLocalDevelopment =
+        typeof window !== "undefined" &&
+        (
+          window.location.hostname === "localhost" ||
+          window.location.hostname === "127.0.0.1"
+        );
+
+      if (isLocalDevelopment) {
+        const localHour = new Date().getHours();
+
+        const localPhase =
+          localHour >= 5 && localHour < 10
+            ? "morning"
+            : localHour >= 10 && localHour < 17
+              ? "day"
+              : localHour >= 17 && localHour < 19
+                ? "evening"
+                : "night";
+
+        atmosphere.dataset.weatherPhase =
+          localPhase;
+
+        /*
+         * R74F5Q11F1
+         *
+         * Persist the rendered localhost scenic phase.
+         * Astro after-swap can then restore it immediately
+         * on the destination page while location resolution
+         * remains unavailable.
+         *
+         * No fake location or weather is introduced.
+         */
+        persistedAtmosphereState = {
+          kind:
+            atmosphere.dataset.weatherKind ?? "",
+          wind:
+            atmosphere.dataset.weatherWind ?? "",
+          day:
+            atmosphere.dataset.weatherDay ?? "",
+          phase:
+            localPhase
+        };
+
+        console.info(
+          "[Mato Global Weather] Local scenic phase fallback:",
+          localPhase
+        );
+      }
+
       return;
     }
 

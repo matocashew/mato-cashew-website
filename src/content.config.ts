@@ -43,6 +43,18 @@ const resources = defineCollection({
   loader: glob({
     pattern: "**/*.{md,mdx}",
     base: "./src/content/resources",
+
+    /*
+     * R77Q22F1
+     *
+     * EN and KM translations intentionally share
+     * the same public data.slug.
+     *
+     * Use the relative source entry path only as
+     * Astro's internal collection identity.
+     * Public URLs remain unchanged.
+     */
+    generateId: ({ entry }) => entry,
   }),
 
   schema: z.object({
@@ -50,6 +62,21 @@ const resources = defineCollection({
     title: z.string(),
 
     slug: z.string(),
+
+    /*
+     * R77Q9F1
+     * Resource bilingual identity.
+     *
+     * Existing resources remain English by default
+     * during the bilingual migration.
+     */
+    language: z
+      .enum(["en", "km"])
+      .default("en"),
+
+    translationKey: z
+      .string()
+      .optional(),
 
     description: z.string(),
 

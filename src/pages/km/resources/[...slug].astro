@@ -17,7 +17,7 @@ import {
 export async function getStaticPaths() {
 
   const resources =
-    await getResources();
+    await getResources("km");
 
   return resources.map((resource) => ({
 
@@ -43,6 +43,24 @@ const {
 
 const canonical =
   `https://matocashew.com/km/resources/${resource.data.slug}`;
+
+const englishResources =
+  await getResources("en");
+
+const englishTranslation =
+  englishResources.find(
+    (candidate) =>
+      candidate.data.translationKey ===
+      resource.data.translationKey
+  );
+
+const englishLanguagePath =
+  englishTranslation
+    ? `/resources/${englishTranslation.data.slug}`
+    : "/resources";
+
+const khmerLanguagePath =
+  `/km/resources/${resource.data.slug}`;
 ---
 
 <ResourcePageSchema
@@ -73,7 +91,13 @@ const canonical =
   ]}
 >
 
-  <PageHero
+  <div
+  id="language-route-context"
+  data-language-en={englishLanguagePath}
+  data-language-km={khmerLanguagePath}
+  hidden
+></div>
+<PageHero
     title={resource.data.title}
     description={resource.data.description}
   />

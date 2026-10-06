@@ -14,7 +14,7 @@ const t = getCurrentLanguage(
   Astro.url.pathname
 );
 
-const resources = await getResources();
+const resources = await getResources("en");
 ---
 
 <PageLayout
