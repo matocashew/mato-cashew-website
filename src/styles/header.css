@@ -12866,4 +12866,27 @@ html body:has(
 }
 
 /* E163-FINAL-MEGA-MENU-840-END */
-
+/*
+ * K80 MOBILE MEGA RUNTIME GUARD
+ * Desktop-only Mega Menu runtime layers must never
+ * participate in Mobile document layout.
+ *
+ * Approved browser prototype: K80Q10T1
+ */
+@media (max-width: 768px) {
+  #mato-unified-mega-outline,
+  #mato-unified-mega-stroke,
+  #mato-unified-mega-glass {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+  }
+}
