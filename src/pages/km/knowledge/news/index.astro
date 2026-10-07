@@ -1,4 +1,4 @@
-﻿---
+---
 import PageLayout from "@layouts/PageLayout.astro";
 import { newsService } from "@services/newsService";
 
@@ -106,4 +106,94 @@ const articles = await newsService.getAll("km");
   .news-index__card h2 a { color: inherit; }
   .news-index__source { font-size: .9rem; opacity: .75; }
   .news-index__empty { padding-block: 2rem; }
+
+  /*
+   * K83Q13P1 - APPROVED NEWS HERO ADAPTIVE CONTRAST
+   * Approved browser prototype: K83Q12T1
+   * Keep scenic background unchanged.
+   */
+
+  .news-index__header {
+    position: relative;
+    z-index: 2;
+  }
+
+  .news-index__eyebrow {
+    color: #245b2b !important;
+    font-weight: 800 !important;
+    text-shadow:
+      0 1px 2px rgba(255,255,255,.95),
+      0 0 10px rgba(255,255,255,.65);
+  }
+
+  .news-index__header h1 {
+    color: #0b1f38 !important;
+    font-weight: 800 !important;
+    text-shadow:
+      0 1px 2px rgba(255,255,255,.95),
+      0 2px 12px rgba(255,255,255,.58);
+  }
+
+  .news-index__header > p:not(.news-index__eyebrow) {
+    color: #24364b !important;
+    font-weight: 600 !important;
+    text-shadow:
+      0 1px 2px rgba(255,255,255,.95),
+      0 1px 8px rgba(255,255,255,.72);
+  }
+
+  .weather-atmosphere[data-weather-phase="evening"]
+    ~ main
+    .news-index__eyebrow {
+    color: #f3ffe9 !important;
+    text-shadow:
+      0 1px 2px rgba(0,0,0,.92),
+      0 2px 10px rgba(0,0,0,.72);
+  }
+
+  .weather-atmosphere[data-weather-phase="evening"]
+    ~ main
+    .news-index__header h1 {
+    color: #ffffff !important;
+    text-shadow:
+      0 2px 3px rgba(0,0,0,.95),
+      0 3px 14px rgba(0,0,0,.78);
+  }
+
+  .weather-atmosphere[data-weather-phase="evening"]
+    ~ main
+    .news-index__header > p:not(.news-index__eyebrow) {
+    color: #f4f7fb !important;
+    text-shadow:
+      0 1px 2px rgba(0,0,0,.95),
+      0 2px 10px rgba(0,0,0,.82);
+  }
+
+  .weather-atmosphere[data-weather-phase="night"]
+    ~ main
+    .news-index__eyebrow {
+    color: #dff6d7 !important;
+    text-shadow:
+      0 1px 2px rgba(0,0,0,1),
+      0 2px 12px rgba(0,0,0,.92);
+  }
+
+  .weather-atmosphere[data-weather-phase="night"]
+    ~ main
+    .news-index__header h1 {
+    color: #ffffff !important;
+    text-shadow:
+      0 2px 3px rgba(0,0,0,1),
+      0 3px 16px rgba(0,0,0,.95);
+  }
+
+  .weather-atmosphere[data-weather-phase="night"]
+    ~ main
+    .news-index__header > p:not(.news-index__eyebrow) {
+    color: #f5f7fa !important;
+    font-weight: 600 !important;
+    text-shadow:
+      0 1px 2px rgba(0,0,0,1),
+      0 2px 12px rgba(0,0,0,.95);
+  }
 </style>

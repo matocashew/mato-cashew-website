@@ -93,6 +93,43 @@ async function refreshGlobalWeather():
   const currentRequest =
     ++requestId;
 
+  /*
+   * K83Q7P3 - IMMEDIATE LOCAL SCENIC PHASE
+   *
+   * Local development must not wait for browser geolocation
+   * before displaying the scenic time-of-day background.
+   *
+   * Production location/weather resolution remains unchanged.
+   */
+  const isLocalScenicDevelopment =
+    typeof window !== "undefined" &&
+    (
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1"
+    );
+
+  if (isLocalScenicDevelopment) {
+    const localHour = new Date().getHours();
+
+    const localPhase =
+      localHour >= 5 && localHour < 10
+        ? "morning"
+        : localHour >= 10 && localHour < 17
+          ? "day"
+          : localHour >= 17 && localHour < 19
+            ? "evening"
+            : "night";
+
+    atmosphere.dataset.weatherPhase =
+      localPhase;
+
+    persistedAtmosphereState = {
+      kind: atmosphere.dataset.weatherKind ?? "",
+      wind: atmosphere.dataset.weatherWind ?? "",
+      day: atmosphere.dataset.weatherDay ?? "",
+      phase: localPhase
+    };
+  }
   try {
 
     /*
