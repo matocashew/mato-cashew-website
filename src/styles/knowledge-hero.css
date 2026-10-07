@@ -57,3 +57,361 @@
   filter: none;
 }
 
+/* =========================================================
+   K82Q6P1 - GLOBAL ARTICLE HERO READABILITY
+
+   Applies to every Knowledge Article Detail:
+   - English
+   - Khmer
+   - Day scenic background
+   - Night scenic background
+
+   Preserve:
+   - Scenic background
+   - Hero dimensions
+   - Article structure
+   - Article reading card
+   ========================================================= */
+
+/*
+ * Shared Article Detail foreground.
+ * Strong white typography remains readable over
+ * bright sky, green orchard, mountains and night scenery.
+ */
+
+.knowledge-article-page .knowledge-hero,
+.knowledge-article-page .article-hero {
+  position: relative;
+  z-index: 2;
+}
+
+/* Category / eyebrow / breadcrumb */
+
+.knowledge-article-page .knowledge-hero .eyebrow,
+.knowledge-article-page .knowledge-hero .breadcrumb,
+.knowledge-article-page .knowledge-hero .article-category,
+.knowledge-article-page .article-hero .eyebrow,
+.knowledge-article-page .article-hero .breadcrumb,
+.knowledge-article-page .article-hero .article-category {
+  color: #ffffff !important;
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.90),
+    0 2px 8px rgba(0, 0, 0, 0.72),
+    0 4px 18px rgba(0, 0, 0, 0.42);
+}
+
+/* Main Article Detail title */
+
+.knowledge-article-page .knowledge-hero h1,
+.knowledge-article-page .article-hero h1 {
+  color: #ffffff !important;
+
+  text-shadow:
+    0 2px 2px rgba(0, 0, 0, 0.92),
+    0 3px 10px rgba(0, 0, 0, 0.78),
+    0 6px 24px rgba(0, 0, 0, 0.48);
+}
+
+/* Subtitle / description */
+
+.knowledge-article-page .knowledge-hero .subtitle,
+.knowledge-article-page .knowledge-hero .description,
+.knowledge-article-page .knowledge-hero p,
+.knowledge-article-page .article-hero .subtitle,
+.knowledge-article-page .article-hero .description,
+.knowledge-article-page .article-hero p {
+  color: #ffffff !important;
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.94),
+    0 2px 8px rgba(0, 0, 0, 0.76),
+    0 4px 16px rgba(0, 0, 0, 0.42);
+}
+
+/* Author / Published / Reading time */
+
+.knowledge-article-page .knowledge-hero .meta,
+.knowledge-article-page .knowledge-hero .article-meta,
+.knowledge-article-page .knowledge-hero time,
+.knowledge-article-page .article-hero .meta,
+.knowledge-article-page .article-hero .article-meta,
+.knowledge-article-page .article-hero time {
+  color: #ffffff !important;
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.96),
+    0 2px 8px rgba(0, 0, 0, 0.78),
+    0 4px 16px rgba(0, 0, 0, 0.44);
+}
+
+/*
+ * Tags stay light and clean.
+ */
+
+.knowledge-article-page .knowledge-hero .tag,
+.knowledge-article-page .knowledge-hero .article-tag,
+.knowledge-article-page .article-hero .tag,
+.knowledge-article-page .article-hero .article-tag {
+  color: #173c2b !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.88) !important;
+
+  text-shadow: none !important;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/*
+ * NIGHT
+ * Strengthen separation without changing the
+ * scenic Night background itself.
+ */
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-article-page
+.knowledge-hero h1,
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-article-page
+.article-hero h1 {
+  color: #ffffff !important;
+
+  text-shadow:
+    0 2px 3px rgba(0, 0, 0, 1),
+    0 4px 12px rgba(0, 0, 0, 0.92),
+    0 8px 28px rgba(0, 0, 0, 0.70);
+}
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-article-page
+.knowledge-hero p,
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-article-page
+.article-hero p,
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-article-page
+.knowledge-hero .meta,
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-article-page
+.knowledge-hero .article-meta,
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-article-page
+.article-hero .meta,
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-article-page
+.article-hero .article-meta {
+  color: #ffffff !important;
+
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 1),
+    0 3px 10px rgba(0, 0, 0, 0.92),
+    0 6px 20px rgba(0, 0, 0, 0.68);
+}
+
+/*
+ * Khmer:
+ * preserve font family while giving Khmer glyphs
+ * slightly more vertical breathing room.
+ */
+
+html[lang="km"]
+.knowledge-article-page
+.knowledge-hero h1,
+
+html[lang="km"]
+.knowledge-article-page
+.article-hero h1 {
+  line-height: 1.35;
+}
+
+html[lang="km"]
+.knowledge-article-page
+.knowledge-hero p,
+
+html[lang="km"]
+.knowledge-article-page
+.article-hero p,
+
+html[lang="km"]
+.knowledge-article-page
+.knowledge-hero .meta,
+
+html[lang="km"]
+.knowledge-article-page
+.article-hero .meta {
+  line-height: 1.75;
+}
+
+/* K82Q6P1 END */
+
+/* =========================================================
+   K82Q10P1 - GLOBAL ARTICLE META DIVIDER READABILITY
+
+   Exact source correction after K82Q9D1:
+   - Real metadata class = .knowledge-meta
+   - Applies to English + Khmer article detail
+   - Strong Day + Night readability
+   - Strengthen hero divider
+   - Preserve scenic background
+   - Preserve images
+   - Preserve layout
+   ========================================================= */
+
+/*
+ * REAL ARTICLE METADATA
+ * Author / Published / Reading Time
+ */
+
+.knowledge-article-page
+.knowledge-meta,
+.knowledge-article-page
+.knowledge-meta span {
+  color: #ffffff !important;
+
+  font-weight: 650;
+
+  opacity: 1 !important;
+  filter: none !important;
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 1),
+    0 2px 6px rgba(0, 0, 0, 0.96),
+    0 4px 14px rgba(0, 0, 0, 0.82),
+    0 7px 24px rgba(0, 0, 0, 0.58);
+}
+
+
+/*
+ * NIGHT
+ * Increase separation further without changing
+ * the scenic Night background.
+ */
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-article-page
+.knowledge-meta,
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-article-page
+.knowledge-meta span {
+  color: #ffffff !important;
+
+  font-weight: 700;
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 1),
+    0 3px 8px rgba(0, 0, 0, 1),
+    0 5px 18px rgba(0, 0, 0, 0.92),
+    0 8px 28px rgba(0, 0, 0, 0.72);
+}
+
+
+/*
+ * ARTICLE HERO DIVIDER
+ *
+ * Both EN + KM article pages contain the <hr>
+ * directly after the hero information.
+ */
+
+.knowledge-article-page
+.knowledge-hero hr,
+
+.knowledge-article-page
+.article-hero hr {
+  border: 0 !important;
+
+  height: 1px;
+
+  background:
+    rgba(255, 255, 255, 0.88) !important;
+
+  opacity: 1 !important;
+
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.52),
+    0 2px 8px rgba(0, 0, 0, 0.24);
+}
+
+
+/*
+ * Fallback for article-level HR if the current DOM
+ * places the divider immediately outside the hero wrapper.
+ */
+
+.knowledge-article-page > hr,
+.knowledge-article-page main > hr {
+  border: 0 !important;
+
+  height: 1px;
+
+  background:
+    rgba(255, 255, 255, 0.88) !important;
+
+  opacity: 1 !important;
+
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.52),
+    0 2px 8px rgba(0, 0, 0, 0.24);
+}
+
+
+/*
+ * NIGHT DIVIDER
+ */
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-article-page
+.knowledge-hero hr,
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-article-page
+.article-hero hr,
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-article-page > hr {
+  background:
+    rgba(255, 255, 255, 0.94) !important;
+
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.90),
+    0 3px 10px rgba(0, 0, 0, 0.52);
+}
+
+
+/*
+ * Khmer glyph readability.
+ */
+
+html[lang="km"]
+.knowledge-article-page
+.knowledge-meta,
+html[lang="km"]
+.knowledge-article-page
+.knowledge-meta span {
+  font-weight: 650;
+  line-height: 1.75;
+}
+
+/* K82Q10P1 END */

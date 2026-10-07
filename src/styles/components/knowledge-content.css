@@ -397,3 +397,184 @@ html[lang="km"] .knowledge-content h3 {
     opacity: 1;
 }
 
+
+/* =========================================================
+   K82Q3P1 - ARTICLE DETAIL READING CONTRAST
+   Improve English + Khmer Knowledge article readability
+   over the shared scenic background.
+
+   Scope:
+   - Knowledge article detail only
+   - Preserve scenic background
+   - Preserve existing layout
+   - Preserve Knowledge Index
+   ========================================================= */
+
+/*
+ * Main article reading region.
+ * The translucent surface separates long-form text from
+ * detailed scenery while keeping the Mato scenic layer visible.
+ */
+.knowledge-article-page .knowledge-content {
+  position: relative;
+  z-index: 2;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.90),
+      rgba(248, 252, 249, 0.84)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 22px;
+
+  box-shadow:
+    0 18px 48px rgba(15, 54, 34, 0.12);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/*
+ * Strong readable body typography.
+ */
+.knowledge-article-page .knowledge-content,
+.knowledge-article-page .knowledge-content p,
+.knowledge-article-page .knowledge-content li {
+  color: #1f3429;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.30);
+}
+
+/*
+ * Headings need stronger separation from body copy.
+ */
+.knowledge-article-page .knowledge-content h1,
+.knowledge-article-page .knowledge-content h2,
+.knowledge-article-page .knowledge-content h3,
+.knowledge-article-page .knowledge-content h4,
+.knowledge-article-page .knowledge-content h5,
+.knowledge-article-page .knowledge-content h6 {
+  color: #075f3b;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.42);
+}
+
+/*
+ * Keep emphasis clearly visible.
+ */
+.knowledge-article-page .knowledge-content strong,
+.knowledge-article-page .knowledge-content b {
+  color: #153c2b;
+  font-weight: 700;
+}
+
+/*
+ * Links remain recognisable against the reading surface.
+ */
+.knowledge-article-page .knowledge-content a {
+  color: #006b43;
+  font-weight: 650;
+}
+
+/*
+ * Night scenic phase:
+ * retain a light reading surface rather than placing dark
+ * article copy directly over the night landscape.
+ */
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-article-page
+.knowledge-content {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(246, 250, 247, 0.94),
+      rgba(236, 244, 239, 0.90)
+    );
+
+  border-color: rgba(255, 255, 255, 0.70);
+
+  box-shadow:
+    0 20px 54px rgba(0, 20, 13, 0.24);
+}
+
+/*
+ * Khmer readability.
+ */
+html[lang="km"]
+.knowledge-article-page
+.knowledge-content,
+html[lang="km"]
+.knowledge-article-page
+.knowledge-content p,
+html[lang="km"]
+.knowledge-article-page
+.knowledge-content li {
+  line-height: 1.9;
+}
+
+/*
+ * Mobile keeps the same contrast without changing
+ * the article's structural layout.
+ */
+@media (max-width: 768px) {
+  .knowledge-article-page .knowledge-content {
+    border-radius: 18px;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* K82Q3P1 END */
+
+/* =========================================================
+   K82Q5P1 - LOCKED ARTICLE CARD SPACING
+
+   Approved visual direction:
+   - Preserve K82Q3P1 reading surface
+   - More breathing room around article text
+   - Text must not sit close to card edges
+   - Preserve scenic background
+   - Preserve existing article typography
+   - Responsive spacing without horizontal overflow
+   ========================================================= */
+
+.knowledge-article-page .knowledge-content {
+  box-sizing: border-box;
+
+  padding:
+    2.25rem
+    2.5rem;
+}
+
+/*
+ * Tablet:
+ * retain comfortable reading space while allowing
+ * the article card to use the available width.
+ */
+@media (max-width: 900px) {
+
+  .knowledge-article-page .knowledge-content {
+    padding:
+      1.75rem;
+  }
+
+}
+
+/*
+ * Mobile:
+ * smaller but still clearly visible inner breathing room.
+ */
+@media (max-width: 640px) {
+
+  .knowledge-article-page .knowledge-content {
+    padding:
+      1.25rem;
+  }
+
+}
+
+/* K82Q5P1 END */

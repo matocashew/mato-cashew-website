@@ -1,4 +1,4 @@
-﻿---
+---
 import {
   getKnowledgeTranslations,
 } from "../../i18n/knowledge";
@@ -79,7 +79,8 @@ const tags = [
   >
     <KnowledgeIndexHero lang={lang} />
 
-    <KnowledgeToolbar
+    <div class="knowledge-filter-panel">
+      <KnowledgeToolbar
       totalArticles={totalArticles}
       lang={lang}
     />
@@ -161,6 +162,8 @@ const tags = [
 
   )
 }
+
+    </div>
 
     <section id="featured-article-section">
       <h2 class="section-title">

@@ -346,3 +346,824 @@ html[lang="km"] .knowledge-index-page {
   isolation: isolate;
 }
 
+/* =========================================================
+   K81Q5P1 - APPROVED KNOWLEDGE CENTER FILTER PANEL
+   Permanent implementation of approved browser prototype.
+
+   Structure:
+   Hero
+   -> Search / result count
+   -> Browse by Category
+   -> Browse by Tags
+   -> Featured Article
+
+   Knowledge Stats are intentionally retired from the
+   compact approved index presentation.
+
+   K80 / Header / scenic atmosphere remain untouched.
+   ========================================================= */
+
+.knowledge-index-page {
+  position: relative;
+  z-index: 2;
+}
+
+/* Approved compact Hero relationship */
+
+.knowledge-index-page .knowledge-index-hero {
+  margin-bottom: 1rem;
+}
+
+/* One unified translucent filter surface */
+
+.knowledge-filter-panel {
+  position: relative;
+  z-index: 3;
+
+  width: min(100%, 980px);
+  margin: 0 auto 2rem;
+  padding: 11px 14px 12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.58);
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.82),
+      rgba(248, 251, 247, 0.72)
+    );
+
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 18px 50px rgba(20, 54, 36, 0.10);
+
+  overflow: hidden;
+}
+
+/* Search / result count */
+
+.knowledge-filter-panel .knowledge-toolbar {
+  margin: 0;
+}
+
+.knowledge-filter-panel .knowledge-search {
+  margin: 0;
+}
+
+.knowledge-filter-panel
+.knowledge-search input {
+  min-height: 42px;
+  padding: 0.65rem 1rem;
+
+  background:
+    rgba(255, 255, 255, 0.90);
+}
+
+.knowledge-filter-panel
+.knowledge-search-result-count {
+  margin:
+    0.45rem 0 0;
+
+  font-size: 0.82rem;
+}
+
+/* Stats were not part of the approved compact panel */
+
+.knowledge-filter-panel
+.knowledge-stats {
+  display: none !important;
+}
+
+/* Categories */
+
+.knowledge-filter-panel
+.knowledge-categories {
+  margin:
+    0.8rem 0 0;
+}
+
+.knowledge-filter-panel
+.knowledge-categories
+.section-title {
+  margin:
+    0 0 0.55rem;
+
+  font-size: 0.92rem;
+}
+
+.knowledge-filter-panel
+.category-list {
+  gap: 0.5rem;
+}
+
+.knowledge-filter-panel
+.category-chip {
+  min-height: 32px;
+  padding:
+    0.38rem 0.72rem;
+
+  font-size: 0.76rem;
+}
+
+/* Tags */
+
+.knowledge-filter-panel
+.knowledge-tags-filter {
+  margin-top: 0.8rem;
+}
+
+.knowledge-filter-panel
+.knowledge-tags-filter h2 {
+  margin:
+    0 0 0.55rem;
+
+  font-size: 0.92rem;
+}
+
+.knowledge-filter-panel
+.tag-filter-chips {
+  gap: 0.45rem;
+}
+
+.knowledge-filter-panel
+.tag-filter-chip {
+  min-height: 30px;
+  padding:
+    0.34rem 0.68rem;
+
+  font-size: 0.74rem;
+}
+
+/* Desktop:
+   keep extra tags compact instead of allowing the old
+   filters to create a tall standalone section.
+ */
+
+@media (min-width: 769px) {
+
+  .knowledge-filter-panel
+  .knowledge-tags-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 0.65rem;
+
+    min-height: 32px;
+    padding:
+      0.38rem 0.8rem;
+
+    border:
+      1px solid #10613e;
+    border-radius: 999px;
+
+    background:
+      rgba(255, 255, 255, 0.45);
+
+    color: #10613e;
+
+    font-size: 0.74rem;
+    font-weight: 700;
+
+    cursor: pointer;
+  }
+
+  .knowledge-filter-panel
+  .tag-filter-chip--extra {
+    display: none;
+  }
+
+  .knowledge-filter-panel
+  .tag-filter-chips.is-expanded
+  .tag-filter-chip--extra {
+    display: inline-flex;
+  }
+
+  /* Approved first-screen Featured relationship */
+
+  .knowledge-filter-panel
+  + #featured-article-section {
+    position: relative;
+    z-index: 2;
+
+    transform:
+      translateY(-72px);
+
+    margin-bottom: -72px;
+  }
+}
+
+/* Mobile approved compact panel */
+
+@media (max-width: 768px) {
+
+  .knowledge-filter-panel {
+    width: calc(100% - 0px);
+    max-width: 365px;
+
+    margin:
+      0 auto 1.5rem;
+
+    padding:
+      11px 12px 12px;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+  }
+
+  .knowledge-filter-panel
+  .knowledge-search input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .knowledge-filter-panel
+  .knowledge-categories {
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+  }
+
+  .knowledge-filter-panel
+  .knowledge-tags-filter {
+    margin-top: 0.75rem;
+  }
+
+  .knowledge-filter-panel
+  .category-list,
+  .knowledge-filter-panel
+  .tag-filter-chips {
+    max-width: 100%;
+  }
+
+  .knowledge-filter-panel
+  .category-chip,
+  .knowledge-filter-panel
+  .tag-filter-chip {
+    max-width: 100%;
+  }
+
+  .knowledge-filter-panel
+  .knowledge-tags-toggle {
+    margin-top: 0.65rem;
+  }
+}
+
+@media (max-width: 420px) {
+
+  .knowledge-filter-panel {
+    width: 100%;
+    max-width: 365px;
+  }
+}
+
+/* =========================================================
+   K81Q7P1 - LOCKED DESKTOP MASTER ALIGNMENT
+
+   Master reference:
+   - Result count aligned right
+   - All desktop tags visible
+   - No desktop Show More Tags button
+   - Featured heading fully visible below panel
+   - Existing K81 panel structure preserved
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  /* Search occupies the full first row */
+
+  .knowledge-filter-panel
+  .knowledge-toolbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    column-gap: 1rem;
+    row-gap: 0.35rem;
+  }
+
+  .knowledge-filter-panel
+  .knowledge-toolbar
+  .knowledge-search {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 100%;
+  }
+
+  /* Locked reference:
+     Showing 7 of 13 articles = right side
+  */
+
+  .knowledge-filter-panel
+  .knowledge-search-result-count {
+    grid-column: 2;
+    grid-row: 2;
+
+    justify-self: end;
+    align-self: center;
+
+    margin: 0;
+
+    white-space: nowrap;
+
+    font-size: 0.76rem;
+  }
+
+  /*
+   * Desktop master shows all tags.
+   * Mobile collapse behavior remains untouched.
+   */
+
+  .knowledge-filter-panel
+  .tag-filter-chip--extra {
+    display: inline-flex;
+  }
+
+  .knowledge-filter-panel
+  .knowledge-tags-toggle {
+    display: none !important;
+  }
+
+  /*
+   * Undo K81Q5P1's -72px Featured translation.
+   * The locked reference keeps Featured heading
+   * clearly readable below the glass panel.
+   */
+
+  .knowledge-filter-panel
+  + #featured-article-section {
+    transform: none;
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+  }
+}
+
+/* =========================================================
+   K81Q9P1 - DESKTOP COMPACT TAGS
+
+   User-approved adjustment:
+   - Keep desktop Tags compact
+   - Show initial Tags only
+   - Restore Show More Tags button
+   - Result-count / Featured corrections remain unchanged
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+  .knowledge-filter-panel
+  .tag-filter-chip--extra {
+    display: none;
+  }
+
+  .knowledge-filter-panel
+  .tag-filter-chips.is-expanded
+  .tag-filter-chip--extra {
+    display: inline-flex;
+  }
+
+  .knowledge-filter-panel
+  .knowledge-tags-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* =========================================================
+   K81Q13P1 - KNOWLEDGE DAY NIGHT TYPOGRAPHY CONTRAST
+
+   Purpose:
+   - Improve Hero readability
+   - Improve Featured Article heading readability
+   - Adapt automatically for Night atmosphere
+
+   Protected:
+   - Scenic background unchanged
+   - Hero dimensions unchanged
+   - Filter panel unchanged
+   - Tags behavior unchanged
+   - Featured positioning unchanged
+   - Header / K80 unchanged
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   DAY / DEFAULT
+   --------------------------------------------------------- */
+
+.knowledge-index-page
+.knowledge-index-hero
+.eyebrow {
+  color: #075f3e;
+  text-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.65);
+}
+
+.knowledge-index-page
+.knowledge-index-hero
+h1 {
+  color: #101c31;
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 0.40),
+    0 2px 8px rgba(255, 255, 255, 0.22);
+}
+
+.knowledge-index-page
+.knowledge-index-hero
+h1 span {
+  color: #006c43;
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 0.45),
+    0 2px 8px rgba(255, 255, 255, 0.20);
+}
+
+.knowledge-index-page
+.knowledge-index-hero
+.description {
+  color: #3f4d63;
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 0.72),
+    0 1px 6px rgba(255, 255, 255, 0.35);
+}
+
+.knowledge-index-page
+.knowledge-index-hero__topics
+span {
+  color: #075f3e;
+
+  background:
+    rgba(255, 255, 255, 0.20);
+
+  border-color:
+    rgba(7, 95, 62, 0.30);
+
+  text-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.55);
+}
+
+
+/* Featured Article — Day */
+
+.knowledge-index-page
+#featured-article-section
+> .section-title {
+  color: #13213a;
+
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 0.72),
+    0 2px 8px rgba(255, 255, 255, 0.45);
+}
+
+
+/* ---------------------------------------------------------
+   NIGHT
+   Existing site authority:
+   .weather-atmosphere[data-weather-day="false"] ~ main
+   --------------------------------------------------------- */
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-index-page
+.knowledge-index-hero
+.eyebrow {
+  color: #d9f7e8;
+
+  text-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.70),
+    0 0 10px rgba(0, 0, 0, 0.32);
+}
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-index-page
+.knowledge-index-hero
+h1 {
+  color: rgb(247, 255, 249);
+
+  text-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.72),
+    0 3px 12px rgba(0, 0, 0, 0.48);
+}
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-index-page
+.knowledge-index-hero
+h1 span {
+  color: #8ee8b9;
+
+  text-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.76),
+    0 3px 12px rgba(0, 0, 0, 0.52);
+}
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-index-page
+.knowledge-index-hero
+.description {
+  color: rgba(255, 255, 255, 0.96);
+
+  text-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.72),
+    0 2px 10px rgba(0, 0, 0, 0.48);
+}
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-index-page
+.knowledge-index-hero__topics
+span {
+  color: #f4fff8;
+
+  background:
+    rgba(10, 31, 35, 0.38);
+
+  border-color:
+    rgba(218, 255, 233, 0.42);
+
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.78);
+}
+
+
+/* Featured Article — Night */
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-index-page
+#featured-article-section
+> .section-title {
+  color: rgb(247, 255, 249);
+
+  text-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.78),
+    0 3px 12px rgba(0, 0, 0, 0.58);
+}
+
+/* =========================================================
+   K81Q15P1 - STRONG KNOWLEDGE TYPOGRAPHY CONTRAST
+
+   Readability correction only.
+   NO layout change.
+   NO background change.
+   NO panel change.
+   ========================================================= */
+
+
+/* =========================
+   DAY / DEFAULT
+   ========================= */
+
+/* Small Hero eyebrow */
+.knowledge-index-page
+.knowledge-index-hero
+.eyebrow {
+  color: #004d32;
+
+  font-weight: 800;
+
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.95),
+    0 1px 4px rgba(255,255,255,0.90);
+}
+
+
+/* Main Hero title */
+.knowledge-index-page
+.knowledge-index-hero
+h1 {
+  color: #0b1930;
+
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.95),
+    0 2px 5px rgba(255,255,255,0.82),
+    0 3px 12px rgba(255,255,255,0.55);
+}
+
+
+/* Green title line */
+.knowledge-index-page
+.knowledge-index-hero
+h1 span {
+  color: #00633f;
+
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.95),
+    0 2px 5px rgba(255,255,255,0.85),
+    0 3px 12px rgba(255,255,255,0.55);
+}
+
+
+/* Hero description — substantially darker */
+.knowledge-index-page
+.knowledge-index-hero
+.description {
+  color: #24344b;
+
+  font-weight: 600;
+
+  text-shadow:
+    0 1px 0 rgba(255,255,255,1),
+    0 1px 3px rgba(255,255,255,0.95),
+    0 2px 8px rgba(255,255,255,0.80);
+}
+
+
+/* Topic pills */
+.knowledge-index-page
+.knowledge-index-hero__topics
+span {
+  color: #004f34;
+
+  font-weight: 700;
+
+  background:
+    rgba(255,255,255,0.52);
+
+  border-color:
+    rgba(0,79,52,0.42);
+
+  box-shadow:
+    0 1px 4px rgba(255,255,255,0.35);
+
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.90);
+}
+
+
+/* Featured Article */
+.knowledge-index-page
+#featured-article-section
+> .section-title {
+  color: #0b1930;
+
+  font-weight: 800;
+
+  text-shadow:
+    -1px -1px 0 rgba(255,255,255,0.82),
+     1px -1px 0 rgba(255,255,255,0.82),
+    -1px  1px 0 rgba(255,255,255,0.82),
+     1px  1px 0 rgba(255,255,255,0.82),
+     0 2px 7px rgba(255,255,255,0.95),
+     0 3px 14px rgba(255,255,255,0.72);
+}
+
+
+/* =========================
+   NIGHT
+   ========================= */
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-index-page
+.knowledge-index-hero
+.eyebrow {
+  color: #e9fff3;
+
+  text-shadow:
+    0 1px 2px rgba(0,0,0,0.95),
+    0 2px 8px rgba(0,0,0,0.88);
+}
+
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-index-page
+.knowledge-index-hero
+h1 {
+  color: #ffffff;
+
+  text-shadow:
+    0 2px 2px rgba(0,0,0,0.95),
+    0 3px 8px rgba(0,0,0,0.88),
+    0 4px 16px rgba(0,0,0,0.65);
+}
+
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-index-page
+.knowledge-index-hero
+h1 span {
+  color: #9af0bf;
+
+  text-shadow:
+    0 2px 2px rgba(0,0,0,0.95),
+    0 3px 8px rgba(0,0,0,0.90),
+    0 4px 16px rgba(0,0,0,0.68);
+}
+
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-index-page
+.knowledge-index-hero
+.description {
+  color: #ffffff;
+
+  font-weight: 600;
+
+  text-shadow:
+    0 1px 2px rgba(0,0,0,1),
+    0 2px 6px rgba(0,0,0,0.95),
+    0 3px 12px rgba(0,0,0,0.78);
+}
+
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-index-page
+.knowledge-index-hero__topics
+span {
+  color: #ffffff;
+
+  background:
+    rgba(4,24,29,0.62);
+
+  border-color:
+    rgba(220,255,235,0.70);
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.32);
+
+  text-shadow:
+    0 1px 2px rgba(0,0,0,1),
+    0 2px 5px rgba(0,0,0,0.80);
+}
+
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-index-page
+#featured-article-section
+> .section-title {
+  color: #ffffff;
+
+  text-shadow:
+    0 2px 2px rgba(0,0,0,1),
+    0 3px 8px rgba(0,0,0,0.95),
+    0 4px 16px rgba(0,0,0,0.78);
+}
+
+/* =========================================================
+   K81Q17P1 - LATEST ARTICLES STRONG CONTRAST
+
+   Readability correction only.
+
+   Targets:
+   - English: Latest Articles
+   - Khmer: Latest Articles translation
+   - Day background
+   - Night background
+
+   NO layout change.
+   NO position change.
+   NO background change.
+   NO image change.
+   ========================================================= */
+
+
+/* =========================
+   DAY / DEFAULT
+   ========================= */
+
+.knowledge-index-page
+.knowledge-latest-section
+> .section-title {
+  color: #0b1930;
+
+  font-weight: 800;
+
+  text-shadow:
+    -1px -1px 0 rgba(255,255,255,0.82),
+     1px -1px 0 rgba(255,255,255,0.82),
+    -1px  1px 0 rgba(255,255,255,0.82),
+     1px  1px 0 rgba(255,255,255,0.82),
+     0 2px 7px rgba(255,255,255,0.95),
+     0 3px 14px rgba(255,255,255,0.72);
+}
+
+
+/* =========================
+   NIGHT
+   ========================= */
+
+.weather-atmosphere[data-weather-day="false"]
+~ main
+.knowledge-index-page
+.knowledge-latest-section
+> .section-title {
+  color: #ffffff;
+
+  font-weight: 800;
+
+  text-shadow:
+    0 2px 2px rgba(0,0,0,1),
+    0 3px 8px rgba(0,0,0,0.95),
+    0 4px 16px rgba(0,0,0,0.78);
+}
+
