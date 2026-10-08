@@ -40,7 +40,7 @@ const articles = await newsService.getAll("en");
                 <img
                   src={article.data.heroImage}
                   alt={article.data.title}
-                  loading="lazy"
+                  loading="eager" decoding="sync"
                 />
               )}
               <div class="news-index__card-body">

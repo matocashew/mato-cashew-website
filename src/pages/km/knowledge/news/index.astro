@@ -40,7 +40,7 @@ const articles = await newsService.getAll("km");
                 <img
                   src={article.data.heroImage}
                   alt={article.data.title}
-                  loading="lazy"
+                  loading="eager" decoding="sync"
                 />
               )}
               <div class="news-index__card-body">
