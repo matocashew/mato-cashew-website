@@ -1,4 +1,4 @@
-﻿---
+---
 import type { CollectionEntry } from "astro:content";
 
 import ProductsHero from "../products/ProductsHero.astro";
@@ -24,22 +24,27 @@ const { products, language }: Props = Astro.props;
   <TrustBar />
 </ScenicHeroShell>
 
-<ProductIntro />
+<!-- K86T18-UNIFIED-PRODUCTS-OUTER-CARD -->
+<div class="products-unified-outer-card">
 
+  <ProductIntro />
 
-<section
-  id="products"
-  class="products-page-grid"
->
-  <div class="container">
+  <section
+    id="products"
+    class="products-page-grid"
+  >
+    <div class="container">
 
-    <ProductGrid
-      products={products}
-      language={language}
-    />
+      <ProductGrid
+        products={products}
+        language={language}
+      />
 
-  </div>
-</section>
+    </div>
+  </section>
+
+</div>
+<!-- K86T18-UNIFIED-PRODUCTS-OUTER-CARD-END -->
 
 <PackagingOptions />
 

@@ -23,15 +23,41 @@ const t = getCurrentLanguage(Astro.url.pathname);
     <div class="product-features">
 
       <span class="feature-badge">
-        ✓ {t.products.intro.features.exportReady}
+        <span class="product-feature-icon" aria-hidden="true">
+  <svg viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="1.8"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 22v-8"/>
+    <path d="M12 14C6 14 4 10 4 5c5 0 8 3 8 9Z"/>
+    <path d="M12 14c0-6 3-9 8-9 0 5-2 9-8 9Z"/>
+  </svg>
+</span>
+      <span>{t.products.intro.features.exportReady}</span>
       </span>
 
       <span class="feature-badge">
-        ✓ {t.products.intro.features.oem}
+        <span class="product-feature-icon" aria-hidden="true">
+  <svg viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="1.8"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="m12 2 9 5-9 5-9-5 9-5Z"/>
+    <path d="M3 7v10l9 5 9-5V7"/>
+    <path d="M12 12v10"/>
+  </svg>
+</span>
+      <span>{t.products.intro.features.oem}</span>
       </span>
 
       <span class="feature-badge">
-        ✓ {t.products.intro.features.directFarmers}
+        <span class="product-feature-icon" aria-hidden="true">
+  <svg viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="1.8"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H5l-3 2v-7.5A8.5 8.5 0 0 1 10.5 5H12"/>
+    <path d="M14 3h8v8h-5l-3 2V3Z"/>
+  </svg>
+</span>
+      <span>{t.products.intro.features.directFarmers}</span>
       </span>
 
     </div>

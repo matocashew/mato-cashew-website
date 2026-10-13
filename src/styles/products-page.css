@@ -2175,3 +2175,450 @@ section.packaging-options .section-title h2 {
 }
 
 /* K85Q12T3-PACKAGING-FULL-CARD-END */
+
+/* ==========================================================
+   K86T4-PRODUCT-INFORMATION-CARD
+   Approved K86T3 browser prototype.
+   Product Information heading + specifications table.
+   Preserve scenic background and existing table styles.
+   ========================================================== */
+
+section.product-specifications > .container {
+    box-sizing: border-box;
+    width: calc(100% - 32px);
+    max-width: 1200px;
+    margin-inline: auto;
+
+    padding: 20px 22px 24px;
+
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    background: rgba(255, 250, 239, 0.68);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+section.product-specifications .section-title {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+section.product-specifications .section-title h2 {
+    color: #172b23;
+    text-shadow: none;
+}
+
+@media (max-width: 767px) {
+    section.product-specifications > .container {
+        padding: 18px 16px 20px;
+        border-radius: 16px;
+    }
+}
+
+/* K86T4-PRODUCT-INFORMATION-CARD-END */
+
+/* ==========================================================
+   K86T8-FAQ-OUTER-CARD
+   Approved K86T7 Firefox browser prototype.
+   FAQ heading + five accordion items.
+   Preserve scenic background and accordion behavior.
+   ========================================================== */
+
+section.product-faq > .container {
+    box-sizing: border-box;
+    width: calc(100% - 32px);
+    max-width: 1200px;
+    margin-inline: auto;
+
+    padding: 20px 22px 24px;
+
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    background: rgba(255, 250, 239, 0.68);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+section.product-faq .section-title {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding: 0;
+
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+section.product-faq .section-title h2 {
+    color: #172b23;
+    text-shadow: none;
+}
+
+@media (max-width: 767px) {
+    section.product-faq > .container {
+        padding: 18px 16px 20px;
+        border-radius: 16px;
+    }
+}
+
+/* K86T8-FAQ-OUTER-CARD-END */
+
+/* ==========================================================
+   K86T13B-BUSINESS-PREMIUM-CARD
+   Approved K86T12 premium browser prototype.
+   Preserve existing content, links and scenic background.
+   ========================================================== */
+
+section.products-cta > .container {
+    box-sizing: border-box;
+    width: calc(100% - 32px);
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 24px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.78);
+    background: rgba(255, 250, 239, 0.73);
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.07);
+}
+
+section.products-cta .products-cta-box {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 44px 36px 38px;
+    border-radius: 20px;
+    background:
+        radial-gradient(ellipse at 100% 0%, rgba(76,179,121,.35), transparent 45%),
+        radial-gradient(ellipse at 0% 100%, rgba(30,151,100,.24), transparent 42%),
+        linear-gradient(135deg, #075a3f 0%, #006849 55%, #08754e 100%);
+    box-shadow: inset 0 1px rgba(255,255,255,.18);
+}
+
+section.products-cta .products-cta-box::before,
+section.products-cta .products-cta-box::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    z-index: -1;
+    width: 280px;
+    height: 280px;
+    border: 1px solid rgba(206,244,190,.13);
+    border-radius: 12% 88% 20% 80%;
+    background: rgba(186,236,160,.055);
+    transform: rotate(-28deg);
+}
+
+section.products-cta .products-cta-box::before {
+    left: -160px;
+    bottom: -145px;
+}
+
+section.products-cta .products-cta-box::after {
+    right: -170px;
+    top: -140px;
+    transform: rotate(35deg);
+}
+
+section.products-cta .products-cta-box h2 {
+    max-width: 790px;
+    margin-inline: auto;
+    font-size: clamp(30px, 3vw, 46px);
+    line-height: 1.15;
+    letter-spacing: -.025em;
+    text-wrap: balance;
+    color: #fff;
+}
+
+section.products-cta .products-cta-box > p {
+    max-width: 770px;
+    margin-inline: auto;
+    line-height: 1.65;
+    color: rgba(255,255,255,.94);
+}
+
+section.products-cta .cta-features {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 18px 26px;
+    margin-top: 24px;
+}
+
+section.products-cta .k86t13-feature {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+}
+
+section.products-cta .k86t13-feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 46px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #e9fac2;
+    color: #076747;
+}
+
+section.products-cta .k86t13-feature-icon svg {
+    width: 23px;
+    height: 23px;
+}
+
+section.products-cta .cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 26px;
+}
+
+section.products-cta .cta-buttons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-height: 52px;
+    padding: 12px 24px;
+    border-radius: 999px;
+}
+
+section.products-cta .k86t13-arrow {
+    font-size: 20px;
+    line-height: 1;
+}
+
+@media (max-width: 767px) {
+    section.products-cta > .container {
+        padding: 12px;
+        border-radius: 18px;
+    }
+
+    section.products-cta .products-cta-box {
+        padding: 34px 18px;
+        border-radius: 15px;
+    }
+
+    section.products-cta .cta-features {
+        gap: 14px;
+    }
+
+    section.products-cta .k86t13-feature-icon {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+    }
+
+    section.products-cta .cta-buttons a {
+        width: 100%;
+    }
+}
+
+/* K86T13B-BUSINESS-PREMIUM-CARD-END */
+
+/* ==========================================================
+   K86T18-UNIFIED-PRODUCTS-OUTER-CARD
+   Approved K86T17 browser visibility prototype.
+   Cambodian Cashew Products + all six product cards.
+   Preserve scenic background and product card design.
+   ========================================================== */
+
+.products-unified-outer-card {
+    box-sizing: border-box;
+    position: relative;
+    isolation: isolate;
+    z-index: 2;
+
+    width: calc(100% - 32px);
+    max-width: 1200px;
+    margin-inline: auto;
+
+    background: rgba(255, 250, 239, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.90);
+    border-radius: 22px;
+    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.10);
+
+    overflow: visible;
+}
+
+.products-unified-outer-card::before,
+.products-unified-outer-card::after {
+    content: none;
+}
+
+.products-unified-outer-card > .product-intro,
+.products-unified-outer-card > .products-page-grid {
+    position: relative;
+    z-index: 1;
+    opacity: 1;
+    visibility: visible;
+}
+
+.products-unified-outer-card .product-intro > .container {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.products-unified-outer-card .products-grid {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 767px) {
+    .products-unified-outer-card {
+        border-radius: 16px;
+    }
+}
+
+/* K86T18-UNIFIED-PRODUCTS-OUTER-CARD-END */
+
+/* ==========================================================
+   K86T22-PRODUCTS-UNIFIED-SPACING
+   Approved K86T20 + K86T21 browser prototypes.
+   Intro + six product cards inside one unified outer card.
+   Trust Bar separation: 16px.
+   Preserve scenic background and existing product cards.
+   ========================================================== */
+
+.products-unified-outer-card {
+    margin-top: 16px;
+    padding: 20px 22px 24px;
+}
+
+.products-unified-outer-card > .product-intro {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.products-unified-outer-card
+.product-intro > .container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0 0 22px;
+
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.products-unified-outer-card
+> .products-page-grid {
+    width: 100%;
+    margin: 0;
+    padding: 24px 0 0;
+
+    border-top: 1px solid rgba(20, 90, 65, 0.14);
+}
+
+.products-unified-outer-card
+> .products-page-grid > .container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 767px) {
+    .products-unified-outer-card {
+        padding: 18px 16px 20px;
+    }
+
+    .products-unified-outer-card
+    > .products-page-grid {
+        padding-top: 18px;
+    }
+}
+
+/* K86T22-PRODUCTS-UNIFIED-SPACING-END */
+
+/* ==========================================================
+   K86T24-PRODUCT-FEATURE-ICONS
+   Approved K86T23 Firefox browser prototype.
+   Replaces checkmarks with semantic SVG icons.
+   ========================================================== */
+
+.product-intro .feature-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.product-intro .feature-badge .product-feature-icon {
+    display: inline-flex;
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    align-items: center;
+    justify-content: center;
+    color: #08734d;
+}
+
+.product-intro .feature-badge .product-feature-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* K86T24-PRODUCT-FEATURE-ICONS-END */
+
+/* ==========================================================
+   K86T28B-UNIFORM-CARD-SPACING
+   Approved K86T26 + K86T27 browser prototypes.
+   24px spacing between all five product sections.
+   24px spacing between Business Inquiries and Footer.
+   Preserve scenic background and existing card designs.
+   ========================================================== */
+
+.products-unified-outer-card {
+    margin-bottom: 24px;
+}
+
+section.packaging-options,
+section.product-specifications,
+section.product-faq,
+section.products-cta {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+section.packaging-options {
+    margin-bottom: 24px;
+}
+
+section.product-specifications {
+    margin-bottom: 24px;
+}
+
+section.product-faq {
+    margin-bottom: 24px;
+}
+
+section.products-cta {
+    margin-bottom: 24px;
+}
+
+/* K86T28B-UNIFORM-CARD-SPACING-END */

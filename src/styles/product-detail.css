@@ -1345,3 +1345,185 @@ html[lang="km"] .product-breadcrumb {
         height: 10px;
     }
 }
+
+/* ==========================================================
+   K87T4-PRODUCT-HIGHLIGHTS-OUTER-CARD
+   Approved K87T3 browser prototype.
+   Product Highlights outer card.
+   Preserve scenic background and existing feature cards.
+   ========================================================== */
+
+section.product-specifications {
+    padding: 24px 0;
+    background: transparent;
+}
+
+section.product-specifications > .container {
+    box-sizing: border-box;
+    width: calc(100% - 32px);
+    max-width: 1200px;
+    margin-inline: auto;
+
+    padding: 24px;
+
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    background: rgba(255, 250, 239, 0.78);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+
+    position: relative;
+    z-index: 2;
+}
+
+section.product-specifications .specifications-list {
+    margin-top: 0;
+}
+
+@media (max-width: 767px) {
+    section.product-specifications > .container {
+        padding: 18px 16px 20px;
+        border-radius: 16px;
+    }
+}
+
+/* K87T4-PRODUCT-HIGHLIGHTS-OUTER-CARD-END */
+
+/* ==========================================================
+   K87T8-RECOMMENDED-USES-CARD
+   Approved K87T7 Firefox browser prototype.
+   Product Applications outer translucent card.
+   Preserve scenic background and existing content.
+   ========================================================== */
+
+section.product-applications {
+    background: transparent;
+    padding: 0 16px;
+    margin: 24px 0;
+}
+
+section.product-applications > .container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 24px 22px;
+
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    background: rgba(255, 250, 239, 0.78);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+
+    position: relative;
+    z-index: 1;
+}
+
+section.product-applications .applications-grid {
+    margin-top: 24px;
+}
+
+@media (max-width: 767px) {
+    section.product-applications {
+        padding-inline: 16px;
+    }
+
+    section.product-applications > .container {
+        padding: 18px 16px 20px;
+        border-radius: 16px;
+    }
+}
+
+/* K87T8-RECOMMENDED-USES-CARD-END */
+
+/* ==========================================================
+   K87T11-RELATED-PRODUCTS-CARD
+   Approved K87T10 browser prototype.
+   Preserve product cards and scenic background.
+   ========================================================== */
+
+section.related-products {
+    background: transparent !important;
+    padding: 0 16px !important;
+    margin: 24px 0 !important;
+}
+
+section.related-products > .container {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin-inline: auto !important;
+
+    padding: 24px 22px !important;
+
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.65) !important;
+    background: rgba(255, 250, 239, 0.78) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05) !important;
+
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+@media (max-width: 767px) {
+    section.related-products > .container {
+        padding: 18px 16px 20px !important;
+        border-radius: 16px !important;
+    }
+}
+
+/* K87T11-RELATED-PRODUCTS-CARD-END */
+
+/* ==========================================================
+   K87T19-RETAIL-HIGHLIGHTS-SPACING
+   Approved K87T18 browser prototype.
+   Retail Product Card to Product Highlights = 24px.
+   Do not modify the scenic background or inner cards.
+   ========================================================== */
+
+section.product-details {
+    padding-bottom: 0;
+}
+
+/* K87T19-RETAIL-HIGHLIGHTS-SPACING-END */
+
+/* ==========================================================
+   K87T23-UNIFORM-PRODUCT-CARD-SPACING
+   Approved Firefox K87T22 spacing: 24px
+   Retail > Highlights > Uses > Related Products
+   Preserve scenic background and existing card design.
+   ========================================================== */
+
+section.product-details {
+    padding-bottom: 24px;
+}
+
+section.product-specifications {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+section.product-applications {
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+section.related-products {
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+/* K87T23-UNIFORM-PRODUCT-CARD-SPACING-END */
+
+/* ==========================================================
+   K87T26-UNIFORM-PRODUCT-SPACING
+   Approved Firefox K87T25 browser prototype.
+   ========================================================== */
+
+section.product-specifications {
+    padding-top: 0 !important;
+}
+
+section.related-products {
+    margin-top: 0 !important;
+}
+
+/* K87T26-UNIFORM-PRODUCT-SPACING-END */
