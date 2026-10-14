@@ -67,8 +67,30 @@ import QuickFacts from "@components/knowledge/QuickFacts.astro";
 
 </InfoBox>
 
-## ព័ត៌មានសង្ខេប
-
+<div
+  data-mato-groupa-quickfacts="true"
+  style={{
+    display: "block",
+    background: "rgba(238, 247, 239, 0.94)",
+    borderLeft: "4px solid #147d48",
+    borderRadius: "12px",
+    padding: "22px 24px",
+    margin: "24px 0 32px"
+  }}
+>
+  <h2
+    style={{
+      fontSize: "1.25rem",
+      fontWeight: 700,
+      lineHeight: 1.4,
+      color: "#075b39",
+      margin: "0 0 16px",
+      padding: "0 0 10px",
+      borderBottom: "1px solid rgba(7,91,57,.18)"
+    }}
+  >
+    ព័ត៌មានសង្ខេប
+  </h2>
 <QuickFacts
   items={[
     "គុណភាពខុសពីការចាត់ថ្នាក់។",
@@ -78,6 +100,7 @@ import QuickFacts from "@components/knowledge/QuickFacts.astro";
     "អ្នកទិញអន្តរជាតិរំពឹងទទួលបានផលិតផលដែលមានគុណភាពស្មើគ្នា និងស្របតាមស្តង់ដារ។"
   ]}
 />
+</div>
 
 ---
 
@@ -358,3 +381,10 @@ import QuickFacts from "@components/knowledge/QuickFacts.astro";
 <ArticleLink href="/km/knowledge/what-is-cashew/">
   តើស្វាយចន្ទីជាអ្វី?
 </ArticleLink>
+
+<style>{`
+  [data-mato-groupa-quickfacts="true"] .quick-facts__list {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+`}</style>

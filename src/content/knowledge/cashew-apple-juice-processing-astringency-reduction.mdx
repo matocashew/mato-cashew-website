@@ -33,6 +33,30 @@ import QuickFacts from "@components/knowledge/QuickFacts.astro";
 
 Cashew apples can create value beyond the nut, but their short post-harvest life and astringent taste make juice processing challenging. This guide explains extraction, tannin reduction, nutritional quality, and food safety, distinguishing experimental research from validated production practices.
 
+<div
+  data-mato-apple-juice-quickfacts="true"
+  style={{
+    display: "block",
+    background: "rgba(238, 247, 239, 0.94)",
+    borderLeft: "4px solid #147d48",
+    borderRadius: "12px",
+    padding: "22px 24px",
+    margin: "24px 0 32px"
+  }}
+>
+  <h2
+    style={{
+      fontSize: "1.25rem",
+      fontWeight: 700,
+      lineHeight: 1.4,
+      color: "#075b39",
+      margin: "0 0 16px",
+      padding: "0 0 10px",
+      borderBottom: "1px solid rgba(7,91,57,.18)"
+    }}
+  >
+    Quick Facts
+  </h2>
 <QuickFacts
   items={[
     "Tannins contribute to the dry, puckering sensation of astringency.",
@@ -42,6 +66,7 @@ Cashew apples can create value beyond the nut, but their short post-harvest life
     "Experimental treatments are not ready-made commercial recipes."
   ]}
 />
+</div>
 
 ## 1. Understanding the Cashew Apple
 
@@ -83,3 +108,10 @@ Cashew apple juice offers value-addition opportunities, provided processors bala
 
 1. Aluko, A., Makule, E., & Kassim, N. (2023). *Effect of clarification on physicochemical properties and nutrient retention of pressed and blended cashew apple juice*. Food Science & Nutrition. https://doi.org/10.1002/fsn3.3222
 2. Singh, S., et al. (2025). *Tannin Mitigation in Cashew Apple Juice using Taro and Water Chestnut Powders as Clarifying Agents*. Current Research in Nutrition and Food Science Journal. https://doi.org/10.12944/CRNFSJ.13.Special-Issue-July.10
+
+<style>{`
+  [data-mato-apple-juice-quickfacts="true"] .quick-facts__list {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+`}</style>

@@ -43,8 +43,30 @@ import InfoBox from "@components/ui/InfoBox.astro";
 
 ការស្រាវជ្រាវឆ្នាំ 2026 ផ្តល់ការយល់ដឹងបន្ថែមអំពីរបៀបដែលទឹក និងចំហាយទឹកផ្លាស់ទីក្នុងអំឡុងការត្រាំ ការចំហុយ និងការសម្ងួត។
 
-## ព័ត៌មានសង្ខេប
-
+<div
+  data-mato-groupa-quickfacts="true"
+  style={{
+    display: "block",
+    background: "rgba(238, 247, 239, 0.94)",
+    borderLeft: "4px solid #147d48",
+    borderRadius: "12px",
+    padding: "22px 24px",
+    margin: "24px 0 32px"
+  }}
+>
+  <h2
+    style={{
+      fontSize: "1.25rem",
+      fontWeight: 700,
+      lineHeight: 1.4,
+      color: "#075b39",
+      margin: "0 0 16px",
+      padding: "0 0 10px",
+      borderBottom: "1px solid rgba(7,91,57,.18)"
+    }}
+  >
+    ព័ត៌មានសង្ខេប
+  </h2>
 <QuickFacts
   items={[
     "ការស្រាវជ្រាវថ្មីបានសិក្សាការផ្ទេរកម្តៅ និងសំណើមក្នុងគ្រាប់ស្វាយចន្ទីអំឡុងការត្រាំ ការចំហុយ និងការសម្ងួត។",
@@ -54,6 +76,7 @@ import InfoBox from "@components/ui/InfoBox.astro";
     "អ្នកកែច្នៃអាចបង្កើនការយល់ដឹងអំពីដំណើរការផលិត ដោយកត់ត្រាសំណើម និងលក្ខខណ្ឌកែច្នៃតាម batch។"
   ]}
 />
+</div>
 
 ## អ្វីដែលការស្រាវជ្រាវបានរកឃើញ
 
@@ -183,3 +206,10 @@ https://www.fao.org/
 ការស្រាវជ្រាវថ្មីជួយឱ្យយើងយល់កាន់តែច្បាស់ពីការផ្លាស់ទីសំណើមក្នុងគ្រាប់ស្វាយចន្ទី ខណៈសំណើអនុវត្តសម្រាប់អ្នកកែច្នៃនៅកម្ពុជា គឺចាប់ផ្តើមបង្កើតកំណត់ត្រា batch ដែលភ្ជាប់វត្ថុធាតុដើម លក្ខខណ្ឌកែច្នៃ និងលទ្ធផលក្រោយបកសំបក។
 
 ទិន្នន័យនេះអាចជាមូលដ្ឋានសម្រាប់ការកែលម្អដំណើរការផលិតជាបន្តបន្ទាប់។
+
+<style>{`
+  [data-mato-groupa-quickfacts="true"] .quick-facts__list {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+`}</style>

@@ -33,6 +33,30 @@ import QuickFacts from "@components/knowledge/QuickFacts.astro";
 
 ផ្លែស្វាយចន្ទីអាចបង្កើតផលិតផលបន្ថែមតម្លៃក្រៅពីគ្រាប់ ប៉ុន្តែវាឆាប់ខូច និងអាចមានអារម្មណ៍ចត់ស្រគៀវ។ អត្ថបទនេះពន្យល់ពីការទាញយកទឹក ការកាត់បន្ថយតានីន ការរក្សាគុណភាពអាហារូបត្ថម្ភ និងសុវត្ថិភាព ដោយបែងចែកលទ្ធផលស្រាវជ្រាវចេញពីការណែនាំផលិតកម្ម។
 
+<div
+  data-mato-apple-juice-quickfacts="true"
+  style={{
+    display: "block",
+    background: "rgba(238, 247, 239, 0.94)",
+    borderLeft: "4px solid #147d48",
+    borderRadius: "12px",
+    padding: "22px 24px",
+    margin: "24px 0 32px"
+  }}
+>
+  <h2
+    style={{
+      fontSize: "1.25rem",
+      fontWeight: 700,
+      lineHeight: 1.4,
+      color: "#075b39",
+      margin: "0 0 16px",
+      padding: "0 0 10px",
+      borderBottom: "1px solid rgba(7,91,57,.18)"
+    }}
+  >
+    ចំណុចសំខាន់ៗ
+  </h2>
 <QuickFacts
   items={[
     "ការកាត់បន្ថយតានីនអាចជួយបន្ថយអារម្មណ៍ចត់ស្រគៀវ។",
@@ -42,6 +66,7 @@ import QuickFacts from "@components/knowledge/QuickFacts.astro";
     "លទ្ធផលមន្ទីរពិសោធន៍មិនមែនជារូបមន្តលក់ភ្លាមៗទេ។"
   ]}
 />
+</div>
 
 ## 1. ស្វែងយល់អំពីផ្លែស្វាយចន្ទី
 
@@ -83,3 +108,10 @@ Aluko, Makule និង Kassim (២០២៣) បានសិក្សាកា�
 
 1. Aluko, A., Makule, E., & Kassim, N. (2023). *Effect of clarification on physicochemical properties and nutrient retention of pressed and blended cashew apple juice*. Food Science & Nutrition. https://doi.org/10.1002/fsn3.3222
 2. Singh, S., et al. (2025). *Tannin Mitigation in Cashew Apple Juice using Taro and Water Chestnut Powders as Clarifying Agents*. Current Research in Nutrition and Food Science Journal. https://doi.org/10.12944/CRNFSJ.13.Special-Issue-July.10
+
+<style>{`
+  [data-mato-apple-juice-quickfacts="true"] .quick-facts__list {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+`}</style>
