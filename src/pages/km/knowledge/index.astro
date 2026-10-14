@@ -1,5 +1,6 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
+import VideoLearningCTA from "@components/videos/VideoLearningCTA.astro";
 
 import KnowledgeGrid from "@components/knowledge/KnowledgeGrid.astro";
 import FeaturedKnowledgeCard from "@components/knowledge/FeaturedKnowledgeCard.astro";
@@ -20,6 +21,7 @@ import "@styles/components/knowledge-categories.css";
 import "@styles/components/knowledge-index-hero.css";
 import "@styles/components/knowledge-article-card.css";
 import "@styles/components/knowledge-system.css";
+import "@styles/components/knowledge-index-refresh.css";
 
 
 /* =========================================================
@@ -128,6 +130,8 @@ const tags = [
     <KnowledgeIndexHero
       lang={lang}
     />
+
+    <VideoLearningCTA lang={lang} />
 
 
     <!-- ===================================================

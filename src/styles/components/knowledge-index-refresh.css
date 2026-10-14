@@ -1,0 +1,340 @@
+/* K89 Stage 4F-2B
+   Knowledge Center index pages only.
+   Do not alter Hero, Header, Trust Bar or scenic layers.
+*/
+
+.knowledge-index-page .section-title {
+  margin-top: clamp(2.5rem, 4vw, 4rem);
+  margin-bottom: 1.4rem;
+  font-size: clamp(1.55rem, 2.4vw, 2.15rem);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.knowledge-index-page .featured-knowledge-card {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+  border-radius: 22px;
+  box-shadow: 0 12px 32px rgba(20, 49, 35, 0.08);
+}
+
+.knowledge-index-page .featured-content {
+  padding: clamp(1.5rem, 3vw, 3rem);
+}
+
+.knowledge-index-page .featured-content h2 {
+  font-size: clamp(1.45rem, 2.1vw, 2.2rem);
+  line-height: 1.25;
+}
+
+.knowledge-index-page .featured-content p {
+  line-height: 1.7;
+}
+
+.knowledge-index-page .knowledge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 1.7vw, 1.5rem);
+  align-items: stretch;
+}
+
+.knowledge-index-page .knowledge-grid > * {
+  min-width: 0;
+}
+
+.knowledge-index-page .knowledge-latest-section {
+  padding-bottom: clamp(2rem, 4vw, 4rem);
+}
+
+@media (max-width: 1050px) {
+  .knowledge-index-page .knowledge-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .knowledge-index-page .featured-knowledge-card {
+    grid-template-columns: minmax(0, 1fr);
+    border-radius: 18px;
+  }
+
+  .knowledge-index-page .featured-content {
+    padding: 1.5rem;
+  }
+
+  .knowledge-index-page .knowledge-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .knowledge-index-page .section-title {
+    margin-top: 2.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .knowledge-index-page .featured-knowledge-card {
+    transition: none;
+  }
+}
+
+/* K89 STAGE 4F-3B PREMIUM DESIGN */
+
+/* Video learning CTA */
+.knowledge-index-page .mato-video-cta {
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+  border: 1px solid rgba(37, 101, 65, 0.2);
+  border-radius: 24px;
+  background:
+    linear-gradient(
+      115deg,
+      rgba(255, 253, 247, 0.98),
+      rgba(232, 246, 233, 0.95)
+    );
+  box-shadow:
+    0 16px 40px rgba(22, 64, 38, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.knowledge-index-page .mato-video-cta__label {
+  color: #176341;
+  font-weight: 800;
+  letter-spacing: 0.065em;
+}
+
+.knowledge-index-page .mato-video-cta__button {
+  min-height: 48px;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(24, 79, 49, 0.16);
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.knowledge-index-page .mato-video-cta__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(24, 79, 49, 0.2);
+}
+
+/* Search and filter container */
+.knowledge-index-page .knowledge-filter-panel {
+  border-radius: 22px;
+  border: 1px solid rgba(39, 93, 59, 0.14);
+  background: rgba(255, 253, 248, 0.94);
+  box-shadow: 0 12px 32px rgba(25, 62, 39, 0.07);
+}
+
+/* Category filter chips */
+.knowledge-index-page .category-list {
+  gap: 0.75rem;
+}
+
+.knowledge-index-page .category-chip {
+  border-radius: 999px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.knowledge-index-page .category-chip.active {
+  background: #24643f;
+  border-color: #24643f;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(36, 100, 63, 0.18);
+}
+
+/* Tag filters */
+.knowledge-index-page .tag-filter-chips {
+  gap: 0.65rem;
+}
+
+.knowledge-index-page .tag-filter-chip {
+  border-radius: 999px;
+}
+
+.knowledge-index-page .tag-filter-chip:focus-visible,
+.knowledge-index-page .category-chip:focus-visible {
+  outline: 3px solid #b68b3d;
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .knowledge-index-page .mato-video-cta {
+    padding: 1.5rem;
+    border-radius: 18px;
+  }
+
+  .knowledge-index-page .knowledge-filter-panel {
+    border-radius: 18px;
+  }
+
+  .knowledge-index-page .category-list,
+  .knowledge-index-page .tag-filter-chips {
+    gap: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .knowledge-index-page .mato-video-cta__button {
+    transition: none;
+  }
+
+  .knowledge-index-page .mato-video-cta__button:hover {
+    transform: none;
+  }
+}
+
+/* K89 STAGE 4F-4B ALIGNMENT */
+
+/* Approved desktop alignment: 1200px content model */
+.knowledge-index-page .knowledge-filter-panel {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* K89 STAGE 4F-5F PERMANENT ICONS */
+
+/* Shared icon styling */
+.knowledge-index-page .mato-video-cta__label,
+.knowledge-index-page .knowledge-categories h2,
+.knowledge-index-page .knowledge-tags-filter h2,
+.knowledge-index-page #featured-article-section .section-title,
+.knowledge-index-page .knowledge-latest-section .section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* SVG icon base */
+.knowledge-index-page .mato-video-cta__label::before,
+.knowledge-index-page .knowledge-categories h2::before,
+.knowledge-index-page .knowledge-tags-filter h2::before,
+.knowledge-index-page #featured-article-section .section-title::before,
+.knowledge-index-page .knowledge-latest-section .section-title::before {
+  content: "";
+  display: inline-block;
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
+  background-color: #176341;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+/* Video icon */
+.knowledge-index-page .mato-video-cta__label::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='m10 8 6 4-6 4z' fill='black'/%3E%3C/svg%3E");
+}
+
+/* Category grid icon */
+.knowledge-index-page .knowledge-categories h2::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+/* Tags icon */
+.knowledge-index-page .knowledge-tags-filter h2::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 13 12 21 3 12V4h8z' fill='none' stroke='black' stroke-width='2'/%3E%3Ccircle cx='7.5' cy='8.5' r='1.5' fill='black'/%3E%3C/svg%3E");
+}
+
+/* Featured article icon */
+.knowledge-index-page #featured-article-section .section-title::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 7v14M3 18V5a2 2 0 0 1 2-2h4a3 3 0 0 1 3 3 3 3 0 0 1 3-3h4a2 2 0 0 1 2 2v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z' fill='none' stroke='black' stroke-width='1.8'/%3E%3C/svg%3E");
+}
+
+/* Latest articles icon */
+.knowledge-index-page .knowledge-latest-section .section-title::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='4' width='18' height='16' rx='2' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M7 8h10M7 12h10M7 16h6' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+/* Search icon and text alignment */
+.knowledge-index-page .knowledge-search {
+  position: relative;
+}
+
+.knowledge-index-page .knowledge-search::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-color: #176341;
+  pointer-events: none;
+  z-index: 1;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='m21 21-4.35-4.35' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.knowledge-index-page .knowledge-search input#knowledge-search {
+  padding-left: 56px;
+  padding-right: 52px;
+  box-sizing: border-box;
+}
+
+
+/* K89 STAGE 4F-5H APPROVED SOLID ICON BADGES */
+
+/*
+ * Approved Browser Console Test:
+ * Badge: 42px x 42px
+ * SVG: 25px x 25px
+ * Background: #104b35
+ * Border: 2px white
+ * Radius: 11px
+ * Heading gap: 13px
+ */
+
+.knowledge-index-page
+#featured-article-section .section-title,
+.knowledge-index-page
+.knowledge-latest-section .section-title {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.knowledge-index-page
+#featured-article-section .section-title::before,
+.knowledge-index-page
+.knowledge-latest-section .section-title::before {
+  content: "";
+  display: inline-block;
+
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+
+  border: 2px solid rgba(255,255,255,.95);
+  border-radius: 11px;
+  box-sizing: border-box;
+
+  background-color: #104b35;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 25px 25px;
+
+  mask: none;
+  -webkit-mask: none;
+
+  box-shadow:
+    0 3px 12px rgba(0,0,0,.32);
+}
+
+/* Featured Article: white book icon */
+.knowledge-index-page
+#featured-article-section .section-title::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 7v14M3 18V5a2 2 0 0 1 2-2h4a3 3 0 0 1 3 3 3 3 0 0 1 3-3h4a2 2 0 0 1 2 2v13h-6a3 3 0 0 1-3-3 3 3 0 0 0-3-3z'/%3E%3C/svg%3E");
+}
+
+/* Latest Articles: white newspaper icon */
+.knowledge-index-page
+.knowledge-latest-section .section-title::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='2'/%3E%3Cpath d='M7 8h10M7 12h10M7 16h6'/%3E%3C/svg%3E");
+}

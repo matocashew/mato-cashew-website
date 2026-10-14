@@ -1,0 +1,22 @@
+---
+import PageLayout from "../../../layouts/PageLayout.astro";
+import VideoLibrary from "../../../components/videos/VideoLibrary.astro";
+---
+
+<PageLayout
+  title="Cashew Video Learning | Mato Cashew"
+  description="Educational cashew videos about cultivation, harvesting, processing and quality control."
+  canonical="https://matocashew.com/knowledge/videos"
+  lang="en"
+  hasKhmerAlternate={true}
+  englishAlternateUrl="https://matocashew.com/knowledge/videos"
+  khmerAlternateUrl="https://matocashew.com/km/knowledge/videos"
+>
+  <div
+    id="language-route-context"
+    data-language-en="/knowledge/videos"
+    data-language-km="/km/knowledge/videos"
+    hidden
+  ></div>
+  <VideoLibrary lang="en" />
+</PageLayout>

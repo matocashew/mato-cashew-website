@@ -1,0 +1,22 @@
+---
+import PageLayout from "../../../../layouts/PageLayout.astro";
+import VideoLibrary from "../../../../components/videos/VideoLibrary.astro";
+---
+
+<PageLayout
+  title="វីដេអូចំណេះដឹងអំពីស្វាយចន្ទី | ចន្ទីមាតុភូមិ"
+  description="វីដេអូអប់រំអំពីការដាំដុះ ការប្រមូលផល ការកែច្នៃ និងការត្រួតពិនិត្យគុណភាពស្វាយចន្ទី។"
+  canonical="https://matocashew.com/km/knowledge/videos"
+  lang="km"
+  hasKhmerAlternate={true}
+  englishAlternateUrl="https://matocashew.com/knowledge/videos"
+  khmerAlternateUrl="https://matocashew.com/km/knowledge/videos"
+>
+  <div
+    id="language-route-context"
+    data-language-en="/knowledge/videos"
+    data-language-km="/km/knowledge/videos"
+    hidden
+  ></div>
+  <VideoLibrary lang="km" />
+</PageLayout>

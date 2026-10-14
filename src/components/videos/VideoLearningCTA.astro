@@ -1,0 +1,117 @@
+---
+interface Props {
+  lang: "en" | "km";
+}
+
+const { lang } = Astro.props;
+const isKhmer = lang === "km";
+
+const content = isKhmer
+  ? {
+      label: "រៀនតាមវីដេអូ",
+      title: "ស្វែងយល់អំពីស្វាយចន្ទីតាមវីដេអូ",
+      description: "សិក្សាអំពីការដាំដុះ ការប្រមូលផល ការកែច្នៃ និងការត្រួតពិនិត្យគុណភាពស្វាយចន្ទី តាមរយៈបណ្ណាល័យវីដេអូរបស់ចន្ទីមាតុភូមិ។",
+      action: "ចូលមើលបណ្ណាល័យវីដេអូ",
+      url: "/km/knowledge/videos"
+    }
+  : {
+      label: "VIDEO LEARNING",
+      title: "Learn About Cashews Through Video",
+      description: "Explore cashew cultivation, harvesting, processing, and quality control through the Mato Cashew video learning library.",
+      action: "Explore Video Library",
+      url: "/knowledge/videos"
+    };
+---
+
+<section class="mato-video-cta" aria-labelledby="mato-video-cta-title">
+  <div class="mato-video-cta__content">
+    <p class="mato-video-cta__label">{content.label}</p>
+    <h2 id="mato-video-cta-title">{content.title}</h2>
+    <p class="mato-video-cta__description">
+      {content.description}
+    </p>
+  </div>
+
+  <a class="mato-video-cta__button" href={content.url}>
+    {content.action}
+    <span aria-hidden="true">→</span>
+  </a>
+</section>
+
+<style>
+  .mato-video-cta {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    margin: 24px 0 32px;
+    padding: clamp(24px, 3vw, 36px);
+    border: 1px solid rgba(86, 115, 74, .25);
+    border-radius: 20px;
+    background: rgba(255, 253, 247, .94);
+    box-shadow: 0 10px 30px rgba(20, 50, 30, .08);
+    color: #243a2b;
+  }
+
+  .mato-video-cta__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mato-video-cta__label {
+    margin: 0 0 10px;
+    color: #527146;
+    font-size: .82rem;
+    font-weight: 800;
+    letter-spacing: .05em;
+  }
+
+  .mato-video-cta h2 {
+    margin: 0 0 12px;
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    line-height: 1.4;
+  }
+
+  .mato-video-cta__description {
+    margin: 0;
+    line-height: 1.75;
+  }
+
+  .mato-video-cta__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-shrink: 0;
+    padding: 14px 20px;
+    border-radius: 12px;
+    background: #235c3c;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .mato-video-cta__button:hover {
+    background: #17482e;
+  }
+
+  .mato-video-cta__button:focus-visible {
+    outline: 3px solid #b68b3d;
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 760px) {
+    .mato-video-cta {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .mato-video-cta__button {
+      width: 100%;
+    }
+  }
+</style>

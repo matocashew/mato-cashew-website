@@ -1,0 +1,72 @@
+---
+import { cashewPlaylists } from "../../data/cashewVideos";
+import "../../styles/components/video-learning.css";
+
+interface Props {
+  lang: "en" | "km";
+}
+
+const { lang } = Astro.props;
+const isKhmer = lang === "km";
+
+const copy = isKhmer
+  ? {
+      eyebrow: "ចន្ទីមាតុភូមិ",
+      title: "វីដេអូចំណេះដឹងអំពីស្វាយចន្ទី",
+      description: "ស្វែងយល់អំពីការដាំដុះ ការប្រមូលផល ការកែច្នៃ និងការត្រួតពិនិត្យគុណភាពស្វាយចន្ទី។",
+      comingSoon: "វីដេអូនឹងមានក្នុងពេលឆាប់ៗនេះ",
+      playlist: "មើលបញ្ជីវីដេអូនៅ YouTube",
+      back: "ត្រឡប់ទៅមជ្ឈមណ្ឌលចំណេះដឹង"
+    }
+  : {
+      eyebrow: "Mato Cashew",
+      title: "Cashew Video Learning",
+      description: "Explore educational videos about cashew cultivation, harvesting, processing, and quality control.",
+      comingSoon: "Educational videos coming soon",
+      playlist: "View playlist on YouTube",
+      back: "Back to Knowledge Center"
+    };
+---
+
+<section class="mato-video-library" lang={lang}>
+  <div class="mato-video-library__inner">
+    <header class="mato-video-library__header">
+      <p class="mato-video-library__eyebrow">{copy.eyebrow}</p>
+      <h1>{copy.title}</h1>
+      <p>{copy.description}</p>
+    </header>
+
+    <div class="mato-video-library__grid">
+      {cashewPlaylists.map((playlist, index) => (
+        <article class="mato-video-library__card">
+          <div class="mato-video-library__number" aria-hidden="true">
+            {String(index + 1).padStart(2, "0")}
+          </div>
+
+          <h2>{isKhmer ? playlist.km : playlist.en}</h2>
+
+          <p class="mato-video-library__status">
+            {copy.comingSoon}
+          </p>
+
+          <a
+            class="mato-video-library__link"
+            href={playlist.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${copy.playlist}: ${isKhmer ? playlist.km : playlist.en}`}
+          >
+            {copy.playlist}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <div class="mato-video-library__footer">
+      <a href={isKhmer ? "/km/knowledge" : "/knowledge"}>
+        ← {copy.back}
+      </a>
+    </div>
+  </div>
+</section>
