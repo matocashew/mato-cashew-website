@@ -237,3 +237,18 @@
     padding-bottom: 0;
   }
 }
+
+
+/* K89-HERO-TOPIC-ICONS-BEGIN */
+.knowledge-index-hero__topics span {
+  gap: 7px;
+}
+
+.knowledge-index-hero__topics .k89-topic-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: currentColor;
+}
+/* K89-HERO-TOPIC-ICONS-END */
