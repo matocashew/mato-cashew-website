@@ -16,7 +16,7 @@ export async function getResources(
   CollectionEntry<"resources">[]
 > {
 
-  return await getCollection(
+  const resources = await getCollection(
     "resources",
     ({ data }) =>
       !data.draft &&
@@ -25,6 +25,16 @@ export async function getResources(
         data.language === language
       )
   );
+
+  return resources.sort((a, b) => {
+    const dateA = new Date(a.data.publishDate).getTime();
+    const dateB = new Date(b.data.publishDate).getTime();
+
+    return (
+      dateB - dateA ||
+      a.data.slug.localeCompare(b.data.slug)
+    );
+  });
 
 }
 
