@@ -3415,3 +3415,262 @@ body.story-lightbox-open {
 }
 
 /* MATO-VALUES-OUTER-GLASS-V5-END */
+/* MATO-APPROACH-OUTER-GLASS-A3-START
+   Approved Our Approach Outer Glass Card.
+   Scoped to About Page Our Approach section.
+*/
+
+.our-process > .container {
+  background: linear-gradient(
+    145deg,
+    rgba(12, 35, 34, 0.76),
+    rgba(18, 52, 43, 0.66)
+  ) !important;
+
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 32px;
+
+  padding: 32px !important;
+
+  box-shadow:
+    0 24px 65px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.our-process .process-heading h2,
+.our-process .process-heading h3 {
+  color: #ffffff !important;
+}
+
+.our-process .process-heading p,
+.our-process .process-heading span {
+  color: #c4ead6 !important;
+}
+
+@media (max-width: 768px) {
+  .our-process > .container {
+    padding: 20px !important;
+    border-radius: 24px !important;
+  }
+}
+
+/* MATO-APPROACH-OUTER-GLASS-A3-END */
+/* MATO-PRODUCT-FOCUS-GLASS-PF3-START
+   Approved Product Focus Outer Glass Card.
+   Scoped to About Page Product Focus section.
+*/
+
+.quality-standards > .quality-grid {
+  background: linear-gradient(
+    145deg,
+    rgba(12, 35, 34, 0.76),
+    rgba(18, 52, 43, 0.66)
+  ) !important;
+
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 32px;
+
+  padding: 32px !important;
+
+  box-shadow:
+    0 24px 65px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.quality-standards .quality-content .section-title h2,
+.quality-standards .quality-content .section-title h3 {
+  color: #ffffff !important;
+}
+
+.quality-standards .quality-content .section-title p,
+.quality-standards .quality-content .section-title span {
+  color: #c4ead6 !important;
+}
+
+.quality-standards .quality-content > p {
+  color: #e1eee7 !important;
+}
+
+.quality-standards .quality-content li {
+  color: #ffffff !important;
+}
+
+.quality-standards .quality-content li span,
+.quality-standards .quality-content li p {
+  color: #ffffff !important;
+}
+
+.quality-standards .quality-grid img {
+  border-radius: 24px;
+}
+
+@media (max-width: 768px) {
+  .quality-standards > .quality-grid {
+    padding: 20px !important;
+    border-radius: 24px;
+  }
+}
+
+/* MATO-PRODUCT-FOCUS-GLASS-PF3-END */
+/* MATO-WHY-CHOOSE-OUTER-GLASS-WM3-START
+   Approved Why Mato Cashew Outer Glass Card.
+   Scoped to About Page Why Mato Cashew section.
+*/
+
+.why-choose > .container {
+  background: linear-gradient(
+    145deg,
+    rgba(12, 35, 34, 0.76),
+    rgba(18, 52, 43, 0.66)
+  ) !important;
+
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 32px;
+
+  padding: 32px !important;
+
+  box-shadow:
+    0 24px 65px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.why-choose .choose-heading h2,
+.why-choose .choose-heading h3 {
+  color: #ffffff !important;
+}
+
+.why-choose .choose-heading .section-title p,
+.why-choose .choose-heading .section-title span {
+  color: #c4ead6 !important;
+}
+
+@media (max-width: 768px) {
+  .why-choose > .container {
+    padding: 20px !important;
+    border-radius: 24px !important;
+  }
+}
+
+/* MATO-WHY-CHOOSE-OUTER-GLASS-WM3-END */
+/* MATO-LETS-CONNECT-GLASS-LC3-START
+   Approved Let's Connect Outer Glass LC3
+   and Business Inquiries contrast LC3A.
+*/
+
+.about-cta > .container {
+  background: linear-gradient(
+    145deg,
+    rgba(12, 35, 34, 0.76),
+    rgba(18, 52, 43, 0.66)
+  ) !important;
+
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 32px;
+
+  padding: 32px !important;
+
+  box-shadow:
+    0 24px 65px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.about-cta .about-cta-content h2,
+.about-cta .about-cta-content h3 {
+  color: #ffffff !important;
+}
+
+.about-cta .about-cta-content > p {
+  color: #e1eee7 !important;
+}
+
+.about-cta .about-cta-content > span,
+.about-cta .about-cta-content .eyebrow,
+.about-cta .about-cta-content .section-label {
+  color: #c4ead6 !important;
+}
+
+.about-cta .about-cta-grid img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* LC3A: Business Inquiries secondary button.
+   Targets the existing /wholesale link.
+   Does not affect Contact Us.
+*/
+
+.about-cta .about-cta-content a[href="/wholesale"],
+.about-cta .about-cta-content a[href="/km/wholesale"],
+.about-cta .about-cta-content a[href$="/wholesale"] {
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.65) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  text-decoration: none !important;
+  border-radius: 999px;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.about-cta .about-cta-content a[href$="/wholesale"]:hover,
+.about-cta .about-cta-content a[href$="/wholesale"]:focus-visible {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+  .about-cta > .container {
+    padding: 20px !important;
+    border-radius: 24px !important;
+  }
+}
+
+/* MATO-LETS-CONNECT-GLASS-LC3-END */
+/* MATO-STORY-LABEL-CONTRAST-FR3B-START
+   Approved Our Story label contrast correction.
+   English and Khmer.
+*/
+
+.story-content > .section-tag {
+  color: #C4EAD6 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+/* MATO-STORY-LABEL-CONTRAST-FR3B-END */
+/* MATO-ABOUT-EQUAL-SPACING-SP4-START
+   Approved desktop spacing: 72px between glass cards.
+   Includes Mission & Vision.
+   Preserves card dimensions and internal layouts.
+*/
+
+@media (min-width: 769px) {
+  main > section.company-story,
+  main > section.mission-vision,
+  main > section.core-values,
+  main > section.our-process,
+  main > section.quality-standards,
+  main > section.why-choose,
+  main > section.about-cta {
+    padding-top: 36px !important;
+    padding-bottom: 36px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+/* MATO-ABOUT-EQUAL-SPACING-SP4-END */
