@@ -649,3 +649,51 @@ html[lang="km"] .weather-source__purpose {
   z-index: 2;
 }
 
+
+
+/* MATO-WEATHER-HERO-CONTRAST-W3D-START */
+/* Approved Weather Page Hero contrast */
+
+.weather-page__hero-copy {
+  position: relative !important;
+  isolation: isolate;
+}
+
+.weather-page__hero-copy::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -22px -26px;
+  border-radius: 24px;
+  background: linear-gradient(
+    90deg,
+    rgba(5, 22, 34, 0.72) 0%,
+    rgba(5, 22, 34, 0.48) 68%,
+    rgba(5, 22, 34, 0.06) 100%
+  );
+  pointer-events: none;
+}
+
+.weather-page__hero-copy h1 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.38);
+}
+
+.weather-page__hero-copy p {
+  color: #e5edf3 !important;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.35);
+}
+
+.weather-page__hero-copy > :not(h1):not(p) {
+  color: #a9e4c5;
+}
+
+@media (max-width: 767px) {
+  .weather-page__hero-copy::before {
+    inset: -14px -12px;
+    border-radius: 18px;
+    background: rgba(5, 22, 34, 0.64);
+  }
+}
+
+/* MATO-WEATHER-HERO-CONTRAST-W3D-END */
