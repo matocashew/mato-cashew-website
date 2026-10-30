@@ -494,6 +494,25 @@ export const navigation: MenuItem[] = [
           "អាកាសធាតុបច្ចុប្បន្ន និងការណែនាំផែនការ ៧ ថ្ងៃសម្រាប់សកម្មភាពចន្ទី។",
         icon: "cloud-sun",
       },
+      {
+        id: "knowledge-resources",
+        icon: "folder-open",
+
+        label: "Resources",
+        labelKm: "ធនធាន",
+
+        href: "/resources",
+        hrefKm: "/km/resources",
+
+        description:
+          "Practical guides and cashew references.",
+
+        descriptionKm:
+          "មគ្គុទ្ទេសក៍ និងឯកសារយោងស្វាយចន្ទី។",
+
+        visible: true,
+        order: 11,
+      },
     ],
   },
 
@@ -779,25 +798,6 @@ export const navigation: MenuItem[] = [
         order: 1,
       },
 
-      {
-        id: "about-resources",
-        icon: "book-open",
-
-        label: "Resources",
-        labelKm: "ធនធាន",
-
-        href: "/resources",
-        hrefKm: "/km/resources",
-
-        description:
-          "Practical guides and cashew references.",
-
-        descriptionKm:
-          "មគ្គុទ្ទេសក៍ និងឯកសារយោងស្វាយចន្ទី។",
-
-        visible: true,
-        order: 2,
-      },
 
       {
         id: "about-gallery",
