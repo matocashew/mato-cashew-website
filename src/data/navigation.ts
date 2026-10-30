@@ -276,7 +276,7 @@ export const navigation: MenuItem[] = [
 
         group: "quality",
 
-        visible: true,
+        visible: false,
         order: 2,
       },
 
@@ -302,7 +302,7 @@ export const navigation: MenuItem[] = [
 
         group: "quality",
 
-        visible: true,
+        visible: false,
         order: 3,
       },
 
@@ -328,7 +328,7 @@ export const navigation: MenuItem[] = [
 
         group: "quality",
 
-        visible: true,
+        visible: false,
         order: 4,
       },
 
@@ -354,7 +354,7 @@ export const navigation: MenuItem[] = [
 
         group: "safety",
 
-        visible: true,
+        visible: false,
         order: 5,
       },
 
@@ -380,7 +380,7 @@ export const navigation: MenuItem[] = [
 
         group: "handling",
 
-        visible: true,
+        visible: false,
         order: 6,
       },
 
@@ -406,7 +406,7 @@ export const navigation: MenuItem[] = [
 
         group: "handling",
 
-        visible: true,
+        visible: false,
         order: 7,
       },
 
@@ -432,7 +432,7 @@ export const navigation: MenuItem[] = [
 
         group: "handling",
 
-        visible: true,
+        visible: false,
         order: 8,
       },
 
@@ -458,12 +458,12 @@ export const navigation: MenuItem[] = [
 
         group: "handling",
 
-        visible: true,
+        visible: false,
         order: 9,
       },
       {
         id: "knowledge-news-events",
-        icon: "book-open",
+        icon: "calendar-days",
 
         label: "News & Events",
         labelKm: "ព័ត៌មាន និងព្រឹត្តិការណ៍",
