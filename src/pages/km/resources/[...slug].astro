@@ -73,6 +73,11 @@ const khmerLanguagePath =
   lang="km"
   title={`${resource.data.title} | ចន្ទីមាតុភូមិ`}
   description={resource.data.description}
+  ogImage={
+    resource.data.image
+      ? new URL(resource.data.image, Astro.site ?? "https://matocashew.com").href
+      : undefined
+  }
   canonical={canonical}
   ogType="article"
   breadcrumbs={[

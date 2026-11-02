@@ -72,6 +72,11 @@ const khmerLanguagePath =
 <PageLayout
   title={`${resource.data.title} | Mato Cashew`}
   description={resource.data.description}
+  ogImage={
+    resource.data.image
+      ? new URL(resource.data.image, Astro.site ?? "https://matocashew.com").href
+      : undefined
+  }
   canonical={canonical}
   ogType="article"
   breadcrumbs={[
