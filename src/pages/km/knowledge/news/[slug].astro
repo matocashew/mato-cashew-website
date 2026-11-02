@@ -41,6 +41,12 @@ const englishLanguagePath = englishTranslation
 <PageLayout
   title={`${entry.data.title} | Mato Cashew`}
   description={entry.data.description}
+  ogImage={
+    entry.data.heroImage
+      ? new URL(entry.data.heroImage, Astro.site ?? "https://matocashew.com").href
+      : undefined
+  }
+  ogType="article"
   canonical={canonical}
   lang="km"
   hasKhmerAlternate={Boolean(englishTranslation)}
