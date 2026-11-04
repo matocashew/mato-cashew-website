@@ -1,0 +1,84 @@
+# MATO CASHEW - PRODUCTION CMS
+# GitHub OAuth authentication via Cloudflare Worker.
+
+local_backend: false
+backend:
+  name: github
+  repo: matocashew/mato-cashew-website
+  branch: main
+  base_url: https://cms-auth.matocashew.com
+  auth_endpoint: /auth
+
+publish_mode: editorial_workflow
+
+media_folder: "public/images/news"
+public_folder: "/images/news"
+
+collections:
+  - name: "news_en"
+    label: "News & Events - English"
+    folder: "src/content/news"
+    create: true
+    preview: false
+    extension: "md"
+    format: "frontmatter"
+    identifier_field: "title"
+    slug: "{{slug}}"
+    fields:
+      - {label: "Slug", name: "slug", widget: "string", hint: "Lowercase English letters, numbers and hyphens. Used for filename."}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "Language", name: "language", widget: "hidden", default: "en"}
+      - {label: "Translation Key", name: "translationKey", widget: "string"}
+      - {label: "Category", name: "category", widget: "string"}
+      - {label: "Tags", name: "tags", widget: "list", default: []}
+      - {label: "Published Date", name: "publishedAt", widget: "datetime", format: "YYYY-MM-DD", time_format: false}
+      - {label: "Event Date", name: "eventDate", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: false}
+      - {label: "Source Name", name: "sourceName", widget: "string"}
+      - {label: "Source URL", name: "sourceUrl", widget: "string"}
+      - {label: "Hero Image", name: "heroImage", widget: "image", required: false, hint: "Use WebP only."}
+      - {label: "Draft", name: "draft", widget: "boolean", default: true}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        required: false
+        fields:
+          - {label: "SEO Title", name: "title", widget: "string", required: false}
+          - {label: "SEO Description", name: "description", widget: "text", required: false}
+      - {label: "Article Body", name: "body", widget: "markdown"}
+
+  - name: "news_km"
+    label: "News & Events - Khmer"
+    folder: "src/content/news/km"
+    create: true
+    preview: false
+    extension: "md"
+    format: "frontmatter"
+    identifier_field: "title"
+    slug: "{{slug}}"
+    fields:
+      - {label: "Slug", name: "slug", widget: "string", hint: "Use the same slug as English."}
+      - {label: "ចំណងជើង", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "Language", name: "language", widget: "hidden", default: "km"}
+      - {label: "Translation Key", name: "translationKey", widget: "string"}
+      - {label: "Category", name: "category", widget: "string"}
+      - {label: "Tags", name: "tags", widget: "list", default: []}
+      - {label: "Published Date", name: "publishedAt", widget: "datetime", format: "YYYY-MM-DD", time_format: false}
+      - {label: "Event Date", name: "eventDate", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: false}
+      - {label: "Source Name", name: "sourceName", widget: "string"}
+      - {label: "Source URL", name: "sourceUrl", widget: "string"}
+      - {label: "Hero Image", name: "heroImage", widget: "image", required: false, hint: "Use WebP only."}
+      - {label: "Draft", name: "draft", widget: "boolean", default: true}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        required: false
+        fields:
+          - {label: "SEO Title", name: "title", widget: "string", required: false}
+          - {label: "SEO Description", name: "description", widget: "text", required: false}
+      - {label: "Article Body", name: "body", widget: "markdown"}
