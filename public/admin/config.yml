@@ -16,6 +16,11 @@ public_folder: "/images/news"
 
 collections:
   - name: "news_en"
+    sortable_fields:
+      - field: publishedAt
+        label: "Published Date"
+        default_sort: desc
+      - title
     label: "News & Events - English"
     folder: "src/content/news"
     create: true
@@ -50,6 +55,11 @@ collections:
       - {label: "Article Body", name: "body", widget: "markdown"}
 
   - name: "news_km"
+    sortable_fields:
+      - field: publishedAt
+        label: "Published Date"
+        default_sort: desc
+      - title
     label: "News & Events - Khmer"
     folder: "src/content/news/km"
     create: true
