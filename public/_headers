@@ -17,4 +17,5 @@
 
 
 /admin/*
+  ! Cross-Origin-Opener-Policy
   Cross-Origin-Opener-Policy: same-origin-allow-popups
