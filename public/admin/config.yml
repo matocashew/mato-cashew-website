@@ -101,7 +101,7 @@ collections:
     format: "frontmatter"
     identifier_field: "slug"
     slug: "{{slug}}"
-    media_folder: "public/images/knowledge"
+    media_folder: "/public/images/knowledge"
     public_folder: "/images/knowledge"
     fields:
       - {label: "Slug", name: "slug", widget: "string", hint: "Use lowercase English letters, numbers and hyphens. Khmer must use the matching English slug."}
@@ -139,7 +139,7 @@ collections:
     format: "frontmatter"
     identifier_field: "slug"
     slug: "{{slug}}"
-    media_folder: "public/images/knowledge"
+    media_folder: "/public/images/knowledge"
     public_folder: "/images/knowledge"
     fields:
       - {label: "Slug", name: "slug", widget: "string", hint: "Use lowercase English letters, numbers and hyphens. Khmer must use the matching English slug."}
