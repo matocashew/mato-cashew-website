@@ -92,3 +92,74 @@ collections:
           - {label: "SEO Title", name: "title", widget: "string", required: false}
           - {label: "SEO Description", name: "description", widget: "text", required: false}
       - {label: "Article Body", name: "body", widget: "markdown"}
+  - name: "knowledge_en"
+    label: "Knowledge Center - English"
+    folder: "src/content/knowledge"
+    create: true
+    preview: false
+    extension: "mdx"
+    format: "frontmatter"
+    identifier_field: "title"
+    slug: "{{slug}}"
+    fields:
+      - {label: "Slug", name: "slug", widget: "string", hint: "Use lowercase English letters, numbers and hyphens. Khmer must use the matching English slug."}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "Author", name: "author", widget: "string"}
+      - {label: "Published Date", name: "publishedAt", widget: "datetime", format: "YYYY-MM-DD", time_format: false}
+      - {label: "Updated Date", name: "updatedAt", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: false}
+      - {label: "Language", name: "language", widget: "hidden", default: "en"}
+      - {label: "Translation Key", name: "translationKey", widget: "string"}
+      - {label: "Hero Image", name: "heroImage", widget: "image", hint: "Use WebP only."}
+      - {label: "Category", name: "category", widget: "string"}
+      - {label: "Tags", name: "tags", widget: "list", default: []}
+      - {label: "Reading Time (minutes)", name: "readingTime", widget: "number", value_type: "int"}
+      - {label: "Related Products", name: "relatedProducts", widget: "list", required: false, default: []}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Draft", name: "draft", widget: "boolean", default: true}
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        fields:
+          - {label: "SEO Title", name: "title", widget: "string", required: false}
+          - {label: "SEO Description", name: "description", widget: "text", required: false}
+          - {label: "SEO Keywords", name: "keywords", widget: "list", required: false}
+          - {label: "Canonical URL", name: "canonical", widget: "string", required: false}
+      - {label: "MDX Body", name: "body", widget: "code", default_language: "markdown"}
+
+  - name: "knowledge_km"
+    label: "Knowledge Center - Khmer"
+    folder: "src/content/knowledge/km"
+    create: true
+    preview: false
+    extension: "mdx"
+    format: "frontmatter"
+    identifier_field: "title"
+    slug: "{{slug}}"
+    fields:
+      - {label: "Slug", name: "slug", widget: "string", hint: "Use lowercase English letters, numbers and hyphens. Khmer must use the matching English slug."}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "Author", name: "author", widget: "string"}
+      - {label: "Published Date", name: "publishedAt", widget: "datetime", format: "YYYY-MM-DD", time_format: false}
+      - {label: "Updated Date", name: "updatedAt", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: false}
+      - {label: "Language", name: "language", widget: "hidden", default: "km"}
+      - {label: "Translation Key", name: "translationKey", widget: "string"}
+      - {label: "Hero Image", name: "heroImage", widget: "image", hint: "Use WebP only."}
+      - {label: "Category", name: "category", widget: "string"}
+      - {label: "Tags", name: "tags", widget: "list", default: []}
+      - {label: "Reading Time (minutes)", name: "readingTime", widget: "number", value_type: "int"}
+      - {label: "Related Products", name: "relatedProducts", widget: "list", required: false, default: []}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Draft", name: "draft", widget: "boolean", default: true}
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        fields:
+          - {label: "SEO Title", name: "title", widget: "string", required: false}
+          - {label: "SEO Description", name: "description", widget: "text", required: false}
+          - {label: "SEO Keywords", name: "keywords", widget: "list", required: false}
+          - {label: "Canonical URL", name: "canonical", widget: "string", required: false}
+      - {label: "MDX Body", name: "body", widget: "code", default_language: "markdown"}
