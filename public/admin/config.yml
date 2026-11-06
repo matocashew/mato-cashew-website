@@ -126,7 +126,7 @@ collections:
           - {label: "SEO Description", name: "description", widget: "text", required: false}
           - {label: "SEO Keywords", name: "keywords", widget: "list", required: false}
           - {label: "Canonical URL", name: "canonical", widget: "string", required: false}
-      - {label: "MDX Body", name: "body", widget: "code", default_language: "markdown"}
+      - {label: "MDX Body", name: "body", widget: "text"}
 
   - name: "knowledge_km"
     label: "Knowledge Center - Khmer"
@@ -162,4 +162,4 @@ collections:
           - {label: "SEO Description", name: "description", widget: "text", required: false}
           - {label: "SEO Keywords", name: "keywords", widget: "list", required: false}
           - {label: "Canonical URL", name: "canonical", widget: "string", required: false}
-      - {label: "MDX Body", name: "body", widget: "code", default_language: "markdown"}
+      - {label: "MDX Body", name: "body", widget: "text"}
