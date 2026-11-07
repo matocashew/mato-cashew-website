@@ -14,7 +14,7 @@ export const newsService = {
     return entries
       .map((entry) => ({
         ...entry,
-        slug: entry.id.replace(/^km\//, ""),
+        slug: entry.data.slug ?? entry.data.translationKey ?? entry.id.replace(/^km\//, "").replace(/\.mdx?$/, ""),
       }))
       .sort(
         (a, b) =>

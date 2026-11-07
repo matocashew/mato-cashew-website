@@ -31,6 +31,7 @@ const news = defineCollection({
   loader: glob({
     pattern: "**/*.{md,mdx}",
     base: "./src/content/news",
+    generateId: ({ entry }) => entry,
   }),
   schema: newsSchema,
 });
