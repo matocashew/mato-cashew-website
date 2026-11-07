@@ -12,26 +12,8 @@ type KnowledgeLanguage = "en" | "km";
 function normalizeSlug(
   entry: CollectionEntry<"knowledge">
 ): string {
-
-  /*
-   * English content currently lives at:
-   *
-   * knowledge/what-is-cashew.mdx
-   *
-   * Khmer content will live at:
-   *
-   * knowledge/km/what-is-cashew.mdx
-   *
-   * Astro entry IDs therefore may contain
-   * the locale folder for Khmer.
-   */
-
-  return entry.id.replace(
-    /^(en|km)\//,
-    ""
-  );
+  return entry.data.translationKey;
 }
-
 
 function toKnowledge(
   entry: CollectionEntry<"knowledge">

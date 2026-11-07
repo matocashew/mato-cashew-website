@@ -5,6 +5,7 @@ import { baseContentSchema }
 
 export const knowledgeSchema =
   baseContentSchema.extend({
+    slug: z.string().optional(),
 
     /*
      * Stable key shared by translations.

@@ -15,6 +15,7 @@ const knowledge = defineCollection({
   loader: glob({
     pattern: "**/*.{md,mdx}",
     base: "./src/content/knowledge",
+      generateId: ({ entry }) => entry,
   }),
 
   schema: knowledgeSchema,
