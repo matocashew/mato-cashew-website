@@ -93,6 +93,11 @@ collections:
           - {label: "SEO Description", name: "description", widget: "text", required: false}
       - {label: "Article Body", name: "body", widget: "markdown"}
   - name: "knowledge_en"
+    sortable_fields:
+      - field: publishedAt
+        label: "Published Date"
+        default_sort: desc
+      - title
     label: "Knowledge Center - English"
     folder: "src/content/knowledge"
     create: true
@@ -131,6 +136,11 @@ collections:
       - {label: "MDX Body", name: "body", widget: "text"}
 
   - name: "knowledge_km"
+    sortable_fields:
+      - field: publishedAt
+        label: "Published Date"
+        default_sort: desc
+      - title
     label: "Knowledge Center - Khmer"
     folder: "src/content/knowledge/km"
     create: true
