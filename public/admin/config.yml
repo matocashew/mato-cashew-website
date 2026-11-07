@@ -11,7 +11,7 @@ backend:
 
 publish_mode: editorial_workflow
 
-media_folder: "public/images/news"
+media_folder: "/public/images/news"
 public_folder: "/images/news"
 
 collections:
