@@ -23,7 +23,7 @@ eventDate: 2026-11-10
 sourceName: GIZ Cambodia
 sourceUrl: https://www.giz.de/en/regions/asia/cambodia/news/cambodia-hosts-second-cashew-pepper-trade-forum-connect-global-markets
 heroImage: /images/news/cambodia-cashew-pepper-trade-forum-2026.webp
-draft: true
+draft: false
 featured: false
 seo:
   title: Cambodia Cashew & Pepper Trade Forum 2026
