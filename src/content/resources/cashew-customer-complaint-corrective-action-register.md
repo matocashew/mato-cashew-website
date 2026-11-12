@@ -185,4 +185,40 @@ The **Mato Cashew Customer Complaint & Corrective Action Register** provides a p
 
 These references provide general management and food-safety principles. The Mato Cashew toolkit is an independent practical template and is not an ISO-certified document.
 
-FieldPurposeComplaint IDUnique reference for each complaintDate ReceivedDate the business received the complaintCustomer ReferenceCustomer name or internal customer codeProduct DescriptionProduct name, grade, or specificationBatch/Lot NumberIdentification of the affected product batchComplaint CategoryType of issue reportedComplaint DetailsDescription of the problemAffected QuantityQuantity potentially affectedRisk AssessmentInitial evaluation of seriousnessResponsible PersonStaff member assigned to the complaintCorrective ActionAction planned to address the identified causeTarget Completion DateExpected completion dateStatusOpen, Under Investigation, Action in Progress, or ClosedClosure DateDate the complaint was formally closedItemExampleComplaint IDCC-001ProductRoasted cashew kernelsBatch NumberLOT-001ComplaintDamaged packagingQuantity Affected20 packsImmediate CorrectionInspect and replace affected packsInvestigation FindingPackaging seal settings require reviewCorrective ActionCheck sealing settings and update the inspection checklistResponsible PersonProduction SupervisorStatusAction in ProgressWorksheetMain FunctionGuide EN-KMBilingual instructions for using the workbookComplaint RegisterMain list of customer complaintsInvestigation & Corrective ActionsFindings, assigned actions, owners, and deadlinesFollow-Up & ClosureCustomer communication, verification, and closureDashboardSummary of complaints by category, status, and reporting period
+### Complaint Register — Key Fields
+
+* **Complaint ID:** Unique reference for each complaint.
+* **Date Received:** Date the business received the complaint.
+* **Customer Reference:** Customer name or internal customer code.
+* **Product Description:** Product name, grade, or specification.
+* **Batch/Lot Number:** Identification of the affected product batch.
+* **Complaint Category:** Type of issue reported.
+* **Complaint Details:** Description of the problem.
+* **Affected Quantity:** Quantity potentially affected.
+* **Risk Assessment:** Initial evaluation of seriousness.
+* **Responsible Person:** Staff member assigned to the complaint.
+* **Corrective Action:** Action planned to address the identified cause.
+* **Target Completion Date:** Expected completion date.
+* **Status:** Open, Under Investigation, Action in Progress, or Closed.
+* **Closure Date:** Date the complaint was formally closed.
+
+### Example Complaint Record
+
+* **Complaint ID:** CC-001
+* **Product:** Roasted cashew kernels
+* **Batch Number:** LOT-001
+* **Complaint:** Damaged packaging
+* **Quantity Affected:** 20 packs
+* **Immediate Correction:** Inspect and replace affected packs
+* **Investigation Finding:** Packaging seal settings require review
+* **Corrective Action:** Check sealing settings and update the inspection checklist
+* **Responsible Person:** Production Supervisor
+* **Status:** Action in Progress
+
+### Excel Toolkit — Worksheet Overview
+
+* **Guide EN-KM:** Bilingual instructions for using the workbook.
+* **Complaint Register:** Main list of customer complaints.
+* **Investigation & Corrective Actions:** Findings, assigned actions, owners, and deadlines.
+* **Follow-Up & Closure:** Customer communication, verification, and closure.
+* **Dashboard:** Summary of complaints by category, status, and reporting period.
