@@ -179,6 +179,11 @@ collections:
       - {label: "MDX Body", name: "body", widget: "text"}
 
   - name: "resources_en"
+    sortable_fields:
+      - field: publishDate
+        label: "Published Date"
+        default_sort: desc
+      - title
     label: "Resources - English"
     folder: "src/content/resources"
     create: true
@@ -216,6 +221,11 @@ collections:
       - {label: "Article Body", name: "body", widget: "markdown"}
 
   - name: "resources_km"
+    sortable_fields:
+      - field: publishDate
+        label: "Published Date"
+        default_sort: desc
+      - title
     label: "Resources - Khmer"
     folder: "src/content/resources/km"
     create: true
