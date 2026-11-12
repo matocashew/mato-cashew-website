@@ -177,3 +177,59 @@ collections:
           - {label: "SEO Keywords", name: "keywords", widget: "list", required: false}
           - {label: "Canonical URL", name: "canonical", widget: "string", required: false}
       - {label: "MDX Body", name: "body", widget: "text"}
+
+  - name: "resources_en"
+    label: "Resources - English"
+    folder: "src/content/resources"
+    create: true
+    preview: false
+    extension: "md"
+    format: "frontmatter"
+    identifier_field: "slug"
+    slug: "{{slug}}"
+    media_folder: "/public/images/resources"
+    public_folder: "/images/resources"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "Language", name: "language", widget: "hidden", default: "en"}
+      - {label: "Translation Key", name: "translationKey", widget: "string", required: false}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", time_format: false}
+      - {label: "Updated Date", name: "updatedDate", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: false}
+      - {label: "Author", name: "author", widget: "string", default: "Mato Cashew"}
+      - {label: "Hero Image", name: "image", widget: "image", hint: "Use WebP only."}
+      - {label: "Category", name: "category", widget: "string"}
+      - {label: "Tags", name: "tags", widget: "list", default: []}
+      - {label: "Draft", name: "draft", widget: "boolean", default: true}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Reading Time", name: "readingTime", widget: "number", value_type: "int", required: false}
+      - {label: "Article Body", name: "body", widget: "markdown"}
+
+  - name: "resources_km"
+    label: "Resources - Khmer"
+    folder: "src/content/resources/km"
+    create: true
+    preview: false
+    extension: "md"
+    format: "frontmatter"
+    identifier_field: "slug"
+    slug: "{{slug}}"
+    media_folder: "/public/images/resources"
+    public_folder: "/images/resources"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "Language", name: "language", widget: "hidden", default: "km"}
+      - {label: "Translation Key", name: "translationKey", widget: "string", required: false}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", time_format: false}
+      - {label: "Updated Date", name: "updatedDate", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: false}
+      - {label: "Author", name: "author", widget: "string", default: "Mato Cashew"}
+      - {label: "Hero Image", name: "image", widget: "image", hint: "Use WebP only."}
+      - {label: "Category", name: "category", widget: "string"}
+      - {label: "Tags", name: "tags", widget: "list", default: []}
+      - {label: "Draft", name: "draft", widget: "boolean", default: true}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Reading Time", name: "readingTime", widget: "number", value_type: "int", required: false}
+      - {label: "Article Body", name: "body", widget: "markdown"}
