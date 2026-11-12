@@ -618,3 +618,56 @@ body:has(
 
 
 /* R76-RESOURCE-HERO-ADAPTIVE-READABILITY-END */
+
+/* Mato Cashew — Shared Resources Download Button */
+.resource-download {
+  margin: 32px 0 12px;
+  padding: 22px;
+  border: 1px solid rgba(24, 92, 60, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.resource-download__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: #31473d;
+  font-size: 14px;
+}
+
+.resource-download__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 12px;
+  background: #176b43;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.resource-download__button:hover {
+  background: #105334;
+  color: #ffffff;
+}
+
+.resource-download__button:focus-visible {
+  outline: 3px solid #e6a23c;
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .resource-download {
+    padding: 18px;
+  }
+
+  .resource-download__button {
+    display: flex;
+    width: 100%;
+  }
+}

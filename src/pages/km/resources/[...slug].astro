@@ -7,6 +7,7 @@ import "../../../styles/resource-detail.css";
 
 import PageLayout from "../../../layouts/PageLayout.astro";
 import PageHero from "../../../components/PageHero.astro";
+import ResourceDownload from "../../../components/resources/ResourceDownload.astro";
 import ResourceMeta from "../../../components/resources/ResourceMeta.astro";
 import ResourcePageSchema from "../../../components/seo/ResourcePageSchema.astro";
 
@@ -121,6 +122,11 @@ const khmerLanguagePath =
     <article class="resource-content">
 
       <Content />
+
+      <ResourceDownload
+        file={resource.data.downloadFile}
+        lang="km"
+      />
 
     </article>
 

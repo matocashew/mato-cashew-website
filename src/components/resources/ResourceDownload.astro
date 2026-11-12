@@ -1,0 +1,181 @@
+---
+interface Props {
+  file?: string;
+  lang: "en" | "km";
+}
+
+const { file, lang } = Astro.props;
+
+const fileUrl = file?.trim() ?? "";
+const extension = fileUrl.split("?")[0].split(".").pop()?.toLowerCase();
+
+const supported = extension === "xlsx" || extension === "pdf";
+
+const label = extension === "pdf"
+  ? (lang === "km" ? "ទាញយកឯកសារ PDF" : "Download PDF")
+  : (lang === "km" ? "ទាញយកឯកសារ Excel" : "Download Excel Toolkit");
+---
+
+<div
+  class="resource-download"
+  data-resource-download
+  data-file={supported ? fileUrl : ""}
+  data-lang={lang}
+  hidden
+>
+  <div class="resource-download__details">
+    <span class="resource-download__type"></span>
+    <span class="resource-download__language"></span>
+  </div>
+
+  <a class="resource-download__button" href="#" download>
+    <span aria-hidden="true">↓</span>
+    <span class="resource-download__label">{label}</span>
+  </a>
+</div>
+
+<script>
+  function placeResourceDownload(
+    container: HTMLElement,
+    article: Element
+  ) {
+    const headings = Array.from(
+      article.querySelectorAll<HTMLElement>("h2, h3, h4")
+    );
+
+    const downloadHeadings = headings.filter((heading) => {
+      const title = heading.textContent?.trim().toLowerCase() || "";
+
+      return (
+        /download|toolkit|ទាញយក/.test(title)
+      );
+    });
+
+    if (downloadHeadings.length === 0) return;
+
+    const heading = downloadHeadings[downloadHeadings.length - 1];
+    const level = Number(heading.tagName.substring(1));
+
+    let insertionPoint: Element = heading;
+    let sibling = heading.nextElementSibling;
+
+    while (sibling) {
+      if (/^H[2-6]$/.test(sibling.tagName)) {
+        const nextLevel = Number(sibling.tagName.substring(1));
+        if (nextLevel <= level) break;
+      }
+
+      if (sibling.matches("p, ul, ol")) {
+        insertionPoint = sibling;
+      }
+
+      sibling = sibling.nextElementSibling;
+    }
+
+    insertionPoint.insertAdjacentElement("afterend", container);
+  }
+  function setupResourceDownloads() {
+    document.querySelectorAll<HTMLElement>(
+      ".resource-download[data-resource-download]"
+    ).forEach((container) => {
+      const article = container.closest(".resource-content");
+      if (!article) return;
+
+      const lang = container.dataset.lang === "km" ? "km" : "en";
+      const configured = container.dataset.file?.trim() || "";
+
+      const links = Array.from(
+        article.querySelectorAll<HTMLAnchorElement>("a[href]")
+      ).filter((link) => !link.closest(".resource-download"));
+
+      const isSupported = (url: string) => {
+        try {
+          const parsed = new URL(url, document.baseURI);
+          return (
+            parsed.origin === window.location.origin &&
+            /^\/downloads\/resources\/.+\.(xlsx|pdf)$/i.test(parsed.pathname)
+          );
+        } catch {
+          return false;
+        }
+      };
+
+      const fallback = links.find((link) => isSupported(link.href));
+
+      const selected = isSupported(configured)
+        ? configured
+        : fallback?.href;
+
+      if (!selected) return;
+
+      const target = new URL(selected, document.baseURI);
+      const extension = target.pathname.toLowerCase().endsWith(".pdf")
+        ? "pdf"
+        : "xlsx";
+
+      const button = container.querySelector<HTMLAnchorElement>(
+        ".resource-download__button"
+      );
+
+      if (!button) return;
+
+      const label = extension === "pdf"
+        ? (lang === "km" ? "ទាញយកឯកសារ PDF" : "Download PDF")
+        : (lang === "km" ? "ទាញយកឯកសារ Excel" : "Download Excel Toolkit");
+
+      button.href = target.href;
+      button.setAttribute("aria-label", label);
+
+      const labelElement = container.querySelector<HTMLElement>(
+        ".resource-download__label"
+      );
+
+      if (labelElement) labelElement.textContent = label;
+
+      const typeElement = container.querySelector<HTMLElement>(
+        ".resource-download__type"
+      );
+
+      if (typeElement) {
+        typeElement.textContent = extension === "pdf"
+          ? "PDF (.pdf)"
+          : "Excel (.xlsx)";
+      }
+
+      const languageElement = container.querySelector<HTMLElement>(
+        ".resource-download__language"
+      );
+
+      if (languageElement) {
+        languageElement.textContent = lang === "km"
+          ? "ភាសាខ្មែរ"
+          : "English";
+      }
+
+      links.forEach((link) => {
+        try {
+          const current = new URL(link.href, document.baseURI);
+
+          if (current.href === target.href) {
+            link.hidden = true;
+          }
+        } catch {
+          // Keep unrelated links unchanged.
+        }
+      });
+
+      placeResourceDownload(container, article);
+      container.hidden = false;
+    });
+  }
+
+  document.addEventListener("astro:page-load", setupResourceDownloads);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupResourceDownloads, {
+      once: true
+    });
+  } else {
+    setupResourceDownloads();
+  }
+</script>
