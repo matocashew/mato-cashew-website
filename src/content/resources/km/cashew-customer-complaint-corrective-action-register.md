@@ -18,7 +18,7 @@ tags:
   - វិធានការកែតម្រូវ
   - ការតាមដានប្រភពផលិតផល
   - ឧបករណ៍អាជីវកម្ម
-draft: true
+draft: false
 featured: false
 readingTime: 7
 downloadFile: /downloads/resources/mato-cashew-customer-complaint-corrective-action-register-en-km.xlsx
