@@ -21,6 +21,7 @@ tags:
 draft: true
 featured: false
 readingTime: 7
+downloadFile: /downloads/resources/mato-cashew-customer-complaint-corrective-action-register-en-km.xlsx
 ---
 # Cashew Customer Complaint & Corrective Action Register: A Practical Business Toolkit
 
