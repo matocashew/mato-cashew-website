@@ -172,11 +172,7 @@ By recording complaints, investigating causes, assigning corrective actions, and
 
 The **Mato Cashew Customer Complaint & Corrective Action Register** provides a practical starting point for building these records.
 
-## Download the Toolkit
 
-**Cashew Customer Complaint & Corrective Action Register — Excel Toolkit (English & Khmer)**
-
-[/downloads/resources/mato-cashew-customer-complaint-corrective-action-register-en-km.xlsx](/downloads/resources/mato-cashew-customer-complaint-corrective-action-register-en-km.xlsx)
 
 ## References
 
