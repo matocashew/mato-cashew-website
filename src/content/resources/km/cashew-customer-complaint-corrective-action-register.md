@@ -21,6 +21,7 @@ tags:
 draft: true
 featured: false
 readingTime: 7
+downloadFile: /downloads/resources/mato-cashew-customer-complaint-corrective-action-register-en-km.xlsx
 ---
 # បញ្ជីកត់ត្រាបណ្តឹងអតិថិជន និងវិធានការកែតម្រូវសម្រាប់អាជីវកម្មស្វាយចន្ទី
 
