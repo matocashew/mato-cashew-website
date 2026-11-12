@@ -176,7 +176,7 @@ The **Mato Cashew Customer Complaint & Corrective Action Register** provides a p
 
 **Cashew Customer Complaint & Corrective Action Register — Excel Toolkit (English & Khmer)**
 
-*The download link will be added after the Excel file is created, uploaded, and verified.*
+*\[Download Excel Toolkit (English & Khmer)](/downloads/resources/mato-cashew-customer-complaint-corrective-action-register-en-km.xlsx)*
 
 ## References
 
