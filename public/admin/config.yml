@@ -204,6 +204,15 @@ collections:
       - {label: "Draft", name: "draft", widget: "boolean", default: true}
       - {label: "Featured", name: "featured", widget: "boolean", default: false}
       - {label: "Reading Time", name: "readingTime", widget: "number", value_type: "int", required: false}
+      - label: "Downloadable File (Excel / PDF)"
+        name: "downloadFile"
+        widget: "file"
+        required: false
+        media_folder: "/public/downloads/resources"
+        public_folder: "/downloads/resources"
+        media_library:
+          config:
+            multiple: false
       - {label: "Article Body", name: "body", widget: "markdown"}
 
   - name: "resources_km"
@@ -232,4 +241,13 @@ collections:
       - {label: "Draft", name: "draft", widget: "boolean", default: true}
       - {label: "Featured", name: "featured", widget: "boolean", default: false}
       - {label: "Reading Time", name: "readingTime", widget: "number", value_type: "int", required: false}
+      - label: "Downloadable File (Excel / PDF)"
+        name: "downloadFile"
+        widget: "file"
+        required: false
+        media_folder: "/public/downloads/resources"
+        public_folder: "/downloads/resources"
+        media_library:
+          config:
+            multiple: false
       - {label: "Article Body", name: "body", widget: "markdown"}

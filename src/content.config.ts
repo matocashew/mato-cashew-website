@@ -110,6 +110,8 @@ const resources = defineCollection({
       .number()
       .optional(),
 
+      downloadFile: z.string().optional(),
+
   }),
 
 });
