@@ -18,7 +18,7 @@ tags:
   - corrective action
   - traceability
   - business tools
-draft: true
+draft: false
 featured: false
 readingTime: 7
 downloadFile: /downloads/resources/mato-cashew-customer-complaint-corrective-action-register-en-km.xlsx
