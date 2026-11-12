@@ -1,22 +1,25 @@
 ---
-title: "Cashew Batch Costing and Pricing Worksheet for Small Processors"
-slug: "cashew-batch-costing-pricing-worksheet"
-language: "en"
-translationKey: "cashew-batch-costing-pricing-worksheet"
-description: "A practical downloadable worksheet for estimating cashew processing costs, saleable kernel recovery, break-even selling prices and potential batch margins."
+title: Cashew Batch Costing and Pricing Worksheet for Small Processors
+slug: cashew-batch-costing-pricing-worksheet
+language: en
+translationKey: cashew-batch-costing-pricing-worksheet
+description: A practical downloadable worksheet for estimating cashew processing
+  costs, saleable kernel recovery, break-even selling prices and potential batch
+  margins.
 publishDate: 2026-10-13
-author: "Mato Cashew"
-image: "/images/resources/cashew-batch-costing-pricing-worksheet.webp"
-category: "Business Tools / Processing Economics"
+author: Mato Cashew
+image: /images/resources/cashew-batch-costing-pricing-worksheet.webp
+category: Business Tools / Processing Economics
 tags:
-  - "Cashew Processing"
-  - "Costing"
-  - "Pricing"
-  - "Small Processors"
-  - "Business Tools"
+  - Cashew Processing
+  - Costing
+  - Pricing
+  - Small Processors
+  - Business Tools
 draft: false
 featured: false
 readingTime: 7
+downloadFile: /downloads/resources/mato-cashew-customer-complaint-corrective-action-register-en-km.xlsx
 ---
 # Cashew Batch Costing and Pricing Worksheet for Small Processors
 
