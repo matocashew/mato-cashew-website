@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Mato Cashew | Image Path</title>
+<style>
+body{font:16px system-ui;background:#f4f7f5;color:#173d31}
+main{max-width:650px;margin:50px auto;padding:24px;background:white;border-radius:12px}
+input{box-sizing:border-box;width:100%;padding:12px;margin:8px 0 16px}
+button{padding:11px 18px;background:#176b4d;color:white;border:0;border-radius:6px;cursor:pointer}
+button:disabled{opacity:.5}
+img{max-width:100%;max-height:280px;display:none;margin:18px 0}
+#status{margin-top:12px}
+</style>
+</head>
+<body>
+<main>
+<h2>Mato Cashew — Image Path</h2>
+<p>Paste the URL of an image already uploaded to Mato Cashew.</p>
+<label for="url">Image URL</label>
+<input id="url" placeholder="https://matocashew.com/images/news/example.webp">
+<button id="show">Show Path</button>
+<img id="preview" alt="Image preview">
+<label for="path">Image Path</label>
+<input id="path" readonly placeholder="/images/...">
+<button id="copy" disabled>Copy Path</button>
+<p id="status" role="status"></p>
+</main>
+<script>
+const url=document.getElementById("url");
+const path=document.getElementById("path");
+const preview=document.getElementById("preview");
+const copy=document.getElementById("copy");
+const status=document.getElementById("status");
+document.getElementById("show").onclick=()=>{
+  path.value="";
+  copy.disabled=true;
+  preview.style.display="none";
+  status.textContent="";
+  try{
+    const u=new URL(url.value.trim(),location.origin);
+    if(!["matocashew.com","www.matocashew.com"].includes(u.hostname)
+       && u.origin!==location.origin)throw Error("Invalid website");
+    if(!u.pathname.startsWith("/images/"))throw Error("Not an image path");
+    if(!/\.(webp|png|jpe?g|gif|avif)$/i.test(u.pathname))
+      throw Error("Unsupported image extension");
+    path.value=u.pathname;
+    preview.src=u.href;
+    preview.style.display="block";
+    copy.disabled=false;
+    status.textContent="Path ready";
+  }catch(e){status.textContent=e.message}
+};
+copy.onclick=async()=>{
+  try{
+    await navigator.clipboard.writeText(path.value);
+    status.textContent="Path copied";
+  }catch(e){
+    path.select();
+    status.textContent="Please copy the selected path manually";
+  }
+};
+</script>
+</body>
+</html>
