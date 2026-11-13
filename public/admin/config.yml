@@ -261,3 +261,75 @@ collections:
           config:
             multiple: false
       - {label: "Article Body", name: "body", widget: "markdown"}
+
+  # =========================================================
+  # PRODUCTS — BILINGUAL (EN / KM)
+  # =========================================================
+  - name: "products"
+    label: "Products — English / Khmer"
+    label_singular: "Product"
+    folder: "src/content/products"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    identifier_field: "title"
+    slug: "{{slug}}"
+    sortable_fields:
+      - field: publishDate
+        label: "Published Date"
+        default_sort: desc
+      - title
+    fields:
+      - {label: "Product Title (EN)", name: "title", widget: "string"}
+      - {label: "Product Title (KM)", name: "titleKm", widget: "string", required: false}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "SKU", name: "sku", widget: "string"}
+
+      - {label: "Description (EN)", name: "description", widget: "text"}
+      - {label: "Description (KM)", name: "descriptionKm", widget: "text", required: false}
+
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["Retail", "Wholesale"]
+
+      - {label: "Category (KM)", name: "categoryKm", widget: "string", required: false}
+      - {label: "Weight", name: "weight", widget: "string"}
+      - {label: "Packaging (EN)", name: "packaging", widget: "string"}
+      - {label: "Packaging (KM)", name: "packagingKm", widget: "string", required: false}
+
+      - {label: "Main Product Image", name: "image", widget: "image"}
+
+      - label: "Product Gallery"
+        name: "gallery"
+        widget: "list"
+        required: false
+
+      - {label: "Featured Product", name: "featured", widget: "boolean", default: false}
+      - {label: "Available for Wholesale", name: "availableForWholesale", widget: "boolean", default: true}
+      - {label: "Private Label", name: "privateLabel", widget: "boolean", default: false}
+      - {label: "Minimum Order", name: "minimumOrder", widget: "string", required: false}
+
+      - label: "Specifications (EN)"
+        name: "specifications"
+        widget: "list"
+        required: false
+
+      - label: "Specifications (KM)"
+        name: "specificationsKm"
+        widget: "list"
+        required: false
+
+      - label: "Applications (EN)"
+        name: "applications"
+        widget: "list"
+        required: false
+
+      - label: "Applications (KM)"
+        name: "applicationsKm"
+        widget: "list"
+        required: false
+
+      - {label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", time_format: false}
+      - {label: "Updated Date", name: "updatedDate", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: false}
+      - {label: "Draft", name: "draft", widget: "boolean", default: true}
