@@ -1,0 +1,157 @@
+/* Hourly forecast is nested inside the existing seven-day forecast panel. */
+.weather-forecast .weather-hourly {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  margin: 24px 0 0;
+  padding: 24px 0 0;
+  border: 0;
+  border-top: 1px solid rgba(21, 62, 43, .12);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #153e2b;
+}
+.weather-forecast .weather-hourly__title {
+  margin: 0;
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  font-weight: 750;
+  line-height: 1.45;
+}
+.weather-forecast .weather-hourly__hint,
+.weather-forecast .weather-hourly__status {
+  margin: 6px 0 16px;
+  font-size: .85rem;
+  color: #62766a;
+  line-height: 1.7;
+}
+.weather-forecast .weather-hourly__scroller {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 2px 14px;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #b6cbbd transparent;
+}
+.weather-forecast .weather-hourly__grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+  width: max-content;
+}
+.weather-forecast .weather-hourly__card {
+  box-sizing: border-box;
+  flex: 0 0 158px;
+  width: 158px;
+  min-height: 178px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 15px;
+  border: 1px solid #e0eae3;
+  border-radius: 16px;
+  background: #f7faf8;
+}
+.weather-forecast .weather-hourly__time { color: #5a7464; font-size: .82rem; font-weight: 650; }
+.weather-forecast .weather-hourly__temp { color: #153e2b; font-size: 1.5rem; line-height: 1.2; }
+.weather-forecast .weather-hourly__condition { color: #2c6448; font-size: .84rem; font-weight: 600; }
+.weather-forecast .weather-hourly__metric { color: #597568; font-size: .77rem; line-height: 1.5; }
+@media (max-width: 680px) {
+  .weather-forecast .weather-hourly { margin-top: 18px; padding-top: 18px; }
+  .weather-forecast .weather-hourly__card { flex-basis: 146px; width: 146px; padding: 12px; }
+}
+
+/* MATO_HOURLY_METRIC_ROWS_V1 */
+.weather-forecast .weather-hourly__metric-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  align-items: start;
+  column-gap: 0.35rem;
+  width: 100%;
+  font-size: 0.7rem;
+  line-height: 1.35;
+  color: #597366;
+}
+.weather-forecast .weather-hourly__metric-label {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+.weather-forecast .weather-hourly__metric-value {
+  color: #17432f;
+  white-space: nowrap;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.weather-forecast .weather-hourly__card {
+  min-width: 0;
+}
+/* MATO_HOURLY_CARD_LAYOUT_V2 */
+/* Keep hourly metrics readable in both English and Khmer. */
+.weather-forecast .weather-hourly__card {
+  flex: 0 0 240px;
+  width: 240px;
+  min-width: 240px;
+  min-height: 190px;
+  padding: 17px 16px;
+  gap: 10px;
+}
+.weather-forecast .weather-hourly__condition {
+  margin-bottom: 4px;
+}
+.weather-forecast .weather-hourly__metric-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 12px;
+  width: 100%;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+.weather-forecast .weather-hourly__metric-label {
+  min-width: 0;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.weather-forecast .weather-hourly__metric-value {
+  white-space: nowrap;
+  text-align: right;
+  font-size: 0.85rem;
+}
+@media (max-width: 680px) {
+  .weather-forecast .weather-hourly__card {
+    flex: 0 0 220px;
+    width: 220px;
+    min-width: 220px;
+    padding: 15px;
+  }
+  .weather-forecast .weather-hourly__metric-row {
+    font-size: 0.78rem;
+    gap: 8px;
+  }
+}
+
+/* MATO_STAGE_3D11_METRIC_ALIGNMENT */
+.weather-forecast .weather-hourly__metric-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+
+.weather-forecast .weather-hourly__metric-label {
+  min-width: 0;
+  overflow-wrap: normal;
+}
+
+.weather-forecast .weather-hourly__metric-label::after {
+  content: ":";
+}
+
+.weather-forecast .weather-hourly__metric-value {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}

@@ -1,5 +1,6 @@
 import { getCashewAdvisory } from "../lib/weather/cashew-advisory";
 import { fetchWeather } from "../lib/weather/open-meteo";
+import { startHourlyForecast } from "./weather-hourly";
 
 import type {
   MatoWeatherData,
@@ -352,6 +353,7 @@ async function loadWeather(
   location: LocationConfig,
   signal: AbortSignal,
 ): Promise<void> {
+  void startHourlyForecast(root, location.latitude, location.longitude, signal);
   setText(
     root,
     "[data-weather-status]",
