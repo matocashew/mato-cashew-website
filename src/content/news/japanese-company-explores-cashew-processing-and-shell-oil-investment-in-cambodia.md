@@ -2,12 +2,12 @@
 slug: japanese-cashew-processing-shell-oil-investment-cambodia-2026
 title: Japanese Company Explores Cashew Processing and Shell Oil Investment in
   Cambodia
-description: Japanese trading company JFE Shoji is exploring a proposed
-  investment in Cambodia to establish cashew nut processing and cashew nut shell
-  liquid (CNSL) extraction facilities in Kampong Thom province.
-excerpt: The proposed project could process 30,000 tonnes of raw cashew nuts and
-  produce 5,000 tonnes of cashew shell oil annually, subject to successful
-  machinery testing and further investment decisions.
+description: Japanese company JFE Shoji is exploring investment in cashew
+  processing and cashew nut shell liquid (CNSL) production in Kampong Thom,
+  Cambodia.
+excerpt: The proposed project includes capacity to process 30,000 tonnes of raw
+  cashew nuts and produce 5,000 tonnes of CNSL annually, subject to successful
+  testing and investment decisions.
 language: en
 translationKey: japanese-cashew-processing-shell-oil-investment-cambodia-2026
 category: Industry & Market
@@ -29,16 +29,10 @@ draft: false
 featured: false
 seo:
   title: Japan Explores Cashew Processing and CNSL Investment in Cambodia
-  description: JFE Shoji explores a proposed cashew processing plant with 30,000
-    tonnes of annual capacity and a 5,000-tonne CNSL facility in Kampong Thom,
-    Cambodia.
+  description: JFE Shoji explores a proposed cashew processing facility and CNSL
+    extraction plant in Kampong Thom, Cambodia, with investment plans dependent
+    on testing.
 ---
-# Japanese Company Explores Cashew Processing and Shell Oil Investment in Cambodia
-
-**Description:** Japanese trading company JFE Shoji is exploring a proposed investment in Cambodia to establish cashew nut processing and cashew nut shell liquid (CNSL) extraction facilities in Kampong Thom province.
-
-**Excerpt:** The proposed project could process 30,000 tonnes of raw cashew nuts and produce 5,000 tonnes of cashew shell oil annually, subject to successful machinery testing and further investment decisions.
-
 ## Japanese Company Discusses Cashew Investment in Kampong Thom
 
 A Japanese company is exploring opportunities to invest in cashew nut processing and cashew nut shell liquid (CNSL) production in Cambodia, as the country seeks to increase domestic processing and make better use of agricultural by-products.
@@ -103,9 +97,5 @@ The proposed cooperation between JFE Shoji and TPJ represents a potential step t
 By linking raw nut processing with the production of industrial materials from cashew shells, the project could help diversify revenue opportunities for local businesses.
 
 For now, the initiative remains at the discussion and technical-testing stage. Further developments will depend on successful machinery trials, investment decisions and construction planning.
-
-**Source:** Cashew Nut Association of Cambodia (CAC), *Japanese Company Explores Investment in Cambodia’s Cashew Shell Oil Processing Industry*, 12 November 2026.
-
-**Source URL:** <https://cac-camcashew.org/news/japanese-company-explores-investment-in-cambodia>
 
 *Editorial note: All production capacities and investment timelines are proposed plans reported by CAC, not confirmed operating results.*
