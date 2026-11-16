@@ -23,8 +23,6 @@ featured: false
 readingTime: 7
 downloadFile: /downloads/resources/mato-cashew-batch-traceability-stock-movement-register-en-km.xlsx
 ---
-## Introduction
-
 Cashew processing businesses receive raw cashew nuts from different farmers, suppliers, and locations. These nuts pass through several processing stages, including drying, steaming, shelling, peeling, grading, and packaging before being sold to customers.
 
 Without proper records, businesses may find it difficult to identify where raw materials came from, monitor stock movements, investigate quality problems, or trace products delivered to customers.
