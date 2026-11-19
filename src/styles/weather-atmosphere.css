@@ -1,4 +1,4 @@
-﻿/* =========================================================
+/* =========================================================
    A48 — MATO CASHEW WEATHER ATMOSPHERE
    SVG CLOUD RENDERER
 
@@ -4470,3 +4470,61 @@ footer,
 
 
 
+
+/* BG-7 SIX-PHASE CAMBODIA BACKGROUNDS — LOCAL UAT */
+.weather-atmosphere[data-weather-phase="morning"] .weather-atmosphere__sky {
+  background-image: url("/images/atmosphere/cambodia/01_morning_desktop.webp") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+.weather-atmosphere[data-weather-phase="midday"] .weather-atmosphere__sky {
+  background-image: url("/images/atmosphere/cambodia/03_midday_desktop.webp") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+.weather-atmosphere[data-weather-phase="afternoon"] .weather-atmosphere__sky {
+  background-image: url("/images/atmosphere/cambodia/05_afternoon_desktop.webp") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+.weather-atmosphere[data-weather-phase="night"] .weather-atmosphere__sky {
+  background-image: url("/images/atmosphere/cambodia/07_night_desktop.webp") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+.weather-atmosphere[data-weather-phase="midnight"] .weather-atmosphere__sky {
+  background-image: url("/images/atmosphere/cambodia/09_midnight_desktop.webp") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+.weather-atmosphere[data-weather-phase="predawn"] .weather-atmosphere__sky {
+  background-image: url("/images/atmosphere/cambodia/11_predawn_desktop.webp") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+@media (max-width: 767px) {
+  .weather-atmosphere[data-weather-phase="morning"] .weather-atmosphere__sky {
+    background-image: url("/images/atmosphere/cambodia/02_morning_mobile.webp") !important;
+  }
+  .weather-atmosphere[data-weather-phase="midday"] .weather-atmosphere__sky {
+    background-image: url("/images/atmosphere/cambodia/04_midday_mobile.webp") !important;
+  }
+  .weather-atmosphere[data-weather-phase="afternoon"] .weather-atmosphere__sky {
+    background-image: url("/images/atmosphere/cambodia/06_afternoon_mobile.webp") !important;
+  }
+  .weather-atmosphere[data-weather-phase="night"] .weather-atmosphere__sky {
+    background-image: url("/images/atmosphere/cambodia/08_night_mobile.webp") !important;
+  }
+  .weather-atmosphere[data-weather-phase="midnight"] .weather-atmosphere__sky {
+    background-image: url("/images/atmosphere/cambodia/10_midnight_mobile.webp") !important;
+  }
+  .weather-atmosphere[data-weather-phase="predawn"] .weather-atmosphere__sky {
+    background-image: url("/images/atmosphere/cambodia/12_predawn_mobile.webp") !important;
+  }
+}

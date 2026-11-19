@@ -5050,3 +5050,74 @@ html[lang="km"] .hero-description,
 }
 
 /* R71F6Q5B20P END */
+
+/* =========================================================
+   BG-7 STEP 8E-7 MOBILE GLASS CARD
+   Home Hero only. Preserve existing content and carousel.
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+    .home-scenic-canvas
+    .home-hero-floating-shell > .hero {
+
+        width: calc(100% - 24px) !important;
+        max-width: none !important;
+
+        margin-left: auto !important;
+        margin-right: auto !important;
+        margin-top: 84px !important;
+
+        border-radius: 24px !important;
+
+        box-sizing: border-box !important;
+
+        background:
+            rgba(255, 255, 255, 0.22) !important;
+
+        -webkit-backdrop-filter:
+            blur(12px) saturate(118%) !important;
+
+        backdrop-filter:
+            blur(12px) saturate(118%) !important;
+
+        border:
+            1px solid rgba(255, 255, 255, 0.42) !important;
+
+        box-shadow:
+            0 18px 45px rgba(3, 30, 20, 0.14) !important;
+    }
+}
+
+/* END BG-7 STEP 8E-7 */
+
+/* =========================================================
+   BG-7 STEP 8E-9 VERTICAL BALANCE
+   Home Hero Mobile only
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+    .home-scenic-canvas
+    .home-hero-floating-shell > .hero {
+
+        padding-top: 24px !important;
+        padding-bottom: 0 !important;
+
+        height: auto !important;
+        min-height: 0 !important;
+    }
+
+    .home-scenic-canvas
+    .home-hero-floating-shell > .hero
+    > .hero-grid {
+
+        padding-top: 0 !important;
+        padding-bottom: 24px !important;
+
+        height: auto !important;
+        min-height: 0 !important;
+    }
+}
+
+/* END BG-7 STEP 8E-9 */

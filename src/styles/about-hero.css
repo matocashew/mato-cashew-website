@@ -1,4 +1,4 @@
-﻿/* =========================================================
+/* =========================================================
    MATO CASHEW — ABOUT HERO
    Desktop-first premium layout
    ========================================================= */
@@ -2046,3 +2046,173 @@ html[lang="km"] .about-hero__description {
 }
 
 /* R44H19-ABOUT-TRUST-SPACING-END */
+
+/* BG-7 CAMBODIA FULL-PAGE HERO INTEGRATION — LOCAL UAT */
+
+/*
+ * Reveal the existing global Cambodia atmosphere behind
+ * the About Hero while preserving its layout and content.
+ */
+.scenic-hero-shell--about .about-hero__media {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.scenic-hero-shell--about .about-hero {
+  background-color: transparent !important;
+}
+
+/* BG-7 STEP 8D-8 CAMBODIA HERO REVEAL — LOCAL UAT */
+
+/* Reveal the global Cambodia background through About shell. */
+.scenic-hero-shell--about {
+  background: transparent !important;
+}
+
+/* Disable only the old About scenic photograph. */
+.scenic-hero-shell--about
+> .scenic-hero-shell__background {
+  background-image: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Preserve the existing Hero layout and readable gradient. */
+
+/* BG-7 STEP 8D-11 FROSTED GLASS HERO - LOCAL UAT */
+
+/*
+ * Apply frosted glass only to the About Hero card.
+ * Preserve existing geometry, content and weather layers.
+ */
+.scenic-hero-shell--about > .about-hero {
+  background: rgba(255, 255, 255, 0.22) !important;
+
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.32);
+}
+
+/*
+ * Keep the original text readability gradient.
+ * Do not change Hero content positioning.
+ */
+
+/* BG-7 STEP 8D-14 MOBILE SPACING STABILITY - LOCAL UAT */
+
+@media (max-width: 767px) {
+
+  /*
+   * Fixed header is 69px in the verified 360px viewport.
+   * Add 16px of visual separation below it.
+   */
+  .scenic-hero-shell--about {
+    padding-top: 85px !important;
+    box-sizing: border-box;
+  }
+
+  .scenic-hero-shell--about > .about-hero {
+    margin-top: 0 !important;
+    box-sizing: border-box;
+  }
+
+  /*
+   * Consistent spacing across hard reload
+   * and Astro client-side navigation.
+   */
+  .scenic-hero-shell--about > .trust-bar {
+    margin-top: 16px !important;
+    margin-bottom: 24px !important;
+  }
+}
+
+/* BG-7 STEP 8D-17 MOBILE HERO HEIGHT - LOCAL UAT */
+
+@media (max-width: 767px) {
+
+  /*
+   * Reduce excess space above About Hero content.
+   * Keep header and Trust Bar spacing rules unchanged.
+   */
+  .scenic-hero-shell--about > .about-hero {
+    height: 490px !important;
+    min-height: 490px !important;
+  }
+
+}
+
+/* BG-7 STEP 8D-19 MOBILE CONTENT CENTERING - LOCAL UAT */
+
+@media (max-width: 767px) {
+
+  .scenic-hero-shell--about
+  > .about-hero
+  > .about-hero__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .scenic-hero-shell--about .about-hero__content {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    text-align: center;
+  }
+
+}
+
+/* BG-7 STEP 8D-21 HERO CONTENT BALANCE - LOCAL UAT */
+
+@media (max-width: 767px) {
+
+  /*
+   * Balance internal spacing around the content group.
+   * Preserve the approved 490px Hero card height.
+   */
+  .scenic-hero-shell--about
+  > .about-hero
+  > .about-hero__container {
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .scenic-hero-shell--about .about-hero__content {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+}
+
+/* BG-7 STEP 8D-24 CONTAINER HEIGHT CORRECTION - LOCAL UAT */
+
+@media (max-width: 767px) {
+
+  /*
+   * Match the inner container to the actual Hero card.
+   * Prevent the previous 590px container from shifting
+   * content below the center of the 490px card.
+   */
+  .scenic-hero-shell--about
+  > .about-hero
+  > .about-hero__container {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+
+    box-sizing: border-box !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+}

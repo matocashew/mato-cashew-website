@@ -1,3 +1,20 @@
+function getCambodiaScenicPhase(): string {
+  const hour = Number(
+    new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Phnom_Penh",
+      hour: "2-digit",
+      hourCycle: "h23"
+    }).format(new Date())
+  );
+
+  if (hour >= 6 && hour < 11) return "morning";
+  if (hour >= 11 && hour < 14) return "midday";
+  if (hour >= 14 && hour < 18) return "afternoon";
+  if (hour >= 18) return "night";
+  if (hour < 4) return "midnight";
+  return "predawn";
+}
+
 import {
   getVisitorLocation
 } from "../lib/location/visitor-location";
@@ -109,16 +126,7 @@ async function refreshGlobalWeather():
     );
 
   if (isLocalScenicDevelopment) {
-    const localHour = new Date().getHours();
-
-    const localPhase =
-      localHour >= 5 && localHour < 10
-        ? "morning"
-        : localHour >= 10 && localHour < 17
-          ? "day"
-          : localHour >= 17 && localHour < 19
-            ? "evening"
-            : "night";
+    const localPhase = getCambodiaScenicPhase();
 
     atmosphere.dataset.weatherPhase =
       localPhase;
@@ -176,16 +184,7 @@ async function refreshGlobalWeather():
         );
 
       if (isLocalDevelopment) {
-        const localHour = new Date().getHours();
-
-        const localPhase =
-          localHour >= 5 && localHour < 10
-            ? "morning"
-            : localHour >= 10 && localHour < 17
-              ? "day"
-              : localHour >= 17 && localHour < 19
-                ? "evening"
-                : "night";
+        const localPhase = getCambodiaScenicPhase();
 
         atmosphere.dataset.weatherPhase =
           localPhase;
@@ -294,61 +293,7 @@ async function refreshGlobalWeather():
      * same visitor-aware atmosphere state.
      */
 
-    let visitorHour: number;
-
-    try {
-
-      const hourText =
-        new Intl.DateTimeFormat(
-          "en-US",
-          {
-            timeZone:
-              weather.timezone ?? location.timezone ?? "UTC",
-
-            hour:
-              "2-digit",
-
-            hourCycle:
-              "h23"
-          }
-        )
-          .format(new Date());
-
-      visitorHour =
-        Number.parseInt(
-          hourText,
-          10
-        );
-
-    } catch {
-
-      /*
-       * Safe fallback only when the supplied timezone
-       * cannot be interpreted by Intl.
-       */
-
-      visitorHour =
-        new Date().getUTCHours();
-    }
-
-
-    const weatherPhase =
-      visitorHour >= 5 &&
-      visitorHour < 10
-
-        ? "morning"
-
-        : visitorHour >= 10 &&
-          visitorHour < 17
-
-          ? "day"
-
-          : visitorHour >= 17 &&
-            visitorHour < 19
-
-            ? "evening"
-
-            : "night";
+    const weatherPhase = getCambodiaScenicPhase();
 
 
     atmosphere.dataset.weatherPhase =
@@ -548,6 +493,45 @@ if (
   }
 
 
+  /*
+   * BG-7 P2-7 AUTOMATIC SCENIC REFRESH
+   *
+   * Update only the Cambodia scenic phase.
+   * Do not call the weather API.
+   */
+  function refreshCambodiaScenicPhase(): void {
+    const atmosphere = document.querySelector<HTMLElement>(
+      ".weather-atmosphere"
+    );
+
+    if (!atmosphere) return;
+
+    const phase = getCambodiaScenicPhase();
+
+    if (atmosphere.dataset.weatherPhase === phase) {
+      return;
+    }
+
+    atmosphere.dataset.weatherPhase = phase;
+
+    if (persistedAtmosphereState) {
+      persistedAtmosphereState.phase = phase;
+    }
+  }
+
+  window.setInterval(
+    refreshCambodiaScenicPhase,
+    60_000
+  );
+
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+      if (!document.hidden) {
+        refreshCambodiaScenicPhase();
+      }
+    }
+  );
   window.MatoGlobalWeather = {
 
     refresh:
