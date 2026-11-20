@@ -4475,37 +4475,37 @@ footer,
 .weather-atmosphere[data-weather-phase="morning"] .weather-atmosphere__sky {
   background-image: url("/images/atmosphere/cambodia/01_morning_desktop.webp") !important;
   background-size: cover !important;
-  background-position: center center !important;
+  background-position: center calc(50% + 30px) !important;
   background-repeat: no-repeat !important;
 }
 .weather-atmosphere[data-weather-phase="midday"] .weather-atmosphere__sky {
   background-image: url("/images/atmosphere/cambodia/03_midday_desktop.webp") !important;
   background-size: cover !important;
-  background-position: center center !important;
+  background-position: center calc(50% + 30px) !important;
   background-repeat: no-repeat !important;
 }
 .weather-atmosphere[data-weather-phase="afternoon"] .weather-atmosphere__sky {
   background-image: url("/images/atmosphere/cambodia/05_afternoon_desktop.webp") !important;
   background-size: cover !important;
-  background-position: center center !important;
+  background-position: center calc(50% + 30px) !important;
   background-repeat: no-repeat !important;
 }
 .weather-atmosphere[data-weather-phase="night"] .weather-atmosphere__sky {
   background-image: url("/images/atmosphere/cambodia/07_night_desktop.webp") !important;
   background-size: cover !important;
-  background-position: center center !important;
+  background-position: center calc(50% + 30px) !important;
   background-repeat: no-repeat !important;
 }
 .weather-atmosphere[data-weather-phase="midnight"] .weather-atmosphere__sky {
   background-image: url("/images/atmosphere/cambodia/09_midnight_desktop.webp") !important;
   background-size: cover !important;
-  background-position: center center !important;
+  background-position: center calc(50% + 30px) !important;
   background-repeat: no-repeat !important;
 }
 .weather-atmosphere[data-weather-phase="predawn"] .weather-atmosphere__sky {
   background-image: url("/images/atmosphere/cambodia/11_predawn_desktop.webp") !important;
   background-size: cover !important;
-  background-position: center center !important;
+  background-position: center calc(50% + 30px) !important;
   background-repeat: no-repeat !important;
 }
 @media (max-width: 767px) {
