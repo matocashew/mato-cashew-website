@@ -4583,3 +4583,15 @@ footer,
     }
 }
 /* END HC-65 */
+
+/* BW-03 BUSINESS CARD WIDTH */
+/* Desktop Home EN/KM: match Testimonials glass card width. */
+@media (min-width: 993px) {
+    .home-business__inner {
+        width: 1200px !important;
+        max-width: calc(100% - 28px) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+/* END BW-03 */
