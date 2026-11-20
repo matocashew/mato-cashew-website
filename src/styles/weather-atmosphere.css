@@ -4595,3 +4595,237 @@ footer,
     }
 }
 /* END BW-03 */
+
+/* AG-06 BALANCED FROSTED GLASS */
+/* Desktop Home EN/KM - approved AG-04 visual. */
+@media (min-width: 993px) {
+    .home-business__inner {
+        position: relative !important;
+        isolation: isolate !important;
+        background: linear-gradient(
+            125deg,
+            rgba(255,255,255,0.15),
+            rgba(12,35,34,0.16) 45%,
+            rgba(255,255,255,0.07)
+        ) !important;
+        -webkit-backdrop-filter: blur(9px) saturate(115%) !important;
+        backdrop-filter: blur(9px) saturate(115%) !important;
+        border: 1px solid rgba(255,255,255,0.50) !important;
+        box-shadow:
+            0 14px 38px rgba(0,0,0,0.12),
+            inset 0 1px 0 rgba(255,255,255,0.50),
+            inset 0 -1px 0 rgba(255,255,255,0.12) !important;
+    }
+
+    .home-business__inner::before {
+        content: "" !important;
+        position: absolute !important;
+        inset: 0 !important;
+        border-radius: inherit !important;
+        background: linear-gradient(
+            105deg,
+            rgba(5,32,35,0.34) 0%,
+            rgba(5,32,35,0.22) 42%,
+            transparent 72%
+        ) !important;
+        pointer-events: none !important;
+        z-index: 0 !important;
+    }
+
+    .home-business__inner > * {
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    .home-business__inner h1,
+    .home-business__inner h2,
+    .home-business__inner h3,
+    .home-business__inner p,
+    .home-business__inner li {
+        color: #fff !important;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.65);
+    }
+}
+/* END AG-06 */
+
+/* AG-09 TESTIMONIALS GLASS */
+/* Desktop Home EN/KM: approved AG-08 visual. */
+@media (min-width: 993px) {
+    .home-testimonials .container {
+        position: relative !important;
+        isolation: isolate !important;
+        background: linear-gradient(
+            125deg,
+            rgba(255,255,255,0.15),
+            rgba(12,35,34,0.16) 45%,
+            rgba(255,255,255,0.07)
+        ) !important;
+        -webkit-backdrop-filter: blur(9px) saturate(115%) !important;
+        backdrop-filter: blur(9px) saturate(115%) !important;
+        border: 1px solid rgba(255,255,255,0.50) !important;
+        box-shadow:
+            0 14px 38px rgba(0,0,0,0.12),
+            inset 0 1px 0 rgba(255,255,255,0.50),
+            inset 0 -1px 0 rgba(255,255,255,0.12) !important;
+    }
+
+    .home-testimonials .container::before {
+        content: "" !important;
+        position: absolute !important;
+        inset: 0 !important;
+        border-radius: inherit !important;
+        background: linear-gradient(
+            105deg,
+            rgba(5,32,35,0.34) 0%,
+            rgba(5,32,35,0.22) 42%,
+            transparent 72%
+        ) !important;
+        pointer-events: none !important;
+        z-index: 0 !important;
+    }
+
+    .home-testimonials .container > * {
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    .home-testimonials .container h2 {
+        color: #fff !important;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.65);
+    }
+}
+/* END AG-09 */
+
+/* AG-12 TESTIMONIALS LABEL COLOR */
+/* Desktop Home EN/KM: improve eyebrow text contrast. */
+@media (min-width: 993px) {
+    .home-testimonials .home-testimonials-tag {
+        color: #FFFFFF !important;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.65) !important;
+    }
+}
+/* END AG-12 */
+
+/* AG-25 WEATHER OUTER GLASS */
+/* Desktop Home EN/KM: approved AG-24 visual. */
+/* Target existing outer card only, not Temperature Card. */
+@media (min-width: 993px) {
+    .home-weather > .container {
+        background: linear-gradient(
+            125deg,
+            rgba(255,255,255,0.15),
+            rgba(12,35,34,0.16) 45%,
+            rgba(255,255,255,0.07)
+        ) !important;
+
+        -webkit-backdrop-filter:
+            blur(9px) saturate(115%) !important;
+
+        backdrop-filter:
+            blur(9px) saturate(115%) !important;
+
+        border: 1px solid rgba(255,255,255,0.50) !important;
+        border-radius: 24px !important;
+
+        box-shadow:
+            0 14px 38px rgba(0,0,0,0.12),
+            inset 0 1px 0 rgba(255,255,255,0.50),
+            inset 0 -1px 0 rgba(255,255,255,0.12) !important;
+    }
+}
+/* END AG-25 */
+
+/* AG-29 WEATHER LABEL COLOR */
+/* Desktop Home EN/KM: approved AG-28 white text. */
+@media (min-width: 993px) {
+    .home-weather .home-weather__eyebrow {
+        color: #FFFFFF !important;
+        text-shadow:
+            0 1px 4px rgba(0,0,0,0.65) !important;
+    }
+}
+/* END AG-29 */
+
+/* AG-33 KNOWLEDGE GLASS */
+/* Approved AG-32: match Testimonials outer glass card. */
+@media (min-width: 993px) {
+    .home-knowledge {
+        background: linear-gradient(
+            125deg,
+            rgba(255, 255, 255, 0.15),
+            rgba(12, 35, 34, 0.16) 45%,
+            rgba(255, 255, 255, 0.07)
+        ) !important;
+
+        -webkit-backdrop-filter:
+            blur(9px) saturate(115%) !important;
+
+        backdrop-filter:
+            blur(9px) saturate(115%) !important;
+
+        border: 1px solid rgba(255, 255, 255, 0.5) !important;
+        border-radius: 24px !important;
+
+        box-shadow:
+            0 14px 38px rgba(0, 0, 0, 0.12),
+            inset 0 1px 0 rgba(255, 255, 255, 0.5),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.12)
+            !important;
+    }
+}
+/* END AG-33 */
+
+/* AG-37 OUR PROCESS GLASS */
+/* Approved AG-36: match Testimonials outer glass card. */
+@media (min-width: 993px) {
+    .home-process > .container {
+        background: linear-gradient(
+            125deg,
+            rgba(255, 255, 255, 0.15),
+            rgba(12, 35, 34, 0.16) 45%,
+            rgba(255, 255, 255, 0.07)
+        ) !important;
+
+        -webkit-backdrop-filter:
+            blur(9px) saturate(115%) !important;
+
+        backdrop-filter:
+            blur(9px) saturate(115%) !important;
+
+        border: 1px solid rgba(255, 255, 255, 0.5) !important;
+        border-radius: 24px !important;
+
+        box-shadow:
+            0 14px 38px rgba(0, 0, 0, 0.12),
+            inset 0 1px 0 rgba(255, 255, 255, 0.5),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.12)
+            !important;
+    }
+}
+/* END AG-37 */
+
+
+/* WC-10 SOFT IMAGE BLEND */
+/* Approved WC-09: seamless Why Choose image transition. */
+@media (min-width: 993px) {
+    .home-why-choose-visual {
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.35) 5%,
+            black 18%
+        ) !important;
+
+        mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.35) 5%,
+            black 18%
+        ) !important;
+    }
+
+    .home-why-choose-visual::before {
+        display: none !important;
+    }
+}
+/* END WC-10 */
