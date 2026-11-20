@@ -5121,3 +5121,104 @@ html[lang="km"] .hero-description,
 }
 
 /* END BG-7 STEP 8E-9 */
+
+/* HC-7 PREMIUM HERO TYPOGRAPHY - LOCAL UAT */
+/* Original transparent glass remains unchanged. */
+
+.home-scenic-canvas
+.home-hero-floating-shell .hero-content h1,
+.home-scenic-canvas
+.home-hero-floating-shell .hero-content h2 {
+    color: #FFFDF7 !important;
+    text-shadow:
+        0 2px 4px rgba(12, 28, 23, 0.48),
+        0 5px 16px rgba(12, 28, 23, 0.20) !important;
+}
+
+.home-scenic-canvas
+.home-hero-floating-shell .hero-content p {
+    color: #F5F3EB !important;
+    text-shadow:
+        0 1px 3px rgba(12, 28, 23, 0.52),
+        0 2px 8px rgba(12, 28, 23, 0.18) !important;
+}
+
+.home-scenic-canvas
+.home-hero-floating-shell .hero-eyebrow,
+.home-scenic-canvas
+.home-hero-floating-shell .hero-kicker {
+    color: #F3E2B8 !important;
+    text-shadow:
+        0 1px 3px rgba(10, 35, 27, 0.80),
+        0 2px 6px rgba(10, 35, 27, 0.45) !important;
+}
+
+/* END HC-7 */
+
+/* HC-9 CONTENT CONTRAST */
+/* Transparent Hero with left-side readability gradient. */
+
+@media (min-width: 768px) {
+    .home-scenic-canvas
+    .home-hero-floating-shell > .hero {
+        background:
+            linear-gradient(
+                90deg,
+                rgba(15, 39, 33, 0.42) 0%,
+                rgba(15, 39, 33, 0.30) 35%,
+                rgba(15, 39, 33, 0.08) 65%,
+                rgba(15, 39, 33, 0.00) 100%
+            ) !important;
+    }
+}
+
+/* END HC-9 */
+
+/* HC-14 ACTUAL HERO TAG FIX */
+/* Home Hero only: English and Khmer. */
+
+.home-scenic-canvas
+.home-hero-floating-shell
+.hero-content > .hero-tag {
+    color: #F3E2B8 !important;
+    opacity: 1 !important;
+    text-shadow:
+        0 1px 3px rgba(10, 35, 27, 0.85),
+        0 2px 7px rgba(10, 35, 27, 0.55) !important;
+}
+
+/* END HC-14 */
+
+/* HC-16 HERO TAG LINE FIX */
+/* Match decorative line to premium eyebrow text. */
+
+.home-scenic-canvas
+.home-hero-floating-shell
+.hero-content > .hero-tag::before {
+    background: #F3E2B8 !important;
+    opacity: 1 !important;
+    box-shadow:
+        0 1px 3px rgba(10, 35, 27, 0.55) !important;
+}
+
+/* END HC-16 */
+
+/* HC-32 CONSOLIDATED SINGLE BORDER */
+/* Desktop Home Hero: one outer border only. */
+
+@media (min-width: 993px) {
+    .home-scenic-canvas > .home-hero-floating-shell {
+        border: 1px solid rgba(255, 255, 255, 0.62) !important;
+        outline: none !important;
+        box-shadow:
+            0 24px 60px rgba(25, 69, 48, 0.12) !important;
+    }
+
+    .home-scenic-canvas > .home-hero-floating-shell > .hero {
+        border: 0 !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+}
+
+/* END HC-32 */

@@ -4377,7 +4377,7 @@ footer,
      ======================================================= */
 
   .home-scenic-canvas > .products.products-showcase {
-    padding-top: 86px !important;
+    padding-top: 0px !important;
     padding-bottom: 86px !important;
   }
 
@@ -4528,3 +4528,58 @@ footer,
     background-image: url("/images/atmosphere/cambodia/12_predawn_mobile.webp") !important;
   }
 }
+
+/* HC-49 HOME PRODUCTS GLASS GAP */
+/* Desktop Home EN/KM: align Products Glass with 14px card gap. */
+@media (min-width: 993px) {
+    .home-scenic-canvas > .products.products-showcase {
+        transform: translateY(-26px) !important;
+    }
+}
+/* END HC-49 */
+
+/* HC-58 HOME GLASS CARD SPACING */
+/* Desktop only: approved 14px gaps from HC-55 + HC-57. */
+@media (min-width: 993px) {
+    .home-scenic-canvas > .products.products-showcase {
+        padding-bottom: 0 !important;
+        margin-bottom: -26px !important;
+    }
+
+    .home-scenic-canvas > .home-why-choose {
+        padding-top: 14px !important;
+        padding-bottom: 0 !important;
+    }
+
+    .home-scenic-canvas > .home-process {
+        padding-top: 14px !important;
+        padding-bottom: 0 !important;
+    }
+
+    .home-scenic-canvas > .home-stats {
+        padding-top: 14px !important;
+    }
+}
+/* END HC-58 */
+
+/* HC-65 FINAL LOWER GLASS SPACING */
+/* Desktop Home EN/KM: approved 14px card spacing. */
+@media (min-width: 993px) {
+    .home-knowledge {
+        margin-top: 14px !important;
+    }
+
+    .home-weather {
+        padding-top: 14px !important;
+    }
+
+    .home-testimonials {
+        padding-top: 14px !important;
+        padding-bottom: 0 !important;
+    }
+
+    .home-business {
+        padding-top: 14px !important;
+    }
+}
+/* END HC-65 */
